@@ -8,7 +8,12 @@ public class DrawAuctionController {
 
 	@RequestMapping("list.dr")
 	public String drawBoardList() {
-		return "board/drawBoard/drawBoardListview";
+		return "board/drawBoard/drawBoardListView";
+	}
+	
+	@RequestMapping("list.ac")
+	public String auctionBoardList() {
+		return "board/auctionBoard/auctionBoardListView";
 	}
 	
 }
