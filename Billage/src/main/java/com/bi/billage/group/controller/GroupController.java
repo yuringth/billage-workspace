@@ -11,16 +11,16 @@ import com.bi.billage.group.model.service.GroupService;
 @Controller
 public class GroupController {
 	
-	@Autowired
-	private GroupService groupService;
+	//@Autowired
+	//private GroupService groupService;
 	
-	@RequestMapping("list.gr")
-	public ModelAndView selectGroup(@RequestParam(value="cpage", defaultValue="1")int currentPage, ModelAndView mv) {
+	//@RequestMapping("list.gr")
+	//public ModelAndView selectGroup(@RequestParam(value="cpage", defaultValue="1")int currentPage, ModelAndView mv) {
 		
 		//PageInfo pi = pagination.
 		
-		return mv;
-	}
+		//return mv;
+	//}
 	
 	
 	
