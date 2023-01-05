@@ -85,7 +85,7 @@
 					<a class="dropdown-item" href="#">입찰수 순</a>
 				</div>
 			</div>
-			<div><button type="button" class="btn btn-info">글쓰기</button></div>   
+			<div><button type="button" class="btn btn-info" onclick="location.href='insert.ac'" >글쓰기</button></div>   
 		</div>
 
 
