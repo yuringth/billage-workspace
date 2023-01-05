@@ -5,11 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>안녕 여긴 메인</title>
+<title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page="common/header.jsp"/>
-	<jsp:include page="common/footer.jsp"/>
-	
+	<h1>안녕 여긴 에러페이징 : 에러 종류는  ${ errorMsg } </h1>
 </body>
 </html>
