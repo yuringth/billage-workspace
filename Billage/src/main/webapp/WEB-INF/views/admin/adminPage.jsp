@@ -29,7 +29,7 @@
         height: 100%;
         background: #4b4276;
         padding: 30px 0px;
-        position: fixed;
+        /* position: fixed; */
     }
     .wrapper .sidebar h2 {
         color: #fff;
@@ -105,7 +105,6 @@
 	<jsp:include page="../common/header.jsp"/>
 
 	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-<br><br><br><br><br>
     <div class="wrapper">
         <div class="sidebar">
             <h2>관리자 페이지</h2>
