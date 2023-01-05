@@ -15,5 +15,10 @@ public class BoardController {
 	public String serialListView() {
 		return "board/serialBoard/serialListView";
 	}
+	
+	@RequestMapping("detail.se")
+	public String serialDetailView() {
+		return "board/serialBoard/serialDetailView";
+	}
 
 }
