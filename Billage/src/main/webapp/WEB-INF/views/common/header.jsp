@@ -88,6 +88,7 @@
 	             <li><a href="list.re">리뷰</a></li>
 	             <li><a href="list.dr">추첨</a></li>
 	             <li><a href="list.ac">경매</a></li>
+	             <li><a href="#">중고</a></li>
 	             <li><a href="#">마을</a></li>
 	         </ul>
 	    </div>
