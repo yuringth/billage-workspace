@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>리뷰게시판 목록 조회</title>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
 <style>
 
     .reviewList-area{
@@ -90,7 +93,7 @@
      
         <!-- 리뷰 하나를 감싸는 div -->
         <div class="one-content">
-            <div class="wirter">
+            <div class="wirter" onclick="reviewDetail()">
                 <div>작성자　　　　</div>                                              
                 <div class="card-footer">
                  	   별점 : <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -119,8 +122,12 @@
         </div>
 
 
-
-
+	<script>
+		function reviewDetail(){ // 게시글 상세보기 : 안된다!!!!!
+			location.href = 'detail.re' + $(this); 
+		}
+	</script>
+	
 
 
 
