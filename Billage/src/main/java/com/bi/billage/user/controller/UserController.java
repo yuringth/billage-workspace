@@ -10,4 +10,9 @@ public class UserController {
 	public String adminPage() {
 		return "admin/adminPage";
 	}
+	
+	@RequestMapping("userEnrollForm.me")
+	public String userEnrollForm() {
+		return "user/userEnrollForm";
+	}
 }
