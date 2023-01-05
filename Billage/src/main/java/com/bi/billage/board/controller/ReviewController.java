@@ -4,11 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class DrawController {
+public class ReviewController {
 
-	@RequestMapping("list.dr")
-	public String drawBoardList() {
-		return "board/drawBoard/drawBoardListview";
+	@RequestMapping("list.re")
+	public String reviewBoardList() {
+		return "board/reviewBoard/reviewBoardList";
 	}
+	
 	
 }
