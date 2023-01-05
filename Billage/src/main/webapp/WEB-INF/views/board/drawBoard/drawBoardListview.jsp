@@ -9,6 +9,7 @@
 <style>
     .outer{
         width : 1200px;
+        margin : auto;
     }
     .align-left{
         flex: auto;
