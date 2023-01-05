@@ -82,7 +82,7 @@
         
 	    <div id="nav-bar">
 	         <ul>
-	             <li class="active"><a href="#">모임</a></li>
+	             <li><a href="list.gr">모임</a></li>
 	             <li><a href="#">연재</a></li>
 	             <li><a href="#">대여</a></li>
 	             <li><a href="list.re">리뷰</a></li>
