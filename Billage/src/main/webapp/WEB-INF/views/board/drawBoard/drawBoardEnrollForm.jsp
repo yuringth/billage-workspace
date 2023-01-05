@@ -10,8 +10,8 @@
 <body>
 	<jsp:include page="../../common/header.jsp"/>
 	
-	
-	여긴 추첨글쓰기야
+		
+		
 	
 
 	<jsp:include page="../../common/footer.jsp"/>
