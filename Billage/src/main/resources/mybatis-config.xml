@@ -9,15 +9,17 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	</settings>
 	
 	<typeAliases>
-		<typeAlias type="com.bi.billage.user.model.vo.user" alias="user"/>
-		<typeAlias type="com.bi.bilaage.board.model.vo.Board" alias="board"/>
-		<typeAlias type="com.bi.billage.reply.model.vo.Reply" alias="reply"/>
+		<typeAlias type="com.bi.billage.user.model.vo.User" alias="user" />
+		<typeAlias type="com.bi.bilaage.board.model.vo.Board" alias="board" />
+		<typeAlias type="com.bi.billage.reply.model.vo.Reply" alias="reply" />
+		<typeAlias type="com.bi.billage.board.model.vo.Group" alias="group" />
 	</typeAliases>
 	<!-- **주의 : 미리 등록을 해두려면 해당 클래스가 진짜 존재하고 있는 상태여야함 -->
 	
 	<mappers>
 		<mapper resource="/mappers/member-mapper.xml"/>
 		<mapper resource="/mappers/board-mapper.xml"/>
+		<mapper resource="/mappers/group-mapper.xml" />
 	</mappers>
 	<!-- **주의 : 미리 등록을 해두려면 해당 mappse 파일이 진짜 존재하고 있는 상태여야함 + namespace속성까지 작성해둬야함 -->
 	
