@@ -215,14 +215,14 @@
     </div>
     <div class="header">
         <div class="logo">
-            <p>Billage<span>town</span></p>
+            <p>Billage<span></a>town</span></p>
         </div>
         <div id="flip">
             <p>Menu</p>
         </div>
         <nav id="nav">
             <ul>
-                <li class="active"><a href="#">모임</a></li>
+                <li><a href="#">모임</a></li>
                 <li><a href="#">연재</a></li>
                 <li><a href="#">대여</a></li>
                 <li><a href="list.re">리뷰</a></li>
