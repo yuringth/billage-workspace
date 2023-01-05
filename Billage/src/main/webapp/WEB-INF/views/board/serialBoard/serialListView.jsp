@@ -51,7 +51,7 @@
                 </thead>
                 <tbody>
                 		<tr>
-                			<td class="bno">1</td>
+                			<td class="sno">1</td>
                 			<td>01화 개발자로 환생?</td>
                 			<td>233</td>
                 			<td>2022.12.25</td>
@@ -60,6 +60,17 @@
                 </tbody>
             </table>
             <br>
+            
+            <script>
+            
+            	$(function(){
+            		$('#boardList>tbody>tr').click(function(){
+            			/* location.href = 'detail.bo?bno=' + $(this).children('.bno').text(); */
+            			location.href = 'detail.se';
+            		})
+            	})
+            
+            </script>
        
             <br><br>
         </div>
