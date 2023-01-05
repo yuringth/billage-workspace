@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>리뷰게시판 글 작성 폼</title>
+<title>글 상세정보</title>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
@@ -31,12 +31,11 @@
 
 
 </style>
-
 </head>
 <body>
- 리뷰게시판 폼
- 
- 	<!-- 메뉴바 -->
+
+
+	 <!-- 메뉴바 -->
 	<jsp:include page="../../common/header.jsp" />
     
  	
@@ -67,33 +66,21 @@
 
 		<br>
 
-		<form action="#">
-			<textarea id="content" rows="30" cols="100" style="resize:none" maxlength="1000">여기에 글 작성하기</textarea>
-			<br>
-			<hr>
-			<spank id="count">0</spank> / 1000
-		</form>
-
-
-		<!-- 글입력 갯수 세기 -->
-		<script>
-        $(function(){
-            $('#content').keyup(function(){
-                $('#count').text($(this).val().length);
-                
-            });
-        });
-    	</script>
-
+		<div id="content" rows="30" cols="100" style="resize:none" maxlength="1000">여기에 글 작성내용을 띄워주자</div>
+		<br>
+		<hr>
 
 		<hr>
-		<p>
-			포인트 지급 안내 <br>
-			리뷰 작성 시 : 10point 지급
-		</p>
-
+		
 		<div>
-			<a href="">글작성</a>
+			댓글 <input type="text" id="replyContent">
+			<button>댓글</button>
+		</div>
+	                    
+	                    
+	                    
+		<div>
+			<a href="">삭제하기(로그인==유저정보일치할시)</a>
 			<a href="">목록으로</a>
 		</div>
 
@@ -110,6 +97,8 @@
  
  
  
- 
+
+
+
 </body>
 </html>
