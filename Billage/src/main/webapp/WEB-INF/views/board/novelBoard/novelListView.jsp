@@ -229,7 +229,27 @@ div.card.show {
 		            </div>
 		            <div class="card-flap flap1">
 		                <div class="card-description">
-		                    작품<br>설명<br>들어가는<br>곳
+		                    작가명<br>최신화<br>장르<br>추천수<br>별점
+		                </div>
+		                <div class="card-flap flap2">
+		                    <div class="card-actions">
+		                        <a href="list.se" class="btn">읽으러가기</a>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		        <div class="card">
+		            <div class="card__image-holder">
+		                <img class="card__image" src="https://source.unsplash.com/300x225/?wave" alt="wave" />
+		            </div>
+		            <div class="card-title">
+		                <h2>
+		                    작품 제목 들어가는 곳
+		                </h2>
+		            </div>
+		            <div class="card-flap flap1">
+		                <div class="card-description">
+		                작가명<br>최신화<br>장르<br>추천수<br>별점
 		                </div>
 		                <div class="card-flap flap2">
 		                    <div class="card-actions">
@@ -249,27 +269,7 @@ div.card.show {
 		            </div>
 		            <div class="card-flap flap1">
 		                <div class="card-description">
-		                    작품<br>설명<br>들어가는<br>곳
-		                </div>
-		                <div class="card-flap flap2">
-		                    <div class="card-actions">
-		                        <a href="#" class="btn">읽으러가기</a>
-		                    </div>
-		                </div>
-		            </div>
-		        </div>
-		        <div class="card">
-		            <div class="card__image-holder">
-		                <img class="card__image" src="https://source.unsplash.com/300x225/?wave" alt="wave" />
-		            </div>
-		            <div class="card-title">
-		                <h2>
-		                    작품 제목 들어가는 곳
-		                </h2>
-		            </div>
-		            <div class="card-flap flap1">
-		                <div class="card-description">
-		                    작품<br>설명<br>들어가는<br>곳
+		                    작가명<br>최신화<br>장르<br>추천수<br>별점
 		                </div>
 		                <div class="card-flap flap2">
 		                    <div class="card-actions">

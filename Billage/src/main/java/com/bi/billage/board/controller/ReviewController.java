@@ -15,7 +15,7 @@ public class ReviewController {
 	
 	// 리뷰게시판 -> 글쓰기버튼 클릭 시 -> 리뷰게시판 글작성 폼화면으로 이동
 	@RequestMapping("enrollForm.re")
-	public String reviewBoardEnrollForm() {
+	public String reviewEnrollForm() {
 		return "board/reviewBoard/reviewEnrollForm";
 	}
 	
