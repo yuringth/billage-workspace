@@ -12,6 +12,7 @@
     .reviewList-area{
         border:1px solid red;
         width:1200px;
+        margin:auto;
 
     }
     
@@ -35,17 +36,28 @@
     }
 
   	.book-detail{
-  		width:50px;
-		height:50px;
+  		width:450px;
+		height:300px;
   		display:flex;
   	}
+  	
+  	#image{
+  	
+  	}
+	
+	#title{
+	
+	}
+	
+	#content{
+	
+	}
 
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+	* {
+	  margin: 0;
+	  padding: 0;
+	  box-sizing: border-box;
+	}
 
 
 </style>
@@ -86,23 +98,30 @@
             </div>
 
 			<div class="book-detail">
-	            <div class="image">
+	            <div id="image">
 	            	사진
-	            	 <a href="#"><img class="card-img-top" src="https://image.yes24.com/goods/24259565/XL" alt=""></a>
+	            	 <a href="#"><img class="card-img-top" src="https://image.yes24.com/goods/24259565/XL" alt="" width:30px; heigh:30px;></a>
 	            </div>
 	            
 	            
-	            <div class="title">
+	            <div id="title">
 	            	<p>책 제목</p>
 	            </div>
-    	        <div class="content">
+    	        <div id="content">
   	  	       		<p>책 내용</p>
     	        </div>
 			</div>
+			
+			<br>
 
             <div><button>♡</button>찜갯수(5) 댓글(3) 리뷰등록수(3)</div>
 
         </div>
+
+
+
+
+
 
 
 
@@ -120,10 +139,15 @@
         </ul>    
     </div>    
 
+	<div>
+		<button href="enrollForm.re">글작성</button>
+	</div>
   
 
 	<!-- 푸터바 -->
 	<jsp:include page="../../common/footer.jsp" />
 
+
+	
 </body>
 </html>
