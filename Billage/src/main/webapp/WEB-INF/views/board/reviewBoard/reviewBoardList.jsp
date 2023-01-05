@@ -140,7 +140,7 @@
     </div>    
 
 	<div>
-		<button href="enrollForm.re">글작성</button>
+		<a href="enrollForm.re">글작성</a>
 	</div>
   
 
