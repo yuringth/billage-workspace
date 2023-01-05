@@ -139,10 +139,15 @@
         </ul>    
     </div>    
 
+	<div>
+		<button href="enrollForm.re">글작성</button>
+	</div>
   
 
 	<!-- 푸터바 -->
 	<jsp:include page="../../common/footer.jsp" />
 
+
+	
 </body>
 </html>
