@@ -119,7 +119,6 @@
                         <li><a href="#">이용약관</a></li> 
                         <li><a href="#">개인정보처리방침</a></li> 
                         <li><a href="#">커뮤니티 가이드라인</a></li> 
-                        <li><a href="#">이용안내</a></li>
                     </ul>
                 </div>
 
@@ -145,8 +144,8 @@
                         </th>
                     </tr>
                     <tr>
-                        <th class="ft-table-area"><button class="click-box">FAQ</button></th>
-                        <td> 궁금해할까봐 궁금증 적어놨음😉 </td>
+                        <th class="ft-table-area"><button class="click-box">고객센터</button></th>
+                        <td> 커맨드센터아님ㅎ😉 </td>
                     </tr>
                     <tr>
                         <th class="ft-table-area"><button class="click-box">연재신청</button></th>
