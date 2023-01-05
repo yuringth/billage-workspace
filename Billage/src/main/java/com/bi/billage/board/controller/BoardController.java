@@ -10,5 +10,10 @@ public class BoardController {
 	public String novelListView() {
 		return "board/novelBoard/novelListView";
 	}
+	
+	@RequestMapping("list.se")
+	public String serialListView() {
+		return "board/serialBoard/serialListView";
+	}
 
 }
