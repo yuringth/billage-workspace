@@ -5,6 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class DrawAuctionController {
+	
+	@RequestMapping("main.ma")
+	public String maingogo() {
+		return "redirect:/";
+	}
 
 	@RequestMapping("list.dr")
 	public String drawBoardList() {
@@ -16,4 +21,13 @@ public class DrawAuctionController {
 		return "board/auctionBoard/auctionBoardListView";
 	}
 	
+	@RequestMapping("insert.dr")
+	public String drawEnrollForm() {
+		return "board/drawBoard/drawBoardEnrollForm";
+	}
+	
+	@RequestMapping("insert.ac")
+	public String auctionEnrollForm() {
+		return "board/auctionBoard/auctionBoardEnrollForm";
+	}
 }

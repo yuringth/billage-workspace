@@ -16,6 +16,9 @@
         margin : auto;
         
     }
+    .margin-bottom{
+    	margin-bottom : 20px;
+    }
     .align-side{
     	display : flex;
     	justify-content: space-between;
@@ -45,15 +48,19 @@
         padding-top: 10px;
         padding-bottom: 10px;
         padding-left: 30px;
-        padding-right: 10px;
     }
     .countnum{
         display: flex;
         flex-direction: row-reverse;
-        font-size: 15px;
+        font-size: 12px;
     }
     .textsize {
-        font-size: 20px;
+        font-size: 17px;
+        margin : 0px;
+    }
+    .title-text{
+		font-size: 25px;
+        margin : 0px;
     }
 
 </style>
@@ -65,10 +72,9 @@
 </head>
 <body>
     <jsp:include page="../../common/header.jsp"/>
-    	<div>dd</div>
     <!-- 전체를 감싸는 div -->
     <div class="outer">
-		<div class="align-side">
+		<div class="align-side margin-bottom">
 			<div class="dropdown">
 				<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
 				정렬
@@ -79,8 +85,13 @@
 					<a class="dropdown-item" href="#">입찰수 순</a>
 				</div>
 			</div>
-			<div><button type="button" class="btn btn-info">글쓰기</button></div>   
+			<div><button type="button" class="btn btn-info" onclick="location.href='insert.ac'" >글쓰기</button></div>   
 		</div>
+
+
+
+
+
 
 		<div class="align-left-outer">
 	        <div class="one-content">
@@ -88,7 +99,34 @@
 	                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20151001_94%2Fbyitself_1443657275235dwe4K_JPEG%2F20150919_114529.jpg&type=sc960_832">
 	            </div>
 	            <div class="text-area">
-	                <h3>책 제목</h3>
+	                <p class="title-text">책 제목</p>
+	                <p class="textsize">현재 가격 : 2250P</p>
+	                <p class="textsize">남은 시간 : 00:00:00</p>
+	                <p class="countnum">입찰 : 10 조회 : 10</p>
+	            </div>
+	
+	        </div>
+
+
+
+
+			<div class="one-content">
+	            <div class="img-area">
+	                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20151001_94%2Fbyitself_1443657275235dwe4K_JPEG%2F20150919_114529.jpg&type=sc960_832">
+	            </div>
+	            <div class="text-area">
+	                <p class="title-text">책 제목</p>
+	                <p class="textsize">현재 가격 : 2250P</p>
+	                <p class="textsize">남은 시간 : 00:00:00</p>
+	                <p class="countnum">입찰 : 10 조회 : 10</p>
+	            </div>
+	
+	        </div> <div class="one-content">
+	            <div class="img-area">
+	                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20151001_94%2Fbyitself_1443657275235dwe4K_JPEG%2F20150919_114529.jpg&type=sc960_832">
+	            </div>
+	            <div class="text-area">
+	                <p class="title-text">책 제목</p>
 	                <p class="textsize">현재 가격 : 2250P</p>
 	                <p class="textsize">남은 시간 : 00:00:00</p>
 	                <p class="countnum">입찰 : 10 조회 : 10</p>
@@ -96,31 +134,6 @@
 	
 	        </div>
 			
-			 <div class="one-content">
-	            <div class="img-area">
-	                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20151001_94%2Fbyitself_1443657275235dwe4K_JPEG%2F20150919_114529.jpg&type=sc960_832">
-	            </div>
-	            <div class="text-area">
-	                <h3>책 제목</h3>
-	                <p class="textsize">현재 가격 : 3000P</p>
-	                <p class="textsize">남은 시간 : 00:00:00</p>
-	                <p class="countnum">입찰 : 10 조회 : 10</p>
-	            </div>
-	
-	        </div>
-			
-			 <div class="one-content">
-	            <div class="img-area">
-	                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20151001_94%2Fbyitself_1443657275235dwe4K_JPEG%2F20150919_114529.jpg&type=sc960_832">
-	            </div>
-	            <div class="text-area">
-	                <h3>책 제목</h3>
-	                <p class="textsize">현재 가격 : 7000P</p>
-	                <p class="textsize">남은 시간 : 00:00:00</p>
-	                <p class="countnum">입찰 : 10 조회 : 10</p>
-	            </div>
-	
-	        </div>
 		</div>
     </div>	
 
