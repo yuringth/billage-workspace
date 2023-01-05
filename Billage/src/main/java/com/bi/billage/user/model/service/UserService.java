@@ -1,5 +1,9 @@
 package com.bi.billage.user.model.service;
 
-public interface UserService {
+import com.bi.billage.user.model.vo.User;
 
+public interface UserService {
+	
+	// 회원가입 서비스
+	int insertUser(User u);
 }
