@@ -62,6 +62,21 @@
 	</div>
 	<br><br><br>
 	
+	<hr>
+	<h5>둘 다 재미있게 본 책</h5>
+	<div class="funBook">
+		<div id="funbookimg"><img src="" width="150px;" height="70px;"></div>
+		<div id="funBookTitle">책 제목</div>
+	</div>
+
+	<br><br><br>
+
+	<h5>둘이 엇갈린 책</h5>
+	<div class="badBook">
+		<div id="badbookimg"><img src="" width="150px;" height="70px;"></div>
+		<div id="badBookTitle">책 제목</div>
+	</div>
+	
 	<script>
 	  const ctx = document.getElementById('myChart');
 	
