@@ -64,7 +64,7 @@
 	
 	<div id="outer">
 		<div class="header" id="logo-area">
-			<a><img>로고넣자</a>
+			<a href="${ request.contextPath() } "><img>로고넣자</a>
 		</div>
 	
         <div class="header" id="search-area">
