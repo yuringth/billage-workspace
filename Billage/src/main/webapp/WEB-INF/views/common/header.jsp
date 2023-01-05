@@ -226,8 +226,8 @@
                 <li><a href="#">연재</a></li>
                 <li><a href="#">대여</a></li>
                 <li><a href="#">중고거래</a></li>
-                <li><a href="#">추첨</a></li>
-                <li><a href="#">경매</a></li>
+                <li><a href="list.dr">추첨</a></li>
+                <li><a href="list.ac">경매</a></li>
                 <li><a href="#">마을</a></li>
             </ul>
         </nav>
