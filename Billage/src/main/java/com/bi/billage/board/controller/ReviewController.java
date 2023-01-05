@@ -9,7 +9,7 @@ public class ReviewController {
 	// 리뷰게시판 목록 조회 화면
 	@RequestMapping("list.re")
 	public String reviewBoardList() {
-		return "board/reviewBoard/reviewBoardList";
+		return "board/reviewBoard/reviewListView";
 	}
 	
 	
