@@ -30,33 +30,15 @@
     .wirter{
         border:1px solid red;
 		width:450px;
-		height:100px;
+		height:50px;
         display:flex;
     }
 
-    .star{
-        border:1px solid red;
-		width:100px;
-		height:100px;
-
-    }
-
-    .image{
-        border:1px solid red;
-		width:100px;
-		height:100px;
-    }
-    .title{
-        border:1px solid red;
-		width:100px;
-		height:100px;
-    }
-    .content{
-        border:1px solid red;
-		width:100px;
-		height:100px;
-    }
-
+  	.book-detail{
+  		width:50px;
+		height:50px;
+  		display:flex;
+  	}
 
 
 * {
@@ -97,47 +79,32 @@
         <!-- 리뷰 하나를 감싸는 div -->
         <div class="one-content">
             <div class="wirter">
-                <div>작성자                                   </div>                                              
+                <div>작성자　　　　</div>                                              
                 <div class="card-footer">
-                    별점 : <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                 	   별점 : <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
                 </div>
             </div>
 
-            <div class="image">사진</div>
-            <div class="title">책 제목</div>
-            <div class="content">책 내용</div>
+			<div class="book-detail">
+	            <div class="image">
+	            	사진
+	            	 <a href="#"><img class="card-img-top" src="https://image.yes24.com/goods/24259565/XL" alt=""></a>
+	            </div>
+	            
+	            
+	            <div class="title">
+	            	<p>책 제목</p>
+	            </div>
+    	        <div class="content">
+  	  	       		<p>책 내용</p>
+    	        </div>
+			</div>
 
             <div><button>♡</button>찜갯수(5) 댓글(3) 리뷰등록수(3)</div>
 
         </div>
 
 
-        <!-- 리뷰를 감싸는 div -->
-        <div>
-            <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="https://image.yes24.com/goods/24259565/XL" alt=""></a>
-              
-                <div class="one-content">
-                    <h4 class="one-image">
-                        <a href="#"><img src=""></a>
-                    </h4>
-                    <h5>작성자</h5>
-                    <p class="card-text">여긴 책 내용을 넣읍시다!!!!!!!!!!!</p>
-                </div>
-                
-                <div class="card-footer">
-                    <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                </div>
-            </div>
-
-            <div>
-                <div><button>♡</button>찜갯수(5) 댓글(3) 리뷰등록수(3)</div>
-            </div>
-
-
-        </div>
-
-        
 
                     
     <!-- 페이지처리하는 영역-->
