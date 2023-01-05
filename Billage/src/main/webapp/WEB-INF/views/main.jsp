@@ -8,7 +8,7 @@
 <title>안녕 여긴 메인</title>
 </head>
 <body>
-	<jsp:include page="header.jsp"/>
-	<jsp:include page="footer.jsp"/>
+	<jsp:include page="common/header.jsp"/>
+	<jsp:include page="common/footer.jsp"/>
 </body>
 </html>
