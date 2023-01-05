@@ -9,6 +9,9 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	
 	<title>Insert title here</title>
 	<style>
 		#outer {
@@ -58,6 +61,136 @@
 			font-size: 25px;
 
 		}
+		
+		/*모달 관련 스타일입니다*/
+		#login-area-modal {
+		  margin: 0px;
+		  padding: 0px;
+		  text-decoration: none;
+		  font-family:sans-serif;
+		  display:none;
+		}
+		
+		body {
+		  background-image:#34495e;
+		}
+		
+		.joinForm {
+		  position:absolute;
+		  width:400px;
+		  height:400px;
+		  padding: 30px, 20px;
+		  background-color:#FFFFFF;
+		  text-align:center;
+		  top:40%;
+		  left:50%;
+		  transform: translate(-50%,-50%);
+		  border-radius: 15px;
+		}
+		
+		#close-btn{
+			position:relative;
+			margin-right:350px;
+		}
+		
+		.joinForm h2 {
+		  text-align: center;
+		  margin: 30px;
+		}
+		
+		.textForm {
+		  border-bottom: 2px solid #adadad;
+		  margin: 30px;
+		  padding: 10px 10px;
+		}
+		
+		
+		.id {
+		  width: 100%;
+		  border:none;
+		  outline:none;
+		  color: #636e72;
+		  font-size:16px;
+		  height:25px;
+		  background: none;
+		}
+		
+		.pw {
+		  width: 100%;
+		  border:none;
+		  outline:none;
+		  color: #636e72;
+		  font-size:16px;
+		  height:25px;
+		  background: none;
+		}
+		
+		.name {
+		  width: 100%;
+		  border:none;
+		  outline:none;
+		  color: #636e72;
+		  font-size:16px;
+		  height:25px;
+		  background: none;
+		}
+		
+		.email {
+		  width: 100%;
+		  border:none;
+		  outline:none;
+		  color: #636e72;
+		  font-size:16px;
+		  height:25px;
+		  background: none;
+		}
+		
+		.nickname {
+		  width: 100%;
+		  border:none;
+		  outline:none;
+		  color: #636e72;
+		  font-size:16px;
+		  height:25px;
+		  background: none;
+		}
+		
+		.cellphoneNo {
+		  width: 100%;
+		  border:none;
+		  outline:none;
+		  color: #636e72;
+		  font-size:16px;
+		  height:25px;
+		  background: none;
+		}
+		
+		.btn {
+		  position:relative;
+		  left:40%;
+		  transform: translateX(-50%);
+		  margin-bottom: 40px;
+		  width:80%;
+		  height:40px;
+		  background: linear-gradient(125deg,#81ecec,#6c5ce7,#81ecec);
+		  background-position: left;
+		  background-size: 200%;
+		  color:white;
+		  font-weight: bold;
+		  border:none;
+		  cursor:pointer;
+		  transition: 0.4s;
+		  display:inline;
+		}
+		
+		.btn:hover {
+		  background-position: right;
+		}
+				
+				
+		
+		
+		
 	</style>
 
 </head>
@@ -76,7 +209,7 @@
 
 		<div class="header" id="login-area">
 			<div>
-				<a href="userEnrollForm.me">회원가입</a>
+				<a id="login-form-btn">회원가입</a>
 				<a href="#">로그인하기</a>
 			</div>
 		</div>
@@ -97,6 +230,78 @@
 		</div>
 
 
+	</div>
+	<script>
+		$(function(){
+			$('#login-form-btn').click(function(){
+				$('#login-area-modal').fadeIn();
+			})
+			
+			$('#close-btn').click(function(){
+				$('#login-area-modal').fadeOut();
+			})
+			
+			
+			
+		});
+	
+	</script>
+
+	<div id="login-area-modal">
+		<button id="close-btn"> X </button>
+		<form action="doJoin" method="POST" class="joinForm" onsubmit="DoJoinForm__submit(this); return false;">
+	                                                                                               
+	      <h2>회원가입</h2>
+	      
+	      <div class="textForm">
+	        <input name="loginId" type="text" class="id" placeholder="아이디">
+	        </input>
+	      </div>
+	      
+	      <div class="textForm">
+	        <input name="loginPw" type="password" class="pw" placeholder="비밀번호">
+	      </div>
+	      
+	       <div class="textForm">
+	        <input name="loginPwConfirm" type="password" class="pw" placeholder="비밀번호 확인">
+	      </div>
+	      
+	      <div class="textForm">
+	        <input name="name" type="password" class="name" placeholder="이름">
+	      </div>
+	      
+	       <div class="textForm">
+	        <input name="email" type="text" class="email" placeholder="이메일">
+	      </div>
+	      
+	      <div class="textForm">
+	        <input name="nickname" type="text" class="nickname" placeholder="닉네임">
+	      </div>
+	      
+	      <div class="textForm">
+	        <input name="phone" type="text" class="cellphoneNo" placeholder="전화번호">
+	      </div>
+	      
+	      <div class="textForm">
+	        <input name="birthDate" type="text" class="cellphoneNo" placeholder="생년월일 6자를 입력">
+	      </div>
+	      <div class="textForm">
+	        
+	        남<input name="gender" type="radio" class="cellphoneNo">
+	        여<input name="gender" type="radio" class="cellphoneNo">
+	        
+	      </div>
+	      
+	      <div class="textForm">
+	        <input name="address" type="text" class="name" placeholder="주소를 입력해주세요."><button type="button">주소찾기</button>
+	      </div>
+	      
+	       <div class="textForm">
+	        <input name="detailAddress" type="text" class="name" placeholder="주소를 입력해주세요.">
+	      </div>
+	      
+	      <input type="submit" class="btn" value="J O I N"/>
+	    </form>
 	</div>
 
 
