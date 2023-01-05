@@ -2,3 +2,33 @@
 <!DOCTYPE configuration 
 PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+	
+	<typeAliases>
+		<typeAlias type="com.bi.billage.user.model.vo.user" alias="user"/>
+		<typeAlias type="com.bi.bilaage.board.model.vo.Board" alias="board"/>
+		<typeAlias type="com.bi.billage.reply.model.vo.Reply" alias="reply"/>
+	</typeAliases>
+	<!-- **주의 : 미리 등록을 해두려면 해당 클래스가 진짜 존재하고 있는 상태여야함 -->
+	
+	<mappers>
+		<mapper resource="/mappers/member-mapper.xml"/>
+		<mapper resource="/mappers/board-mapper.xml"/>
+	</mappers>
+	<!-- **주의 : 미리 등록을 해두려면 해당 mappse 파일이 진짜 존재하고 있는 상태여야함 + namespace속성까지 작성해둬야함 -->
+	
+	<!-- 
+		enviroments, dataSource에 기술했던 DB연결정보
+		=> DB등록정보는 서버연동과 동시에 이루어져야 하기 때문에
+		서버 켜짐과 동시에 바로 읽혀지는 파일이 root-context.xml에 기술할 예정
+	 -->
+	
+
+
+
+
+</configuration>
