@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>리뷰게시판 목록 조회</title>
 </head>
 <body>
-	<jsp:forward page="views/common/main.jsp"></jsp:forward>
+
 </body>
 </html>
