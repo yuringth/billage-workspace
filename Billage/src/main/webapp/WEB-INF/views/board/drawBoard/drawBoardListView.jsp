@@ -66,9 +66,9 @@
             </div>
             <div class="text-area">
                 <h1>책 제목</h1>
-                <p class="textsize">현재 가격 : 2250P</p>
+                <p class="textsize">응모 가격 : 150P</p>
                 <p class="textsize">남은 시간 : 00:00:00</p>
-                <p class="countnum">입찰 : 10 조회 : 10</p>
+                <p class="countnum">조회 : 10</p>
             </div>
 
         </div>
@@ -79,9 +79,9 @@
             </div>
             <div class="text-area">
                 <h1>책 제목</h1>
-                <p class="textsize">현재 가격 : 3000P</p>
+                <p class="textsize">응모 가격 : 200P</p>
                 <p class="textsize">남은 시간 : 00:00:00</p>
-                <p class="countnum">입찰 : 10 조회 : 10</p>
+                <p class="countnum">조회 : 10</p>
             </div>
 
         </div>
@@ -92,9 +92,9 @@
             </div>
             <div class="text-area">
                 <h1>책 제목</h1>
-                <p class="textsize">현재 가격 : 7000P</p>
+                <p class="textsize">응모 가격 : 100P</p>
                 <p class="textsize">남은 시간 : 00:00:00</p>
-                <p class="countnum">입찰 : 10 조회 : 10</p>
+                <p class="countnum">조회 : 10</p>
             </div>
 
         </div>
