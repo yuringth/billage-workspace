@@ -90,6 +90,7 @@
 	             <li><a href="list.ac">경매</a></li>
 	             <li><a href="#">중고</a></li>
 	             <li><a href="#">마을</a></li>
+	             <li><a href="#">임시관리자</a></li>
 	         </ul>
 	    </div>
         
