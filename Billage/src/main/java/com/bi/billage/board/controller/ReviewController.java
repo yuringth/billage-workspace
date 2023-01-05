@@ -23,7 +23,7 @@ public class ReviewController {
 	// 리뷰게시판 -> 게시글 상세보기 : 안됨!!!
 	@RequestMapping("detail.re")
 	public String reviewDetail() {
-		return "board/reviewBoard/reviewDetailForm";
+		return "board/reviewBoard/reviewDetailView";
 	}
 	
 	
