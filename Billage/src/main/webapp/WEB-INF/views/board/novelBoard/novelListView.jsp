@@ -217,6 +217,12 @@ div.card.show {
 </style>
 <body>
 		<jsp:include page="../../common/header.jsp"/>
+		<!-- 로그인 후 관리자일 경우만 보여지는 글쓰기 버튼 -->
+        <c:if test="${ loginUser eq null }">
+        <div align="center">
+        <a class="btn btn-secondary" href="enrollForm.nv">작품등록</a>
+        </div>
+        </c:if>
 		<div class="cards">
 		        <div class="card">
 		            <div class="card__image-holder">
