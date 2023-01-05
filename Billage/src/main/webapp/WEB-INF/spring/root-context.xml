@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+   
+   <!-- Root Context: defines shared resources visible to all other web components -->
+      
+   <!-- 
+      * root-context.xml
+      서버 구동과 동시에 web.xml파일을 거쳐서 바로 로딩되는 문서 == preloading
+      => 서버 구동과 동시에 바로 셋팅(bean등록) 해야하는 내용들을 작성
+      주로 DB정보, 트랜잭션처리, 내외부모듈연결 등등 ...
+    -->
+    
+   
+   
+   <!-- ★★★파일 업로드 관련 빈 등록★★★ -->
+   <bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+      <property name="maxUploadSize" value="100000000" />
+      <property name="maxInMemorySize" value="100000000" />
+   </bean>
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+</beans>
