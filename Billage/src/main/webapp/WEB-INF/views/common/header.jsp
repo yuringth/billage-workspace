@@ -20,7 +20,7 @@
 			margin: auto;
 		}
 
-		#outer>.header {
+		#outer > .header {
 			float: left;
 			height: 200px;
 
@@ -73,7 +73,8 @@
 
 	<div id="outer">
 		<div class="header" id="logo-area">
-			<a href="main.ma"><img>로고넣자</a>
+			<a href="${ request.getContextPath()}/billage/"><img>로고넣자</a>
+			<!-- main.ma -->
 		</div>
 
 		<div class="header" id="search-area">
