@@ -1,18 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>리뷰게시판 글 작성 폼</title>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
 
 <style>
 .outer{
 	width:1200px;
 	margin: auto;
+	
 }
+
+.btn2{ 
+	display: flex; 
+	justify-content: center;
+	padding-bottom:10px;
+
+}
+
 
 .book-detail-outer{
 	border : 1px solid blue;
@@ -49,10 +59,16 @@
 .book-content-outer{
 	text-align:center;
 }
-
-
-
 </style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
 
 </head>
 <body>
@@ -67,6 +83,9 @@
 
 		<hr>
 		
+		<div class="btn2">
+			<button class="btn btn-link" onclick="location.href='search.re'">상품검색</button>
+		</div>
 		
 		<div class="book-detail-outer">
 			<div class="book-detail-area">
@@ -127,8 +146,6 @@
 
 
  	</div>   
- 
- 
  
  
  

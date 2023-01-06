@@ -6,6 +6,18 @@
 <head>
 <meta charset="UTF-8">
 <title>안녕여긴 마이페이지</title>
+<style>
+	#myPage-area {
+		width:1200px;
+		align : center;
+	}
+	#menubar{
+		width:250px;
+	}
+
+
+</style>
+
 </head>
 
 <body>
@@ -21,7 +33,7 @@
 				<li class="menu"><a href="list.ms">쪽지함보기</a></li>
 				<li class="menu"><a>모임관련</a></li>
 				<li class="menu"><a>내 리뷰목록보기</a></li>
-				<li class="menu"><a>모임 관련</a></li>
+				<li class="menu"><a href="">모임 관련</a></li>
 				<li class="menu"><a>경매, 추첨 관련</a></li>
 				<li class="menu"><a>책 대여 목록보기</a></li>
 				<li class="menu"><a>중고 거래 목록보기</a></li>
@@ -31,7 +43,7 @@
 		
 		</div>
 		<div>
-		
+			<
 		
 		
 		</div>
