@@ -44,10 +44,8 @@
   		display:flex;
   	}
   	
-  	#image{
-  	
-  	}
-	
+
+
 	#title{
 	
 	}
@@ -102,8 +100,7 @@
 
 			<div class="book-detail">
 	            <div id="image">
-	            	사진
-	            	 <a href="#"><img class="card-img-top" src="https://image.yes24.com/goods/24259565/XL" alt="" width:30px; heigh:30px;></a>
+	            	<img class="card-img-top" src="https://image.yes24.com/goods/24259565/XL" alt="" style= "width:120px; height:120px;">
 	            </div>
 	            
 	            

@@ -5,9 +5,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>여기는 보드 리스트 </title>
+<title>여긴 모임 디테일뷰</title>
 </head>
 <body>
-
+	<jsp:include page="../common/header.jsp" />
+	
+	
+	
+	
+	
+	<jsp:include page="../common/footer.jsp" />
 </body>
 </html>

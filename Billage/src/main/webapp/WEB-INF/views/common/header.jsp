@@ -20,7 +20,7 @@
 			margin: auto;
 		}
 
-		#outer>.header {
+		#outer > .header {
 			float: left;
 			height: 200px;
 
@@ -62,133 +62,7 @@
 
 		}
 		
-		/*모달 관련 스타일입니다*/
-		#login-area-modal {
-		  margin: 0px;
-		  padding: 0px;
-		  text-decoration: none;
-		  font-family:sans-serif;
-		  display:none;
-		}
-		
-		body {
-		  background-image:#34495e;
-		}
-		
-		.joinForm {
-		  position:absolute;
-		  width:400px;
-		  height:400px;
-		  padding: 30px, 20px;
-		  background-color:#FFFFFF;
-		  text-align:center;
-		  top:40%;
-		  left:50%;
-		  transform: translate(-50%,-50%);
-		  border-radius: 15px;
-		}
-		
-		#close-btn{
-			position:relative;
-			margin-right:350px;
-		}
-		
-		.joinForm h2 {
-		  text-align: center;
-		  margin: 30px;
-		}
-		
-		.textForm {
-		  border-bottom: 2px solid #adadad;
-		  margin: 30px;
-		  padding: 10px 10px;
-		}
-		
-		
-		.id {
-		  width: 100%;
-		  border:none;
-		  outline:none;
-		  color: #636e72;
-		  font-size:16px;
-		  height:25px;
-		  background: none;
-		}
-		
-		.pw {
-		  width: 100%;
-		  border:none;
-		  outline:none;
-		  color: #636e72;
-		  font-size:16px;
-		  height:25px;
-		  background: none;
-		}
-		
-		.name {
-		  width: 100%;
-		  border:none;
-		  outline:none;
-		  color: #636e72;
-		  font-size:16px;
-		  height:25px;
-		  background: none;
-		}
-		
-		.email {
-		  width: 100%;
-		  border:none;
-		  outline:none;
-		  color: #636e72;
-		  font-size:16px;
-		  height:25px;
-		  background: none;
-		}
-		
-		.nickname {
-		  width: 100%;
-		  border:none;
-		  outline:none;
-		  color: #636e72;
-		  font-size:16px;
-		  height:25px;
-		  background: none;
-		}
-		
-		.cellphoneNo {
-		  width: 100%;
-		  border:none;
-		  outline:none;
-		  color: #636e72;
-		  font-size:16px;
-		  height:25px;
-		  background: none;
-		}
-		
-		.btn {
-		  position:relative;
-		  left:40%;
-		  transform: translateX(-50%);
-		  margin-bottom: 40px;
-		  width:80%;
-		  height:40px;
-		  background: linear-gradient(125deg,#81ecec,#6c5ce7,#81ecec);
-		  background-position: left;
-		  background-size: 200%;
-		  color:white;
-		  font-weight: bold;
-		  border:none;
-		  cursor:pointer;
-		  transition: 0.4s;
-		  display:inline;
-		}
-		
-		.btn:hover {
-		  background-position: right;
-		}
-				
-				
-		
+
 		
 		
 	</style>
@@ -199,7 +73,8 @@
 
 	<div id="outer">
 		<div class="header" id="logo-area">
-			<a href="main.ma"><img>로고넣자</a>
+			<a href="${ request.getContextPath()}/billage/"><img>로고넣자</a>
+			<!-- main.ma -->
 		</div>
 
 		<div class="header" id="search-area">
@@ -247,7 +122,7 @@
 	
 	</script>
 
-	<div id="login-area-modal">
+	<div id="login-area-modal" style="display:none;">
 		<button id="close-btn"> X </button>
 		<form action="doJoin" method="POST" class="joinForm" onsubmit="DoJoinForm__submit(this); return false;">
 	                                                                                               

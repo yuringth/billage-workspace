@@ -14,13 +14,21 @@ public class GroupController {
 	//@Autowired
 	//private GroupService groupService;
 	
-	//@RequestMapping("list.gr")
-	//public ModelAndView selectGroup(@RequestParam(value="cpage", defaultValue="1")int currentPage, ModelAndView mv) {
+	@RequestMapping("list.gr")
+	public /*ModelAndView*/String selectGroup(/*@RequestParam(value="cpage", defaultValue="1")int currentPage, ModelAndView mv*/) {
 		
 		//PageInfo pi = pagination.
-		
+		//mv.setViewName("group/groupListView");
 		//return mv;
-	//}
+		return "group/groupListView";
+	}
+	
+	
+	@RequestMapping("detail.gr")
+	public String selectDetailGroup(/*게시글 번호*/) {
+		//게시글 번호 조회 
+		return "group/groupDetailView";
+	}
 	
 	
 	

@@ -7,18 +7,27 @@
 <meta charset="UTF-8">
 <title>안녕 여긴 푸터쓰</title>
 <style>
+
       @font-face {
      font-family: 'S-CoreDream-3Light';
      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
      font-weight: normal;
      font-style: normal;
     }
+	
+	#footer-area{
+		display:block;
+	}
 
-
-    #ft-list-area> ul li{
+    #ft-list-area > ul li{
         list-style: none;
         line-height: 30px;
     }
+
+	#ft-list-area li a{
+        text-decoration : none;
+        color:black;
+	}
 
     #ft-list-area li a:hover{
         font-weight: 900;
