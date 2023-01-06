@@ -25,6 +25,9 @@
 	
 	<jsp:include page="../common/header.jsp"/>
 	
+	<!-- 팔로잉한 페이지 목록의 팔로우 버튼은 모두 팔로잉 상태여야 한다.
+			팔로잉한 상대방의 닉네임을 누르면 해당 유저의 detailView로 이동한다.
+	 -->
 	<div class="outer" >
 		
 		<div id="followinglist">
@@ -38,7 +41,7 @@
 					<img src="https://i.pinimg.com/originals/4c/f0/16/4cf0163a9db5f4b69499b9365be5fcda.png" width="100px;" height="100px;">
 				</div>
 				<div id="userDetail">
-					<div id="userNickName" ><a href="followingDetail.fo"></a>test</div>
+					<div id="userNickName" ><a href="followDetail.fo">user02</a></div>
 					<div id="reviewCount">리뷰100</div>
 				</div>
 				<button id="followingBtn" width="50px;" height="20px;">팔로잉</button>
