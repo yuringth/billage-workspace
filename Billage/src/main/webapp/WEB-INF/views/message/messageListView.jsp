@@ -29,7 +29,7 @@
 		
 		
 		<div class="container">
-			<table class="table table-hover table-bordered">
+			<table class="table table-hover table-bordered table-sm">
 				<thead class="thead-light">
 					<tr>
 						<th width="150px">보낸 사람</th>
