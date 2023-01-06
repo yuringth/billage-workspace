@@ -84,7 +84,7 @@
 					<a class="dropdown-item" href="#">입찰수 순</a>
 				</div>
 			</div>
-			<div><button type="button" class="btn btn-info" onclick="location.href='insert.ac'" >글쓰기</button></div>   
+			<div><button type="button" class="btn btn-info" onclick="location.href='enrollForm.ac'" >글쓰기</button></div>   
 		</div>
 
 
@@ -93,6 +93,7 @@
 
 
 		<div class="align-left-outer">
+		
 	        <div class="one-content">
 	            <div class="img-area">
 	                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20151001_94%2Fbyitself_1443657275235dwe4K_JPEG%2F20150919_114529.jpg&type=sc960_832">
@@ -137,6 +138,15 @@
     </div>	
 
     <jsp:include page="../../common/footer.jsp"/>
+    
+    <script>
+    	$(function(){
+    		$('.one-content').click(function(){
+    			location.href='detail.ac';
+    		})	
+    	})
+    </script>
+    
 
 </body>
 </html>
