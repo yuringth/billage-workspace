@@ -21,16 +21,14 @@
     }
     
     .wrapper {
-    	display: flex;
         position: relative;
     }
     
     .wrapper .sidebar {
-        width: 250px;
+        width: 200px;
         height: 100%;
         background: #4b4276;
         padding: 30px 0px;
-        margin-left: 200px;
         /* position: fixed; */
     }
     .wrapper .sidebar h2 {
@@ -79,7 +77,7 @@
     }
     .wrapper .main_content {
         width: 100%;
-        margin-left: 150px;
+        margin-left: 200px;
     }
     .wrapper .main_content .header {
         padding: 20px;
@@ -120,7 +118,7 @@
             </ul>
         </div>
         <div class="main_content">
-            <h2>hello, admin</h2>
+            
         </div>
     </div>
     
