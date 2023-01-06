@@ -13,6 +13,35 @@
     -->
     
    
+   <!-- DB 연결 설정 3단계 -->
+   <!-- 1단계 -->  <!-- commons-dbcp 의 BasicDataSource 클래스 사용할 예정  -->
+	<bean class="org.apache.commons.dbcp.BasicDataSource" id="dataSource" destroy-method="close">
+	   <!-- 어떤 DB에 접속할건지 정보 작성 -->
+	   <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+	   <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+	   <property name="username" value="billage" />
+	   <property name="password" value="billage" />
+	</bean>
+   
+   <!-- 주석으로 바꿔가면서 사용합시다  
+   <property name="url" value="jdbc:oracle:thin:192.168.31.9:1521:xe" /> 
+   -->
+   
+   
+   <!-- 2단계 :: mybatis Spring에서 제공하는 SQL명령어 실행을 위한 도구 등록-->
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactoryBean" >
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+		<property name="dataSource" ref="dataSource" />	
+	</bean>
+   <!-- 3단계 -->
+	<bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession">
+		<!-- SQL명령어 실행을 위한 도구에 대한 참조를 설정 -->
+		<constructor-arg ref="sqlSessionFactoryBean" />
+	</bean>
+   
+   
+   
+   
    
    <!-- ★★★파일 업로드 관련 빈 등록★★★ -->
    <bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
