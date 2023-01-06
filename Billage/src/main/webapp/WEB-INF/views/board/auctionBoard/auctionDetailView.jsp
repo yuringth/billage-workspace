@@ -15,6 +15,10 @@
         width : 1200px;
         margin : auto;
     }
+    .writerarea{
+		width : 600px;
+		margin: auto;
+	}
 	.imgarea{
 		width: 600px;
 		height : 600px;
