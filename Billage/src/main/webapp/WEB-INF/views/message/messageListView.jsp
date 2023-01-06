@@ -28,7 +28,7 @@
 		
 		
 		
-		<div class="container">
+		<div class="container" style="width : 1000px;">
 			<table class="table table-hover table-bordered table-sm">
 				<thead class="thead-light">
 					<tr>
