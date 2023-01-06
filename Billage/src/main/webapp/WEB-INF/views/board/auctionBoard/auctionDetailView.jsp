@@ -6,11 +6,22 @@
 <head>
 <meta charset="UTF-8">
 <title>경매글 상세보기</title>
+<style>
+	.outer{
+        width : 1200px;
+        margin : auto;
+    }
+	
+
+</style>
 </head>
 <body>
 	<jsp:include page="../../common/header.jsp"/>
 	
-	
+	<div class="outer">
+
+
+	</div>
 	
 	
 
