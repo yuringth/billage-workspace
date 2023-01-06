@@ -49,7 +49,7 @@
         margin-left : 10px;
         margin-top : 8px;
     }
-    p {
+    .textdiv>p{
         font-size: 13px;
         padding-top: 10px;
     }
