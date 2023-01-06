@@ -5,11 +5,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <title>쪽지함</title>
 </head>
 <body>
 	<div class="outer">
-		<ul class="nav justify-content-center">
+		<ul class="nav justify-content-center table-bordered">
 			<li class="nav-item">
 				<a class="nav-link" href="#">받은 쪽지함</a>
 			</li>
@@ -21,12 +25,11 @@
 			</li>
 		</ul>
 		
-		<hr>
 		
 		
 	<div class="container">
-		<table class="table table-hover">
-			<thead>
+		<table class="table table-hover table-bordered">
+			<thead class="thead-light">
 				<tr>
 					<th width="150px">보낸 사람</th>
 					<th width="850px">내용</th>
