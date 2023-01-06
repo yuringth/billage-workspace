@@ -99,27 +99,12 @@
                 </div>
             </div>
 
-            <div class="longdiv align-left">
-                <div class="shortdiv align-left">
-                    <div class="textdiv">
-                        <p>마감일:</p>
-                    </div>
-                    <div class="inputdiv">
-                        <input type="date" class="form-control" id="closeDate" placeholder="날짜 입력" name="closeDate">
-                    </div>
-                </div>
-                <div class="shortdiv align-left">
-                    <div class="textdiv">
-                        <p>응모포인트:</p>
-                    </div>
-                    <div class="inputdiv">
-                        <input type="number" class="form-control" id="tryPoint" value="50P" name="tryPoint">
-                    </div>
-                </div>
-            </div>
-
+            
 
             <div style="width : 790px;">
+    	        <div class="textdiv">
+	                <p>상품 소개:</p>
+                </div>
                 <textarea class="form-control" rows="15" id="content" style="resize: none;" name="content" placeholder="내용을 입력하세요"></textarea>
             </div>
 
