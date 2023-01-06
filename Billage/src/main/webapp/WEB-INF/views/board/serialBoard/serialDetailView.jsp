@@ -111,8 +111,6 @@
         <br><br>
 
     </div>
-    
-    <jsp:include page="../../common/footer.jsp" />
             <br><br>
             <table id="boardList" class="table table-hover" align="center">
                 <thead>
@@ -137,10 +135,8 @@
             <br>
        
             <br><br>
-        </div>
         <br><br>
 
-    </div>
 	<jsp:include page="../../common/footer.jsp"/>
 
 </body>
