@@ -26,33 +26,55 @@
     }
     
     .one-content{
-   		border:1px solid red;
-    	width:450px;
-    	height:400px;
+   		border:1px solid forestgreen;
+    	width:500px;
+    	height:350px;
+    	margin:25px;
+    }
+    
+    
+    .list-outer{
+   		display:flex;
+   		width:1100px;
+   		margin:auto;
     }
 
-    .wirter{
-        border:1px solid red;
-		width:450px;
+    .content-detail0{
+        border:1px solid blue;
+		width:500px;
 		height:50px;
         display:flex;
     }
 
+
   	.book-detail{
-  		width:450px;
-		height:300px;
+  		border:1px solid red;
+  		width:500px;
+		height:250px;
   		display:flex;
+  		margin:auto;
   	}
   	
+ 
+  	
+	.content-detail1{
+		border:1px solid pink;
+		width:200px; 
+		height:220px;
+		margin-top:10px;
+		margin-left:10px;
+	}
+
+  	
+	.content-detail2{
+		border:1px solid pink;
+		width:300px;
+		height:220px;
+		margin-top:10px;
+		margin-left:10px;
+	}
 
 
-	#title{
-	
-	}
-	
-	#content{
-	
-	}
 
 	* {
 	  margin: 0;
@@ -88,35 +110,91 @@
                 </select>
             </div>
         </div>
-     
+
+	<div class="list-outer">
+
         <!-- 리뷰 하나를 감싸는 div -->
         <div class="one-content">
-            <div class="wirter" onclick="reviewDetail()">
+        	
+        	<!-- 작성자/별 -->
+            <div class="content-detail0" onclick="reviewDetail()">
                 <div>작성자　　　　</div>                                              
                 <div class="card-footer">
                  	   별점 : <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
                 </div>
             </div>
-
-			<div class="book-detail">
-	            <div id="image">
-	            	<img class="card-img-top" src="https://image.yes24.com/goods/24259565/XL" alt="" style= "width:120px; height:120px;">
-	            </div>
-	            
-	            
-	            <div id="title">
-	            	<p>책 제목</p>
-	            </div>
-    	        <div id="content">
-  	  	       		<p>책 내용</p>
-    	        </div>
-			</div>
 			
-			<br>
-
-            <div><button>♡</button>찜갯수(5) 댓글(3) 리뷰등록수(3)</div>
-
+			<!-- 책관련 디테일 div 책사진/제목/내용  -->
+			<div class="book-detail">
+			
+				<div class="content-detail1">
+		            <div>
+		            	<img class="card-img-top" src="https://image.yes24.com/goods/24259565/XL" alt="" style= "width:200px; height:220px;">
+		            </div>
+				</div>
+				
+				<div class="content-detail2">	            
+		            <div>
+		            	<div style="height:20px;">책 제목</div>
+		            </div>
+	    	        <div>
+	  	  	       		<div style="height:200px;">책내용</div>
+	    	        </div>
+				</div>
+			
+				<br>
+			</div>
+	
+	            <div>
+	            	<button>♡</button>찜갯수(5) 댓글(3) 리뷰등록수(3)
+	            </div>
+	            
+	            
         </div>
+
+
+
+
+ 		<!-- 리뷰 하나를 감싸는 div -->
+        <div class="one-content">
+        	
+        	<!-- 작성자/별 -->
+            <div class="content-detail0" onclick="reviewDetail()">
+                <div>작성자　　　　</div>                                              
+                <div class="card-footer">
+                 	   별점 : <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                </div>
+            </div>
+			
+			<!-- 책관련 디테일 div 책사진/제목/내용  -->
+			<div class="book-detail">
+			
+				<div class="content-detail1">
+		            <div>
+		            	<img class="card-img-top" src="https://image.yes24.com/goods/24259565/XL" alt="" style= "width:200px; height:220px;">
+		            </div>
+				</div>
+				
+				<div class="content-detail2">	            
+		            <div>
+		            	<div style="height:20px;">책 제목</div>
+		            </div>
+	    	        <div>
+	  	  	       		<div style="height:200px;">책내용</div>
+	    	        </div>
+				</div>
+			
+				<br>
+			</div>
+	
+	            <div>
+	            	<button>♡</button>찜갯수(5) 댓글(3) 리뷰등록수(3)
+	            </div>
+	            
+	            
+        </div>
+
+	</div>
 
 
 	<script>
