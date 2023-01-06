@@ -20,7 +20,7 @@
     .content-area{
     	display:flex;
     	margin:auto;
-    	height:100px;
+    	height:120px;
     	width:700px;
     }
     
@@ -70,35 +70,76 @@
 	<jsp:include page="../../common/header.jsp"/>
 
     <div class="outer">
+    
 		<div class="text-div">
 			<p>"검색이름"로 125개의 검색 결과가 있습니다.</p>
 		</div>
+		
 		<hr>
 		
+		<!-- 책상품 하나의div  -->
 		<div class="content-area">
-			
 			<div class="content-area1">
 				<p>1</p>
 			</div>
-			
 			<div class="content-area2">
 				<div class="content-photo">
 					<div>사진</div>
 				</div>
-				
 				<div class="content-detail">
-					<div>도서제목</div>
-					<div>작가</div>
-					<div>출판날자</div>
+					<p>도서제목</p>
+					<p>작가</p>
+					<p>출판날자</p>
 				</div>
 			</div>
-			
 			<div  class="content-area3">
 				<button>선택</button>
 			</div>	
-			
+		</div>
+		
+		<hr>
+
+		<!-- 책상품 하나의div  -->
+		<div class="content-area">
+			<div class="content-area1">
+				<p>1</p>
+			</div>
+			<div class="content-area2">
+				<div class="content-photo">
+					<div>사진</div>
+				</div>
+				<div class="content-detail">
+					<p>도서제목</p>
+					<p>작가</p>
+					<p>출판날자</p>
+				</div>
+			</div>
+			<div  class="content-area3">
+				<button>선택</button>
+			</div>	
 		</div>
 
+		<hr>
+
+		<!-- 책상품 하나의div  -->
+		<div class="content-area">
+			<div class="content-area1">
+				<p>1</p>
+			</div>
+			<div class="content-area2">
+				<div class="content-photo">
+					<div>사진</div>
+				</div>
+				<div class="content-detail">
+					<p>도서제목</p>
+					<p>작가</p>
+					<p>출판날자</p>
+				</div>
+			</div>
+			<div  class="content-area3">
+				<button>선택</button>
+			</div>	
+		</div>
 
     </div>
 
