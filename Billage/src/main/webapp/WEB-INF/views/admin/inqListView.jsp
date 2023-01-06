@@ -16,10 +16,6 @@
         text-decoration: none;
     }
     
-    body {
-        background-color: #f3f5f9;
-    }
-    
     .wrapper {
     	display: flex;
         position: relative;
@@ -30,7 +26,7 @@
         height: 100%;
         background: #4b4276;
         padding: 30px 0px;
-        margin-left: 200px;
+        margin-left: 50px;
         /* position: fixed; */
     }
     .wrapper .sidebar h2 {
@@ -79,7 +75,7 @@
     }
     .wrapper .main_content {
         width: 100%;
-        margin-left: 150px;
+        margin-left: 50px;
     }
     .wrapper .main_content .header {
         padding: 20px;
@@ -102,6 +98,28 @@
             display: none !important;
         }
     }
+    /*-----------------------------------*/
+    @import url("https://fonts.googleapis.com/css?family=IBM Plex Sans:400,400i,700");
+
+	*, :before, :after {
+		box-sizing: border-box;
+	}
+	.title {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+	}
+	.tr {
+		display: grid;
+		grid-template-columns: 15% 15% 20% 20% 15% 15%;
+	}
+	.header {
+		border-bottom: solid 1px #aaa;
+	}
+	.body {
+		border-bottom: solid 1px #aaa;
+	}
 </style>
 <body>
    <jsp:include page="../common/header.jsp"/>
@@ -120,11 +138,54 @@
             </ul>
         </div>
         <div class="main_content">
-            <h2>hello, admin</h2>
+            <div class="title">
+				<h1 class="title-text">모임 목록 조회 및 관리</h1>
+			</div>
+			<br>
+			<div class="table">
+				<div class="tr header">
+					<div class="td">문의회원</div>
+					<div class="td">문의유형</div>
+					<div class="td">문의제목</div>
+					<div class="td">문의날짜</div>
+					<div class="td">답변상태</div>
+					<div class="td">비고</div>
+				</div>
+				<div class="tr body">
+					<div class="td">책벌레</div>
+					<div class="td">공모전</div>
+					<div class="td">제가 왜 떨어졌죠?</div>
+					<div class="td">2023/01/06</div>
+					<div class="td">미답변</div>
+					<div class="td"></div>
+				</div>
+				<div class="tr body">
+					<div class="td">책벌레</div>
+					<div class="td">공모전</div>
+					<div class="td">제가 왜 떨어졌죠?</div>
+					<div class="td">2023/01/06</div>
+					<div class="td">미답변</div>
+					<div class="td"></div>
+				</div>
+				<div class="tr body">
+					<div class="td">책벌레</div>
+					<div class="td">공모전</div>
+					<div class="td">제가 왜 떨어졌죠?</div>
+					<div class="td">2023/01/06</div>
+					<div class="td">미답변</div>
+					<div class="td"></div>
+				</div>
+				<div class="tr body">
+					<div class="td">책벌레</div>
+					<div class="td">공모전</div>
+					<div class="td">제가 왜 떨어졌죠?</div>
+					<div class="td">2023/01/06</div>
+					<div class="td">미답변</div>
+					<div class="td"></div>
+				</div>
+			</div>
         </div>
     </div>
-    
-    
    <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>
