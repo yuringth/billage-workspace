@@ -120,12 +120,12 @@
             </div>
 
             <div class="longdiv align-left">
-                <div class="btnleft btn btn-dark">
+                <button class="btnleft btn btn-dark">
                     <p class="btntitle">등록</p>
-                </div>
-                <div class="btnright btn btn-secondary">
+                </button>
+                <button class="btnright btn btn-secondary">
                     <p class="btntitle ">취소</p>
-                </div>
+                </button>
             </div>
         </form> 
     </div>

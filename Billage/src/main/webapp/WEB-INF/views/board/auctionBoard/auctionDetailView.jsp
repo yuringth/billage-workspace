@@ -31,10 +31,17 @@
 	.genre{
 		text-align: center;
 		font-size: 17px;
+		margin-bottom: 0px;
 	}
 	.title{
 		text-align: center;
 		font-size: 30px;
+		font-weight: bold;
+		margin-bottom: 0px;
+	}
+	.bookWriter{
+		text-align: center;
+		font-size: 20px;
 		margin-bottom: 40px;
 		font-weight: bolder;
 	}
@@ -79,6 +86,9 @@
 	
 	<div class="outer">
 
+		<div class="writerarea">
+			<p>작성자 : 주우재</p>
+		</div>
 		<!--이미지 영역-->
 		<div class="imgarea">
 			<img style="width: 600px; height: 600px;"src="https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2FMjAyMDA4MDVfMjY2%2FMDAxNTk2NTY3NDEwNzA4.fW0LNc9ezTC45UeZP4C72irFTFC23cB7YklNQdu1G-Ig.uUzznBuV_lL2adb0KTMAwzWFN6n0d0HE__fS_ihBmpog.JPEG%2FexternalFile.jpg&type=sc960_832">
@@ -88,6 +98,7 @@
 		<p class="time">남은 시간 : 00 : 00 : 30</p>
 		<p class="genre">호러</p>
 		<p class="title">"주호민의 리코더괴담"</p>
+		<p class="bookWriter">침착맨</p>
 		<div class="content" style="width : 550px">
 			<p>
 주호민의 리코더 괴담... 그의 리코더 연주 '할아버지의 11개월'을 끝까지 들으면 죽
@@ -110,12 +121,12 @@
 			</div>
 
 			<div class="btnArea">
-				<div class="btn1 btn btn-dark">
-					<p>즉시구매</p>
-				</div>
-				<div class="btn1 btn btn-secondary">
-					<p>입찰</p>
-				</div>
+				<button class="btn1 btn btn-dark">
+					즉시구매
+				</button>
+				<button class="btn1 btn btn-secondary">
+					입찰
+				</button>
 			</div>
 		</form>
 
