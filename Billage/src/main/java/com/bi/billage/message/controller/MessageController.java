@@ -10,4 +10,12 @@ public class MessageController {
 	public String messageList() {
 		return "message/messageListView";
 	}
+	@RequestMapping("sendList.ms")
+	public String messageSendList() {
+		return "message/messageSendListView";
+	}
+	@RequestMapping("sendForm.ms")
+	public String messageSendForm() {
+		return "message/messageSendForm";
+	}
 }

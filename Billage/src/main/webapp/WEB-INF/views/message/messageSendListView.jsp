@@ -9,17 +9,17 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<title>쪽지함</title>
+<title>보낸 쪽지함</title>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"/>
 	<div class="outer">
 		<ul class="nav justify-content-center table-bordered">
 			<li class="nav-item">
-				<a class="nav-link">받은 쪽지함</a>
+				<a class="nav-link" href="list.ms">받은 쪽지함</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="sendList.ms">보낸 쪽지함</a>
+				<a class="nav-link">보낸 쪽지함</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="sendForm.ms">쪽지 보내기</a>
@@ -32,14 +32,14 @@
 			<table class="table table-hover table-bordered table-sm">
 				<thead class="thead-light">
 					<tr>
-						<th width="150px">보낸 사람</th>
+						<th width="150px">받는 사람</th>
 						<th width="850px">내용</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td>유림쿤</td>
-						<td>私は韓国が嫌いです。</td>
+						<td>독도는 우리땅입니다.</td>
 					</tr>
 				</tbody>
 			</table>
