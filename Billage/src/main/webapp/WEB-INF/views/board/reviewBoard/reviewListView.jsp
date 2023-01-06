@@ -131,7 +131,7 @@
 
                     
     <!-- 페이지처리하는 영역-->
-    <div id="market_page" class="">
+    <div id="pagingArea">
         <ul class="pagination">
             <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
             <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -140,8 +140,9 @@
             <li class="page-item"><a class="page-link" href="#">4</a></li>
             <li class="page-item"><a class="page-link" href="#">5</a></li>
             <li class="page-item"><a class="page-link" href="#">Next</a></li>
-        </ul>    
-    </div>    
+        </ul>
+    </div>
+
 
 	<div>
 		<a href="enrollForm.re">글작성</a>
