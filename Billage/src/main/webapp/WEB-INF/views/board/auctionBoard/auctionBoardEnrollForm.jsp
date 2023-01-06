@@ -64,10 +64,10 @@
 
             <div class="longdiv align-left">
                 <div class="textdiv">
-                    <p>Email:</p>
+                    <p>제목:</p>
                 </div>
                 <div class="titlediv">
-                    <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
+                    <input type="text" class="form-control" id="title" placeholder="Enter username" name="title" required>
                 </div>
             </div>
 
@@ -75,37 +75,18 @@
             <div class="longdiv align-left">
                 <div class="shortdiv align-left">
                     <div class="textdiv">
-                        <p>Email:</p>
+                        <p>작가:</p>
                     </div>
                     <div class="inputdiv">
-                        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                        <input type="text" class="form-control" id="bookWriter" placeholder="Enter email" name="bookWriter">
                     </div>
                 </div>
                 <div class="shortdiv align-left">
                     <div class="textdiv">
-                        <p>Email:</p>
+                        <p>장르:</p>
                     </div>
                     <div class="inputdiv">
-                        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
-                    </div>
-                </div>
-            </div>
-
-            <div class="longdiv align-left">
-                <div class="shortdiv align-left">
-                    <div class="textdiv">
-                        <p>Email:</p>
-                    </div>
-                    <div class="inputdiv">
-                        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
-                    </div>
-                </div>
-                <div class="shortdiv align-left">
-                    <div class="textdiv">
-                        <p>Email:</p>
-                    </div>
-                    <div class="inputdiv">
-                        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                        <input type="text" class="form-control" id="genre" placeholder="Enter email" name="genre">
                     </div>
                 </div>
             </div>
@@ -113,25 +94,44 @@
             <div class="longdiv align-left">
                 <div class="shortdiv align-left">
                     <div class="textdiv">
-                        <p>Email:</p>
+                        <p>마감일:</p>
                     </div>
                     <div class="inputdiv">
-                        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                        <input type="date" class="form-control" id="closeDate" placeholder="Enter email" name="closeDate">
                     </div>
                 </div>
                 <div class="shortdiv align-left">
                     <div class="textdiv">
-                        <p>Email:</p>
+                        <p>즉시구매가:</p>
                     </div>
                     <div class="inputdiv">
-                        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                        <input type="number" class="form-control" id="instantlyPrice" placeholder="Enter email" name="instantlyPrice">
+                    </div>
+                </div>
+            </div>
+
+            <div class="longdiv align-left">
+                <div class="shortdiv align-left">
+                    <div class="textdiv">
+                        <p>시작가:</p>
+                    </div>
+                    <div class="inputdiv">
+                        <input type="email" class="form-control" id="startPrice" placeholder="Enter email" name="startPrice">
+                    </div>
+                </div>
+                <div class="shortdiv align-left">
+                    <div class="textdiv">
+                        <p>입찰단위:</p>
+                    </div>
+                    <div class="inputdiv">
+                        <input type="email" class="form-control" id="bidPrice" placeholder="Enter email" name="bidPrice">
                     </div>
                 </div>
             </div>
             
 
             <div style="width : 790px;">
-                <textarea class="form-control" rows="15" id="boardContent" style="resize: none;" placeholder="내용을 입력하세요"></textarea>
+                <textarea class="form-control" rows="15" id="content" name="content" style="resize: none;" placeholder="내용을 입력하세요"></textarea>
             </div>
 
             <div class="longdiv align-left">
