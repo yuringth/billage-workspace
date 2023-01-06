@@ -83,9 +83,12 @@
 
 		<hr>
 		
-		<div class="btn2">
-			<button class="btn btn-link" onclick="location.href='search.re'">상품검색</button>
-		</div>
+		<form action="search.re">
+			<div class="btn2">
+				<input type="text"><button class="btn btn-link" type="submit">상품검색</button>
+			</div>
+		</form>
+		
 		
 		<div class="book-detail-outer">
 			<div class="book-detail-area">

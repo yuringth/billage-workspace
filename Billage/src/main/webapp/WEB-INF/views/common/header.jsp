@@ -94,7 +94,7 @@
 
 	<div id="outer">
 		<div class="header" id="logo-area">
-			<a href="billage/"><img>로고넣자</a>
+			<a href="/billage"><img>로고넣자</a>
 			<!-- main.ma -->
 		</div>
 
