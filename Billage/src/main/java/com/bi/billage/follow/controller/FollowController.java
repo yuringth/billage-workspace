@@ -15,7 +15,7 @@ public class FollowController {
 	@RequestMapping("selectFollower.fo")
 	public String selectFollowerList() {
 		
-		return "follow/followerListview";
+		return "follow/followerListView";
 	}
 	
 	@RequestMapping("selectLoginUser.fo")
@@ -23,9 +23,14 @@ public class FollowController {
 		return "follow/loginUserFollowView";
 	}
 	
-	@RequestMapping("followingDetail.fo")
+	@RequestMapping("followDetail.fo")
 	public String selectFollowing() {
 		return "follow/followingUserView";
+	}
+	
+	@RequestMapping("reviewList.fo")
+	public String selectFollowReviewList() {
+		return "follow/followReviewListView";
 	}
 
 }
