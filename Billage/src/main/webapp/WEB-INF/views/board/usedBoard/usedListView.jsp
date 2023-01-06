@@ -74,6 +74,7 @@
 </head>
 <body>
 
+
     <jsp:include page="../../common/header.jsp"/>
 
 
@@ -89,9 +90,8 @@
 					<a class="dropdown-item" href="#">최신 날짜 순</a>
 				</div>
 			</div>
-			<div><button type="button" class="btn btn-info" onclick="location.href='insert.dr'">글쓰기</button></div>   
+			<div><button type="button" class="btn btn-info" onclick="location.href='enrollForm.ud'">글쓰기</button></div>   
 		</div>
-
 
 
 
