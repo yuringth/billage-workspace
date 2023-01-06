@@ -38,7 +38,7 @@
 					<img src="https://i.pinimg.com/originals/4c/f0/16/4cf0163a9db5f4b69499b9365be5fcda.png" width="100px;" height="100px;">
 				</div>
 				<div id="userDetail">
-					<div id="userNickName">test</div>
+					<div id="userNickName" ><a href="followingDetail.fo"></a>test</div>
 					<div id="reviewCount">리뷰100</div>
 				</div>
 				<button id="followingBtn" width="50px;" height="20px;">팔로잉</button>
