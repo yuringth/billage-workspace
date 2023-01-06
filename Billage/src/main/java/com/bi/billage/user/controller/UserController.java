@@ -15,10 +15,34 @@ public class UserController {
 		return "admin/adminPage";
 	}
 	
-	// 1:1문의 작성폼
+	// 회원관리화면selectGroup.ad
+	@RequestMapping("selectUser.ad")
+	public String selectUserList() {
+		return "admin/userListView";
+	}
+	
+	// 모임관리화면
+	@RequestMapping("selectGroup.ad")
+	public String selectGroupList() {
+		return "admin/groupListView";
+	}
+	
+	// 1:1 문의내역
+	@RequestMapping("inquiryList.ad")
+	public String selectInqList() {
+		return "admin/inqListView";
+	}
+	
+	// 1:1 문의 작성폼
 	@RequestMapping("enroll.iq")
 	public String enrollInquiry() {
 		return "admin/inqEnrollForm";
+	}
+	
+	// 연재 요청 리스트
+	@RequestMapping("serialApply.ad")
+	public String serialRequest() {
+		return "admin/serialRequestListView";
 	}
 	
 	// 연재 요청 작성폼
@@ -27,6 +51,7 @@ public class UserController {
 		return "admin/serialRequestForm";
 	}
 	
+	// 작품 등록폼
 	@RequestMapping("enrollForm.nv")
 	public String enrollNovel() {
 		return "admin/novelEnrollForm";
