@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>중고게시판 작성 화면</title>
+<title>검색 누르면 상품 검색 페이지가 뜬다</title>
 
 <style>
     .outer{
@@ -60,10 +59,9 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
+
 </head>
 <body>
-
-
 
 	<jsp:include page="../../common/header.jsp"/>
 
@@ -100,12 +98,27 @@
                 </div>
             </div>
 
-            
+            <div class="longdiv align-left">
+                <div class="shortdiv align-left">
+                    <div class="textdiv">
+                        <p>마감일:</p>
+                    </div>
+                    <div class="inputdiv">
+                        <input type="date" class="form-control" id="closeDate" placeholder="날짜 입력" name="closeDate">
+                    </div>
+                </div>
+                <div class="shortdiv align-left">
+                    <div class="textdiv">
+                        <p>응모포인트:</p>
+                    </div>
+                    <div class="inputdiv">
+                        <input type="number" class="form-control" id="tryPoint" value="50P" name="tryPoint">
+                    </div>
+                </div>
+            </div>
+
 
             <div style="width : 790px;">
-    	        <div class="textdiv">
-	                <p>상품 소개:</p>
-                </div>
                 <textarea class="form-control" rows="15" id="content" style="resize: none;" name="content" placeholder="내용을 입력하세요"></textarea>
             </div>
 
@@ -123,5 +136,6 @@
     </div>
 
     <jsp:include page="../../common/footer.jsp"/>
+
 </body>
 </html>

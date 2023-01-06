@@ -27,4 +27,11 @@ public class ReviewController {
 	}
 	
 	
+	// 리뷰게시판 -> 상품 검색 api 페이지 나옴
+	@RequestMapping("search.re")
+	public String reviewSearchForm() {
+		return "board/reviewBoard/reviewSearchView";
+	}
+	
+	
 }
