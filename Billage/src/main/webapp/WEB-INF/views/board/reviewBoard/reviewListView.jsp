@@ -8,7 +8,8 @@
 <title>리뷰게시판 목록 조회</title>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <style>
 
@@ -82,7 +83,10 @@
 	  box-sizing: border-box;
 	}
 
-
+	.pagingArea{
+		display : flex;
+		justify-content: center;
+	}
 </style>
 
 
@@ -114,10 +118,10 @@
 	<div class="list-outer">
 
         <!-- 리뷰 하나를 감싸는 div -->
-        <div class="one-content">
+        <div class="one-content" onclick="reviewDetail()">
         	
         	<!-- 작성자/별 -->
-            <div class="content-detail0" onclick="reviewDetail()">
+            <div class="content-detail0">
                 <div>작성자　　　　</div>                                              
                 <div class="card-footer">
                  	   별점 : <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -198,8 +202,8 @@
 
 
 	<script>
-		function reviewDetail(){ // 게시글 상세보기 : 안된다!!!!!
-			location.href = 'detail.re' + $(this); 
+		function reviewDetail(){ // 게시글 상세보기 :되지만 나중에 페이징처리로 이동하기
+			location.href = 'detail.re';
 		}
 	</script>
 	
@@ -209,7 +213,7 @@
 
                     
     <!-- 페이지처리하는 영역-->
-    <div id="pagingArea">
+    <div class="pagingArea">
         <ul class="pagination">
             <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
             <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -222,8 +226,8 @@
     </div>
 
 
-	<div>
-		<a href="enrollForm.re">글작성</a>
+	<div class="pagingArea">
+		<button class="btn btn-secondary" onclick="location.href='enrollForm.re'">글작성</button>
 	</div>
   
 
