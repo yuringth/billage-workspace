@@ -8,14 +8,27 @@ public class UserController {
 	
 	// 관리자 관련
 	
+	// 관리자 페이지
 	@RequestMapping("admin.ad")
 	public String adminPage() {
 		return "admin/adminPage";
 	}
 	
+	// 1:1문의 신청폼
 	@RequestMapping("enroll.iq")
 	public String enrollInquiry() {
 		return "admin/inqEnrollForm";
+	}
+	
+	// 연재 요청폼
+	@RequestMapping("request.se")
+	public String requestSerial() {
+		return "admin/serialRequestForm";
+	}
+	
+	@RequestMapping("enrollForm.nv")
+	public String enrollNovel() {
+		return "admin/novelEnrollForm";
 	}
 	
 	// 관리자 관련 끝

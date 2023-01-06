@@ -144,7 +144,7 @@
     
     <script>
     	$(function(){
-    		$('.oneContent').click(function(){
+    		$('.one-content').click(function(){
     			location.href='detail.dr';
     		})	
     	})
