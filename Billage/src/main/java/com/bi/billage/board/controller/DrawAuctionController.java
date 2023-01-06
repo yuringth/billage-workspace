@@ -31,7 +31,7 @@ public class DrawAuctionController {
 		return "board/drawBoard/drawDetailView";
 	}
 
-	@RequestMapping("detail.dr")
+	@RequestMapping("detail.ac")
 	public String auctionDetailView() {
 		return "board/auctionBoard/auctionDetailView";
 	}
