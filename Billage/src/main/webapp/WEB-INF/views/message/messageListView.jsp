@@ -12,6 +12,7 @@
 <title>쪽지함</title>
 </head>
 <body>
+	<jsp:include page="../common/header.jsp"/>
 	<div class="outer">
 		<ul class="nav justify-content-center table-bordered">
 			<li class="nav-item">
@@ -27,22 +28,24 @@
 		
 		
 		
-	<div class="container">
-		<table class="table table-hover table-bordered">
-			<thead class="thead-light">
-				<tr>
-					<th width="150px">보낸 사람</th>
-					<th width="850px">내용</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>유림쿤</td>
-					<td>私は韓国が嫌いです。</td>
-				</tr>
-			</tbody>
-		</table>
+		<div class="container">
+			<table class="table table-hover table-bordered">
+				<thead class="thead-light">
+					<tr>
+						<th width="150px">보낸 사람</th>
+						<th width="850px">내용</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>유림쿤</td>
+						<td>私は韓国が嫌いです。</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
 	</div>
-	</div>
+	<jsp:include page="../common/footer.jsp"/>
 </body>
 </html>
