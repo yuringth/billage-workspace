@@ -9,18 +9,16 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
+	
 	.outer{
 		width:1200px;
 		margin:auto;
 	}
-	.star>span {
-		background-color : rgb(236, 219, 71);
-	}
 	
-	#book2{
-		width: 70%;
-		color : rgb(234, 234, 234);
+	#book2box{
+		
 	}
+
 </style>
 </head>
 <body>
@@ -29,11 +27,11 @@
 	<div class="outer">
 		<div id="userProfile">
 			<div id="profile"><img src="https://i.pinimg.com/originals/4c/f0/16/4cf0163a9db5f4b69499b9365be5fcda.png" width="100px;" height="100px;"></div>
-			<div id="nickName">user01</div>
+			<div id="nickName"><a herf="selectLoginUser.fo"></a>user01</div>
 			<div class="detailList" style="display:flex; flex-direction: row;">
 				<div id="review">평가 150 &nbsp;</div>
-				<div id="following">팔로워 5 &nbsp;</div>
-				<div id="follower">팔로잉 5 &nbsp;</div>
+				<div id="following" ><a href="selectFollowing.fo"></a>팔로잉 5 &nbsp;</div>
+				<div id="follower" ><a href="selectFollower.fo"></a>팔로워 5 &nbsp;</div>
 			</div>
 		</div>
 		<br>	
@@ -77,12 +75,14 @@
 		<br><br><br>
 	
 		<h2>둘이 엇갈린 책</h2>
-		<div class="badBook" style="display:flex; flex-direction: row; justify-content: space-evenly;">
-			<div class="book2">
-				<div id="badbookimg"><img src="" width="150px;" height="250px;"></div>
-				<br>
-				<div id="badBookTitle">책 제목</div>
-			</div>	
+		<div class="badBook" >
+			<div class="book2Box" style="width:70%; height: 400px; background-color: rgb(235, 235, 235); margin:auto; display:flex; flex-direction: row; justify-content: space-evenly;">
+				<div class="book2" style="margin-top: 50px;">
+					<div id="badbookimg"><img src="" width="150px;" height="250px;"></div>
+					<br>
+					<div id="badBookTitle">책 제목</div>
+				</div>	
+			</div>
 		</div>
 	</div>
 	<br><br><br>
