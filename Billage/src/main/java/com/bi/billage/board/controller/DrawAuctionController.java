@@ -16,13 +16,23 @@ public class DrawAuctionController {
 		return "board/auctionBoard/auctionBoardListView";
 	}
 	
-	@RequestMapping("insert.dr")
+	@RequestMapping("enrollForm.dr")
 	public String drawEnrollForm() {
 		return "board/drawBoard/drawBoardEnrollForm";
 	}
 	
-	@RequestMapping("insert.ac")
+	@RequestMapping("enrollForm.ac")
 	public String auctionEnrollForm() {
 		return "board/auctionBoard/auctionBoardEnrollForm";
+	}
+	
+	@RequestMapping("detail.dr")
+	public String drawDetailView() {
+		return "board/drawBoard/drawDetailView";
+	}
+
+	@RequestMapping("detail.dr")
+	public String auctionDetailView() {
+		return "board/auctionBoard/auctionDetailView";
 	}
 }
