@@ -71,9 +71,30 @@
 
 <body>
 
+<%-- 로그인 성공시 / 로그인 실패 시 넣어야 함  
+
+		<c:choose>
+			<c:when test="${ empty loginUser }">
+				<div>
+					<a href="userEnrollForm.me">회원가입</a>
+					<a href="#">로그인하기</a>
+				</div>
+			</c:when>
+		 	<c:otherwise> 
+				<div>
+					${ loginUser.nickname } 님 환영합니다!! <br> 
+					<a href="myPage.me">마이페이지</a>
+				</div>			
+			</c:otherwise>			
+		</c:choose> 	
+
+
+--%>
+
+
 	<div id="outer">
 		<div class="header" id="logo-area">
-			<a href="${ request.getContextPath()}/billage/"><img>로고넣자</a>
+			<a href="billage/"><img>로고넣자</a>
 			<!-- main.ma -->
 		</div>
 
@@ -83,12 +104,18 @@
 		</div>
 
 		<div class="header" id="login-area">
-			<div>
-				<a href="userEnrollForm.me">회원가입</a>
-				<a href="#">로그인하기</a>
-			</div>
-		</div>
 
+				<div>
+					<a href="userEnrollForm.me">회원가입</a>
+					<a href="#">로그인하기</a>
+				</div>
+
+				<div>
+					${ loginUser.nickname } 님 환영합니다!! <br> 
+					<a href="mypage.me">마이페이지</a>
+				</div>			
+
+		</div>
 
 		<div id="nav-bar">
 			<ul>

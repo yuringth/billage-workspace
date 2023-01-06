@@ -5,8 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<title>마이페이지 메뉴 </title>
 <style>
     * {
         margin: 0;
@@ -22,6 +21,8 @@
     
     .wrapper {
         position: relative;
+        display:inline-block;
+        
     }
     
     .wrapper .sidebar {
@@ -101,13 +102,13 @@
         }
     }
 </style>
+</head>
 <body>
-   <jsp:include page="../common/header.jsp"/>
 
-   <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
     <div class="wrapper">
         <div class="sidebar">
-            <h2>관리자 페이지</h2>
+            <h2>마이 페이지</h2>
             <ul>
                 <li><a href="#"><i class="fas fa-user"></i>회원 관리</a></li>
                 <li><a href="#"><i class="fas fa-home"></i>모임 관리</a></li>
@@ -117,12 +118,11 @@
                 <li><a href="#"><i class="fas fa-address-book"></i>연재 요청</a></li>
             </ul>
         </div>
+        
         <div class="main_content">
-            
+        
         </div>
-    </div>
-    
-    
-   <jsp:include page="../common/footer.jsp"/>
+	</div>
+            
 </body>
 </html>
