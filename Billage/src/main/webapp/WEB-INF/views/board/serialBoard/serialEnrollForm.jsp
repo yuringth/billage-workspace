@@ -104,28 +104,24 @@ textarea:focus {
   	text-align: right;
   }
 }
+textarea {
+    min-height: 20rem;
+    overflow-y: hidden;
+    resize: none;
+}
 </style>
 <body>
-	<jsp:include page="../common/header.jsp"/>
+	<jsp:include page="../../common/header.jsp"/>
 <form action="#">
 
   <header align="center">
-    <h2>1:1 문의</h2>
-    <div>불편사항에 대한 문의는 최대한 빠르게 답변 드립니다.연재관련 문의는 연재신청란을 통해서 하셔야 합니다.</div>
+    <h2>작품 연재</h2>
+    <div>작가님! 안녕하세요. 오늘도 좋은 연재 부탁드립니다!</div>
   </header>
   <div>
     <label class="desc">
-    	문의 유형
+      	제목
     </label>
-    <div>
-    <select id="inqType" name="inqType" class="inqType" tabindex="11"> 
-      <option value="First Choice">First Choice</option>
-      <option value="Second Choice">Second Choice</option>
-      <option value="Third Choice">Third Choice</option>
-    </select>
-    </div>
-  </div>
-  <div>
     <div>
       <input name="Field1" type="text" class="field text fn" value="" size="8" tabindex="1" placeholder="제목을 입력하세요.">
     </div>
@@ -133,20 +129,36 @@ textarea:focus {
     <br>
   <div>
     <label class="desc">
-      	문의 내용
+      	본문 내용
     </label>
     <div>
-      <textarea name="Field2" spellcheck="true" rows="10" cols="50" tabindex="4" style="resize:none"></textarea>
+      <textarea name="Field2" id="newTweetContent" onkeydown="resize(this)" onkeyup="resize(this)" spellcheck="true" rows="20" cols="52" tabindex="4"></textarea>
+    </div>
+  </div>
+  <div>
+    <label class="desc">
+      	작가의 말
+    </label>
+    <div>
+      <input name="Field1" type="text" class="field text fn" value="" size="8" tabindex="1" placeholder="연재 소감등을 남겨주세요!">
     </div>
   </div>
   <div>
 	<div>
   		<input id="saveForm" name="saveForm" type="submit" value="등록" class="">
     </div>
-</div>
+  </div>
   
 </form>
-<jsp:include page="../common/footer.jsp"/>
+
+<script>
+function resize(obj) {
+    obj.style.height = '1px';
+    obj.style.height = (12 + obj.scrollHeight) + 'px';
+}
+</script>
+
+<jsp:include page="../../common/footer.jsp"/>
 
 </body>
 </html>

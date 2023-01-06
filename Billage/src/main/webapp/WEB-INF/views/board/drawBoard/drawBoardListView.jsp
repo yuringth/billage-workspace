@@ -85,7 +85,7 @@
 					<a class="dropdown-item" href="#">남은시간 순</a>
 				</div>
 			</div>
-			<div><button type="button" class="btn btn-info" onclick="location.href='insert.dr'">글쓰기</button></div>   
+			<div><button type="button" class="btn btn-info" onclick="location.href='enrollForm.dr'">글쓰기</button></div>   
 		</div>
 
 
@@ -141,6 +141,14 @@
     </div>	
 
     <jsp:include page="../../common/footer.jsp"/>
+    
+    <script>
+    	$(function(){
+    		$('.one-content').click(function(){
+    			location.href='detail.dr';
+    		})	
+    	})
+    </script>
 
 </body>
 </html>

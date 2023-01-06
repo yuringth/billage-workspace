@@ -110,22 +110,13 @@ textarea:focus {
 <form action="#">
 
   <header align="center">
-    <h2>1:1 문의</h2>
-    <div>불편사항에 대한 문의는 최대한 빠르게 답변 드립니다.연재관련 문의는 연재신청란을 통해서 하셔야 합니다.</div>
+    <h2>연재 신청</h2>
+    <div>Billage에서 연재 작가님들을 모십니다. 연재 자격 요건에 대해서는 공지사항을 확인해 주세요.</div>
   </header>
   <div>
-    <label class="desc">
-    	문의 유형
+     <label class="desc">
+      	제목
     </label>
-    <div>
-    <select id="inqType" name="inqType" class="inqType" tabindex="11"> 
-      <option value="First Choice">First Choice</option>
-      <option value="Second Choice">Second Choice</option>
-      <option value="Third Choice">Third Choice</option>
-    </select>
-    </div>
-  </div>
-  <div>
     <div>
       <input name="Field1" type="text" class="field text fn" value="" size="8" tabindex="1" placeholder="제목을 입력하세요.">
     </div>
@@ -133,18 +124,20 @@ textarea:focus {
     <br>
   <div>
     <label class="desc">
-      	문의 내용
+      	작가 프로필
     </label>
     <div>
-      <textarea name="Field2" spellcheck="true" rows="10" cols="50" tabindex="4" style="resize:none"></textarea>
+      <textarea name="Field2" spellcheck="true" rows="10" cols="50" tabindex="4" style="resize:none" placeholder="필명, 경력, 경험 등 자유롭게 기술"></textarea>
     </div>
   </div>
   <div>
 	<div>
-  		<input id="saveForm" name="saveForm" type="submit" value="등록" class="">
+		<input type="file">
+    </div><br>
+    <div align="right">
+  		<input id="saveForm" name="saveForm" type="submit" value="신청" class="">
     </div>
 </div>
-  
 </form>
 <jsp:include page="../common/footer.jsp"/>
 
