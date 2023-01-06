@@ -24,14 +24,21 @@
 <body>
 <jsp:include page="../common/header.jsp"/>
 
+	<!-- 
+		프로필을 누른 해당 유저의 프로필
+		평가를 누르면 해당 유저가 평가한 도서 목록을 볼 수 있다.
+		팔로잉/팔로워를 누르면 유저의 팔로우/팔로잉 목록으로 갈 수 있다.
+		해당 유저의 취향을 볼 수 있다.
+		해당 유저와의 취향을 볼 수 있다.
+	 -->
 	<div class="outer">
 		<div id="userProfile">
 			<div id="profile"><img src="https://i.pinimg.com/originals/4c/f0/16/4cf0163a9db5f4b69499b9365be5fcda.png" width="100px;" height="100px;"></div>
-			<div id="nickName"><a herf="selectLoginUser.fo"></a>user01</div>
+			<div id="nickName"><a href="followDetail.fo">user02</a></div>
 			<div class="detailList" style="display:flex; flex-direction: row;">
 				<div id="review">평가 150 &nbsp;</div>
-				<div id="following" ><a href="selectFollowing.fo"></a>팔로잉 5 &nbsp;</div>
-				<div id="follower" ><a href="selectFollower.fo"></a>팔로워 5 &nbsp;</div>
+				<div id="following" ><a href="selectFollowing.fo">팔로잉 5 &nbsp;</a></div>
+				<div id="follower" ><a href="selectFollower.fo">팔로워 5 &nbsp;</a></div>
 			</div>
 		</div>
 		<br>	
