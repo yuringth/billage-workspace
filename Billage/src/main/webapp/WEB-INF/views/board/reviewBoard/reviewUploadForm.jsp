@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>중고거래게시판 목록 조회</title>
+<title>Insert title here</title>
 </head>
 <body>
 
