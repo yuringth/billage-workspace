@@ -15,6 +15,10 @@
         width : 1200px;
         margin : auto;
     }
+	.writerarea{
+		width : 600px;
+		margin: auto;
+	}
 	.imgarea{
 		width: 600px;
 		height : 600px;
@@ -31,12 +35,15 @@
 	.genre{
 		text-align: center;
 		font-size: 17px;
+		margin-bottom: 0px;
+
 	}
 	.title{
 		text-align: center;
 		font-size: 30px;
-		margin-bottom: 40px;
-		font-weight: bolder;
+		font-weight: bold;
+		margin-bottom: 0px;
+
 	}
 	.bookWriter{
 		text-align: center;
@@ -64,9 +71,9 @@
 		margin-bottom: 8px;
 	}
 	.btn1{
-		margin: auto;
 		width : 200px;
-		margin: 30px;
+		margin-top: 30px;
+		margin-left: 500px;
 	}
 
 
@@ -82,10 +89,14 @@
 	
 	<div class="outer">
 
+		<div class="writerarea">
+			<p>작성자 : 주우재</p>
+		</div>
 		<!--이미지 영역-->
 		<div class="imgarea">
 			<img style="width: 600px; height: 600px;"src="https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2FMjAyMDA4MDVfMjY2%2FMDAxNTk2NTY3NDEwNzA4.fW0LNc9ezTC45UeZP4C72irFTFC23cB7YklNQdu1G-Ig.uUzznBuV_lL2adb0KTMAwzWFN6n0d0HE__fS_ihBmpog.JPEG%2FexternalFile.jpg&type=sc960_832">
 		</div>
+		
 
 		
 		<p class="time">남은 시간 : 00 : 00 : 30</p>
@@ -102,9 +113,10 @@
 		</div>
 
 		<form action="">
-			<div class="btn1 btn btn-secondary">
-				<p> ${tryPoint}P 응모하기</p>
-			</div>
+			<input type="hidden" name="tryPoint" value="${tryPoint}">
+			<button class="btn1 btn btn-secondary">
+				${tryPoint}P 응모하기
+			</button>
 		</form>
 
 

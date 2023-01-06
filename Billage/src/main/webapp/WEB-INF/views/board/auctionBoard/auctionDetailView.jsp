@@ -31,11 +31,13 @@
 	.genre{
 		text-align: center;
 		font-size: 17px;
+		margin-bottom: 0px;
 	}
 	.title{
 		text-align: center;
 		font-size: 30px;
-		font-weight: bolder;
+		font-weight: bold;
+		margin-bottom: 0px;
 	}
 	.bookWriter{
 		text-align: center;
@@ -84,6 +86,9 @@
 	
 	<div class="outer">
 
+		<div class="writerarea">
+			<p>작성자 : 주우재</p>
+		</div>
 		<!--이미지 영역-->
 		<div class="imgarea">
 			<img style="width: 600px; height: 600px;"src="https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2FMjAyMDA4MDVfMjY2%2FMDAxNTk2NTY3NDEwNzA4.fW0LNc9ezTC45UeZP4C72irFTFC23cB7YklNQdu1G-Ig.uUzznBuV_lL2adb0KTMAwzWFN6n0d0HE__fS_ihBmpog.JPEG%2FexternalFile.jpg&type=sc960_832">
@@ -116,12 +121,12 @@
 			</div>
 
 			<div class="btnArea">
-				<div class="btn1 btn btn-dark">
-					<p>즉시구매</p>
-				</div>
-				<div class="btn1 btn btn-secondary">
-					<p>입찰</p>
-				</div>
+				<button class="btn1 btn btn-dark">
+					즉시구매
+				</button>
+				<button class="btn1 btn btn-secondary">
+					입찰
+				</button>
 			</div>
 		</form>
 
