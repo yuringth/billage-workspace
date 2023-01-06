@@ -25,7 +25,7 @@ public class FollowController {
 	
 	@RequestMapping("followDetail.fo")
 	public String selectFollowing() {
-		return "follow/followingUserView";
+		return "follow/followDetailView";
 	}
 	
 	@RequestMapping("reviewList.fo")

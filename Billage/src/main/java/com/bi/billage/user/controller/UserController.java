@@ -34,6 +34,7 @@ public class UserController {
 	
 	// 관리자 관련 끝
 	
+	// 회원가입 폼으로
 	@RequestMapping("userEnrollForm.me")
 	public String userEnrollForm() {
 		return "user/userEnrollForm";
@@ -42,6 +43,12 @@ public class UserController {
 	@RequestMapping("mypage.me")
 	public String myPage() {
 		return "user/myPage";
+	}
+	
+	// 로그인 폼으로
+	@RequestMapping("loginUserForm.me")
+	public String loginUserForm() {
+		return "user/loginUserForm";
 	}
 	
 }

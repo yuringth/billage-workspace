@@ -7,9 +7,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-.outer{
+	.outer{
 		width:1200px;
 		margin:auto;
+	}
+	a {
+  		text-decoration: none;
 	}
 </style>
 </head>
