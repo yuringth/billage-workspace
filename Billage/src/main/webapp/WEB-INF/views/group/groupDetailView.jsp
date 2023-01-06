@@ -69,6 +69,9 @@
 
 </head>
 <body>
+
+	<jsp:include page="../common/header.jsp" />
+
   <div class='demo-topbar'>
   <button data-codepen class='codepen-button'>Edit in CodePen</button>
 
@@ -80,6 +83,9 @@
 </div>
 
   <div id='calendar'></div>
-</body>
 
+	
+	<jsp:include page="../common/footer.jsp" />
+
+</body>
 </html>
