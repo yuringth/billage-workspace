@@ -35,7 +35,7 @@
             </c:if>
             <!-- 로그인 후 독자일 경우만 보여지는 버튼 -->
             <c:if test="${ loginUser eq null }">
-            <a class="btn btn-secondary" style="float:right;" href="enrollForm.se">작품 추천</a>&nbsp;
+            <a class="btn btn-secondary" style="float:right;" href="enrollForm.se">작품 추천</a>
             <a class="btn btn-secondary" style="float:right;" href="enrollForm.se">작품 후원</a>
             </c:if>
             <br><br>
