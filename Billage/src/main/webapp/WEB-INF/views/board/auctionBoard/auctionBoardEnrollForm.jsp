@@ -49,6 +49,10 @@
         margin-left : 10px;
         margin-top : 8px;
     }
+    p {
+        font-size: 13px;
+        padding-top: 10px;
+    }
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
