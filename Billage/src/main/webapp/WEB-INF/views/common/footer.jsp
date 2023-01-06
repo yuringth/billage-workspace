@@ -175,7 +175,7 @@
             location.href = "enroll.iq";
         })
         $('#apply').click(function () {
-            location.href = "enroll.iq";
+            location.href = "request.se";
         })
         $('#notice').click(function () {
             location.href = "enroll.iq";
