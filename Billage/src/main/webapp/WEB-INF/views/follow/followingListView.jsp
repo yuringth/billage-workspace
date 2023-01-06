@@ -18,6 +18,9 @@
 		flex-direction: row;
 		justify-content: space-evenly;
 	}
+	a {
+  		text-decoration: none;
+	}
 	
 </style>
 </head>
@@ -42,7 +45,7 @@
 				</div>
 				<div id="userDetail">
 					<div id="userNickName" ><a href="followDetail.fo">user02</a></div>
-					<div id="reviewCount">리뷰100</div>
+					<div id="reviewCount"><a href="reviewList.fo"></a>리뷰100</div>
 				</div>
 				<button id="followingBtn" width="50px;" height="20px;">팔로잉</button>
 			</div>
