@@ -1,12 +1,18 @@
 package com.bi.billage.user.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.bi.billage.user.model.service.UserService;
+import com.bi.billage.user.model.vo.User;
 
 @Controller
 public class UserController {
 	
+	@Autowired
+	private UserService userService;
 	// 관리자 관련 컨트롤러
 	
 	// 관리자 페이지
@@ -76,4 +82,17 @@ public class UserController {
 		return "user/loginUserForm";
 	}
 	
+	// 회원가입
+	@RequestMapping("insert.me")
+	public String insertUser(User u, Model model) {
+		
+		int result = userService.insertUser(u);
+		
+		if(result > 0 ) {	// 가입성공되면 메인페이지로
+			return "redirect:/";
+		} else {			// 실패 에러메세지
+			model.addAttribute("errorMsg", "가입에 실패했습니다.");
+			return "common/errorPage";
+		}
+	}
 }

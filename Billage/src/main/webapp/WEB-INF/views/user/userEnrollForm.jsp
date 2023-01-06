@@ -133,7 +133,7 @@ body {
 <body>
 	
 	<div align="center">
-		<form action="doJoin" method="POST" class="joinForm" onsubmit="DoJoinForm__submit(this); return false;">
+		<form action="insert.me" method="POST" class="joinForm" onsubmit="DoJoinForm__submit(this); return false;">
 	                                                                                               
 	      <h2>회원가입</h2>
 	      
@@ -186,7 +186,7 @@ body {
 	        <input name="detailAddress" type="text" class="name" placeholder="상세 주소를 입력해주세요.">
 	      </div>
 	      
-	      <input type="submit" class="btn" value="J O I N"/> <button type="button" class="btn">홈으로 돌아가기</button>
+	      <input type="submit" class="btn" value="J O I N"/> <button type="button" class="btn" onclick="history.back();">홈으로 돌아가기</button>
 	    </form>
 	    
 	</div>
@@ -196,18 +196,21 @@ body {
 <!-- 주소란 입력 클릭 시 카카오 주소 찾기 api 나타나는 스크립트 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-window.onload = function(){
+	window.onload = function(){
+		
+	    document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면 카카오 주소찾기 발생
+	        
+	        new daum.Postcode({
+	            oncomplete: function(data) { //선택시 입력값 세팅
+	                document.getElementById("address_kakao").value = data.address; // 주소 넣기
+	                document.querySelector("input[name=detailAddress]").focus(); //상세입력 포커싱
+	            }
+	        }).open();
+	    });
+	}
 	
-    document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면 카카오 주소찾기 발생
-        
-        new daum.Postcode({
-            oncomplete: function(data) { //선택시 입력값 세팅
-                document.getElementById("address_kakao").value = data.address; // 주소 넣기
-                document.querySelector("input[name=detailAddress]").focus(); //상세입력 포커싱
-            }
-        }).open();
-    });
-}
+
+
 </script>
 
 </html>

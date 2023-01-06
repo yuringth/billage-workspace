@@ -3,5 +3,39 @@
 "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="userMapper">
-
+	
+	<!-- 회원가입용 쿼리문 -->
+	<insert id="insertUser" parameterType="user">
+		INSERT
+		  INTO
+			  USER
+			  (
+				USER_ID,
+				USER_PWD,
+				NAME,
+				EMAIL,
+				NICKNAME,
+				PHONE,
+				BIRTH_DATE,
+				GENDER,
+				ADDRESS,
+				DETAIL_ADDRESS
+			  )
+		VALUES
+			  (
+			  	#{userId},
+			  	#{userPwd},
+			  	#{name},
+			  	#{email},
+			  	#{nickname},
+			  	#{phone},
+			  	#{birthDate},
+			  	#{gender},
+			  	#{address},
+			  	#{detailAddress}
+			  )		
+	</insert>
+	
+	
+	
 </mapper>
