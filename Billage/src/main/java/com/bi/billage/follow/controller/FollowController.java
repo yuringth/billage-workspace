@@ -22,5 +22,10 @@ public class FollowController {
 	public String selectLoginUser() {
 		return "follow/loginUserFollowView";
 	}
+	
+	@RequestMapping("followingDetail.fo")
+	public String selectFollowing() {
+		return "follow/followingUserView";
+	}
 
 }
