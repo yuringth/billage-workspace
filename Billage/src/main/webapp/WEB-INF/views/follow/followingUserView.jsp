@@ -16,6 +16,11 @@
 	.star>span {
 		background-color : rgb(236, 219, 71);
 	}
+	
+	#book2{
+		width: 70%;
+		color : rgb(234, 234, 234);
+	}
 </style>
 </head>
 <body>
@@ -59,23 +64,29 @@
 			<div id="starCount"><h2>별점 갯수 : ?</h2></div>
 			<div id="starMany"><h2>많이 준 별점 : ?</h2></div>
 		</div>
+		<hr>
+		<h2>둘 다 재미있게 본 책</h2>
+		<div class="funBook" style="display:flex; flex-direction: row; justify-content: space-evenly;">
+			<div class="book1">
+				<div id="funbookimg"><img src="" width="150px;" height="250px;"></div>
+				<br>
+				<div id="funBookTitle">책 제목</div>
+			</div>
+		</div>
+	
+		<br><br><br>
+	
+		<h2>둘이 엇갈린 책</h2>
+		<div class="badBook" style="display:flex; flex-direction: row; justify-content: space-evenly;">
+			<div class="book2">
+				<div id="badbookimg"><img src="" width="150px;" height="250px;"></div>
+				<br>
+				<div id="badBookTitle">책 제목</div>
+			</div>	
+		</div>
 	</div>
 	<br><br><br>
 	
-	<hr>
-	<h5>둘 다 재미있게 본 책</h5>
-	<div class="funBook">
-		<div id="funbookimg"><img src="" width="150px;" height="70px;"></div>
-		<div id="funBookTitle">책 제목</div>
-	</div>
-
-	<br><br><br>
-
-	<h5>둘이 엇갈린 책</h5>
-	<div class="badBook">
-		<div id="badbookimg"><img src="" width="150px;" height="70px;"></div>
-		<div id="badBookTitle">책 제목</div>
-	</div>
 	
 	<script>
 	  const ctx = document.getElementById('myChart');
