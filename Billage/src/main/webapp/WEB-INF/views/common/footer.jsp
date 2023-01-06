@@ -133,8 +133,6 @@
                         © 2023 Billage Co., Ltd. All rights reserved.
                     </p>
                </div>
-
-               
             </div>
             <div id="footer-area-right">
                 <table id="ft-btn-table">
@@ -144,24 +142,37 @@
                         </th>
                     </tr>
                     <tr>
-                        <th class="ft-table-area"><button class="click-box">고객센터</button></th>
+                        <th class="ft-table-area"><button class="click-box" id="center">고객센터</button></th>
                         <td> 커맨드센터아님ㅎ😉 </td>
                     </tr>
                     <tr>
-                        <th class="ft-table-area"><button class="click-box">연재신청</button></th>
+                        <th class="ft-table-area"><button class="click-box" id="apply">연재신청</button></th>
                         <td> 연재신청하세용 </td>
                     </tr>
                     <tr>
-                        <th class="ft-table-area"><button class="click-box">공지사항</button></th>
+                        <th class="ft-table-area"><button class="click-box" id="notice">공지사항</button></th>
                         <td> billage한 공지공지사항사항 👀🌼 </td>
                     </tr>
-
-
                 </table>
             </div>
-
-
         </div>
     </div>
+    
+    <script>
+    // 푸터 하단 각종 이동
+    $(function () {
+    	
+        $('#center').click(function () {
+            location.href = "enroll.iq";
+        })
+        $('#apply').click(function () {
+            location.href = "enroll.iq";
+        })
+        $('#notice').click(function () {
+            location.href = "enroll.iq";
+        })
+   })
+    
+    </script>
 </body>
 </html>
