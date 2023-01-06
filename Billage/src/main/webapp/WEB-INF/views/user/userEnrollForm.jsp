@@ -138,16 +138,16 @@ body {
 	      <h2>회원가입</h2>
 	      
 	      <div class="textForm">
-	        <input name="loginId" type="text" class="id" placeholder="아이디">
+	        <input name="userId" type="text" class="id" placeholder="아이디">
 	        </input>
 	      </div>
 	      
 	      <div class="textForm">
-	        <input name="loginPw" type="password" class="pw" placeholder="비밀번호">
+	        <input name="userPwd" type="password" class="pw" placeholder="비밀번호">
 	      </div>
 	      
 	       <div class="textForm">
-	        <input name="loginPwConfirm" type="password" class="pw" placeholder="비밀번호 확인">
+	        <input name="checkPwd" type="password" class="pw" placeholder="비밀번호 확인">
 	      </div>
 	      
 	      <div class="textForm">
@@ -178,19 +178,36 @@ body {
                     <label for="Female">여자</label> &nbsp;&nbsp;
 	      </div>
 	      
-	      <button type="button">주소찾기</button>
-	      
 	      <div class="textForm">
-	        <input name="address" type="text" class="name" placeholder="주소를 입력해주세요.">
+	        <input name="address" type="text" class="name" id="address_kakao" placeholder="주소를 입력해주세요.">
 	      </div>
 	      
 	       <div class="textForm">
-	        <input name="detailAddress" type="text" class="name" placeholder="주소를 입력해주세요.">
+	        <input name="detailAddress" type="text" class="name" placeholder="상세 주소를 입력해주세요.">
 	      </div>
 	      
-	      <input type="submit" class="btn" value="J O I N"/>
+	      <input type="submit" class="btn" value="J O I N"/> <button type="button" class="btn">홈으로 돌아가기</button>
 	    </form>
+	    
 	</div>
 	
 </body>
+
+<!-- 주소란 입력 클릭 시 카카오 주소 찾기 api 나타나는 스크립트 -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+window.onload = function(){
+	
+    document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면 카카오 주소찾기 발생
+        
+        new daum.Postcode({
+            oncomplete: function(data) { //선택시 입력값 세팅
+                document.getElementById("address_kakao").value = data.address; // 주소 넣기
+                document.querySelector("input[name=detailAddress]").focus(); //상세입력 포커싱
+            }
+        }).open();
+    });
+}
+</script>
+
 </html>
