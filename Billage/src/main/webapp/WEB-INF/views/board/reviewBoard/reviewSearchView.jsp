@@ -11,47 +11,51 @@
         width : 800px;
         margin : auto;
     }
-    .longdiv {
-        width : 800px;
+    
+    
+    .text-div{
+    	text-align:center;
     }
-    .shortdiv {
-        width : 400px;
+    
+    .content-area{
+    	display:flex;
+    	margin:auto;
+    	height:100px;
+    	width:700px;
     }
-    .inputdiv{
-        width : 310px;
+    
+    
+    .content-area1{
+    	border:1px solid black;
+    	width:50px;
     }
-    .textdiv{
-        width : 80px;
+
+    .content-area2{
+    	border:1px solid black;
+    	width:550px;
+    	display:flex;
     }
-    .align-side{
-        display: flex;
-        justify-content: space-evenly;
+    
+    .content-photo{
+    	border:1px solid red;
+    	width:100px;
+    }
+    
+    .content-detail{
+    	border:1px solid blue;
+    	width:450px;
+    }
+    
+    .content-area3{
+    	border:1px solid black;
+    	width:100px;
     }    
-    .align-left{
-        display: flex;
-    }
-    .titlediv {
-        width : 710px;
-    }
-    .btntitle {
-        margin-top: 8px;
-        margin-bottom: 8px;
-        margin-left: 0px;
-    }
-    .btnleft {
-        width : 384px;
-        margin-right : 10px;
-        margin-top : 8px;
-    }
-    .btnright {
-        width : 384px;
-        margin-left : 10px;
-        margin-top : 8px;
-    }
-    .textdiv>p{
-        font-size: 13px;
-        padding-top: 10px;
-    }
+    
+    
+    
+    
+    
+    
 </style>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -66,72 +70,35 @@
 	<jsp:include page="../../common/header.jsp"/>
 
     <div class="outer">
+		<div class="text-div">
+			<p>"검색이름"로 125개의 검색 결과가 있습니다.</p>
+		</div>
+		<hr>
+		
+		<div class="content-area">
+			
+			<div class="content-area1">
+				<p>1</p>
+			</div>
+			
+			<div class="content-area2">
+				<div class="content-photo">
+					<div>사진</div>
+				</div>
+				
+				<div class="content-detail">
+					<div>도서제목</div>
+					<div>작가</div>
+					<div>출판날자</div>
+				</div>
+			</div>
+			
+			<div  class="content-area3">
+				<button>선택</button>
+			</div>	
+			
+		</div>
 
-        <form action="insert.ac">
-
-            <div class="longdiv align-left">
-                <div class="textdiv">
-                    <p>제목:</p>
-                </div>
-                <div class="titlediv">
-                    <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요" name="title" required>
-                </div>
-            </div>
-
-
-            <div class="longdiv align-left">
-                <div class="shortdiv align-left">
-                    <div class="textdiv">
-                        <p>작가:</p>
-                    </div>
-                    <div class="inputdiv">
-                        <input type="text" class="form-control" id="bookWriter" placeholder="작가 명" name="bookWriter">
-                    </div>
-                </div>
-                <div class="shortdiv align-left">
-                    <div class="textdiv">
-                        <p>장르:</p>
-                    </div>
-                    <div class="inputdiv">
-                        <input type="text" class="form-control" id="genre" placeholder="장르" name="genre">
-                    </div>
-                </div>
-            </div>
-
-            <div class="longdiv align-left">
-                <div class="shortdiv align-left">
-                    <div class="textdiv">
-                        <p>마감일:</p>
-                    </div>
-                    <div class="inputdiv">
-                        <input type="date" class="form-control" id="closeDate" placeholder="날짜 입력" name="closeDate">
-                    </div>
-                </div>
-                <div class="shortdiv align-left">
-                    <div class="textdiv">
-                        <p>응모포인트:</p>
-                    </div>
-                    <div class="inputdiv">
-                        <input type="number" class="form-control" id="tryPoint" value="50P" name="tryPoint">
-                    </div>
-                </div>
-            </div>
-
-
-            <div style="width : 790px;">
-                <textarea class="form-control" rows="15" id="content" style="resize: none;" name="content" placeholder="내용을 입력하세요"></textarea>
-            </div>
-
-            <div class="longdiv align-left">
-                <button class="btnleft btn btn-dark">
-                    <p class="btntitle">등록</p>
-                </button>
-                <button class="btnright btn btn-secondary">
-                    <p class="btntitle ">취소</p>
-                </button>
-            </div>
-        </form> 
-    </div>
 
     </div>
 
