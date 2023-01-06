@@ -11,6 +11,19 @@
         width : 800px;
         margin : auto;
     }
+    
+    
+    .text-div{
+    	text-align:center;
+    }
+    
+    .content-area{
+    	display:flex;
+    	margin:auto;
+    }
+    
+    
+    
     .longdiv {
         width : 800px;
     }
@@ -62,11 +75,37 @@
 
 </head>
 <body>
-
+ssppdspdsjgi
 	<jsp:include page="../../common/header.jsp"/>
 
     <div class="outer">
-
+		<div class="text-div">
+			<p>"검색이름"로 125개의 검색 결과가 있습니다.</p>
+		</div>
+		<hr>
+		
+		<div class="content-area">
+			<div>
+				<div>1</div>
+			</div>
+			
+			<div>
+				<div>사진</div>
+				<div>도서제목</div>
+				<div>작가</div>
+				<div>출판날자</div>
+			</div>
+			
+			<div>
+				<button>선택</button>
+			</div>	
+			
+		</div>
+		
+		
+		
+		
+		
         <form action="insert.ac">
 
             <div class="longdiv align-left">
