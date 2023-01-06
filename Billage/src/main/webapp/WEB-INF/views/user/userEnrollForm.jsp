@@ -131,10 +131,66 @@ body {
 
 </head>
 <body>
-	<jsp:include page="../common/header.jsp" />
 	
 	<div align="center">
-
+		<form action="doJoin" method="POST" class="joinForm" onsubmit="DoJoinForm__submit(this); return false;">
+	                                                                                               
+	      <h2>회원가입</h2>
+	      
+	      <div class="textForm">
+	        <input name="loginId" type="text" class="id" placeholder="아이디">
+	        </input>
+	      </div>
+	      
+	      <div class="textForm">
+	        <input name="loginPw" type="password" class="pw" placeholder="비밀번호">
+	      </div>
+	      
+	       <div class="textForm">
+	        <input name="loginPwConfirm" type="password" class="pw" placeholder="비밀번호 확인">
+	      </div>
+	      
+	      <div class="textForm">
+	        <input name="name" type="text" class="name" placeholder="이름">
+	      </div>
+	      
+	       <div class="textForm">
+	        <input name="email" type="text" class="email" placeholder="이메일">
+	      </div>
+	      
+	      <div class="textForm">
+	        <input name="nickname" type="text" class="nickname" placeholder="닉네임">
+	      </div>
+	      
+	      <div class="textForm">
+	        <input name="phone" type="text" class="cellphoneNo" placeholder="전화번호       - 없이 입력">
+	      </div>
+	      
+	      <div class="textForm">
+	        <input name="birthDate" type="text" class="cellphoneNo" placeholder="생년월일 6자를 입력">
+	      </div>
+	      
+	      <div class="textForm">
+	        		<label for=""> 성별 : </label> &nbsp;&nbsp;
+                    <input type="radio" id="Male" value="M" name="gender" checked>
+                    <label for="Male">남자</label> &nbsp;&nbsp;
+                    <input type="radio" id="Female" value="F" name="gender">
+                    <label for="Female">여자</label> &nbsp;&nbsp;
+	      </div>
+	      
+	      <button type="button">주소찾기</button>
+	      
+	      <div class="textForm">
+	        <input name="address" type="text" class="name" placeholder="주소를 입력해주세요.">
+	      </div>
+	      
+	       <div class="textForm">
+	        <input name="detailAddress" type="text" class="name" placeholder="주소를 입력해주세요.">
+	      </div>
+	      
+	      <input type="submit" class="btn" value="J O I N"/>
+	    </form>
 	</div>
+	
 </body>
 </html>
