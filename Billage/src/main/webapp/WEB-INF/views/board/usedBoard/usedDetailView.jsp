@@ -10,7 +10,6 @@
 
 
 	<div class="outer">
-		
 		<div class="">
 			<div>사진</div>
 		</div>
@@ -32,9 +31,13 @@
 		<div>
 			<p>관심 채팅 조회</p>
 		</div>
-		
-	
 	</div>
+	
+	
+	
+	
+	
+	
 
 </body>
 </html>

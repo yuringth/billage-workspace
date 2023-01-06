@@ -100,7 +100,9 @@
 		<div class="align-left-outer">
 	        <div class="one-content">
 	            <div class="img-area">
-	                <img src="https://img.sbs.co.kr/newimg/news/20160122/200906797_700.jpg">
+	                
+	                <img src="https://img.sbs.co.kr/newimg/news/20160122/200906797_700.jpg" onclick="location.href='detail.ud'">
+	            	
 	            </div>
 	            <div class="text-area">
 	                <p class="title-text">상품 제목</p>
