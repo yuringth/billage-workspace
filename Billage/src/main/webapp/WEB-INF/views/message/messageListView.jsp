@@ -24,8 +24,22 @@
 		<hr>
 		
 		
-		
-		
+	<div class="container">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th width="150px">보낸 사람</th>
+					<th width="850px">내용</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>유림쿤</td>
+					<td>私は韓国が嫌いです。</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 	</div>
 </body>
 </html>
