@@ -107,7 +107,7 @@
 
 				<div>
 					<a href="userEnrollForm.me">회원가입</a>
-					<a href="#">로그인하기</a>
+					<a href="loginUserForm.me">로그인하기</a>
 				</div>
 
 				<div>
