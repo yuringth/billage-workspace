@@ -8,21 +8,24 @@
 <title>쪽지함</title>
 </head>
 <body>
-
-<ul class="nav justify-content-center">
-	<li class="nav-item">
-		<a class="nav-link" href="#">Link</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="#">Link</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="#">Link</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link disabled" href="#">Disabled</a>
-	</li>
-</ul>
-
+	<div class="outer">
+		<ul class="nav justify-content-center">
+			<li class="nav-item">
+				<a class="nav-link" href="#">받은 쪽지함</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">보낸 쪽지함</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">쪽지 보내기</a>
+			</li>
+		</ul>
+		
+		<hr>
+		
+		
+		
+		
+	</div>
 </body>
 </html>
