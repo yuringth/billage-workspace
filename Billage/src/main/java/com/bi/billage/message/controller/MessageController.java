@@ -1,5 +1,12 @@
 package com.bi.billage.message.controller;
 
-public class MessageController {
+import org.springframework.stereotype.Controller;
 
+@Controller
+public class MessageController {
+	
+	@RequestMapping("list.ms")
+	public String messageList() {
+		return "message/messageListView";
+	}
 }
