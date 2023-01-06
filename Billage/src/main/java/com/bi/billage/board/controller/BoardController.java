@@ -6,25 +6,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class BoardController {
 	
-	// ÀÛÇ° ¸®½ºÆ® È­¸é
+	// ì‘í’ˆ ë¦¬ìŠ¤íŠ¸ í™”ë©´
 	@RequestMapping("list.nv")
 	public String novelListView() {
 		return "board/novelBoard/novelListView";
 	}
 	
-	// ¿¬Àç ¸®½ºÆ® È­¸é
+	// ì—°ì¬ ë¦¬ìŠ¤íŠ¸ í™”ë©´
 	@RequestMapping("list.se")
 	public String serialListView() {
 		return "board/serialBoard/serialListView";
 	}
 	
-	// ¿¬Àç »ó¼¼º¸±â È­¸é
+	// ì—°ì¬ ìƒì„¸ë³´ê¸° í™”ë©´
 	@RequestMapping("detail.se")
 	public String serialDetailView() {
 		return "board/serialBoard/serialDetailView";
 	}
 	
-	// ¿¬Àç ÀÛ¼º È­¸é
+	// ì—°ì¬ ì‘ì„± í™”ë©´
 	@RequestMapping("enrollForm.se")
 	public String serialEnroll() {
 		return "board/serialBoard/serialEnrollForm";
