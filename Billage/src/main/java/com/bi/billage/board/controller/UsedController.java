@@ -21,5 +21,11 @@ public class UsedController {
 	}
 	
 	
+	// 중고게시판 -> 글 상세정보 조회 
+	@RequestMapping("detail.ud")
+	public String usedDetailView() {
+		return "board/usedBoard/usedDetailView";
+	}
+	
 	
 }
