@@ -7,21 +7,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class UserController {
 	
-	// °ü¸®ÀÚ °ü·Ã
+	// ê´€ë¦¬ì ê´€ë ¨ ì»¨íŠ¸ë¡¤ëŸ¬
 	
-	// °ü¸®ÀÚ ÆäÀÌÁö
+	// ê´€ë¦¬ì í˜ì´ì§€
 	@RequestMapping("admin.ad")
 	public String adminPage() {
 		return "admin/adminPage";
 	}
 	
-	// 1:1¹®ÀÇ ½ÅÃ»Æû
+	// 1:1ë¬¸ì˜ ì‘ì„±í¼
 	@RequestMapping("enroll.iq")
 	public String enrollInquiry() {
 		return "admin/inqEnrollForm";
 	}
 	
-	// ¿¬Àç ¿äÃ»Æû
+	// ì—°ì¬ ìš”ì²­ ì‘ì„±í¼
 	@RequestMapping("request.se")
 	public String requestSerial() {
 		return "admin/serialRequestForm";
@@ -32,7 +32,7 @@ public class UserController {
 		return "admin/novelEnrollForm";
 	}
 	
-	// °ü¸®ÀÚ °ü·Ã ³¡
+	// ê´€ë¦¬ì ê´€ë ¨ ë
 	
 	@RequestMapping("userEnrollForm.me")
 	public String userEnrollForm() {
