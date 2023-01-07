@@ -26,6 +26,7 @@
     .align-left{
         flex: auto;
     }
+    
     .align-left-outer{
         display: flex;
         flex-wrap: wrap;
