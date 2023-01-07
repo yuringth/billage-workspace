@@ -1,18 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>리뷰게시판 글 작성 폼</title>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
 
 <style>
 .outer{
 	width:1200px;
 	margin: auto;
 }
+
+
 
 .book-detail-outer{
 	border : 1px solid blue;
@@ -45,42 +48,62 @@
 	height:200px;
 }
 
-
-.book-content-outer{
-	text-align:center;
+#book_content, #book_title, #book_author, #book_publisher, #book_data{
+	border:1px solid pink;
+	height:40px;
 }
 
 
 
+
+.review-content-outer{
+	text-align:center;
+}
+
+
 </style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
 
 </head>
 <body>
 
-
 	<jsp:include page="../../common/header.jsp" />
+    
     
     
  	<!-- 전체를 감싸는 div  -->
  	<div class="outer">
 
 		<h1 style="text-align:center;">리뷰 상세페이지</h1>
+		
+		<!-- 리뷰넘버 식별자로 넘기기 -->
+		<input type="hidden" neme="reviewNo" value="#">
 
 		<hr>
 		
-		
+		<!-- api 책정보 끌어오기 -->
 		<div class="book-detail-outer">
 			<div class="book-detail-area">
 				<div class="content-photo-detail">
-					<div>사진</div>
+					<!-- api에서 끌고 오는거니까 첨부파일로 안해도 되는게 맞겠지? <input type="file" name="upfile"> 이런식으로.. -->
+					<div id="book_imag" name="bookImag">사진</div>
 				</div>
 				
+				<!-- review 테이블 : book_content, book_publisher, book_date 컬럼 추가  -->
 				<div class="content-book-detail">
-					<div id="content">책내용</div>
-					<div id="title">제목</div>
-					<div id="wirter">저자</div>
-					<div id="publisher">츨판사</div>
-					<div id="date">발행일자</div>
+					<div id="boo_content" name="bookContent">책내용</div>
+					<div id="book_title" name="bookTitle">제목</div>
+					<div id="book_author" name="bookAuthor">저자</div>
+					<div id="book_publisher" name="bookPublisher">츨판사</div>
+					<div id="book_date" name="bookDate">발행일자</div>
 				</div>
 			</div>
 		</div>
@@ -88,58 +111,78 @@
 		
 		<hr>
 
+		<!-- 매란언니한테 알려달라하기 -->
 		<div style="text-align:center;">별점 : ☆☆☆★ 
 			<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
 		</div>
 
 		<br>
 
-		<div class="book-content-outer">
-			<form action="#">
-				<textarea id="content" rows="30" cols="100" style="resize:none" maxlength="1000">여기에 글 내용 불러오기</textarea>
-				<br>
-				<hr>
-				<spank id="count" style="color:blue;">이 숫자도 불러오기</spank> / 1000
-			</form>
+		<div class="review-content-outer">
+			<textarea id="review_content" name="reviewContent" rows="20" cols="100" style="resize:none" maxlength="1000" required>책 내용 불러오기</textarea>
+			
+			<hr>
+			
+			<!-- 좋아요기능 -->
+			<button>♡</button>
+			
+			<!-- 작성자한테만 보이게 하기 -->	
+			<div style="text-align:center;">
+				<button onclick="location.href='enrollForm.re'">글수정</button>
+				<button>글삭제</button>
+				<button>뒤로가기</button>
+			</div>
+
 		</div>
 
 
-		<!-- 글입력 갯수 세기 -->
-		<script>
-        $(function(){
-            $('.book-content-outer #content').keyup(function(){
-                $('#count').text($(this).val().length);
-                
-            });
-        });
-    	</script>
 
-
-		<hr>
+	<!-- 댓글 div  -->
+	<br>
+    <table id="replyArea" class="table" align="center">
+       <thead>
+           <tr>
+               <th colspan="2">
+                   <textarea class="form-control" name="" id="reply_content" cols="55" rows="2" style="resize:none; width:100%;"></textarea>
+               </th>
+               <th style="vertical-align:middle"><button class="btn btn-secondary">등록하기</button></th>
+           </tr>
+           <tr>
+           		<!-- 총 댓글수 나타내는건 안할 수 있음!!! 일단 쌤꺼 복사한 것 뿐 -->
+               <td colspan="3">댓글(<span id="reply_count">3</span>)</td>
+           </tr>
+       </thead>
+       <tbody>
+           <tr>
+               <th>user02</th>
+               <td>ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ꿀잼</td>
+               <td>2020-03-12</td>
+           </tr>
+           <tr>
+               <th>user01</th>
+               <td>재밌어요</td>
+               <td>2020-03-11</td>
+           </tr>
+           <tr>
+               <th>admin</th>
+               <td>댓글입니다!!</td>
+               <td>2020-03-10</td>
+           </tr>
+     	</tbody>
+    </table>
 	
-		<div style="text-align:center;">
-			<a href="">글작성</a>
-			<a href="">목록으로</a>
-		</div>
+                    
+     
 
-
+	<!-- 전체 outer /div -->	
  	</div>   
+ 	
+ 	
  
+   	
  
-	<div>
-		댓글 <input type="text" id="replyContent">
-		<button>댓글</button>
-	</div>
-                    
-                    
-                    
-	<div>
-		<a href="">삭제하기(로그인==유저정보일치할시)</a>
-		<a href="">목록으로</a>
-	</div>
- 
- 
- 
+   	
+   
 	<jsp:include page="../../common/footer.jsp" />
  
  

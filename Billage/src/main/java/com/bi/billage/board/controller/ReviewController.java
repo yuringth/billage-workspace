@@ -14,8 +14,8 @@ public class ReviewController {
 	
 	
 	// 리뷰게시판 -> 글쓰기버튼 클릭 시 -> 리뷰게시판 글작성 폼화면으로 이동
-	@RequestMapping("enrollForm.re")
-	public String reviewEnrollForm() {
+	@RequestMapping("insert.re")
+	public String reviewInsertForm() {
 		return "board/reviewBoard/reviewEnrollForm";
 	}
 	
@@ -33,5 +33,11 @@ public class ReviewController {
 		return "board/reviewBoard/reviewSearchView";
 	}
 	
+	
+	// 리뷰게시판 -> 글수정 누를 시 -> 수정폼 화면 나옴
+	@RequestMapping("enrollForm.re")
+	public String reviewEnrollForm() {
+		return "board/reviewBoard/reviewUploadForm";
+	}
 	
 }

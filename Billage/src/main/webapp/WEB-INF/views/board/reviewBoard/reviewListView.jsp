@@ -231,7 +231,7 @@
 
 
 	<div class="pagingArea">
-		<button class="btn btn-secondary" onclick="location.href='enrollForm.re'">글작성</button>
+		<button class="btn btn-secondary" onclick="location.href='insert.re'">글작성</button>
 	</div>
   
 
