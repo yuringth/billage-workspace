@@ -17,38 +17,44 @@
     	text-align:center;
     }
     
-    .content-area{
+    .book-outer{
     	display:flex;
     	margin:auto;
-    	height:120px;
     	width:700px;
+    	height:120px;
     }
     
     
     .content-area1{
     	border:1px solid black;
-    	width:50px;
+    	width:75px;
     }
+
 
     .content-area2{
     	border:1px solid black;
     	width:550px;
     	display:flex;
     }
-    
-    .content-photo{
+    .content-detail1{
     	border:1px solid red;
     	width:100px;
     }
-    
-    .content-detail{
+    .content-detail2{
     	border:1px solid blue;
     	width:450px;
+    	height:120px;
     }
+    #book_title, #book_author, #book_date{
+    	border: 1px solid black;
+    	height:40px;
+    	margin:0px;
+    }
+    
     
     .content-area3{
     	border:1px solid black;
-    	width:100px;
+    	width:75px;
     }    
     
     
@@ -78,68 +84,90 @@
 		<hr>
 		
 		<!-- 책상품 하나의div  -->
-		<div class="content-area">
+		<div class="book-outer">
 			<div class="content-area1">
 				<p>1</p>
+				<!-- 책 번호 식별값으로 hidden하기(?) 정보 끌어다쓸때 식별값 필요하니까 => 그럼 form태그 안에 감싸야하나??-->
+				<input type="hidden" neme="bookNo" value="#">
 			</div>
 			<div class="content-area2">
-				<div class="content-photo">
+				<div class="content-detail1">
 					<div>사진</div>
 				</div>
-				<div class="content-detail">
-					<p>도서제목</p>
-					<p>작가</p>
-					<p>출판날자</p>
+				<div class="content-detail2">
+					<p id="book_title" name="bookTitle">도서제목</p>
+					<p id="book_author" name="bookAuthor">작가</p>
+					<p id="book_date" name="bookDate">출판날자</p>
 				</div>
 			</div>
 			<div  class="content-area3">
+				<!-- 선택 버튼 누를 시 책 정보를 끌고옴 -->
 				<button>선택</button>
 			</div>	
 		</div>
 		
+		
+		
+		
 		<hr>
-
+		
+		
+		
 		<!-- 책상품 하나의div  -->
-		<div class="content-area">
+		<div class="book-outer">
 			<div class="content-area1">
 				<p>1</p>
+				<!-- 책 번호 식별값으로 hidden하기(?) 정보 끌어다쓸때 식별값 필요하니까 => 그럼 form태그 안에 감싸야하나??-->
+				<input type="hidden" neme="bookNo" value="#">
 			</div>
 			<div class="content-area2">
-				<div class="content-photo">
+				<div class="content-detail1">
 					<div>사진</div>
 				</div>
-				<div class="content-detail">
-					<p>도서제목</p>
-					<p>작가</p>
-					<p>출판날자</p>
+				<div class="content-detail2">
+					<p id="book_title" name="bookTitle">도서제목</p>
+					<p id="book_author" name="bookAuthor">작가</p>
+					<p id="book_date" name="bookDate">출판날자</p>
 				</div>
 			</div>
 			<div  class="content-area3">
+				<!-- 선택 버튼 누를 시 책 정보를 끌고옴 -->
 				<button>선택</button>
 			</div>	
 		</div>
-
+		
+		
+		
+		
 		<hr>
-
+		
+		
 		<!-- 책상품 하나의div  -->
-		<div class="content-area">
+		<div class="book-outer">
 			<div class="content-area1">
 				<p>1</p>
+				<!-- 책 번호 식별값으로 hidden하기(?) 정보 끌어다쓸때 식별값 필요하니까 => 그럼 form태그 안에 감싸야하나??-->
+				<input type="hidden" neme="bookNo" value="#">
 			</div>
 			<div class="content-area2">
-				<div class="content-photo">
+				<div class="content-detail1">
 					<div>사진</div>
 				</div>
-				<div class="content-detail">
-					<p>도서제목</p>
-					<p>작가</p>
-					<p>출판날자</p>
+				<div class="content-detail2">
+					<p id="book_title" name="bookTitle">도서제목</p>
+					<p id="book_author" name="bookAuthor">작가</p>
+					<p id="book_date" name="bookDate">출판날자</p>
 				</div>
 			</div>
 			<div  class="content-area3">
+				<!-- 선택 버튼 누를 시 책 정보를 끌고옴 -->
 				<button>선택</button>
 			</div>	
 		</div>
+		
+		
+		<hr>
+
 
     </div>
 
