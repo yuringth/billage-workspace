@@ -56,22 +56,22 @@
     }
 
     #footer-area-all{
-        width:1100px;
+        width:1200px;
         margin: auto;
-        background-color: aliceblue;
+        /*background-color: aliceblue;*/
         
     }
     
     #footer-area-right{
-        width:500px;
-        background-color: rgba(161, 165, 156, 0.678);
+        width:600px;
+       /* background-color: rgba(161, 165, 156, 0.678);*/
         display: inline-block;
     }
 
 
     #footer-area-left{
         width:600px;
-        background-color: rgba(168, 178, 197, 0.603);
+      /*  background-color: rgba(168, 178, 197, 0.603);*/
         float: left;
         
     }
@@ -116,6 +116,7 @@
 <body>
 	
 		<br><br><br>
+	<hr>
 	<div id="footer-area">
         <div id="footer-area-all">
             <div id="footer-area-left">

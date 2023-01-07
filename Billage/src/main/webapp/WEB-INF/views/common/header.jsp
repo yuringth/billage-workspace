@@ -17,19 +17,26 @@
 		div{ box-sizing: border-box; }
 		a { text-decoration: none; color: black; }
 		ul { list-style:none; margin:0px; } 
-		body{ padding-top:250px;}
+		body{ padding-top:280px;}
 		
-		#header-outer {
-			width: 1200px;
-			height: 250px;
-			margin: auto;
+		#all-header{ 
+			width:100%;
 			position:fixed;
 			top:0;
 			left:0;
 			right:0;
-			background: white;
-		}
+ 			background: white;
+			z-index:1000;
+			border-bottom: 1px solid gray;
+		} 
+		
+		#header-outer {
+			width: 1200px;
+			height: 230px;
+			margin: auto;
 
+		}
+	
 		#outer-top { margin-top: 20px; height: 120px; }
 		
 		#header-outer > #outer-top > .header {
@@ -52,7 +59,7 @@
 
 		#header-outer > #outer-top #login-area {  }
 		
-		#header-outer > #outer-bottom{ height: 130px;}
+		#header-outer > #outer-bottom{ height: 110px;}
 
 		#header-outer > #outer-bottom{ width: 100%; display:block; }
 
@@ -104,50 +111,49 @@
 
 --%>
 
-
-	<div id="header-outer">
-		<div id="outer-top">
-			<div class="header" id="logo-area">
-				<a href="/billage"><img src="resources/images/logo.png.jpg" width="100px;" height="100px;"></a>
-			</div>
-
-			<div class="header" id="search-area">
-				<input type="text" />
-				<button type="submit" >검색</button>
-			</div>
-
-			<div class="header" id="login-area">
-
-				<div>
-					<a href="userEnrollForm.me">회원가입</a>
-					<a href="loginUserForm.me">로그인하기</a>
+	<div id="all-header">
+		<div id="header-outer">
+			<div id="outer-top">
+				<div class="header" id="logo-area">
+					<a href="/billage"><img src="resources/images/logo.png.jpg" width="100px;" height="100px;"></a>
 				</div>
+	
+				<div class="header" id="search-area">
+					<input type="text" />
+					<button type="submit" >검색</button>
+				</div>
+	
+				<div class="header" id="login-area">
+	
+					<div>
+						<a href="userEnrollForm.me">회원가입</a>
+						<a href="loginUserForm.me">로그인하기</a>
+					</div>
+	
+					<div>
+						${ loginUser.nickname } 님 환영합니다!! <br> 
+						<a href="mypage.me">마이페이지</a>
+					</div>			
+	
+				</div>
+			</div> <!-- outer-top끝  -->
+			
+			<div id="outer-bottom"> 
+				<ul>
+					<li><a href="list.gr">모임</a></li>
+					<li><a href="list.nv">연재</a></li>
+					<li><a href="#">대여</a></li>
+					<li><a href="list.re">리뷰</a></li>
+					<li><a href="list.dr">추첨</a></li>
+					<li><a href="list.ac">경매</a></li>
+					<li><a href="list.ud">중고</a></li>
+					<li><a href="#">마을</a></li>
+					<li><a href="admin.ad">임시<br>관리자</a></li>
+				</ul>
+			</div> <!-- outer-bottom 끝 -->
+		</div> <!-- header-outer 끝 -->
+	</div> <!-- all-header끝 -->
 
-				<div>
-					${ loginUser.nickname } 님 환영합니다!! <br> 
-					<a href="mypage.me">마이페이지</a>
-				</div>			
-
-			</div>
-		</div> <!-- outer-top끝  -->
-		
-		<div id="outer-bottom"> 
-			<ul>
-				<li><a href="list.gr">모임</a></li>
-				<li><a href="list.nv">연재</a></li>
-				<li><a href="#">대여</a></li>
-				<li><a href="list.re">리뷰</a></li>
-				<li><a href="list.dr">추첨</a></li>
-				<li><a href="list.ac">경매</a></li>
-				<li><a href="list.ud">중고</a></li>
-				<li><a href="#">마을</a></li>
-				<li><a href="admin.ad">임시<br>관리자</a></li>
-			</ul>
-		</div> <!-- outer-bottom -->
-
-
-
-	</div> <!-- header-outer 끝 -->
 </body>
 
 </html>

@@ -61,6 +61,7 @@
 		line-height: 35px;
 		width:40px;
 		display:none;
+		z-index:900;
 	}
 </style>
 </head>
