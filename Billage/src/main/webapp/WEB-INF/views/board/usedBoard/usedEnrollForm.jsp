@@ -64,7 +64,7 @@
 
     <div class="outer">
 
-        <form action="insert.ac">
+        <form action="insert.ac" id="usedEnrollForm" method="post" enctype="multipart/form-data">
 
             <div class="longdiv align-left">
                 <div class="textdiv">
@@ -103,6 +103,14 @@
                     </div>
                     <div class="inputdiv">
                         <input type="number" class="form-control" id="instantlyPrice" placeholder="판매가" name="instantlyPrice">
+                    </div>
+                </div>
+                <div class="shortdiv align-left">
+                    <div class="textdiv">
+                        <p>첨부파일:</p>
+                    </div>
+                    <div class="inputdiv">
+                    	<input type="file" id="upfile" class="form-control-file border" name="">
                     </div>
                 </div>
             </div>

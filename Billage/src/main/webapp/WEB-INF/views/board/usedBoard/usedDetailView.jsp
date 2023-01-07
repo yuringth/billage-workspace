@@ -143,6 +143,12 @@ font-size: 25px;
 			<p id="count" name="count">관심 채팅 조회</p>
 		</div>
 		
+		<div style="text-align:center;">
+			<button onclick="location.href='update.ud'">글수정</button>
+			<button>글삭제</button>
+			<button>뒤로가기</button>
+		</div>
+	
 		
 		
 		
