@@ -8,22 +8,22 @@
 <title>안녕 나는 모임 디테일뷰야</title>
 
 <style>
-	body{ padding-bottom:200px;}
+	body{ padding-bottom:160px;}
 	#all-detail{ margin:auto; width:1200px;}
-	#group-btn-area { width:100%;  height: 200px; position:fixed; bottom:0; left:0; right:0; background-color: gray;}
+	#group-btn-area { width:100%;  height: 160px; position:fixed; bottom:0; left:0; right:0; background-color: gray;}
 	#btn-zone{ width:1200px; height:200px; margin:auto; text-align: center;}
 	#btn-zone button{ 
 		display:inline-block; 
 		margin:auto; 
-		width:450px; 
-		height:180px;
-		font-size:100px;
+		width:430px; 
+		height:120px;
+		font-size:60px;
 		background-color: white;
 		border-style:none;
 		vertical-align:middle;
-		margin-top:10px;
-		margin-left:20px;
-		margin-right:20px;
+		margin-top:20px;
+		margin-left:30px;
+		margin-right:30px;
 	}
 	#btn-zone button:hover{ cursor:pointer; font-weight:900;}
 </style>

@@ -13,6 +13,7 @@
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"/>
+	<jsp:include page="../user/myPageBar.jsp" />
 	<div class="outer">
 		<ul class="nav justify-content-center table-bordered">
 			<li class="nav-item">

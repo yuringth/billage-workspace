@@ -7,14 +7,10 @@
 <meta charset="UTF-8">
 <title>안녕여긴 마이페이지</title>
 <style>
-	#myPage-area {
-		width:1200px;
-		align : center;
-	}
-	#menubar{
-		width:250px;
-	}
-
+	
+	
+	/*모달관련 스타일*/
+	/*
 	#write-textarea{
         text-align: center;
 
@@ -70,7 +66,7 @@
         padding-left: 50px;
         font-size: 30px;
         color:rgb(109, 104, 104);
-        /* font-weight: 00; */
+        /* font-weight: 00; 
         font-family: 'Happiness-Sans-Title';
     }
 
@@ -81,7 +77,14 @@
     .tag-opt {
         font-size: 18px;
     }
-
+	*/
+	
+	#all-mypage-main {
+		margin:auto; 
+		width:1200px; 
+		height:2000px; 
+		border:1px solid red;
+	}
 
 </style>
 
@@ -89,30 +92,24 @@
 
 <body>
 	<jsp:include page="../common/header.jsp"/>
-
-	<div id="myPage-area">
-		<div id="menubar">
-			<ul class="menubar-area">
-				<li class="menu"><a>개인정보수정</a></li>
-				<%-- 개인정보수정에 회원탈퇴 넣기 --%>
-				<li class="menu"><a>내 포인트 보기</a></li>
-				<li class="menu"><a>팔로우관련</a></li>
-				<li class="menu"><a href="list.ms">쪽지함보기</a></li>
-				<li class="menu"><a>모임관련</a></li>
-				<li class="menu"><a>내 리뷰목록보기</a></li>
-				<li class="menu"><a href="">모임 관련</a></li>
-				<li class="menu"><a>경매, 추첨 관련</a></li>
-				<li class="menu"><a>책 대여 목록보기</a></li>
-				<li class="menu"><a>중고 거래 목록보기</a></li>
-			</ul>
+	<jsp:include page="myPageBar.jsp" />
 		
-		</div>
-		<div>
+	<div id="all-mypage-main">
+	
+	
+	
+	
+	</div>	
+		
+			
+		
+		
 		
 		
 		
 		
 		<%-- 이거 모달 참고 하는 용도로 코드 남긴 것  --%>
+<%--
 			<div id="store-report-area">
 		    <div class="modal fade" id="mymodal2">
 		        <div class="modal-dialog">
@@ -177,7 +174,10 @@
 			}                	
         })
 	
- </script>
+	 </script>
+--%>
+
+
 	<jsp:include page="../common/footer.jsp"/>
 </body>
 </html>
