@@ -15,13 +15,10 @@
 		width:250px;
 	}
 
-
-
 	#write-textarea{
         text-align: center;
 
 	}
-	
 	
 	#store-report-area{
         position: fixed;

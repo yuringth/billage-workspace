@@ -17,11 +17,17 @@
 		div{ box-sizing: border-box; }
 		a { text-decoration: none; color: black; }
 		ul { list-style:none; margin:0px; } 
+		body{ padding-top:250px;}
 		
 		#header-outer {
 			width: 1200px;
 			height: 250px;
 			margin: auto;
+			position:fixed;
+			top:0;
+			left:0;
+			right:0;
+			background: white;
 		}
 
 		#outer-top { margin-top: 20px; height: 120px; }
@@ -48,10 +54,7 @@
 		
 		#header-outer > #outer-bottom{ height: 130px;}
 
-		#header-outer > #outer-bottom{
-			width: 100%;
-			display:block;	
-		}
+		#header-outer > #outer-bottom{ width: 100%; display:block; }
 
 		#outer-bottom > ul > li {
 			float: left;
@@ -62,12 +65,16 @@
 			border-radius: 20px;
 		}
 
-		 #outer-bottom > ul>li>a {
+		#outer-bottom > ul>li>a {
 			text-align: center;
 			font-size: 25px;
-
 		}
 		
+		#outer-bottom > ul>li>a:hover {
+			cursor: pointer;
+			font-size: 28px;
+			font-weight: 900;
+		}
 
 		
 		
