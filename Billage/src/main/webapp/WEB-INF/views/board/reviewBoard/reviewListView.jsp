@@ -40,7 +40,7 @@
    		margin:auto;
     }
 
-    .content-detail0{
+    .one-content-detail1{
         border:1px solid blue;
 		width:500px;
 		height:50px;
@@ -48,7 +48,7 @@
     }
 
 
-  	.book-detail{
+  	.one-content-detail2{
   		border:1px solid red;
   		width:500px;
 		height:250px;
@@ -58,7 +58,7 @@
   	
  
   	
-	.content-detail1{
+	.book-detail1{
 		border:1px solid pink;
 		width:200px; 
 		height:220px;
@@ -67,7 +67,7 @@
 	}
 
   	
-	.content-detail2{
+	.book-detail2{
 		border:1px solid pink;
 		width:300px;
 		height:220px;
@@ -75,6 +75,13 @@
 		margin-left:10px;
 	}
 
+	
+	/* 이거 뭔데 div안에 안들어가냐??! 찜갯수 ㅠ */
+	.one-content-detail3{
+		border:1px solid black;
+		width:500px;
+		height:50px;
+	}
 
 
 	* {
@@ -87,6 +94,7 @@
 		display : flex;
 		justify-content: center;
 	}
+	
 </style>
 
 
@@ -121,7 +129,7 @@
         <div class="one-content" onclick="reviewDetail()">
         	
         	<!-- 작성자/별 -->
-            <div class="content-detail0">
+            <div class="one-content-detail1">
                 <div>작성자　　　　</div>                                              
                 <div class="card-footer">
                  	   별점 : <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -129,15 +137,15 @@
             </div>
 			
 			<!-- 책관련 디테일 div 책사진/제목/내용  -->
-			<div class="book-detail">
+			<div class="one-content-detail2">
 			
-				<div class="content-detail1">
+				<div class="book-detail1">
 		            <div>
 		            	<img class="card-img-top" src="https://image.yes24.com/goods/24259565/XL" alt="" style= "width:200px; height:220px;">
 		            </div>
 				</div>
 				
-				<div class="content-detail2">	            
+				<div class="book-detail2">	            
 		            <div>
 		            	<div style="height:20px;">책 제목</div>
 		            </div>
@@ -148,22 +156,19 @@
 			
 				<br>
 			</div>
-	
-	            <div>
-	            	<button>♡</button>찜갯수(5) 댓글(3) 리뷰등록수(3)
-	            </div>
-	            
-	            
+
+            <div class="one-content-detail3">
+            	<div><button>♡</button>찜갯수(5) 댓글(3) 리뷰등록수(3)</div>
+            </div>
         </div>
 
 
 
-
- 		<!-- 리뷰 하나를 감싸는 div -->
-        <div class="one-content">
+        <!-- 리뷰 하나를 감싸는 div -->
+        <div class="one-content" onclick="reviewDetail()">
         	
         	<!-- 작성자/별 -->
-            <div class="content-detail0" onclick="reviewDetail()">
+            <div class="one-content-detail1">
                 <div>작성자　　　　</div>                                              
                 <div class="card-footer">
                  	   별점 : <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -171,15 +176,15 @@
             </div>
 			
 			<!-- 책관련 디테일 div 책사진/제목/내용  -->
-			<div class="book-detail">
+			<div class="one-content-detail2">
 			
-				<div class="content-detail1">
+				<div class="book-detail1">
 		            <div>
 		            	<img class="card-img-top" src="https://image.yes24.com/goods/24259565/XL" alt="" style= "width:200px; height:220px;">
 		            </div>
 				</div>
 				
-				<div class="content-detail2">	            
+				<div class="book-detail2">	            
 		            <div>
 		            	<div style="height:20px;">책 제목</div>
 		            </div>
@@ -190,13 +195,12 @@
 			
 				<br>
 			</div>
-	
-	            <div>
-	            	<button>♡</button>찜갯수(5) 댓글(3) 리뷰등록수(3)
-	            </div>
-	            
-	            
+
+            <div class="one-content-detail3">
+            	<div><button>♡</button>찜갯수(5) 댓글(3) 리뷰등록수(3)</div>
+            </div>
         </div>
+
 
 	</div>
 

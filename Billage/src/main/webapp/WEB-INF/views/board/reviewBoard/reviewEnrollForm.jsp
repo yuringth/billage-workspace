@@ -13,14 +13,15 @@
 .outer{
 	width:1200px;
 	margin: auto;
-	
 }
 
-.btn2{ 
+
+/* 상품검색 버튼 고쳐야함 */
+.search-div{ 
 	display: flex; 
 	justify-content: center;
 	padding-bottom:10px;
-
+	height:50px;
 }
 
 
@@ -55,6 +56,13 @@
 	height:200px;
 }
 
+#book_content, #book_title, #book_author, #book_publisher, #book_data{
+	border:1px solid pink;
+	height:40px;
+}
+
+
+
 
 .book-content-outer{
 	text-align:center;
@@ -83,9 +91,11 @@
 
 		<hr>
 		
-		<form action="search.re">
-			<div class="btn2">
-				<input type="text"><button class="btn btn-link" type="submit">상품검색</button>
+		<!-- api끌고오는건데 enctype으로 해야하는게 맞을까?? -->
+		<form id="reviewEnrollForm" action="search.re" method="post" enctype="multipart/form-data">
+			<div class="search-div">
+				<input type="text" id="book_title" name="book_title">
+				<button class="btn btn-link" type="submit">상품검색</button>
 			</div>
 		</form>
 		
@@ -93,15 +103,16 @@
 		<div class="book-detail-outer">
 			<div class="book-detail-area">
 				<div class="content-photo-detail">
-					<div>사진</div>
+					<div id="book_imag" name="book_imag">사진</div>
 				</div>
 				
+				<!-- review 테이블 : book_content, book_publisher, book_date 컬럼 추가  -->
 				<div class="content-book-detail">
-					<div id="content">책내용</div>
-					<div id="title">제목</div>
-					<div id="wirter">저자</div>
-					<div id="publisher">츨판사</div>
-					<div id="date">발행일자</div>
+					<div id="book_content" name="book_content">책내용</div>
+					<div id="book_title" name="book_title">제목</div>
+					<div id="book_author" name="book_author">저자</div>
+					<div id="book_publisher" name="book_publisher">츨판사</div>
+					<div id="book_date" name="book_date">발행일자</div>
 				</div>
 			</div>
 		</div>
