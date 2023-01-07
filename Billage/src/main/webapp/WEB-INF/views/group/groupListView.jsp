@@ -8,7 +8,9 @@
 
 <title>여기는 모임 리스트 </title>
 <style>
-
+	p { padding:0px; margin:0px; }
+	
+	#thum-text-area, #thum-like-area { text-align:left; }
 	#outer-area{
 		width : 1200px;
 		margin: auto;
@@ -45,7 +47,21 @@
 		cursor: pointer;
 		opacity: 0.7;
 	}
+	
+	#thum-area{
+		position:
+	}
 
+	#new-group{
+		position: absolute;
+		border: 2px solid black;
+		border-radius: 50px;
+		margin-top: 10px;
+		margin-left: 10px;
+		line-height: 35px;
+		width:40px;
+		display:none;
+	}
 </style>
 </head>
 <body>
@@ -72,101 +88,61 @@
 		</div>
 	
 	
-	
-		<div class="list-area">
-			<div class="thumbnail" align="center">
-				<img src="#" alt="">
-				<p>
-					No. dd<br>
-					조회수 dd <br>
-				</p>              
+		<div id="list-area">
+		<div id="thum-area" class="thumbnail" align="center">
+			<div id="new-group" value="0">new</div>
+			<img src="#" alt="">
+			<h3>모임 이름</h3> 
+			<div id="thum-text-area">
+				<span>모일 진행일 독서모임</span></br>
+				<span>성동구 | 모집인원 4/8</span></br>
 			</div>
-		
-		
-		<script>
-			$(function(){
-				$('.list-area > .thumbnail').click(function(){
-					location.href = "detail.gr";
-					//글번호 들고 가야 돼
-				})
-				
-			})
-		
-		</script>
+			<div id="thum-like-area">
+				<span>찜하기<img src=""></span>
+				<span>(명)</span>
+			</div>
+		</div>
+	
 		<!-- ㅇㅕ기서부터 더미데이터  -->
-			<div class="thumbnail" align="center">
+			<div id="thum-area" class="thumbnail" align="center">
+				<div id="new-group" value="1">new</div>
+				
 				<img src="#" alt="">
-				<p>
-					No. dd<br>
-					조회수 dd <br>
-				</p>              
+				<h3>모임 이름</h3> 
+				<div id="thum-text-area">
+					<span>모일 진행일 독서모임</span></br>
+					<span>성동구 | 모집인원 4/8</span></br>
+				</div>
+				<div id="thum-like-area">
+					<span>찜하기<img src=""></span>
+					<span>(명)</span>
+				</div>
 			</div>
 	
-			<div class="thumbnail" align="center">
-				<img src="#" alt="">
-				<p>
-					No. dd<br>
-					조회수 dd <br>
-	
-				</p>              
-			</div>
-			
-			<div class="thumbnail" align="center">
-				<img src="#" alt="">
-				<p>
-					No. dd<br>
-					조회수 dd <br>
-	
-				</p>              
-			</div>
-	
-						
-			<div class="thumbnail" align="center">
-				<img src="#" alt="">
-				<p>
-					No. dd<br>
-					조회수 dd <br>
-	
-				</p>              
-			</div>				
-			
-			<div class="thumbnail" align="center">
-				<img src="#" alt="">
-				<p>
-					No. dd<br>
-					조회수 dd <br>
-	
-				</p>              
-			</div>				
-			
-			<div class="thumbnail" align="center">
-				<img src="#" alt="">
-				<p>
-					No. dd<br>
-					조회수 dd <br>
-	
-				</p>              
-			</div>				
-			
-			<div class="thumbnail" align="center">
-				<img src="#" alt="">
-				<p>
-					No. dd<br>
-					조회수 dd <br>
-	
-				</p>              
-			</div>		
-			<div class="thumbnail" align="center">
-				<img src="#" alt="">
-				<p>
-					No. dd<br>
-					조회수 dd <br>
-	
-				</p>              
-			</div>
-			<!-- 더미 데이터 끝 -->
+		<!-- 더미 데이터 끝 -->
 		</div> <!-- list-area끝  -->
 	</div> <!-- outer-area 끝 -->
+	
+	
+		<script>
+			$(function(){
+				/* 이거 구현할 때 모임생성날짜 계산해서 1이랑 0이랑 구분할 수 있게 값을 들고오고 싶은데 어떻게 하징? 
+						DB에서 조건문 걸어서 가지고 와야 하나?
+								어떠카지!!!!!!!!? ㅠㅠ */
+				$('#list-area #new-group').each(function(){
+					if($(this).attr('value') == 1){
+						$(this).show();
+					}					
+				});
+				
+				
+				$('#list-area > .thumbnail').click(function(){
+					location.href = "detail.gr";
+					//글번호 들고 가야 돼
+				});
+			});
+
+		</script>
 		
 	<jsp:include page="../common/footer.jsp" />
 </body>
