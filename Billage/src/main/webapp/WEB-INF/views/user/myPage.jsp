@@ -160,9 +160,6 @@
 	<div id="store-report"><a>신고하기</a></div>
 	 <script>
 	$(function(){
-		while(1){
-			location.href = location.href;
-		}
 			$('#store-report a').click(function(){
 		          $('#store-report-area').fadeIn();
 	      });
