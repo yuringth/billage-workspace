@@ -26,6 +26,7 @@
     .align-left{
         flex: auto;
     }
+    
     .align-left-outer{
         display: flex;
         flex-wrap: wrap;
@@ -90,7 +91,7 @@
 					<a class="dropdown-item" href="#">최신 날짜 순</a>
 				</div>
 			</div>
-			<div><button type="button" class="btn btn-info" onclick="location.href='enrollForm.ud'">글쓰기</button></div>   
+			<div><button type="button" class="btn btn-info" onclick="location.href='insert.ud'">글쓰기</button></div>   
 		</div>
 
 

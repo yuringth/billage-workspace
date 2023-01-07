@@ -15,8 +15,8 @@ public class UsedController {
 	
 	
 	// 중고게시판 -> 글쓰기버튼 클릭 시 -> 중고게시판 글작성 폼화면으로 이동
-	@RequestMapping("enrollForm.ud")
-	public String usedEnrollForm() {
+	@RequestMapping("insert.ud")
+	public String usedInsertForm() {
 		return "board/usedBoard/usedEnrollForm";
 	}
 	
@@ -25,6 +25,12 @@ public class UsedController {
 	@RequestMapping("detail.ud")
 	public String usedDetailView() {
 		return "board/usedBoard/usedDetailView";
+	}
+	
+	// 중고게시판 -> 글수정 -> 수정폼 화면
+	@RequestMapping("update.ud")
+	public String usedUpdateForm() {
+		return "board/usedBoard/usedUploadForm";
 	}
 	
 	

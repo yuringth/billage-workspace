@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>중고게시판 작성 화면</title>
+<title>중고게시판 작성화면</title>
 
 <style>
     .outer{
@@ -54,29 +54,24 @@
         padding-top: 10px;
     }
 </style>
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
 </head>
 <body>
-
-
-
 	<jsp:include page="../../common/header.jsp"/>
 
     <div class="outer">
 
-        <form action="insert.ac">
+        <form action="insert.ac" id="usedEnrollForm" method="post" enctype="multipart/form-data">
 
             <div class="longdiv align-left">
                 <div class="textdiv">
                     <p>제목:</p>
                 </div>
                 <div class="titlediv">
-                    <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요" name="title" required>
+                    <input type="text" class="form-control" id="used_title" placeholder="게시글 제목을 입력하세요" name="usedTitle" required>
                 </div>
             </div>
 
@@ -87,7 +82,7 @@
                         <p>작가:</p>
                     </div>
                     <div class="inputdiv">
-                        <input type="text" class="form-control" id="bookWriter" placeholder="작가 명" name="bookWriter">
+                        <input type="text" class="form-control" id="book_author" placeholder="작가명" name="bookAuthor">
                     </div>
                 </div>
                 <div class="shortdiv align-left">
@@ -95,7 +90,27 @@
                         <p>장르:</p>
                     </div>
                     <div class="inputdiv">
-                        <input type="text" class="form-control" id="genre" placeholder="장르" name="genre">
+                        <input type="text" class="form-control" id="book_genre" placeholder="장르" name="bookGenre">
+                    </div>
+                </div>
+            </div>
+
+            <div class="longdiv align-left">
+                
+                <div class="shortdiv align-left">
+                    <div class="textdiv">
+                        <p>판매가:</p>
+                    </div>
+                    <div class="inputdiv">
+                        <input type="number" class="form-control" id="instantlyPrice" placeholder="판매가" name="instantlyPrice">
+                    </div>
+                </div>
+                <div class="shortdiv align-left">
+                    <div class="textdiv">
+                        <p>첨부파일:</p>
+                    </div>
+                    <div class="inputdiv">
+                    	<input type="file" id="upfile" class="form-control-file border" name="">
                     </div>
                 </div>
             </div>
@@ -103,10 +118,7 @@
             
 
             <div style="width : 790px;">
-    	        <div class="textdiv">
-	                <p>상품 소개:</p>
-                </div>
-                <textarea class="form-control" rows="15" id="content" style="resize: none;" name="content" placeholder="내용을 입력하세요"></textarea>
+                <textarea class="form-control" rows="15" id="used_content" name="usedContent" style="resize: none;" placeholder="내용을 입력하세요"></textarea>
             </div>
 
             <div class="longdiv align-left">
