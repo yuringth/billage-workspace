@@ -14,50 +14,56 @@
 	
 	<title>Insert title here</title>
 	<style>
-		#outer {
+		div{ box-sizing: border-box; }
+		a { text-decoration: none; color: black; }
+		ul { list-style:none; margin:0px; } 
+		
+		#header-outer {
 			width: 1200px;
-			height: 300px;
+			height: 250px;
 			margin: auto;
 		}
 
-		#outer > .header {
+		#outer-top { margin-top: 20px; height: 120px; }
+		
+		#header-outer > #outer-top > .header {
 			float: left;
-			height: 200px;
+			text-align: center;
+			width:400px;
+		}
+		
 
+		#header-outer > #outer-top > #logo-area {  }
+
+		#header-outer > #outer-top > #search-area > input, button { 
+			margin-top:30px; 
+			font-size:20px;
+			padding:0px;
+			
+		 }
+		 
+		#header-outer > #outer-top > #search-area > input { width:300px; height:30px; border-bottom : 1px solid black;}
+
+		#header-outer > #outer-top #login-area {  }
+		
+		#header-outer > #outer-bottom{ height: 130px;}
+
+		#header-outer > #outer-bottom{
+			width: 100%;
+			display:block;	
 		}
 
-		#logo-area {
-			width: 400px;
-		}
-
-		#search-area {
-			width: 400px;
-		}
-
-		#login-area {
-			width: 400px;
-		}
-
-		#nav-bar {
-			width: 1200px;
-			height: 100px;
-			margin: auto;
-		}
-
-		#nav-bar ul {
-			list-style: none;
-			display: block;
-
-		}
-
-		#nav-bar ul>li {
+		#outer-bottom > ul > li {
 			float: left;
-			margin-left: 30px;
+			text-align:center;
+			width:120px;
+			height:70px;
+			margin-top:20px;
+			border-radius: 20px;
 		}
 
-		#nav-bar ul>li>a {
-			text-decoration: none;
-			color: black;
+		 #outer-bottom > ul>li>a {
+			text-align: center;
 			font-size: 25px;
 
 		}
@@ -92,18 +98,18 @@
 --%>
 
 
-	<div id="outer">
-		<div class="header" id="logo-area">
-			<a href="/billage"><img>로고넣자</a>
-			<!-- main.ma -->
-		</div>
+	<div id="header-outer">
+		<div id="outer-top">
+			<div class="header" id="logo-area">
+				<a href="/billage"><img src="resources/images/logo.png.jpg" width="100px;" height="100px;"></a>
+			</div>
 
-		<div class="header" id="search-area">
-			<input type="text" />
-			<input type="button" value="검색" />
-		</div>
+			<div class="header" id="search-area">
+				<input type="text" />
+				<button type="submit" >검색</button>
+			</div>
 
-		<div class="header" id="login-area">
+			<div class="header" id="login-area">
 
 				<div>
 					<a href="userEnrollForm.me">회원가입</a>
@@ -115,9 +121,10 @@
 					<a href="mypage.me">마이페이지</a>
 				</div>			
 
-		</div>
-
-		<div id="nav-bar">
+			</div>
+		</div> <!-- outer-top끝  -->
+		
+		<div id="outer-bottom"> 
 			<ul>
 				<li><a href="list.gr">모임</a></li>
 				<li><a href="list.nv">연재</a></li>
@@ -127,21 +134,13 @@
 				<li><a href="list.ac">경매</a></li>
 				<li><a href="list.ud">중고</a></li>
 				<li><a href="#">마을</a></li>
-				<li><a href="admin.ad">임시관리자</a></li>
+				<li><a href="admin.ad">임시<br>관리자</a></li>
 			</ul>
-		</div>
-
-
-	</div>
-
-
-	
+		</div> <!-- outer-bottom -->
 
 
 
-
-
-
+	</div> <!-- header-outer 끝 -->
 </body>
 
 </html>

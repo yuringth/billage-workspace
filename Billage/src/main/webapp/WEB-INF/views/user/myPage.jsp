@@ -109,10 +109,13 @@
 				<li class="menu"><a>중고 거래 목록보기</a></li>
 			</ul>
 		
-		
-		
 		</div>
 		<div>
+		
+		
+		
+		
+		<%-- 이거 모달 참고 하는 용도로 코드 남긴 것  --%>
 			<div id="store-report-area">
 		    <div class="modal fade" id="mymodal2">
 		        <div class="modal-dialog">
