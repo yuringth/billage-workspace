@@ -71,9 +71,18 @@ public class UserController {
 		return "user/userEnrollForm";
 	}
 	
+	
+	//--------------------------------------------------------------------------------
+	// 마이페이지 
 	@RequestMapping("mypage.me")
 	public String myPage() {
 		return "user/myPage";
+	}
+	
+	
+	@RequestMapping("group.me")
+	public String groupAdmin() {
+		return "group/groupAdminView";
 	}
 	
 	// 로그인 폼으로
