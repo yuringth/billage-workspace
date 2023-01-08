@@ -15,4 +15,9 @@ public class FreeBoardController {
 	public String selectBoardDetail() {
 		return "board/freeBoard/boardDetailView";
 	}
+	
+	@RequestMapping("insert.bo")
+	public String insertBoard() {
+		return "board/freeBoard/boardEnrollForm";
+	}
 }
