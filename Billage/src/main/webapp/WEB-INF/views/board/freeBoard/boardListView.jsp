@@ -79,7 +79,7 @@
 	
 	<script>
 		$(function(){
-			$('.bordList').click(function(){
+			$('.boardList').click(function(){
 				location.href='detail.bo';
 			})
 		})

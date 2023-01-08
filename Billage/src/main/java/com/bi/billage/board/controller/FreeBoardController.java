@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class FreeBoardController {
 	
-	@RequestMapping("select.bo")
+	@RequestMapping("list.bo")
 	public String selectBoardList() {
 		return "board/freeBoard/boardListView";
 	}
