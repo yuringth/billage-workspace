@@ -10,4 +10,9 @@ public class FreeBoardController {
 	public String selectBoardList() {
 		return "board/freeBoard/boardListView";
 	}
+	
+	@RequestMapping("detail.bo")
+	public String selectBoardDetail() {
+		return "board/freeBoard/boardDetailView";
+	}
 }
