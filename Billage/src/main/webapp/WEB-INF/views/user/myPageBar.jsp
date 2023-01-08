@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이페이지 메뉴바 만들고 싶다 정말 </title>
+<title>마이페이지 메뉴바 </title>
 <style>
 	div{ box-sizing : border-box;}
 	

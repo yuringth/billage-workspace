@@ -14,6 +14,7 @@ public class GroupController {
 	//@Autowired
 	//private GroupService groupService;
 	
+	//등록된 모임 리스트를 가지고 와야 함 , 페이징 처리 필요
 	@RequestMapping("list.gr")
 	public /*ModelAndView*/String selectGroup(/*@RequestParam(value="cpage", defaultValue="1")int currentPage, ModelAndView mv*/) {
 		
@@ -24,13 +25,18 @@ public class GroupController {
 	}
 	
 	
+	// 모임 상세보기 메소드 
 	@RequestMapping("detail.gr")
 	public String selectDetailGroup(/*게시글 번호*/) {
 		//게시글 번호 조회 
 		return "group/groupDetailView";
 	}
 	
-	
+	// 마이페이지에서 모임 개설하기 클릭시 실행되는 메소드 
+	@RequestMapping("enrollForm.gr")
+	public String enrollGroup() {
+		return "group/groupEnrollForm";
+	}
 	
 	
 	
