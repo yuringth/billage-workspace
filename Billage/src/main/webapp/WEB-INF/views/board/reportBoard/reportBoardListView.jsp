@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자유게시판 목록입니다.</title>
+<title>Insert title here</title>
 <style>
 	.outer{
 			width:1200px;
@@ -49,26 +49,27 @@
 </style>
 </head>
 <body>
+<body>
 	<jsp:include page="../../common/header.jsp"/>
 		
 		<div class="outer">
 			<div id="freeboard" style="display:flex; flex-direction: row; justify-content: space-between;">
-				<div><h1>자유게시판</h1></div>
+				<div><h1>신고세기판</h1></div>
 				<div><button>글쓰기</button></div>
 			</div>
 			<div id="boardHeader" style="display:flex; flex-direction: row; justify-content: space-evenly;">
 				<div class="boardNo">게시글 번호</div>
-				<div class="boardCategory">말머리</div>
+				<div class="boardCategory">신고사유</div>
 				<div class="boardTitle">제목</div>
 				<div class="boardDate">날짜</div>
-				<div class="nickName">닉네임</div>
+				<div class="nickName">처리결과</div>
 			</div>
 			<div class="boardList" style="display:flex; flex-direction: row; justify-content: space-evenly;">
 				<div class="boardNo">20</div>
-				<div class="boardCategory">자유</div>
+				<div class="boardCategory">욕설/비방</div>
 				<div class="boardTitle">제목</div>
 				<div class="boardDate">22-01-06</div>
-				<div class="nickName">사용자</div>
+				<div class="nickName">처리 완료</div>
 			</div>
 		</div>
 		<br><br><br>
@@ -84,6 +85,5 @@
 			})
 		})
 	</script>
-	
 </body>
 </html>
