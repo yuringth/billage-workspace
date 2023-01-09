@@ -31,7 +31,7 @@ public class DrawAuctionController {
 	
 	@RequestMapping("list.ac")
 	public ModelAndView auctionBoardList(ModelAndView mv) {
-		mv.addObject("list", boardService.selectAuctionBoardList()).setViewName("board/drawBoard/auctionBoardListView");
+		mv.addObject("list", boardService.selectAuctionBoardList()).setViewName("board/auctionBoard/auctionBoardListView");
 		return mv;
 	}
 	
