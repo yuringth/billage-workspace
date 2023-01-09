@@ -37,7 +37,7 @@ public class DrawAuctionController {
 		String remaindTime = ""; // 남은 시간 넣을 변수
 		
 		// DB 받아온 String 담을 포멧
-		SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-DD HH:mm:ss");
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
 		// 남은 일수가 하루 이상일 때 담을 포멧
 		SimpleDateFormat dFormat = new SimpleDateFormat("DD일 HH:mm:ss");
@@ -47,7 +47,10 @@ public class DrawAuctionController {
 		for(int i = 0; i < list.size(); i++) {
 			// DB에서 가져온 값을 Date2에 담는다
 			date2 = format.parse(list.get(i).getCloseDate());
+			
 			System.out.println(list.get(i).getCloseDate());
+			
+			System.out.println(date2);
 			
 			// 계산을 위해 date2를 변환 long으로 변환
 			closeTime = date2.getTime();
@@ -60,7 +63,6 @@ public class DrawAuctionController {
 			} else { // 하루도 안 남았을 때
 				remaindTime = tFormat.format(time);
 			}
-			
 			list.get(i).setRemaindTime(remaindTime);
 		}
 		
