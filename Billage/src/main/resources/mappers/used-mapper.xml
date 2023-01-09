@@ -18,14 +18,14 @@
 		<result column="STOCK_STATUS"	property="stockStatus" />
 		<result column="BOOK_GENRE"		property="bookGenre" />
 		<result column="BOOK_AUTHOR"	property="bookAuthor" />
-		<result column="BOOK_TITLE"	property="bookTitle" />
+		<result column="BOOK_TITLE"	    property="bookTitle" />
 		<result column="ORIGIN_NAME"	property="originName" />
 		<result column="CHANGE_NAME"	property="changeName" />
 	</resultMap>
 
 
 	<!-- 글작성 쿼리문 -->
-	<insert id="insertUsedBoard" parameterType="usedBoard">
+	<insert id="insertUsedBoard" parameterType="used">
 		insert
 		  into
 		  	   usedBoard
