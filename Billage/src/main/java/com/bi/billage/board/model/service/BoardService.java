@@ -3,6 +3,7 @@ package com.bi.billage.board.model.service;
 import java.util.ArrayList;
 
 import com.bi.billage.board.model.vo.ADBoard;
+import com.bi.billage.board.model.vo.ReportBoard;
 
 public interface BoardService {
 	
@@ -14,7 +15,7 @@ public interface BoardService {
 	
 	//휘수 구역
 	//report
-	int insertReport();
+	int insertReport(ReportBoard r);
 	
 	
 	
