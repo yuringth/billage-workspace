@@ -105,7 +105,7 @@
 	</update>
 	
 	<!-- 추첨글 상세조회 -->
-	<select id="selectdrawBoard" parameterType="_int" resultMap="drawBoardResultSet">
+	<select id="selectDrawBoard" parameterType="_int" resultMap="drawBoardResultSet">
 		SELECT
 				DRAW_NO
 				,NICKNAME
@@ -125,6 +125,16 @@
 		 WHERE
 		 		DRAW_NO = #{boardNO} 
 	</select>
+	
+	<!-- 추첨 글 삭제 -->
+	<update id="deleteDrawBoard" parameterType="_int">
+		UPDATE
+				DRAW_BOARD
+		   SET
+		   		STATUS = 'Y'
+		 WHERE
+		 		DRAW_NO = #{boardNo}
+	</update>
 	
 	
 
