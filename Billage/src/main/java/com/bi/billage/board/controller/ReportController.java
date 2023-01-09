@@ -25,11 +25,17 @@ public class ReportController {
 	}
 	*/
 	
-	@RequestMapping("detail.ro")
-	public String selectReportDetail() {
-		return"board/reportBoard/reportBoardDetailView";
+	//reportBoard 목록 띄우기
+	@RequestMapping("list.ro")
+	public String selectReportList(Model model) {
+		
+		ArrayList<ReportBoard> list = boardService.selectReport();
+		
+		return "board/reportBoard/reportListView";
+		
 	}
 	
+	//reportBoard 작성 페이지
 	@RequestMapping("insertForm.ro")
 	public String insertReportForm(/*int boardNo ,*/HttpSession session) {
 		
@@ -38,8 +44,11 @@ public class ReportController {
 		return"board/reportBoard/reportEnrollForm";
 	}
 	
+	//reporBoard insert
 	@RequestMapping("insert.ro")
 	public String insertReport(ReportBoard r, Model model ) {
+		
+		System.out.println(r);
 		
 		int result = boardService.insertReport(r);
 		
@@ -51,13 +60,13 @@ public class ReportController {
 			return "common/errorPage";
 		}
 		
-		}
-	@RequestMapping("list.ro")
-	public String selectReportList(Model model) {
-		
-		ArrayList<ReportBoard> list = boardService.selectReport();
-		
-		return "board/reportBoard/reportListView";
-		
 	}
+	
+	//reportBoard 상세페이지
+	@RequestMapping("detail.ro")
+	public String selectReportDetail() {
+		return"board/reportBoard/reportBoardDetailView";
+	}
+	
+	
 }
