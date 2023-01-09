@@ -72,7 +72,7 @@
                     <p>제목:</p>
                 </div>
                 <div class="titlediv">
-                    <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요" name="reportTitle" required>
+                    <input type="text" class="form-control" id="reportTitle" placeholder="제목을 입력하세요" name="reportTitle" required>
                 </div>
             </div>
 
@@ -83,13 +83,13 @@
                         <p>신고사유:</p>
                     </div>
                     <div class="inputdiv">
-                        <input type="text" class="form-control" id="category" placeholder="신고사유를 입력해주세요" name="reportCategory">
+                        <input type="text" class="form-control" id="reportCategory" placeholder="신고사유를 입력해주세요" name="reportCategory">
                     </div>
                 </div>
             </div>
 
             <div style="width : 790px;">
-                <textarea class="form-control" rows="15" id="content" style="resize: none;" name="reportContent" placeholder="내용을 입력하세요"></textarea>
+                <textarea class="form-control" rows="15" id="reportContent" style="resize: none;" name="reportContent" placeholder="내용을 입력하세요"></textarea>
             </div>
 
             <div class="longdiv align-left">
