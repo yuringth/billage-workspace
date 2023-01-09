@@ -151,7 +151,7 @@ public class BoardDao {
 	
 	// 유림시작
 	public int insertUsedBoard(SqlSessionTemplate sqlSession, UsedBoard b) {
-		return sqlSession.insert("UsedBoardMapper.insertUsedBoard");	
+		return sqlSession.insert("usedMapper.insertUsedBoard");	
 		
 	}
 
