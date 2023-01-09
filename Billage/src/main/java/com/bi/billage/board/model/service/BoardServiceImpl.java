@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.bi.billage.board.model.dao.BoardDao;
 import com.bi.billage.board.model.vo.ADBoard;
+import com.bi.billage.board.model.vo.ReportBoard;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -18,9 +19,9 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired SqlSessionTemplate sqlSession;
 
 	@Override
-	public int insertReport() {
+	public int insertReport(ReportBoard r) {
 		
-		return 0;
+		return boardDao.insertReport(sqlSession, r);
 	}
 
 	@Override
