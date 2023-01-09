@@ -56,20 +56,20 @@ public class ReviewController {
 	
 	
 	// api도전
-	/*
-	@RequestMapping(value="taste.do", produces="application/json; charset=UTF-8")
+	
+	@RequestMapping(value="search.bk", produces="application/json; charset=UTF-8")
 	public String reviewApi () {
 		
 		// url은 손으로 한땀한땀 작성하는게 좋다
 		// 인증서 => 브라우저에 있음 => 우리는 http로 작성할것임! https안됨!!
-		String url ="http://www.aladin.co.kr/ttb/api/ItemList.aspx";
+		String url ="http://www.http://www.aladin.co.kr";
 		url += "?serviceKey=" + serviceKey;
 		url += "&MaxResults=" + 10;
 		url += "&Output=json"; // json이니까 produces추가해야함!!
-		url += "&pageNo=" + page;
+		url += "&Query=" + bookTitle;
 			   
 			   
-		// System.out.println(url);
+		System.out.println(url);
 		
 	    URL requestUrl = new URL(url); // 부모클래스(?)
 	    HttpURLConnection urlConnection = (HttpURLConnection)requestUrl.openConnection(); // 부모가 자식한테 어케 들어가 하고 다운캐스팉 해주기
@@ -83,11 +83,8 @@ public class ReviewController {
 	    urlConnection.disconnect(); // 뭐지?
 	    
 	    return responseText; // 응답데이터임!! 	@ResponseBody
-	    
-		
-		
 	}
-	*/
+	
 	
 	
 	

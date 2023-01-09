@@ -200,8 +200,20 @@
 	
 	
 	<script>
-		 function search(book_title){
-			 
+		 function search(){
+			 $.ajax({
+				url:'search.bk',
+				data:{ // 요청시 전달 값
+					bookTitle : bookTitle
+				},
+				success : function(result){
+					console.log(result);
+				},
+				error: function(){
+					console.log('실패');
+				}
+				 
+			 })
 			 
 			 
 		 }

@@ -64,7 +64,7 @@
 
     <div class="outer">
 
-        <form action="insert.ac" method="post" action="insert.bo" enctype="multipart/form-data">
+        <form action="insert.dr" method="post" action="insert.bo" enctype="multipart/form-data">
 
             <div class="longdiv align-left">
                 <div class="textdiv">
