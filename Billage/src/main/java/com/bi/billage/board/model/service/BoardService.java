@@ -19,7 +19,7 @@ public interface BoardService {
 	//report
 	int insertReport(ReportBoard r);
 	
-	ArrayList<ReportBoard> selectReportList();
+	ArrayList<ReportBoard> selectReport();
 	
 	
 	

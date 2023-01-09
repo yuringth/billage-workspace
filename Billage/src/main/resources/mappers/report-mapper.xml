@@ -38,4 +38,18 @@
  	 		  )       
 		        
 	</insert>
+	
+	<select id="selectReport" resultMap="reportResultSet">
+		select
+		        report_no
+		        ,user_no
+		        ,report_title
+		        ,report_category
+		        ,report_content
+		        ,board_no
+		        )
+		from
+		      board        
+		        
+	</select>
 </mapper>

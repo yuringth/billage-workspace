@@ -55,7 +55,7 @@ public class ReportController {
 	@RequestMapping("list.ro")
 	public String selectReportList(Model model) {
 		
-		ArrayList<ReportBoard> list = boardService.selectReportList();
+		ArrayList<ReportBoard> list = boardService.selectReport();
 		
 		return "board/reportBoard/reportListView";
 		
