@@ -65,7 +65,8 @@
     <div class="outer">
 
         <form action="insert.ro" method="post" >
-			<input type="hidden" id="boardNo" name="boardNo" value="${boardNo}">
+			<input type="hidden" id="boardNo" name="boardNo" value="${boardNo }">
+			<input type="hidden" id="userNo" name="userNo" value="${userNo }">
 			
             <div class="longdiv align-left">
                 <div class="textdiv">
