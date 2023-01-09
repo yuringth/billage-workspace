@@ -53,6 +53,17 @@
         padding-left: 455px;
 	}	
 	
+	#result-area{
+		margin : auto;
+		width : 480px;
+		height : 400px;
+	}
+	
+	#enter-addr-in{
+		width : 480px;
+		height : 400px;
+		overflow : scroll;		
+	}
 	
 	
 	
@@ -130,7 +141,7 @@
 		
 		<div id="search-area">
 			<div id="search-text"> 
-				<input id="search" type="text" />			
+				<input id="search" type="text" placeholder="읍/면/동을 입력해주세요."/>			
 			</div>
 			<div id="result-area">
 			
@@ -224,18 +235,20 @@
 					}
 					
 					// valueArr에 담긴 주소문자열 배열을 
-					valueArr.forEach(el => {
+					valueArr.forEach(function(el) {
+						//el =>
 						uniqueObj[el] = true; // { 동(시 구) : true, 동 (시 구) : true, ... } 해당 형태로 uniqueObj 객체에 담음  (중복제거 됨) 
 					});
 					
 					// 객체 키만 모아서 배열로 반환 
 					const uniqueArr = Object.keys(uniqueObj);
 					
-					// 반환된 배열 uniqueArr 요소 하나씩 돌면서 value에 문자열 형태로 담는다. 
-					for(let i in uniqueArr){			
+					// 반환된 배열 uniqueArr 요소 하나씩 돌면서 value에 문자열 형태로 담는다.
+					value += '<div id="enter-addr-in">';
+					for(let i in uniqueArr.reverse()){			
 						value += '<p class="enter-addr">' + uniqueArr[i] + '</p>';				
 					}
-					
+					value += '</div>';
 					$('#result-area').html(value);
 					
 				},
