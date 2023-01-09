@@ -81,18 +81,18 @@
 		<!--모임 개설 : 모임이름, 모임요일, 모임 설명, 모임 지역, 모임 참여 인원 받아야 함 -->
 		<form action="insert.gr" method="post" enctype="multipart/form-data">
 			<table border="1" align="center">
-				<caption>모임개설정보</caption>	
+				<caption style="text-align:left;">*필수입력사항</caption>	
 				<colgroup>
 					<col style="width:200px;">
 					<col style="width:800px;">
 				</colgroup>
 				<tbody>
 					<tr>
-						<th scope="row">모임 이름</th>
+						<th scope="row">*모임 이름</th>
 						<td><div><input type="text" name="groupTitle" required></div></td>
 					</tr>
 					<tr>
-						<th scope="row">모임 요일</th>
+						<th scope="row">*모임 요일</th>
 						<td>
 							<select name="groupDay">
 								<option name="groupDay">월</option>
@@ -106,16 +106,16 @@
 						</td>
 					</tr>
 					<tr>
-						<th>모임 설명</th>
+						<th>*모임 설명</th>
 						<td><div><textarea name="groupDescribe" row="50" style="width:800px; height:200px; resize: none;" 
 											placeholder="10자 이상 입력해주세요"></textarea></div></td>
 					</tr>
 					<tr>
-						<th>모임 지역</th>
-						<td><input type="button" id="addr-btn" value="찾기" /><div><input type="text" name="groupLocation" required></div></td>
+						<th>*모임 지역</th>
+						<td><input type="button" id="addr-btn" value="찾기" /><div><input type="text" name="groupLocation" required readonly></div></td>
 					</tr>
 					<tr>
-						<th>모임 참여 인원</th>
+						<th>*모임 참여 인원</th>
 						<td><div><input type="number" name="groupNum" required/></div></td>
 					</tr>
 					<tr>
@@ -141,7 +141,7 @@
 		
 		<div id="search-area">
 			<div id="search-text"> 
-				<input id="search" type="text" placeholder="읍/면/동을 입력해주세요."/>			
+				<input id="search" type="text" placeholder="읍/면/동을 입력해주세요." />			
 			</div>
 			<div id="result-area">
 			
@@ -190,6 +190,7 @@
 	    // 검색을 위한 모달창 띄우기 
 	    $(function(){
 	    	$('#addr-btn').click(function(){
+	    		$('input[name=groupLocation]').val('');
 	    		$('#modal-serach-area').show();
 	    	});
 	    	
@@ -197,6 +198,8 @@
 	    	$('#addr-close').click(function(){
 	    		$('#modal-serach-area').hide();
 	    		$('#search').val('');
+	    		$('#enter-addr-in').empty();
+	    		
 	    	});
 	    });
 	    
@@ -269,6 +272,8 @@
 				console.log($addr[2]);
 				$('input[name=groupLocation]').val($addr[2]);
 				$('#modal-serach-area').hide();
+				$('#search').val('');
+				$('#enter-addr-in').empty();
 			});
 			
 			
