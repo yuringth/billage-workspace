@@ -65,7 +65,7 @@
     <div class="outer">
 
         <form action="insert.dr" method="post" action="insert.bo" enctype="multipart/form-data">
-
+			<input type="hidden" value="${ loginUser.userNo }" name="userNo">
             <div class="longdiv align-left">
                 <div class="textdiv">
                     <p>제목:</p>
