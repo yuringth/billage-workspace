@@ -41,6 +41,8 @@ public class ReportController {
 	@RequestMapping("insert.ro")
 	public String insertReport(ReportBoard r, Model model ) {
 		
+		System.out.println(r);
+		
 		int result = boardService.insertReport(r);
 		
 		if(result > 0) {
