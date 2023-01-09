@@ -147,17 +147,24 @@
 				</div>
 	
 				<div class="header" id="login-area">
-	
-					<div>
-						<a href="userEnrollForm.me">회원가입</a>
-						<a id="login-btn" >로그인하기</a>
+					
+					<c:choose>
+						<c:when test="${ empty loginUser }">
+							<div>
+								<a href="userEnrollForm.me">회원가입</a>
+								<a id="login-btn" >로그인하기</a>
 						
 						<!-- href="loginUserForm.me" -->
-					</div>
-	
-					<div>
-						${ loginUser.nickname } 님 환영합니다!! <br> 
-						<a href="mypage.me">마이페이지</a>
+							</div>
+						</c:when>
+						
+						<c:otherwise>
+							<div>
+								${ loginUser.nickname } 님 환영합니다!! <br> 
+								<a href="mypage.me">마이페이지</a>
+							</div>
+						</c:otherwise>
+					</c:choose>
 					</div>			
 	
 				</div>
