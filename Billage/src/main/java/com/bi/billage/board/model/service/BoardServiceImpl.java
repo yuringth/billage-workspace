@@ -2,12 +2,20 @@ package com.bi.billage.board.model.service;
 
 import java.util.ArrayList;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bi.billage.board.model.dao.BoardDao;
 import com.bi.billage.board.model.vo.ADBoard;
 
 @Service
 public class BoardServiceImpl implements BoardService {
+	
+	@Autowired
+	private BoardDao boardDao;
+	
+	@Autowired SqlSessionTemplate sqlSession;
 
 	@Override
 	public int insertReport() {
