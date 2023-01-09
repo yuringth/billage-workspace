@@ -39,7 +39,7 @@
 		        
 	</insert>
 	
-	<select id="selectReport" resultMap="reportResultSet">
+	<select id="selectReportList" resultMap="reportResultSet">
 		select
 		        report_no
 		        ,user_no

@@ -30,10 +30,13 @@ public class BoardDao {
 	
 	public ArrayList<ReportBoard> selectReportList(SqlSession sqlSession) {
 		
-		return (ArrayList)sqlSession.selectList("reportMapper.selectReport");
+		return (ArrayList)sqlSession.selectList("reportMapper.selectReportList");
 	}
 	
-	
+	public ReportBoard selectReport(SqlSession sqlSession, int rno) {
+		
+		return (ReportBoard)sqlSession.selectOne("reportMapper.selectReport", rno);
+	}
 	
 	
 	
