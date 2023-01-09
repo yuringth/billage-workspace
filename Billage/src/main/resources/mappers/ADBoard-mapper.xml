@@ -4,12 +4,45 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="ADBoardMapper">
 	
-	<resultMap type="DRAW_BOARD" id="drawBoardResultSet">
-		<result column="BOARD_NO" property="boardNo"/>
+	<resultMap type="adboard" id="drawBoardResultSet">
+		<result column="DRAW_NO" property="boardNo"/>
+		<result column="CLOSE_DATE" property="closeDate"/>
+		<result column="TITLE" property="title"/>
+		<result column="CONTENT" property="content"/>
+		<result column="COUNT" property="count"/>
+		<result column="STATUS" property="status"/>
+		<result column="THUMBNAIL" property="thumbnail"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="BOOK_WRITER" property="bookWriter"/>
+		<result column="GENRE" property="genre"/>
+		<result column="ORIGIN_NAME" property="originName"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="PRIZE_USER" property="prizeUser"/>
+		<result column="USER_NO" property="userNo"/>
+		<result column="ACCEPT_STATUS" property="acceptStatus"/>
+		<result column="TRY_POINT" property="tryPoint"/>
 	</resultMap>
-	<resultMap type="AUCTION_BOARD" id="drawBoardResultSet">
-		<result column="BOARD_NO" property="boardNo"/>
-	</resultMap>
+	<resultMap type="adboard" id="AuctionBoardResultSet">
+		<result column="AUCTION_NO" property="boardNo"/>
+		<result column="CLOSE_DATE" property="closeDate"/>
+		<result column="TITLE" property="title"/>
+		<result column="CONTENT" property="content"/>
+		<result column="COUNT" property="count"/>
+		<result column="STATUS" property="status"/>
+		<result column="THUMBNAIL" property="thumbnail"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="BOOK_WRITER" property="bookWriter"/>
+		<result column="GENRE" property="genre"/>
+		<result column="ORIGIN_NAME" property="originName"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="PRIZE_USER" property="prizeUser"/>
+		<result column="USER_NO" property="userNo"/>
+		<result column="START_PRICE" property="startPrice"/>
+		<result column="INSTANTLY_PRICE" property="instantlyPrice"/>
+		<result column="BID_PRICE" property="bidPrice"/>
+		<result column="NOW_PRICE" property="nowPrice"/>
+	</resultMap>	
+		
 	
 	<insert id="insertDrawBoard">
 	
