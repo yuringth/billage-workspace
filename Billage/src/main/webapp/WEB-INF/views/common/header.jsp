@@ -159,6 +159,7 @@
 							<div>
 								${ loginUser.nickname } 님 환영합니다!! <br> 
 								<a href="mypage.me">마이페이지</a>
+								<a href="logout.me">로그아웃</a>
 							</div>
 						</c:otherwise>
 					</c:choose>

@@ -122,4 +122,10 @@ public class UserController {
 		}
 	}
 	
+	// 로그아웃
+	@RequestMapping("logout.me")
+	public String logoutUser(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
 }
