@@ -4,7 +4,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="ADBoardMapper">
 	
-	<resultMap type="DRAW_BOARD" id="drawBoardResultSet">
+	<resultMap type="adboard" id="drawBoardResultSet">
 		<result column="DRAW_NO" property="boardNo"/>
 		<result column="CLOSE_DATE" property="closeDate"/>
 		<result column="TITLE" property="title"/>
@@ -22,7 +22,7 @@
 		<result column="ACCEPT_STATUS" property="acceptStatus"/>
 		<result column="TRY_POINT" property="tryPoint"/>
 	</resultMap>
-	<resultMap type="AUCTION_BOARD" id="AuctionBoardResultSet">
+	<resultMap type="adboard" id="AuctionBoardResultSet">
 		<result column="AUCTION_NO" property="boardNo"/>
 		<result column="CLOSE_DATE" property="closeDate"/>
 		<result column="TITLE" property="title"/>
