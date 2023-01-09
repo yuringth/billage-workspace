@@ -82,7 +82,7 @@
   
 </div>
 
-  <div id='calendar'></div>
+  <div id='calendar' style="width:500px; height:500px;"></div>
 
 	
 	<jsp:include page="../common/footer.jsp" />

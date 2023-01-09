@@ -115,7 +115,7 @@
 		<div id="header-outer">
 			<div id="outer-top">
 				<div class="header" id="logo-area">
-					<a href="/billage"><img src="resources/images/logo.png.jpg" width="100px;" height="100px;"></a>
+					<a href="/billage"><img src="resources/images/logo.png" width="100%;" height="100%;"></a>
 				</div>
 	
 				<div class="header" id="search-area">

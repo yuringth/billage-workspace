@@ -148,7 +148,7 @@
                 <table id="ft-btn-table">
                     <tr>
                         <th colspan="2">
-                            <img src="resources/images/logo.png.jpg" alt="">
+                            <img src="resources/images/logo.png" alt="">
                         </th>
                     </tr>
                     <tr>
