@@ -71,28 +71,32 @@
                     <p>제목:</p>
                 </div>
                 <div class="titlediv">
-                    <input type="text" class="form-control" id="usedTitle" placeholder="게시글 제목을 입력하세요" name="used_title" required>
+                    <input type="text" class="form-control" id="usedTitle" placeholder="게시글 제목을 입력하세요" name="usedTitle" required>
                 </div>
             </div>
         
+        
+        
             <div class="longdiv align-left">
-            	<div class="shortdiv align-left">
-                	<div class="textdiv">
-                    	<p>첨부파일:</p>
-                 	</div>
-                 	<div class="inputdiv">
-                 		<input type="file" id="upfile" class="form-control-file border"  placeholder="파일첨부를 해주세요" name="upfile">
-                	</div>
-            	</div>
+                <div class="shortdiv align-left">
+                    <div class="textdiv">
+                        <p>첨부파일:</p>
+                    </div>
+                    <div class="inputdiv">
+                    	<input type="file" id="upfile" class="form-control-file border"  placeholder="파일첨부를 해주세요" name="upfile" required>
+                    </div>
+                </div>
             </div>
-                
+            
+    
+            
             <div class="longdiv align-left">
                 <div class="shortdiv align-left">
                     <div class="textdiv">
                         <p>작가:</p>
                     </div>
                     <div class="inputdiv">
-                        <input type="text" class="form-control" id="book_author" placeholder="작가명" name="book_author">
+                        <input type="text" class="form-control" id="book_author" placeholder="작가명" name="bookAuthor">
                     </div>
                 </div>
                 <div class="shortdiv align-left">
@@ -100,7 +104,7 @@
                         <p>장르:</p>
                     </div>
                     <div class="inputdiv">
-                        <input type="text" class="form-control" id="book_genre" placeholder="장르" name="book_genre">
+                        <input type="text" class="form-control" id="book_genre" placeholder="장르" name="bookGenre">
                     </div>
                 </div>
             </div>
@@ -119,7 +123,7 @@
                         <p>책제목:</p>
                     </div>
                     <div class="inputdiv">
-                        <input type="text" class="form-control" id="instantlyPrice" placeholder="책제목" name="book_title">
+                        <input type="text" class="form-control" id="instantlyPrice" placeholder="책제목" name="bookTitle">
                     </div>
                 </div>
             </div>
@@ -142,6 +146,9 @@
     </div>
 
     </div>
+
+
+
 
     <jsp:include page="../../common/footer.jsp"/>
 </body>

@@ -64,15 +64,16 @@
 
     <div class="outer">
 
-        <form action="insert.ro">
-			<input type="hidden" id="boardNo" name="boardNo" value="${boardNo}">
+        <form action="insert.ro" method="post" >
+			<input type="hidden" id="boardNo" name="boardNo" value="${boardNo }">
+			<input type="hidden" id="userNo" name="userNo" value="${userNo }">
 			
             <div class="longdiv align-left">
                 <div class="textdiv">
                     <p>제목:</p>
                 </div>
                 <div class="titlediv">
-                    <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요" name="reportTitle" required>
+                    <input type="text" class="form-control" id="reportTitle" placeholder="제목을 입력하세요" name="reportTitle" required>
                 </div>
             </div>
 
@@ -83,21 +84,18 @@
                         <p>신고사유:</p>
                     </div>
                     <div class="inputdiv">
-                        <input type="text" class="form-control" id="category" placeholder="신고사유를 입력해주세요" name="reportCategory">
+                        <input type="text" class="form-control" id="reportCategory" placeholder="신고사유를 입력해주세요" name="reportCategory">
                     </div>
                 </div>
             </div>
 
             <div style="width : 790px;">
-                <textarea class="form-control" rows="15" id="content" style="resize: none;" name="boardContent" placeholder="내용을 입력하세요"></textarea>
+                <textarea class="form-control" rows="15" id="reportContent" style="resize: none;" name="reportContent" placeholder="내용을 입력하세요"></textarea>
             </div>
 
             <div class="longdiv align-left">
-                <button class="btnleft btn btn-dark">
+                <button class="btnleft btn btn-dark" type="submit">
                     <p class="btntitle">등록</p>
-                </button>
-                <button class="btnright btn btn-secondary">
-                    <p class="btntitle ">취소</p>
                 </button>
             </div>
         </form> 

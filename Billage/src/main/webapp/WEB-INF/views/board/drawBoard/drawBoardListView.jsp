@@ -88,7 +88,6 @@
 			<c:if test="${ not empty loginUser }">
 				<div><button type="button" class="btn btn-info" onclick="location.href='enrollForm.dr'">글쓰기</button></div>
 			</c:if>
-			<div><button type="button" class="btn btn-info" onclick="location.href='enrollForm.dr'">글쓰기</button></div>
 		</div>
 
 
@@ -98,6 +97,7 @@
 
 		<div class="align-left-outer">
 	        <div class="one-content">
+	        	<input type="hidden" value="${ boardNo }" class="boardNo">
 	            <div class="img-area">
 	                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20151001_94%2Fbyitself_1443657275235dwe4K_JPEG%2F20150919_114529.jpg&type=sc960_832">
 	            </div>
@@ -148,7 +148,7 @@
     <script>
     	$(function(){
     		$('.one-content').click(function(){
-    			location.href='detail.dr';
+    			location.href='detail.dr?bno='+ $('this>.boardNo ').val();
     		})	
     	})
     </script>

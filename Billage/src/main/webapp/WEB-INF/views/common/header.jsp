@@ -82,8 +82,31 @@
 			font-size: 28px;
 			font-weight: 900;
 		}
-
+/*------------------------------------------------------------------------------------------------*/
+		#modal-login-area{
+			position: fixed;
+	        width: 500px;
+	        height:500px;
+	        background-color: rgb(253, 219, 219);
+	        border-radius: 20px;
+	        transform: translate(-50%, -50%);
+	        left: 50%;
+	        top: 50%;
+	        z-index: 1005;
+	        text-align: center;
+	        display: none;
+		}
 		
+		#modal-login-area .close{
+			font-size: 25px;
+	        background-color:rgba(95, 152, 124, 0);
+	        border: 1px solid rgba(245, 245, 220, 0);
+	        cursor: pointer;
+	        color:rgb(0, 0, 0);
+	        padding-left: 455px;
+		}
+	
+	
 		
 	</style>
 
@@ -123,17 +146,23 @@
 					<button type="submit" >검색</button>
 				</div>
 	
-				<div class="header" id="login-area">
-	
-					<div>
-						<a href="userEnrollForm.me">회원가입</a>
-						<a href="loginUserForm.me">로그인하기</a>
-					</div>
-	
-					<div>
-						${ loginUser.nickname } 님 환영합니다!! <br> 
-						<a href="mypage.me">마이페이지</a>
-					</div>			
+				<div class="header" id="login-area">			
+					<c:choose>
+						<c:when test="${ empty loginUser }">
+							<div>
+								<a href="userEnrollForm.me">회원가입</a>
+								<a id="login-btn" >로그인하기</a>
+							</div>
+						</c:when>
+						
+						<c:otherwise>
+							<div>
+								${ loginUser.nickname } 님 환영합니다!! <br> 
+								<a href="mypage.me">마이페이지</a>
+								<a href="logout.me">로그아웃</a>
+							</div>
+						</c:otherwise>
+					</c:choose>
 	
 				</div>
 			</div> <!-- outer-top끝  -->
@@ -153,6 +182,44 @@
 			</div> <!-- outer-bottom 끝 -->
 		</div> <!-- header-outer 끝 -->
 	</div> <!-- all-header끝 -->
+    <!-- --------------------------------------- -->
+    
+		<div id="modal-login-area">
+			<div id="login-screen">
+			 <button type="button" class="close">&times;</button>
+				<h1>로그인</h1>
+			    
+				<form action="login.me" method="post">
+					<div class="control-group">
+						<input type="text" class="login-field" placeholder="아이디를 입력하세요." id="login-name" name="userId">
+					</div>
+					
+					<div class="control-group">
+						<input type="password" class="login-field" placeholder="비밀번호를 입력하세요." id="login-pass" name="userPwd"/>
+					
+						<button type="submit" class="">로그인하기</button>
+						<button class="login-link" onclick="" >비밀번호찾기</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	<script>
+		$(function(){
+			// 로그인 모달창 띄우고 지우는 이벤트 
+	        $('#login-btn').click(function(){
+	        	$('#modal-login-area').fadeIn();
+	        	
+	        });
+	        
+			$('.close').click(function(){
+				$('#modal-login-area').fadeOut();
+			});
+			
+		});
+	
+	
+	</script>
+
 
 </body>
 

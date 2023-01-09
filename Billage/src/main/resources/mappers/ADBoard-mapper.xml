@@ -11,7 +11,6 @@
 		<result column="CONTENT" property="content"/>
 		<result column="COUNT" property="count"/>
 		<result column="STATUS" property="status"/>
-		<result column="THUMBNAIL" property="thumbnail"/>
 		<result column="CREATE_DATE" property="createDate"/>
 		<result column="BOOK_WRITER" property="bookWriter"/>
 		<result column="GENRE" property="genre"/>
@@ -22,14 +21,13 @@
 		<result column="ACCEPT_STATUS" property="acceptStatus"/>
 		<result column="TRY_POINT" property="tryPoint"/>
 	</resultMap>
-	<resultMap type="adboard" id="AuctionBoardResultSet">
+	<resultMap type="adboard" id="auctionBoardResultSet">
 		<result column="AUCTION_NO" property="boardNo"/>
 		<result column="CLOSE_DATE" property="closeDate"/>
 		<result column="TITLE" property="title"/>
 		<result column="CONTENT" property="content"/>
 		<result column="COUNT" property="count"/>
 		<result column="STATUS" property="status"/>
-		<result column="THUMBNAIL" property="thumbnail"/>
 		<result column="CREATE_DATE" property="createDate"/>
 		<result column="BOOK_WRITER" property="bookWriter"/>
 		<result column="GENRE" property="genre"/>
@@ -43,10 +41,207 @@
 		<result column="NOW_PRICE" property="nowPrice"/>
 	</resultMap>	
 		
-	
-	<insert id="insertDrawBoard">
-	
+	<!-- 추첨 글 작성 -->
+	<insert id="insertDrawBoard" parameterType="adboard">
+		INSERT
+		  INTO
+		  		DRAW_BOARD
+		  		(
+		  		DRAW_NO
+		  		,TITLE
+		  		,USER_NO
+		  		,BOOK_WRITER
+		  		,GENRE
+		  		,CLOSE_DATE
+		  		,TRY_POINT
+		  		,CONTENT
+		  		,ORIGIN_NAME
+		  		,CHANGE_NAME
+		  		)
+		VALUES
+				(
+				SEQ_DNO.NEXTVAL
+				,#{title}
+				,#{userNo}
+				,#{bookWriter}
+				,#{genre}
+				,#{closeDate}
+				,#{tryPoint}
+				,#{content}
+				,#{originName}
+				,#{changeName}
+				)
 	</insert>
+	
+	<!-- 추첨글 전체 조회  -->
+	<select id="selectDrawBoardList" resultMap="drawBoardResultSet">
+		SELECT
+				DRAW_NO
+				,TITLE
+				,GENRE
+				,TRY_POINT
+				,CLOSE_DATE
+				,COUNT
+				,CHANGE_NAME
+		  FROM
+		  		DRAW_BOARD
+		 WHERE
+		 		STATUS = 'N'
+		   AND
+		   		ACCEPT_STATUS = 'Y'
+		 ORDER
+		 	BY
+				DRAW_NO DESC		 		
+	</select>
+	
+	<!-- 추첨글 조회수 증가 -->
+	<update id="drawIncreaseCount" parameterType="_int">
+		UPDATE
+				DRAW_BOARD
+		   SET
+		   		COUNT = COUNT + 1
+		 WHERE
+		 		DRAW_NO = #{boardNo}
+	</update>
+	
+	<!-- 추첨글 상세조회 -->
+	<select id="selectDrawBoard" parameterType="_int" resultMap="drawBoardResultSet">
+		SELECT
+				DRAW_NO
+				,NICKNAME
+				,ORIGIN_NAME
+				,CHANGE_NAME
+				,CLOSE_DATE
+				,GENRE
+				,TITLE
+				,BOOK_WRITER
+				,CONTENT
+				,TRY_POINT
+				,CREATE_DATE
+		  FROM
+		  		DRAW_BOARD D
+		  JOIN
+		  		MEMBER M ON (D.USER_NO = M.USER_NO)
+		 WHERE
+		 		DRAW_NO = #{boardNO} 
+	</select>
+	
+	<!-- 추첨 글 삭제 -->
+	<update id="deleteDrawBoard" parameterType="_int">
+		UPDATE
+				DRAW_BOARD
+		   SET
+		   		STATUS = 'Y'
+		 WHERE
+		 		DRAW_NO = #{boardNo}
+	</update>
+	
+	
+	<!-- ====================================== -->
+	
+	
+	<!-- 경매글 리스트 조회 -->
+				<!-- 여기에 입찰자 수 하기  -->
+	<select id="selectAcutionBoardList" resultMap="auctionBoardResultSet">
+		SELECT
+				AUCTION_NO
+				,TITLE
+				,GENRE
+				,NOW_PRICE
+				,CLOSE_DATE
+				,COUNT
+				,CHANGE_NAME
+		  FROM
+		  		AUCTION_BOARD
+		 WHERE
+		 		STATUS = 'N'
+		 ORDER
+		 	BY
+				AUCTION_NO DESC		 		
+	</select>
+	
+	<!-- 경매글 작성 -->
+	<insert id="insertAuctionBoard" parameterType="adboard">
+		INSERT
+		  INTO
+		  		AUCTION_BOARD
+		  		(
+		  		AUCTION_NO
+		  		,TITLE
+		  		,USER_NO
+		  		,BOOK_WRITER
+		  		,GENRE
+		  		,CLOSE_DATE
+		  		,INSTANTLY_PRICE
+		  		,START_PRICE
+		  		,BID_PRICE
+		  		,NOW_PRICE
+		  		,CONTENT
+		  		,ORIGIN_NAME
+		  		,CHANGE_NAME
+		  		)
+		VALUES
+				(
+				SEQ_ANO.NEXTVAL
+				,#{title}
+				,#{userNo}
+				,#{bookWriter}
+				,#{genre}
+				,#{closeDate}
+				,#{instantlyPrice}
+				,#{startPrice}
+				,#{bidPrice}
+				,#{startPrice}
+				,#{content}
+				,#{originName}
+				,#{changeName}
+				)
+	</insert>
+	
+	<!-- 경매글 조회수 증가 -->
+	<update id="auctionIncreaseCount" parameterType="_int">
+		UPDATE
+				AUCTION_BOARD
+		   SET
+		   		COUNT = COUNT + 1
+		 WHERE
+		 		DRAW_NO = #{boardNo}
+	</update>
+	
+	<!-- 경매글 상세조회 -->
+	<select id="selectAuctionBoard">
+		SELECT
+				AUCTION_NO
+				,NICKNAME
+				,ORIGIN_NAME
+				,CHANGE_NAME
+				,CLOSE_DATE
+				,GENRE
+				,TITLE
+				,BOOK_WRITER
+				,CONTENT
+				,NOW_PRICE
+				,START_PRICE
+				,BID_PRICE
+				,INSTANTLY_PRICE
+				,CREATE_DATE
+		  FROM
+		  		AUCTION_BOARD A
+		  JOIN
+		  		MEMBER M ON (A.USER_NO = M.USER_NO)
+		 WHERE
+		 		DRAW_NO = #{boardNO} 
+	</select>
+	
+	<!-- 경매글 삭제 -->
+	<update id="deleteAuctionBoard">
+		UPDATE
+				AUCTION_BOARD
+		   SET
+		   		STATUS = 'Y'
+		 WHERE
+		 		DRAW_NO = #{boardNo}
+	</update>
 
 </mapper>
 

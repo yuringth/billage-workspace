@@ -12,6 +12,8 @@ import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.ReportBoard;
 import com.bi.billage.board.model.vo.Serial;
 import com.bi.billage.common.model.vo.PageInfo;
+import com.bi.billage.board.model.vo.ReviewBoard;
+import com.bi.billage.board.model.vo.UsedBoard;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -21,22 +23,35 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Autowired SqlSessionTemplate sqlSession;
 
+	//신고게시판	
 	@Override
 	public int insertReport(ReportBoard r) {
 		
 		return boardDao.insertReport(sqlSession, r);
 	}
+	
+	//신고게시판
+	@Override
+	public ArrayList<ReportBoard> selectReport() {
+		
+		return boardDao.selectReport(sqlSession);
+	}
+	
+	
 
 	@Override
-	public int increaseCount(int boardNo) {
+	public int auctionIncreaseCount(int boardNo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return boardDao.auctionIncreaseCount(sqlSession, boardNo);
+	}
+	@Override
+	public int drawIncreaseCount(int boardNo) {
+		return boardDao.drawIncreaseCount(sqlSession, boardNo);
 	}
 
 	@Override
 	public ArrayList<ADBoard> selectDrawBoardList() {
-		// TODO Auto-generated method stub
-		return null;
+		return boardDao.selectDrawBoardList(sqlSession);
 	}
 
 	@Override
@@ -46,14 +61,12 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public ADBoard selectDrawBoard(int boardNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return boardDao.selectDrawBoard(sqlSession, boardNo);
 	}
 
 	@Override
 	public int deleteDrawBoard(int boardNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return boardDao.deleteDrawBoard(sqlSession, boardNo);
 	}
 
 	@Override
@@ -64,26 +77,22 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public ArrayList<ADBoard> selectAuctionBoardList() {
-		// TODO Auto-generated method stub
-		return null;
+		return boardDao.selectAuctionBoardList(sqlSession);
 	}
 
 	@Override
 	public int insertAuctionBoard(ADBoard b) {
-		// TODO Auto-generated method stub
-		return 0;
+		return boardDao.insertAuctionBoard(sqlSession, b);
 	}
 
 	@Override
 	public ADBoard selectAuctionBoard(int boardNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return boardDao.selectAuctionBoard(sqlSession, boardNo);
 	}
 
 	@Override
 	public int deleteAuctionBoard(int boardNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return boardDao.deleteAuctionBoard(sqlSession, boardNo);
 	}
 
 	@Override
@@ -115,6 +124,98 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return boardDao.selectSerialList(sqlSession, pi, novelNo);
 	}
+	//중고게시판
+	@Override
+	public int insertUsedBoard(UsedBoard b) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	//중고게시판
+	@Override
+	public int increaseUsedCount(int boardNo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	//중고게시판
+	@Override
+	public UsedBoard selectUsedBoard(int boardNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	//중고게시판
+	@Override
+	public int deleteUsedBoard(int boardNo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	//중고게시판
+	@Override
+	public int updateUsedBoard(UsedBoard b) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	//중고게시판
+	@Override
+	public ArrayList<UsedBoard> selectTopBoard() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	// 리뷰게시판
+	@Override
+	public int insertReviewBoard(UsedBoard b) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	// 리뷰게시판
+	@Override
+	public int increaseReviewCount(int boardNo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	// 리뷰게시판
+	@Override
+	public ReviewBoard selectReviewBoard(int boardNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	// 리뷰게시판
+	@Override
+	public int deleteReviewBoard(int boardNo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	// 리뷰게시판
+	@Override
+	public int updateReviewBoard(UsedBoard b) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int increaseCount(int boardNo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+
+	
+	
+	
+	
+	
+	
 
 
 }

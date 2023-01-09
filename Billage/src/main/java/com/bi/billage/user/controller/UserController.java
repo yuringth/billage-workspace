@@ -1,5 +1,7 @@
 package com.bi.billage.user.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -105,5 +107,24 @@ public class UserController {
 		}
 	}
 	
+	// 로그인
+	@RequestMapping("login.me")
+	public String loginUser(User u, Model model, HttpSession session) {
+		
+		User loginUser = userService.loginUser(u);
+		if(loginUser == null) {
+			model.addAttribute("errorMsg", "에러발생");
+			return "common/errorPage";
+		} else {
+			session.setAttribute("loginUser", loginUser);
+			return "redirect:/";
+		}
+	}
 	
+	// 로그아웃
+	@RequestMapping("logout.me")
+	public String logoutUser(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
 }

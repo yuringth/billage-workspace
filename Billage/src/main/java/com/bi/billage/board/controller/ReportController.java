@@ -1,5 +1,7 @@
 package com.bi.billage.board.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bi.billage.board.model.service.BoardService;
 import com.bi.billage.board.model.vo.ReportBoard;
+import com.bi.billage.user.model.vo.User;
 
 @Controller
 public class ReportController {
@@ -16,26 +19,41 @@ public class ReportController {
 	@Autowired
 	private BoardService boardService;
 	
+	/*
 	@RequestMapping("list.ro")
 	public String selectReportList() {
 		return "board/reportBoard/reportBoardListView";
 	}
+	*/
 	
-	@RequestMapping("detail.ro")
-	public String selectReportDetail() {
-		return"board/reportBoard/reportBoardDetailView";
+	//reportBoard 목록 띄우기
+	@RequestMapping("list.ro")
+	public String selectReportList(Model model) {
+		
+		ArrayList<ReportBoard> list = boardService.selectReport();
+		
+		return "board/reportBoard/reportListView";
+		
 	}
 	
+	//reportBoard 작성 페이지
 	@RequestMapping("insertForm.ro")
-	public String insertReportForm(int boardNo, HttpSession session) {
+	public String insertReportForm(/*int boardNo ,*/HttpSession session) {
 		
-		session.setAttribute("boardNo", boardNo);
+		
+		 int userNo = ((User)session.getAttribute("loginUser")).getUserNo();
+		 System.out.println(userNo);
+		 session.setAttribute("boardNo", 6);
+		 session.setAttribute("userNo", userNo);
 		
 		return"board/reportBoard/reportEnrollForm";
 	}
 	
+	//reporBoard insert
 	@RequestMapping("insert.ro")
 	public String insertReport(ReportBoard r, Model model ) {
+		
+		System.out.println(r);
 		
 		int result = boardService.insertReport(r);
 		
@@ -47,6 +65,13 @@ public class ReportController {
 			return "common/errorPage";
 		}
 		
-		
 	}
+	
+	//reportBoard 상세페이지
+	@RequestMapping("detail.ro")
+	public String selectReportDetail() {
+		return"board/reportBoard/reportBoardDetailView";
+	}
+	
+	
 }

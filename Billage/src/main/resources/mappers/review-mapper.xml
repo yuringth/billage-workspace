@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="reviewMapper">
+
+
+	<resultMap id="reviewResultSet" type="review">
+		<result column="REVIEW_NO"      property="reviewNo" />
+		<result column="USER_NO"		property="userNo" />
+		<result column="REVIEW_STAR"	property="reviewStar" />
+		<result column="REVIEW_TITLE"	property="reviewTitle" />
+		<result column="REVIEW_CONTENT"	property="reviewContent" />
+		<result column="CREATE_DATE"	property="createDate" />
+		<result column="COUNT"		    property="count" />
+		<result column="REVIEW_STATUS"	property="reviewStatus" />
+		<result column="BOOK_AUTHOR"	property="bookAuthor" />
+		<result column="BOOK_GENRE"		property="bookGenre" />
+		<result column="BOOK_IMAG"		property="bookImag" />
+		<result column="BOOK_POINT"  	property="bookPoint" />
+		<result column="BOOK_NO"	    property="bookNo" />
+	</resultMap>
+
+
+
+
+</mapper>
