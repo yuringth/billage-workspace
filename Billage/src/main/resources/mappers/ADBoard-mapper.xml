@@ -3,11 +3,93 @@
 "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="ADBoardMapper">
-
 	
-	<insert id="insertDrawBoard">
+	<resultMap type="adboard" id="drawBoardResultSet">
+		<result column="DRAW_NO" property="boardNo"/>
+		<result column="CLOSE_DATE" property="closeDate"/>
+		<result column="TITLE" property="title"/>
+		<result column="CONTENT" property="content"/>
+		<result column="COUNT" property="count"/>
+		<result column="STATUS" property="status"/>
+		<result column="THUMBNAIL" property="thumbnail"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="BOOK_WRITER" property="bookWriter"/>
+		<result column="GENRE" property="genre"/>
+		<result column="ORIGIN_NAME" property="originName"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="PRIZE_USER" property="prizeUser"/>
+		<result column="USER_NO" property="userNo"/>
+		<result column="ACCEPT_STATUS" property="acceptStatus"/>
+		<result column="TRY_POINT" property="tryPoint"/>
+	</resultMap>
+	<resultMap type="adboard" id="auctionBoardResultSet">
+		<result column="AUCTION_NO" property="boardNo"/>
+		<result column="CLOSE_DATE" property="closeDate"/>
+		<result column="TITLE" property="title"/>
+		<result column="CONTENT" property="content"/>
+		<result column="COUNT" property="count"/>
+		<result column="STATUS" property="status"/>
+		<result column="THUMBNAIL" property="thumbnail"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="BOOK_WRITER" property="bookWriter"/>
+		<result column="GENRE" property="genre"/>
+		<result column="ORIGIN_NAME" property="originName"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="PRIZE_USER" property="prizeUser"/>
+		<result column="USER_NO" property="userNo"/>
+		<result column="START_PRICE" property="startPrice"/>
+		<result column="INSTANTLY_PRICE" property="instantlyPrice"/>
+		<result column="BID_PRICE" property="bidPrice"/>
+		<result column="NOW_PRICE" property="nowPrice"/>
+	</resultMap>	
+		
 	
+	<insert id="insertDrawBoard" parameterType="adboard">
+		INSERT
+		  INTO
+		  		DRAWBOARD
+		  		(
+		  		DRAW_NO
+		  		,TITLE
+		  		,BOOK_WRITER
+		  		,GENRE
+		  		,CLOSE_DATE
+		  		,TRY_POINT
+		  		,CONTENT
+		  		,ORIGIN_NAME
+		  		,CHANGE_NAME
+		  		)
+		VALUES
+				(
+				SEQ_DNO.NEXTVAL
+				,#{title}
+				,#{userNo}
+				,#{genre}
+				,#{closeDate}
+				,#{tryPoint}
+				,#{content}
+				,#{originName}
+				,#{changeName}
+				)
 	</insert>
+	
+	<select id="selectDrawBoardList" resultMap="drawBoardResultSet">
+		SELECT
+				DRAW_NO
+				,TITLE
+				,GENRE
+				,TRY_POINT
+				,CLOSE_DATE
+				,COUNT
+				,CHANGE_NAME
+		  FROM
+		  		DRAW_BOARD
+		 WHERE
+		 		STATUS = 'N'
+		 ORDER
+		 	BY
+				DRAW_NO DESC		 		
+	</select>
 
 </mapper>
 

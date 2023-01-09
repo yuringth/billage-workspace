@@ -11,8 +11,13 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<typeAliases>
 		<typeAlias type="com.bi.billage.user.model.vo.User" alias="user" />
 		<typeAlias type="com.bi.billage.board.model.vo.Board" alias="board" />
+		<typeAlias type="com.bi.billage.board.model.vo.ADBoard" alias="adboard" />
 		<typeAlias type="com.bi.billage.reply.model.vo.Reply" alias="reply" />
 		<typeAlias type="com.bi.billage.group.model.vo.Group" alias="group" />
+		<typeAlias type="com.bi.billage.board.model.vo.ReportBoard" alias="Report" />
+		<typeAlias type="com.bi.billage.board.model.vo.UsedBoard" alias="used" />
+		<typeAlias type="com.bi.billage.board.model.vo.ReviewBoard" alias="review" />
+		
 	</typeAliases>
 	<!-- **주의 : 미리 등록을 해두려면 해당 클래스가 진짜 존재하고 있는 상태여야함 -->
 	
@@ -20,6 +25,11 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="/mappers/user-mapper.xml"/>
 		<mapper resource="/mappers/board-mapper.xml"/>
 		<mapper resource="/mappers/group-mapper.xml" />
+		<mapper resource="/mappers/ADBoard-mapper.xml" />
+		<mapper resource="/mappers/report-mapper.xml" />	
+		<mapper resource="/mappers/used-mapper.xml" />	
+		<mapper resource="/mappers/review-mapper.xml" />	
+			
 	</mappers>
 	<!-- **주의 : 미리 등록을 해두려면 해당 mapper 파일이 진짜 존재하고 있는 상태여야함 + namespace속성까지 작성해둬야함 -->
 	

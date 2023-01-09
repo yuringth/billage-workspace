@@ -7,11 +7,11 @@ public class ADBoard {
 	
 	private int boardNo;
 	private String prizeUser;
-	private String userNo; //작성자
+	private int userNo; //작성자
 	private String acceptStatus;
 	private int tryPoint;
 	private String closeDate;
-	private String title;
+	private String title; //책제목
 	private String content;
 	private int count;
 	private String status;
@@ -23,7 +23,7 @@ public class ADBoard {
 	private String changeName;
 	
 	private int startPrice;
-	private int InstantlyPrice;
+	private int instantlyPrice;
 	private int bidPrice;
 	private int nowPrice;
 

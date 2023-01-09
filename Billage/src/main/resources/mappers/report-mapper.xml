@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="reportMapper">
+	
+	<resultMap id="reportResultSet" type="report">
+		<result column="REPORT_NO" property="reportNo"/>
+		<result column="USER_NO" property="userNo"/>
+		<result column="REPORT_TITLE" property="reportTitle"/>
+		<result column="REPORT_CATEGORY" property="reportCategory"/>
+		<result column="REPORT_CONTENT" property="reportContent"/>
+		<result column="REPORT_DATE" property="reportDate"/>
+		<result column="REPORT_STATUS" property="reportStatus"/>
+		<result column="BOARD_NO" property="boardNo"/>
+	</resultMap>
+	
+	<insert id="insertReport" parameterType="report">
+		insert
+		   into
+		        report
+		        (
+		        report_no
+		        ,user_no
+		        ,report_title
+		        ,report_category
+		        ,report_content
+		        ,board_no
+		        )
+ 	 values
+ 	 		  (
+ 	 		  seq_repno.nextval
+ 	 		  ,#{userNo}
+ 	 		  ,#{reportTitle}
+ 	 		  ,#{reportCategory}
+ 	 		  ,#{reportContent}
+ 	 		  ,#{boardNo}
+ 	 		  )       
+		        
+	</insert>
+</mapper>

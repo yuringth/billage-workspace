@@ -113,6 +113,10 @@
 	}
 
 
+
+
+
+
 </style>
 
 </head>
@@ -171,6 +175,13 @@
         </div>
     </div>
     
+    
+
+    
+    
+    
+    
+    
     <script>
     // 푸터 하단 각종 이동
     $(function () {
@@ -184,7 +195,19 @@
         $('#notice').click(function () {
             location.href = "enroll.iq";
         })
-   })
+        
+      
+        
+        
+        
+        
+        
+   });
+    
+    
+    
+    
+    
     
     </script>
 </body>
