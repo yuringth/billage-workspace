@@ -146,15 +146,12 @@
 					<button type="submit" >검색</button>
 				</div>
 	
-				<div class="header" id="login-area">
-					
+				<div class="header" id="login-area">			
 					<c:choose>
 						<c:when test="${ empty loginUser }">
 							<div>
 								<a href="userEnrollForm.me">회원가입</a>
 								<a id="login-btn" >로그인하기</a>
-						
-						<!-- href="loginUserForm.me" -->
 							</div>
 						</c:when>
 						
@@ -165,7 +162,6 @@
 							</div>
 						</c:otherwise>
 					</c:choose>
-					</div>			
 	
 				</div>
 			</div> <!-- outer-top끝  -->
@@ -184,7 +180,7 @@
 				</ul>
 			</div> <!-- outer-bottom 끝 -->
 		</div> <!-- header-outer 끝 -->
-
+	</div> <!-- all-header끝 -->
     <!-- --------------------------------------- -->
     
 		<div id="modal-login-area">
@@ -206,14 +202,6 @@
 				</form>
 			</div>
 		</div>
-
-
-
-
-
-
-	</div> <!-- all-header끝 -->
-
 	<script>
 		$(function(){
 			// 로그인 모달창 띄우고 지우는 이벤트 

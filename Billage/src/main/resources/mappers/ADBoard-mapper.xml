@@ -143,7 +143,8 @@
 	
 	
 	<!-- 경매글 리스트 조회 -->
-	<select id="selectAuctionBoardList" resultMap="auctionBoardResultSet">
+				<!-- 여기에 입찰자 수 하기  -->
+	<select id="selectAcutionBoardList" resultMap="auctionBoardResultSet">
 		SELECT
 				AUCTION_NO
 				,TITLE
@@ -152,14 +153,13 @@
 				,CLOSE_DATE
 				,COUNT
 				,CHANGE_NAME
-				<!-- 여기에 입찰자 수 하기  -->
 		  FROM
 		  		AUCTION_BOARD
 		 WHERE
 		 		STATUS = 'N'
 		 ORDER
 		 	BY
-				DRAW_NO DESC		 		
+				AUCTION_NO DESC		 		
 	</select>
 	
 	<!-- 경매글 작성 -->
