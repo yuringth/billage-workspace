@@ -74,22 +74,17 @@
                     <input type="text" class="form-control" id="usedTitle" placeholder="게시글 제목을 입력하세요" name="used_title" required>
                 </div>
             </div>
-
-  
-            
-                <div class="longdiv align-left">
-                
-	                <div class="shortdiv align-left">
-	                    <div class="textdiv">
-	                        <p>첨부파일:</p>
-	                    </div>
-	                    <div class="inputdiv">
-	                    	<input type="file" id="upfile" class="form-control-file border"  placeholder="파일첨부를 해주세요" name="upfile">
-	                    </div>
-	                </div>
-	                
-                </div>
-                
+        
+            <div class="longdiv align-left">
+            	<div class="shortdiv align-left">
+                	<div class="textdiv">
+                    	<p>첨부파일:</p>
+                 	</div>
+                 	<div class="inputdiv">
+                 		<input type="file" id="upfile" class="form-control-file border"  placeholder="파일첨부를 해주세요" name="upfile">
+                	</div>
+            	</div>
+            </div>
                 
             <div class="longdiv align-left">
                 <div class="shortdiv align-left">
@@ -111,7 +106,6 @@
             </div>
 
             <div class="longdiv align-left">
-                
                 <div class="shortdiv align-left">
                     <div class="textdiv">
                         <p>판매가:</p>
@@ -128,12 +122,6 @@
                         <input type="number" class="form-control" id="instantlyPrice" placeholder="책제목" name="book_title">
                     </div>
                 </div>
-                
-                
-                
-        
-                
-                
             </div>
 
             
