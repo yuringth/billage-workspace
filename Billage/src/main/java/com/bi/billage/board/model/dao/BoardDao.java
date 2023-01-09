@@ -28,7 +28,7 @@ public class BoardDao {
 	}
 	
 	
-	public ArrayList<ReportBoard> selectReport(SqlSession sqlSession) {
+	public ArrayList<ReportBoard> selectReportList(SqlSession sqlSession) {
 		
 		return (ArrayList)sqlSession.selectList("reportMapper.selectReport");
 	}

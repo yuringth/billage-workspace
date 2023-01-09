@@ -46,8 +46,8 @@
 		        ,report_title
 		        ,report_category
 		        ,report_content
+		        ,report_status
 		        ,board_no
-		        )
 		from
 		      report        
 		        

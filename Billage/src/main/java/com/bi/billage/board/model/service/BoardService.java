@@ -5,12 +5,10 @@ import java.util.ArrayList;
 import com.bi.billage.board.model.vo.ADBoard;
 import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.ReportBoard;
-
-import com.bi.billage.board.model.vo.Serial;
-import com.bi.billage.common.model.vo.PageInfo;
-
 import com.bi.billage.board.model.vo.ReviewBoard;
+import com.bi.billage.board.model.vo.Serial;
 import com.bi.billage.board.model.vo.UsedBoard;
+import com.bi.billage.common.model.vo.PageInfo;
 
 
 public interface BoardService {
@@ -41,7 +39,7 @@ public interface BoardService {
 	//report
 	int insertReport(ReportBoard r);
 	
-	ArrayList<ReportBoard> selectReport();
+	ArrayList<ReportBoard> selectReportList();
 	
 	
 	
