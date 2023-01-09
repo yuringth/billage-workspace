@@ -14,7 +14,7 @@ public class BoardDao {
 	
 	public int insertReport(SqlSession sqlSession, ReportBoard r) {
 		
-		return sqlSession.insert("boardMapper.insertBoard", r);
+		return sqlSession.insert("reportMapper.insertReport", r);
 	}
 	
 	
