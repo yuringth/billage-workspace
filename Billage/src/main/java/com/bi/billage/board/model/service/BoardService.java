@@ -6,6 +6,12 @@ import com.bi.billage.board.model.vo.ADBoard;
 
 public interface BoardService {
 	
+	
+	///////////////////////
+	// 게시글 조회수 증가
+	int increaseCount (int boardNo);
+	////////////////////////
+	
 	//휘수 구역
 	int insertReport();
 	
@@ -60,11 +66,6 @@ public interface BoardService {
 
 
 
-	
-	///////////////////////
-	// 게시글 조회수 증가
-	int increaseCount (int boardNo);
-	////////////////////////
 
 	// auction , draw board -세헌
 	
