@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.bi.billage.board.model.service.BoardService;
 import com.bi.billage.board.model.vo.ReportBoard;
@@ -28,11 +29,14 @@ public class ReportController {
 	
 	//reportBoard 목록 띄우기
 	@RequestMapping("list.ro")
-	public String selectReportList(Model model) {
+	public ModelAndView selectReportList(ModelAndView mv) {
 		
-		ArrayList<ReportBoard> list = boardService.selectReport();
+		ArrayList<ReportBoard> list = boardService.selectReportList();
 		
-		return "board/reportBoard/reportListView";
+		mv.addObject("list", boardService.selectReportList()).setViewName("board/reportBoard/reportBoardListView");
+		
+		
+		return mv;
 		
 	}
 	
@@ -69,7 +73,10 @@ public class ReportController {
 	
 	//reportBoard 상세페이지
 	@RequestMapping("detail.ro")
-	public String selectReportDetail() {
+	public String selectReportDetail(int rno, ModelAndView mv) {
+		
+		ReportBoard r = boardService.selectReport(rno);
+		
 		return"board/reportBoard/reportBoardDetailView";
 	}
 	
