@@ -44,7 +44,7 @@
 				</tr>
 				<tr>
 					<td>2</td>
-					<td><a href="">받다를 볼 수 있을까</a></td>
+					<td><a href="">바다를 볼 수 있을까</a></td>
 					<td>토</td>
 					<td>회원</td>
 					<td></td>

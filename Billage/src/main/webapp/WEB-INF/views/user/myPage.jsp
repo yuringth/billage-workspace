@@ -6,9 +6,28 @@
 <head>
 <meta charset="UTF-8">
 <title>안녕여긴 마이페이지</title>
+<%--dateClick and selectable dates/times - Demos | FullCalendar --%>
+
+<link href='/docs/dist/demo-to-codepen.css' rel='stylesheet' />
+<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>	
+
 <style>
 	
-	
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+      font-size: 14px;
+    }
+
+    #calendar {
+      max-width: 1100px;
+      margin: 40px auto;
+    }
+
+
+
 	/*모달관련 스타일*/
 	/*
 	#write-textarea{
@@ -89,18 +108,39 @@
 </style>
 
 </head>
-
 <body>
 	<jsp:include page="../common/header.jsp"/>
 	<jsp:include page="myPageBar.jsp" />
 		
 	<div id="all-mypage-main">
-	
-	
-	
-	
+		<div id='calendar' style="width:500px; height:500px;"></div>
 	</div>	
 		
+	
+	<script>
+
+		document.addEventListener('DOMContentLoaded', function() {
+		  var calendarEl = document.getElementById('calendar');
+		
+		  var calendar = new FullCalendar.Calendar(calendarEl, {
+		    selectable: true,
+		    headerToolbar: {
+		      left: 'prev,next today',
+		      center: 'title',
+		      right: 'dayGridMonth,timeGridWeek,timeGridDay'
+		    },
+		    dateClick: function(info) {
+		      alert('clicked ' + info.dateStr);
+		    },
+		    select: function(info) {
+		      alert('selected ' + info.startStr + ' to ' + info.endStr);
+		    }
+		  });
+		
+		  calendar.render();
+		});
+
+	</script>
 			
 		
 		
