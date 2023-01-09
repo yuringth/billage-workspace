@@ -64,7 +64,7 @@
 
     <div class="outer">
 
-        <form action="insert.ac">
+        <form action="insert.ro">
 
             <div class="longdiv align-left">
                 <div class="textdiv">
@@ -79,41 +79,13 @@
             <div class="longdiv align-left">
                 <div class="shortdiv align-left">
                     <div class="textdiv">
-                        <p>신고대상 닉네임:</p>
+                        <p>신고사유:</p>
                     </div>
                     <div class="inputdiv">
-                        <input type="text" class="form-control" id="userNickName" placeholder="userNickName" name="userNickName">
-                    </div>
-                </div>
-                <div class="shortdiv align-left">
-                    <div class="textdiv">
-                        <p>게시판:</p>
-                    </div>
-                    <div class="inputdiv">
-                        <input type="text" class="form-control" id="board" placeholder="게시판 명" name="board">
+                        <input type="text" class="form-control" id="category" placeholder="신고사유를 입력해주세요" name="reportCategory">
                     </div>
                 </div>
             </div>
-
-            <div class="longdiv align-left">
-                <div class="shortdiv align-left">
-                    <div class="textdiv">
-                        <p>마감일:</p>
-                    </div>
-                    <div class="inputdiv">
-                        <input type="date" class="form-control" id="closeDate" placeholder="날짜 입력" name="closeDate">
-                    </div>
-                </div>
-                <div class="shortdiv align-left">
-                    <div class="textdiv">
-                        <p>응모포인트:</p>
-                    </div>
-                    <div class="inputdiv">
-                        <input type="number" class="form-control" id="tryPoint" value="50P" name="tryPoint">
-                    </div>
-                </div>
-            </div>
-
 
             <div style="width : 790px;">
                 <textarea class="form-control" rows="15" id="content" style="resize: none;" name="content" placeholder="내용을 입력하세요"></textarea>
