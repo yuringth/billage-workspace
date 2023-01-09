@@ -144,19 +144,7 @@ public interface BoardService {
 	// 댓글 작성 서비스(Ajax)(insert)
 //	int insertReply(Reply r);
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	// 유림 끝
