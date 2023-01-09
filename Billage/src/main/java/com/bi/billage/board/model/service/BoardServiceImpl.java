@@ -1,5 +1,14 @@
 package com.bi.billage.board.model.service;
 
-public class BoardServiceImpl {
+import org.springframework.stereotype.Service;
+
+@Service
+public class BoardServiceImpl implements BoardService {
+
+	@Override
+	public int insertReport() {
+		
+		return 0;
+	}
 
 }
