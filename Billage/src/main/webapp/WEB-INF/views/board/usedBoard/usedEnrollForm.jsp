@@ -75,17 +75,50 @@
                 </div>
             </div>
         
+        
+        
             <div class="longdiv align-left">
-            	<div class="shortdiv align-left">
-                	<div class="textdiv">
-                    	<p>첨부파일:</p>
-                 	</div>
-                 	<div class="inputdiv">
-                 		<input type="file" id="upfile" class="form-control-file border"  placeholder="파일첨부를 해주세요" name="upfile">
-                	</div>
-            	</div>
+                <div class="shortdiv align-left">
+                    <div class="textdiv">
+                        <p>첨부파일:</p>
+                    </div>
+                    <div class="inputdiv">
+                    	<input type="file" id="upfile1" class="form-control-file border"  placeholder="파일첨부를 해주세요" name="upfile1" required>
+                    </div>
+                </div>
+             
+                <div class="shortdiv align-left" type="hidden">
+                    <div class="textdiv">
+                        <p>첨부파일:</p>
+                    </div>
+                    <div class="inputdiv">
+                    	<input type="file" id="upfile2" class="form-control-file border"  placeholder="파일첨부를 해주세요" name="upfile2">
+                    </div>
+                </div>
             </div>
+            
                 
+            <div class="longdiv align-left">
+                <div class="shortdiv align-left">
+                    <div class="textdiv">
+                        <p>첨부파일:</p>
+                    </div>
+                    <div class="inputdiv">
+                    	<input type="file" id="upfile3" class="form-control-file border"  placeholder="파일첨부를 해주세요" name="upfile3">
+                    </div>
+                </div>
+                <div class="shortdiv align-left">
+                    <div class="textdiv">
+                        <p>첨부파일:</p>
+                    </div>
+                    <div class="inputdiv">
+                    	<input type="file" id="upfile4" class="form-control-file border"  placeholder="파일첨부를 해주세요" name="upfile4">
+                    </div>
+                </div>
+            </div>
+            
+            
+            
             <div class="longdiv align-left">
                 <div class="shortdiv align-left">
                     <div class="textdiv">
@@ -142,6 +175,9 @@
     </div>
 
     </div>
+
+
+
 
     <jsp:include page="../../common/footer.jsp"/>
 </body>
