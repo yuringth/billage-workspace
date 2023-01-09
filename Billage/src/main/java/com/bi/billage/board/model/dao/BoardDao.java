@@ -1,5 +1,7 @@
 package com.bi.billage.board.model.dao;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -73,9 +75,64 @@ public class BoardDao {
 	//=====================================휘수 구역 끝 =====================================================
 	
 	// 세헌
-	public int insertDrawBoard(SqlSessionTemplate sqlSession, ADBoard b) {
-		return sqlSession.insert("ADBoardMapper.insertDrawBoard");
+	
+	public int drawIncreaseCount(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.update("ADBoardMapper", boardNo);
 	}
+	
+	public int insertDrawBoard(SqlSessionTemplate sqlSession, ADBoard b) {
+		return sqlSession.insert("ADBoardMapper.insertDrawBoard", b);
+	}
+
+	public ArrayList<ADBoard> selectDrawBoardList(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("ADBoardMapper.selectDrawBoardList");
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
 	
 	
 	
@@ -89,6 +146,60 @@ public class BoardDao {
 		return sqlSession.insert("UsedBoardMapper.insertUsedBoard");	
 		
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
 	
 	
 	// 유림끝

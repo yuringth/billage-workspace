@@ -105,5 +105,10 @@ public class UserController {
 		}
 	}
 	
+	// 로그인
+	@RequestMapping("login.me")
+	public String loginUser(User u, Model model, HttpSession session) {
+		
+	}
 	
 }

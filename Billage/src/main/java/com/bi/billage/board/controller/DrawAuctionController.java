@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.bi.billage.board.model.service.BoardService;
 import com.bi.billage.board.model.vo.ADBoard;
@@ -23,8 +24,9 @@ public class DrawAuctionController {
 	private BoardService boardService;
 	
 	@RequestMapping("list.dr")
-	public String drawBoardList() {
-		return "board/drawBoard/drawBoardListView";
+	public ModelAndView drawBoardList(ModelAndView mv) {
+		mv.addObject("list", boardService.selectDrawBoardList()).setViewName("board/drawBoard/drawBoardListView");
+		return mv;
 	}
 	
 	@RequestMapping("list.ac")
@@ -43,8 +45,15 @@ public class DrawAuctionController {
 	}
 	
 	@RequestMapping("detail.dr")
-	public String drawDetailView() {
-		return "board/drawBoard/drawDetailView";
+	public ModelAndView drawDetailView(int bno,ModelAndView mv) {
+		
+		if(boardService.increaseCount(bno) > 0) {
+			mv.addObject("b", boardService.selectDrawBoard(bno)).setViewName("board/drawBoard/drawDetailView");
+		} else {
+			mv.addObject("errorMsg", "게시글 조회 실패").setViewName("common/errorPage");
+		}
+		
+		return mv;
 	}
 
 	@RequestMapping("detail.ac")
