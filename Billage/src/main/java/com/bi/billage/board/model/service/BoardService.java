@@ -91,4 +91,39 @@ public interface BoardService {
 	int deleteAuctionBoard(int boardNo);
 	// 경매게시글 수정
 	int updateAuctionBoard(int boardNo);
+	
+	
+	
+	
+	
+	
+	// 유림 시작
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// 유림 끝
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
