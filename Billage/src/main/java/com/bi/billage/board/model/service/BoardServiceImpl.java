@@ -19,7 +19,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int insertReport() {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
