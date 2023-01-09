@@ -106,7 +106,7 @@
 		            	<!-- <p class="genre">${ b.genre }</p> -->
 		                <p class="title-text">${ b.title }</p>
 		                <p class="textsize">응모 가격 : ${ b.tryPoint }P</p>
-		                <p class="textsize">남은 시간 : ${ closeDate }</p>
+		                <p class="textsize">남은 시간 : ${b.remaindTime }</p>
 		                <p class="countnum">조회 : ${ b.count }</p>
 		            </div>
 		        </div>
