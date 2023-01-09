@@ -96,49 +96,21 @@
 
 
 		<div class="align-left-outer">
-	        <div class="one-content">
-	        	<input type="hidden" value="${ boardNo }" class="boardNo">
-	            <div class="img-area">
-	                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20151001_94%2Fbyitself_1443657275235dwe4K_JPEG%2F20150919_114529.jpg&type=sc960_832">
-	            </div>
-	            <div class="text-area">
-	                <p class="title-text">책 제목</p>
-	                <p class="textsize">응모 가격 : 100P</p>
-	                <p class="textsize">남은 시간 : 00:00:00</p>
-	                <p class="countnum">조회 : 10</p>
-	            </div>
-	
-	        </div>
-
-
-
-
-            <div class="one-content">
-	            <div class="img-area">
-	                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20151001_94%2Fbyitself_1443657275235dwe4K_JPEG%2F20150919_114529.jpg&type=sc960_832">
-	            </div>
-	            <div class="text-area">
-	                <p class="title-text">책 제목</p>
-	                <p class="textsize">응모 가격 : 100P</p>
-	                <p class="textsize">남은 시간 : 00:00:00</p>
-	                <p class="countnum">조회 : 10</p>
-	            </div>
-	
-	        </div>
-			<div class="one-content">
-	            <div class="img-area">
-	                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20151001_94%2Fbyitself_1443657275235dwe4K_JPEG%2F20150919_114529.jpg&type=sc960_832">
-	            </div>
-	            <div class="text-area">
-	                <p class="title-text">책 제목</p>
-	                <p class="textsize">응모 가격 : 100P</p>
-	                <p class="textsize">남은 시간 : 00:00:00</p>
-	                <p class="countnum">조회 : 10</p>
-	            </div>
-	
-	        </div>
-			
-			
+	        <c:forEach items="${ list }" var="b">
+		        <div class="one-content">
+		        	<input type="hidden" value="${ b.boardNo }" class="boardNo">
+		            <div class="img-area">
+		                <img src="${ b.changeName }">
+		            </div>
+		            <div class="text-area">
+		            	<!-- <p class="genre">${ b.genre }</p> -->
+		                <p class="title-text">${ b.title }</p>
+		                <p class="textsize">응모 가격 : ${ b.tryPoint }P</p>
+		                <p class="textsize">남은 시간 : ${b.remaindTime }</p>
+		                <p class="countnum">조회 : ${ b.count }</p>
+		            </div>
+		        </div>
+			</c:forEach>
 		</div>
 
     </div>	

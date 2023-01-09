@@ -2,7 +2,9 @@ package com.bi.billage.board.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpSession;
@@ -24,8 +26,48 @@ public class DrawAuctionController {
 	private BoardService boardService;
 	
 	@RequestMapping("list.dr")
-	public ModelAndView drawBoardList(ModelAndView mv) {
-		mv.addObject("list", boardService.selectDrawBoardList()).setViewName("board/drawBoard/drawBoardListView");
+	public ModelAndView drawBoardList(ModelAndView mv) throws ParseException {
+		
+		ArrayList<ADBoard> list = boardService.selectDrawBoardList();
+		
+		// DB 받아온 String 담을 포멧
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
+		Date date = new Date();
+		Date date2 = null;
+		long nowTime = date.getTime(); // 현재시간
+		long closeTime = 0;	// 마감시간
+		String remaindTime = ""; // 남은 시간 넣을 변수
+		
+		System.out.println(nowTime);
+		// 남은 일수가 하루 이상일 때 담을 포멧
+		SimpleDateFormat dFormat = new SimpleDateFormat("dd일 HH:mm:ss");
+		// 하루도 안남았을 때 담을 포멧
+		SimpleDateFormat tFormat = new SimpleDateFormat("HH:mm:ss");
+		
+		for(int i = 0; i < list.size(); i++) {
+			// DB에서 가져온 값을 Date2에 담는다
+			date2 = format.parse(list.get(i).getCloseDate());
+			
+			
+			// 계산을 위해 date2를 변환 long으로 변환
+			closeTime = date2.getTime();
+			
+			System.out.println(closeTime);
+			
+			//남은 시간
+			long time = (closeTime - nowTime);
+			
+			if(time / 1000 * (24*60*60) >= 1) { //하루 이상 남았을 때
+				remaindTime = dFormat.format(time);
+			} else { // 하루도 안 남았을 때
+				remaindTime = tFormat.format(time);
+			}
+			list.get(i).setRemaindTime(remaindTime);
+		}
+		
+		
+		mv.addObject("list", list).setViewName("board/drawBoard/drawBoardListView");
 		return mv;
 	}
 	
@@ -69,6 +111,7 @@ public class DrawAuctionController {
 	
 	@RequestMapping("insert.dr")
 	public String insertDrawBoard(ADBoard b, MultipartFile upFile, HttpSession session, Model model) {
+		
 		
 		if(!upFile.getOriginalFilename().equals("")) { // getOriginalFileName == filename필드의 값을 반환함
 			

@@ -3,9 +3,11 @@ package com.bi.billage.user.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.bi.billage.user.model.service.UserService;
 import com.bi.billage.user.model.vo.User;
@@ -15,6 +17,10 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private BCryptPasswordEncoder bcryptPasswordEncoder;
+	
 	// 관리자 관련 컨트롤러
 	
 	// 관리자 페이지
@@ -96,6 +102,10 @@ public class UserController {
 	// 회원가입
 	@RequestMapping("insert.me")
 	public String insertUser(User u, Model model) {
+		// 암호화 작업
+		String encPwd = bcryptPasswordEncoder.encode(u.getUserPwd());
+		
+		u.setUserPwd(encPwd);
 		
 		int result = userService.insertUser(u);
 		
@@ -109,16 +119,19 @@ public class UserController {
 	
 	// 로그인
 	@RequestMapping("login.me")
-	public String loginUser(User u, Model model, HttpSession session) {
+	public ModelAndView loginUser(User u, ModelAndView mv, HttpSession session) {
 		
 		User loginUser = userService.loginUser(u);
-		if(loginUser == null) {
-			model.addAttribute("errorMsg", "에러발생");
-			return "common/errorPage";
-		} else {
+		
+		if(loginUser != null && bcryptPasswordEncoder.matches(u.getUserPwd(), loginUser.getUserPwd())) {	// 로그인 성공 시
 			session.setAttribute("loginUser", loginUser);
-			return "redirect:/";
+			mv.setViewName("redirect:/");
+		} else {	// 로그인 실패 시
+			// 키 - 밸류 담기
+			mv.addObject("errorMsg", "에러입니다.");
+			mv.setViewName("common/errorPage");
 		}
+		return mv;
 	}
 	
 	// 로그아웃

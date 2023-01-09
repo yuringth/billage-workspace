@@ -26,5 +26,7 @@ public class ADBoard {
 	private int instantlyPrice;
 	private int bidPrice;
 	private int nowPrice;
+	
+	private String remaindTime;
 
 }

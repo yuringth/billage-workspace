@@ -32,10 +32,17 @@ public class BoardServiceImpl implements BoardService {
 	
 	//신고게시판
 	@Override
-	public ArrayList<ReportBoard> selectReport() {
+	public ArrayList<ReportBoard> selectReportList() {
 		
-		return boardDao.selectReport(sqlSession);
+		return boardDao.selectReportList(sqlSession);
 	}
+	
+	@Override
+	public ReportBoard selectReport(int rno) {
+		// TODO Auto-generated method stub
+		return boardDao.selectReport(sqlSession, rno);
+	}
+
 
 	@Override
 	public int auctionIncreaseCount(int boardNo) {
@@ -212,6 +219,7 @@ public class BoardServiceImpl implements BoardService {
 		return 0;
 	}
 
+	
 
 
 
