@@ -35,7 +35,6 @@
  	 		  ,#{reportTitle}
  	 		  ,#{reportCategory}
  	 		  ,#{reportContent}
- 	 		  ,sysdate
  	 		  ,#{boardNo}
  	 		  )       
 		        
