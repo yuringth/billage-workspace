@@ -55,7 +55,8 @@
 	
 	
 	<!-- 게시글 삭제 -->
-	<update id="#" parameterType="_int">
+	
+	<update id="deleteUsedBoard" parameterType="_int">
 		update
 		       usedBoard
 		   set
@@ -65,7 +66,7 @@
 	</update>
 
 
-	<update id="#" parameterType="used">
+	<update id="updateUsedBoard" parameterType="used">
 		update
 		       usedBoard
 		   set
