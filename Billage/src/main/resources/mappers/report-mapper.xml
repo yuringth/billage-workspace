@@ -54,7 +54,7 @@
 		        
 	</select>
 	
-	<select id="selectReport" parameterType="_int" resultMap="reprtResultSet">
+	<select id="selectReport" parameterType="_int" resultMap="reportResultSet">
 		select
 		        report_no
 		        ,user_no

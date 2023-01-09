@@ -31,7 +31,7 @@ public class DrawAuctionController {
 		ArrayList<ADBoard> list = boardService.selectDrawBoardList();
 		
 		Date date = new Date();
-		
+		Date date2 = null;
 		long nowTime = date.getTime(); // 현재시간
 		long closeTime = 0;	// 마감시간
 		String remaindTime = ""; // 남은 시간 넣을 변수
@@ -46,7 +46,8 @@ public class DrawAuctionController {
 		
 		for(int i = 0; i < list.size(); i++) {
 			// DB에서 가져온 값을 Date2에 담는다
-			Date date2 = format.parse(list.get(i).getCloseDate());
+			date2 = format.parse(list.get(i).getCloseDate());
+			System.out.println(list.get(i).getCloseDate());
 			
 			// 계산을 위해 date2를 변환 long으로 변환
 			closeTime = date2.getTime();
@@ -62,6 +63,7 @@ public class DrawAuctionController {
 			
 			list.get(i).setRemaindTime(remaindTime);
 		}
+		
 		
 		mv.addObject("list", list).setViewName("board/drawBoard/drawBoardListView");
 		return mv;
