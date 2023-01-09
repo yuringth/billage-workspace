@@ -112,7 +112,6 @@ public class UserController {
 	public String loginUser(User u, Model model, HttpSession session) {
 		
 		User loginUser = userService.loginUser(u);
-		
 		if(loginUser == null) {
 			model.addAttribute("errorMsg", "에러발생");
 			return "common/errorPage";
