@@ -65,6 +65,7 @@
 			</div>
 			<div class="boardList" style="display:flex; flex-direction: row; justify-content: space-evenly;">
 				<c:forEach items="${list}"  var="r">
+					<input type="hidden" id="userNo" name="userNo" value="${ r.userNo }">
 					<div class="rno">${ r.reportNo }</div>
 					<div class="boardCategory">${ r.reportCategory }</div>
 					<div class="boardTitle">${ r.reportTitle }</div>
