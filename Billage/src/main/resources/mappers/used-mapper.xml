@@ -51,6 +51,33 @@
 			  ,#{usedContent}
 			   )
 	</insert>
+	
+	
+	
+	<!-- 게시글 삭제 -->
+	<update id="#" parameterType="_int">
+		update
+		       usedBoard
+		   set
+		       used_status = 'Y'
+		 where
+		       used_no = #{usedNo}
+	</update>
+
+
+	<update id="#" parameterType="used">
+		update
+		       usedBoard
+		   set
+		        used_title = #{usedTitle}
+		       ,book_author = #{bookAuthor}
+		       ,book_genre = #{bookGenre}
+		       ,point = #{point}
+		       ,book_title = #{bookTitle}
+		       ,used_content = #{usedContent}
+		 where
+		       used_no = #{usedNo}
+	</update>
 
 
 </mapper>

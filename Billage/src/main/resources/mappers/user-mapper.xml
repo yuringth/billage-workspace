@@ -5,17 +5,17 @@
 <mapper namespace="userMapper">
 
 	<resultMap id="userResultSet" type="user">
-		<result column="USER_ID" property="userId" />
-		<result column="USER_PWD"		property="userPwd" />
-		<result column="NAME"		property="name" />
-		<result column="EMAIL"		property="email" />
-		<result column="NICKNAME"		property="nickname" />
-		<result column="PHONE"		property="phone" />
-		<result column="BIRTH_DATE"		property="birthDate" />
-		<result column="GENDER"		property="gender" />
-		<result column="ADDRESS"		property="address" />
+		<result column="USER_ID" 			property="userId" />
+		<result column="USER_PWD"			property="userPwd" />
+		<result column="NAME"				property="name" />
+		<result column="EMAIL"				property="email" />
+		<result column="NICKNAME"			property="nickname" />
+		<result column="PHONE"				property="phone" />
+		<result column="BIRTH_DATE"			property="birthDate" />
+		<result column="GENDER"				property="gender" />
+		<result column="ADDRESS"			property="address" />
 		<result column="DETAIL_ADDRESS"		property="detailAddress" />
-		<result column="USER_GRADE"		property="userGrade" />
+		<result column="USER_GRADE"			property="userGrade" />
 	
 	</resultMap>
 	
@@ -25,7 +25,7 @@
 	<insert id="insertUser" parameterType="user">
 		INSERT
 		  INTO
-			  "USER"
+			  MEMBER
 			  (
 			  	USER_NO,
 				USER_ID,
@@ -55,7 +55,31 @@
 			  )		
 	</insert>
 	
+	<!-- 로그인용 쿼리문 -->
+	<select id="loginUser" parameterType="user" resultMap="userResultSet">
+		SELECT
+				USER_NO,
+				USER_ID,
+				USER_PWD,
+				NAME,
+				EMAIL,
+				NICKNAME,
+				PHONE,
+				BIRTH_DATE,
+				GENDER,
+				ADDRESS,
+				DETAIL_ADDRESS,
+				ENROLL_DATE,
+				PROFILE_IMG,
+				USER_GRADE,
+				STATUS
+		FROM
+				MEMBER
+		WHERE
+				USER_NO = #{userNo}
+		AND
+				STATUS = 'Y'
 	
-	
+	</select>
 	
 </mapper>
