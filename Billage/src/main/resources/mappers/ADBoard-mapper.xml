@@ -11,7 +11,6 @@
 		<result column="CONTENT" property="content"/>
 		<result column="COUNT" property="count"/>
 		<result column="STATUS" property="status"/>
-		<result column="THUMBNAIL" property="thumbnail"/>
 		<result column="CREATE_DATE" property="createDate"/>
 		<result column="BOOK_WRITER" property="bookWriter"/>
 		<result column="GENRE" property="genre"/>
@@ -29,7 +28,6 @@
 		<result column="CONTENT" property="content"/>
 		<result column="COUNT" property="count"/>
 		<result column="STATUS" property="status"/>
-		<result column="THUMBNAIL" property="thumbnail"/>
 		<result column="CREATE_DATE" property="createDate"/>
 		<result column="BOOK_WRITER" property="bookWriter"/>
 		<result column="GENRE" property="genre"/>
