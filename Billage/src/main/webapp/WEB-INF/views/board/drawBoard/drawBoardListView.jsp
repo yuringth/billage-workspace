@@ -88,7 +88,6 @@
 			<c:if test="${ not empty loginUser }">
 				<div><button type="button" class="btn btn-info" onclick="location.href='enrollForm.dr'">글쓰기</button></div>
 			</c:if>
-			<div><button type="button" class="btn btn-info" onclick="location.href='enrollForm.dr'">글쓰기</button></div>
 		</div>
 
 

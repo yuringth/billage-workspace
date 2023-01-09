@@ -37,6 +37,11 @@ public class BoardServiceImpl implements BoardService {
 	
 
 	@Override
+	public int auctionIncreaseCount(int boardNo) {
+		// TODO Auto-generated method stub
+		return boardDao.auctionIncreaseCount(sqlSession, boardNo);
+	}
+	@Override
 	public int drawIncreaseCount(int boardNo) {
 		return boardDao.drawIncreaseCount(sqlSession, boardNo);
 	}
@@ -69,26 +74,22 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public ArrayList<ADBoard> selectAuctionBoardList() {
-		// TODO Auto-generated method stub
-		return null;
+		return boardDao.selectAuctionBoardList(sqlSession);
 	}
 
 	@Override
 	public int insertAuctionBoard(ADBoard b) {
-		// TODO Auto-generated method stub
-		return 0;
+		return boardDao.insertAuctionBoard(sqlSession, b);
 	}
 
 	@Override
 	public ADBoard selectAuctionBoard(int boardNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return boardDao.selectAuctionBoard(sqlSession, boardNo);
 	}
 
 	@Override
 	public int deleteAuctionBoard(int boardNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return boardDao.deleteAuctionBoard(sqlSession, boardNo);
 	}
 
 	@Override
@@ -180,11 +181,6 @@ public class BoardServiceImpl implements BoardService {
 		return 0;
 	}
 
-	@Override
-	public int auctionIncreaseCount(int boardNo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 
 

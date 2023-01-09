@@ -97,10 +97,25 @@ public class BoardDao {
 		return sqlSession.update("ADBoardMapper.deleteDrawBoard", boardNo);
 	}
 
+	public ArrayList<ADBoard> selectAuctionBoardList(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("ADBoardMapper.selectAcutionBoardList");
+	}
 
+	public int insertAuctionBoard(SqlSessionTemplate sqlSession, ADBoard b) {
+		return sqlSession.insert("ADBoardMapper.insertAuctionBoard", b);
+	}
 
+	public int auctionIncreaseCount(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.update("ADBoardMapper.auctionIncreaseCount", boardNo);
+	}
 
+	public ADBoard selectAuctionBoard(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.selectOne("ADBoardMapper.selectAuctionBoard", boardNo);
+	}
 
+	public int deleteAuctionBoard(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.update("ADBoardMapper.deleteAuctionBoard", boardNo);
+	}
 
 
 
@@ -154,6 +169,16 @@ public class BoardDao {
 		return sqlSession.insert("usedMapper.insertUsedBoard", b);	
 		
 	}
+
+
+
+
+
+
+
+
+
+
 
 
 

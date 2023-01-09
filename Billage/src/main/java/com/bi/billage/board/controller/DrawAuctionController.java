@@ -30,8 +30,9 @@ public class DrawAuctionController {
 	}
 	
 	@RequestMapping("list.ac")
-	public String auctionBoardList() {
-		return "board/auctionBoard/auctionBoardListView";
+	public ModelAndView auctionBoardList(ModelAndView mv) {
+		mv.addObject("list", boardService.selectAuctionBoardList()).setViewName("board/auctionBoard/auctionBoardListView");
+		return mv;
 	}
 	
 	@RequestMapping("enrollForm.dr")
@@ -45,9 +46,9 @@ public class DrawAuctionController {
 	}
 	
 	@RequestMapping("detail.dr")
-	public ModelAndView drawDetailView(int bno,ModelAndView mv) {
+	public ModelAndView drawDetailView(int bno, ModelAndView mv) {
 		
-		if(boardService.increaseCount(bno) > 0) {
+		if(boardService.drawIncreaseCount(bno) > 0) {
 			mv.addObject("b", boardService.selectDrawBoard(bno)).setViewName("board/drawBoard/drawDetailView");
 		} else {
 			mv.addObject("errorMsg", "게시글 조회 실패").setViewName("common/errorPage");
@@ -57,8 +58,13 @@ public class DrawAuctionController {
 	}
 
 	@RequestMapping("detail.ac")
-	public String auctionDetailView() {
-		return "board/auctionBoard/auctionDetailView";
+	public ModelAndView auctionDetailView(int bno, ModelAndView mv) {
+		if(boardService.auctionIncreaseCount(bno) > 0) {
+			mv.addObject("b", boardService.selectAuctionBoard(bno)).setViewName("board/drawBoard/auctionDetailView");
+		} else {
+			mv.addObject("errorMsg", "게시글 조회 실패").setViewName("common/errorPage");
+		}
+		return mv;
 	}
 	
 	@RequestMapping("insert.dr")
@@ -102,13 +108,28 @@ public class DrawAuctionController {
 
 		if(boardService.insertDrawBoard(b) > 0) { //성공 => 게시글 리스트 페이지
 			//포워딩 => boardListView.jsp => 리스트를 안불러와서 리다이렉트를 해야함
-			return "redirect:list.bo";
+			return "redirect:list.dr";
 		} else {
 			model.addAttribute("errorMsg", "게시글 작성에 실패했어용 ㅠ");
 			return "common/errorPage";
 		}
 	}
 	
+	@RequestMapping("insert.ac")
+	public String insertAuctionBoard(ADBoard b, MultipartFile upFile, HttpSession session, Model model) {
+		
+		if(!upFile.getOriginalFilename().equals("")) {
+			b.setOriginName(upFile.getOriginalFilename());
+			b.setChangeName("resources/uploadFiles/" + saveFile(upFile, session));
+		} 
+		
+		if(boardService.insertAuctionBoard(b) > 0) {
+			return "redirect:list.ac";
+		} else {
+			model.addAttribute("errorMsg", "게시글 작성에 실패했어용 ㅠ");
+			return "common/errorPage";
+		}
+	}
 	
 	
 	public String saveFile(MultipartFile upfile, HttpSession session) { // 실제 넘어온 파일의 이름을 변경해서 서버에 업로드
@@ -138,14 +159,16 @@ public class DrawAuctionController {
 		return changeName;
 	}
 	
+	
 	@RequestMapping("delete.dr")
-	public ModelAndView deleteDraw(int boardNo, ModelAndView mv) {
+	public String deleteDraw(int boardNo, ModelAndView mv) {
 		if(boardService.deleteDrawBoard(boardNo) > 0) {
-			mv.setViewName("board/drawBoard/drawBoardListView");
+			return "redirect:list.dr";
 		} else {
-			mv.addObject("errorMsg", "게시글 삭제 실패").setViewName("common/errorPage");
+			mv.addObject("errorMsg", "게시글 작성에 실패했어용 ㅠ");
+			return "common/errorPage";
 		}
-		return mv;
+		
 	}
 	
 }
