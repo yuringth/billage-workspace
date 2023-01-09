@@ -16,6 +16,7 @@
 		<result column="ADDRESS"			property="address" />
 		<result column="DETAIL_ADDRESS"		property="detailAddress" />
 		<result column="USER_GRADE"			property="userGrade" />
+		<result column="USER_NO"			property="userNo" />
 	
 	</resultMap>
 	
@@ -76,9 +77,9 @@
 		FROM
 				MEMBER
 		WHERE
-				USER_NO = #{userNo}
+				USER_ID = #{userId}
 		AND
-				STATUS = 'Y'
+				STATUS = 'N'
 	
 	</select>
 	

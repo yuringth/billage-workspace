@@ -24,9 +24,12 @@
         </div>
         <br><br><br>
         <div class="novelInfo" align="left">
-            <h2>작품명</h2>
-            <h4>작가명</h4>
-            <h6>작품설명</h6>
+        <c:forEach items="${ list }" var="s" begin="1" end="1">
+            <h2>제목 : ${s.novelTitle}</h2>
+            <h4>작가명 : ${s.nickName}</h4>
+            <h6>설명 : ${s.novelDisplay }</h6>
+        </c:forEach>
+        <h1>${serial.novelTitle }</h1>
         </div>
             <br>
             <!-- 로그인 후 작가본인일 경우만 보여지는 글쓰기 버튼 -->
@@ -49,15 +52,18 @@
                         <th>별점</th>
                     </tr>
                 </thead>
+                <c:forEach items="${ list }" var="s">
                 <tbody>
                 		<tr>
-                			<td class="sno">1</td>
-                			<td>01화 개발자로 환생?</td>
-                			<td>233</td>
-                			<td>2022.12.25</td>
-                			<td>★★★★★</td>
+                			<input type="hidden" class="nno" value="${ s.novelNo }">
+                			<td class="sno">${ s.serialNo }</td>
+                			<td>${ s.serialTitle }</td>
+                			<td>${ s.count }</td>
+                			<td>${ s.uploadDate }</td>
+                			<td>${ s.starRating }</td>
                 		</tr>
                 </tbody>
+                </c:forEach>
             </table>
             <br>
             
@@ -66,7 +72,7 @@
             	$(function(){
             		$('#boardList>tbody>tr').click(function(){
             			/* location.href = 'detail.bo?bno=' + $(this).children('.bno').text(); */
-            			location.href = 'detail.se';
+            			location.href = 'detail.se?nno=' + $(this).children('.nno').val() + '&sno=' + $(this).children('.sno').text();
             		})
             	})
             

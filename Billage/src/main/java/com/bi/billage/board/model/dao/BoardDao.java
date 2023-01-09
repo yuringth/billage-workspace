@@ -1,14 +1,20 @@
 package com.bi.billage.board.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.bi.billage.board.model.vo.ADBoard;
+import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.ReportBoard;
+import com.bi.billage.board.model.vo.Serial;
 import com.bi.billage.board.model.vo.UsedBoard;
+import com.bi.billage.common.model.vo.PageInfo;
 
 @Repository
 public class BoardDao {
@@ -21,12 +27,15 @@ public class BoardDao {
 	}
 	
 	
-	public ArrayList<ReportBoard> selectReport(SqlSession sqlSession) {
+	public ArrayList<ReportBoard> selectReportList(SqlSession sqlSession) {
 		
-		return (ArrayList)sqlSession.selectList("reportMapper.selectReport");
+		return (ArrayList)sqlSession.selectList("reportMapper.selectReportList");
 	}
 	
-	
+	public ReportBoard selectReport(SqlSession sqlSession, int rno) {
+		
+		return (ReportBoard)sqlSession.selectOne("reportMapper.selectReport", rno);
+	}
 	
 	
 	
@@ -88,6 +97,58 @@ public class BoardDao {
 	public int drawIncreaseCount(SqlSessionTemplate sqlSession, int boardNo) {
 		return sqlSession.update("ADBoardMapper.drawIncreaseCount", boardNo);
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 	public ADBoard selectDrawBoard(SqlSessionTemplate sqlSession, int boardNo) {
 		return sqlSession.selectOne("ADBoardMapper.selectDrawBoard", boardNo);
@@ -97,10 +158,25 @@ public class BoardDao {
 		return sqlSession.update("ADBoardMapper.deleteDrawBoard", boardNo);
 	}
 
+	public ArrayList<ADBoard> selectAuctionBoardList(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("ADBoardMapper.selectAcutionBoardList");
+	}
 
+	public int insertAuctionBoard(SqlSessionTemplate sqlSession, ADBoard b) {
+		return sqlSession.insert("ADBoardMapper.insertAuctionBoard", b);
+	}
 
+	public int auctionIncreaseCount(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.update("ADBoardMapper.auctionIncreaseCount", boardNo);
+	}
 
+	public ADBoard selectAuctionBoard(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.selectOne("ADBoardMapper.selectAuctionBoard", boardNo);
+	}
 
+	public int deleteAuctionBoard(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.update("ADBoardMapper.deleteAuctionBoard", boardNo);
+	}
 
 
 
@@ -311,6 +387,16 @@ public class BoardDao {
 
 
 
+
+
+
+
+
+
+
+
+
+
 	
 	
 	
@@ -343,5 +429,40 @@ public class BoardDao {
 	
 	
 	/////////////////////////////////////////////
+	
+	// 광진구역 시작
+	
+	public int selectNovelListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("novelMapper.selectNovelListCount");
+	}
+
+	public ArrayList<Novel> selectNovelList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage()- 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("novelMapper.selectNovelList", null, rowBounds);
+	}
+
+	public int selectSerialListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("serialMapper.selectSerialListCount");
+	}
+	
+	public ArrayList<Serial> selectSerialList(SqlSessionTemplate sqlSession, PageInfo pi, int novelNo) {
+		int offset = (pi.getCurrentPage()- 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("serialMapper.selectSerialList", novelNo, rowBounds);
+		
+	}
+
+	public ArrayList<Serial> selectSerialDetail(SqlSessionTemplate sqlSession, PageInfo pi, int novelNo, String serialNo) {
+		int offset = (pi.getCurrentPage()- 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		Map<String, Object> map = new HashMap<>();
+		map.put("serial_no", serialNo);
+		map.put("novel_no", novelNo);
+		return (ArrayList)sqlSession.selectList("serialMapper.selectSerialDetail", map, rowBounds);
+		}
+
+	
+	// 광진구역 끝
 
 }

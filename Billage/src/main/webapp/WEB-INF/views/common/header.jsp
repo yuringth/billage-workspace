@@ -146,19 +146,23 @@
 					<button type="submit" >검색</button>
 				</div>
 	
-				<div class="header" id="login-area">
-	
-					<div>
-						<a href="userEnrollForm.me">회원가입</a>
-						<a id="login-btn" >로그인하기</a>
+				<div class="header" id="login-area">			
+					<c:choose>
+						<c:when test="${ empty loginUser }">
+							<div>
+								<a href="userEnrollForm.me">회원가입</a>
+								<a id="login-btn" >로그인하기</a>
+							</div>
+						</c:when>
 						
-						<!-- href="loginUserForm.me" -->
-					</div>
-	
-					<div>
-						${ loginUser.nickname } 님 환영합니다!! <br> 
-						<a href="mypage.me">마이페이지</a>
-					</div>			
+						<c:otherwise>
+							<div>
+								${ loginUser.nickname } 님 환영합니다!! <br> 
+								<a href="mypage.me">마이페이지</a>
+								<a href="logout.me">로그아웃</a>
+							</div>
+						</c:otherwise>
+					</c:choose>
 	
 				</div>
 			</div> <!-- outer-top끝  -->
@@ -177,7 +181,7 @@
 				</ul>
 			</div> <!-- outer-bottom 끝 -->
 		</div> <!-- header-outer 끝 -->
-
+	</div> <!-- all-header끝 -->
     <!-- --------------------------------------- -->
     
 		<div id="modal-login-area">
@@ -198,7 +202,7 @@
 					</div>
 				</form>
 			</div>
-		</div>
+
 	</div> <!-- all-header끝 -->
 
 	<script>

@@ -75,17 +75,21 @@
                 </div>
             </div>
         
+        
+        
             <div class="longdiv align-left">
-            	<div class="shortdiv align-left">
-                	<div class="textdiv">
-                    	<p>첨부파일:</p>
-                 	</div>
-                 	<div class="inputdiv">
-                 		<input type="file" id="upfile" class="form-control-file border"  placeholder="파일첨부를 해주세요" name="upfile">
-                	</div>
-            	</div>
+                <div class="shortdiv align-left">
+                    <div class="textdiv">
+                        <p>첨부파일:</p>
+                    </div>
+                    <div class="inputdiv">
+                    	<input type="file" id="upfile" class="form-control-file border"  placeholder="파일첨부를 해주세요" name="upfile" required>
+                    </div>
+                </div>
             </div>
-                
+            
+    
+            
             <div class="longdiv align-left">
                 <div class="shortdiv align-left">
                     <div class="textdiv">
@@ -142,6 +146,9 @@
     </div>
 
     </div>
+
+
+
 
     <jsp:include page="../../common/footer.jsp"/>
 </body>

@@ -41,10 +41,10 @@
 			</div>
 			<br>
 			
-			<div id="boardTitle"><h3>자유게시판 제목모곰곰고</h3></div>
-			<div id="nickName">유저닉네임</div>
+			<div id="boardTitle"><h3>${r.reportTitle}</h3></div>
+			<div id="nickName">${r.nickName }</div>
 			<div id="boardAct" style="display:flex; flex-direction: row; justify-content: flex-start; ">
-				<div id="boardDate">2022-01-08&nbsp;</div>
+				<div id="boardDate">${r.reportDate}&nbsp;</div>
 				<div id="boardUpdateBtn" style="margin-right:10px;"><button>수정</button></div>
 				<div id="boardDeleteBtn"><button>X</button></div>
 			</div>
@@ -52,7 +52,7 @@
 			
 			<hr>
 			<div id="boardContent">
-				<pre>여기는 신고내용이 들어갈 예정입니다요용용용</pre>
+				<pre>${r.reportContent}</pre>
 			</div>
 			<br>
 			

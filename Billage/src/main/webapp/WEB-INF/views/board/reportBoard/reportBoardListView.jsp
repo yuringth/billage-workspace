@@ -54,22 +54,24 @@
 		
 		<div class="outer">
 			<div id="freeboard" style="display:flex; flex-direction: row; justify-content: space-between;">
-				<div><h1>신고세기판</h1></div>
-				<div><button>글쓰기</button></div>
+				<div><h1>신고게시판</h1></div>
 			</div>
 			<div id="boardHeader" style="display:flex; flex-direction: row; justify-content: space-evenly;">
 				<div class="boardNo">게시글 번호</div>
 				<div class="boardCategory">신고사유</div>
 				<div class="boardTitle">제목</div>
 				<div class="boardDate">날짜</div>
-				<div class="nickName">처리결과</div>
+				<div class="reportStatus">처리결과</div>
 			</div>
 			<div class="boardList" style="display:flex; flex-direction: row; justify-content: space-evenly;">
-				<div class="boardNo">20</div>
-				<div class="boardCategory">욕설/비방</div>
-				<div class="boardTitle">제목</div>
-				<div class="boardDate">22-01-06</div>
-				<div class="nickName">처리 완료</div>
+				<c:forEach items="${list}"  var="r">
+					<input type="hidden" id="userNo" name="userNo" value="${ r.userNo }">
+					<div class="rno">${ r.reportNo }</div>
+					<div class="boardCategory">${ r.reportCategory }</div>
+					<div class="boardTitle">${ r.reportTitle }</div>
+					<div class="boardDate">${ r.reportDate }</div>
+					<div class="reportStatus">${ r.reportStatus }</div>				
+				</c:forEach>
 			</div>
 		</div>
 		<br><br><br>
@@ -81,7 +83,7 @@
 	<script>
 		$(function(){
 			$('.boardList').click(function(){
-				location.href='detail.ro';
+				location.href='detail.ro?rno=' +$(this).children('.rno').text();
 			})
 		})
 	</script>

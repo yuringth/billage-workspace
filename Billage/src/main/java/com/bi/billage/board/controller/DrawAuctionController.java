@@ -2,7 +2,9 @@ package com.bi.billage.board.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpSession;
@@ -24,14 +26,55 @@ public class DrawAuctionController {
 	private BoardService boardService;
 	
 	@RequestMapping("list.dr")
-	public ModelAndView drawBoardList(ModelAndView mv) {
-		mv.addObject("list", boardService.selectDrawBoardList()).setViewName("board/drawBoard/drawBoardListView");
+	public ModelAndView drawBoardList(ModelAndView mv) throws ParseException {
+		
+		ArrayList<ADBoard> list = boardService.selectDrawBoardList();
+		
+		// DB 받아온 String 담을 포멧
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
+		Date date = new Date();
+		Date date2 = null;
+		long nowTime = date.getTime(); // 현재시간
+		long closeTime = 0;	// 마감시간
+		String remaindTime = ""; // 남은 시간 넣을 변수
+		
+		System.out.println(nowTime);
+		// 남은 일수가 하루 이상일 때 담을 포멧
+		SimpleDateFormat dFormat = new SimpleDateFormat("dd일 HH:mm:ss");
+		// 하루도 안남았을 때 담을 포멧
+		SimpleDateFormat tFormat = new SimpleDateFormat("HH:mm:ss");
+		
+		for(int i = 0; i < list.size(); i++) {
+			// DB에서 가져온 값을 Date2에 담는다
+			date2 = format.parse(list.get(i).getCloseDate());
+			
+			
+			// 계산을 위해 date2를 변환 long으로 변환
+			closeTime = date2.getTime();
+			
+			System.out.println(closeTime);
+			
+			//남은 시간
+			long time = (closeTime - nowTime);
+			
+			if(time / 1000 * (24*60*60) >= 1) { //하루 이상 남았을 때
+				remaindTime = dFormat.format(time);
+			} else { // 하루도 안 남았을 때
+				remaindTime = tFormat.format(time);
+			}
+			list.get(i).setRemaindTime(remaindTime);
+		}
+		
+		
+		mv.addObject("list", list).setViewName("board/drawBoard/drawBoardListView");
 		return mv;
 	}
 	
 	@RequestMapping("list.ac")
-	public String auctionBoardList() {
-		return "board/auctionBoard/auctionBoardListView";
+	public ModelAndView auctionBoardList(ModelAndView mv) {
+		mv.addObject("list", boardService.selectAuctionBoardList()).setViewName("board/auctionBoard/auctionBoardListView");
+		return mv;
 	}
 	
 	@RequestMapping("enrollForm.dr")
@@ -45,9 +88,9 @@ public class DrawAuctionController {
 	}
 	
 	@RequestMapping("detail.dr")
-	public ModelAndView drawDetailView(int bno,ModelAndView mv) {
+	public ModelAndView drawDetailView(int bno, ModelAndView mv) {
 		
-		if(boardService.increaseCount(bno) > 0) {
+		if(boardService.drawIncreaseCount(bno) > 0) {
 			mv.addObject("b", boardService.selectDrawBoard(bno)).setViewName("board/drawBoard/drawDetailView");
 		} else {
 			mv.addObject("errorMsg", "게시글 조회 실패").setViewName("common/errorPage");
@@ -57,12 +100,18 @@ public class DrawAuctionController {
 	}
 
 	@RequestMapping("detail.ac")
-	public String auctionDetailView() {
-		return "board/auctionBoard/auctionDetailView";
+	public ModelAndView auctionDetailView(int bno, ModelAndView mv) {
+		if(boardService.auctionIncreaseCount(bno) > 0) {
+			mv.addObject("b", boardService.selectAuctionBoard(bno)).setViewName("board/drawBoard/auctionDetailView");
+		} else {
+			mv.addObject("errorMsg", "게시글 조회 실패").setViewName("common/errorPage");
+		}
+		return mv;
 	}
 	
 	@RequestMapping("insert.dr")
 	public String insertDrawBoard(ADBoard b, MultipartFile upFile, HttpSession session, Model model) {
+		
 		
 		if(!upFile.getOriginalFilename().equals("")) { // getOriginalFileName == filename필드의 값을 반환함
 			
@@ -102,13 +151,28 @@ public class DrawAuctionController {
 
 		if(boardService.insertDrawBoard(b) > 0) { //성공 => 게시글 리스트 페이지
 			//포워딩 => boardListView.jsp => 리스트를 안불러와서 리다이렉트를 해야함
-			return "redirect:list.bo";
+			return "redirect:list.dr";
 		} else {
 			model.addAttribute("errorMsg", "게시글 작성에 실패했어용 ㅠ");
 			return "common/errorPage";
 		}
 	}
 	
+	@RequestMapping("insert.ac")
+	public String insertAuctionBoard(ADBoard b, MultipartFile upFile, HttpSession session, Model model) {
+		
+		if(!upFile.getOriginalFilename().equals("")) {
+			b.setOriginName(upFile.getOriginalFilename());
+			b.setChangeName("resources/uploadFiles/" + saveFile(upFile, session));
+		} 
+		
+		if(boardService.insertAuctionBoard(b) > 0) {
+			return "redirect:list.ac";
+		} else {
+			model.addAttribute("errorMsg", "게시글 작성에 실패했어용 ㅠ");
+			return "common/errorPage";
+		}
+	}
 	
 	
 	public String saveFile(MultipartFile upfile, HttpSession session) { // 실제 넘어온 파일의 이름을 변경해서 서버에 업로드
@@ -138,14 +202,34 @@ public class DrawAuctionController {
 		return changeName;
 	}
 	
+	
 	@RequestMapping("delete.dr")
-	public ModelAndView deleteDraw(int boardNo, ModelAndView mv) {
+	public String deleteDraw(int boardNo, HttpSession session, ModelAndView mv, String changeName) {
 		if(boardService.deleteDrawBoard(boardNo) > 0) {
-			mv.setViewName("board/drawBoard/drawBoardListView");
+			if(!changeName.equals("")) {// 만약에 첨부파일이 존재했을 경우
+				// 기존에 존재하는 첨부파일을 삭제
+				// resources/xxxx/xxxx.jps 요걸 찾으려면
+				new File(session.getServletContext().getRealPath(changeName)).delete();
+			}
+			return "redirect:list.dr";
 		} else {
-			mv.addObject("errorMsg", "게시글 삭제 실패").setViewName("common/errorPage");
+			mv.addObject("errorMsg", "게시글 작성에 실패했어용 ㅠ");
+			return "common/errorPage";
 		}
-		return mv;
+		
+	}
+	@RequestMapping("delete.ac")
+	public String deleteAuction(int boardNo, HttpSession session, ModelAndView mv, String changeName) {
+		if(boardService.deleteAuctionBoard(boardNo) > 0) {
+			if(!changeName.equals("")) {
+				new File(session.getServletContext().getRealPath(changeName)).delete();
+			}
+			return "redirect:list.dr";
+		} else {
+			mv.addObject("errorMsg", "게시글 작성에 실패했어용 ㅠ");
+			return "common/errorPage";
+		}
+		
 	}
 	
 }
