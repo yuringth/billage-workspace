@@ -13,6 +13,7 @@
 		<result column="REPORT_DATE" property="reportDate"/>
 		<result column="REPORT_STATUS" property="reportStatus"/>
 		<result column="BOARD_NO" property="boardNo"/>
+		<result column="NICKNAME" property="nickName"/>	
 	</resultMap>
 	
 	<insert id="insertReport" parameterType="report">
@@ -25,6 +26,7 @@
 		        ,report_title
 		        ,report_category
 		        ,report_content
+		        ,report_date
 		        ,board_no
 		        )
  	 values
@@ -53,4 +55,22 @@
 		        
 	</select>
 	
+	<select id="selectReport" parameterType="_int" resultMap="reportResultSet">
+		select
+		        report_no
+		        ,r.user_no
+		        ,report_title
+		        ,report_category
+		        ,report_content
+		        ,report_status
+		        ,board_no
+		        ,nickName
+		from
+		      report r
+		join
+		      member m on (r.user_no = m.user_no)      
+		where
+		      report_no = #{rno}      
+				
+	</select>
 </mapper>

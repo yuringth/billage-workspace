@@ -80,7 +80,7 @@
 				,TITLE
 				,GENRE
 				,TRY_POINT
-				,CLOSE_DATE
+				,to_char(CLOSE_DATE, 'YYYY-MM-DD HH:mm:ss') as "CLOSE_DATE"
 				,COUNT
 				,CHANGE_NAME
 		  FROM

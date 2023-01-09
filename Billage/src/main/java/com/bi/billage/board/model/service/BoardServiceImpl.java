@@ -40,7 +40,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public ReportBoard selectReport(int rno) {
 		// TODO Auto-generated method stub
-		return null;
+		return boardDao.selectReport(sqlSession, rno);
 	}
 
 

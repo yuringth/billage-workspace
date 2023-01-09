@@ -73,11 +73,16 @@ public class ReportController {
 	
 	//reportBoard 상세페이지
 	@RequestMapping("detail.ro")
-	public String selectReportDetail(int rno, ModelAndView mv) {
+	public ModelAndView selectReportDetail(int rno, ModelAndView mv) {
 		
+		System.out.println(rno);
 		ReportBoard r = boardService.selectReport(rno);
 		
-		return"board/reportBoard/reportBoardDetailView";
+		System.out.println(r);
+		
+		mv.addObject("r",r).setViewName("board/reportBoard/reportBoardDetailView");
+		
+		return mv;
 	}
 	
 	
