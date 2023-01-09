@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="novelMapper">
+
+	<resultMap type="novel" id="novelResultSet">
+		<result column="novel_no"		property="novelNo" />
+		<result column="user_no"		property="userNo" />
+		<result column="novel_img"		property="novelImg" />
+		<result column="novel_title"	property="novelTitle" />
+		<result column="novel_display"	property="novelDisplay" />
+		<result column="start_date"		property="startDate" />
+		<result column="count"			property="count" />
+		<result column="heart"			property="heart" />
+		<result column="serial_status"	property="serialStatus" />
+		<result column="charge_status"	property="chargeStatus" />
+		<result column="nickname"		property="nickName" />
+	</resultMap>
+	
+	<select id="selectNovelListCount" resultType="_int">
+		select
+				count(*)
+		from
+				novel
+	</select>
+	
+	<select id="selectNovelList" resultMap="novelResultSet">
+		select
+				novel_no,
+				n.user_no,
+				novel_img,
+				novel_title,
+				novel_display,
+				start_date,
+				count,
+				heart,
+				serial_status,
+				charge_status,
+				nickname
+		from
+				novel n
+		join
+				member m
+		on
+				n.user_no = m.user_no
+	</select>
+
+</mapper>
