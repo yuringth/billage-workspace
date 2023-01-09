@@ -16,8 +16,8 @@ public class ReportController {
 		return"board/reportBoard/reportBoardDetailView";
 	}
 	
-	@RequestMapping("insert.ro")
-	public String insertReport() {
+	@RequestMapping("insertForm.ro")
+	public String insertReportForm() {
 		return"board/reportBoard/reportEnrollForm";
 	}
 }
