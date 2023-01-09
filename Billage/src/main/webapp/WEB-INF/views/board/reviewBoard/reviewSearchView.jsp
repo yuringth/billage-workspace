@@ -177,15 +177,47 @@
 					title : $('#title').val()
 				},
 				success : function(result){
+					
 					console.log(result);
+					console.log(result.item);
+					console.log(result.item[0].title);
+					
+					
+					const itemArr = result.item;
+					
+					let value ='';
+					for(let i in itemArr){
+						
+						let item = itemArr[i];
+						
+						value += '<div class="book-outer">'
+							  + '<div class="content-area1">'
+							  + '<p>' + i + '</p>'
+							  + '</div>'
+							  + '<div class="content-area2">'
+							  + '<div class="content-detail1">'
+							  + '<div>' + item[i].cover + '</div>'
+							  + '</div>'
+							  + '<div class="content-detail2">'
+							  + '<p id="book_title" name="bookTitle">' + item[i].title + '</p>'
+							  + '<p id="book_author" name="bookAuthor">' + item[i].author + '</p>'
+							  + '<p id="book_date" name="bookDate">' + item[i].pubDate + '</p>'
+							  + '<p id="book_publisher" name="bookPublisher">' + item[i].publisher + '</p>'
+							  + '</div>'
+							  + '</div>'
+							  + '<div  class="content-area3">'
+							  + '<button>선택</button>'
+							  + '</div>'
+							  
+					}
+					$('.book-outer').html(value);
+					$('#title').val(title);
+					
 				},
 				error: function(){
 					console.log('실패');
 				}
-				 
 			 })
-			 
-			 
 		 }
 	</script>
 
