@@ -24,6 +24,33 @@
 	</resultMap>
 
 
+	<!-- 글작성 쿼리문 -->
+	<insert id="insertUsedBoard" parameterType="usedBoard">
+		insert
+		  into
+		  	   usedBoard
+		       (
+		       used_no
+		      ,user_no
+		      ,used_title
+		      ,book_author
+		      ,book_genre
+		      ,point
+		      ,book_title
+		      ,used_content
+		       )
+		values
+			   (
+			   seq_useno.nextval
+			  ,#{userNo}
+			  ,#{usedTitle}
+			  ,#{bookAuthor}
+			  ,#{bookGenre}
+			  ,#{point}
+			  ,#{bookTitle}
+			  ,#{usedContent}
+			   )
+	</insert>
 
 
 </mapper>
