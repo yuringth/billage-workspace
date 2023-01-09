@@ -64,7 +64,7 @@
 
     <div class="outer">
 
-        <form action="insert.ac">
+        <form action="insert.ac" method="post" action="insert.bo" enctype="multipart/form-data">
 
             <div class="longdiv align-left">
                 <div class="textdiv">
@@ -117,6 +117,15 @@
 
             <div style="width : 790px;">
                 <textarea class="form-control" rows="15" id="content" style="resize: none;" name="content" placeholder="내용을 입력하세요"></textarea>
+            </div>
+            
+             <div class="longdiv align-left">
+                <div class="textdiv">
+                    <p>첨부파일:</p>
+                </div>
+                <div class="titlediv">
+                    <input type="file"  id=upFile name="upFile" required style="padding-top : 6px;">
+                </div>
             </div>
 
             <div class="longdiv align-left">
