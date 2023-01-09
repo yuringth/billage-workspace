@@ -33,8 +33,6 @@ public class BoardServiceImpl implements BoardService {
 		
 		return boardDao.selectReport(sqlSession);
 	}
-	
-	
 
 	@Override
 	public int auctionIncreaseCount(int boardNo) {
