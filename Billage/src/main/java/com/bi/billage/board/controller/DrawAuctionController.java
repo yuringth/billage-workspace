@@ -25,8 +25,7 @@ public class DrawAuctionController {
 	
 	@RequestMapping("list.dr")
 	public ModelAndView drawBoardList(ModelAndView mv) {
-		mv.addObject("list", boardService.selectDrawBoardList());
-		mv.setViewName("board/drawBoard/drawBoardListView");
+		mv.addObject("list", boardService.selectDrawBoardList()).setViewName("board/drawBoard/drawBoardListView");
 		return mv;
 	}
 	
@@ -46,8 +45,15 @@ public class DrawAuctionController {
 	}
 	
 	@RequestMapping("detail.dr")
-	public String drawDetailView() {
-		return "board/drawBoard/drawDetailView";
+	public ModelAndView drawDetailView(int bno,ModelAndView mv) {
+		
+		if(boardService.increaseCount(bno) > 0) {
+			mv.addObject("b", boardService.selectDrawBoard(bno)).setViewName("board/drawBoard/drawDetailView");
+		} else {
+			mv.addObject("errorMsg", "게시글 조회 실패").setViewName("common/errorPage");
+		}
+		
+		return mv;
 	}
 
 	@RequestMapping("detail.ac")

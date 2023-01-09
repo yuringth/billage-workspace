@@ -27,14 +27,12 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int increaseCount(int boardNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int drawIncreaseCount(int boardNo) {
+		return boardDao.drawIncreaseCount(sqlSession, boardNo);
 	}
 
 	@Override
 	public ArrayList<ADBoard> selectDrawBoardList() {
-		// TODO Auto-generated method stub
 		return boardDao.selectDrawBoardList(sqlSession);
 	}
 
@@ -164,6 +162,18 @@ public class BoardServiceImpl implements BoardService {
 	// 리뷰게시판
 	@Override
 	public int updateReviewBoard(UsedBoard b) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int increaseCount(int boardNo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int auctionIncreaseCount(int boardNo) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
