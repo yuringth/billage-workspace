@@ -21,4 +21,9 @@ public class UserServiceImpl implements UserService{
 		return userDao.insertUser(sqlSession, u);
 	}
 
+	@Override
+	public User loginUser(User u) {
+		return userDao.loginUser(sqlSession, u);
+	}
+
 }
