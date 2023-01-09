@@ -56,9 +56,9 @@
 	height:200px;
 }
 
-#book_content, #book_title, #book_author, #book_publisher, #book_data{
+#book_title, #book_author, #book_publisher, #book_data{
 	border:1px solid pink;
-	height:40px;
+	height:50px;
 }
 
 
@@ -71,75 +71,74 @@
 
 
 
-	/*모달관련 스타일*/
-	
-	#write-textarea{
-        text-align: center;
+/*모달관련 스타일*/
+#write-textarea{
+       text-align: center;
 
-	}
-	
-	#store-report-area{
-        position: fixed;
-        width: 600px;
-        height:900px;
-        background-color: rgb(253, 219, 219);
-        border-radius: 20px;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        display: none;
-        z-index: 1000;
-    }
+}
 
-    #store-report-area .close{
-        font-size: 40px;
-        background-color:rgba(95, 152, 124, 0);
-        border: 1px solid rgba(245, 245, 220, 0);
-        cursor: pointer;
-        color:rgb(0, 0, 0);
-        padding-left: 560px;
-    }
-	
-    #store-report-area{
-        height:720px;
-    }
+#store-report-area{
+       position: fixed;
+       width: 600px;
+       height:900px;
+       background-color: rgb(253, 219, 219);
+       border-radius: 20px;
+       left: 50%;
+       top: 50%;
+       transform: translate(-50%, -50%);
+       display: none;
+       z-index: 1000;
+   }
 
-    .modal-title>h2{
-        font-size: 34px;
-        text-align: center;
-        font-weight: 900px;
-        font-family: 'Happiness-Sans-Title';
-    }
+   #store-report-area .close{
+       font-size: 40px;
+       background-color:rgba(95, 152, 124, 0);
+       /* border: 1px solid rgba(245, 245, 220, 0); */
+       cursor: pointer;
+       color:rgb(0, 0, 0);
+       padding-left: 560px;
+   }
 
-    #store-report-area p {
-        font-weight: 900;
-        padding: 5px 20px;
-        font-size: 20px;
-    }
+   #store-report-area{
+       height:720px;
+   }
 
-    #st-text-area p {
-        padding-left: 40px;
-        font-weight: 400;
-        font-size: 16px;
-    }
+   .modal-title>h2{
+       font-size: 34px;
+       text-align: center;
+       font-weight: 900px;
+       font-family: 'Happiness-Sans-Title';
+   }
 
-    #store-name-area{
-        margin: 5px 10px;
-        padding-left: 50px;
-        font-size: 30px;
-        color:rgb(109, 104, 104);
-        /* font-weight: 00; 
-        font-family: 'Happiness-Sans-Title';
-    }
+   #store-report-area p {
+       font-weight: 900;
+       padding: 5px 20px;
+       font-size: 20px;
+   }
 
-    #tag-area {
-        margin-left: 45px;
-    }
-    
-    .tag-opt {
-        font-size: 18px;
-    }
-	
+   #st-text-area p {
+       padding-left: 40px;
+       font-weight: 400;
+       font-size: 16px;
+   }
+
+   #store-name-area{
+       margin: 5px 10px;
+       padding-left: 50px;
+       font-size: 30px;
+       color:rgb(109, 104, 104);
+       /* font-weight: 00; 
+       font-family: 'Happiness-Sans-Title';
+   }
+
+   #tag-area {
+       margin-left: 45px;
+   }
+   
+   .tag-opt {
+       font-size: 18px;
+   }
+
 
 
 </style>
@@ -190,9 +189,8 @@
 				
 				<!-- review 테이블 : book_content, book_publisher, book_date 컬럼 추가  -->
 				<div class="content-book-detail">
-					<div id="boo_content" name="bookContent">책내용</div>
 					<div id="book_title" name="bookTitle">제목</div>
-					<div id="book_author" name="bookAuthor">저자</div>
+					<div id="book_author" name="bookAuthor">작가</div>
 					<div id="book_publisher" name="bookPublisher">츨판사</div>
 					<div id="book_date" name="bookDate">발행일자</div>
 				</div>
@@ -273,6 +271,8 @@
 		                    <input type="reset" value="다시쓰기"/>
 		                </div>
 		            </form>
+		            
+		            
 		        </div><!-- class="modal-dialog" -->
 		    </div><!-- class="modal fade" id="mymodal1" -->
 		</div> <!-- #store-report-area-->
@@ -310,6 +310,8 @@
         })
 	</script>
 
+	 
+	 
  
  
  
@@ -323,9 +325,32 @@
        });
    	</script>
    	
-   	
-   	
  
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
+   	
    	
    
 	<jsp:include page="../../common/footer.jsp" />

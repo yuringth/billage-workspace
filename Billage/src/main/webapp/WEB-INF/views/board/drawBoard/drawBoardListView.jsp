@@ -85,7 +85,10 @@
 					<a class="dropdown-item" href="#">남은시간 순</a>
 				</div>
 			</div>
-			<div><button type="button" class="btn btn-info" onclick="location.href='enrollForm.dr'">글쓰기</button></div>   
+			<c:if test="${ not empty loginUser }">
+				<div><button type="button" class="btn btn-info" onclick="location.href='enrollForm.dr'">글쓰기</button></div>
+			</c:if>
+			<div><button type="button" class="btn btn-info" onclick="location.href='enrollForm.dr'">글쓰기</button></div>
 		</div>
 
 

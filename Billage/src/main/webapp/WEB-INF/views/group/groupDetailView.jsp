@@ -44,7 +44,8 @@
     			<span>0명이 찜했어요!</span>
     		</div>
     		<div id="detail-right">
-    			여기엔 내용
+    			<div>모임요일</div>
+    			<div>참여자</div>
     		</div>
     	</div>
     	<div id="group-info-area">
@@ -53,6 +54,7 @@
     			<pre>여긴 모임 소개가 들어갈 공간입니다.</pre>
     		</div>
     		<div style="height:400px;">
+    		
     		</div>
     	</div>
 		
