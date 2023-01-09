@@ -40,8 +40,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int insertDrawBoard(ADBoard b) {
-		
-		return 0;
+		return boardDao.insertDrawBoard(sqlSession, b);
 	}
 
 	@Override

@@ -65,13 +65,14 @@
     <div class="outer">
 
         <form action="insert.ro">
-
+			<input type="hidden" id="boardNo" name="boardNo" value="${boardNo}">
+			
             <div class="longdiv align-left">
                 <div class="textdiv">
                     <p>제목:</p>
                 </div>
                 <div class="titlediv">
-                    <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요" name="title" required>
+                    <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요" name="reportTitle" required>
                 </div>
             </div>
 
@@ -88,7 +89,7 @@
             </div>
 
             <div style="width : 790px;">
-                <textarea class="form-control" rows="15" id="content" style="resize: none;" name="content" placeholder="내용을 입력하세요"></textarea>
+                <textarea class="form-control" rows="15" id="content" style="resize: none;" name="boardContent" placeholder="내용을 입력하세요"></textarea>
             </div>
 
             <div class="longdiv align-left">
