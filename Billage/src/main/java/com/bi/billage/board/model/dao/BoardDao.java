@@ -73,7 +73,7 @@ public class BoardDao {
 	
 	// 세헌
 	public int insertDrawBoard(SqlSessionTemplate sqlSession, ADBoard b) {
-		return sqlSession.insert(statement);
+		return sqlSession.insert("ADBoardMapper.insertDrawBoard");
 	}
 	
 	

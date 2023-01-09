@@ -23,7 +23,7 @@ public class ADBoard {
 	private String changeName;
 	
 	private int startPrice;
-	private int InstantlyPrice;
+	private int instantlyPrice;
 	private int bidPrice;
 	private int nowPrice;
 
