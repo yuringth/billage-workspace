@@ -199,12 +199,6 @@
 				</form>
 			</div>
 		</div>
-
-
-
-
-
-
 	</div> <!-- all-header끝 -->
 
 	<script>

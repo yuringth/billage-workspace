@@ -7,6 +7,11 @@
 <meta charset="UTF-8">
 <title>모임 등록하기</title>
 <style>
+	#all-enrollFrom button{
+		margin:0px;
+		padding:0px;
+	}
+	
 	#all-enrollFrom {
 		margin:auto;
 		width:1200px;
@@ -23,6 +28,34 @@
 	}
 	
 	#file-insert:hover{ cursor:pointer; }
+	
+	<!-- -->
+	#modal-serach-area{
+		position: fixed;
+        width: 500px;
+        height:500px;
+        background-color: rgb(253, 219, 219);
+        border-radius: 20px;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        top: 50%;
+        z-index: 1005;
+        text-align: center;
+        display: none;
+	}
+	
+	#addr-close {
+		font-size: 25px;
+        background-color:rgba(95, 152, 124, 0);
+        border: 1px solid rgba(245, 245, 220, 0);
+        cursor: pointer;
+        color:rgb(0, 0, 0);
+        padding-left: 455px;
+	}	
+	
+	
+	
+	
 </style>
 </head>
 <body>
@@ -68,7 +101,7 @@
 					</tr>
 					<tr>
 						<th>모임 지역</th>
-						<td><div><input type="text" name="groupLocation" required><button>검색</button></div>api쓰고 싶어여...</td>
+						<td><input type="button" id="addr-btn" value="찾기" /><div><input type="text" name="groupLocation" required></div></td>
 					</tr>
 					<tr>
 						<th>모임 참여 인원</th>
@@ -90,6 +123,22 @@
 			</div>
 		</form>
 	</div> <!-- all-enrollFrom -->
+	
+	<!-- --------------- 모임 지역 찾기 모달창 구현 ----------------- -->
+	<div id="modal-serach-area">
+		<button type="button" id="addr-close">&times;</button>
+		
+		<div id="search-area">
+			<div id="search-text"> 
+				<input id="search" type="text" />			
+			</div>
+			<div id="result-area" style="width:480px; height:300px; border:1px solid black;">
+			
+			</div>
+		</div>
+	</div>
+	
+	
 	
 	
 	<script>
@@ -127,7 +176,82 @@
 			}                	
 	    })
 		
-	
+	    // 검색을 위한 모달창 띄우기 
+	    $(function(){
+	    	$('#addr-btn').click(function(){
+	    		$('#modal-serach-area').show();
+	    	});
+	    	
+	    	
+	    	$('#addr-close').click(function(){
+	    		$('#modal-serach-area').hide();
+	    		$('#search').val('');
+	    	});
+	    });
+	    
+		//
+		
+		$('#search-text input[type=text]').keyup(function(){
+			
+			$('#result-area').empty();
+			
+			$.ajax({
+				url : "searchAddr.gr",
+				data : { keyword:$('#search').val() },
+				success: function(result){
+					
+					const itemsArr = result.response.result.items;
+					
+					let valueArr = [];
+					let value = ''; 
+					
+					for(let i in itemsArr){
+						let item  = itemsArr[i];
+						
+						let fullAdd = item.address.road;
+						var splitAdd = fullAdd.split(" ");		
+						valueArr.push(splitAdd[2] + " (" + splitAdd[0] + " " + splitAdd[1]+")");
+
+						//console.log(valueArr);
+												
+						//let result2 = Array.from(new Set(value));
+						//console.log(result2[i].name);
+
+						//console.log(splitAdd[2] + " ( " + splitAdd[0] + " " + splitAdd[1] + ")");
+					}
+					
+					
+					const resultArr = valueArr.reduce((acc, v) => {
+						console.log(acc);
+						return acc.find(x => x.name === v.name) ? acc : [...acc, v];
+					}, []);
+					
+					
+					
+					for(let i in resultArr){			
+						value += resultArr[i] + '<br>';				
+					}
+					
+					
+					//console.log(value);
+					$('#result-area').html(value);
+					
+					//console.log(result.response.result.items[0].address.road);
+				},
+				error : function(){
+					console.log('비동기통신실패');
+				}
+			});
+			
+		});
+		
+		
+		//const result = arr2.reduce((acc, v) => {
+		//    return acc.find(x => x.name === v.name) ? acc : [...acc, v];
+		//}, []);
+
+		// [ {name: "레드"}, {name: "그린"}, {name: "블루"} ]
+		
 	</script>
 	
 	<jsp:include page="../common/footer.jsp"/>
