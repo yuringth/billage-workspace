@@ -21,10 +21,10 @@ public class BoardDao {
 	}
 	
 	
-	
-	
-	
-	
+	public ArrayList<ReportBoard> selectReportList(SqlSession sqlSession) {
+		
+		return (ArrayList)sqlSession.selectList("reportMapper.selectReportList");
+	}
 	
 	
 	
