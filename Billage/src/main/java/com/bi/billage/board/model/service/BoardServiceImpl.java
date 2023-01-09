@@ -53,14 +53,12 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public ADBoard selectDrawBoard(int boardNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return boardDao.selectDrawBoard(sqlSession, boardNo);
 	}
 
 	@Override
 	public int deleteDrawBoard(int boardNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return boardDao.deleteDrawBoard(sqlSession, boardNo);
 	}
 
 	@Override

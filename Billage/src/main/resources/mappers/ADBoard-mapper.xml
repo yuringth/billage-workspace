@@ -43,7 +43,7 @@
 		<result column="NOW_PRICE" property="nowPrice"/>
 	</resultMap>	
 		
-	
+	<!-- 추첨 글 작성 -->
 	<insert id="insertDrawBoard" parameterType="adboard">
 		INSERT
 		  INTO
@@ -73,6 +73,7 @@
 				)
 	</insert>
 	
+	<!-- 추첨글 전체 조회  -->
 	<select id="selectDrawBoardList" resultMap="drawBoardResultSet">
 		SELECT
 				DRAW_NO
@@ -86,10 +87,56 @@
 		  		DRAW_BOARD
 		 WHERE
 		 		STATUS = 'N'
+		   AND
+		   		ACCEPT_STATUS = 'Y'
 		 ORDER
 		 	BY
 				DRAW_NO DESC		 		
 	</select>
+	
+	<!-- 추첨글 조회수 증가 -->
+	<update id="drawIncreaseCount" parameterType="_int">
+		UPDATE
+				DRAW_BOARD
+		   SET
+		   		COUNT = COUNT + 1
+		 WHERE
+		 		DRAW_NO = #{boardNo}
+	</update>
+	
+	<!-- 추첨글 상세조회 -->
+	<select id="selectDrawBoard" parameterType="_int" resultMap="drawBoardResultSet">
+		SELECT
+				DRAW_NO
+				,NICKNAME
+				,ORIGIN_NAME
+				,CHANGE_NAME
+				,CLOSE_DATE
+				,GENRE
+				,TITLE
+				,BOOK_WRITER
+				,CONTENT
+				,TRY_POINT
+				,CREATE_DATE
+		  FROM
+		  		DRAW_BOARD D
+		  JOIN
+		  		MEMBER M ON (D.USER_NO = M.USER_NO)
+		 WHERE
+		 		DRAW_NO = #{boardNO} 
+	</select>
+	
+	<!-- 추첨 글 삭제 -->
+	<update id="deleteDrawBoard" parameterType="_int">
+		UPDATE
+				DRAW_BOARD
+		   SET
+		   		STATUS = 'Y'
+		 WHERE
+		 		DRAW_NO = #{boardNo}
+	</update>
+	
+	
 
 </mapper>
 
