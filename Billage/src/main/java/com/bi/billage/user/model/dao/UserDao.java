@@ -15,7 +15,6 @@ public class UserDao {
 	
 	// 로그인
 	public User loginUser(SqlSessionTemplate sqlSession, User u) {
-		System.out.println(u);
 		return sqlSession.selectOne("userMapper.loginUser", u);
 	}
 }
