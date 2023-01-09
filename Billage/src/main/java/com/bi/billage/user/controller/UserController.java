@@ -112,7 +112,6 @@ public class UserController {
 	public String loginUser(User u, Model model, HttpSession session) {
 		
 		User loginUser = userService.loginUser(u);
-		System.out.println(loginUser);
 		if(loginUser == null) {
 			model.addAttribute("errorMsg", "에러발생");
 			return "common/errorPage";
@@ -122,4 +121,10 @@ public class UserController {
 		}
 	}
 	
+	// 로그아웃
+	@RequestMapping("logout.me")
+	public String logoutUser(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
 }

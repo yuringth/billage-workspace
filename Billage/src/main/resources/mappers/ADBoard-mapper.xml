@@ -11,7 +11,6 @@
 		<result column="CONTENT" property="content"/>
 		<result column="COUNT" property="count"/>
 		<result column="STATUS" property="status"/>
-		<result column="THUMBNAIL" property="thumbnail"/>
 		<result column="CREATE_DATE" property="createDate"/>
 		<result column="BOOK_WRITER" property="bookWriter"/>
 		<result column="GENRE" property="genre"/>
@@ -29,7 +28,6 @@
 		<result column="CONTENT" property="content"/>
 		<result column="COUNT" property="count"/>
 		<result column="STATUS" property="status"/>
-		<result column="THUMBNAIL" property="thumbnail"/>
 		<result column="CREATE_DATE" property="createDate"/>
 		<result column="BOOK_WRITER" property="bookWriter"/>
 		<result column="GENRE" property="genre"/>
@@ -47,7 +45,7 @@
 	<insert id="insertDrawBoard" parameterType="adboard">
 		INSERT
 		  INTO
-		  		DRAWBOARD
+		  		DRAW_BOARD
 		  		(
 		  		DRAW_NO
 		  		,TITLE
@@ -166,7 +164,7 @@
 	<insert id="insertAuctionBoard" parameterType="adboard">
 		INSERT
 		  INTO
-		  		DRAWBOARD
+		  		AUCTION_BOARD
 		  		(
 		  		AUCTION_NO
 		  		,TITLE

@@ -24,9 +24,12 @@
         </div>
         <br><br><br>
         <div class="novelInfo" align="left">
-            <h2>작품명</h2>
-            <h4>작가명</h4>
-            <h6>작품설명</h6>
+        <c:forEach items="${ list }" var="s" begin="1" end="1">
+            <h2>제목 : ${s.novelTitle}</h2>
+            <h4>작가명 : ${s.nickName}</h4>
+            <h6>설명 : ${s.novelDisplay }</h6>
+        </c:forEach>
+        <h1>${serial.novelTitle }</h1>
         </div>
             <br>
             <!-- 로그인 후 작가본인일 경우만 보여지는 글쓰기 버튼 -->

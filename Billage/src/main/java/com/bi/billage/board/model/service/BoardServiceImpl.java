@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.bi.billage.board.model.dao.BoardDao;
 import com.bi.billage.board.model.vo.ADBoard;
+import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.ReportBoard;
+import com.bi.billage.board.model.vo.Serial;
+import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.board.model.vo.ReviewBoard;
 import com.bi.billage.board.model.vo.UsedBoard;
 
@@ -33,8 +36,6 @@ public class BoardServiceImpl implements BoardService {
 		
 		return boardDao.selectReport(sqlSession);
 	}
-	
-	
 
 	@Override
 	public int auctionIncreaseCount(int boardNo) {
@@ -98,6 +99,29 @@ public class BoardServiceImpl implements BoardService {
 		return 0;
 	}
 
+	@Override
+	public int selectNovelListCount() {
+		// TODO Auto-generated method stub
+		return boardDao.selectNovelListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Novel> selectNovelList(PageInfo pi) {
+		// TODO Auto-generated method stub
+		return boardDao.selectNovelList(sqlSession, pi);
+	}
+
+	@Override
+	public int selectSerialListCount() {
+		// TODO Auto-generated method stub
+		return boardDao.selectSerialListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Serial> selectSerialList(PageInfo pi, int novelNo) {
+		// TODO Auto-generated method stub
+		return boardDao.selectSerialList(sqlSession, pi, novelNo);
+	}
 	//중고게시판
 	@Override
 	public int insertUsedBoard(UsedBoard b) {

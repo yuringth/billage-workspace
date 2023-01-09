@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bi.billage.board.model.service.BoardService;
 import com.bi.billage.board.model.vo.ReportBoard;
+import com.bi.billage.user.model.vo.User;
 
 @Controller
 public class ReportController {
@@ -39,7 +40,11 @@ public class ReportController {
 	@RequestMapping("insertForm.ro")
 	public String insertReportForm(/*int boardNo ,*/HttpSession session) {
 		
-		session.setAttribute("boardNo", 6);
+		
+		 int userNo = ((User)session.getAttribute("loginUser")).getUserNo();
+		 System.out.println(userNo);
+		 session.setAttribute("boardNo", 6);
+		 session.setAttribute("userNo", userNo);
 		
 		return"board/reportBoard/reportEnrollForm";
 	}

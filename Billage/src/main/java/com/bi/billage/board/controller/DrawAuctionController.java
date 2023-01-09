@@ -161,8 +161,26 @@ public class DrawAuctionController {
 	
 	
 	@RequestMapping("delete.dr")
-	public String deleteDraw(int boardNo, ModelAndView mv) {
+	public String deleteDraw(int boardNo, HttpSession session, ModelAndView mv, String changeName) {
 		if(boardService.deleteDrawBoard(boardNo) > 0) {
+			if(!changeName.equals("")) {// 만약에 첨부파일이 존재했을 경우
+				// 기존에 존재하는 첨부파일을 삭제
+				// resources/xxxx/xxxx.jps 요걸 찾으려면
+				new File(session.getServletContext().getRealPath(changeName)).delete();
+			}
+			return "redirect:list.dr";
+		} else {
+			mv.addObject("errorMsg", "게시글 작성에 실패했어용 ㅠ");
+			return "common/errorPage";
+		}
+		
+	}
+	@RequestMapping("delete.ac")
+	public String deleteAuction(int boardNo, HttpSession session, ModelAndView mv, String changeName) {
+		if(boardService.deleteAuctionBoard(boardNo) > 0) {
+			if(!changeName.equals("")) {
+				new File(session.getServletContext().getRealPath(changeName)).delete();
+			}
 			return "redirect:list.dr";
 		} else {
 			mv.addObject("errorMsg", "게시글 작성에 실패했어용 ㅠ");
