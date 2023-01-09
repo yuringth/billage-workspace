@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="serialMapper">
+
+	<resultMap type="serial" id="serialResultSet">
+		<result column="serial_no"			property="serialNo" />
+		<result column="novel_no"			property="novelNo" />
+		<result column="serial_title"		property="serialTitle" />
+		<result column="serial_content"		property="serialContent" />
+		<result column="upload_date"		property="uploadDate" />
+		<result column="star_rating"		property="starRating" />
+		<result column="author_comment"		property="authorComment" />
+		<result column="user_no"			property="userNo" />
+		<result column="novel_title"		property="novelTitle" />
+		<result column="nickname"			property="nickName" />
+		<result column="novel_display"		property="novelDisplay" />
+		<result column="novel_img"			property="novelImg" />
+	</resultMap>
+	
+	<select id="selectSerialListCount" resultType="_int">
+		select
+				count(*)
+		from
+				serial
+	</select>
+	
+	<select id="selectSerialList" resultMap="serialResultSet">
+		select
+				serial_no,
+				s.novel_no,
+				serial_title,
+				serial_content,
+				upload_date,
+				star_rating,
+				author_comment,
+				n.user_no,
+				n.novel_title,
+				n.novel_display,
+				n.novel_img,
+                (select nickname from member m where m.user_no = s.user_no) as nickName
+		from
+				serial s
+		left join
+				novel n
+		on
+				s.novel_no = n.novel_no
+		where
+				n.novel_no = #{ novel_no }
+	</select>
+	
+</mapper>

@@ -14,6 +14,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.bi.billage.board.model.vo.ADBoard" alias="adboard" />
 		<typeAlias type="com.bi.billage.reply.model.vo.Reply" alias="reply" />
 		<typeAlias type="com.bi.billage.group.model.vo.Group" alias="group" />
+		<typeAlias type="com.bi.billage.board.model.vo.Novel" alias="novel" />
+		<typeAlias type="com.bi.billage.board.model.vo.Serial" alias="serial" />
 		<typeAlias type="com.bi.billage.board.model.vo.ReportBoard" alias="Report" />
 		<typeAlias type="com.bi.billage.board.model.vo.UsedBoard" alias="used" />
 		<typeAlias type="com.bi.billage.board.model.vo.ReviewBoard" alias="review" />
@@ -26,6 +28,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="/mappers/board-mapper.xml"/>
 		<mapper resource="/mappers/group-mapper.xml" />
 		<mapper resource="/mappers/ADBoard-mapper.xml" />
+		<mapper resource="/mappers/novel-mapper.xml" />
+		<mapper resource="/mappers/serial-mapper.xml" />
 		<mapper resource="/mappers/report-mapper.xml" />	
 		<mapper resource="/mappers/used-mapper.xml" />	
 		<mapper resource="/mappers/review-mapper.xml" />	

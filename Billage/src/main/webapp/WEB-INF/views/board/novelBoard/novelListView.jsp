@@ -224,67 +224,45 @@ div.card.show {
         </div>
         </c:if>
 		<div class="cards">
+		        <c:forEach items="${ list }" var="n">
 		        <div class="card">
 		            <div class="card__image-holder">
 		                <img class="card__image" src="https://source.unsplash.com/300x225/?wave" alt="wave" />
 		            </div>
-		            <div class="card-title">
-		                <h2>
-		                    작품 제목 들어가는 곳
+		            <div class="card-title" title="${ n.novelTitle }">
+		                <h2 style="display: block;
+      								white-space: nowrap;
+	  								text-overflow: ellipsis;
+	  								overflow: hidden;">
+		                    ${ n.novelTitle }
 		                </h2>
 		            </div>
 		            <div class="card-flap flap1">
 		                <div class="card-description">
-		                    작가명<br>최신화<br>장르<br>추천수<br>별점
+		                    작가명 : ${ n.nickName }<br>최신화 : <br>추천수 : ${ n.heart }<br>별점 (평균): 
 		                </div>
 		                <div class="card-flap flap2">
 		                    <div class="card-actions">
-		                        <a href="list.se" class="btn">읽으러가기</a>
+		                    <input type="hidden" class="nno" value="${ n.novelNo }">
+		                        <a class="btn">읽으러가기</a>
 		                    </div>
 		                </div>
 		            </div>
 		        </div>
-		        <div class="card">
-		            <div class="card__image-holder">
-		                <img class="card__image" src="https://source.unsplash.com/300x225/?wave" alt="wave" />
-		            </div>
-		            <div class="card-title">
-		                <h2>
-		                    작품 제목 들어가는 곳
-		                </h2>
-		            </div>
-		            <div class="card-flap flap1">
-		                <div class="card-description">
-		                작가명<br>최신화<br>장르<br>추천수<br>별점
-		                </div>
-		                <div class="card-flap flap2">
-		                    <div class="card-actions">
-		                        <a href="#" class="btn">읽으러가기</a>
-		                    </div>
-		                </div>
-		            </div>
-		        </div>
-		        <div class="card">
-		            <div class="card__image-holder">
-		                <img class="card__image" src="https://source.unsplash.com/300x225/?wave" alt="wave" />
-		            </div>
-		            <div class="card-title">
-		                <h2>
-		                    작품 제목 들어가는 곳
-		                </h2>
-		            </div>
-		            <div class="card-flap flap1">
-		                <div class="card-description">
-		                    작가명<br>최신화<br>장르<br>추천수<br>별점
-		                </div>
-		                <div class="card-flap flap2">
-		                    <div class="card-actions">
-		                        <a href="#" class="btn">읽으러가기</a>
-		                    </div>
-		                </div>
-		            </div>
-		        </div>
+		        </c:forEach>
 		    </div>
 		    <jsp:include page="../../common/footer.jsp"/>
+	<script>
+	
+	$(function () {
+    	
+        $('.card-actions').click(function () {
+
+            location.href = 'list.se?nno=' + $(this).children('.nno').val();
+            		
+        })
+	})
+	
+	</script>
 </body>
 </html>
