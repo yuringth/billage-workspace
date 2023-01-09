@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bi.billage.board.model.vo.ADBoard;
 import com.bi.billage.board.model.vo.ReportBoard;
+import com.bi.billage.board.model.vo.UsedBoard;
 
 @Repository
 public class BoardDao {
@@ -16,7 +17,7 @@ public class BoardDao {
 	
 	public int insertReport(SqlSession sqlSession, ReportBoard r) {
 		
-		return sqlSession.insert("boardMapper.insertBoard", r);
+		return sqlSession.insert("reportMapper.insertReport", r);
 	}
 	
 	
@@ -139,7 +140,14 @@ public class BoardDao {
 	
 	
 	
+	// 유림시작
+	public int insertUsedBoard(SqlSessionTemplate sqlSession, UsedBoard b) {
+		return sqlSession.insert("UsedBoardMapper.insertUsedBoard");	
+		
+	}
 	
+	
+	// 유림끝
 	
 	
 	
