@@ -29,9 +29,9 @@ public class BoardServiceImpl implements BoardService {
 	
 	//신고게시판
 	@Override
-	public ArrayList<ReportBoard> selectReportList() {
+	public ArrayList<ReportBoard> selectReport() {
 		
-		return boardDao.selectReportList(sqlSession);
+		return boardDao.selectReport(sqlSession);
 	}
 	
 	
