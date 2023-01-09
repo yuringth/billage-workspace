@@ -13,9 +13,9 @@ public interface BoardService {
 	////////////////////////
 	
 	//휘수 구역
+	//report
 	int insertReport();
 	
-
 	
 	
 	
