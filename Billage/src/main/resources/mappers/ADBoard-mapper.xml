@@ -121,7 +121,7 @@
 		  FROM
 		  		DRAW_BOARD D
 		  JOIN
-		  		"USER" U ON (D.USER_NO = U.USER_NO)
+		  		MEMBER M ON (D.USER_NO = M.USER_NO)
 		 WHERE
 		 		DRAW_NO = #{boardNO} 
 	</select>
