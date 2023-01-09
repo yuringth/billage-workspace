@@ -150,7 +150,7 @@
 		            	<div style="height:20px;">책 제목</div>
 		            </div>
 	    	        <div>
-	  	  	       		<div style="height:200px;">책내용</div>
+	  	  	       		<div style="height:200px;">리뷰 내용</div>
 	    	        </div>
 				</div>
 			
@@ -189,7 +189,7 @@
 		            	<div style="height:20px;">책 제목</div>
 		            </div>
 	    	        <div>
-	  	  	       		<div style="height:200px;">책내용</div>
+	  	  	       		<div style="height:200px;">리뷰 내용</div>
 	    	        </div>
 				</div>
 			

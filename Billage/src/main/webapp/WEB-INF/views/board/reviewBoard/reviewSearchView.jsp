@@ -46,9 +46,9 @@
     	width:450px;
     	height:120px;
     }
-    #book_title, #book_author, #book_date{
+    #book_title, #book_author, #book_date, #book_publisher{
     	border: 1px solid black;
-    	height:40px;
+    	height:30px;
     	margin:0px;
     }
     
@@ -78,6 +78,18 @@
 
     <div class="outer">
     
+    
+    	
+    
+    
+    
+    <!-- ========================================================================== -->
+    
+    
+    
+    
+    
+    
 		<div class="text-div">
 			<p>"검색이름"로 125개의 검색 결과가 있습니다.</p>
 		</div>
@@ -98,7 +110,8 @@
 				<div class="content-detail2">
 					<p id="book_title" name="bookTitle">도서제목</p>
 					<p id="book_author" name="bookAuthor">작가</p>
-					<p id="book_date" name="bookDate">출판날자</p>
+					<p id="book_date" name="bookDate">발행일자</p>
+					<p id="book_publisher" name="bookPublisher">출판사</p>
 				</div>
 			</div>
 			<div  class="content-area3">
@@ -129,6 +142,7 @@
 					<p id="book_title" name="bookTitle">도서제목</p>
 					<p id="book_author" name="bookAuthor">작가</p>
 					<p id="book_date" name="bookDate">출판날자</p>
+					<p id="book_publisher" name="bookPublisher">출판사</p>
 				</div>
 			</div>
 			<div  class="content-area3">
@@ -158,6 +172,7 @@
 					<p id="book_title" name="bookTitle">도서제목</p>
 					<p id="book_author" name="bookAuthor">작가</p>
 					<p id="book_date" name="bookDate">출판날자</p>
+					<p id="book_publisher" name="bookPublisher">출판사</p>
 				</div>
 			</div>
 			<div  class="content-area3">

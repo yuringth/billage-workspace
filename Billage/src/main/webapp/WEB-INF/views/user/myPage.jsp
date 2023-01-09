@@ -79,6 +79,9 @@
     }
 	*/
 	
+	
+	
+	
 	#all-mypage-main {
 		margin:auto; 
 		width:1200px; 
@@ -175,7 +178,7 @@
         })
 	
 	 </script>
---%>
+ --%>
 
 
 	<jsp:include page="../common/footer.jsp"/>
