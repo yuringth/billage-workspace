@@ -63,8 +63,11 @@
 		        ,report_content
 		        ,report_status
 		        ,board_no
+		        ,nickName
 		from
-		      report
+		      report r
+		join
+		      member m on (r.userNo = m.userNo)      
 		where
 		      report_no = #{rno}      
 				
