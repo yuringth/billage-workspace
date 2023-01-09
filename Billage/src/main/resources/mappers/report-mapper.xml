@@ -30,7 +30,7 @@
  	 values
  	 		  (
  	 		  seq_repno.nextval
- 	 		  ,5
+ 	 		  ,#{userNo}
  	 		  ,#{reportTitle}
  	 		  ,#{reportCategory}
  	 		  ,#{reportContent}

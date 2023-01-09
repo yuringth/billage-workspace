@@ -76,9 +76,9 @@
 		FROM
 				MEMBER
 		WHERE
-				USER_NO = #{userNo}
+				USER_ID = #{userId}
 		AND
-				STATUS = 'Y'
+				STATUS = 'N'
 	
 	</select>
 	
