@@ -89,7 +89,15 @@
     
     
     
-    
+    	
+		<div class="text-div">
+    		<input type="text" id="book_title" name="bookTitle" placeholder="책이름을 작성해주세요">
+    		<button onclick="search();">이동</button>
+    		
+		</div>
+
+	
+
 		<div class="text-div">
 			<p>"검색이름"로 125개의 검색 결과가 있습니다.</p>
 		</div>
@@ -186,6 +194,20 @@
 
 
     </div>
+
+
+
+	
+	
+	<script>
+		 function search(book_title){
+			 
+			 
+			 
+		 }
+	</script>
+
+
 
     <jsp:include page="../../common/footer.jsp"/>
 
