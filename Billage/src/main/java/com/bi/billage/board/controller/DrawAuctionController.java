@@ -138,4 +138,6 @@ public class DrawAuctionController {
 		return changeName;
 	}
 	
+	
+	
 }

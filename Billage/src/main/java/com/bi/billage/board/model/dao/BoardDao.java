@@ -76,9 +76,6 @@ public class BoardDao {
 	
 	// 세헌
 	
-	public int drawIncreaseCount(SqlSessionTemplate sqlSession, int boardNo) {
-		return sqlSession.update("ADBoardMapper", boardNo);
-	}
 	
 	public int insertDrawBoard(SqlSessionTemplate sqlSession, ADBoard b) {
 		return sqlSession.insert("ADBoardMapper.insertDrawBoard", b);
@@ -88,6 +85,13 @@ public class BoardDao {
 		return (ArrayList)sqlSession.selectList("ADBoardMapper.selectDrawBoardList");
 	}
 
+	public int drawIncreaseCount(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.update("ADBoardMapper.drawIncreaseCount", boardNo);
+	}
+	
+	public ADBoard selectDrawBoard(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.selectOne("ADBoardMapper.selectdrawBoard", boardNo);
+	}
 
 
 
@@ -146,6 +150,58 @@ public class BoardDao {
 		return sqlSession.insert("usedMapper.insertUsedBoard");	
 		
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

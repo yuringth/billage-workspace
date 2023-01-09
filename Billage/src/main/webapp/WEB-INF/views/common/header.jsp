@@ -209,6 +209,7 @@
 
 	<script>
 		$(function(){
+			// 로그인 모달창 띄우고 지우는 이벤트 
 	        $('#login-btn').click(function(){
 	        	$('#modal-login-area').fadeIn();
 	        	
