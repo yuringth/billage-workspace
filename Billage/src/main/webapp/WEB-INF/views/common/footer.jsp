@@ -96,8 +96,8 @@
 
 
     #ft-btn-table img{
-        width:180px;
-        height:180px;
+		width:70%;
+        height:50%;
         margin: auto;
 
     }
@@ -108,6 +108,9 @@
         margin: auto;
     }
 	
+	.ft-img-area{
+		height: 200px;
+	}
 
 
 </style>
@@ -147,7 +150,7 @@
             <div id="footer-area-right">
                 <table id="ft-btn-table">
                     <tr>
-                        <th colspan="2">
+                        <th class="ft-img-area" colspan="2">
                             <img src="resources/images/logo.png" alt="">
                         </th>
                     </tr>

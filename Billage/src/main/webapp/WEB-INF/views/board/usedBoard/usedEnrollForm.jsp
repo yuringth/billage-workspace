@@ -64,7 +64,7 @@
 
     <div class="outer">
 
-        <form action="insert.ac" id="usedEnrollForm" method="post" enctype="multipart/form-data">
+        <form action="upload.ud" id="usedEnrollForm" method="post" enctype="multipart/form-data">
 
             <div class="longdiv align-left">
                 <div class="textdiv">
@@ -74,22 +74,17 @@
                     <input type="text" class="form-control" id="usedTitle" placeholder="게시글 제목을 입력하세요" name="used_title" required>
                 </div>
             </div>
-
-  
-            
-                <div class="longdiv align-left">
-                
-	                <div class="shortdiv align-left">
-	                    <div class="textdiv">
-	                        <p>첨부파일:</p>
-	                    </div>
-	                    <div class="inputdiv">
-	                    	<input type="file" id="upfile" class="form-control-file border"  placeholder="파일첨부를 해주세요" name="upfile">
-	                    </div>
-	                </div>
-	                
-                </div>
-                
+        
+            <div class="longdiv align-left">
+            	<div class="shortdiv align-left">
+                	<div class="textdiv">
+                    	<p>첨부파일:</p>
+                 	</div>
+                 	<div class="inputdiv">
+                 		<input type="file" id="upfile" class="form-control-file border"  placeholder="파일첨부를 해주세요" name="upfile">
+                	</div>
+            	</div>
+            </div>
                 
             <div class="longdiv align-left">
                 <div class="shortdiv align-left">
@@ -111,7 +106,6 @@
             </div>
 
             <div class="longdiv align-left">
-                
                 <div class="shortdiv align-left">
                     <div class="textdiv">
                         <p>판매가:</p>
@@ -125,15 +119,9 @@
                         <p>책제목:</p>
                     </div>
                     <div class="inputdiv">
-                        <input type="number" class="form-control" id="instantlyPrice" placeholder="책제목" name="book_title">
+                        <input type="text" class="form-control" id="instantlyPrice" placeholder="책제목" name="book_title">
                     </div>
                 </div>
-                
-                
-                
-        
-                
-                
             </div>
 
             
