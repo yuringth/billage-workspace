@@ -51,6 +51,7 @@
 		  		(
 		  		DRAW_NO
 		  		,TITLE
+		  		,USER_NO
 		  		,BOOK_WRITER
 		  		,GENRE
 		  		,CLOSE_DATE
@@ -64,6 +65,7 @@
 				SEQ_DNO.NEXTVAL
 				,#{title}
 				,#{userNo}
+				,#{bookWriter}
 				,#{genre}
 				,#{closeDate}
 				,#{tryPoint}
@@ -137,6 +139,111 @@
 	</update>
 	
 	
+	<!-- ====================================== -->
+	
+	
+	<!-- 경매글 리스트 조회 -->
+	<select id="selectAuctionBoardList" resultMap="auctionBoardResultSet">
+		SELECT
+				AUCTION_NO
+				,TITLE
+				,GENRE
+				,NOW_PRICE
+				,CLOSE_DATE
+				,COUNT
+				,CHANGE_NAME
+				<!-- 여기에 입찰자 수 하기  -->
+		  FROM
+		  		AUCTION_BOARD
+		 WHERE
+		 		STATUS = 'N'
+		 ORDER
+		 	BY
+				DRAW_NO DESC		 		
+	</select>
+	
+	<!-- 경매글 작성 -->
+	<insert id="insertAuctionBoard" parameterType="adboard">
+		INSERT
+		  INTO
+		  		DRAWBOARD
+		  		(
+		  		AUCTION_NO
+		  		,TITLE
+		  		,USER_NO
+		  		,BOOK_WRITER
+		  		,GENRE
+		  		,CLOSE_DATE
+		  		,INSTANTLY_PRICE
+		  		,START_PRICE
+		  		,BID_PRICE
+		  		,NOW_PRICE
+		  		,CONTENT
+		  		,ORIGIN_NAME
+		  		,CHANGE_NAME
+		  		)
+		VALUES
+				(
+				SEQ_ANO.NEXTVAL
+				,#{title}
+				,#{userNo}
+				,#{bookWriter}
+				,#{genre}
+				,#{closeDate}
+				,#{instantlyPrice}
+				,#{startPrice}
+				,#{bidPrice}
+				,#{startPrice}
+				,#{content}
+				,#{originName}
+				,#{changeName}
+				)
+	</insert>
+	
+	<!-- 경매글 조회수 증가 -->
+	<update id="auctionIncreaseCount" parameterType="_int">
+		UPDATE
+				AUCTION_BOARD
+		   SET
+		   		COUNT = COUNT + 1
+		 WHERE
+		 		DRAW_NO = #{boardNo}
+	</update>
+	
+	<!-- 경매글 상세조회 -->
+	<select id="selectAuctionBoard">
+		SELECT
+				AUCTION_NO
+				,NICKNAME
+				,ORIGIN_NAME
+				,CHANGE_NAME
+				,CLOSE_DATE
+				,GENRE
+				,TITLE
+				,BOOK_WRITER
+				,CONTENT
+				,NOW_PRICE
+				,START_PRICE
+				,BID_PRICE
+				,INSTANTLY_PRICE
+				,CREATE_DATE
+		  FROM
+		  		AUCTION_BOARD A
+		  JOIN
+		  		MEMBER M ON (A.USER_NO = M.USER_NO)
+		 WHERE
+		 		DRAW_NO = #{boardNO} 
+	</select>
+	
+	<!-- 경매글 삭제 -->
+	<update id="deleteAuctionBoard">
+		UPDATE
+				AUCTION_BOARD
+		   SET
+		   		STATUS = 'Y'
+		 WHERE
+		 		DRAW_NO = #{boardNo}
+	</update>
 
 </mapper>
 
