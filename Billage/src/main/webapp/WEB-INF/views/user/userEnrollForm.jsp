@@ -174,7 +174,7 @@ body {
 	        		<label for=""> 성별 : </label> &nbsp;&nbsp;
                     <input type="radio" id="Male" value="M" name="gender" checked>
                     <label for="Male">남자</label> &nbsp;&nbsp;
-                    <input type="radio" id="Female" value="F" name="gender">
+                    <input type="radio" id="Female" value="W" name="gender">
                     <label for="Female">여자</label> &nbsp;&nbsp;
 	      </div>
 	      
