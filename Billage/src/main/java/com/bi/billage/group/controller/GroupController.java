@@ -54,7 +54,7 @@ public class GroupController {
 			  url += "&type=address";
 			  url += "&category=road";
 			  url += "&request=search";
-			  url += "&size=10";
+			  url += "&size=100";
 			  
 		URL requestUrl = new URL(url);
 		HttpURLConnection urlConnection = (HttpURLConnection)requestUrl.openConnection();

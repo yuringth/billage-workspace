@@ -132,7 +132,7 @@
 			<div id="search-text"> 
 				<input id="search" type="text" />			
 			</div>
-			<div id="result-area" style="width:480px; height:300px; border:1px solid black;">
+			<div id="result-area">
 			
 			</div>
 		</div>
@@ -195,14 +195,23 @@
 			
 			$('#result-area').empty();
 			
+			var $text = $('#search').val();
+			
+			if($text.replace(/\s| /gi, "").length != 0){
+			
 			$.ajax({
 				url : "searchAddr.gr",
 				data : { keyword:$('#search').val() },
 				success: function(result){
 					
+					// 변수에 API로 가져온 주소 items[] 객체 배열을 담는다. 
 					const itemsArr = result.response.result.items;
 					
-					let valueArr = [];
+					// 객체배열 요소 하나를 출력해서 필요한 값으로 가공한 문자열을 담는다.
+					const valueArr = [];
+					// 중복없는 배열 요소만 담을 객체 생성
+					const uniqueObj = {};
+					// 출력할 요소에 대한 문자열을 담을 변수 선언 
 					let value = ''; 
 					
 					for(let i in itemsArr){
@@ -212,36 +221,43 @@
 						var splitAdd = fullAdd.split(" ");		
 						valueArr.push(splitAdd[2] + " (" + splitAdd[0] + " " + splitAdd[1]+")");
 
-						//console.log(valueArr);
-												
-						//let result2 = Array.from(new Set(value));
-						//console.log(result2[i].name);
-
-						//console.log(splitAdd[2] + " ( " + splitAdd[0] + " " + splitAdd[1] + ")");
 					}
 					
+					// valueArr에 담긴 주소문자열 배열을 
+					valueArr.forEach(el => {
+						uniqueObj[el] = true; // { 동(시 구) : true, 동 (시 구) : true, ... } 해당 형태로 uniqueObj 객체에 담음  (중복제거 됨) 
+					});
 					
-					const resultArr = valueArr.reduce((acc, v) => {
-						console.log(acc);
-						return acc.find(x => x.name === v.name) ? acc : [...acc, v];
-					}, []);
+					// 객체 키만 모아서 배열로 반환 
+					const uniqueArr = Object.keys(uniqueObj);
 					
-					
-					
-					for(let i in resultArr){			
-						value += resultArr[i] + '<br>';				
+					// 반환된 배열 uniqueArr 요소 하나씩 돌면서 value에 문자열 형태로 담는다. 
+					for(let i in uniqueArr){			
+						value += '<p class="enter-addr">' + uniqueArr[i] + '</p>';				
 					}
 					
-					
-					//console.log(value);
 					$('#result-area').html(value);
 					
-					//console.log(result.response.result.items[0].address.road);
 				},
 				error : function(){
 					console.log('비동기통신실패');
 				}
 			});
+			} else {
+				$('#result-area').html('<p> 해당하는 지역이 없습니다. </p>');
+			}
+		});
+		
+		
+		
+		$(function(){
+			$(document).on('click', '.enter-addr', function(){
+				var $addr = $(this).text().split(/[" ",)]/);
+				console.log($addr[2]);
+				$('input[name=groupLocation]').val($addr[2]);
+				$('#modal-serach-area').hide();
+			});
+			
 			
 		});
 		
