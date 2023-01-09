@@ -1,7 +1,11 @@
 package com.bi.billage.board.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.bi.billage.board.model.vo.ReportBoard;
 
 @Controller
 public class ReportController {
@@ -17,7 +21,17 @@ public class ReportController {
 	}
 	
 	@RequestMapping("insertForm.ro")
-	public String insertReportForm() {
+	public String insertReportForm(int boardNo, HttpSession session) {
+		
+		session.setAttribute("boardNo", boardNo);
+		
 		return"board/reportBoard/reportEnrollForm";
+	}
+	
+	@RequestMapping("insert.ro")
+	public String insertReport(ReportBoard r) {
+		
+		return"main";
+		
 	}
 }
