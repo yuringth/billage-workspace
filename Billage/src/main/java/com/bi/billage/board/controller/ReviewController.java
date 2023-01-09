@@ -65,17 +65,14 @@ public class ReviewController {
 		// url은 손으로 한땀한땀 작성하는게 좋다
 		// 인증서 => 브라우저에 있음 => 우리는 http로 작성할것임! https안됨!!
 		String url ="http://www.aladin.co.kr/ttb/api/ItemLookUp.aspx";
-		url += "?TTBKey=" + serviceKey; // 부여받은 TTBKey값
-		url += "&OptResult=ebookList,usedList,reviewList";
-		url += "&Version=20131101";
-		url += "&itemIdType=ISBN"; // 검색결과 한 페이지당 최대 출력 개수
-		url += "&output=js";
+		url += "?ttbkey=" + serviceKey; // 부여받은 TTBKey값
+		url += "&itemIdType=ISBN"; 
 		url += "&ItemId=" + title; // 출력방법 => json이니까 produces추가해야함!!
+		url += "&output=js";
+		url += "&Version=20131101";
+		url += "&OptResult=ebookList,usedList,reviewList";
 		
 		
-		/* url += "&Query=" + bookTitle; */
-			   
-			   
 		System.out.println(url);
 		
 	    URL requestUrl = new URL(url); // 부모클래스(?)
