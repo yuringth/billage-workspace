@@ -18,10 +18,12 @@ public class ReportController {
 	@Autowired
 	private BoardService boardService;
 	
+	/*
 	@RequestMapping("list.ro")
 	public String selectReportList() {
 		return "board/reportBoard/reportBoardListView";
 	}
+	*/
 	
 	@RequestMapping("detail.ro")
 	public String selectReportDetail() {
