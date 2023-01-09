@@ -122,6 +122,13 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return boardDao.selectSerialList(sqlSession, pi, novelNo);
 	}
+	
+	@Override
+	public ArrayList<Serial> selectSerialDetail(PageInfo pi, int novelNo, String serialNo) {
+		// TODO Auto-generated method stub
+		return boardDao.selectSerialDetail(sqlSession, pi, novelNo, serialNo);
+	}
+	
 	//중고게시판
 	@Override
 	public int insertUsedBoard(UsedBoard b) {

@@ -52,15 +52,18 @@
                         <th>별점</th>
                     </tr>
                 </thead>
+                <c:forEach items="${ list }" var="s">
                 <tbody>
                 		<tr>
-                			<td class="sno">1</td>
-                			<td>01화 개발자로 환생?</td>
-                			<td>233</td>
-                			<td>2022.12.25</td>
-                			<td>★★★★★</td>
+                			<input type="hidden" class="nno" value="${ s.novelNo }">
+                			<td class="sno">${ s.serialNo }</td>
+                			<td>${ s.serialTitle }</td>
+                			<td>${ s.count }</td>
+                			<td>${ s.uploadDate }</td>
+                			<td>${ s.starRating }</td>
                 		</tr>
                 </tbody>
+                </c:forEach>
             </table>
             <br>
             
@@ -69,7 +72,7 @@
             	$(function(){
             		$('#boardList>tbody>tr').click(function(){
             			/* location.href = 'detail.bo?bno=' + $(this).children('.bno').text(); */
-            			location.href = 'detail.se';
+            			location.href = 'detail.se?nno=' + $(this).children('.nno').val() + '&sno=' + $(this).children('.sno').text();
             		})
             	})
             

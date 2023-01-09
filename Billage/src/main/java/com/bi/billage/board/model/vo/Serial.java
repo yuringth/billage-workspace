@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class Serial {
 	
-	private int serialNo; // SERIAL_NO	NUMBER
+	private String serialNo; // SERIAL_NO	NUMBER
 	private int novelNo; // NOVEL_NO	NUMBER
 	private String serialTitle; // SERIAL_TITLE	VARCHAR2(30 BYTE)
 	private String serialContent; // SERIAL_CONTENT	VARCHAR2(4000 BYTE)
@@ -19,5 +19,6 @@ public class Serial {
 	private String nickName;
 	private String novelDisplay;
 	private String novelImg;
+	private int count;
 
 }

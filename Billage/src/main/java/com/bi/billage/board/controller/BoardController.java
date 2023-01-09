@@ -1,5 +1,6 @@
 package com.bi.billage.board.controller;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,8 +37,11 @@ public class BoardController {
 	
 	// 연재 상세보기 화면
 	@RequestMapping("detail.se")
-	public String serialDetailView() {
-		return "board/serialBoard/serialDetailView";
+	public ModelAndView selectSerialDetail(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv, @Param("novelNo") int nno, @Param("serialNo") String sno) {
+		PageInfo pi = Pagination.getPageInfo(boardService.selectSerialListCount(), currentPage, 10, 5);
+		mv.addObject("pi", pi).addObject("list", boardService.selectSerialDetail(pi, nno, sno)).setViewName("board/serialBoard/serialDetailView");
+		
+		return mv;
 	}
 	
 	// 연재 작성 화면
