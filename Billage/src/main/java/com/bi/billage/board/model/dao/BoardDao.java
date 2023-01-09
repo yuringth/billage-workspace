@@ -1,11 +1,14 @@
 package com.bi.billage.board.model.dao;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.bi.billage.board.model.vo.ADBoard;
 import com.bi.billage.board.model.vo.ReportBoard;
+import com.bi.billage.board.model.vo.UsedBoard;
 
 @Repository
 public class BoardDao {
@@ -73,17 +76,78 @@ public class BoardDao {
 	
 	// 세헌
 	public int insertDrawBoard(SqlSessionTemplate sqlSession, ADBoard b) {
-		return sqlSession.insert("ADBoardMapper.insertDrawBoard");
+		return sqlSession.insert("ADBoardMapper.insertDrawBoard", b);
+	}
+
+	public ArrayList<ADBoard> selectDrawBoardList(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("ADBoardMapper.selectDrawBoardList");
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// 유림시작
+	public int insertUsedBoard(SqlSessionTemplate sqlSession, UsedBoard b) {
+		return sqlSession.insert("UsedBoardMapper.insertUsedBoard");	
+		
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
+	// 유림끝
 	
 	
 	

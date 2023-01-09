@@ -35,7 +35,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public ArrayList<ADBoard> selectDrawBoardList() {
 		// TODO Auto-generated method stub
-		return null;
+		return boardDao.selectDrawBoardList(sqlSession);
 	}
 
 	@Override
