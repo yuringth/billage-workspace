@@ -73,7 +73,7 @@ public class ReviewController {
 		url += "&OptResult=ebookList,usedList,reviewList";
 		
 		
-		System.out.println(url);
+		//System.out.println(url);
 		
 	    URL requestUrl = new URL(url); // 부모클래스(?)
 	    HttpURLConnection urlConnection = (HttpURLConnection)requestUrl.openConnection(); // 부모가 자식한테 어케 들어가 하고 다운캐스팉 해주기
