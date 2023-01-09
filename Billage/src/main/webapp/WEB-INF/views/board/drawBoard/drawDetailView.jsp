@@ -120,6 +120,7 @@
 		</form>
 
 
+	<button onclick="location.href='delete.dr'">삭제하기</button>
 	</div>
 	
 	

@@ -90,7 +90,11 @@ public class BoardDao {
 	}
 	
 	public ADBoard selectDrawBoard(SqlSessionTemplate sqlSession, int boardNo) {
-		return sqlSession.selectOne("ADBoardMapper.selectdrawBoard", boardNo);
+		return sqlSession.selectOne("ADBoardMapper.selectDrawBoard", boardNo);
+	}
+	
+	public int deleteDrawBoard(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.update("ADBoardMapper.deleteDrawBoard", boardNo);
 	}
 
 
@@ -150,6 +154,58 @@ public class BoardDao {
 		return sqlSession.insert("usedMapper.insertUsedBoard", b);	
 		
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

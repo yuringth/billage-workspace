@@ -20,11 +20,21 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Autowired SqlSessionTemplate sqlSession;
 
+	//신고게시판	
 	@Override
 	public int insertReport(ReportBoard r) {
 		
 		return boardDao.insertReport(sqlSession, r);
 	}
+	
+	//신고게시판
+	@Override
+	public ArrayList<ReportBoard> selectReportList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
 
 	@Override
 	public int drawIncreaseCount(int boardNo) {
@@ -48,8 +58,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int deleteDrawBoard(int boardNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return boardDao.deleteDrawBoard(sqlSession, boardNo);
 	}
 
 	@Override
@@ -176,6 +185,10 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+
+
+	
 	
 	
 	
