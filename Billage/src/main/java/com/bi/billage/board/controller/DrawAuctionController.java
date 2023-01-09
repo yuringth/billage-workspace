@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bi.billage.board.model.service.BoardService;
-import com.bi.billage.board.model.vo.Board;
+import com.bi.billage.board.model.vo.ADBoard;
 
 @Controller
 public class DrawAuctionController {
