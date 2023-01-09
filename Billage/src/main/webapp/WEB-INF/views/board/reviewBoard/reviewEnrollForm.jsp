@@ -69,6 +69,79 @@
 }
 
 
+
+
+	/*모달관련 스타일*/
+	
+	#write-textarea{
+        text-align: center;
+
+	}
+	
+	#store-report-area{
+        position: fixed;
+        width: 600px;
+        height:900px;
+        background-color: rgb(253, 219, 219);
+        border-radius: 20px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+        z-index: 1000;
+    }
+
+    #store-report-area .close{
+        font-size: 40px;
+        background-color:rgba(95, 152, 124, 0);
+        border: 1px solid rgba(245, 245, 220, 0);
+        cursor: pointer;
+        color:rgb(0, 0, 0);
+        padding-left: 560px;
+    }
+	
+    #store-report-area{
+        height:720px;
+    }
+
+    .modal-title>h2{
+        font-size: 34px;
+        text-align: center;
+        font-weight: 900px;
+        font-family: 'Happiness-Sans-Title';
+    }
+
+    #store-report-area p {
+        font-weight: 900;
+        padding: 5px 20px;
+        font-size: 20px;
+    }
+
+    #st-text-area p {
+        padding-left: 40px;
+        font-weight: 400;
+        font-size: 16px;
+    }
+
+    #store-name-area{
+        margin: 5px 10px;
+        padding-left: 50px;
+        font-size: 30px;
+        color:rgb(109, 104, 104);
+        /* font-weight: 00; 
+        font-family: 'Happiness-Sans-Title';
+    }
+
+    #tag-area {
+        margin-left: 45px;
+    }
+    
+    .tag-opt {
+        font-size: 18px;
+    }
+	
+
+
 </style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>

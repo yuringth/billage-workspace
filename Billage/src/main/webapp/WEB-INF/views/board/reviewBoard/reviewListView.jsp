@@ -233,7 +233,7 @@
 	<div class="pagingArea">
 		<button class="btn btn-secondary" onclick="location.href='insert.re'">글작성</button>
 	</div>
-  
+  </div>
 
 	<!-- 푸터바 -->
 	<jsp:include page="../../common/footer.jsp" />
