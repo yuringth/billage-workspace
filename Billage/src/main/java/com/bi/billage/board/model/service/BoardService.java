@@ -41,8 +41,7 @@ public interface BoardService {
 	
 	ArrayList<ReportBoard> selectReportList();
 	
-	
-	
+	ReportBoard selectReport(int rno);
 	
 	
 	

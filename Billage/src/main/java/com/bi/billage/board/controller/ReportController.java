@@ -31,9 +31,9 @@ public class ReportController {
 	@RequestMapping("list.ro")
 	public ModelAndView selectReportList(ModelAndView mv) {
 		
-		ArrayList<ReportBoard> list = boardService.selectReport();
+		ArrayList<ReportBoard> list = boardService.selectReportList();
 		
-		mv.addObject("list", boardService.selectReport()).setViewName("board/reportBoard/reportBoardListView");
+		mv.addObject("list", boardService.selectReportList()).setViewName("board/reportBoard/reportBoardListView");
 		
 		
 		return mv;
