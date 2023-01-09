@@ -138,4 +138,14 @@ public class DrawAuctionController {
 		return changeName;
 	}
 	
+	@RequestMapping("delete.dr")
+	public ModelAndView deleteDraw(int boardNo, ModelAndView mv) {
+		if(boardService.deleteDrawBoard(boardNo) > 0) {
+			mv.setViewName("board/drawBoard/drawBoardListView");
+		} else {
+			mv.addObject("errorMsg", "게시글 삭제 실패").setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	
 }

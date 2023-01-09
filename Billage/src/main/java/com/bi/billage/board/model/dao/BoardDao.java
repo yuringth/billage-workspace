@@ -21,10 +21,10 @@ public class BoardDao {
 	}
 	
 	
-	
-	
-	
-	
+	public ArrayList<ReportBoard> selectReportList(SqlSession sqlSession) {
+		
+		return (ArrayList)sqlSession.selectList("reportMapper.selectReportList");
+	}
 	
 	
 	
@@ -76,9 +76,6 @@ public class BoardDao {
 	
 	// 세헌
 	
-	public int drawIncreaseCount(SqlSessionTemplate sqlSession, int boardNo) {
-		return sqlSession.update("ADBoardMapper", boardNo);
-	}
 	
 	public int insertDrawBoard(SqlSessionTemplate sqlSession, ADBoard b) {
 		return sqlSession.insert("ADBoardMapper.insertDrawBoard", b);
@@ -88,6 +85,17 @@ public class BoardDao {
 		return (ArrayList)sqlSession.selectList("ADBoardMapper.selectDrawBoardList");
 	}
 
+	public int drawIncreaseCount(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.update("ADBoardMapper.drawIncreaseCount", boardNo);
+	}
+	
+	public ADBoard selectDrawBoard(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.selectOne("ADBoardMapper.selectDrawBoard", boardNo);
+	}
+	
+	public int deleteDrawBoard(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.update("ADBoardMapper.deleteDrawBoard", boardNo);
+	}
 
 
 
@@ -143,9 +151,113 @@ public class BoardDao {
 	
 	// 유림시작
 	public int insertUsedBoard(SqlSessionTemplate sqlSession, UsedBoard b) {
-		return sqlSession.insert("UsedBoardMapper.insertUsedBoard");	
+		return sqlSession.insert("usedMapper.insertUsedBoard", b);	
 		
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

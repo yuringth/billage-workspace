@@ -1,5 +1,7 @@
 package com.bi.billage.board.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +18,12 @@ public class ReportController {
 	@Autowired
 	private BoardService boardService;
 	
+	/*
 	@RequestMapping("list.ro")
 	public String selectReportList() {
 		return "board/reportBoard/reportBoardListView";
 	}
+	*/
 	
 	@RequestMapping("detail.ro")
 	public String selectReportDetail() {
@@ -47,6 +51,13 @@ public class ReportController {
 			return "common/errorPage";
 		}
 		
+		}
+	@RequestMapping("list.ro")
+	public String selectReportList(Model model) {
+		
+		ArrayList<ReportBoard> list = boardService.selectReportList();
+		
+		return "board/reportBoard/reportListView";
 		
 	}
 }
