@@ -30,8 +30,8 @@ public class BoardServiceImpl implements BoardService {
 	//신고게시판
 	@Override
 	public ArrayList<ReportBoard> selectReportList() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return boardDao.selectReportList(sqlSession);
 	}
 	
 	
