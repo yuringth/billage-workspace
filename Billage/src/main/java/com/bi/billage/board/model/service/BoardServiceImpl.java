@@ -38,7 +38,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int insertDrawBoard(ADBoard b) {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
