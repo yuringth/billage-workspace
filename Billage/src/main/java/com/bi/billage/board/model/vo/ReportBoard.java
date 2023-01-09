@@ -13,4 +13,5 @@ public class ReportBoard {
 	private String reportDate;//REPORT_DATE
 	private String reportStatus;//REPORT_STATUS
 	private int boardNo;
+	private String nickName;
 }
