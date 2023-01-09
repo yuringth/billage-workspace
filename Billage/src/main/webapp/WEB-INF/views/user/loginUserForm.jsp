@@ -94,21 +94,23 @@ box-shadow: none;
 			<div class="app-title">
 				<h1>로그인</h1>
 			</div>
-
-			<div class="login-form">
-				<div class="control-group">
-				<input type="text" class="login-field" value="" placeholder="아이디를 입력하세요." id="login-name">
-				<label class="login-field-icon fui-user" for="login-name"></label>
-				</div>
-
-				<div class="control-group">
-				<input type="password" class="login-field" value="" placeholder="비밀번호를 입력하세요." id="login-pass">
-				<label class="login-field-icon fui-lock" for="login-pass"></label>
-				</div>
-
-				<a class="btn btn-primary btn-large btn-block" href="#">로그인하기</a>
-				<a class="login-link" href="#">비밀번호찾기</a>
-			</div>
+			
+			<form action="login.me" method="post">
+				<div class="login-form">
+					<div class="control-group">
+					<input type="text" class="login-field" placeholder="아이디를 입력하세요." id="login-name" name="userId">
+					<label class="login-field-icon fui-user" for="login-name"></label>
+					</div>
+	
+					<div class="control-group">
+					<input type="password" class="login-field" placeholder="비밀번호를 입력하세요." id="login-pass" name="userPwd">
+					<label class="login-field-icon fui-lock" for="login-pass"></label>
+					</div>
+	
+					<a class="btn btn-primary btn-large btn-block">로그인하기</a>
+					<a class="login-link" href="#">비밀번호찾기</a>
+				</div>l
+			</form>
 		</div>
 	</div>
 	
