@@ -25,6 +25,7 @@
 		        ,report_title
 		        ,report_category
 		        ,report_content
+		        ,report_date
 		        ,board_no
 		        )
  	 values
@@ -34,6 +35,7 @@
  	 		  ,#{reportTitle}
  	 		  ,#{reportCategory}
  	 		  ,#{reportContent}
+ 	 		  ,sysdate
  	 		  ,#{boardNo}
  	 		  )       
 		        
@@ -53,4 +55,19 @@
 		        
 	</select>
 	
+	<select id="selectReport" parameterType="_int" resultMap="reprtResultSet">
+		select
+		        report_no
+		        ,user_no
+		        ,report_title
+		        ,report_category
+		        ,report_content
+		        ,report_status
+		        ,board_no
+		from
+		      report
+		where
+		      report_no = #{rno}      
+				
+	</select>
 </mapper>
