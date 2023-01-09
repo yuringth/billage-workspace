@@ -6,6 +6,61 @@ import com.bi.billage.board.model.vo.ADBoard;
 
 public interface BoardService {
 	
+	//휘수 구역
+	int insertReport();
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//==========================================휘수 구역 끝=
+
+
+
+	
 	///////////////////////
 	// 게시글 조회수 증가
 	int increaseCount (int boardNo);
