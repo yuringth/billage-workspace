@@ -21,6 +21,7 @@
 		        report
 		        (
 		        report_no
+		        ,user_no
 		        ,report_title
 		        ,report_category
 		        ,report_content
@@ -29,11 +30,10 @@
  	 values
  	 		  (
  	 		  seq_repno.nextval
- 	 		  ,#{reportTitle}
  	 		  ,#{userNo}
- 	 		  ,#{reprotTitle}
+ 	 		  ,#{reportTitle}
  	 		  ,#{reportCategory}
- 	 		  ,#{reportContetn}
+ 	 		  ,#{reportContent}
  	 		  ,#{boardNo}
  	 		  )       
 		        

@@ -27,9 +27,9 @@ public class ReportController {
 	}
 	
 	@RequestMapping("insertForm.ro")
-	public String insertReportForm(int boardNo, HttpSession session) {
+	public String insertReportForm(/*int boardNo ,*/HttpSession session) {
 		
-		session.setAttribute("boardNo", boardNo);
+		session.setAttribute("boardNo", 6);
 		
 		return"board/reportBoard/reportEnrollForm";
 	}
