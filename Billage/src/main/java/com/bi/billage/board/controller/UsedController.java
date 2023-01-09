@@ -32,8 +32,8 @@ public class UsedController {
 	
 	// 글작성
 	@RequestMapping("upload.ud")
-	public String usedUpload(UsedBoard ud, MultipartFile upfile) {
-		System.out.println(ud);
+	public String usedUpload(UsedBoard b, MultipartFile upfile) {
+		System.out.println(b);
 		System.out.println(upfile);
 		
 		

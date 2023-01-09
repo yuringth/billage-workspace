@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import com.bi.billage.board.model.vo.ADBoard;
 import com.bi.billage.board.model.vo.ReportBoard;
+import com.bi.billage.board.model.vo.ReviewBoard;
+import com.bi.billage.board.model.vo.UsedBoard;
 
 public interface BoardService {
 	
@@ -99,6 +101,48 @@ public interface BoardService {
 	
 	// 유림 시작
 	
+	// 중고게시판 작성 (insert) 
+	int insertUsedBoard(UsedBoard b);
+	
+	// 중고게시글 조회수 증가 (update)
+	int increaseUsedCount(int boardNo);
+	// 중고게시판 상세 조회 (select)
+	UsedBoard selectUsedBoard(int boardNo);
+	
+	// 중고게시판 삭제 (update)
+	int deleteUsedBoard(int boardNo);
+	
+	// 중고게시글 수정 서비스(update)
+	int updateUsedBoard(UsedBoard b);
+	
+	// 중고게시판 TOP-N 분석(조회수 높은 순으로 띄우기)(select)
+	ArrayList<UsedBoard> selectTopBoard();
+	
+	
+	
+	// 리뷰게시판 작성 (insert) 
+	int insertReviewBoard(UsedBoard b);
+	
+	// 리뷰게시글 조회수 증가 (update)
+	int increaseReviewCount(int boardNo);
+	// 리뷰게시판 상세 조회 (select)
+	ReviewBoard selectReviewBoard(int boardNo);
+	
+	// 리뷰게시판 삭제 (update)
+	int deleteReviewBoard(int boardNo);
+	
+	// 리뷰게시글 수정 서비스(update)
+	int updateReviewBoard(UsedBoard b);
+	
+	
+	
+	
+	// 댓글 나중에......
+	// 댓글 리스트 조회서비스(Ajax)(select)
+//	ArrayList<Reply> selectReplyList(int boardNo);
+	
+	// 댓글 작성 서비스(Ajax)(insert)
+//	int insertReply(Reply r);
 	
 	
 	
