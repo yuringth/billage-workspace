@@ -117,7 +117,7 @@ public class UserController {
 			model.addAttribute("errorMsg", "에러발생");
 			return "common/errorPage";
 		} else {
-			session.setAttribute("loginUser", "loginUser");
+			session.setAttribute("loginUser", loginUser);
 			return "redirect:/";
 		}
 	}
