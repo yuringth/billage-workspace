@@ -48,7 +48,7 @@ public class DrawAuctionController {
 	}
 	
 	@RequestMapping("insert.dr")
-	public String insertDrawBoard(Board b, MultipartFile upFile, HttpSession session, Model model) {
+	public String insertDrawBoard(ADBoard b, MultipartFile upFile, HttpSession session, Model model) {
 		
 		if(!upFile.getOriginalFilename().equals("")) { // getOriginalFileName == filename필드의 값을 반환함
 			
