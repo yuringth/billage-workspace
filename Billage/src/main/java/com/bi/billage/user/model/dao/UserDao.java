@@ -43,7 +43,7 @@ public class UserDao {
 
 	public int updateSerialRequest(SqlSessionTemplate sqlSession, int requestNo) {
 		return sqlSession.update("serialMapper.updateSerialRequest", requestNo);
-	
+	}
 	// id 중복체크
 	public int idCheck(SqlSessionTemplate sqlSession, String checkId) {
 		return sqlSession.selectOne("userMapper.idCheck", checkId);
