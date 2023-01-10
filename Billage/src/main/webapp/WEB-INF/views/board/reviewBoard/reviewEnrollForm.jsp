@@ -201,7 +201,7 @@
 			<div class="book-detail-area">
 				<div class="content-photo-detail">
 					<!-- api에서 끌고 오는거니까 첨부파일로 안해도 되는게 맞겠지? <input type="file" name="upfile"> 이런식으로.. -->
-					<div id="book_imag" name="bookImag"><img src="" id="book_scr">사진</div>
+					<div id="book_imag" name="bookImag"><img src="" id="book_src"></div>
 				</div>
 				
 				<!-- review 테이블 : book_content, book_publisher, book_date 컬럼 추가  -->
@@ -366,18 +366,14 @@
 				 console.log($('#md_book_author').text());
 				 console.log($('#md_book_date').text());
 				 console.log($('#md_book_publisher').text());
-				 console.log($('#md_img').attr('src'));
+				 console.log($('#md_img').attr('src')); // http:// sljdgkjslkg.jpg
 				 
 				 
 				 $('#book_title').html($('#md_book_title').text());
 				 $('#book_author').html($('#md_book_author').text());
 				 $('#book_publisher').html($('#md_book_publisher').text());
 				 $('#book_date').html($('#md_book_date').text());
-				 
-				 
-				// $('#book_imag').html($('#md_img').attr('src', "$('#md_img').attr('src')"));
-				 
-				 //$('#book_scr').attr('scr', '$('#md_img').attr('src')');
+				 $('#book_src').attr('src', $('#md_img').attr('src'));
 				 
 				 
 				 
