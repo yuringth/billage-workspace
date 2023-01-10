@@ -23,12 +23,17 @@
 		<result column="BOOK_NO"	    property="bookNo" />
 	</resultMap>
 
+	<resultMap id="bookResultSet" type="book">
+		<result column="BOOK_NAME"      property="bookName" />
+		<result column="ISBN"		    property="isbn" />
+	</resultMap>
+
 
 
 
 
 	<!-- isbn 조회 쿼리문 -->
-	<select id="selectIsbn" parameterType="review">
+	<select id="selectIsbn" parameterType="book" resultMap="bookResultSet">
 		select
 		       isbn
 		  from 

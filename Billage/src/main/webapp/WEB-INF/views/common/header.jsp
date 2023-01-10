@@ -192,7 +192,7 @@
 					<li><a href="list.ac">경매</a></li>
 					<li><a href="list.ud">중고</a></li>
 					<li><a href="#">마을</a></li>
-					<li><a href="admin.ad">임시<br>관리자</a></li>
+					<li><a href="admin.ad">임시</a></li>
 				</ul>
 			</div> <!-- outer-bottom 끝 -->
 		</div> <!-- header-outer 끝 -->

@@ -374,6 +374,7 @@
 				 $('#book_publisher').html($('#md_book_publisher').text());
 				 $('#book_date').html($('#md_book_date').text());
 				 
+				 
 				// $('#book_imag').html($('#md_img').attr('src', "$('#md_img').attr('src')"));
 				 
 				 //$('#book_scr').attr('scr', '$('#md_img').attr('src')');

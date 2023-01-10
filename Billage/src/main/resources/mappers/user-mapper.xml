@@ -83,6 +83,15 @@
 	
 	</select>
 	
+	<!-- 연재요청 수락후 회원등급변경 -->
+	<update id="updateUserGrade">
+		update
+				member
+		set
+				user_grade = '2'
+		where
+				user_no = #{ userNo }
+	</update>
 	<!-- id중복체크용 쿼리문 -->
 	<select id="idCheck" resultType="_int">
 		SELECT

@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <style>
     * {
         margin: 0;
@@ -14,10 +17,6 @@
         box-sizing: border-box;
         list-style: none;
         text-decoration: none;
-    }
-    
-    body {
-        background-color: #f3f5f9;
     }
     
     .wrapper {
@@ -30,7 +29,7 @@
         height: 100%;
         background: #4b4276;
         padding: 30px 0px;
-        margin-left: 200px;
+        margin-left: 50px;
         /* position: fixed; */
     }
     .wrapper .sidebar h2 {
@@ -79,7 +78,7 @@
     }
     .wrapper .main_content {
         width: 100%;
-        margin-left: 150px;
+        margin-left: 50px;
     }
     .wrapper .main_content .header {
         padding: 20px;
@@ -87,21 +86,36 @@
         color: #717171;
         border-bottom: 1px solid #e0e4e8;
     }
-    .wrapper .main_content .info {
-        margin: 20px;
-        color: #717171;
-        line-height: 25px;
-    }
-
-    .wrapper .main_content .info div {
-        margin-bottom: 20px;
-    }
-
     @media (max-height: 500px) {
         .social_media {
             display: none !important;
         }
     }
+    /*-----------------------------------*/
+    @import url("https://fonts.googleapis.com/css?family=IBM Plex Sans:400,400i,700");
+
+	*, :before, :after {
+		box-sizing: border-box;
+	}
+	.title {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+	}
+	.tr {
+		display: grid;
+		grid-template-columns: 15% 15% 20% 20% 15% 15%;
+	}
+	.header {
+		border-bottom: solid 1px #aaa;
+	}
+	.body {
+		border-bottom: solid 1px #aaa;
+	}
+	
+	#boardList {text-align:center;}
+    #boardList>tbody>tr:hover {cursor:pointer;}
 </style>
 <body>
    <jsp:include page="../common/header.jsp"/>
@@ -120,11 +134,56 @@
             </ul>
         </div>
         <div class="main_content">
-            <h2>hello, admin</h2>
+            <div class="title">
+				<h1 class="title-text">연재 요청 조회 및 관리</h1>
+			</div>
+			<table id="contentArea" algin="center" class="table">
+                <tr>
+                    <th width="100">제목</th>
+                    <td colspan="3">${ sr.requestTitle }</td>
+                </tr>
+                <tr>
+                    <th>작성일</th>
+                    <td>${ sr.requestDate }</td>
+                </tr>
+                <tr>
+                    <th>내용</th>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <td colspan="4"><p style="height:150px;">${ sr.requestContent }</p></td>
+                </tr>
+                <tr>
+                    <th>첨부파일</th>
+                    <td colspan="3">
+                    	<c:choose>
+                    		<c:when test="${ empty sr.originName }">
+                    			첨부파일이 없습니다.
+                    		</c:when>
+                    		<c:otherwise>
+                        		<a href="${ sr.changeName }" download="${ sr.originName }">${ sr.originName }</a>
+                        	</c:otherwise>
+                        </c:choose>
+                    </td>
+                </tr>
+            </table>
+            <div>
+            ${ sr.requestNo }
+            ${ sr.userNo }
+            <form action="" method="get" id="updateForm">
+            	<input type="hidden" name="rno" value="${ sr.requestNo }">
+            	<input type="hidden" name="uno" value="${ sr.userNo }">
+            </form>
+            <a class="btn btn-primary" onclick="agreeRequest();">수락하기</a>
+            </div>
+            <br>
         </div>
-    </div>
-    
-    
+      </div>
+      <script>
+      	function agreeRequest() {
+      		$('#updateForm').attr('action', 'update.re').submit();
+      	}
+      </script>
    <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>
