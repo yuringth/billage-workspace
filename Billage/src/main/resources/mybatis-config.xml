@@ -16,6 +16,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.bi.billage.group.model.vo.Group" alias="group" />
 		<typeAlias type="com.bi.billage.board.model.vo.Novel" alias="novel" />
 		<typeAlias type="com.bi.billage.board.model.vo.Serial" alias="serial" />
+		<typeAlias type="com.bi.billage.board.model.vo.SerialRequest" alias="serialRequest" />
 		<typeAlias type="com.bi.billage.board.model.vo.ReportBoard" alias="Report" />
 		<typeAlias type="com.bi.billage.board.model.vo.UsedBoard" alias="used" />
 		<typeAlias type="com.bi.billage.board.model.vo.ReviewBoard" alias="review" />

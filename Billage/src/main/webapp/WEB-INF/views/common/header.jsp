@@ -133,6 +133,13 @@
 
 
 --%>
+	<!-- alert 메시지 -->
+	<c:if test="${ not empty alertMsg }">
+		<script>
+			alertify.alert('안녕?', '${alertMsg}', function(){ alertify.success('확인'); });
+		</script>
+		<c:remove var="alertMsg" />
+	</c:if>
 
 	<div id="all-header">
 		<div id="header-outer">
