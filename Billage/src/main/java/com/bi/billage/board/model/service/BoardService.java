@@ -3,6 +3,7 @@ package com.bi.billage.board.model.service;
 import java.util.ArrayList;
 
 import com.bi.billage.board.model.vo.ADBoard;
+import com.bi.billage.board.model.vo.Book;
 import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.ReportBoard;
 import com.bi.billage.board.model.vo.ReviewBoard;
@@ -146,6 +147,10 @@ public interface BoardService {
 	
 	// 중고게시판 TOP-N 분석(조회수 높은 순으로 띄우기)(select)
 	ArrayList<UsedBoard> selectTopBoard();
+	
+	
+	// 책 이름 작성 후 -> ISBN을 가져오기
+	Book selectIsbn(String title);
 	
 	
 	

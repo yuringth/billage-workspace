@@ -20,6 +20,7 @@
 		<result column="USER_NO" property="userNo"/>
 		<result column="ACCEPT_STATUS" property="acceptStatus"/>
 		<result column="TRY_POINT" property="tryPoint"/>
+		<result column="NICKNAME" property="nickname"/>
 	</resultMap>
 	<resultMap type="adboard" id="auctionBoardResultSet">
 		<result column="AUCTION_NO" property="boardNo"/>
@@ -39,6 +40,7 @@
 		<result column="INSTANTLY_PRICE" property="instantlyPrice"/>
 		<result column="BID_PRICE" property="bidPrice"/>
 		<result column="NOW_PRICE" property="nowPrice"/>
+		<result column="NICKNAME" property="nickname"/>
 	</resultMap>	
 		
 	<!-- 추첨 글 작성 -->

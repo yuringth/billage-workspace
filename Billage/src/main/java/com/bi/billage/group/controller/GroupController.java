@@ -6,19 +6,28 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.bi.billage.common.savefile.SaveFile;
+import com.bi.billage.group.model.service.GroupService;
+import com.bi.billage.group.model.vo.Group;
 
 @Controller
 public class GroupController {
 	
-	
+	// API serviceKey
 	private static final String serviceKey = "B15BD225-F8CB-34E6-9DC3-A77C2FE5F5A9";
 	
+	@Autowired
+	private GroupService groupService;
 	
-	//@Autowired
-	//private GroupService groupService;
+	
 	
 	//등록된 모임 리스트를 가지고 와야 함 , 페이징 처리 필요
 	@RequestMapping("list.gr")
@@ -38,12 +47,10 @@ public class GroupController {
 		return "group/groupDetailView";
 	}
 	
-	// 마이페이지에서 모임 개설하기 클릭시 실행되는 메소드 
-	@RequestMapping("enrollForm.gr")
-	public String enrollGroup() {
-		return "group/groupEnrollForm";
-	}
+
 	
+	
+	// 지역을 찾는 API을 구현 함 
 	@ResponseBody
 	@RequestMapping(value="searchAddr.gr", produces = "application/json; charset=UTF-8")
 	public String ajaxSearchAddr(String keyword) throws IOException {
@@ -74,4 +81,28 @@ public class GroupController {
 		
 		return responseText;
 	}
+	
+	
+	// 마이페이지에서 모임 개설하기 클릭시 실행되는 메소드  -- 모임등록폼 작성 페이지 
+	@RequestMapping("enrollForm.gr")
+	public String enrollGroup() {
+		return "group/groupEnrollForm";
+	}
+	
+	// 모임등록 하면 값 들어오는 메소드 --------------------------------- 기능 구현 필요함 
+	@RequestMapping("create.gr")
+	public String insertGroup(Group group, MultipartFile upfile, HttpSession session) {
+		System.out.println(group);
+		
+		if(!upfile.getOriginalFilename().equals("")) {
+			String changeName = SaveFile.getSaveFile(upfile, session);
+			group.setGroupImg(changeName);
+		}
+		
+		
+		
+		return "group/groupAdminView";
+	}
+	
+	
 }
