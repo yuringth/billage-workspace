@@ -23,12 +23,15 @@
 		<result column="BOOK_NO"	    property="bookNo" />
 	</resultMap>
 
-
+	<resultMap id="bookResultSet" type="book">
+		<result column="BOOK_NAME"      property="bookName" />
+		<result column="ISBN"		    property="isbn" />
+	</resultMap>
 
 
 
 	<!-- isbn 조회 쿼리문 -->
-	<select id="selectIsbn" parameterType="review">
+	<select id="selectIsbn" parameterType="book" resultMap="bookResultSet">
 		select
 		       isbn
 		  from 
@@ -36,5 +39,18 @@
 		 where
 		       book_name = #{bookName}
 	</select>
+	
+	
+	<!-- 글작성 쿼리문 -->
+<!-- 
+<insert id="insertReviewBoard" parameterType="review">
+ 리뷰넘버, 작성자, 별점, 리뷰 제목, 리뷰내용, 작성일, 조회수, 리뷰 상태, 책제목, 작가, 장르, 사진, 포인트
+REVIEW_NO, USER_NO, REVIEW_STAR REVIEW_TITLE, REVIEW_CONTENT, CREATE_DATE, COUNT, REVIEW_STATUS, BOOK_TITLE, BOOK_AUTHOR, BOOK_GENRE, BOOK_IMAG, BOOK_POINT
+INSERT INTO REVIEW
+values(SEQ_RNO, admin, 3, '자바의신이 되고싶으시다면', '자바의정석은 정말 좋습니다',SYSDATE, , 'N', ');
+</insert>
+-->
+	
+	
 	
 </mapper>

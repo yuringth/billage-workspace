@@ -125,8 +125,8 @@
         <div class="sidebar">
             <h2>관리자 페이지</h2>
             <ul>
-                <li><a href="userList.ad"><i class="fas fa-user"></i>회원 관리</a></li>
-                <li><a href="groupList.ad"><i class="fas fa-home"></i>모임 관리</a></li>
+                <li><a href="selectUser.ad"><i class="fas fa-user"></i>회원 관리</a></li>
+                <li><a href="selectGroup.ad"><i class="fas fa-home"></i>모임 관리</a></li>
                 <li><a href="inquiryList.ad"><i class="fas fa-address-card"></i>1:1 문의</a></li>
                 <li><a href="faqList.fa"><i class="fas fa-project-diagram"></i>FAQ 관리</a></li>
                 <li><a href="noticeList.no"><i class="fas fa-blog"></i>공지사항</a></li>
@@ -137,46 +137,53 @@
             <div class="title">
 				<h1 class="title-text">연재 요청 조회 및 관리</h1>
 			</div>
-				<table id="serialRequestList" class="table table-hover" align="center">
-                <thead>
-                    <tr>
-                        <th>요청번호</th>
-                        <th>요청회원</th>
-                        <th>요청제목</th>
-                        <th>요청날짜</th>
-                        <th>승락여부</th>
-                    </tr>
-                </thead>
-                <c:forEach items="${ list }" var="sr">
-                <tbody>
-                		<tr>
-                			<td class="rno">${sr.requestNo}</td>
-                			<td>${sr.nickName}</td>
-                			<td>${sr.requestTitle}</td>
-                			<td>${sr.requestDate}</td>
-                			<td>${sr.acceptance}</td>
-                		</tr>
-                </tbody>
-                </c:forEach>
+			<table id="contentArea" algin="center" class="table">
+                <tr>
+                    <th width="100">제목</th>
+                    <td colspan="3">${ sr.requestTitle }</td>
+                </tr>
+                <tr>
+                    <th>작성일</th>
+                    <td>${ sr.requestDate }</td>
+                </tr>
+                <tr>
+                    <th>내용</th>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <td colspan="4"><p style="height:150px;">${ sr.requestContent }</p></td>
+                </tr>
+                <tr>
+                    <th>첨부파일</th>
+                    <td colspan="3">
+                    	<c:choose>
+                    		<c:when test="${ empty sr.originName }">
+                    			첨부파일이 없습니다.
+                    		</c:when>
+                    		<c:otherwise>
+                        		<a href="${ sr.changeName }" download="${ sr.originName }">${ sr.originName }</a>
+                        	</c:otherwise>
+                        </c:choose>
+                    </td>
+                </tr>
             </table>
+            <div>
+            ${ sr.requestNo }
+            ${ sr.userNo }
+            <form action="" method="get" id="updateForm">
+            	<input type="hidden" name="rno" value="${ sr.requestNo }">
+            	<input type="hidden" name="uno" value="${ sr.userNo }">
+            </form>
+            <a class="btn btn-primary" onclick="agreeRequest();">수락하기</a>
+            </div>
             <br>
-            
-            <script>
-            
-            	$(function(){
-            		$('#serialRequestList>tbody>tr').click(function(){
-            			location.href = 'detail.sr?rno=' + $(this).children('.rno').text();
-            		})
-            	})
-            
-            </script>
-       
-            <br><br>
         </div>
-        <br><br>
-			<br>
-        </div>
-    </div>
+      </div>
+      <script>
+      	function agreeRequest() {
+      		$('#updateForm').attr('action', 'update.re').submit();
+      	}
+      </script>
    <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

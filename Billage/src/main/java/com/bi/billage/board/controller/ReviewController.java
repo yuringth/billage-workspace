@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bi.billage.board.model.service.BoardService;
+import com.bi.billage.board.model.vo.Book;
+import com.bi.billage.board.model.vo.ReviewBoard;
 
 @Controller
 public class ReviewController {
@@ -20,10 +22,56 @@ public class ReviewController {
 	private BoardService boardService;
 
 	
-	
-	
+	// api 오픈 키 => 나중에 알라딘 api 발급받아서 serviceKey에 업데이트 하세용
 	private static final String serviceKey="ttbiuui12341246001";
-
+	
+	// api도전
+	@ResponseBody
+	@RequestMapping(value="search.bk", produces="application/json; charset=UTF-8")
+	public String reviewApi (String title) throws IOException {
+		
+		
+		Book isbn = boardService.selectIsbn(title);
+		
+		System.out.println(isbn);
+		
+		// url은 손으로 한땀한땀 작성하는게 좋다
+		// 인증서 => 브라우저에 있음 => 우리는 http로 작성할것임! https안됨!!
+		String url ="http://www.aladin.co.kr/ttb/api/ItemLookUp.aspx";
+		url += "?ttbkey=" + serviceKey; // 부여받은 TTBKey값
+		url += "&itemIdType=ISBN"; 
+		url += "&ItemId=" + isbn.getIsbn(); // 출력방법 => json이니까 produces추가해야함!!
+		url += "&output=js";
+		url += "&Version=20131101";
+		url += "&OptResult=ebookList,usedList,reviewList";
+		
+		
+		//System.out.println(url);
+		
+		URL requestUrl = new URL(url); // 부모클래스(?)
+		HttpURLConnection urlConnection = (HttpURLConnection)requestUrl.openConnection(); // 부모가 자식한테 어케 들어가 하고 다운캐스팉 해주기
+		urlConnection.setRequestMethod("GET");
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+		
+		String responseText = br.readLine();
+		
+		br.close();//버퍼더리더 반납
+		urlConnection.disconnect(); // 뭐지?
+		
+		return responseText; // 응답데이터임!! 	@ResponseBody
+	}
+	
+	
+	// 리뷰게시판 -> 상품 검색 api 페이지 나옴 => 삭제함
+	/*
+	@RequestMapping("search.re")
+	public String reviewSearchForm() {
+		return "board/reviewBoard/reviewSearchView";
+	}
+	 */
+	
+	
 	
 	
 	// 리뷰게시판 목록 조회 화면
@@ -47,12 +95,6 @@ public class ReviewController {
 	}
 	
 	
-	// 리뷰게시판 -> 상품 검색 api 페이지 나옴
-	@RequestMapping("search.re")
-	public String reviewSearchForm() {
-		return "board/reviewBoard/reviewSearchView";
-	}
-	
 	
 	// 리뷰게시판 -> 글수정 누를 시 -> 수정폼 화면 나옴
 	@RequestMapping("enrollForm.re")
@@ -61,48 +103,11 @@ public class ReviewController {
 	}
 	
 	
-	
-	
-	
-	
-	
-	// api도전
-	@ResponseBody
-	@RequestMapping(value="search.bk", produces="application/json; charset=UTF-8")
-	public String reviewApi (String title) throws IOException {
+	@RequestMapping("insertBoard.re")
+	public String insertReviewBoard(ReviewBoard b) {
 		
-		
-		boardService.selectIsbn(title);
-
-		
-		// url은 손으로 한땀한땀 작성하는게 좋다
-		// 인증서 => 브라우저에 있음 => 우리는 http로 작성할것임! https안됨!!
-		String url ="http://www.aladin.co.kr/ttb/api/ItemLookUp.aspx";
-		url += "?ttbkey=" + serviceKey; // 부여받은 TTBKey값
-		url += "&itemIdType=ISBN"; 
-		url += "&ItemId=" + title; // 출력방법 => json이니까 produces추가해야함!!
-		url += "&output=js";
-		url += "&Version=20131101";
-		url += "&OptResult=ebookList,usedList,reviewList";
-		
-		
-		//System.out.println(url);
-		
-	    URL requestUrl = new URL(url); // 부모클래스(?)
-	    HttpURLConnection urlConnection = (HttpURLConnection)requestUrl.openConnection(); // 부모가 자식한테 어케 들어가 하고 다운캐스팉 해주기
-	    urlConnection.setRequestMethod("GET");
-	    
-	    BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-	    
-	    String responseText = br.readLine();
-	    
-	    br.close();//버퍼더리더 반납
-	    urlConnection.disconnect(); // 뭐지?
-	    
-	    
-	    
-	    
-	    return responseText; // 응답데이터임!! 	@ResponseBody
+		boardService.insertReviewBoard(b);
+		return "board/reviewBoard/reviewListView";
 	}
 	
 	

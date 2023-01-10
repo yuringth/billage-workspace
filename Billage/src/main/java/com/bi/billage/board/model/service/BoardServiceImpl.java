@@ -180,11 +180,11 @@ public class BoardServiceImpl implements BoardService {
 		return null;
 	}
 
-	// 리뷰게시판
+	// 리뷰게시판 => 글작성
 	@Override
-	public int insertReviewBoard(UsedBoard b) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertReviewBoard(ReviewBoard b) {
+
+		return boardDao.insertReviewBoard(sqlSession, b);
 	}
 
 	// 리뷰게시판
@@ -216,7 +216,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	
-	// 리뷰게시판 isbn
+	// 리뷰게시판 => book테이블에서 책제목으로 isbn 문자열 select하기
 	@Override
 	public Book selectIsbn(String title) {
 		

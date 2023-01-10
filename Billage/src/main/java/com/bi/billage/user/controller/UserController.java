@@ -2,14 +2,18 @@ package com.bi.billage.user.controller;
 
 import javax.servlet.http.HttpSession;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bi.billage.common.model.vo.PageInfo;
+import com.bi.billage.common.template.Pagination;
 import com.bi.billage.user.model.service.UserService;
 import com.bi.billage.user.model.vo.User;
 
@@ -30,16 +34,22 @@ public class UserController {
 		return "admin/adminPage";
 	}
 	
-	// 회원관리화면selectGroup.ad
-	@RequestMapping("selectUser.ad")
-	public String selectUserList() {
-		return "admin/userListView";
+	// 회원관리화면
+	@RequestMapping("userList.ad")
+	public ModelAndView selectUserList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
+		PageInfo pi = Pagination.getPageInfo(userService.selectUserListCount(), currentPage, 10, 10);
+		mv.addObject("pi", pi).addObject("list", userService.selectUserList(pi)).setViewName("admin/userListView");
+		
+		return mv;
 	}
 	
 	// 모임관리화면
-	@RequestMapping("selectGroup.ad")
-	public String selectGroupList() {
-		return "admin/groupListView";
+	@RequestMapping("groupList.ad")
+	public ModelAndView selectGroupList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
+		PageInfo pi = Pagination.getPageInfo(userService.selectGroupListCount(), currentPage, 10, 10);
+		mv.addObject("pi", pi).addObject("list", userService.selectGroupList(pi)).setViewName("admin/groupListView");
+		
+		return mv;
 	}
 	
 	// 1:1 문의내역
@@ -54,16 +64,36 @@ public class UserController {
 		return "admin/inqEnrollForm";
 	}
 	
-	// 연재 요청 리스트
-	@RequestMapping("serialApply.ad")
-	public String serialRequest() {
-		return "admin/serialRequestListView";
+	// 연재 요청 리스트 화면 +페이징처리
+	@RequestMapping("list.sr")
+	public ModelAndView selectList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
+		PageInfo pi = Pagination.getPageInfo(userService.selectSerialRequestListCount(), currentPage, 10, 10);
+		mv.addObject("pi", pi).addObject("list", userService.selectSerialRequestList(pi)).setViewName("admin/serialRequestListView");
+		
+		return mv;
+	}
+	
+	// 연재 요청 상세보기
+	@RequestMapping("detail.sr")
+	public ModelAndView selectSerialRequest(ModelAndView mv, int rno) {
+	mv.addObject("sr", userService.selectSerialRequest(rno)).setViewName("admin/serialRequestDetailView");
+	
+	return mv;
 	}
 	
 	// 연재 요청 작성폼
 	@RequestMapping("request.se")
 	public String requestSerial() {
 		return "admin/serialRequestForm";
+	}
+	
+	// 연재 요청 승락후 변화 - 회원등급변경 / 승락상태로변경 / 메일전송
+	@RequestMapping("update.re")
+	public String updateSerialRequest(int rno, int uno) {
+		if(userService.updateUserGrade(uno) > 0) {
+			userService.updateSerialRequest(rno);
+		}
+		return "main";
 	}
 	
 	// 작품 등록폼

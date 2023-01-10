@@ -149,13 +149,13 @@ public interface BoardService {
 	ArrayList<UsedBoard> selectTopBoard();
 	
 	
-	// 책 이름 작성 후 -> ISBN을 가져오기
+	// 리뷰게시판 => book테이블에서 책제목으로 isbn 문자열 select하기
 	Book selectIsbn(String title);
 	
 	
 	
 	// 리뷰게시판 작성 (insert) 
-	int insertReviewBoard(UsedBoard b);
+	int insertReviewBoard(ReviewBoard b);
 	
 	// 리뷰게시글 조회수 증가 (update)
 	int increaseReviewCount(int boardNo);

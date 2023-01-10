@@ -17,5 +17,6 @@ public class Group {
 	private String groupLocation; //GROUP_LOCATION	VARCHAR2(100 BYTE)
 	private String groupStatus; // GROUP_STATUS	VARCHAR2(1 BYTE)
 	private String groupImg; // GROUP_IMG	VARCHAR2(3000 BYTE)
+	private String nickname;
 	
 }
