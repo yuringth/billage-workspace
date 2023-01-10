@@ -13,6 +13,7 @@ import com.bi.billage.board.model.vo.ADBoard;
 import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.ReportBoard;
 import com.bi.billage.board.model.vo.Serial;
+import com.bi.billage.board.model.vo.SerialRequest;
 import com.bi.billage.board.model.vo.UsedBoard;
 import com.bi.billage.common.model.vo.PageInfo;
 
@@ -402,32 +403,6 @@ public class BoardDao {
 	
 	// 유림끝
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	/////////////////////////////////////////////
 	
 	// 광진구역 시작
@@ -461,7 +436,10 @@ public class BoardDao {
 		map.put("novel_no", novelNo);
 		return (ArrayList)sqlSession.selectList("serialMapper.selectSerialDetail", map, rowBounds);
 		}
-
+	
+	public int insertSerialRequest(SqlSessionTemplate sqlSession, SerialRequest sr) {
+		return sqlSession.insert("serialMapper.insertSerialRequest", sr);
+	}
 	
 	// 광진구역 끝
 

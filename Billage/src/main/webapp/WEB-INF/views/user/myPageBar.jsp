@@ -54,11 +54,11 @@
 				<%-- 개인정보수정에 회원탈퇴 넣기 --%>
 				<li class="menu"><a href="">개인정보수정</a></li>
 				<li class="menu"><a href="">내 포인트 보기</a></li>
-				<li class="menu"><a href="">팔로우관련</a></li>
+				<li class="menu"><a href="selectLoginUser.fo">팔로우관련</a></li>
 				<li class="menu"><a href="list.ms">쪽지함보기</a></li>
 				<li class="menu"><a href="">연재/구독목록</a></li>
 				<li class="menu"><a href="">내 리뷰목록보기</a></li>
-				<li class="menu"><a href="group.me">모임 관련</a></li>
+				<li class="menu"><a href="general.me">모임 관련</a></li>
 				<li class="menu"><a href="">경매, 추첨 관련</a></li>
 				<li class="menu"><a href="">책 대여 목록보기</a></li>
 				<li class="menu"><a href="">중고 거래 목록보기</a></li>
