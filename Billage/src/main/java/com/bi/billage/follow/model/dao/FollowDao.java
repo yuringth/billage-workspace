@@ -1,5 +1,7 @@
 package com.bi.billage.follow.model.dao;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +13,10 @@ public class FollowDao {
 		
 		return (User)sqlSession.selectOne("followMapper.selectLoginUser", userNo);
 		
+	}
+	
+	public ArrayList<User> selectFollowingList(SqlSession sqlSession, int userNo) {
+		return (ArrayList) sqlSession.selectList("followMapper.selectFollowingList", userNo);
 	}
 
 }
