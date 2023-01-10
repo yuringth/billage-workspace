@@ -120,7 +120,7 @@
     <script>
     	$(function(){
     		$('.one-content').click(function(){
-    			location.href='detail.dr?bno='+ $('this>.boardNo ').val();
+    			location.href='detail.dr?bno='+ $('.boardNo').val();
     		})	
     	})
     </script>

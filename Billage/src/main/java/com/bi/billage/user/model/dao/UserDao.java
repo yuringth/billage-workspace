@@ -17,4 +17,9 @@ public class UserDao {
 	public User loginUser(SqlSessionTemplate sqlSession, User u) {
 		return sqlSession.selectOne("userMapper.loginUser", u);
 	}
+	
+	// id 중복체크
+	public int idCheck(SqlSessionTemplate sqlSession, String checkId) {
+		return sqlSession.selectOne("userMapper.idCheck", checkId);
+	}
 }

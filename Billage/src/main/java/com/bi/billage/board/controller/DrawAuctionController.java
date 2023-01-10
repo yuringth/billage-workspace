@@ -27,115 +27,43 @@ public class DrawAuctionController {
 	@Autowired
 	private BoardService boardService;
 	
-//	@RequestMapping("list.dr")
-//	public ModelAndView drawBoardList(ModelAndView mv) throws ParseException {
-//		
-//		ArrayList<ADBoard> list = boardService.selectDrawBoardList();
-//		
-//		// DB 받아온 String 담을 포멧
-//		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//		
-//		Date date = new Date();
-//		System.out.println("현재 시간 : " + date);
-//		Date date2 = null;
-//		
-//		long nowTime = date.getTime(); // 현재시간
-//		long closeTime = 0;	// 마감시간
-//		String remaindTime = ""; // 남은 시간 넣을 변수
-//		
-//		System.out.println("long으로 변환한 현재시간 : " + nowTime);
-//		// 남은 일수가 하루 이상일 때 담을 형식
-//		SimpleDateFormat dFormat = new SimpleDateFormat("dd일 HH:mm:ss");
-//		// 하루도 안남았을 때 담을 형식
-//		SimpleDateFormat tFormat = new SimpleDateFormat("HH:mm:ss");
-//		
-//		for(int i = 0; i < list.size(); i++) {
-//			// DB에서 가져온 값을 Date2에 담는다
-//			System.out.println("DB에서 가져온 String값 :" + list.get(i).getCloseDate());
-//			date2 = format.parse(list.get(i).getCloseDate());
-//			
-//			System.out.println("DB에서 가져온값 DATE로 변환 :" + date2);
-//			// 계산을 위해 date2를 변환 long으로 변환
-//			closeTime = date2.getTime();
-//			
-//			//남은 시간
-//			System.out.println("-------------------------");
-//			System.out.println(closeTime);
-//			System.out.println(nowTime);
-//			long time = (closeTime - nowTime);
-//			
-//			System.out.println("DB값을 long으로 변환한 값" + (i+1) + "번째 : " + time);
-//			if(time / (1000 * (24*60*60)) > 1) { //하루 넘게 남았을 때
-//				remaindTime = dFormat.format(time);
-//			} else { // 하루도 안 남았을 때
-//				remaindTime = tFormat.format(time);
-//			}
-//			list.get(i).setRemaindTime(remaindTime);
-//		}
-//		
-//		
-//		mv.addObject("list", list).setViewName("board/drawBoard/drawBoardListView");
-//		return mv;
-//	}
-	
-	
 	@RequestMapping("list.dr")
 	public ModelAndView drawBoardList(ModelAndView mv) throws ParseException {
 		
 		ArrayList<ADBoard> list = boardService.selectDrawBoardList();
 		
-		//날짜 형식들
+		//날짜 형식
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		SimpleDateFormat todayFormat = new SimpleDateFormat("yyyy-MM-dd");
-		SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-		
+		// 현재 시간
 		Date date = new Date();
-		
-		
-		
-		
-		
-		System.out.println("현재 시간 : " + date);
-		Date date2 = null;
-		
-		long nowTime = date.getTime(); // 현재시간
-		long closeTime = 0;	// 마감시간
-		String remaindTime = ""; // 남은 시간 넣을 변수
-		
-		System.out.println("long으로 변환한 현재시간 : " + nowTime);
-		// 남은 일수가 하루 이상일 때 담을 형식
-		SimpleDateFormat dFormat = new SimpleDateFormat("dd일 HH:mm:ss");
-		// 하루도 안남았을 때 담을 형식
-		SimpleDateFormat tFormat = new SimpleDateFormat("HH:mm:ss");
+		//남은 시간 넣을 곳
+		String remaindTime = "";
 		
 		for(int i = 0; i < list.size(); i++) {
-			// DB에서 가져온 값을 Date2에 담는다
-			System.out.println("DB에서 가져온 String값 :" + list.get(i).getCloseDate());
-			date2 = format.parse(list.get(i).getCloseDate());
+			// Db에서 가져온 값을 Date타입으로 바꾼다
+			Date setDate = format.parse(list.get(i).getCloseDate());
+			// 마감시간 - 현재시간
+			long closeTime = setDate.getTime() - date.getTime();
+			// 남은 시간을 초단위로 바꾼다
+			int sec = (int)(closeTime / 1000);
 			
-			System.out.println("DB에서 가져온값 DATE로 변환 :" + date2);
-			// 계산을 위해 date2를 변환 long으로 변환
-			closeTime = date2.getTime();
+			int day = sec / (60 * 60 * 24);
+			int hour = (sec - day * 60 * 60 * 24) / (60 * 60); 
+			int minute = (sec - day * 60 * 60 * 24 - hour * 3600) / 60; 
+			int second = sec % 60;
 			
-			//남은 시간
-			long time = (closeTime - nowTime);
 			
-			System.out.println("DB값을 long으로 변환한 값" + (i+1) + "번째 : " + time);
-			if(time / 1000 * (24*60*60) > 1) { //하루 넘게 남았을 때
-				remaindTime = dFormat.format(time);
+			if(closeTime / (1000*24*60*60) > 1) { //하루 넘게 남았을 때
+				remaindTime = day + "일 " + hour + ":" + minute  + ":" + second;	
+				
 			} else { // 하루도 안 남았을 때
-				remaindTime = tFormat.format(time);
+				remaindTime = hour + ":" + minute  + ":" + second;
 			}
 			list.get(i).setRemaindTime(remaindTime);
 		}
-		
-		
 		mv.addObject("list", list).setViewName("board/drawBoard/drawBoardListView");
 		return mv;
 	}
-	
-	
-	
 	
 	
 	@RequestMapping("list.ac")

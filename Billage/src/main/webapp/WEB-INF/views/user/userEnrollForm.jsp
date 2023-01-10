@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
 * {
   margin: 0px;
@@ -138,7 +139,8 @@ body {
 	      <h2>회원가입</h2>
 	      
 	      <div class="textForm">
-	        <input name="userId" type="text" class="id" placeholder="아이디">
+	        <input name="userId" type="text" class="id" id="userId" placeholder="아이디">
+	        <div id="checkResult" style="font-size:0.7em; display:none;"></div>
 	      </div>
 	      
 	      <div class="textForm">
@@ -212,9 +214,40 @@ body {
 
 	$(function(){
 		
-		const $IdInput = $('.')
+		const $idInput = $('.textForm #userId');
 		
-		
+		$idInput.keyup(function(){
+			// console.log($idInput.val());	일단 콘솔에 잘 찍혔음.
+			
+			if($idInput.val().length >= 5){
+				
+				$.ajax({
+					url : 'idCheck.me',
+					data : {checkId : $idInput.val()},
+					success : function(result){
+						console.log(result);
+						if(result == 'NNNNN'){	// 사용불가능
+							$('#checkResult').show();
+							$('#checkResult').css('color', 'red').text('중복된 아이디가 존재합니다.')
+							$('input[type=submit]').attr('disabled', true);
+						} 
+						else{					// 사용가능
+							$('#checkResult').show();
+							$('#checkResult').css('color', 'green').text('사용 가능한 아이디 입니다.')
+							$('input[type=submit]').removeAttr('disabled');
+						}
+					},
+					error : function() {
+						console.log('아이디 중복체크용 ajax 통신 실패')
+					}
+				})
+			}
+			else{
+				$('#checkResult').hide();
+				$('input[type=submit]').attr('disabled', true);	
+			}
+			
+		});
 		
 	});
 
