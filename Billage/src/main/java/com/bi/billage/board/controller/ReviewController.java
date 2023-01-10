@@ -6,13 +6,22 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bi.billage.board.model.service.BoardService;
+
 @Controller
 public class ReviewController {
 
+	@Autowired
+	private BoardService boardService;
+
+	
+	
+	
 	private static final String serviceKey="ttbiuui12341246001";
 
 	
@@ -61,6 +70,18 @@ public class ReviewController {
 	@ResponseBody
 	@RequestMapping(value="search.bk", produces="application/json; charset=UTF-8")
 	public String reviewApi (String title) throws IOException {
+		
+		
+		boardService.selectIsbn(title);
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		// url은 손으로 한땀한땀 작성하는게 좋다
 		// 인증서 => 브라우저에 있음 => 우리는 http로 작성할것임! https안됨!!
