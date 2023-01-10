@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.bi.billage.board.model.vo.SerialRequest;
 import com.bi.billage.common.model.vo.PageInfo;
+import com.bi.billage.group.model.vo.Group;
 import com.bi.billage.user.model.dao.UserDao;
 import com.bi.billage.user.model.vo.User;
 
@@ -71,6 +72,16 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public ArrayList<User> selectUserList(PageInfo pi) {
 		return userDao.selectUserList(sqlSession, pi);
+	}
+
+	@Override
+	public int selectGroupListCount() {
+		return userDao.selecGroupListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Group> selectGroupList(PageInfo pi) {
+		return userDao.selectGroupList(sqlSession, pi);
 	}
 
 }

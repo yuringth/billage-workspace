@@ -125,8 +125,8 @@
         <div class="sidebar">
             <h2>관리자 페이지</h2>
             <ul>
-                <li><a href="selectUser.ad"><i class="fas fa-user"></i>회원 관리</a></li>
-                <li><a href="selectGroup.ad"><i class="fas fa-home"></i>모임 관리</a></li>
+                <li><a href="userList.ad"><i class="fas fa-user"></i>회원 관리</a></li>
+                <li><a href="groupList.ad"><i class="fas fa-home"></i>모임 관리</a></li>
                 <li><a href="inquiryList.ad"><i class="fas fa-address-card"></i>1:1 문의</a></li>
                 <li><a href="faqList.fa"><i class="fas fa-project-diagram"></i>FAQ 관리</a></li>
                 <li><a href="noticeList.no"><i class="fas fa-blog"></i>공지사항</a></li>
@@ -135,26 +135,26 @@
         </div>
         <div class="main_content">
             <div class="title">
-				<h1 class="title-text">연재 요청 조회 및 관리</h1>
+				<h1 class="title-text">모임 조회 및 관리</h1>
 			</div>
 				<table id="serialRequestList" class="table table-hover" align="center">
                 <thead>
                     <tr>
-                        <th>요청번호</th>
-                        <th>요청회원</th>
-                        <th>요청제목</th>
-                        <th>요청날짜</th>
-                        <th>승락여부</th>
+                        <th>모임번호</th>
+                        <th>모임장</th>
+                        <th>모임이름</th>
+                        <th>모임생성일</th>
+                        <th>모임상태</th>
                     </tr>
                 </thead>
-                <c:forEach items="${ list }" var="sr">
+                <c:forEach items="${ list }" var="g">
                 <tbody>
                 		<tr>
-                			<td class="rno"></td>
-                			<td></td>
-                			<td></td>
-                			<td></td>
-                			<td></td>
+                			<td class="gno">${ g.groupNo }</td>
+                			<td>${ g.nickname }</td>
+                			<td>${ g.groupTitle }</td>
+                			<td>${ g.groupCreatedate }</td>
+                			<td>${ g.groupStatus }</td>
                 		</tr>
                 </tbody>
                 </c:forEach>
@@ -162,12 +162,6 @@
             <br>
             
             <script>
-            
-            	$(function(){
-            		$('#serialRequestList>tbody>tr').click(function(){
-            			location.href = 'detail.sr?rno=' + $(this).children('.rno').text();
-            		})
-            	})
             
             </script>
        

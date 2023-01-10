@@ -19,8 +19,19 @@
 		<result column="USER_NO"			property="userNo" />
 		<result column="ENROLL_DATE"		property="enrollDate" />
 	</resultMap>
-	
-	
+
+	<resultMap id="groupResultSet" type="group">
+			<result column="group_no" 			property="groupNo" />
+			<result column="user_no" 			property="userNo" />
+			<result column="group_title" 		property="groupTitle" />
+			<result column="group_num" 			property="groupNum" />
+			<result column="group_createdate" 	property="groupCreatedate" />
+			<result column="group_describe" 	property="groupDescribe" />
+			<result column="group_day" 			property="groupDay" />
+			<result column="group_location" 	property="groupLocation" />
+			<result column="group_status"		property="groupStatus" />
+			<result column="group_img" 			property="groupImg" />
+	</resultMap>
 	
 	<!-- 회원가입용 쿼리문 -->
 	<insert id="insertUser" parameterType="user">
@@ -123,5 +134,25 @@
 				status
 		from
 				member
+	</select>
+	
+	<!-- 관리자 모임조회 총 몇개 세기 -->
+	<select id="selectGroupListCount" resultType="_int">
+		select
+				count(*)
+		from
+				"GROUP"
+	</select>
+	
+	<!-- 관리자 모임조회 쿼리문 -->
+	<select id="selectGroupList" resultMap="groupResultSet">
+		select
+				group_no,
+				(select nickname from member m where m.user_no = g.user_no) as nickName,
+				group_title,
+				group_createdate,
+				group_status
+		from
+				"GROUP" g
 	</select>
 </mapper>

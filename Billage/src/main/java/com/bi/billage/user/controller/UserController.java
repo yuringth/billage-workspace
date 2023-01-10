@@ -44,9 +44,12 @@ public class UserController {
 	}
 	
 	// 모임관리화면
-	@RequestMapping("selectGroup.ad")
-	public String selectGroupList() {
-		return "admin/groupListView";
+	@RequestMapping("groupList.ad")
+	public ModelAndView selectGroupList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
+		PageInfo pi = Pagination.getPageInfo(userService.selectGroupListCount(), currentPage, 10, 10);
+		mv.addObject("pi", pi).addObject("list", userService.selectGroupList(pi)).setViewName("admin/groupListView");
+		
+		return mv;
 	}
 	
 	// 1:1 문의내역

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bi.billage.board.model.vo.SerialRequest;
 import com.bi.billage.common.model.vo.PageInfo;
+import com.bi.billage.group.model.vo.Group;
 import com.bi.billage.user.model.vo.User;
 
 @Repository
@@ -55,8 +56,19 @@ public class UserDao {
 		return (ArrayList)sqlSession.selectList("userMapper.selectUserList", null, rowBounds);
 	}
 	
+	public int selecGroupListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("userMapper.selectGroupListCount");
+	}
+	
+	public ArrayList<Group> selectGroupList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage()- 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("userMapper.selectGroupList", null, rowBounds);
+	}
+	
 	// id 중복체크
 	public int idCheck(SqlSessionTemplate sqlSession, String checkId) {
 		return sqlSession.selectOne("userMapper.idCheck", checkId);
 	}
+	
 }

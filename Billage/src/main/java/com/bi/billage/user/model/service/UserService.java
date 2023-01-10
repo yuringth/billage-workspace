@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.bi.billage.board.model.vo.SerialRequest;
 import com.bi.billage.common.model.vo.PageInfo;
+import com.bi.billage.group.model.vo.Group;
 import com.bi.billage.user.model.vo.User;
 
 
@@ -33,6 +34,12 @@ public interface UserService {
 	
 	// 회원 리스트 조회
 	ArrayList<User> selectUserList(PageInfo pi);
+	
+	// 모임 총 몇개인지 조회
+	int selectGroupListCount();
+	
+	// 모임 리스트 조회
+	ArrayList<Group> selectGroupList(PageInfo pi);
 	
 	
 	
