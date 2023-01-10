@@ -219,7 +219,8 @@ public class BoardServiceImpl implements BoardService {
 	// 리뷰게시판 isbn
 	@Override
 	public Book selectIsbn(String title) {
-		return ;
+		
+		return boardDao.selectIsbn(sqlSession, title);
 	}
 	
 	

@@ -13,7 +13,7 @@ public class GroupServiceImpl implements GroupService {
 	@Override
 	public int insertGroup(Group group) {
 		
-		
+	
 		return 0;
 	}
 

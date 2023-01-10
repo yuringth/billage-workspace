@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bi.billage.board.model.service.BoardService;
+import com.bi.billage.board.model.vo.Book;
 
 @Controller
 public class ReviewController {
@@ -72,23 +73,16 @@ public class ReviewController {
 	public String reviewApi (String title) throws IOException {
 		
 		
-		boardService.selectIsbn(title);
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		Book isbn = boardService.selectIsbn(title);
+
+		System.out.println(isbn);
 		
 		// url은 손으로 한땀한땀 작성하는게 좋다
 		// 인증서 => 브라우저에 있음 => 우리는 http로 작성할것임! https안됨!!
 		String url ="http://www.aladin.co.kr/ttb/api/ItemLookUp.aspx";
 		url += "?ttbkey=" + serviceKey; // 부여받은 TTBKey값
 		url += "&itemIdType=ISBN"; 
-		url += "&ItemId=" + title; // 출력방법 => json이니까 produces추가해야함!!
+		url += "&ItemId=" + isbn.getIsbn(); // 출력방법 => json이니까 produces추가해야함!!
 		url += "&output=js";
 		url += "&Version=20131101";
 		url += "&OptResult=ebookList,usedList,reviewList";
@@ -106,6 +100,9 @@ public class ReviewController {
 	    
 	    br.close();//버퍼더리더 반납
 	    urlConnection.disconnect(); // 뭐지?
+	    
+	    
+	    
 	    
 	    return responseText; // 응답데이터임!! 	@ResponseBody
 	}

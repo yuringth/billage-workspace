@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <style>
     * {
         margin: 0;
@@ -83,16 +86,6 @@
         color: #717171;
         border-bottom: 1px solid #e0e4e8;
     }
-    .wrapper .main_content .info {
-        margin: 20px;
-        color: #717171;
-        line-height: 25px;
-    }
-
-    .wrapper .main_content .info div {
-        margin-bottom: 20px;
-    }
-
     @media (max-height: 500px) {
         .social_media {
             display: none !important;
@@ -120,6 +113,9 @@
 	.body {
 		border-bottom: solid 1px #aaa;
 	}
+	
+	#boardList {text-align:center;}
+    #boardList>tbody>tr:hover {cursor:pointer;}
 </style>
 <body>
    <jsp:include page="../common/header.jsp"/>
@@ -134,56 +130,51 @@
                 <li><a href="inquiryList.ad"><i class="fas fa-address-card"></i>1:1 문의</a></li>
                 <li><a href="faqList.fa"><i class="fas fa-project-diagram"></i>FAQ 관리</a></li>
                 <li><a href="noticeList.no"><i class="fas fa-blog"></i>공지사항</a></li>
-                <li><a href="serialApply.ad"><i class="fas fa-address-book"></i>연재 요청</a></li>
+                <li><a href="list.sr"><i class="fas fa-address-book"></i>연재 요청</a></li>
             </ul>
         </div>
         <div class="main_content">
             <div class="title">
-				<h1 class="title-text">모임 목록 조회 및 관리</h1>
+				<h1 class="title-text">연재 요청 조회 및 관리</h1>
 			</div>
+				<table id="serialRequestList" class="table table-hover" align="center">
+                <thead>
+                    <tr>
+                        <th>요청번호</th>
+                        <th>요청회원</th>
+                        <th>요청제목</th>
+                        <th>요청날짜</th>
+                        <th>승락여부</th>
+                    </tr>
+                </thead>
+                <c:forEach items="${ list }" var="sr">
+                <tbody>
+                		<tr>
+                			<td class="rno"></td>
+                			<td></td>
+                			<td></td>
+                			<td></td>
+                			<td></td>
+                		</tr>
+                </tbody>
+                </c:forEach>
+            </table>
+            <br>
+            
+            <script>
+            
+            	$(function(){
+            		$('#serialRequestList>tbody>tr').click(function(){
+            			location.href = 'detail.sr?rno=' + $(this).children('.rno').text();
+            		})
+            	})
+            
+            </script>
+       
+            <br><br>
+        </div>
+        <br><br>
 			<br>
-			<div class="table">
-				<div class="tr header">
-					<div class="td">문의회원</div>
-					<div class="td">문의유형</div>
-					<div class="td">문의제목</div>
-					<div class="td">문의날짜</div>
-					<div class="td">답변상태</div>
-					<div class="td">비고</div>
-				</div>
-				<div class="tr body">
-					<div class="td">책벌레</div>
-					<div class="td">공모전</div>
-					<div class="td">제가 왜 떨어졌죠?</div>
-					<div class="td">2023/01/06</div>
-					<div class="td">미답변</div>
-					<div class="td"></div>
-				</div>
-				<div class="tr body">
-					<div class="td">책벌레</div>
-					<div class="td">공모전</div>
-					<div class="td">제가 왜 떨어졌죠?</div>
-					<div class="td">2023/01/06</div>
-					<div class="td">미답변</div>
-					<div class="td"></div>
-				</div>
-				<div class="tr body">
-					<div class="td">책벌레</div>
-					<div class="td">공모전</div>
-					<div class="td">제가 왜 떨어졌죠?</div>
-					<div class="td">2023/01/06</div>
-					<div class="td">미답변</div>
-					<div class="td"></div>
-				</div>
-				<div class="tr body">
-					<div class="td">책벌레</div>
-					<div class="td">공모전</div>
-					<div class="td">제가 왜 떨어졌죠?</div>
-					<div class="td">2023/01/06</div>
-					<div class="td">미답변</div>
-					<div class="td"></div>
-				</div>
-			</div>
         </div>
     </div>
    <jsp:include page="../common/footer.jsp"/>

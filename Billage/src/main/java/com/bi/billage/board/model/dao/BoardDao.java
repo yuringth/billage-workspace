@@ -10,6 +10,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.bi.billage.board.model.vo.ADBoard;
+import com.bi.billage.board.model.vo.Book;
 import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.ReportBoard;
 import com.bi.billage.board.model.vo.Serial;
@@ -226,7 +227,17 @@ public class BoardDao {
 	
 	
 	
-	// 유림시작
+	// 유림시작 ==========================================================
+	
+	// 리뷰게시판 isbn
+	public Book selectIsbn(SqlSessionTemplate sqlSession, String title) {
+		return sqlSession.selectOne("reviewMapper.selectIsbn", title);
+				
+	}
+	
+	
+	
+	// 중고게시판
 	public int insertUsedBoard(SqlSessionTemplate sqlSession, UsedBoard b) {
 		return sqlSession.insert("usedMapper.insertUsedBoard", b);	
 		
@@ -395,13 +406,10 @@ public class BoardDao {
 
 
 
-
-
-
 	
 	
 	
-	// 유림끝
+	// 유림끝  ==========================================================
 	
 	/////////////////////////////////////////////
 	
