@@ -10,4 +10,7 @@ public interface UserService {
 	
 	// 로그인
 	User loginUser(User u);
+	
+	// id중복체크
+	int idCheck(String checkId);
 }
