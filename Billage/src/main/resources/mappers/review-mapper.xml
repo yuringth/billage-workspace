@@ -30,8 +30,6 @@
 
 
 
-
-
 	<!-- isbn 조회 쿼리문 -->
 	<select id="selectIsbn" parameterType="book" resultMap="bookResultSet">
 		select
@@ -41,5 +39,13 @@
 		 where
 		       book_name = #{bookName}
 	</select>
+	
+	
+	<!-- 글작성 쿼리문 -->
+	<inset id="insertReviewBoard" parameterType="review">
+			
+	</inset>
+	
+	
 	
 </mapper>

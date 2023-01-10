@@ -189,48 +189,39 @@
 		
 		<form id="reviewEnrollForm" action="insertBoard.re" method="post" enctype="multipart/form-data">
 		
-		<!-- 작성자 식별자로 넘기기 -->
-		<input type="hidden" neme="userNo" value="#">
-		
+			<!-- 작성자 식별자로 넘기기 -->
+			<input type="hidden" neme="userNo" value="#">
 			
-			<div class="search-div">
-				<!-- <input type="text" id="book_title2" name="bookTitle">
-				<button class="btn btn-link" type="submit">상품검색</button> -->
-			</div>
-			
-		<!-- </form> -->
-		
-		
-		
-		<div class="book-detail-outer">
-			<div class="book-detail-area">
-				<div class="content-photo-detail">
-					<!-- api에서 끌고 오는거니까 첨부파일로 안해도 되는게 맞겠지? <input type="file" name="upfile"> 이런식으로.. -->
-					<div id="book_imag" name="bookImag"><img src="" id="book_src"></div>
-				</div>
-				
-				<!-- review 테이블 : book_content, book_publisher, book_date 컬럼 추가  -->
-				<div class="content-book-detail">
-					<div id="book_title" name="bookTitle">제목</div>
-					<div id="book_author" name="bookAuthor">작가</div>
-					<div id="book_publisher" name="bookPublisher">츨판사</div>
-					<div id="book_date" name="bookDate">발행일자</div>
+			<!-- api에서 가져온 책 정보 -->
+			<div class="book-detail-outer">
+				<div class="book-detail-area">
+					<div class="content-photo-detail">
+						<!-- api에서 끌고 오는거니까 첨부파일로 안해도 되는게 맞겠지? <input type="file" name="upfile"> 이런식으로.. -->
+						<div id="book_imag" name="bookImag"><img src="" id="book_src"></div>
+					</div>
+					
+					<!-- review 테이블 : book_content, book_publisher, book_date 컬럼 추가  -->
+					<div class="content-book-detail">
+						<div id="book_title" name="bookTitle">제목</div>
+						<div id="book_author" name="bookAuthor">작가</div>
+						<div id="book_publisher" name="bookPublisher">츨판사</div>
+						<div id="book_date" name="bookDate">발행일자</div>
+					</div>
 				</div>
 			</div>
-		</div>
-		
-		
-		<hr>
-
-		<!-- 매란언니한테 알려달라하기 -->
-		<div style="text-align:center;">별점 : ☆☆☆★ 
-			<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-		</div>
-
-		<br>
-
-		<div class="review-content-outer">
-			<!-- <form action="#"> -->
+			
+			
+			<hr>
+	
+			<!-- 별점 : 매란언니한테 알려달라하기 -->
+			<div style="text-align:center;">별점 : ☆☆☆★ 
+				<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+			</div>
+	
+			<br>
+	
+			<!-- 리뷰 작성 란 -->
+			<div class="review-content-outer">
 				<textarea id="review_content" name="reviewContent" placeholder="리뷰 작성 해주세요" rows="20" cols="100" style="resize:none" maxlength="1000" required></textarea>
 				
 				<hr>
@@ -247,18 +238,17 @@
 				<hr>
 					
 				<div style="text-align:center;">
-					<button>글작성</button>
-					<button>취소</button>
+					<button type="submit">글작성</button>
+					<button type="reset">취소</button>
 				</div>
-
-			<!-- </form> -->
-		</div>
-
+			</div>
+			
+			
 		</form>
  
  
  
-		<!-- api 모달창 -->
+		<!-- api 모달창 시작 -->
 		<div id="modal-book-search">
 			<button type="button" id="modal-close-btn">&times;</button>
 			
@@ -280,13 +270,13 @@
 			        <!-- 책상품 하나의div  -->
 			        <div class="book-outer">
 			        	
-			        	<!--  ajax해서 가져온 책 정보를 뿌려줌  -->
+			        	<!--  ajax해서 가져온 책 정보를 띄워줌  -->
 			        	
 			        </div>
 				</div>
 			</div>
 		</div>
-		<!-- api 모달창 -->
+		<!-- api 모달창 끝 -->
 
 
 	<!-- 전체 outer /div -->	
