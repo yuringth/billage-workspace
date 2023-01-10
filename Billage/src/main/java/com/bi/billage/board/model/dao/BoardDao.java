@@ -13,6 +13,7 @@ import com.bi.billage.board.model.vo.ADBoard;
 import com.bi.billage.board.model.vo.Book;
 import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.ReportBoard;
+import com.bi.billage.board.model.vo.ReviewBoard;
 import com.bi.billage.board.model.vo.Serial;
 import com.bi.billage.board.model.vo.SerialRequest;
 import com.bi.billage.board.model.vo.UsedBoard;
@@ -229,11 +230,26 @@ public class BoardDao {
 	
 	// 유림시작 ==========================================================
 	
-	// 리뷰게시판 isbn
+	// 리뷰게시판 => book테이블에서 책제목으로 isbn 문자열 select하기
 	public Book selectIsbn(SqlSessionTemplate sqlSession, String title) {
 		return sqlSession.selectOne("reviewMapper.selectIsbn", title);
 				
 	}
+	
+	// 리뷰게시판 => 글작성
+	public int insertReviewBoard(SqlSessionTemplate sqlSession, ReviewBoard b) {
+		return sqlSession.insert("reviewMapper.insertReviewBoard", b);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -242,161 +258,6 @@ public class BoardDao {
 		return sqlSession.insert("usedMapper.insertUsedBoard", b);	
 		
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
