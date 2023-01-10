@@ -202,7 +202,9 @@
 					</div>
 				</form>
 			</div>
-		</div>
+		
+	</div> <!-- all-header끝 -->
+
 	<script>
 		$(function(){
 			// 로그인 모달창 띄우고 지우는 이벤트 

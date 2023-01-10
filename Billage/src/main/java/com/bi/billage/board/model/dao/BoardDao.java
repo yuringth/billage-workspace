@@ -1,10 +1,10 @@
 package com.bi.billage.board.model.dao;
 
 import java.util.ArrayList;
-
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
-
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -12,10 +12,9 @@ import org.springframework.stereotype.Repository;
 import com.bi.billage.board.model.vo.ADBoard;
 import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.ReportBoard;
-
 import com.bi.billage.board.model.vo.Serial;
-import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.board.model.vo.UsedBoard;
+import com.bi.billage.common.model.vo.PageInfo;
 
 @Repository
 public class BoardDao {
@@ -451,7 +450,17 @@ public class BoardDao {
 		int offset = (pi.getCurrentPage()- 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return (ArrayList)sqlSession.selectList("serialMapper.selectSerialList", novelNo, rowBounds);
+		
 	}
+
+	public ArrayList<Serial> selectSerialDetail(SqlSessionTemplate sqlSession, PageInfo pi, int novelNo, String serialNo) {
+		int offset = (pi.getCurrentPage()- 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		Map<String, Object> map = new HashMap<>();
+		map.put("serial_no", serialNo);
+		map.put("novel_no", novelNo);
+		return (ArrayList)sqlSession.selectList("serialMapper.selectSerialDetail", map, rowBounds);
+		}
 
 	
 	// 광진구역 끝

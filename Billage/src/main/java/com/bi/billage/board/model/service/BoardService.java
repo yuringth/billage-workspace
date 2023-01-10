@@ -33,6 +33,9 @@ public interface BoardService {
 	// 연재 리스트 조회
 	ArrayList<Serial> selectSerialList(PageInfo pi, int novelNo);
 	
+	// 연재 상세 조회
+	ArrayList<Serial> selectSerialDetail(PageInfo pi, int novelNo, String serialNo);
+	
 	//광진 구역끝
 	
 	//휘수 구역

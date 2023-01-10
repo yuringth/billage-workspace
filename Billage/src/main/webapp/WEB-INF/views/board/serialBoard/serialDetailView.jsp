@@ -24,9 +24,11 @@
         </div>
         <br><br><br>
         <div class="novelInfo" align="left">
-            <h2>작품명</h2>
-            <h4>작가명</h4>
-            <h6>작품설명</h6>
+        <c:forEach items="${ list }" var="s">
+            <h2>제목 : ${s.novelTitle}</h2>
+            <h4>작가명 : ${s.nickName}</h4>
+            <h6>설명 : ${s.novelDisplay }</h6>
+        </c:forEach>
         </div>
             <br>
             <!-- 로그인 후 독자일 경우만 보여지는 버튼 -->
@@ -37,7 +39,7 @@
             <table id="contentArea" algin="center" class="table">
                 <tr>
                     <th width="100">제목</th>
-                    <td colspan="3">개발자로 환생?</td>
+                    <td colspan="3">${ serialTitle }</td>
                 </tr>
                 <tr>
                     <th>작성일</th>
@@ -122,15 +124,18 @@
                         <th>별점</th>
                     </tr>
                 </thead>
+                <c:forEach items="${ list }" var="s">
                 <tbody>
                 		<tr>
-                			<td class="bno">1</td>
-                			<td>01화 개발자로 환생?</td>
-                			<td>233</td>
-                			<td>2022.12.25</td>
-                			<td>★★★★★</td>
+                			<input type="hidden" class="nno" value="${ s.novelNo }">
+                			<td class="sno">${ s.serialNo }</td>
+                			<td>${ s.serialTitle }</td>
+                			<td>${ s.count }</td>
+                			<td>${ s.uploadDate }</td>
+                			<td>${ s.starRating }</td>
                 		</tr>
                 </tbody>
+                </c:forEach>
             </table>
             <br>
        
