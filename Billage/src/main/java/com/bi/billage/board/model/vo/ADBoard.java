@@ -29,5 +29,7 @@ public class ADBoard {
 	
 	private String remaindTime;
 	private String closeTime;
+	
+	private String nickname;
 
 }
