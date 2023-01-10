@@ -19,46 +19,109 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bi.billage.board.model.service.BoardService;
 import com.bi.billage.board.model.vo.ADBoard;
 
+import javafx.scene.chart.PieChart.Data;
+
 @Controller
 public class DrawAuctionController {
 	
 	@Autowired
 	private BoardService boardService;
 	
+//	@RequestMapping("list.dr")
+//	public ModelAndView drawBoardList(ModelAndView mv) throws ParseException {
+//		
+//		ArrayList<ADBoard> list = boardService.selectDrawBoardList();
+//		
+//		// DB 받아온 String 담을 포멧
+//		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//		
+//		Date date = new Date();
+//		System.out.println("현재 시간 : " + date);
+//		Date date2 = null;
+//		
+//		long nowTime = date.getTime(); // 현재시간
+//		long closeTime = 0;	// 마감시간
+//		String remaindTime = ""; // 남은 시간 넣을 변수
+//		
+//		System.out.println("long으로 변환한 현재시간 : " + nowTime);
+//		// 남은 일수가 하루 이상일 때 담을 형식
+//		SimpleDateFormat dFormat = new SimpleDateFormat("dd일 HH:mm:ss");
+//		// 하루도 안남았을 때 담을 형식
+//		SimpleDateFormat tFormat = new SimpleDateFormat("HH:mm:ss");
+//		
+//		for(int i = 0; i < list.size(); i++) {
+//			// DB에서 가져온 값을 Date2에 담는다
+//			System.out.println("DB에서 가져온 String값 :" + list.get(i).getCloseDate());
+//			date2 = format.parse(list.get(i).getCloseDate());
+//			
+//			System.out.println("DB에서 가져온값 DATE로 변환 :" + date2);
+//			// 계산을 위해 date2를 변환 long으로 변환
+//			closeTime = date2.getTime();
+//			
+//			//남은 시간
+//			System.out.println("-------------------------");
+//			System.out.println(closeTime);
+//			System.out.println(nowTime);
+//			long time = (closeTime - nowTime);
+//			
+//			System.out.println("DB값을 long으로 변환한 값" + (i+1) + "번째 : " + time);
+//			if(time / (1000 * (24*60*60)) > 1) { //하루 넘게 남았을 때
+//				remaindTime = dFormat.format(time);
+//			} else { // 하루도 안 남았을 때
+//				remaindTime = tFormat.format(time);
+//			}
+//			list.get(i).setRemaindTime(remaindTime);
+//		}
+//		
+//		
+//		mv.addObject("list", list).setViewName("board/drawBoard/drawBoardListView");
+//		return mv;
+//	}
+	
+	
 	@RequestMapping("list.dr")
 	public ModelAndView drawBoardList(ModelAndView mv) throws ParseException {
 		
 		ArrayList<ADBoard> list = boardService.selectDrawBoardList();
 		
-		// DB 받아온 String 담을 포멧
+		//날짜 형식들
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat todayFormat = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
 		
 		Date date = new Date();
+		
+		
+		
+		
+		
+		System.out.println("현재 시간 : " + date);
 		Date date2 = null;
+		
 		long nowTime = date.getTime(); // 현재시간
 		long closeTime = 0;	// 마감시간
 		String remaindTime = ""; // 남은 시간 넣을 변수
 		
-		System.out.println(nowTime);
-		// 남은 일수가 하루 이상일 때 담을 포멧
+		System.out.println("long으로 변환한 현재시간 : " + nowTime);
+		// 남은 일수가 하루 이상일 때 담을 형식
 		SimpleDateFormat dFormat = new SimpleDateFormat("dd일 HH:mm:ss");
-		// 하루도 안남았을 때 담을 포멧
+		// 하루도 안남았을 때 담을 형식
 		SimpleDateFormat tFormat = new SimpleDateFormat("HH:mm:ss");
 		
 		for(int i = 0; i < list.size(); i++) {
 			// DB에서 가져온 값을 Date2에 담는다
+			System.out.println("DB에서 가져온 String값 :" + list.get(i).getCloseDate());
 			date2 = format.parse(list.get(i).getCloseDate());
 			
-			
+			System.out.println("DB에서 가져온값 DATE로 변환 :" + date2);
 			// 계산을 위해 date2를 변환 long으로 변환
 			closeTime = date2.getTime();
-			
-			System.out.println(closeTime);
 			
 			//남은 시간
 			long time = (closeTime - nowTime);
 			
-			if(time / 1000 * (24*60*60) >= 1) { //하루 이상 남았을 때
+			System.out.println("DB값을 long으로 변환한 값" + (i+1) + "번째 : " + time);
+			if(time / 1000 * (24*60*60) > 1) { //하루 넘게 남았을 때
 				remaindTime = dFormat.format(time);
 			} else { // 하루도 안 남았을 때
 				remaindTime = tFormat.format(time);
@@ -70,6 +133,10 @@ public class DrawAuctionController {
 		mv.addObject("list", list).setViewName("board/drawBoard/drawBoardListView");
 		return mv;
 	}
+	
+	
+	
+	
 	
 	@RequestMapping("list.ac")
 	public ModelAndView auctionBoardList(ModelAndView mv) {
@@ -112,7 +179,9 @@ public class DrawAuctionController {
 	@RequestMapping("insert.dr")
 	public String insertDrawBoard(ADBoard b, MultipartFile upFile, HttpSession session, Model model) {
 		
-		
+		//날짜 합치기
+		b.setCloseDate(b.getCloseDate() + " " + b.getCloseTime() + ":00");
+		 
 		if(!upFile.getOriginalFilename().equals("")) { // getOriginalFileName == filename필드의 값을 반환함
 			
 			/*
