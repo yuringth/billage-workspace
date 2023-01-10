@@ -102,8 +102,9 @@
 				
         <!-- 책상품 하나의div  -->
         <div class="book-outer">
-           
-           
+        	
+        	<!--  ajax해서 가져온 책 정보를 뿌려줌  -->
+        	
         </div>
 		<hr>
 
@@ -111,55 +112,62 @@
 
 	
 	<script>
-		 function search(){
-			 $.ajax({
-				url:'search.bk',
-				data:{ // 요청시 전달 값
-					title : $('#title').val()
-				},
+	 function search(){
+		 $.ajax({
+			url:'search.bk',
+			data:{ // 요청시 전달 값
+				title : $('#title').val()
+			},
+			
+			success : function(result){
 				
-				success : function(result){
+				const item = result.item[0];
+				
+				let value ='';
 					
-					const item = result.item[0];
-					
-					let value ='';
-						
-					let thumb = item.cover;
-					
-					value +='<div class="content-area1">'
-						  + '<p>' + 1 + '</p>'
-						  + '</div>'
-						  + '<div class="content-area2">'
-						  + '<div class="content-detail1">'
-						  + '<div><img src="' + thumb + '"></div>'
-						  + '</div>'
-						  + '<div class="content-detail2">'
-						  + '<p id="book_title" name="bookTitle">' + item.title + '</p>'
-						  + '<p id="book_author" name="bookAuthor">' + item.author + '</p>'
-						  + '<p id="book_date" name="bookDate">' + item.pubDate + '</p>'
-						  + '<p id="book_publisher" name="bookPublisher">' + item.publisher + '</p>'
-						  + '</div>'
-						  + '</div>'
-						  + '<div  class="content-area3">'
-						  + '<button>선택</button>'
-						  + '</div>';
+				let thumb = item.cover;
+				
+				value += '<div class="content-area1">'
+					  + '<p>' + 1 + '</p>'
+					  + '</div>'
+					  + '<div class="content-area2">'
+					  + '<div class="content-detail1">'
+					  + '<div><img src="' + thumb + '"></div>'
+					  + '</div>'
+					  + '<div class="content-detail2">'
+					  + '<p id="book_title" name="bookTitle">' + item.title + '</p>'
+					  + '<p id="book_author" name="bookAuthor">' + item.author + '</p>'
+					  + '<p id="book_date" name="bookDate">' + item.pubDate + '</p>'
+					  + '<p id="book_publisher" name="bookPublisher">' + item.publisher + '</p>'
+					  + '</div>'
+					  + '</div>'
+					  + '<div  class="content-area3">'
+					  + '<button onclick="copy();">선택</button>'
+					  + '</div>';
+					  
 						  
-							  
-					$('.book-outer').html(value);
-					$('#title').val(title);
-					
-					$("#title").text('');
-					
-				},
+				$('.book-outer').html(value);
+				$('#title').val(title);
 				
-				error: function(){
-					console.log('실패');
-				}
-			 })
-		 }
+				$("#title").val('');
+				
+			},
+			
+			error: function(){
+				console.log('실패');
+			}
+		 })
+	 }
 	</script>
 	
 	
+	<script>
+		function copy(){
+			
+			
+		}
+	
+	</script>
 
 
 
