@@ -27,8 +27,6 @@ public class GroupController {
 	@Autowired
 	private GroupService groupService;
 	
-	
-	
 	//등록된 모임 리스트를 가지고 와야 함 , 페이징 처리 필요
 	@RequestMapping("list.gr")
 	public /*ModelAndView*/String selectGroup(/*@RequestParam(value="cpage", defaultValue="1")int currentPage, ModelAndView mv*/) {
