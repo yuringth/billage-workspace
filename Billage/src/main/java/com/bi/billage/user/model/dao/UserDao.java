@@ -44,6 +44,17 @@ public class UserDao {
 	public int updateSerialRequest(SqlSessionTemplate sqlSession, int requestNo) {
 		return sqlSession.update("serialMapper.updateSerialRequest", requestNo);
 	}
+
+	public int selectUserListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("userMapper.selectUserListCount");
+	}
+
+	public ArrayList<User> selectUserList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage()- 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("userMapper.selectUserList", null, rowBounds);
+	}
+	
 	// id 중복체크
 	public int idCheck(SqlSessionTemplate sqlSession, String checkId) {
 		return sqlSession.selectOne("userMapper.idCheck", checkId);

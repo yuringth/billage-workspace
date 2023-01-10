@@ -35,9 +35,12 @@ public class UserController {
 	}
 	
 	// 회원관리화면
-	@RequestMapping("selectUser.ad")
-	public String selectUserList() {
-		return "admin/userListView";
+	@RequestMapping("userList.ad")
+	public ModelAndView selectUserList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
+		PageInfo pi = Pagination.getPageInfo(userService.selectUserListCount(), currentPage, 10, 10);
+		mv.addObject("pi", pi).addObject("list", userService.selectUserList(pi)).setViewName("admin/userListView");
+		
+		return mv;
 	}
 	
 	// 모임관리화면

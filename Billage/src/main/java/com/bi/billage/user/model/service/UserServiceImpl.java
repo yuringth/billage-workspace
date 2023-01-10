@@ -63,4 +63,14 @@ public class UserServiceImpl implements UserService{
 		return userDao.updateSerialRequest(sqlSession, requestNo);
 	}
 
+	@Override
+	public int selectUserListCount() {
+		return userDao.selectUserListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<User> selectUserList(PageInfo pi) {
+		return userDao.selectUserList(sqlSession, pi);
+	}
+
 }
