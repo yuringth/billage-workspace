@@ -52,8 +52,10 @@ public class DrawAuctionController {
 			int minute = (sec - day * 60 * 60 * 24 - hour * 3600) / 60; 
 			int second = sec % 60;
 			
+			
 			if(closeTime / (1000*24*60*60) > 1) { //하루 넘게 남았을 때
-				remaindTime = day + "일 " + hour + ":" + minute  + ":" + second;
+				remaindTime = day + "일 " + hour + ":" + minute  + ":" + second;	
+				
 			} else { // 하루도 안 남았을 때
 				remaindTime = hour + ":" + minute  + ":" + second;
 			}
