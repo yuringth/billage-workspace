@@ -180,18 +180,20 @@
 
 		<hr>
 		
-		<div><button class="modal-up-btn">상품모달검색</button></div>
 		<!-- api끌고오는건데 enctype으로 해야하는게 맞을까?? -->
 		<!-- 페이지 포워딩 -->
-		<form id="reviewEnrollForm" action="search.re" method="post" enctype="multipart/form-data">
+		<!-- <form id="reviewEnrollForm" action="search.re" method="post" enctype="multipart/form-data"> 기존것-->
+		
+		<form id="reviewEnrollForm" action="insertBoard.re" method="post" enctype="multipart/form-data">
 		
 		<!-- 작성자 식별자로 넘기기 -->
 		<input type="hidden" neme="userNo" value="#">
 		
 			
 			<div class="search-div">
-				<input type="text" id="book_title2" name="bookTitle">
-				<button class="btn btn-link" type="submit">상품검색</button>
+				<!-- <input type="text" id="book_title2" name="bookTitle">
+				<button class="btn btn-link" type="submit">상품검색</button> -->
+				<button class="modal-up-btn">상품모달검색</button>
 			</div>
 		</form>
 		
