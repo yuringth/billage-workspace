@@ -186,7 +186,7 @@ public class DrawAuctionController {
 	public String insertAuctionBoard(ADBoard b, MultipartFile upFile, HttpSession session, Model model) {
 		
 		if(!upFile.getOriginalFilename().equals("")) {
-			String changeName = savefile.getSaveFile(upFile, session);
+			String changeName = SaveFile.getSaveFile(upFile, session);
 			b.setOriginName(upFile.getOriginalFilename());
 			b.setChangeName(changeName);
 		} 
