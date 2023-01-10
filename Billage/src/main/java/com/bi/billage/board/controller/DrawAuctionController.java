@@ -185,6 +185,8 @@ public class DrawAuctionController {
 	@RequestMapping("insert.ac")
 	public String insertAuctionBoard(ADBoard b, MultipartFile upFile, HttpSession session, Model model) {
 		
+		b.setCloseDate(b.getCloseDate() + " " + b.getCloseTime() + ":00");
+		
 		if(!upFile.getOriginalFilename().equals("")) {
 			String changeName = SaveFile.getSaveFile(upFile, session);
 			b.setOriginName(upFile.getOriginalFilename());
