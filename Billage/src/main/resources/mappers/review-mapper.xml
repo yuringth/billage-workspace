@@ -26,4 +26,15 @@
 
 
 
+
+	<!-- isbn 조회 쿼리문 -->
+	<select id="selectIsbn" parameterType="review">
+		select
+		       isbn
+		  from 
+		       book
+		 where
+		       book_name = #{bookName}
+	</select>
+	
 </mapper>

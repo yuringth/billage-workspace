@@ -73,15 +73,7 @@ public class ReviewController {
 		
 		
 		boardService.selectIsbn(title);
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		
 		// url은 손으로 한땀한땀 작성하는게 좋다
 		// 인증서 => 브라우저에 있음 => 우리는 http로 작성할것임! https안됨!!
@@ -106,6 +98,9 @@ public class ReviewController {
 	    
 	    br.close();//버퍼더리더 반납
 	    urlConnection.disconnect(); // 뭐지?
+	    
+	    
+	    
 	    
 	    return responseText; // 응답데이터임!! 	@ResponseBody
 	}
