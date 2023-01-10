@@ -7,6 +7,7 @@ import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.ReportBoard;
 import com.bi.billage.board.model.vo.ReviewBoard;
 import com.bi.billage.board.model.vo.Serial;
+import com.bi.billage.board.model.vo.SerialRequest;
 import com.bi.billage.board.model.vo.UsedBoard;
 import com.bi.billage.common.model.vo.PageInfo;
 
@@ -35,6 +36,9 @@ public interface BoardService {
 	
 	// 연재 상세 조회
 	ArrayList<Serial> selectSerialDetail(PageInfo pi, int novelNo, String serialNo);
+	
+	// 연재신청 서비스(insert)
+	int insertSerialRequest(SerialRequest sr);
 	
 	//광진 구역끝
 	
