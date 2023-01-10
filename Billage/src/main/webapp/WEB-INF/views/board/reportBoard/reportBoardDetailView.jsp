@@ -37,15 +37,15 @@
 <div class="outer">
 			<div id="boardDetailTitle" style="display:flex; flex-direction: row; justify-content: space-between;">
 			<div><h2>자유게시판</h2></div>
-			<div><button>자유게시판 목록</button></div>
+			<div><button ><a href="list.ro"">신고게시판 목록</a></button></div>
 			</div>
 			<br>
 			
 			<div id="boardTitle"><h3>${r.reportTitle}</h3></div>
 			<div id="nickName">${r.nickName }</div>
-			<div id="boardAct" style="display:flex; flex-direction: row; justify-content: flex-start; ">
+			<div id="boardAct" style="display:flex; flex-direction: row; justify-content: flex-end; ">
 				<div id="boardDate">${r.reportDate}&nbsp;</div>
-				<div id="boardUpdateBtn" style="margin-right:10px;"><button>수정</button></div>
+				<div id="boardUpdateBtn" style="margin-right:10px;"><button>처리</button></div>
 				<div id="boardDeleteBtn"><button>X</button></div>
 			</div>
 			<br>
@@ -59,7 +59,7 @@
 			<hr>
 			<br>
 			
-		
+			
 		
 		</div>
 		
