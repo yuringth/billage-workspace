@@ -16,14 +16,22 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private UserDao userDao;
 	
+	// 회원가입
 	@Override
 	public int insertUser(User u) {
 		return userDao.insertUser(sqlSession, u);
 	}
-
+	
+	// 로그인
 	@Override
 	public User loginUser(User u) {
 		return userDao.loginUser(sqlSession, u);
+	}
+	
+	//id 중복체크
+	@Override
+	public int idCheck(String checkId) {
+		return userDao.idCheck(sqlSession, checkId);
 	}
 
 }
