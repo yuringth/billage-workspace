@@ -19,6 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bi.billage.board.model.service.BoardService;
 import com.bi.billage.board.model.vo.ADBoard;
 
+import javafx.scene.chart.PieChart.Data;
+
 @Controller
 public class DrawAuctionController {
 	
@@ -30,46 +32,37 @@ public class DrawAuctionController {
 		
 		ArrayList<ADBoard> list = boardService.selectDrawBoardList();
 		
-		// DB 받아온 String 담을 포멧
+		//날짜 형식
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		
+		// 현재 시간
 		Date date = new Date();
-		Date date2 = null;
-		long nowTime = date.getTime(); // 현재시간
-		long closeTime = 0;	// 마감시간
-		String remaindTime = ""; // 남은 시간 넣을 변수
-		
-		System.out.println(nowTime);
-		// 남은 일수가 하루 이상일 때 담을 포멧
-		SimpleDateFormat dFormat = new SimpleDateFormat("dd일 HH:mm:ss");
-		// 하루도 안남았을 때 담을 포멧
-		SimpleDateFormat tFormat = new SimpleDateFormat("HH:mm:ss");
+		//남은 시간 넣을 곳
+		String remaindTime = "";
 		
 		for(int i = 0; i < list.size(); i++) {
-			// DB에서 가져온 값을 Date2에 담는다
-			date2 = format.parse(list.get(i).getCloseDate());
+			// Db에서 가져온 값을 Date타입으로 바꾼다
+			Date setDate = format.parse(list.get(i).getCloseDate());
+			// 마감시간 - 현재시간
+			long closeTime = setDate.getTime() - date.getTime();
+			// 남은 시간을 초단위로 바꾼다
+			int sec = (int)(closeTime / 1000);
 			
+			int day = sec / (60 * 60 * 24);
+			int hour = (sec - day * 60 * 60 * 24) / (60 * 60); 
+			int minute = (sec - day * 60 * 60 * 24 - hour * 3600) / 60; 
+			int second = sec % 60;
 			
-			// 계산을 위해 date2를 변환 long으로 변환
-			closeTime = date2.getTime();
-			
-			System.out.println(closeTime);
-			
-			//남은 시간
-			long time = (closeTime - nowTime);
-			
-			if(time / 1000 * (24*60*60) >= 1) { //하루 이상 남았을 때
-				remaindTime = dFormat.format(time);
+			if(closeTime / (1000*24*60*60) > 1) { //하루 넘게 남았을 때
+				remaindTime = day + "일 " + hour + ":" + minute  + ":" + second;
 			} else { // 하루도 안 남았을 때
-				remaindTime = tFormat.format(time);
+				remaindTime = hour + ":" + minute  + ":" + second;
 			}
 			list.get(i).setRemaindTime(remaindTime);
 		}
-		
-		
 		mv.addObject("list", list).setViewName("board/drawBoard/drawBoardListView");
 		return mv;
 	}
+	
 	
 	@RequestMapping("list.ac")
 	public ModelAndView auctionBoardList(ModelAndView mv) {
@@ -112,7 +105,9 @@ public class DrawAuctionController {
 	@RequestMapping("insert.dr")
 	public String insertDrawBoard(ADBoard b, MultipartFile upFile, HttpSession session, Model model) {
 		
-		
+		//날짜 합치기
+		b.setCloseDate(b.getCloseDate() + " " + b.getCloseTime() + ":00");
+		 
 		if(!upFile.getOriginalFilename().equals("")) { // getOriginalFileName == filename필드의 값을 반환함
 			
 			/*

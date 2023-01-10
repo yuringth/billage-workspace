@@ -23,4 +23,6 @@ public class User {
 	private String birthDate;		// 회원생년월일 
 	private String gender;			// 회원성별
 	private String status;			// 탈퇴여부
+	private int following; 			// 팔로잉 수
+	private int follower;				// 팔로워 수 
 }

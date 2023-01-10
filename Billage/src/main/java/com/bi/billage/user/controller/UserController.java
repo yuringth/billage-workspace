@@ -88,8 +88,13 @@ public class UserController {
 		return "user/myPage";
 	}
 	
+	@RequestMapping("general.me")
+	public String groupGeneral() {
+		return "group/groupGeneralView";
+	}
 	
-	@RequestMapping("group.me")
+	
+	@RequestMapping("admin.me")
 	public String groupAdmin() {
 		return "group/groupAdminView";
 	}

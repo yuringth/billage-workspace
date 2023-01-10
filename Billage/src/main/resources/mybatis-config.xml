@@ -16,10 +16,11 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.bi.billage.group.model.vo.Group" alias="group" />
 		<typeAlias type="com.bi.billage.board.model.vo.Novel" alias="novel" />
 		<typeAlias type="com.bi.billage.board.model.vo.Serial" alias="serial" />
+		<typeAlias type="com.bi.billage.board.model.vo.SerialRequest" alias="serialRequest" />
 		<typeAlias type="com.bi.billage.board.model.vo.ReportBoard" alias="Report" />
 		<typeAlias type="com.bi.billage.board.model.vo.UsedBoard" alias="used" />
 		<typeAlias type="com.bi.billage.board.model.vo.ReviewBoard" alias="review" />
-		
+		<typeAlias type="com.bi.billage.follow.model.vo.Follow" alias="follow"/>
 	</typeAliases>
 	<!-- **주의 : 미리 등록을 해두려면 해당 클래스가 진짜 존재하고 있는 상태여야함 -->
 	
@@ -33,7 +34,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="/mappers/report-mapper.xml" />	
 		<mapper resource="/mappers/used-mapper.xml" />	
 		<mapper resource="/mappers/review-mapper.xml" />	
-			
+		<mapper resource="/mappers/follow-mapper.xml"/>
 	</mappers>
 	<!-- **주의 : 미리 등록을 해두려면 해당 mapper 파일이 진짜 존재하고 있는 상태여야함 + namespace속성까지 작성해둬야함 -->
 	

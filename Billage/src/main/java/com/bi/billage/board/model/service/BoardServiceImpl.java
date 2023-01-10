@@ -11,6 +11,7 @@ import com.bi.billage.board.model.vo.ADBoard;
 import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.ReportBoard;
 import com.bi.billage.board.model.vo.Serial;
+import com.bi.billage.board.model.vo.SerialRequest;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.board.model.vo.ReviewBoard;
 import com.bi.billage.board.model.vo.UsedBoard;
@@ -217,6 +218,12 @@ public class BoardServiceImpl implements BoardService {
 	public int increaseCount(int boardNo) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public int insertSerialRequest(SerialRequest sr) {
+		// TODO Auto-generated method stub
+		return boardDao.insertSerialRequest(sqlSession, sr);
 	}
 
 	
