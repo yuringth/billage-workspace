@@ -28,5 +28,6 @@ public class ADBoard {
 	private int nowPrice;
 	
 	private String remaindTime;
+	private String closeTime;
 
 }

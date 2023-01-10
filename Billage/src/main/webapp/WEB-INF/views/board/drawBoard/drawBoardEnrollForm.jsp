@@ -21,6 +21,9 @@
     .inputdiv{
         width : 310px;
     }
+    .inputdiv2{
+        width : 155px;
+    }
     .textdiv{
         width : 80px;
     }
@@ -100,23 +103,26 @@
                     <div class="textdiv">
                         <p>마감일:</p>
                     </div>
-                    <div class="inputdiv">
-                        <input type="date" class="form-control" id="closeDate" placeholder="날짜 입력" name="closeDate">
+                    <div class="inputdiv2"> <!-- 날짜 min max 추가하기 -->
+                        <input type="date" class="form-control" id="closeDate"  name="closeDate" required>
                     </div>
+                    <div class="inputdiv2">
+                        <input type="time" class="form-control" id="closeTime" name="closeTime" required>
+                    </div>   
                 </div>
                 <div class="shortdiv align-left">
                     <div class="textdiv">
                         <p>응모포인트:</p>
                     </div>
                     <div class="inputdiv">
-                        <input type="number" class="form-control" id="tryPoint" value="50P" name="tryPoint">
+                        <input type="number" class="form-control" id="tryPoint" value="50P" name="tryPoint" required>
                     </div>
                 </div>
             </div>
 
 
             <div style="width : 790px;">
-                <textarea class="form-control" rows="15" id="content" style="resize: none;" name="content" placeholder="내용을 입력하세요"></textarea>
+                <textarea class="form-control" rows="15" id="content" style="resize: none;" name="content" placeholder="내용을 입력하세요" required></textarea>
             </div>
             
              <div class="longdiv align-left">
