@@ -1,7 +1,6 @@
 package com.bi.billage.board.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,14 +17,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bi.billage.board.model.service.BoardService;
 import com.bi.billage.board.model.vo.ADBoard;
-
-import javafx.scene.chart.PieChart.Data;
+import com.bi.billage.common.savefile.SaveFile;
 
 @Controller
 public class DrawAuctionController {
 	
 	@Autowired
 	private BoardService boardService;
+	
 	
 	@RequestMapping("list.dr")
 	public ModelAndView drawBoardList(ModelAndView mv) throws ParseException {
@@ -83,10 +82,39 @@ public class DrawAuctionController {
 	}
 	
 	@RequestMapping("detail.dr")
-	public ModelAndView drawDetailView(int bno, ModelAndView mv) {
+	public ModelAndView drawDetailView(int bno, ModelAndView mv) throws ParseException {
 		
 		if(boardService.drawIncreaseCount(bno) > 0) {
-			mv.addObject("b", boardService.selectDrawBoard(bno)).setViewName("board/drawBoard/drawDetailView");
+			ADBoard b =  boardService.selectDrawBoard(bno);
+			//날짜 형식
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			// 현재 시간
+			Date date = new Date();
+			//남은 시간 넣을 곳
+			String remaindTime = "";
+			
+			// Db에서 가져온 값을 Date타입으로 바꾼다
+			Date setDate = format.parse(b.getCloseDate());
+			// 마감시간 - 현재시간
+			long closeTime = setDate.getTime() - date.getTime();
+			// 남은 시간을 초단위로 바꾼다
+			int sec = (int)(closeTime / 1000);
+			
+			int day = sec / (60 * 60 * 24);
+			int hour = (sec - day * 60 * 60 * 24) / (60 * 60); 
+			int minute = (sec - day * 60 * 60 * 24 - hour * 3600) / 60; 
+			int second = sec % 60;
+			
+			
+			if(closeTime / (1000*24*60*60) > 1) { //하루 넘게 남았을 때
+				remaindTime = day + "일 " + hour + ":" + minute  + ":" + second;	
+				
+			} else { // 하루도 안 남았을 때
+				remaindTime = hour + ":" + minute  + ":" + second;
+			}
+			b.setRemaindTime(remaindTime);
+			mv.addObject("b",b).setViewName("board/drawBoard/drawDetailView");
+			
 		} else {
 			mv.addObject("errorMsg", "게시글 조회 실패").setViewName("common/errorPage");
 		}
@@ -137,10 +165,9 @@ public class DrawAuctionController {
 			}
 			
 			*/
-			
-			
+			String changeName = SaveFile.getSaveFile(upFile, session);
 			b.setOriginName(upFile.getOriginalFilename()); //원본명
-			b.setChangeName("resources/uploadFiles/" + saveFile(upFile, session));
+			b.setChangeName(changeName);
 			
 		} 
 		// 넘어온 첨부파일이 없을 경우 b : 제목, 작성자, 내용
@@ -159,8 +186,9 @@ public class DrawAuctionController {
 	public String insertAuctionBoard(ADBoard b, MultipartFile upFile, HttpSession session, Model model) {
 		
 		if(!upFile.getOriginalFilename().equals("")) {
+			String changeName = SaveFile.getSaveFile(upFile, session);
 			b.setOriginName(upFile.getOriginalFilename());
-			b.setChangeName("resources/uploadFiles/" + saveFile(upFile, session));
+			b.setChangeName(changeName);
 		} 
 		
 		if(boardService.insertAuctionBoard(b) > 0) {
@@ -171,7 +199,7 @@ public class DrawAuctionController {
 		}
 	}
 	
-	
+	/*
 	public String saveFile(MultipartFile upfile, HttpSession session) { // 실제 넘어온 파일의 이름을 변경해서 서버에 업로드
 		
 		// 파일명 수정 작업 후 서버에 업로드 시키기("image.png" =. 202212123141.png)
@@ -198,7 +226,7 @@ public class DrawAuctionController {
 		
 		return changeName;
 	}
-	
+	*/
 	
 	@RequestMapping("delete.dr")
 	public String deleteDraw(int boardNo, HttpSession session, ModelAndView mv, String changeName) {

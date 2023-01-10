@@ -6,12 +6,16 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.bi.billage.common.savefile.SaveFile;
+import com.bi.billage.group.model.service.GroupService;
 import com.bi.billage.group.model.vo.Group;
 
 @Controller
@@ -20,10 +24,8 @@ public class GroupController {
 	// API serviceKey
 	private static final String serviceKey = "B15BD225-F8CB-34E6-9DC3-A77C2FE5F5A9";
 	
-	//@Autowired
-	//private GroupService groupService;
 	@Autowired
-	private SaveFile savefile;
+	private GroupService groupService;
 	
 	
 	
@@ -89,8 +91,14 @@ public class GroupController {
 	
 	// 모임등록 하면 값 들어오는 메소드 --------------------------------- 기능 구현 필요함 
 	@RequestMapping("create.gr")
-	public String insertGroup(Group group) {
+	public String insertGroup(Group group, MultipartFile upfile, HttpSession session) {
 		System.out.println(group);
+		
+		if(!upfile.getOriginalFilename().equals("")) {
+			String changeName = SaveFile.getSaveFile(upfile, session);
+			group.setGroupImg(changeName);
+		}
+		
 		
 		
 		return "group/groupAdminView";

@@ -1,10 +1,13 @@
 package com.bi.billage.follow.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.bi.billage.follow.model.service.FollowService;
 import com.bi.billage.user.model.vo.User;
@@ -16,8 +19,13 @@ public class FollowController {
 	private FollowService followService;
 	
 	@RequestMapping("selectFollowing.fo")
-	public String selectFollowingList() {
-		return "follow/followingListView";
+	public ModelAndView selectFollowingList(HttpSession session, int uno, ModelAndView mv) {
+		
+		ArrayList<User> followingList = followService.selectFollowingList(uno);
+		
+		mv.addObject("followingList",followingList).setViewName("follow/followingListView");
+		
+		return mv;
 	}
 	
 	@RequestMapping("selectFollower.fo")

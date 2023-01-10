@@ -94,7 +94,7 @@
 		</div>
 		<!--이미지 영역-->
 		<div class="imgarea">
-			<img style="width: 600px; height: 600px;"src="https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2FMjAyMDA4MDVfMjY2%2FMDAxNTk2NTY3NDEwNzA4.fW0LNc9ezTC45UeZP4C72irFTFC23cB7YklNQdu1G-Ig.uUzznBuV_lL2adb0KTMAwzWFN6n0d0HE__fS_ihBmpog.JPEG%2FexternalFile.jpg&type=sc960_832">
+			<img style="width: 600px; height: 600px;"src="${ b.changeName }">
 		</div>
 		
 

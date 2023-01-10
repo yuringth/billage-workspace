@@ -1,5 +1,7 @@
 package com.bi.billage.follow.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,12 @@ public class FollowServiceImpl implements FollowService{
 	public User selectLoginUser(int userNo) {
 		
 		return followDao.selectLoginUser(sqlSession, userNo);
+	}
+
+	@Override
+	public ArrayList<User> selectFollowingList(int userNo) {
+		
+		return followDao.selectFollowingList(sqlSession, userNo);
 	}
 
 }
