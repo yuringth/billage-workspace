@@ -29,4 +29,7 @@ public interface UserService {
 	int updateSerialRequest(int requestNo);
 	
 	
+	
+	// id중복체크
+	int idCheck(String checkId);
 }

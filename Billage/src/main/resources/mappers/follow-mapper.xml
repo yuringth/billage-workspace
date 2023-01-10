@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="followMapper">
+
+		<resultMap id="userResultSet2" type="user">
+			<result column="USER_ID" 			property="userId" />
+			<result column="USER_PWD"			property="userPwd" />
+			<result column="NAME"				property="name" />
+			<result column="EMAIL"				property="email" />
+			<result column="NICKNAME"			property="nickname" />
+			<result column="PHONE"				property="phone" />
+			<result column="BIRTH_DATE"			property="birthDate" />
+			<result column="GENDER"				property="gender" />
+			<result column="ADDRESS"			property="address" />
+			<result column="DETAIL_ADDRESS"		property="detailAddress" />
+			<result column="USER_GRADE"			property="userGrade" />
+			<result column="USER_NO"			property="userNo" />
+			<result column="FOLLOWING"       property="following"/>
+			<result column="FOLLOWER"         property="follower"/> 
+		</resultMap>
+		
+		<select id="selectLoginUser" parameterType="_int" resultMap="userResultSet2">
+			select
+					user_id
+					,user_pwd
+					,name
+					,email
+					,nickname
+					,phone
+					,birth_date
+					,gender
+					,address
+					,detail_address
+					,user_grade
+					,user_no
+					,(
+					select 
+							count(*)
+					from
+						   follow
+					 where
+					       user_no1 = #{userNo}   	
+					) following
+					,(
+					select
+							count(*)
+					  from
+							follow
+					where
+					        user_no2 = #{userNo}		
+					) follower
+			from
+			       member
+			where
+			       user_no = #{userNo}       		
+		</select>
+		
+		<select id="selectFollowingList" parameterType="_int" resultMap="userResultSet2">
+			select
+				     user_id
+					,user_pwd
+					,name
+					,email
+					,nickname
+					,phone
+					,birth_date
+					,gender
+					,address
+					,detail_address
+					,user_grade
+					,user_no
+				  from
+				      	member m
+				  where
+					     user_no in (
+					                    	select
+					                          		user_no2
+					                         from
+					                          		follow
+					                       where
+					                                user_no1 = #{userNo})
+		</select>
+		
+
+</mapper>

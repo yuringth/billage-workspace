@@ -90,32 +90,29 @@
 	<div class="outer">
 
 		<div class="writerarea">
-			<p>작성자 : 주우재</p>
+			<p>작성자 : ${ b.nickname }</p>
 		</div>
 		<!--이미지 영역-->
 		<div class="imgarea">
-			<img style="width: 600px; height: 600px;"src="https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2FMjAyMDA4MDVfMjY2%2FMDAxNTk2NTY3NDEwNzA4.fW0LNc9ezTC45UeZP4C72irFTFC23cB7YklNQdu1G-Ig.uUzznBuV_lL2adb0KTMAwzWFN6n0d0HE__fS_ihBmpog.JPEG%2FexternalFile.jpg&type=sc960_832">
+			<img style="width: 600px; height: 600px;"src="${ b.changeName }">
 		</div>
 		
 
 		
-		<p class="time">남은 시간 : 00 : 00 : 30</p>
-		<p class="genre">호러</p>
-		<p class="title">"주호민의 리코더괴담"</p>
-		<p class="bookWriter">침착맨</p>
+		<p class="time">${b.remaindTime }</p>
+		<p class="genre">${ b.genre }</p>
+		<p class="title">"${ b.title }"</p>
+		<p class="bookWriter">${ b.bookWriter }</p>
 		<div class="content" style="width : 550px">
 			<p>
-주호민의 리코더 괴담... 그의 리코더 연주 '할아버지의 11개월'을 끝까지 들으면 죽
-는다?!
-한 소년이 그의 지옥같은 연주를 끝까지 듣게 되고 그 순간 초인종이 울리는데...
-대한민국 최초 실화바탕 호러로맨스 주호민의 리코더 괴담 정말 재밌습니다!! 꼭 읽어보세요 ㅎㅎ
+				${ b.content }
 			</p>
 		</div>
 
 		<form action="">
-			<input type="hidden" name="tryPoint" value="${tryPoint}">
+			<input type="hidden" name="tryPoint" value="${b.tryPoint}">
 			<button class="btn1 btn btn-secondary">
-				${tryPoint}P 응모하기
+				${b.tryPoint}P 응모하기
 			</button>
 		</form>
 

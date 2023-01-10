@@ -79,7 +79,8 @@
 
 
 		<!--모임 개설 : 모임이름, 모임요일, 모임 설명, 모임 지역, 모임 참여 인원 받아야 함 -->
-		<form action="insert.gr" method="post" enctype="multipart/form-data">
+		<form action="create.gr" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="userNo" value="${ loginUser.userNo }"/>
 			<table border="1" align="center">
 				<caption style="text-align:left;">*필수입력사항</caption>	
 				<colgroup>
@@ -122,7 +123,7 @@
 						<th>모임 대표 이미지</th>
 						<td>
 							 <span><img width="200" height="200" id="file-insert" src="resources/images/plus.png"></span>
-							 <input type="file" name="groupImg" id="file">
+							 <input type="file" name="upfile" id="file">
 						</td>
 					</tr>
 				</tbody>
@@ -251,7 +252,7 @@
 					for(let i in uniqueArr.reverse()){			
 						value += '<p class="enter-addr">' + uniqueArr[i] + '</p>';				
 					}
-					value += '</div>';
+					value += '</5>';
 					$('#result-area').html(value);
 					
 				},

@@ -8,13 +8,14 @@ import org.springframework.stereotype.Service;
 
 import com.bi.billage.board.model.dao.BoardDao;
 import com.bi.billage.board.model.vo.ADBoard;
+import com.bi.billage.board.model.vo.Book;
 import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.ReportBoard;
+import com.bi.billage.board.model.vo.ReviewBoard;
 import com.bi.billage.board.model.vo.Serial;
 import com.bi.billage.board.model.vo.SerialRequest;
-import com.bi.billage.common.model.vo.PageInfo;
-import com.bi.billage.board.model.vo.ReviewBoard;
 import com.bi.billage.board.model.vo.UsedBoard;
+import com.bi.billage.common.model.vo.PageInfo;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -214,6 +215,19 @@ public class BoardServiceImpl implements BoardService {
 		return 0;
 	}
 
+	
+	// 리뷰게시판 isbn
+	@Override
+	public Book selectIsbn(String title) {
+		
+		return boardDao.selectIsbn(sqlSession, title);
+	}
+	
+	
+	
+	
+	
+	
 	@Override
 	public int increaseCount(int boardNo) {
 		// TODO Auto-generated method stub

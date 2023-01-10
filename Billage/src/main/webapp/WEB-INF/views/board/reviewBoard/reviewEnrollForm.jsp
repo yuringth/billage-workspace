@@ -142,7 +142,7 @@
     	width:450px;
     	height:120px;
     }
-    #book_title, #book_author, #book_date, #book_publisher{
+    #md_book_title, #md_book_author, #md_book_date, #md_book_publisher{
     	border: 1px solid black;
     	height:50px;
     	margin:0px;
@@ -190,17 +190,18 @@
 		
 			
 			<div class="search-div">
-				<input type="text" id="book_title" name="bookTitle">
+				<input type="text" id="book_title2" name="bookTitle">
 				<button class="btn btn-link" type="submit">상품검색</button>
 			</div>
 		</form>
+		
 		
 		
 		<div class="book-detail-outer">
 			<div class="book-detail-area">
 				<div class="content-photo-detail">
 					<!-- api에서 끌고 오는거니까 첨부파일로 안해도 되는게 맞겠지? <input type="file" name="upfile"> 이런식으로.. -->
-					<div id="book_imag" name="bookImag">사진</div>
+					<div id="book_imag" name="bookImag"><img src="" id="book_scr">사진</div>
 				</div>
 				
 				<!-- review 테이블 : book_content, book_publisher, book_date 컬럼 추가  -->
@@ -252,7 +253,7 @@
  
  
  
-		<!-- api 모달창 => 전혀 이상한게 없는데 안뜬다!!ㅠㅠ -->
+		<!-- api 모달창 -->
 		<div id="modal-book-search">
 			<button type="button" id="modal-close-btn">&times;</button>
 			
@@ -348,6 +349,7 @@
 					
 					$("#title").val('');
 					
+					
 				},
 				
 				error: function(){
@@ -358,13 +360,27 @@
 	    
 		 $(function(){
 			 $(document).on('click', '#modal-result-btn', function(){
+				 
+				 
 				 console.log($('#md_book_title').text());
 				 console.log($('#md_book_author').text());
 				 console.log($('#md_book_date').text());
 				 console.log($('#md_book_publisher').text());
-				 console.log($('#md_book_img').html());
+				 console.log($('#md_img').attr('src'));
+				 
 				 
 				 $('#book_title').html($('#md_book_title').text());
+				 $('#book_author').html($('#md_book_author').text());
+				 $('#book_publisher').html($('#md_book_publisher').text());
+				 $('#book_date').html($('#md_book_date').text());
+				 
+				 
+				// $('#book_imag').html($('#md_img').attr('src', "$('#md_img').attr('src')"));
+				 
+				 //$('#book_scr').attr('scr', '$('#md_img').attr('src')');
+				 
+				 
+				 
 				 $('#modal-book-search').hide();
 			 })
 		 });
@@ -386,26 +402,6 @@
    	</script>
    	
  
-   	
-   	
-   	
-   	
-   	
-   	
-   	
-   	
-   	
-   	
-   	
-   	
-   	
-   	
-   	
-   	
-   	
-   	
-   	
-   	
    	
    	
    	

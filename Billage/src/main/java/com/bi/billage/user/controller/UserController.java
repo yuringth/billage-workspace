@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bi.billage.common.model.vo.PageInfo;
@@ -168,5 +169,12 @@ public class UserController {
 	public String logoutUser(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
+	}
+	
+	// id 중복체크
+	@ResponseBody
+	@RequestMapping("idCheck.me")
+	public String idCheck(String checkId) {
+		return userService.idCheck(checkId) > 0 ? "NNNNN" : "NNNNY";
 	}
 }
