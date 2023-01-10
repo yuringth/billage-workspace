@@ -1,5 +1,8 @@
 package com.bi.billage.group.model.service;
 
-public interface GroupService {
+import com.bi.billage.group.model.vo.Group;
 
+public interface GroupService {
+	
+	public int insertGroup(Group group);
 }
