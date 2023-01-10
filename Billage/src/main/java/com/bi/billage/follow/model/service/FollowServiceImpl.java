@@ -1,5 +1,24 @@
 package com.bi.billage.follow.model.service;
 
-public class FollowServiceImpl {
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.bi.billage.follow.model.dao.FollowDao;
+import com.bi.billage.user.model.vo.User;
+
+@Service
+public class FollowServiceImpl implements FollowService{
+	
+	@Autowired
+	private FollowDao followDao;
+	
+	@Autowired SqlSessionTemplate sqlSession;
+
+	@Override
+	public User selectLoginUser(int userNo) {
+		
+		return followDao.selectLoginUser(sqlSession, userNo);
+	}
 
 }
