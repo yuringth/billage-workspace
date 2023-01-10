@@ -148,7 +148,7 @@
 					$('.book-outer').html(value);
 					$('#title').val(title);
 					
-					$("#title").text('');
+					$("#title").val('');
 					
 				},
 				
