@@ -205,7 +205,7 @@
 				
 				<!-- review 테이블 : book_content, book_publisher, book_date 컬럼 추가  -->
 				<div class="content-book-detail">
-					<div id="book_title" name="bookTitle"></div>
+					<div id="book_title" name="bookTitle">제목</div>
 					<div id="book_author" name="bookAuthor">작가</div>
 					<div id="book_publisher" name="bookPublisher">츨판사</div>
 					<div id="book_date" name="bookDate">발행일자</div>
@@ -318,6 +318,8 @@
 					
 					const item = result.item[0];
 					
+					console.log(item);
+					
 					let value ='';
 						
 					let thumb = item.cover;
@@ -327,13 +329,13 @@
 						  + '</div>'
 						  + '<div class="content-area2">'
 						  + '<div class="content-detail1">'
-						  + '<div><img src="' + thumb + '"></div>'
+						  + '<div><img id="md_img" src="' + thumb + '"></div>'
 						  + '</div>'
 						  + '<div class="content-detail2">'
 						  + '<p id="md_book_title" name="bookTitle">' + item.title + '</p>'
-						  + '<p id="book_author" name="bookAuthor">' + item.author + '</p>'
-						  + '<p id="book_date" name="bookDate">' + item.pubDate + '</p>'
-						  + '<p id="book_publisher" name="bookPublisher">' + item.publisher + '</p>'
+						  + '<p id="md_book_author" name="bookAuthor">' + item.author + '</p>'
+						  + '<p id="md_book_date" name="bookDate">' + item.pubDate + '</p>'
+						  + '<p id="md_book_publisher" name="bookPublisher">' + item.publisher + '</p>'
 						  + '</div>'
 						  + '</div>'
 						  + '<div  class="content-area3">'
@@ -346,29 +348,26 @@
 					
 					$("#title").val('');
 					
-					
-					
-
-
-					
 				},
 				
 				error: function(){
 					console.log('실패');
 				}
 			 })
-		 }
+		 };
 	    
-		 
-		 $(document).on('click', '#modal-result-btn', function(){
-			 console.log($('#md_book_title').text());
-			 $('#book_title').html($('#md_book_title').text());
-			 $('#modal-book-search').hide();
-		 })
-
-
-	    
-	    
+		 $(function(){
+			 $(document).on('click', '#modal-result-btn', function(){
+				 console.log($('#md_book_title').text());
+				 console.log($('#md_book_author').text());
+				 console.log($('#md_book_date').text());
+				 console.log($('#md_book_publisher').text());
+				 console.log($('#md_book_img').html());
+				 
+				 $('#book_title').html($('#md_book_title').text());
+				 $('#modal-book-search').hide();
+			 })
+		 });
 	</script>
 
 	 
