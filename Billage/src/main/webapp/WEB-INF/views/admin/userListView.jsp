@@ -135,26 +135,30 @@
         </div>
         <div class="main_content">
             <div class="title">
-				<h1 class="title-text">연재 요청 조회 및 관리</h1>
+				<h1 class="title-text">전체 회원 조회 및 관리</h1>
 			</div>
 				<table id="serialRequestList" class="table table-hover" align="center">
                 <thead>
                     <tr>
-                        <th>요청번호</th>
-                        <th>요청회원</th>
-                        <th>요청제목</th>
-                        <th>요청날짜</th>
-                        <th>승락여부</th>
+                        <th>회원번호</th>
+                        <th>회원아이디</th>
+                        <th>회원닉네임</th>
+                        <th>이메일</th>
+                        <th>가입일</th>
+                        <th>회원등급</th>
+                        <th>탈퇴여부</th>
                     </tr>
                 </thead>
-                <c:forEach items="${ list }" var="sr">
+                <c:forEach items="${ list }" var="u">
                 <tbody>
                 		<tr>
-                			<td class="rno"></td>
-                			<td></td>
-                			<td></td>
-                			<td></td>
-                			<td></td>
+                			<td class="uno">${ u.userNo }</td>
+                			<td>${ u.userId }</td>
+                			<td>${ u.nickname }</td>
+                			<td>${ u.email }</td>
+                			<td>${ u.enrollDate }</td>
+                			<td>${ u.userGrade }</td>
+                			<td>${ u.status }</td>
                 		</tr>
                 </tbody>
                 </c:forEach>
@@ -162,12 +166,6 @@
             <br>
             
             <script>
-            
-            	$(function(){
-            		$('#serialRequestList>tbody>tr').click(function(){
-            			location.href = 'detail.sr?rno=' + $(this).children('.rno').text();
-            		})
-            	})
             
             </script>
        

@@ -28,8 +28,15 @@ public interface UserService {
 	int updateUserGrade(int userNo);
 	int updateSerialRequest(int requestNo);
 	
+	// 회원 총 몇명인지 조회
+	int selectUserListCount();
+	
+	// 회원 리스트 조회
+	ArrayList<User> selectUserList(PageInfo pi);
+	
 	
 	
 	// id중복체크
 	int idCheck(String checkId);
+	
 }

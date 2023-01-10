@@ -17,7 +17,7 @@
 		<result column="DETAIL_ADDRESS"		property="detailAddress" />
 		<result column="USER_GRADE"			property="userGrade" />
 		<result column="USER_NO"			property="userNo" />
-	
+		<result column="ENROLL_DATE"		property="enrollDate" />
 	</resultMap>
 	
 	
@@ -83,15 +83,6 @@
 	
 	</select>
 	
-	<!-- 연재요청 수락후 회원등급변경 -->
-	<update id="updateUserGrade">
-		update
-				member
-		set
-				user_grade = '2'
-		where
-				user_no = #{ userNo }
-	</update>
 	<!-- id중복체크용 쿼리문 -->
 	<select id="idCheck" resultType="_int">
 		SELECT
@@ -102,4 +93,35 @@
 				USER_ID = #{checkId}
 	</select>
 	
+	<!-- 연재요청 수락후 회원등급변경 -->
+	<update id="updateUserGrade">
+		update
+				member
+		set
+				user_grade = '2'
+		where
+				user_no = #{ userNo }
+	</update>
+
+	<!-- 관리자 회원조회 총 몇명 세기 -->
+	<select id="selectUserListCount" resultType="_int">
+		select
+				count(*)
+		from
+				member
+	</select>
+	
+	<!-- 관리자 회원조회 쿼리문 -->
+	<select id="selectUserList" resultMap="userResultSet">
+		select
+				user_no,
+				user_id,
+				nickname,
+				email,
+				enroll_date,
+				user_grade,
+				status
+		from
+				member
+	</select>
 </mapper>
