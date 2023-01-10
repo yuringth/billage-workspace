@@ -1,7 +1,11 @@
 package com.bi.billage.follow.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.bi.billage.user.model.vo.User;
 
 @Controller
 public class FollowController {
@@ -19,7 +23,10 @@ public class FollowController {
 	}
 	
 	@RequestMapping("selectLoginUser.fo")
-	public String selectLoginUser() {
+	public String selectLoginUser(HttpSession session) {
+		
+		User user= (User)session.getAttribute("loginUser");
+		
 		return "follow/loginUserFollowView";
 	}
 	

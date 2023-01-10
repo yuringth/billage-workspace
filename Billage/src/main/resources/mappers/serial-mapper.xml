@@ -19,6 +19,17 @@
 		<result column="novel_img"			property="novelImg" />
 	</resultMap>
 	
+	<resultMap type="serialRequest" id="serialRequestResultSet">
+		<result column="request_no"			property="requestNo" />
+		<result column="user_no"			property="userNo" />
+		<result column="request_date"		property="requestDate" />
+		<result column="request_title"		property="requestTitle" />
+		<result column="request_content"	property="requestContent" />
+		<result column="acceptance"			property="acceptance" />
+		<result column="origin_name"			property="originName" />
+		<result column="change_name"			property="changeName" />
+	</resultMap>
+	
 	<select id="selectSerialListCount" resultType="_int">
 		select
 				count(*)
@@ -81,5 +92,32 @@
 		by
 				serial_no desc
 	</select>
+	
+	<insert id="insertSerialRequest" parameterType="serialRequest">
+		insert
+			into
+				serial_request
+				(
+				request_no,
+				user_no,
+				request_date,
+				request_title,
+				request_content,
+				acceptance,
+				origin_name,
+				change_name
+				)
+			values
+				(
+				seq_sereqno.nextval,
+				#{userNo},
+				sysdate,
+				#{requestTitle},
+				#{requestContent},
+				'N',
+				#{originName},
+				#{changeName}
+				)
+	</insert>
 	
 </mapper>
