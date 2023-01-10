@@ -63,7 +63,7 @@
 				<div class="boardDate">날짜</div>
 				<div class="reportStatus">처리결과</div>
 			</div>
-			<div class="boardList" style="display:flex; flex-direction: row; justify-content: space-evenly;">
+			<div class="boardList" style="display:flex; flex-direction: column;; justify-content: space-evenly;">
 				<c:forEach items="${list}"  var="r">
 					<input type="hidden" id="userNo" name="userNo" value="${ r.userNo }">
 					<div class="rno">${ r.reportNo }</div>
