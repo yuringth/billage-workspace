@@ -1,7 +1,6 @@
 package com.bi.billage.board.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,14 +17,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bi.billage.board.model.service.BoardService;
 import com.bi.billage.board.model.vo.ADBoard;
-
-import javafx.scene.chart.PieChart.Data;
+import com.bi.billage.common.savefile.SaveFile;
 
 @Controller
 public class DrawAuctionController {
 	
 	@Autowired
 	private BoardService boardService;
+	
 	
 	@RequestMapping("list.dr")
 	public ModelAndView drawBoardList(ModelAndView mv) throws ParseException {
@@ -166,10 +165,9 @@ public class DrawAuctionController {
 			}
 			
 			*/
-			
-			
+			String changeName = SaveFile.getSaveFile(upFile, session);
 			b.setOriginName(upFile.getOriginalFilename()); //원본명
-			b.setChangeName("resources/uploadFiles/" + saveFile(upFile, session));
+			b.setChangeName(changeName);
 			
 		} 
 		// 넘어온 첨부파일이 없을 경우 b : 제목, 작성자, 내용
@@ -188,8 +186,9 @@ public class DrawAuctionController {
 	public String insertAuctionBoard(ADBoard b, MultipartFile upFile, HttpSession session, Model model) {
 		
 		if(!upFile.getOriginalFilename().equals("")) {
+			String changeName = savefile.getSaveFile(upFile, session);
 			b.setOriginName(upFile.getOriginalFilename());
-			b.setChangeName("resources/uploadFiles/" + saveFile(upFile, session));
+			b.setChangeName(changeName);
 		} 
 		
 		if(boardService.insertAuctionBoard(b) > 0) {
@@ -200,7 +199,7 @@ public class DrawAuctionController {
 		}
 	}
 	
-	
+	/*
 	public String saveFile(MultipartFile upfile, HttpSession session) { // 실제 넘어온 파일의 이름을 변경해서 서버에 업로드
 		
 		// 파일명 수정 작업 후 서버에 업로드 시키기("image.png" =. 202212123141.png)
@@ -227,7 +226,7 @@ public class DrawAuctionController {
 		
 		return changeName;
 	}
-	
+	*/
 	
 	@RequestMapping("delete.dr")
 	public String deleteDraw(int boardNo, HttpSession session, ModelAndView mv, String changeName) {

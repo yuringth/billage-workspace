@@ -27,9 +27,6 @@ public class GroupController {
 	@Autowired
 	private GroupService groupService;
 	
-	@Autowired
-	private SaveFile savefile;
-	
 	
 	
 	//등록된 모임 리스트를 가지고 와야 함 , 페이징 처리 필요
@@ -98,7 +95,7 @@ public class GroupController {
 		System.out.println(group);
 		
 		if(!upfile.getOriginalFilename().equals("")) {
-			String changeName = savefile.getSaveFile(upfile, session);
+			String changeName = SaveFile.getSaveFile(upfile, session);
 			group.setGroupImg(changeName);
 		}
 		
