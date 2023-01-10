@@ -179,6 +179,9 @@
 		<h1 style="text-align:center;">리뷰작성</h1>
 
 		<hr>
+		<div>
+			<button class="modal-up-btn">상품모달검색</button>
+		</div>
 		
 		<!-- api끌고오는건데 enctype으로 해야하는게 맞을까?? -->
 		<!-- 페이지 포워딩 -->
@@ -193,9 +196,9 @@
 			<div class="search-div">
 				<!-- <input type="text" id="book_title2" name="bookTitle">
 				<button class="btn btn-link" type="submit">상품검색</button> -->
-				<button class="modal-up-btn">상품모달검색</button>
 			</div>
-		</form>
+			
+		<!-- </form> -->
 		
 		
 		
@@ -227,7 +230,7 @@
 		<br>
 
 		<div class="review-content-outer">
-			<form action="#">
+			<!-- <form action="#"> -->
 				<textarea id="review_content" name="reviewContent" placeholder="리뷰 작성 해주세요" rows="20" cols="100" style="resize:none" maxlength="1000" required></textarea>
 				
 				<hr>
@@ -248,10 +251,10 @@
 					<button>취소</button>
 				</div>
 
-			</form>
+			<!-- </form> -->
 		</div>
 
-
+		</form>
  
  
  
