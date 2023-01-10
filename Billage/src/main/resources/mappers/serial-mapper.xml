@@ -120,4 +120,48 @@
 				)
 	</insert>
 	
+	<select id="selectSerialRequestListCount" resultType="_int">
+		select
+				count(*)
+		from
+				serial_request
+	</select>
+	
+	<select id="selectSerialRequestList" resultMap="serialRequestResultSet">
+		select
+				request_no,
+				(select nickname from member m where m.user_no = sr.user_no) as nickName,
+				request_title,
+				request_date,
+				acceptance
+		from
+				serial_request sr
+	</select>
+	
+	<select id="selectSerialRequest" resultMap="serialRequestResultSet">
+		select
+				request_no,
+				user_no,
+				(select nickname from member m where m.user_no = sr.user_no) as nickName,
+				request_title,
+				request_content,
+				request_date,
+				origin_name,
+				change_name,
+				acceptance
+		from
+				serial_request sr
+		where
+				request_no = #{ requestNo }
+	</select>
+	
+	<update id="updateSerialRequest">
+		update
+				serial_request
+		set
+				acceptance = 'Y'
+		where
+				request_no = #{ requestNo }
+	</update>
+	
 </mapper>
