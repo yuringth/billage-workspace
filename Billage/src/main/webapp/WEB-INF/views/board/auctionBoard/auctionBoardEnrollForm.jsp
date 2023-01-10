@@ -21,6 +21,9 @@
     .inputdiv{
         width : 310px;
     }
+    .inputdiv2{
+        width : 155px;
+    }
     .textdiv{
         width : 80px;
     }
@@ -71,7 +74,7 @@
                     <p>제목:</p>
                 </div>
                 <div class="titlediv">
-                    <input type="text" class="form-control" id="title" placeholder="Enter username" name="title" required>
+                    <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요" name="title" required>
                 </div>
             </div>
 
@@ -82,7 +85,7 @@
                         <p>작가:</p>
                     </div>
                     <div class="inputdiv">
-                        <input type="text" class="form-control" id="bookWriter" placeholder="Enter email" name="bookWriter">
+                        <input type="text" class="form-control" id="bookWriter" placeholder="작가를 입력하세요" name="bookWriter">
                     </div>
                 </div>
                 <div class="shortdiv align-left">
@@ -90,7 +93,7 @@
                         <p>장르:</p>
                     </div>
                     <div class="inputdiv">
-                        <input type="text" class="form-control" id="genre" placeholder="Enter email" name="genre">
+                        <input type="text" class="form-control" id="genre" placeholder="장르를 입력하세요" name="genre">
                     </div>
                 </div>
             </div>
@@ -100,16 +103,19 @@
                     <div class="textdiv">
                         <p>마감일:</p>
                     </div>
-                    <div class="inputdiv">
-                        <input type="date" class="form-control" id="closeDate" placeholder="Enter email" name="closeDate">
+                    <div class="inputdiv2"> <!-- 날짜 min max 추가하기 -->
+                        <input type="date" class="form-control" id="closeDate"  name="closeDate" required>
                     </div>
+                    <div class="inputdiv2">
+                        <input type="time" class="form-control" id="closeTime" name="closeTime" required>
+                    </div>   
                 </div>
                 <div class="shortdiv align-left">
                     <div class="textdiv">
                         <p>즉시구매가:</p>
                     </div>
                     <div class="inputdiv">
-                        <input type="number" class="form-control" id="instantlyPrice" placeholder="Enter email" name="instantlyPrice">
+                        <input type="number" class="form-control" id="instantlyPrice" placeholder="미입력시 즉시구매 불가" name="instantlyPrice">
                     </div>
                 </div>
             </div>
@@ -120,7 +126,7 @@
                         <p>시작가:</p>
                     </div>
                     <div class="inputdiv">
-                        <input type="email" class="form-control" id="startPrice" placeholder="Enter email" name="startPrice">
+                        <input type="number" class="form-control" id="startPrice" value="100" name="startPrice">
                     </div>
                 </div>
                 <div class="shortdiv align-left">
@@ -128,7 +134,7 @@
                         <p>입찰단위:</p>
                     </div>
                     <div class="inputdiv">
-                        <input type="email" class="form-control" id="bidPrice" placeholder="Enter email" name="bidPrice">
+                        <input type="number" class="form-control" id="bidPrice" value="100" name="bidPrice">
                     </div>
                 </div>
             </div>

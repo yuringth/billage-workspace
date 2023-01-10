@@ -38,18 +38,20 @@
 			<h1 align="center">팔로잉</h1>
 			
 			<hr>
-
-			<div id="following" style="display:flex; flex-direction: column;; justify-content: space-evenly;">
-				<c:forEach items="${ followingList }" var="f">
-					<div id="profile">
-						<img src="https://i.pinimg.com/originals/4c/f0/16/4cf0163a9db5f4b69499b9365be5fcda.png" width="100px;" height="100px;">
-					</div>
-					<div id="userDetail">
-						<div id="userNickName" >${ f.nickname }</div>
-						<div id="reviewCount">리뷰100</div>
-					</div>
-					<button id="followingBtn" width="50px;" height="20px;">팔로잉</button>
-					<br><br>
+			
+			<c:forEach items="${ followingList }" var="f">
+					<div id="following" style="display:flex; flex-direction: row; justify-content: space-evenly;">
+						<div id="profile">
+							<img src="https://i.pinimg.com/originals/4c/f0/16/4cf0163a9db5f4b69499b9365be5fcda.png" width="100px;" height="100px;">
+						</div>
+						<div id="userDetail">
+							<intput type="hidden" id="${ f.userNo} name="${ f.userNo }" value="${ f.userNo }">
+							<div id="${ f.nickname }" ><a href="followDetail.fo?uno="></a>${ f.nickname }</div>
+							<div id="reviewCount">리뷰100</div>
+						</div>
+						<button id="followingBtn" style="width:100px; height:50px;">팔로잉</button>
+						</div>
+						<br><br>
 					</c:forEach>
 				
 			</div>
@@ -57,6 +59,14 @@
 	</div>
 	
 	<jsp:include page="../common/footer.jsp"/>
+	
+	<script>
+		 $(function(){
+				$('#${ f.nickname }').click(function(){
+					location.href='followDetail.fo?uno=' + 
+				})
+			});
+	</script>
 
 </body>
 </html>

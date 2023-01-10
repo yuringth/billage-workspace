@@ -15,4 +15,5 @@ public class SerialRequest {
 	private String acceptance; // ACCEPTANCE	VARCHAR2(1 BYTE)
 	private String originName;
 	private String changeName;
+	private String nickName;
 }
