@@ -135,7 +135,7 @@ textarea:focus {
 		첨부파일
 	</label>
 	<div>
-    	<input type="file" id="upfile" class="form-control-file border" name="upfile">
+    	<input type="file" id="upfile" class="form-control-file border" name="upfile" required>
 	</div><br>
     <div align="left">
   		<button type="submit" class="btn btn-primary">신청하기</button>
