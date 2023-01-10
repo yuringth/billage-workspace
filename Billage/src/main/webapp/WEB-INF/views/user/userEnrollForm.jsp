@@ -139,7 +139,6 @@ body {
 	      
 	      <div class="textForm">
 	        <input name="userId" type="text" class="id" placeholder="아이디">
-	        </input>
 	      </div>
 	      
 	      <div class="textForm">
@@ -209,6 +208,17 @@ body {
 	    });
 	}
 	
+// id 중복 체크용 스크립트
+
+	$(function(){
+		
+		const $IdInput = $('.')
+		
+		
+		
+	});
+
+
 
 
 </script>
