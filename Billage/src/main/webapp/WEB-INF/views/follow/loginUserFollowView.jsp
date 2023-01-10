@@ -22,12 +22,12 @@
 <jsp:include page="../common/header.jsp"/>
 
 	<div class="outer">
-		<div id="userProfile">
+		<div class="userProfile">
 			<div id="profile"><img src="https://i.pinimg.com/originals/4c/f0/16/4cf0163a9db5f4b69499b9365be5fcda.png" width="100px;" height="100px;"></div>
 			<div id="nickName"><a href="selectLoginUser.fo">user01</a></div>
 			<div class="detailList" style="display:flex; flex-direction: row;">
 				<div id="review"><a href="reviewList.fo">평가 150 &nbsp;</a></div>
-				<div id="following"><a href="selectFollowing.fo">팔로잉 5 &nbsp;</a></div>
+				<div id="following" >팔로잉 5 &nbsp;</div>
 				<div id="follower"><a href="selectFollower.fo">팔로워 5 &nbsp;</a></div>
 			</div>
 		</div>
@@ -85,6 +85,12 @@
 	      }
 	    }
 	  });
+	  
+	  $(function(){
+			$('#following').click(function(){
+				location.href='selectFollowing.fo?uno=' +${loginUser.userNo};
+			})
+		});
 	</script>
 
 
