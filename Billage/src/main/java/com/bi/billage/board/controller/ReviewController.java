@@ -8,10 +8,10 @@ import java.net.URL;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.bi.billage.board.model.service.BoardService;
 import com.bi.billage.board.model.vo.Book;
@@ -76,9 +76,8 @@ public class ReviewController {
 	 */
 	
 	
-	
-	
-	// 리뷰게시판 목록 조회 화면
+	// 리뷰게시판 목록 조회 화면 => 몰라 안됨 ㅡㅡ
+	/*
 	@RequestMapping("list.re")
 	public String reviewBoardList(@RequestParam(value="cPage", defaultValue="1") int currentPage, Model model) {
 		
@@ -95,6 +94,33 @@ public class ReviewController {
 		
 		// model에 담았으니까 포워딩해주기(/WEB-INF/views/		board/reviewBoard/reviewListView	.jsp
 		return "board/reviewBoard/reviewListView";
+	}
+	*/
+	
+	// ModelAndView로 바꿔보기 => 리뷰게시판 목록 조회 화면
+	@RequestMapping("list.re")
+	public ModelAndView reviewBoardList(@RequestParam(value="cPage", defaultValue="1") int currentPage, ModelAndView mv) {
+		
+		PageInfo pi = Pagination.getPageInfo(boardService.selectListCount(), currentPage, 10, 4);
+		
+		mv.addObject("pi", pi).addObject("list", boardService.reviewBoardList(pi)).setViewName("board/reviewBoard/reviewListView");
+		// ModelAndView는 메소드체인이 가능해서 코드의 길이가 짧아진다 => 그래서 String으로 사용했을 때 보다 좋다
+		return mv;
+		
+	}
+	
+	
+	
+	// 리뷰게시판 -> 글작성 
+	@RequestMapping("insertBoard.re")
+	public String insertReviewBoard(ReviewBoard b) {
+		
+		System.out.println(b);
+		boardService.insertReviewBoard(b);
+		
+		//return "board/reviewBoard/reviewListView";
+		return "redirect:list.re";
+		
 	}
 	
 	
@@ -118,20 +144,6 @@ public class ReviewController {
 	public String reviewEnrollForm() {
 		return "board/reviewBoard/reviewUploadForm";
 	}
-	
-	// 리뷰게시판 -> 글작성 
-	@RequestMapping("insertBoard.re")
-	public String insertReviewBoard(ReviewBoard b) {
-		
-		System.out.println(b);
-		boardService.insertReviewBoard(b);
-		
-		
-		//return "board/reviewBoard/reviewListView";
-		return "redirect:list.re";
-	
-	}
-	
 	
 	
 	

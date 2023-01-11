@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bi.billage.follow.model.dao.FollowDao;
+import com.bi.billage.follow.model.vo.Follow;
 import com.bi.billage.user.model.vo.User;
 
 @Service
@@ -39,6 +40,12 @@ public class FollowServiceImpl implements FollowService{
 	public ArrayList<User> selectFollowerList2(int userNo) {
 		
 		return followDao.selectFollowerList2(sqlSession, userNo);
+	}
+
+	@Override
+	public int insertFollow(Follow follow) {
+		
+		return followDao.insertFollow(sqlSession, follow);
 	}
 
 }

@@ -39,6 +39,8 @@
    		width:1100px;
    		margin:auto;
     }
+    
+    
 
     .one-content-detail1{
         border:1px solid blue;
@@ -125,90 +127,48 @@
 
 
 
-	<div class="list-outer">
-
-        <!-- 리뷰 하나를 감싸는 div -->
-        <div class="one-content" onclick="reviewDetail()">
-        	
-        	<!-- 작성자/별 -->
-            <div class="one-content-detail1">
-                <div>${ b.userNo }</div>                                              
-                <div class="card-footer">
-                 	   별점 : ${ b.reviewStar } <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                </div>
-            </div>
-			
-			<!-- 책관련 디테일 div 책사진/제목/내용  -->
-			<div class="one-content-detail2">
-			
-				<div class="book-detail1">
-		            <div>
-		            	<img class="card-img-top" src="${ b.bookImag }" alt="" style= "width:200px; height:220px;">
+   	<c:forEach items="${ list }" var="b">
+		<div class="list-outer">
+	        <!-- 리뷰 하나를 감싸는 div -->
+		        <div class="one-content" onclick="reviewDetail()">
+		        
+		        	<!-- 작성자/별 -->
+		            <div class="one-content-detail1">
+		                <div>유저 닉네임: ${ b.userNo }</div>                                              
+		                <div class="card-footer">
+		                 	   별점 : ${ b.reviewStar } <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+		                </div>
 		            </div>
-				</div>
-				
-				<div class="book-detail2">	            
-		            <div>
-		            	<div style="height:20px;">${ b.bookTitle }</div>
+					
+					<!-- 책관련 디테일 div 책사진/제목/내용  -->
+					<div class="one-content-detail2">
+					
+						<div class="book-detail1">
+				            <div>
+				            	<img class="card-img-top" src="${ b.bookImag }" alt="" style= "width:200px; height:220px;">
+				            </div>
+						</div>
+						
+						<div class="book-detail2">	            
+				            <div>
+				            	<div style="height:20px; font-weight:bold;" >${ b.bookTitle }</div>
+				            </div>
+			    	        <div>
+			  	  	       		<div style="height:200px;">${ b.reviewContent }</div>
+			    	        </div>
+						</div>
+					
+						<br>
+					</div>
+		
+		            <div class="one-content-detail3">
+		            	<button>♡</button>찜갯수(5)
+	            		<div> 댓글(3) 리뷰등록수(3) 조회수${ b.count }</div>
+		            	<div>${ b.createDate }</div>
 		            </div>
-	    	        <div>
-	  	  	       		<div style="height:200px;">${ b.reviewContent }</div>
-	    	        </div>
-				</div>
-			
-				<br>
-			</div>
-
-            <div class="one-content-detail3">
-            	<div><button>♡</button>찜갯수(5) 댓글(3) 리뷰등록수(3)</div>
-            	<div>${ b.createDate }</div>
-            </div>
-        </div>
-
-
-
-        <!-- 리뷰 하나를 감싸는 div -->
-        <div class="one-content" onclick="reviewDetail()">
-        	
-        	<!-- 작성자/별 -->
-            <div class="one-content-detail1">
-                <div>${ b.userNo }</div>                                              
-                <div class="card-footer">
-                 	   별점 : ${ b.reviewStar } <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                </div>
-            </div>
-			
-			<!-- 책관련 디테일 div 책사진/제목/내용  -->
-			<div class="one-content-detail2">
-			
-				<div class="book-detail1">
-		            <div>
-		            	<img class="card-img-top" src="${ b.bookImag }" alt="" style= "width:200px; height:220px;">
-		            </div>
-				</div>
-				
-				<div class="book-detail2">	            
-		            <div>
-		            	<div style="height:20px;">${ b.bookTitle }</div>
-		            </div>
-	    	        <div>
-	  	  	       		<div style="height:200px;">${ b.reviewContent }</div>
-	    	        </div>
-				</div>
-			
-				<br>
-			</div>
-
-            <div class="one-content-detail3">
-            	<div><button>♡</button>찜갯수(5) 댓글(3) 리뷰등록수(3)</div>
-            	<div>${ b.createDate }</div>
-            </div>
-        </div>
-
-
-
-
-	</div>
+		        </div>
+		</div>
+	</c:forEach>
 
 
 	<script>
@@ -225,7 +185,6 @@
     <!-- 페이지처리하는 영역-->
     <div class="pagingArea">
         <ul class="pagination">
-            
             <c:choose>
             	<c:when test="${ pi.currentPage eq 1 }">
 	            	<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
@@ -244,7 +203,7 @@
        	    		<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
         		</c:when>
  				<c:otherwise>
-       	    		<li class="page-item"><a class="page-link" href="${ pi.currentPage + 1 }">Next</a></li>
+       	    		<li class="page-item"><a class="page-link" href="list.re?cPage=${ pi.currentPage + 1 }">Next</a></li>
         		</c:otherwise>
         	</c:choose>
         

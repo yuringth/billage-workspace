@@ -161,7 +161,7 @@ public interface BoardService {
 	// 리뷰 게시글의 총 개수 조회
 	int selectListCount();
 	// 리뷰 게시글 리스트 조회
-	ArrayList<ReviewBoard> selectList(PageInfo pi);
+	ArrayList<ReviewBoard> reviewBoardList(PageInfo pi);
 	
 	
 	

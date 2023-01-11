@@ -150,5 +150,19 @@
 				                                        user_no1 = #{userNo})
 		</select>
 		
+		<insert id="insertFollow" parameterType="follow">
+		insert
+		   into
+		        follow
+		        (user_no1
+		        ,user_no2)
+		 values
+		         (
+		         #{userNo1}
+		         ,#{userNo2}
+		         )       
+		        
+		</insert> 
+		
 
 </mapper>
