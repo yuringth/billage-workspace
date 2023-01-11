@@ -83,5 +83,31 @@
 					                                user_no1 = #{userNo})
 		</select>
 		
+		<select id="selectFollowerList" parameterType="_int" resultMap="userResultSet2">
+			select
+				     user_id
+					,user_pwd
+					,name
+					,email
+					,nickname
+					,phone
+					,birth_date
+					,gender
+					,address
+					,detail_address
+					,user_grade
+					,user_no
+				  from
+				      	member m
+				  where
+					     user_no in (
+					                    	select
+					                          		user_no2
+					                         from
+					                          		follow
+					                       where
+					                                user_no1 = #{userNo})
+		</select>
+		
 
 </mapper>

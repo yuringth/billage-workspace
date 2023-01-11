@@ -29,7 +29,7 @@
     .one-content{
    		border:1px solid forestgreen;
     	width:500px;
-    	height:350px;
+    	height:400px;
     	margin:25px;
     }
     
@@ -80,7 +80,7 @@
 	.one-content-detail3{
 		border:1px solid black;
 		width:500px;
-		height:50px;
+		height:100px;
 	}
 
 
@@ -159,6 +159,7 @@
 
             <div class="one-content-detail3">
             	<div><button>♡</button>찜갯수(5) 댓글(3) 리뷰등록수(3)</div>
+            	<div>날짜</div>
             </div>
         </div>
 
@@ -198,6 +199,7 @@
 
             <div class="one-content-detail3">
             	<div><button>♡</button>찜갯수(5) 댓글(3) 리뷰등록수(3)</div>
+            	<div>날짜</div>
             </div>
         </div>
 

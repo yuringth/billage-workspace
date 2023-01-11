@@ -45,8 +45,7 @@
 							<img src="https://i.pinimg.com/originals/4c/f0/16/4cf0163a9db5f4b69499b9365be5fcda.png" width="100px;" height="100px;">
 						</div>
 						<div id="userDetail">
-							<intput type="hidden" id="${ f.userNo} name="${ f.userNo }" value="${ f.userNo }">
-							<div id="${ f.nickname }" ><a href="followDetail.fo?uno="></a>${ f.nickname }</div>
+							<div id="userNickName" ><a href="followDetail.fo?uno=${f.userNo }">${ f.nickname }</a></div>
 							<div id="reviewCount">리뷰100</div>
 						</div>
 						<button id="followingBtn" style="width:100px; height:50px;">팔로잉</button>
@@ -63,7 +62,7 @@
 	<script>
 		 $(function(){
 				$('#${ f.nickname }').click(function(){
-					location.href='followDetail.fo?uno=' + 
+					location.href='followDetail.fo?uno=' +
 				})
 			});
 	</script>

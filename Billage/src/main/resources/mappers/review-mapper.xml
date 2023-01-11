@@ -42,14 +42,38 @@
 	
 	
 	<!-- 글작성 쿼리문 -->
-<!-- 
-<insert id="insertReviewBoard" parameterType="review">
- 리뷰넘버, 작성자, 별점, 리뷰 제목, 리뷰내용, 작성일, 조회수, 리뷰 상태, 책제목, 작가, 장르, 사진, 포인트
-REVIEW_NO, USER_NO, REVIEW_STAR REVIEW_TITLE, REVIEW_CONTENT, CREATE_DATE, COUNT, REVIEW_STATUS, BOOK_TITLE, BOOK_AUTHOR, BOOK_GENRE, BOOK_IMAG, BOOK_POINT
-INSERT INTO REVIEW
-values(SEQ_RNO, admin, 3, '자바의신이 되고싶으시다면', '자바의정석은 정말 좋습니다',SYSDATE, , 'N', ');
-</insert>
--->
+
+	<insert id="insertReviewBoard" parameterType="review">
+	INSERT 
+	  INTO 
+	       REVIEW
+	       (
+	        REVIEW_NO
+	       ,USER_NO
+	       <!-- ,REVIEW_STAR -->
+	       ,REVIEW_CONTENT
+	       <!-- ,CREATE_DATE -->
+	       <!-- ,COUNT -->
+	       ,REVIEW_STATUS
+	       ,BOOK_TITLE
+	       <!-- ,BOOK_IMAG -->
+	       ,BOOK_POINT
+	       )
+	values
+	       (
+	        SEQ_RNO.NEXTVAL
+	       ,#{userNo}
+	      <!--  ,#{reviewStar} -->
+	       ,#{reviewContent}
+	       <!-- ,SYSDATE -->
+	       <!-- ,default -->
+	       ,'N'
+	       ,#{bookTitle}
+	       <!-- ,{bookImg} -->
+	       ,10
+	       )
+	</insert>
+	
 	
 	
 	
