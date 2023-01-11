@@ -340,6 +340,14 @@ public class BoardDao {
 	public int insertNovel(SqlSessionTemplate sqlSession, Novel n) {
 		return sqlSession.insert("novelMapper.insertNovel", n);
 	}
+
+
+	public int insertSerial(SqlSessionTemplate sqlSession, Serial se, int novelNo) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("se", se);
+		map.put("novelNo", novelNo);
+		return sqlSession.insert("serialMapper.insertSerial", map);
+	}
 	
 	// 광진구역 끝
 

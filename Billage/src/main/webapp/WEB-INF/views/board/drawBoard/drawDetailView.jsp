@@ -116,8 +116,9 @@
 			</button>
 		</form>
 
-
-	<button onclick="location.href='delete.dr'">삭제하기</button>
+		<c:if test="${ loginUser.userNo ==  b.userNo}">
+			<button onclick="deleteBtn();" >삭제하기</button>
+		</c:if>
 	</div>
 	
 	
@@ -154,7 +155,11 @@
 		    }
 		}
 	
-	
+		function deleteBtn(){
+			if(confirm('삭제하시겠습니까?')){
+				location.href='delete.dr?bno=${b.boardNo}';
+			}
+		}
 	
 	
 	</script>

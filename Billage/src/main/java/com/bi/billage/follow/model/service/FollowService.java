@@ -17,4 +17,5 @@ public interface FollowService {
 	
 	int insertFollow(Follow follow);
 	
+	int deleteFollow(Follow follow);
 }

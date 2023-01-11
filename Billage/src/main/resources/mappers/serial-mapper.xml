@@ -161,4 +161,29 @@
 				request_no = #{ requestNo }
 	</update>
 	
+	<insert id="insertSerial" parameterType="hashMap">
+		insert
+			into
+				serial
+				(
+				serial_no,
+				novel_no,
+				serial_title,
+				serial_content,
+				upload_date,
+				author_comment,
+				user_no
+				)
+			values
+				(
+				seq_sno.nextval,
+				#{se.novelNo},
+				#{se.serialTitle},
+				#{se.serialContent},
+				sysdate,
+				#{se.authorComment},
+				#{se.userNo}
+				)
+	</insert>
+	
 </mapper>
