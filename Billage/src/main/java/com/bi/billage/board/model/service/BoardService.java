@@ -41,6 +41,9 @@ public interface BoardService {
 	// 연재신청 서비스(insert)
 	int insertSerialRequest(SerialRequest sr);
 	
+	// 작품등록 서비스(insert)
+	int insertNovel(Novel n);
+	
 	//광진 구역끝
 	
 	//휘수 구역
@@ -167,9 +170,8 @@ public interface BoardService {
 	
 	// 리뷰게시글 수정 서비스(update)
 	int updateReviewBoard(UsedBoard b);
-	
-	
-	
+
+
 	
 	// 댓글 나중에......
 	// 댓글 리스트 조회서비스(Ajax)(select)

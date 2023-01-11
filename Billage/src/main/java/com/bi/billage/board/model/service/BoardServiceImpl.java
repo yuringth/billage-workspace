@@ -226,8 +226,6 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	
-	
-	
 	@Override
 	public int increaseCount(int boardNo) {
 		return 0;
@@ -236,6 +234,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int insertSerialRequest(SerialRequest sr) {
 		return boardDao.insertSerialRequest(sqlSession, sr);
+	}
+
+	@Override
+	public int insertNovel(Novel n) {
+		return boardDao.insertNovel(sqlSession, n);
 	}
 
 	

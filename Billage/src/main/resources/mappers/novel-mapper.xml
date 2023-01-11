@@ -7,7 +7,6 @@
 	<resultMap type="novel" id="novelResultSet">
 		<result column="novel_no"		property="novelNo" />
 		<result column="user_no"		property="userNo" />
-		<result column="novel_img"		property="novelImg" />
 		<result column="novel_title"	property="novelTitle" />
 		<result column="novel_display"	property="novelDisplay" />
 		<result column="start_date"		property="startDate" />
@@ -16,6 +15,8 @@
 		<result column="serial_status"	property="serialStatus" />
 		<result column="charge_status"	property="chargeStatus" />
 		<result column="nickname"		property="nickName" />
+		<result column="origin_name"	property="originName" />
+		<result column="change_name"	property="changeName" />
 	</resultMap>
 	
 	<select id="selectNovelListCount" resultType="_int">
@@ -29,7 +30,6 @@
 		select
 				novel_no,
 				n.user_no,
-				novel_img,
 				novel_title,
 				novel_display,
 				start_date,
@@ -37,7 +37,8 @@
 				heart,
 				serial_status,
 				charge_status,
-				nickname
+				nickname,
+				change_name
 		from
 				novel n
 		join
@@ -45,5 +46,34 @@
 		on
 				n.user_no = m.user_no
 	</select>
+	
+	<insert id="insertNovel" parameterType="novel">
+		insert
+			into
+				novel
+				(
+				novel_no,
+				user_no,
+				novel_title,
+				novel_display,
+				start_date,
+				serial_status,
+				charge_status,
+				origin_name,
+				change_name
+				)
+			values
+				(
+				seq_nno.nextval,
+				#{userNo},
+				#{novelTitle},
+				#{novelDisplay},
+				sysdate,
+				'진행',
+				#{chargeStatus},
+				#{originName},
+				#{changeName}
+				)
+	</insert>
 
 </mapper>
