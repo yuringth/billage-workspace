@@ -55,17 +55,9 @@
 				
 			</div>
 		</div>
-	</div>
+
 	
 	<jsp:include page="../common/footer.jsp"/>
-	
-	<script>
-		 $(function(){
-				$('#${ f.nickname }').click(function(){
-					location.href='followDetail.fo?uno=' +
-				})
-			});
-	</script>
 
 </body>
 </html>

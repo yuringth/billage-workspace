@@ -169,10 +169,16 @@ public interface BoardService {
 	// 리뷰게시판 작성 (insert) 
 	int insertReviewBoard(ReviewBoard b);
 	
+	
+	
 	// 리뷰게시글 조회수 증가 (update)
-	int increaseReviewCount(int boardNo);
+	int increaseReviewCount(int reviewNo);
+	
 	// 리뷰게시판 상세 조회 (select)
-	ReviewBoard selectReviewBoard(int boardNo);
+	ReviewBoard selectReviewBoard(int reviewNo);
+	
+	
+	
 	
 	// 리뷰게시판 삭제 (update)
 	int deleteReviewBoard(int boardNo);

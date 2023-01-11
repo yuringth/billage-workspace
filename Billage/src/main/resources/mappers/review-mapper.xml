@@ -75,12 +75,6 @@
 	</select>
 	
 	
-	
-	
-	
-		
-	
-	
 	<!-- 글작성 쿼리문 -->
 	<insert id="insertReviewBoard" parameterType="review">
 	INSERT 
@@ -108,6 +102,41 @@
 	       ,10
 	       )
 	</insert>
+	
+	
+	<!-- 글 조회시, 조회수 증가 쿼리문 -->
+	<update id="increaseReviewCount" parameterType="_int">
+		update
+		       review
+		   set
+		       count = count + 1
+		 where
+		       review_no = #{ reviewNo }
+		   and
+		       review_status = 'N'
+	</update>
+		
+	
+	<!--  리뷰게시판. 조회 성공 시 => db에서 데이터를 가져와야한다. -->
+	<select id="selectReviewBoard" resultType="review" resultMap="reviewResultSet">
+		select
+			    board_no
+		       ,board_title
+		       ,board_writer
+		       ,board_content
+		       ,origin_name
+		       ,change_name
+		       ,count 
+		       ,to_char(create_date, 'YYYY-MM-DD') as "CREATE_DATE"
+		  from
+		       board
+		 where
+		 	   status = 'Y'
+		   and
+		       board_no = #{boardNo}
+	</select>	
+	
+	
 	
 	
 	

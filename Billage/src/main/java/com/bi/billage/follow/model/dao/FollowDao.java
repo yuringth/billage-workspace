@@ -31,5 +31,9 @@ public class FollowDao {
 	public int insertFollow (SqlSession sqlSession, Follow follow) {
 		return (int)sqlSession.insert("followMapper.insertFollow", follow);
 	}
+	
+	public int deleteFollow (SqlSession sqlSession, Follow follow) {
+		return (int)sqlSession.delete("followMapper.deleteFollow", follow);
+	}
 
 }

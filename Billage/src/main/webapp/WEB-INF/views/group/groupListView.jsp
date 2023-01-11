@@ -63,6 +63,20 @@
 		display:none;
 		z-index:900;
 	}
+	
+        #pagingArea {width:fit-content; margin:auto;}
+        
+        #searchForm {
+            width:80%;
+            margin:auto;
+        }
+        #searchForm>* {
+            float:left;
+            margin:5px;
+        }
+        .select {width:20%;}
+        .text {width:53%;}
+        .searchBtn {width:20%;}
 </style>
 </head>
 <body>
@@ -85,77 +99,58 @@
 				<input id="" type="text" name=""/>		
 				<button name="" >검색</button>
 			</form>
-			
 		</div>
-		
-		<script>
-			var date = new Date();
-			
-			console.log(date);
-
-
-			
-		</script>
 
 		<div id="list-area">
 			<c:forEach items="${ groupList }" var="g">
 			<div id="thum-area" class="thumbnail" align="center">
-			
 				<div id="new-group" value="${ g.newCount }">new</div>
 				<img src="${ g.groupImg }" alt="">
 				<h3>${ g.groupTitle }</h3> 
 				<div id="thum-text-area">
 					<span>모임진행요일 : ${ g.groupDay }</span></br>
-					<span>${ g.groupLocation } | 모집인원 4/${ g.groupNum }</span></br>
+					<span>${ g.groupLocation } | 모집인원 ${ g.groupNum }</span></br>
 				</div>
 				<div id="thum-like-area">
 					<span>찜하기<img src=""></span>
 					<span>(명)</span>
 				</div>
 			</div>
-			
-		</c:forEach>
-		
-		<%--
-		<c:forEach items="${ groupList }" var="g">
-			<div id="thum-area" class="thumbnail" align="center">
-				<div id="new-group" value="1">new</div>
-				<img src="${ groupList.groupImg }" alt="">
-				<h3>${ groupList.groupTitle }</h3> 
-				<div id="thum-text-area">
-					<span>모임진행요일 : ${ groupList.groupDay }</span></br>
-					<span>${ groupList.groupLocation } | 모집인원 4/${ groupList.groupNum }</span></br>
-				</div>
-				<div id="thum-like-area">
-					<span>찜하기<img src=""></span>
-					<span>(명)</span>
-				</div>
-			</div>
-		</c:forEach> --%>
-
-		<!-- ㅇㅕ기서부터 더미데이터 
-			<div id="thum-area" class="thumbnail" align="center">
-				<div id="new-group" value="1">new</div>
-				
-				<img src="#" alt="">
-				<h3>모임 이름</h3> 
-				<div id="thum-text-area">
-					<span>모일 진행일 독서모임</span></br>
-					<span>성동구 | 모집인원 4/8</span></br>
-				</div>
-				<div id="thum-like-area">
-					<span>찜하기<img src=""></span>
-					<span>(명)</span>
-				</div>
-			</div>
-	
-		 더미 데이터 끝 -->
+			</c:forEach>
 		</div> <!-- list-area끝  -->
+		
+		
+         <div id="pagingArea">
+               <ul class="pagination">
+               	<c:choose>
+               		<c:when  test="${ pi.currentPage eq 1 }">
+                    	<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+               		</c:when>
+               		<c:otherwise>
+                    	<li class="page-item"><a class="page-link" href="list.bo?cpage=${ pi.currentPage -1 }">Previous</a></li>
+               		</c:otherwise>
+				</c:choose>
+				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                   	<li class="page-item"><a class="page-link" href="list.bo?cpage=${ p }">${ p }</a></li>
+				</c:forEach>
+				
+				<c:choose>
+					<c:when test="${ pi.currentPage eq pi.maxPage }">
+                   		<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="page-item"><a class="page-link" href="list.bo?cpage=${ pi.currentPage + 1 }">Next</a></li>
+					</c:otherwise>
+				</c:choose>
+               </ul>
+           </div>
+		
 	</div> <!-- outer-area 끝 -->
 	
 	
 		<script>
 			$(function(){
+				
 				/* 이거 구현할 때 모임생성날짜 계산해서 1이랑 0이랑 구분할 수 있게 값을 들고오고 싶은데 어떻게 하징? 
 						DB에서 조건문 걸어서 가지고 와야 하나?
 								어떠카지!!!!!!!!? ㅠㅠ */
@@ -171,7 +166,27 @@
 					//글번호 들고 가야 돼
 				});
 			});
+	
+			
 
+				
+				
+				
+				/*
+				안녕?? 나는 팡숀이야 ~
+						
+						팡숀은 뜻이 뭐야 ~
+						
+						팡숀팡숀팡숀~~~
+						
+						이게 바로 팡숀이야 ~ 너무 즐거워버려 ~
+						
+						팡숀 팡숀 ~
+						
+						팡숀 ~ 디스가 뭐야?? 디스 디스가 담배야 담배 ~
+								
+								디스플러스도있어 아주 팡숀이야 ~ */
+	
 		</script>
 		
 	<jsp:include page="../common/footer.jsp" />

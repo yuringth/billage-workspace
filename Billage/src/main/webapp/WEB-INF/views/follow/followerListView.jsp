@@ -51,7 +51,7 @@
 							<div id="userNickName" ><a href="followDetail.fo?uno=${f1.userNo}">${ f1.nickname }</a></div>
 							<div id="reviewCount"><a href="reviewList.fo"></a>리뷰100</div>
 						</div>
-							<button id="followerBtn" width="50px;" height="20px;">팔로잉</button>
+							<button id="followingBtn" class="1" width="50px;" height="20px;">팔로잉</button>
 					</div>
 					</c:forEach>
 					
@@ -65,7 +65,7 @@
 							<div id="reviewCount"><a href="reviewList.fo"></a>리뷰100</div>
 						</div>
 							<input type="hidden"  id="userNo2" value="${ f2.userNo }">
-							<button id="followBtn" width="50px;" height="20px;">팔로우</button>
+							<button id="followerBtn" class="0" width="50px;" height="20px;">팔로우</button>
 							</div>
 					</c:forEach>
 				</div>
@@ -78,23 +78,97 @@
 	
 	<script>
 		$(function(){
-			$('#followBtn').click(function(){
-				$.ajax({
-					url : 'insert.fo',
-					method:'post',
-					data : {
-						userNo2 : $('#userNo2').value()
-					},
-					success:function(result){
+			
+			$('#followingBtn').click(function(){
+							
+							var num = $('#followingBtn').attr('class');
+							
+							if(num>0){
+								
+								$.ajax({
+									url : 'delete.fo',
+									method : 'post',
+									data : {
+										userNo2 : $('#userNo2').val()
+									},
+									success : function(result){
+										if(result > 0){
+											$('#followingBtn').text('팔로우');
+										}
+									},
+									error : function() {
+										console.log('안됨....');
+									}
+								})
+								
+							}
+								else{
+									
+									$.ajax({
+										url : 'insert.fo',
+										method:'post',
+										data : {
+											userNo2 : $('#userNo2').val()
+										},
+										success:function(result){
+												if(result > 0){
+													$('#followingBtn').text('팔로잉');
+											}
+										},
+										error:function(){
+											console.log('안됨... 모름요');
+										}
+									})
+								}
+							
+						})
+			
+			
+			$('#followerBtn').click(function(){
+				
+				var num = $('#followerBtn').attr('class');
+				
+				if(num>0){
+					
+					$.ajax({
+						url : 'delete.fo',
+						method : 'post',
+						data : {
+							userNo2 : $('#userNo2').val()
+						},
+						success : function(result){
 							if(result > 0){
-								$('#followBtn').text('팔로잉');
+								$('#followerBtn').text('팔로우');
+							}
+						},
+						error : function() {
+							console.log('안됨....');
 						}
-					},
-					error:function(){
-						console.log('안됨... 모름요');
+					})
+					
+				}
+					else{
+						
+						$.ajax({
+							url : 'insert.fo',
+							method:'post',
+							data : {
+								userNo2 : $('#userNo2').val()
+							},
+							success:function(result){
+									if(result > 0){
+										$('#followerBtn').text('팔로잉');
+								}
+							},
+							error:function(){
+								console.log('안됨... 모름요');
+							}
+						})
 					}
-				})
+				
 			})
+			
+		
 		})
 	</script>
 </body>
