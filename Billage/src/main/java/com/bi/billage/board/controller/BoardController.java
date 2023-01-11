@@ -63,7 +63,6 @@ public class BoardController {
 	}
 	
 	// 연재 신청 메소드
-	
 	@RequestMapping("insert.se")
 	public String insertSerialRequest(SerialRequest sr, MultipartFile upfile, HttpSession session, Model model) {
 			

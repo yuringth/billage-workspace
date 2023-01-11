@@ -2,7 +2,6 @@ package com.bi.billage.user.controller;
 
 import javax.servlet.http.HttpSession;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -10,8 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bi.billage.board.model.vo.Inquiry;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.common.template.Pagination;
 import com.bi.billage.user.model.service.UserService;
@@ -53,9 +54,12 @@ public class UserController {
 	}
 	
 	// 1:1 문의내역
-	@RequestMapping("inquiryList.ad")
-	public String selectInqList() {
-		return "admin/inqListView";
+	@RequestMapping("inqList.ad")
+	public ModelAndView selectinqList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
+		PageInfo pi = Pagination.getPageInfo(userService.selectInqListCount(), currentPage, 10, 10);
+		mv.addObject("pi", pi).addObject("list", userService.selectInqList(pi)).setViewName("admin/inqListView");
+		
+		return mv;
 	}
 	
 	// 1:1 문의 작성폼
@@ -63,6 +67,19 @@ public class UserController {
 	public String enrollInquiry() {
 		return "admin/inqEnrollForm";
 	}
+	
+	// 문의 요청 메소드
+	@RequestMapping("insert.iq")
+	public String insertInquiry(Inquiry iq, HttpSession session, Model model) {
+			
+			if(userService.insertInquiry(iq) > 0) { // 성공 => 메인화면으로
+				session.setAttribute("alertMsg", "문의 완료");
+				return "main"; //
+			} else {
+				model.addAttribute("errorMsg", "작성 실패");
+				return "common/errorPage";
+			}
+		}
 	
 	// 연재 요청 리스트 화면 +페이징처리
 	@RequestMapping("list.sr")
@@ -101,6 +118,12 @@ public class UserController {
 	public String enrollNovel() {
 		return "admin/novelEnrollForm";
 	}
+	
+	
+	
+	
+	
+	
 	
 	// 관리자 관련 끝
 	
