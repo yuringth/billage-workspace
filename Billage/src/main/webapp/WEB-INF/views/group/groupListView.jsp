@@ -7,6 +7,12 @@
 <meta charset="UTF-8">
 
 <title>여기는 모임 리스트 </title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
 <style>
 	p { padding:0px; margin:0px; }
 	
@@ -127,11 +133,11 @@
                     	<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
                		</c:when>
                		<c:otherwise>
-                    	<li class="page-item"><a class="page-link" href="list.bo?cpage=${ pi.currentPage -1 }">Previous</a></li>
+                    	<li class="page-item"><a class="page-link" href="list.gr?cpage=${ pi.currentPage -1 }">Previous</a></li>
                		</c:otherwise>
 				</c:choose>
 				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-                   	<li class="page-item"><a class="page-link" href="list.bo?cpage=${ p }">${ p }</a></li>
+                   	<li class="page-item"><a class="page-link" href="list.gr?cpage=${ p }">${ p }</a></li>
 				</c:forEach>
 				
 				<c:choose>
@@ -139,7 +145,7 @@
                    		<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
 					</c:when>
 					<c:otherwise>
-						<li class="page-item"><a class="page-link" href="list.bo?cpage=${ pi.currentPage + 1 }">Next</a></li>
+						<li class="page-item"><a class="page-link" href="list.gr?cpage=${ pi.currentPage + 1 }">Next</a></li>
 					</c:otherwise>
 				</c:choose>
                </ul>
