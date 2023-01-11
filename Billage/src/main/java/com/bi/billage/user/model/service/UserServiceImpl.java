@@ -84,4 +84,14 @@ public class UserServiceImpl implements UserService{
 		return userDao.selectGroupList(sqlSession, pi);
 	}
 
+	@Override
+	public int nicknameCheck(String checkNickname) {
+		return userDao.nicknameCheck(sqlSession, checkNickname);
+	}
+
+	@Override
+	public int updateUser(User u) {
+		return userDao.updateUser(sqlSession, u);
+	}
+
 }

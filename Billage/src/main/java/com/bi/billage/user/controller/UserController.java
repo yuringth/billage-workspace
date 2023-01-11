@@ -10,9 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bi.billage.common.model.vo.PageInfo;
+import com.bi.billage.common.savefile.SaveFile;
 import com.bi.billage.common.template.Pagination;
 import com.bi.billage.user.model.service.UserService;
 import com.bi.billage.user.model.vo.User;
@@ -189,6 +191,37 @@ public class UserController {
 	public String myInfo() {
 		return "user/myInfo";
 	}
+	
+	// 닉네임 중복체크
+	@ResponseBody
+	@RequestMapping("nicknameCheck.me")
+	public String nicknameCheck(String checkNickname) {
+		return userService.nicknameCheck(checkNickname) > 0 ? "NNNNN" : "NNNNY";
+	}
+	
+	// 개인정보 수정
+	@RequestMapping("update.me")
+	public String updateUser(User u, Model model, HttpSession session, MultipartFile upfile) {
+		
+		if(!upfile.getOriginalFilename().equals("")) {
+			String changeName = SaveFile.getSaveFile(upfile, session);
+			u.setProfileImg(changeName);
+		}
+		
+		if(userService.updateUser(u) > 0) {
+			
+			session.setAttribute("loginUser", userService.loginUser(u));
+			
+			session.setAttribute("alertMsg", "성공적으로 변경되었습니다.");
+			return "redirect:myInfo.me";
+			
+		} else {
+			model.addAttribute("errorMsg", "회원 정보 변경 실패");
+			return "common/errorPage";
+		}
+	}
+	
+	
 	
 	
 	

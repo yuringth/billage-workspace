@@ -225,7 +225,7 @@ body {
 					url : 'idCheck.me',
 					data : {checkId : $idInput.val()},
 					success : function(result){
-						console.log(result);
+						//console.log(result);
 						if(result == 'NNNNN'){	// 사용불가능
 							$('#checkResult').show();
 							$('#checkResult').css('color', 'red').text('중복된 아이디가 존재합니다.')
