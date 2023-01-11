@@ -28,7 +28,7 @@
 			<div class="detailList" style="display:flex; flex-direction: row;">
 				<div id="review"><a href="reviewList.fo">평가 150 &nbsp;</a></div>
 				<div id="following" >팔로잉 &nbsp;${ user.following } &nbsp;</div>
-				<div id="follower"><a href="selectFollower.fo"> 팔로워 &nbsp;${ user.follower } &nbsp;</a></div>
+				<div id="follower"> 팔로워 &nbsp;${ user.follower } &nbsp;</a></div>
 			</div>
 		</div>
 		<br>	
@@ -89,11 +89,11 @@
 	  $(function(){
 			$('#following').click(function(){
 				location.href='selectFollowing.fo?uno=' +${user.userNo};
-			})
+			});
 			
 			$('#follower').click(function(){
 				location.href='selectFollower.fo?uno=' +${user.userNo};
-			})
+			});
 		});
 	</script>
 
