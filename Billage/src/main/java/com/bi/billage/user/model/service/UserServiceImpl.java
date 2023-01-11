@@ -86,6 +86,15 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
+	public int nicknameCheck(String checkNickname) {
+		return userDao.nicknameCheck(sqlSession, checkNickname);
+	}
+
+	@Override
+	public int updateUser(User u) {
+		return userDao.updateUser(sqlSession, u);
+
+	@Override
 	public int selectInqListCount() {
 		return userDao.selectInqListCount(sqlSession);
 	}
@@ -98,6 +107,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public int insertInquiry(Inquiry iq) {
 		return userDao.insertInquiry(sqlSession, iq);
+
 	}
 
 }
