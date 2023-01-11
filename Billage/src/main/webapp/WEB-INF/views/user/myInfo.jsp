@@ -72,7 +72,7 @@
 		    			<br><br>
 		    			
 		    		<div id="update-btn">
-		    			<button type="submit" id="modify-btn"> 수정하기 </button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <button type="button"> 비밀번호 수정 </button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <button type="button"> 탈퇴하기 </button>
+		    			<button type="submit" id="modify-btn"> 수정하기 </button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <button type="button"> 비밀번호 수정 </button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <button type="button" onclick="location.href='userDeleteForm.me'"> 탈퇴하기 </button>
 	    			</div>
 		  		</fieldset>
 			</form>
