@@ -61,7 +61,7 @@
     	</div>
     	<div id="group-detail-area">
     		<div id="detail-left">
-    			<img src="${ group.groupImg }">
+    			<img width="500px" height="500px" src="${ group.groupImg }">
     			<p>${ group.likeCount }명이 찜했어요!</p>
     		</div>
     		<div id="detail-right">
@@ -104,6 +104,8 @@
 				}					
 			});    
     	});
+    	
+    	
     
     
     </script>
