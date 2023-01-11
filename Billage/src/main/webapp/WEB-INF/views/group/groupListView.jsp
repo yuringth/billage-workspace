@@ -87,24 +87,53 @@
 			</form>
 			
 		</div>
-	
-	
+		
+		<script>
+			var date = new Date();
+			
+			console.log(date);
+
+
+			
+		</script>
+
 		<div id="list-area">
-		<div id="thum-area" class="thumbnail" align="center">
-			<div id="new-group" value="0">new</div>
-			<img src="#" alt="">
-			<h3>모임 이름</h3> 
-			<div id="thum-text-area">
-				<span>모일 진행일 독서모임</span></br>
-				<span>성동구 | 모집인원 4/8</span></br>
+			<c:forEach items="${ groupList }" var="g">
+			<div id="thum-area" class="thumbnail" align="center">
+			
+				<div id="new-group" value="1">new</div>
+				<img src="${ g.groupImg }" alt="">
+				<h3>${ g.groupTitle }</h3> 
+				<div id="thum-text-area">
+					<span>모임진행요일 : ${ g.groupDay }</span></br>
+					<span>${ g.groupLocation } | 모집인원 4/${ g.groupNum }</span></br>
+				</div>
+				<div id="thum-like-area">
+					<span>찜하기<img src=""></span>
+					<span>(명)</span>
+				</div>
 			</div>
-			<div id="thum-like-area">
-				<span>찜하기<img src=""></span>
-				<span>(명)</span>
+			
+		</c:forEach>
+		
+		<%--
+		<c:forEach items="${ groupList }" var="g">
+			<div id="thum-area" class="thumbnail" align="center">
+				<div id="new-group" value="1">new</div>
+				<img src="${ groupList.groupImg }" alt="">
+				<h3>${ groupList.groupTitle }</h3> 
+				<div id="thum-text-area">
+					<span>모임진행요일 : ${ groupList.groupDay }</span></br>
+					<span>${ groupList.groupLocation } | 모집인원 4/${ groupList.groupNum }</span></br>
+				</div>
+				<div id="thum-like-area">
+					<span>찜하기<img src=""></span>
+					<span>(명)</span>
+				</div>
 			</div>
-		</div>
-	
-		<!-- ㅇㅕ기서부터 더미데이터  -->
+		</c:forEach> --%>
+
+		<!-- ㅇㅕ기서부터 더미데이터 
 			<div id="thum-area" class="thumbnail" align="center">
 				<div id="new-group" value="1">new</div>
 				
@@ -120,7 +149,7 @@
 				</div>
 			</div>
 	
-		<!-- 더미 데이터 끝 -->
+		 더미 데이터 끝 -->
 		</div> <!-- list-area끝  -->
 	</div> <!-- outer-area 끝 -->
 	
