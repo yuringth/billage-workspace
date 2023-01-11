@@ -106,44 +106,44 @@ textarea:focus {
 }
 </style>
 <body>
-	<jsp:include page="../common/header.jsp"/>
-<form id="enrollForm" method="post" action="insert.se" enctype="multipart/form-data">
-  <header align="center">
-    <h2>연재 신청</h2>
-    <div>Billage에서 연재 작가님들을 모십니다. 연재 자격 요건에 대해서는 공지사항을 확인해 주세요.</div>
-  </header>
-  <div>
-     <label for="title">
-      	제목
-    </label>
-    <div>
-      <input name="requestTitle" id="title" type="text" class="field text fn" size="8" tabindex="1" placeholder="제목을 입력하세요." required>
-      <input name="userNo" type="hidden" id="writer" value="${ loginUser.userNo }">
-    </div>
-  </div>
-    <br>
-  <div>
-    <label for="profile">
-      	작가 프로필
-    </label>
-    <div>
-      <textarea name="requestContent" id="content" spellcheck="true" rows="10" cols="50" tabindex="4" style="resize:none" placeholder="필명, 경력, 경험 등 자유롭게 기술" required></textarea>
-    </div>
-  </div>
-  <div>
-	<label for="upfile">
-		첨부파일
-	</label>
-	<div>
-    	<input type="file" id="upfile" class="form-control-file border" name="upfile" required>
-	</div><br>
-    <div align="left">
-  		<button type="submit" class="btn btn-primary">신청하기</button>
-        <button type="reset" class="btn btn-danger">취소하기</button>
-    </div>
-</div>
-</form>
-<jsp:include page="../common/footer.jsp"/>
+		<jsp:include page="../common/header.jsp"/>
+	<form id="enrollForm" method="post" action="insert.se" enctype="multipart/form-data">
+	  <header align="center">
+	    <h2>연재 신청</h2>
+	    <div>Billage에서 연재 작가님들을 모십니다. 연재 자격 요건에 대해서는 공지사항을 확인해 주세요.</div>
+	  </header>
+	  <div>
+	     <label for="title">
+	      	제목
+	    </label>
+	    <div>
+	      <input name="requestTitle" id="title" type="text" class="field text fn" size="8" tabindex="1" placeholder="제목을 입력하세요." required>
+	      <input name="userNo" type="hidden" id="writer" value="${ loginUser.userNo }">
+	    </div>
+	  </div>
+	    <br>
+	  <div>
+	    <label for="profile">
+	      	작가 프로필
+	    </label>
+	    <div>
+	      <textarea name="requestContent" id="content" spellcheck="true" rows="10" cols="50" tabindex="4" style="resize:none" placeholder="필명, 경력, 경험 등 자유롭게 기술" required></textarea>
+	    </div>
+	  </div>
+	  <div>
+		<label for="upfile">
+			첨부파일
+		</label>
+		<div>
+	    	<input type="file" id="upfile" class="form-control-file border" name="upfile" required>
+		</div><br>
+	    <div align="left">
+	  		<button type="submit" class="btn btn-primary">신청하기</button>
+	        <button type="reset" class="btn btn-danger">취소하기</button>
+	    </div>
+	</div>
+	</form>
+	<jsp:include page="../common/footer.jsp"/>
 
 </body>
 </html>

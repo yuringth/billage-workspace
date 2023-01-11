@@ -230,13 +230,11 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public int increaseCount(int boardNo) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int insertSerialRequest(SerialRequest sr) {
-		// TODO Auto-generated method stub
 		return boardDao.insertSerialRequest(sqlSession, sr);
 	}
 

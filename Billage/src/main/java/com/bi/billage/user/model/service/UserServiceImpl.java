@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bi.billage.board.model.vo.Inquiry;
 import com.bi.billage.board.model.vo.SerialRequest;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.group.model.vo.Group;
@@ -82,6 +83,21 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public ArrayList<Group> selectGroupList(PageInfo pi) {
 		return userDao.selectGroupList(sqlSession, pi);
+	}
+
+	@Override
+	public int selectInqListCount() {
+		return userDao.selectInqListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Inquiry> selectInqList(PageInfo pi) {
+		return userDao.selectInqList(sqlSession, pi);
+	}
+
+	@Override
+	public int insertInquiry(Inquiry iq) {
+		return userDao.insertInquiry(sqlSession, iq);
 	}
 
 }

@@ -92,7 +92,6 @@
         }
     }
     /*-----------------------------------*/
-    @import url("https://fonts.googleapis.com/css?family=IBM Plex Sans:400,400i,700");
 
 	*, :before, :after {
 		box-sizing: border-box;
@@ -120,14 +119,13 @@
 <body>
    <jsp:include page="../common/header.jsp"/>
 
-   <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
     <div class="wrapper">
         <div class="sidebar">
             <h2>관리자 페이지</h2>
             <ul>
                 <li><a href="userList.ad"><i class="fas fa-user"></i>회원 관리</a></li>
                 <li><a href="groupList.ad"><i class="fas fa-home"></i>모임 관리</a></li>
-                <li><a href="inquiryList.ad"><i class="fas fa-address-card"></i>1:1 문의</a></li>
+                <li><a href="inqList.ad"><i class="fas fa-address-card"></i>1:1 문의</a></li>
                 <li><a href="faqList.fa"><i class="fas fa-project-diagram"></i>FAQ 관리</a></li>
                 <li><a href="noticeList.no"><i class="fas fa-blog"></i>공지사항</a></li>
                 <li><a href="list.sr"><i class="fas fa-address-book"></i>연재 요청</a></li>
@@ -140,21 +138,23 @@
 				<table id="serialRequestList" class="table table-hover" align="center">
                 <thead>
                     <tr>
-                        <th>요청번호</th>
-                        <th>요청회원</th>
-                        <th>요청제목</th>
-                        <th>요청날짜</th>
-                        <th>승락여부</th>
+                        <th>문의번호</th>
+                        <th>문의회원</th>
+                        <th>문의유형</th>
+                        <th>문의제목</th>
+                        <th>문의날짜</th>
+                        <th>답변여부</th>
                     </tr>
                 </thead>
-                <c:forEach items="${ list }" var="sr">
+                <c:forEach items="${ list }" var="iq">
                 <tbody>
                 		<tr>
-                			<td class="rno"></td>
-                			<td></td>
-                			<td></td>
-                			<td></td>
-                			<td></td>
+                			<td class="ino">${ iq.inqNo }</td>
+                			<td>${ iq.nickname }</td>
+                			<td>${ iq.inqType }</td>
+                			<td>${ iq.inqTitle }</td>
+                			<td>${ iq.inqDate }</td>
+                			<td>${ iq.inqStatus }</td>
                 		</tr>
                 </tbody>
                 </c:forEach>
