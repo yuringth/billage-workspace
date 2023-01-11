@@ -30,6 +30,7 @@
 	<div class="info-outer">
 		<div class="info-content" align="center">
 			<form action="update.me" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }">
 		  		<fieldset>
 		    		<legend>개인 정보</legend>
 		    		

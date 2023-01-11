@@ -225,6 +225,7 @@ public class UserController {
 	@RequestMapping("update.me")
 	public String updateUser(User u, Model model, HttpSession session, MultipartFile upfile) {
 		
+		// 프로필 사진 변경
 		if(!upfile.getOriginalFilename().equals("")) {
 			String changeName = SaveFile.getSaveFile(upfile, session);
 			u.setProfileImg(changeName);
