@@ -259,7 +259,16 @@ public class BoardDao {
 	}
 	
 	
+	// 리뷰게시판 => 조회수 증가
+	public int increaseReviewCount(SqlSessionTemplate sqlSession, int reviewNo) {
+		return sqlSession.insert("reviewMapper.insertReviewBoard", reviewNo);
+	}
 	
+	
+	// 리뷰게시판. 조회 성공 시 => db에서 데이터를 가져와야한다.
+	public ReviewBoard selectReviewBoard(SqlSessionTemplate sqlSession, int reviewNo) {
+		return sqlSession.selectOne("reviewMapper.selectReviewBoard", reviewNo);
+	}
 	
 	
 	

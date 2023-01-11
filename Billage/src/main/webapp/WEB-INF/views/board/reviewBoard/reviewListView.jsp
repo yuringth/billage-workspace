@@ -76,6 +76,8 @@
 		margin-top:10px;
 		margin-left:10px;
 	}
+	
+	
 
 	
 	/* 이거 뭔데 div안에 안들어가냐??! 찜갯수 ㅠ */
@@ -134,6 +136,7 @@
 		        
 		        	<!-- 작성자/별 -->
 		            <div class="one-content-detail1">
+		            	<div class="bno">게시글번호 : ${ b.reviewNo }</div>
 		                <div>유저 닉네임: ${ b.userNo }</div>                                              
 		                <div class="card-footer">
 		                 	   별점 : ${ b.reviewStar } <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -151,10 +154,10 @@
 						
 						<div class="book-detail2">	            
 				            <div>
-				            	<div style="height:20px; font-weight:bold;" >${ b.bookTitle }</div>
+				            	<div style="height:80px; font-weight:bold;" >${ b.bookTitle }</div>
 				            </div>
 			    	        <div>
-			  	  	       		<div style="height:200px;">${ b.reviewContent }</div>
+			  	  	       		<div style="height:140px;">${ b.reviewContent }</div>
 			    	        </div>
 						</div>
 					
@@ -171,12 +174,6 @@
 	</c:forEach>
 
 
-	<script>
-		function reviewDetail(){ // 게시글 상세보기 :되지만 나중에 페이징처리로 이동하기
-			location.href = 'detail.re';
-		}
-	</script>
-	
 
 
 
@@ -210,14 +207,24 @@
         </ul>
     </div>
 
-
-
-
 	<c:if test="${ not empty loginUser }">
 		<div class="pagingArea">
 			<button class="btn btn-secondary" onclick="location.href='insert.re'">글작성</button>
 		</div>
 	</c:if>
+	<!-- 페이지 처리 끝  -->
+
+
+
+	<!-- 게시글 상세보기 :되지만 나중에 페이징처리로 이동하기 -->
+	<script>
+		function reviewDetail(){
+			location.href = 'detail.re?reviewNo=' + $(this).children('.bno').text();
+		}
+	</script>
+	
+
+
 
 
   </div>
