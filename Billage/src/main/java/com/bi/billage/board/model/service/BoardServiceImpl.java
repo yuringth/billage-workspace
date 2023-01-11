@@ -180,12 +180,27 @@ public class BoardServiceImpl implements BoardService {
 		return null;
 	}
 
+	
+	
+	// 리뷰 게시글의 총 개수 조회
+	@Override
+	public int selectListCount() {
+		return boardDao.selectNovelListCount(sqlSession);
+	}
+	// 리뷰 게시글 리스트 조회
+	@Override
+	public ArrayList<ReviewBoard> selectList(PageInfo pi){
+		return boardDao.selectList(sqlSession, pi);
+	}
+	
+	
+	
 	// 리뷰게시판 => 글작성
 	@Override
 	public int insertReviewBoard(ReviewBoard b) {
-
 		return boardDao.insertReviewBoard(sqlSession, b);
 	}
+	
 
 	// 리뷰게시판
 	@Override
@@ -226,8 +241,6 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	
-	
-	
 	@Override
 	public int increaseCount(int boardNo) {
 		return 0;
@@ -236,6 +249,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int insertSerialRequest(SerialRequest sr) {
 		return boardDao.insertSerialRequest(sqlSession, sr);
+	}
+
+	@Override
+	public int insertNovel(Novel n) {
+		return boardDao.insertNovel(sqlSession, n);
 	}
 
 	

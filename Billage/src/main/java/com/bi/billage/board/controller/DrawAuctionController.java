@@ -105,7 +105,6 @@ public class DrawAuctionController {
 			int minute = (sec - day * 60 * 60 * 24 - hour * 3600) / 60; 
 			int second = sec % 60;
 			
-			
 			if(closeTime / (1000*24*60*60) > 1) { //하루 넘게 남았을 때
 				remaindTime = day + "일 " + hour + ":" + minute  + ":" + second;	
 				
@@ -114,7 +113,7 @@ public class DrawAuctionController {
 			}
 			b.setRemaindTime(remaindTime);
 			mv.addObject("b",b).setViewName("board/drawBoard/drawDetailView");
-			
+			System.out.println(b.getCloseDate());
 		} else {
 			mv.addObject("errorMsg", "게시글 조회 실패").setViewName("common/errorPage");
 		}
@@ -194,7 +193,6 @@ public class DrawAuctionController {
 		} 
 		
 		if(boardService.insertAuctionBoard(b) > 0) {
-			System.out.println(b.getChangeName());
 			return "redirect:list.ac";
 		} else {
 			model.addAttribute("errorMsg", "게시글 작성에 실패했어용 ㅠ");

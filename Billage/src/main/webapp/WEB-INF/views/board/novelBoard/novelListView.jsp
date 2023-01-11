@@ -227,7 +227,8 @@ div.card.show {
 		        <c:forEach items="${ list }" var="n">
 		        <div class="card">
 		            <div class="card__image-holder">
-		                <img class="card__image" src="https://source.unsplash.com/300x225/?wave" alt="wave" />
+		                <!-- <img class="card__image" src="https://source.unsplash.com/300x225/?wave" alt="wave" /> -->
+		                <img class="card_image" src="${ n.changeName }" width="350" height="400">
 		            </div>
 		            <div class="card-title" title="${ n.novelTitle }">
 		                <h2 style="display: block;

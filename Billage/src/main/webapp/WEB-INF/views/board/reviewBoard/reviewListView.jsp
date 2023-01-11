@@ -123,6 +123,8 @@
             </div>
         </div>
 
+
+
 	<div class="list-outer">
 
         <!-- 리뷰 하나를 감싸는 div -->
@@ -130,9 +132,9 @@
         	
         	<!-- 작성자/별 -->
             <div class="one-content-detail1">
-                <div>작성자　　　　</div>                                              
+                <div>${ b.userNo }</div>                                              
                 <div class="card-footer">
-                 	   별점 : <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                 	   별점 : ${ b.reviewStar } <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
                 </div>
             </div>
 			
@@ -141,16 +143,16 @@
 			
 				<div class="book-detail1">
 		            <div>
-		            	<img class="card-img-top" src="https://image.yes24.com/goods/24259565/XL" alt="" style= "width:200px; height:220px;">
+		            	<img class="card-img-top" src="${ b.bookImag }" alt="" style= "width:200px; height:220px;">
 		            </div>
 				</div>
 				
 				<div class="book-detail2">	            
 		            <div>
-		            	<div style="height:20px;">책 제목</div>
+		            	<div style="height:20px;">${ b.bookTitle }</div>
 		            </div>
 	    	        <div>
-	  	  	       		<div style="height:200px;">리뷰 내용</div>
+	  	  	       		<div style="height:200px;">${ b.reviewContent }</div>
 	    	        </div>
 				</div>
 			
@@ -159,7 +161,7 @@
 
             <div class="one-content-detail3">
             	<div><button>♡</button>찜갯수(5) 댓글(3) 리뷰등록수(3)</div>
-            	<div>날짜</div>
+            	<div>${ b.createDate }</div>
             </div>
         </div>
 
@@ -170,9 +172,9 @@
         	
         	<!-- 작성자/별 -->
             <div class="one-content-detail1">
-                <div>작성자　　　　</div>                                              
+                <div>${ b.userNo }</div>                                              
                 <div class="card-footer">
-                 	   별점 : <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                 	   별점 : ${ b.reviewStar } <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
                 </div>
             </div>
 			
@@ -181,16 +183,16 @@
 			
 				<div class="book-detail1">
 		            <div>
-		            	<img class="card-img-top" src="https://image.yes24.com/goods/24259565/XL" alt="" style= "width:200px; height:220px;">
+		            	<img class="card-img-top" src="${ b.bookImag }" alt="" style= "width:200px; height:220px;">
 		            </div>
 				</div>
 				
 				<div class="book-detail2">	            
 		            <div>
-		            	<div style="height:20px;">책 제목</div>
+		            	<div style="height:20px;">${ b.bookTitle }</div>
 		            </div>
 	    	        <div>
-	  	  	       		<div style="height:200px;">리뷰 내용</div>
+	  	  	       		<div style="height:200px;">${ b.reviewContent }</div>
 	    	        </div>
 				</div>
 			
@@ -199,9 +201,11 @@
 
             <div class="one-content-detail3">
             	<div><button>♡</button>찜갯수(5) 댓글(3) 리뷰등록수(3)</div>
-            	<div>날짜</div>
+            	<div>${ b.createDate }</div>
             </div>
         </div>
+
+
 
 
 	</div>
@@ -221,21 +225,44 @@
     <!-- 페이지처리하는 영역-->
     <div class="pagingArea">
         <ul class="pagination">
-            <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">4</a></li>
-            <li class="page-item"><a class="page-link" href="#">5</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            
+            <c:choose>
+            	<c:when test="${ pi.currentPage eq 1 }">
+	            	<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+	            </c:when>
+				<c:otherwise>	            
+	            	<li class="page-item"><a class="page-link" href="list.re?cPage=${ pi.currentPage - 1 }">Previous</a></li>
+            	</c:otherwise>
+            </c:choose>
+            
+            <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+            	<li class="page-item"><a class="page-link" href="list.re?cPage=${ p }">${ p }</a></li>
+            </c:forEach>
+
+			<c:choose>
+				<c:when test="${ pi.currentPage eq pi.maxPage }">            
+       	    		<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+        		</c:when>
+ 				<c:otherwise>
+       	    		<li class="page-item"><a class="page-link" href="${ pi.currentPage + 1 }">Next</a></li>
+        		</c:otherwise>
+        	</c:choose>
+        
         </ul>
     </div>
 
 
-	<div class="pagingArea">
-		<button class="btn btn-secondary" onclick="location.href='insert.re'">글작성</button>
-	</div>
+
+
+	<c:if test="${ not empty loginUser }">
+		<div class="pagingArea">
+			<button class="btn btn-secondary" onclick="location.href='insert.re'">글작성</button>
+		</div>
+	</c:if>
+
+
   </div>
+  
 
 	<!-- 푸터바 -->
 	<jsp:include page="../../common/footer.jsp" />

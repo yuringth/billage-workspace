@@ -91,7 +91,7 @@
 	<div class="outer">
 
 		<div class="writerarea">
-			<p>작성자 : ${ b.nickName }</p>
+			<p>작성자 : ${ b.nickname }</p>
 		</div>
 		<!--이미지 영역-->
 		<div class="imgarea">
@@ -99,7 +99,7 @@
 		</div>
 
 		
-		<p class="time">남은 시간 : ${ b.remaindTime }</p>
+		<p class="time"></p>
 		<p class="genre">${ b.genre }</p>
 		<p class="title">"${ b.title }"</p>
 		<p class="bookWriter">${ b.bookWriter }</p>
@@ -133,6 +133,41 @@
 
 
 	</div>
+	
+	
+	<script>
+	$(function(){
+		closeCount();
+		setInterval(closeCount, 500);
+	})
+	
+	function closeCount(){
+		var end = new Date('${ b.closeDate }');
+		var now = new Date(); 
+		
+		var remaindTime = end - now;
+		
+		var day = Math.floor(remaindTime / (1000*60*60*24));
+	    var hour = Math.floor((remaindTime / (1000*60*60)) % 24);
+	    var min = Math.floor((remaindTime / (1000*60)) % 60);
+	    var sec = Math.floor(remaindTime / 1000 % 60);
+		
+	    if(sec < 10){
+	    	sec = sec + '0';
+	    }
+	    if(min < 10){
+	    	min = min + '0';
+	    }
+	    if(hour < 10){
+	    	hour = hour + '0';
+	    }
+	    if(remaindTime >= 0){
+	    	$('.time').text(day +'일' + hour + ':' + min + ':' + sec + ':');
+	    } else {
+	    	$('.time').text('응모 시간 종료');
+	    }
+	}
+	</script>
 	
 	
 

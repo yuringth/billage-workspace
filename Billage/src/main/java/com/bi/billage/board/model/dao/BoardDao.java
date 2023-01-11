@@ -236,6 +236,23 @@ public class BoardDao {
 				
 	}
 	
+	// 리뷰 게시글의 총 개수 조회
+	public int selectListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("reviewMapper.selectListCount");
+	}
+	
+	// 리뷰 게시글 리스트 조회
+	public ArrayList<ReviewBoard> selectList(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("reviewMapper.selectList", null, rowBounds);
+	} 
+	
+	
+	
 	// 리뷰게시판 => 글작성
 	public int insertReviewBoard(SqlSessionTemplate sqlSession, ReviewBoard b) {
 		return sqlSession.insert("reviewMapper.insertReviewBoard", b);
@@ -308,6 +325,11 @@ public class BoardDao {
 	
 	public int insertSerialRequest(SqlSessionTemplate sqlSession, SerialRequest sr) {
 		return sqlSession.insert("serialMapper.insertSerialRequest", sr);
+	}
+
+
+	public int insertNovel(SqlSessionTemplate sqlSession, Novel n) {
+		return sqlSession.insert("novelMapper.insertNovel", n);
 	}
 	
 	// 광진구역 끝
