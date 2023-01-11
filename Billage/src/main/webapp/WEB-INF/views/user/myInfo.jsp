@@ -35,8 +35,16 @@
 		    		<legend>개인 정보</legend>
 		    		
 		    		<div id="img-area">
-						 <span><img width="200" height="200" id="file-insert" src="resources/images/plus.png"></span>
-						 <input type="file" name="upfile" id="file">
+		    			<c:choose>
+							<c:when test="${ !empty loginUser.profileImg }">
+								 <span><img width="200" height="200" id="file-insert" src="${ sessionScope.loginUser.profileImg }"></span>
+								 <input type="file" name="upfile" id="file">
+							</c:when>
+							<c:otherwise>
+								 <span><img width="200" height="200" id="file-insert" src="resources/images/plus.png"></span>
+								 <input type="file" name="upfile" id="file">
+							</c:otherwise>		    			
+		    			</c:choose>
 		    		</div>
 		    		
 		    		<div id="input-area">

@@ -16,6 +16,7 @@
 		<result column="CREATE_DATE"	property="createDate" />
 		<result column="COUNT"		    property="count" />
 		<result column="REVIEW_STATUS"	property="reviewStatus" />
+		<result column="BOOK_TITLE" 	property="bookTitle" />
 		<result column="BOOK_AUTHOR"	property="bookAuthor" />
 		<result column="BOOK_GENRE"		property="bookGenre" />
 		<result column="BOOK_IMAG"		property="bookImag" />
@@ -55,15 +56,17 @@
 	<select id="selectList" resultMap="reviewResultSet">
 		select
 		        review_no
+		       ,user_no
 		       ,review_star
 		       ,book_imag
 		       ,book_title
 		       ,review_content
 		       ,count
 		       ,to_char(create_date, 'YYYY-MM-DD') as "create_date"
-		     
 		  from
 		       review
+		  join
+		       member using(user_no)
 		 where
 		       review_status = 'N'
 		 order
