@@ -30,9 +30,15 @@ public class FollowServiceImpl implements FollowService{
 	}
 
 	@Override
-	public ArrayList<User> selectFollowerList(int userNo) {
+	public ArrayList<User> selectFollowerList1(int userNo) {
 		
-		return followDao.selectFollowerList(sqlSession, userNo);
+		return followDao.selectFollowerList1(sqlSession, userNo);
+	}
+
+	@Override
+	public ArrayList<User> selectFollowerList2(int userNo) {
+		
+		return followDao.selectFollowerList2(sqlSession, userNo);
 	}
 
 }
