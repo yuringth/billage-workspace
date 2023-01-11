@@ -10,5 +10,8 @@ public interface FollowService {
 	
 	ArrayList<User> selectFollowingList(int userNo);
 	
-	ArrayList<User>selectFollowerList(int userNo);
+	ArrayList<User>selectFollowerList1(int userNo);
+	
+	ArrayList<User>selectFollowerList2(int userNo);
+	
 }

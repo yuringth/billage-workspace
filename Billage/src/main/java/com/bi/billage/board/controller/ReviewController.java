@@ -106,9 +106,9 @@ public class ReviewController {
 	@RequestMapping("insertBoard.re")
 	public String insertReviewBoard(ReviewBoard b) {
 		
+		System.out.println(b);
 		boardService.insertReviewBoard(b);
 		
-		System.out.println(b);
 		
 		return "board/reviewBoard/reviewListView";
 	}

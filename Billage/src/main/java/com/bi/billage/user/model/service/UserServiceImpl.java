@@ -84,7 +84,19 @@ public class UserServiceImpl implements UserService{
 	public ArrayList<Group> selectGroupList(PageInfo pi) {
 		return userDao.selectGroupList(sqlSession, pi);
 	}
-
+	
+	// 닉네임 중복체크
+	@Override
+	public int nicknameCheck(String checkNickname) {
+		return userDao.nicknameCheck(sqlSession, checkNickname);
+	}
+	
+	// 개인정보수정
+	@Override
+	public int updateUser(User u) {
+		return userDao.updateUser(sqlSession, u);
+	}
+	
 	@Override
 	public int selectInqListCount() {
 		return userDao.selectInqListCount(sqlSession);
@@ -98,6 +110,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public int insertInquiry(Inquiry iq) {
 		return userDao.insertInquiry(sqlSession, iq);
+
 	}
 
 }

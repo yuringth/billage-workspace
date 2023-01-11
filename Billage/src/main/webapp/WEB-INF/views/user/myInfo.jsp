@@ -29,7 +29,8 @@
 	
 	<div class="info-outer">
 		<div class="info-content" align="center">
-			<form action="update.me" method="post">
+			<form action="update.me" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }">
 		  		<fieldset>
 		    		<legend>개인 정보</legend>
 		    		
@@ -45,11 +46,8 @@
 		    			회원 ID<br>
 		    			<input type="text" name="userId" value="${ sessionScope.loginUser.userId }" readonly><br><br><br>
 		    			
-		    			비밀번호<br>
-		    			<input type="password" name="userPwd" value=""><br><br><br>
-		    			
 		    			닉네임<br>
-		    			<input type="text" name="nickname" value="${ sessionScope.loginUser.nickname }"><br><br><br>
+		    			<input type="text" name="nickname" id="nickname" value="${ sessionScope.loginUser.nickname }"><div id="checkResult" style="font-size:0.7em; display:none;"></div><br><br><br>
 		    			
 		    			이메일<br>
 		    			<input type="text" name="email" value="${ sessionScope.loginUser.email }"><br><br><br>
@@ -66,7 +64,7 @@
 		    			<br><br>
 		    			
 		    		<div id="update-btn">
-		    			<button type="submit"> 수정하기 </button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <button type="button"> 탈퇴하기 </button>
+		    			<button type="submit" id="modify-btn"> 수정하기 </button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <button type="button"> 비밀번호 수정 </button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <button type="button"> 탈퇴하기 </button>
 	    			</div>
 		  		</fieldset>
 			</form>
@@ -95,6 +93,7 @@
 	}
 	
 	// 프로필 이미지 수정하기 스크립트 영역
+	
 	//첨부파일 ------------------------------------------------------
 	// 첨부파일 버튼 숨기고
 	$('#file').hide();
@@ -119,5 +118,46 @@
 			$('#file-insert').attr('src', 'resources/images/plus.png');
 		}
 	});
+</script>
+<script>
+//닉네임 중복체크
+$(function(){
+	
+	const $nicknameInput = $('#nickname');
+	
+	$nicknameInput.keyup(function(){
+		 //console.log($nicknameInput.val());	
+		
+		if($nicknameInput.val().length >= 3){
+			
+			$.ajax({
+				url : 'nicknameCheck.me',
+				data : {checkNickname : $nicknameInput.val()},
+				success : function(result){
+					console.log(result);
+					if(result == 'NNNNN'){	// 사용불가능
+						$('#checkResult').show();
+						$('#checkResult').css('color', 'red').text('중복된 닉네임이 존재합니다.')
+						$('#modify-btn').attr('disabled', true);
+					} 
+					else{					// 사용가능
+						$('#checkResult').show();
+						$('#checkResult').css('color', 'green').text('사용 가능한 닉네임 입니다.')
+						$('#modify-btn').removeAttr('disabled');
+					}
+				},
+				error : function() {
+					console.log('닉네임 중복체크용 ajax 통신 실패')
+				}
+			})
+		}
+		else{
+			$('#checkResult').hide();
+			$('#modify-btn').attr('disabled', true);		
+		}
+		
+	});
+	
+});
 </script>
 </html>
