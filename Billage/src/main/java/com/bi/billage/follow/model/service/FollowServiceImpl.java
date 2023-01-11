@@ -29,4 +29,10 @@ public class FollowServiceImpl implements FollowService{
 		return followDao.selectFollowingList(sqlSession, userNo);
 	}
 
+	@Override
+	public ArrayList<User> selectFollowerList(int userNo) {
+		
+		return followDao.selectFollowerList(sqlSession, userNo);
+	}
+
 }

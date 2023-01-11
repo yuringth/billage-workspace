@@ -194,6 +194,7 @@ public class DrawAuctionController {
 		} 
 		
 		if(boardService.insertAuctionBoard(b) > 0) {
+			System.out.println(b.getChangeName());
 			return "redirect:list.ac";
 		} else {
 			model.addAttribute("errorMsg", "게시글 작성에 실패했어용 ㅠ");

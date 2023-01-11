@@ -10,11 +10,16 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.common.savefile.SaveFile;
+import com.bi.billage.common.template.Pagination;
 import com.bi.billage.group.model.service.GroupService;
 import com.bi.billage.group.model.vo.Group;
 
@@ -29,12 +34,15 @@ public class GroupController {
 	
 	//등록된 모임 리스트를 가지고 와야 함 , 페이징 처리 필요
 	@RequestMapping("list.gr")
-	public /*ModelAndView*/String selectGroup(/*@RequestParam(value="cpage", defaultValue="1")int currentPage, ModelAndView mv*/) {
+	public ModelAndView selectGroup(@RequestParam(value="cpage", defaultValue="1")int currentPage, ModelAndView mv) {
 		
-		//PageInfo pi = pagination.
-		//mv.setViewName("group/groupListView");
-		//return mv;
-		return "group/groupListView";
+		PageInfo pi = Pagination.getPageInfo(groupService.selectListCount(), currentPage, 10, 9);
+		
+		mv.addObject("pi", pi);
+		mv.addObject("groupList", groupService.selectList(pi));
+		
+		mv.setViewName("group/groupListView");
+		return mv;
 	}
 	
 	
@@ -89,7 +97,7 @@ public class GroupController {
 	
 	// 모임등록 하면 값 들어오는 메소드 --------------------------------- 기능 구현 필요함 
 	@RequestMapping("create.gr")
-	public String insertGroup(Group group, MultipartFile upfile, HttpSession session) {
+	public String insertGroup(Model model, Group group, MultipartFile upfile, HttpSession session) {
 		System.out.println(group);
 		
 		if(!upfile.getOriginalFilename().equals("")) {
@@ -97,9 +105,13 @@ public class GroupController {
 			group.setGroupImg(changeName);
 		}
 		
-		
-		
-		return "group/groupAdminView";
+		if(0 < groupService.insertGroup(group)) {
+			
+			return "group/groupAdminView";
+		} else {
+			model.addAttribute("errorMsg", "그룹 인설트 오류");
+			return "common/errorPage";
+		}
 	}
 	
 	
