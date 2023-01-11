@@ -149,8 +149,17 @@ public interface BoardService {
 	ArrayList<UsedBoard> selectTopBoard();
 	
 	
+	
+	
 	// 리뷰게시판 => book테이블에서 책제목으로 isbn 문자열 select하기
 	Book selectIsbn(String title);
+	
+	
+	// 리뷰 게시글의 총 개수 조회
+	int selectListCount();
+	// 리뷰 게시글 리스트 조회
+	ArrayList<ReviewBoard> selectList(PageInfo pi);
+	
 	
 	
 	
