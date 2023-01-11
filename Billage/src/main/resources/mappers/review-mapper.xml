@@ -56,7 +56,7 @@
 	       <!-- ,COUNT -->
 	       ,REVIEW_STATUS
 	       ,BOOK_TITLE
-	       <!-- ,BOOK_IMAG -->
+	       ,BOOK_IMAG
 	       ,BOOK_POINT
 	       )
 	values
@@ -69,7 +69,7 @@
 	       <!-- ,default -->
 	       ,'N'
 	       ,#{bookTitle}
-	       <!-- ,{bookImg} -->
+	       ,{bookImg} 
 	       ,10
 	       )
 	</insert>
