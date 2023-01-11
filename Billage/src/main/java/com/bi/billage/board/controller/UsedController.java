@@ -40,7 +40,7 @@ public class UsedController {
 	
 	// 글작성
 	@RequestMapping("upload.ud")
-	public String insertUsedBoard(UsedBoard b, MultipartFile upfile /*MultipartFile[] upfile*/,  HttpSession session, Model model) {
+	public String insertUsedBoard(UsedBoard b, MultipartFile upfile,  HttpSession session, Model model) {
 		System.out.println(b);
 		System.out.println(upfile);
 		
