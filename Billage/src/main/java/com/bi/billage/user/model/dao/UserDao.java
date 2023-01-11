@@ -95,7 +95,6 @@ public class UserDao {
 	
 	// 회원정보수정
 	public int updateUser(SqlSessionTemplate sqlSession, User u) {
-		System.out.println(u);
 		return sqlSession.update("userMapper.updateUser", u);
 	}
 	

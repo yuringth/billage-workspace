@@ -18,6 +18,7 @@
 		<result column="USER_GRADE"			property="userGrade" />
 		<result column="USER_NO"			property="userNo" />
 		<result column="ENROLL_DATE"		property="enrollDate" />
+		<result column="PROFILE_IMG"		property="profileImg" />
 	</resultMap>
 
 	<resultMap id="groupResultSet" type="group">
