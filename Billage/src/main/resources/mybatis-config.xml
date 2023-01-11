@@ -21,7 +21,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.bi.billage.board.model.vo.UsedBoard" alias="used" />
 		<typeAlias type="com.bi.billage.board.model.vo.ReviewBoard" alias="review" />
 		<typeAlias type="com.bi.billage.board.model.vo.Book" alias="book" />
-		<typeAlias type="com.bi.billage.follow.model.vo.Follow" alias="follow"/>
+		<typeAlias type="com.bi.billage.follow.model.vo.Follow" alias="follow" />
+		<typeAlias type="com.bi.billage.board.model.vo.Inquiry" alias="inquiry" />
 	</typeAliases>
 	<!-- **주의 : 미리 등록을 해두려면 해당 클래스가 진짜 존재하고 있는 상태여야함 -->
 	

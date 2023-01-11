@@ -18,8 +18,9 @@ public class FollowController {
 	@Autowired
 	private FollowService followService;
 	
+	
 	@RequestMapping("selectFollowing.fo")
-	public ModelAndView selectFollowingList(HttpSession session, int uno, ModelAndView mv) {
+	public ModelAndView selectFollowingList(int uno, ModelAndView mv) {
 		
 		ArrayList<User> followingList = followService.selectFollowingList(uno);
 		
@@ -29,9 +30,15 @@ public class FollowController {
 	}
 	
 	@RequestMapping("selectFollower.fo")
-	public String selectFollowerList() {
+	public ModelAndView selectFollowerList(int uno, ModelAndView mv) {
 		
-		return "follow/followerListView";
+		ArrayList<User> followerList1 = followService.selectFollowerList1(uno);
+		
+		ArrayList<User> followerList2 = followService.selectFollowerList2(uno);
+		
+		mv.addObject("followerList1",followerList1).addObject("followerList2", followerList2).setViewName("follow/followerListView");
+		
+		return mv;
 	}
 	
 	//로그인한 유저의 팔로우 프로필 

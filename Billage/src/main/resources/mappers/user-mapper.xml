@@ -33,6 +33,16 @@
 			<result column="group_img" 			property="groupImg" />
 	</resultMap>
 	
+	<resultMap id="inqResultSet" type="inquiry">
+			<result column="inq_no"			property="inqNo" />
+			<result column="user_no"		property="userNo" />
+			<result column="inq_title"		property="inqTitle" />
+			<result column="inq_content"	property="inqContent" />
+			<result column="inq_type"		property="inqType" />
+			<result column="inq_date"		property="inqDate" />
+			<result column="inq_status"		property="inqStatus" />
+	</resultMap>
+	
 	<!-- 회원가입용 쿼리문 -->
 	<insert id="insertUser" parameterType="user">
 		INSERT
@@ -184,4 +194,50 @@
 	</update>
 	
 	
+	<!-- 문의 총 몇개 세기 -->
+	<select id="selectInqListCount" resultType="_int">
+		select
+				count(*)
+		from
+				inquiry
+	</select>
+	
+	<!-- 관리자 문의조회 쿼리문 -->
+	<select id="selectInqList" resultMap="inqResultSet">
+		select
+				inq_no,
+				(select nickname from member m where m.user_no = iq.user_no) as nickName,
+				inq_type,
+				inq_title,
+				inq_date,
+				inq_status
+		from
+				inquiry iq
+	</select>
+	
+	<!-- 1:1문의 요청 쿼리문 -->
+	<insert id="insertInq" parameterType="inquiry">
+		insert
+			into
+				inquiry
+				(
+				inq_no,
+				user_no,
+				inq_title,
+				inq_content,
+				inq_type,
+				inq_date,
+				inq_status
+				)
+			values
+				(
+				seq_ino.nextval,
+				#{userNo},
+				#{inqTitle},
+				#{inqContent},
+				#{inqType},
+				sysdate,
+				'N'
+				)
+	</insert>
 </mapper>

@@ -52,7 +52,7 @@
 	<insert id="insertGroup" parameterType="group">
 		insert
 		  into 
-		       'GROUP'
+		       "GROUP"
 		       (
 		        GROUP_NO,
 		        USER_NO,

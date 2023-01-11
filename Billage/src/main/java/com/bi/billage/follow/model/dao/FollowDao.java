@@ -18,5 +18,13 @@ public class FollowDao {
 	public ArrayList<User> selectFollowingList(SqlSession sqlSession, int userNo) {
 		return (ArrayList) sqlSession.selectList("followMapper.selectFollowingList", userNo);
 	}
+	
+	public ArrayList<User> selectFollowerList1(SqlSession sqlSession, int userNo) {
+		return (ArrayList) sqlSession.selectList("followMapper.selectFollowerList1", userNo);
+	}
+	
+	public ArrayList<User> selectFollowerList2(SqlSession sqlSession, int userNo) {
+		return (ArrayList) sqlSession.selectList("followMapper.selectFollowerList2", userNo);
+	}
 
 }

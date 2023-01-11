@@ -6,6 +6,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.bi.billage.board.model.vo.Inquiry;
 import com.bi.billage.board.model.vo.SerialRequest;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.group.model.vo.Group;
@@ -66,10 +67,26 @@ public class UserDao {
 		return (ArrayList)sqlSession.selectList("userMapper.selectGroupList", null, rowBounds);
 	}
 	
+	public int selectInqListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("userMapper.selectInqListCount");
+	}
+	
+	public ArrayList<Inquiry> selectInqList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage()- 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("userMapper.selectInqList", null, rowBounds);
+	}
+	
+	public int insertInquiry(SqlSessionTemplate sqlSession, Inquiry iq) {
+		return sqlSession.insert("userMapper.insertInq", iq);
+	}
+	
 	// id 중복체크
 	public int idCheck(SqlSessionTemplate sqlSession, String checkId) {
 		return sqlSession.selectOne("userMapper.idCheck", checkId);
 	}
+
+
 	
 	// 닉네임 중복체크
 	public int nicknameCheck(SqlSessionTemplate sqlSession, String checkNickname) {

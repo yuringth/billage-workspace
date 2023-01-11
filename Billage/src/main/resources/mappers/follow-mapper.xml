@@ -83,5 +83,72 @@
 					                                user_no1 = #{userNo})
 		</select>
 		
+		<!-- 서로 팔로잉 한 list -->
+		<select id="selectFollowerList1" parameterType="_int" resultMap="userResultSet2">
+			select
+				     user_id
+				    ,user_pwd
+				    ,name
+				    ,email
+				    ,nickname
+				    ,phone
+				    ,birth_date
+				    ,gender
+				    ,address
+				    ,detail_address
+				    ,user_grade
+				    ,user_no
+				  from
+				        member m
+				  where
+				         user_no in (select
+				                          user_no1
+				                        from
+				                          follow
+				                         where
+				                         user_no2 = #{userNo}
+				                    INTERSECT
+				                            select
+				                                    user_no2
+				                                from
+				                                    follow
+				                                 where
+				                                        user_no1 = #{userNo})
+		</select>
+		
+		<!-- 나를 팔로잉한 사람들 나는 안 함 -->
+		
+		<select id="selectFollowerList2" parameterType="_int" resultMap="userResultSet2">
+			select
+				     user_id
+				    ,user_pwd
+				    ,name
+				    ,email
+				    ,nickname
+				    ,phone
+				    ,birth_date
+				    ,gender
+				    ,address
+				    ,detail_address
+				    ,user_grade
+				    ,user_no
+				  from
+				        member m
+				  where
+				         user_no in (select
+				                          user_no1
+				                        from
+				                          follow
+				                         where
+				                         user_no2 = #{userNo}
+				                    MINUS
+				                            select
+				                                    user_no2
+				                                from
+				                                    follow
+				                                 where
+				                                        user_no1 = #{userNo})
+		</select>
+		
 
 </mapper>
