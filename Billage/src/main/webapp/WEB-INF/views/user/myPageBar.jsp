@@ -52,7 +52,7 @@
 			<ul class="menubar-area">
 				<li class="menu"><a href="mypage.me">- MY PAGE🌿  -</a></li>
 				<%-- 개인정보수정에 회원탈퇴 넣기 --%>
-				<li class="menu"><a href="">개인정보수정</a></li>
+				<li class="menu"><a href="myInfo.me">개인정보수정</a></li>
 				<li class="menu"><a href="">내 포인트 보기</a></li>
 				<li class="menu"><a href="selectLoginUser.fo">팔로우관련</a></li>
 				<li class="menu"><a href="list.ms">쪽지함보기</a></li>
