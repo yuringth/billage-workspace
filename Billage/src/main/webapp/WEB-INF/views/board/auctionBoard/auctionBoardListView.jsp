@@ -84,7 +84,9 @@
 					<a class="dropdown-item" href="#">입찰수 순</a>
 				</div>
 			</div>
-			<div><button type="button" class="btn btn-info" onclick="location.href='enrollForm.ac'" >글쓰기</button></div>   
+			<c:if test="${ not empty loginUser }">
+				<div><button type="button" class="btn btn-info" onclick="location.href='enrollForm.ac'">글쓰기</button></div>
+			</c:if>
 		</div>
 
 		<div class="align-left-outer">

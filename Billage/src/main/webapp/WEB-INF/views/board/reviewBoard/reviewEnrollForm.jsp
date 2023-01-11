@@ -49,6 +49,11 @@
 	margin-right:20px;
 }
 
+#book_src{
+	width:200px;
+	height:200px;
+}
+
 /* 책 정보 */
 .content-book-detail{
 	border:1px solid pink;
@@ -154,6 +159,20 @@
     	width:75px;
     }    
     
+    
+    
+    /* 별관련 스타일 */
+    #star-area img{
+        margin: 0 25px;
+    }
+
+    #star-area label{
+        display: inline-block;
+    }
+
+    #star-area input[name=reviewStar] {
+        display: none;
+    } 
 
 </style>
 
@@ -197,15 +216,26 @@
 				<div class="book-detail-area">
 					<div class="content-photo-detail">
 						<!-- api에서 끌고 오는거니까 첨부파일로 안해도 되는게 맞겠지? <input type="file" name="upfile"> 이런식으로.. -->
-						<div id="book_imag" name="bookImag"><img src="" id="book_src"></div>
+						<div id="book_imag">
+						<!-- 	<img src="" id="book_src" name="bookImg"> -->
+							<input src="" type="image" id="book_src"  required value="사진"> 
+							<input type="hidden" id="bookImag" name="bookImag" value=""> 
+							
+						</div>
 					</div>
 					
 					<!-- review 테이블 : book_content, book_publisher, book_date 컬럼 추가  -->
 					<div class="content-book-detail">
-						<div id="book_title" name="bookTitle">제목</div>
+						<!-- input에 넣어야 데이터가 넘어간다. div안에 넣으면 안넘어간다  -->
+						<div><input type="text" id="book_title" name="bookTitle"  required value="제목"></div>
+						<div><input type="text" id="book_author" name="bookAuthor" required value="작가"></div>
+						<div><input type="text" id="book_publisher" name="bookPublisher" required value="출판사"></div>
+						<div><input type="text" id="book_date" name="bookDate" required value="발행일자"></div>
+
+					<!-- 	<div id="book_title" name="bookTitle">제목</div>
 						<div id="book_author" name="bookAuthor">작가</div>
 						<div id="book_publisher" name="bookPublisher">츨판사</div>
-						<div id="book_date" name="bookDate">발행일자</div>
+						<div id="book_date" name="bookDate">발행일자</div> -->
 					</div>
 				</div>
 			</div>
@@ -214,9 +244,39 @@
 			<hr>
 	
 			<!-- 별점 : 매란언니한테 알려달라하기 -->
-			<div style="text-align:center;">별점 : ☆☆☆★ 
+			<div id="star-area" align="center" >
+               <label for="rate1">
+                   <input type="radio" name="reviewStar" value="1" id="rate1" checked>
+                   <img src="resources/images/star1.png" width="50" height="50" alt="">
+               </label>
+
+               <label for="rate2">
+                   <input type="radio" name="reviewStar" value="2" id="rate2">
+                   <img src="resources/images/star2.png" width="50" height="50" alt="">
+               </label>
+
+               <label for="rate3">
+                   <input type="radio" name="reviewStar" value="3" id="rate3">
+                   <img src="resources/images/star2.png" width="50" height="50" alt="">
+               </label>
+
+               <label for="rate4">
+                   <input type="radio" name="reviewStar" value="4" id="rate4">
+                   <img src="resources/images/star2.png" width="50" height="50" alt="">
+               </label>
+               
+               <label for="rate5">
+                   <input type="radio" name="reviewStar" value="5" id="rate5">
+                   <img src="resources/images/star2.png" width="50" height="50" alt="">
+               </label>
+            </div>
+            <!-- 별관련 끝  -->
+			
+			
+			
+<!-- 			<div style="text-align:center;" name="reviewStar">별점 : ☆☆☆★ 
 				<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-			</div>
+			</div> -->
 	
 			<br>
 	
@@ -328,10 +388,12 @@
 						  + '<div><img id="md_img" src="' + thumb + '"></div>'
 						  + '</div>'
 						  + '<div class="content-detail2">'
-						  + '<p id="md_book_title" name="bookTitle">' + item.title + '</p>'
-						  + '<p id="md_book_author" name="bookAuthor">' + item.author + '</p>'
-						  + '<p id="md_book_date" name="bookDate">' + item.pubDate + '</p>'
+						  
+						  + '<p id="md_book_title" name="mdbookTitle">' + item.title + '</p>'
+						  + '<p id="md_book_author" name="mdbookAuthor">' + item.author + '</p>'
+						  + '<p id="md_book_date" name="mdbookDate">' + item.pubDate + '</p>'
 						  + '<p id="md_book_publisher" name="bookPublisher">' + item.publisher + '</p>'
+						  
 						  + '</div>'
 						  + '</div>'
 						  + '<div  class="content-area3">'
@@ -361,15 +423,15 @@
 				 console.log($('#md_book_author').text());
 				 console.log($('#md_book_date').text());
 				 console.log($('#md_book_publisher').text());
-				 console.log($('#md_img').attr('src')); // http:// sljdgkjslkg.jpg
+				 console.log($('#md_img').attr('src')); // https://image.aladin.co.kr/product/7608/30/coversum/8994492038_1.jpg
 				 
 				 
-				 $('#book_title').html($('#md_book_title').text());
-				 $('#book_author').html($('#md_book_author').text());
-				 $('#book_publisher').html($('#md_book_publisher').text());
-				 $('#book_date').html($('#md_book_date').text());
-				 $('#book_src').attr('src', $('#md_img').attr('src'));
-				 
+				 $('#book_title').val($('#md_book_title').text());
+				 $('#book_author').val($('#md_book_author').text());
+				 $('#book_publisher').val($('#md_book_publisher').text());
+				 $('#book_date').val($('#md_book_date').text());
+				 $('#book_src').attr('src', $('#md_img').attr('src')); //https://image.aladin.co.kr/product/7608/30/coversum/8994492038_1.jpg
+				 $('#bookImag').val($('#md_img').attr('src')); //https://image.aladin.co.kr/product/7608/30/coversum/8994492038_1.jpg
 				 
 				 
 				 $('#modal-book-search').hide();
@@ -392,6 +454,22 @@
        });
    	</script>
    	
+   	
+   	<script>
+    $('input[name=reviewStar]').click(function(){
+
+        var $num = $(this).val();
+
+        $('input[name=reviewStar]').each(function(){
+
+            if($(this).val() <= $num){
+                $(this).next().attr('src','resources/images/star1.png');
+            } else {
+                $(this).next().attr('src','resources/images/star2.png');
+            }
+        })
+    });
+   	</script>
  
    	
    	

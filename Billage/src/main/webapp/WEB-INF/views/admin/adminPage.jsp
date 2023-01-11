@@ -106,14 +106,13 @@
 <body>
    <jsp:include page="../common/header.jsp"/>
 
-   <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
     <div class="wrapper">
         <div class="sidebar">
             <h2>관리자 페이지</h2>
             <ul>
                 <li><a href="userList.ad"><i class="fas fa-user"></i>회원 관리</a></li>
                 <li><a href="groupList.ad"><i class="fas fa-home"></i>모임 관리</a></li>
-                <li><a href="inquiryList.ad"><i class="fas fa-address-card"></i>1:1 문의</a></li>
+                <li><a href="inqList.ad"><i class="fas fa-address-card"></i>1:1 문의</a></li>
                 <li><a href="faqList.fa"><i class="fas fa-project-diagram"></i>FAQ 관리</a></li>
                 <li><a href="noticeList.no"><i class="fas fa-blog"></i>공지사항</a></li>
                 <li><a href="list.sr"><i class="fas fa-address-book"></i>연재 요청</a></li>

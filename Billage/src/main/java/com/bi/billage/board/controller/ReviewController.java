@@ -33,7 +33,7 @@ public class ReviewController {
 		
 		Book isbn = boardService.selectIsbn(title);
 		
-		System.out.println(isbn);
+		//System.out.println(isbn);
 		
 		// url은 손으로 한땀한땀 작성하는게 좋다
 		// 인증서 => 브라우저에 있음 => 우리는 http로 작성할것임! https안됨!!
@@ -106,7 +106,10 @@ public class ReviewController {
 	@RequestMapping("insertBoard.re")
 	public String insertReviewBoard(ReviewBoard b) {
 		
+		System.out.println(b);
 		boardService.insertReviewBoard(b);
+		
+		
 		return "board/reviewBoard/reviewListView";
 	}
 	
