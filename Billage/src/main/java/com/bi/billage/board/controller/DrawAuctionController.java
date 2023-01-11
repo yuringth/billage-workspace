@@ -125,7 +125,7 @@ public class DrawAuctionController {
 	@RequestMapping("detail.ac")
 	public ModelAndView auctionDetailView(int bno, ModelAndView mv) {
 		if(boardService.auctionIncreaseCount(bno) > 0) {
-			mv.addObject("b", boardService.selectAuctionBoard(bno)).setViewName("board/drawBoard/auctionDetailView");
+			mv.addObject("b", boardService.selectAuctionBoard(bno)).setViewName("board/auctionBoard/auctionDetailView");
 		} else {
 			mv.addObject("errorMsg", "게시글 조회 실패").setViewName("common/errorPage");
 		}
