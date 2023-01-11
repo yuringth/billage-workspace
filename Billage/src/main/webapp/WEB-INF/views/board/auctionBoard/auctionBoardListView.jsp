@@ -94,13 +94,14 @@
 			<c:forEach items="${ list }" var="b">
 		        <input type="hidden" value="${ b.boardNo }" class="boardNo">
 		        <div class="one-content">
+		        	<input type="hidden" value="${ b.closeDate }" class="closeDate">
 		            <div class="img-area">
 		                <img src="${ b.changeName }">
 		            </div>
 		            <div class="text-area">
 		                <p class="title-text">${ b.title }</p>
 		                <p class="textsize">현재 가격 : ${ b.nowPrice }P</p>
-		                <p class="textsize">남은 시간 : ${ remaindTime }</p>
+		                <p class="textsize time"></p>
 		                <p class="countnum">입찰 : <!-- 카운트해서 --> 조회 : ${ b.count }</p>
 		            </div>
 		
@@ -120,7 +121,44 @@
     		$('.one-content').click(function(){
     			location.href='detail.ac?bno='+ $('.boardNo').val();
     		})	
+    		closeCount();
+			setInterval(closeCount, 500);
     	})
+    	
+    	function closeCount(){
+    		$('.one-content').each(function(){
+    			
+    			var endTime = $(this).find('.closeDate').val();
+    			var end = new Date(endTime);
+				var now = new Date(); 
+				
+				var remaindTime = end - now;
+				
+				var day = Math.floor(remaindTime / (1000*60*60*24));
+			    var hour = Math.floor((remaindTime / (1000*60*60)) % 24);
+			    var min = Math.floor((remaindTime / (1000*60)) % 60);
+			    var sec = Math.floor(remaindTime / 1000 % 60);
+				
+			    if(sec < 10){
+			    	sec = '0' +sec;
+			    }
+			    if(min < 10){
+			    	min = '0' +min;
+			    }
+			    if(hour < 10){
+			    	hour = '0' + hour;
+			    }
+			    
+			    if(remaindTime >= 0){
+			    	$(this).find('.time').text('남은 시간 : ' + day +'일 ' + hour + ':' + min + ':' + sec);
+			    } else {
+			    	$(this).find('.time').text('응모 시간 종료');
+			    }
+    			
+    			
+    		});
+    		
+    	}
     </script>
     
 

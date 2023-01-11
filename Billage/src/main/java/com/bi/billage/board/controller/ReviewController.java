@@ -8,12 +8,17 @@ import java.net.URL;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.bi.billage.board.model.service.BoardService;
 import com.bi.billage.board.model.vo.Book;
 import com.bi.billage.board.model.vo.ReviewBoard;
+import com.bi.billage.common.model.vo.PageInfo;
+import com.bi.billage.common.template.Pagination;
 
 @Controller
 public class ReviewController {
@@ -72,12 +77,51 @@ public class ReviewController {
 	 */
 	
 	
-	
-	
-	// 리뷰게시판 목록 조회 화면
+	// 리뷰게시판 목록 조회 화면 => 몰라 안됨 ㅡㅡ
+	/*
 	@RequestMapping("list.re")
-	public String reviewBoardList() {
+	public String reviewBoardList(@RequestParam(value="cPage", defaultValue="1") int currentPage, Model model) {
+		
+		System.out.println(currentPage);
+		System.out.println(model);
+		
+		// int listCount, int currentPage, int pageLimit, int boardLimit
+		PageInfo pi = Pagination.getPageInfo(boardService.selectListCount(), currentPage, 10, 4);
+		
+		// (페이징 pi를 가지고)게시글 리스트 조회
+		// ArrayList<ReviewBoard> list = boardService.selectList(pi);
+		model.addAttribute("list", boardService.selectList(pi)); // Model은 단지 담는 용도
+		model.addAttribute("pi", pi);
+		
+		// model에 담았으니까 포워딩해주기(/WEB-INF/views/		board/reviewBoard/reviewListView	.jsp
 		return "board/reviewBoard/reviewListView";
+	}
+	*/
+	
+	// ModelAndView로 바꿔보기 => 리뷰게시판 목록 조회 화면
+	@RequestMapping("list.re")
+	public ModelAndView reviewBoardList(@RequestParam(value="cPage", defaultValue="1") int currentPage, ModelAndView mv) {
+		
+		PageInfo pi = Pagination.getPageInfo(boardService.selectListCount(), currentPage, 10, 4);
+		
+		mv.addObject("pi", pi).addObject("list", boardService.reviewBoardList(pi)).setViewName("board/reviewBoard/reviewListView");
+		// ModelAndView는 메소드체인이 가능해서 코드의 길이가 짧아진다 => 그래서 String으로 사용했을 때 보다 좋다
+		return mv;
+		
+	}
+	
+	
+	
+	// 리뷰게시판 -> 글작성 
+	@RequestMapping("insertBoard.re")
+	public String insertReviewBoard(ReviewBoard b) {
+		
+		System.out.println(b);
+		boardService.insertReviewBoard(b);
+		
+		//return "board/reviewBoard/reviewListView";
+		return "redirect:list.re";
+		
 	}
 	
 	
@@ -88,9 +132,27 @@ public class ReviewController {
 	}
 	
 	
-	// 리뷰게시판 -> 게시글 상세보기 
+	// 리뷰게시판 -> 게시글 상세보기 : boardNo를 식별값으로 사용할것이기에 가져와야함
 	@RequestMapping("detail.re")
-	public String reviewDetail() {
+	public String reviewDetail(int reviewNo, Model model) {
+		
+		
+		// 조회수 증가
+		if(boardService.increaseReviewCount(reviewNo) > 0) { // 조회수 성공 시 => 상세보기 들어감
+			// >> 성공적으로 조회수 증가
+			// 	>> boardDetailView.jsp상에 필요한 데이터를 조회(게시글 상세정보 조회용 서비스 호출)
+			//		>> 조회된 데이터를 담아서 board/reviewBoard/reviewDetailView로 포워딩
+			
+			// 조회 성공 시 => db에서 데이터를 가져와야한다.
+			ReviewBoard b = boardService.selectReviewBoard(reviewNo);
+			
+			
+			
+			
+		}
+		
+		
+		
 		return "board/reviewBoard/reviewDetailView";
 	}
 	
@@ -101,18 +163,6 @@ public class ReviewController {
 	public String reviewEnrollForm() {
 		return "board/reviewBoard/reviewUploadForm";
 	}
-	
-	
-	@RequestMapping("insertBoard.re")
-	public String insertReviewBoard(ReviewBoard b) {
-		
-		System.out.println(b);
-		boardService.insertReviewBoard(b);
-		
-		
-		return "board/reviewBoard/reviewListView";
-	}
-	
 	
 	
 	

@@ -136,19 +136,42 @@
 				        member m
 				  where
 				         user_no in (select
-				                          user_no1
-				                        from
-				                          follow
-				                         where
-				                         user_no2 = #{userNo}
-				                    MINUS
-				                            select
-				                                    user_no2
-				                                from
-				                                    follow
-				                                 where
-				                                        user_no1 = #{userNo})
+						                          user_no1
+						                        from
+						                          follow
+						                         where
+						                         user_no2 = #{userNo}
+						                    MINUS
+						                            select
+						                                    user_no2
+						                                from
+						                                    follow
+						                                 where
+						                                        user_no1 = #{userNo})
 		</select>
+		
+		<insert id="insertFollow" parameterType="follow">
+			insert
+			   into
+			          follow
+			          (
+			          user_no1
+			         ,user_no2
+			          )
+		   values
+			         (
+			         #{userNo1}
+			        ,#{userNo2}
+			         )       
+		</insert> 
+		
+		<delete id="deleteFollow" parameterType="follow">
+			 delete
+			   from
+			           follow
+			 where
+			           user_no2 = #{userNo2}      
+		</delete>
 		
 
 </mapper>

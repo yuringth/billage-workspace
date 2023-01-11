@@ -236,13 +236,39 @@ public class BoardDao {
 				
 	}
 	
+	// 리뷰 게시글의 총 개수 조회
+	public int selectListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("reviewMapper.selectListCount");
+	}
+	
+	// 리뷰 게시글 리스트 조회
+	public ArrayList<ReviewBoard> selectList(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("reviewMapper.selectList", null, rowBounds);
+	} 
+	
+	
+	
 	// 리뷰게시판 => 글작성
 	public int insertReviewBoard(SqlSessionTemplate sqlSession, ReviewBoard b) {
 		return sqlSession.insert("reviewMapper.insertReviewBoard", b);
 	}
 	
 	
+	// 리뷰게시판 => 조회수 증가
+	public int increaseReviewCount(SqlSessionTemplate sqlSession, int reviewNo) {
+		return sqlSession.insert("reviewMapper.insertReviewBoard", reviewNo);
+	}
 	
+	
+	// 리뷰게시판. 조회 성공 시 => db에서 데이터를 가져와야한다.
+	public ReviewBoard selectReviewBoard(SqlSessionTemplate sqlSession, int reviewNo) {
+		return sqlSession.selectOne("reviewMapper.selectReviewBoard", reviewNo);
+	}
 	
 	
 	

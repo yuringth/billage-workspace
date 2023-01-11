@@ -50,7 +50,7 @@
 		  		DRAW_BOARD
 		  		(
 		  		DRAW_NO
-		  		,TITLE
+		  		,TITLE${
 		  		,USER_NO
 		  		,BOOK_WRITER
 		  		,GENRE
@@ -110,6 +110,7 @@
 	<select id="selectDrawBoard" parameterType="_int" resultMap="drawBoardResultSet">
 		SELECT
 				DRAW_NO
+				,D.USER_NO
 				,NICKNAME
 				,ORIGIN_NAME
 				,CHANGE_NAME
@@ -207,13 +208,14 @@
 		   SET
 		   		COUNT = COUNT + 1
 		 WHERE
-		 		DRAW_NO = #{boardNo}
+		 		AUCTION_NO = #{boardNo}
 	</update>
 	
 	<!-- 경매글 상세조회 -->
-	<select id="selectAuctionBoard">
+	<select id="selectAuctionBoard" resultMap="auctionBoardResultSet">
 		SELECT
 				AUCTION_NO
+				,A.USER_NO
 				,NICKNAME
 				,ORIGIN_NAME
 				,CHANGE_NAME
@@ -232,7 +234,7 @@
 		  JOIN
 		  		MEMBER M ON (A.USER_NO = M.USER_NO)
 		 WHERE
-		 		DRAW_NO = #{boardNO} 
+		 		AUCTION_NO = #{boardNO} 
 	</select>
 	
 	<!-- 경매글 삭제 -->

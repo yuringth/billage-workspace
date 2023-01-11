@@ -181,25 +181,40 @@ public class BoardServiceImpl implements BoardService {
 		return null;
 	}
 
+	
+	
+	// 리뷰 게시글의 총 개수 조회
+	@Override
+	public int selectListCount() {
+		return boardDao.selectNovelListCount(sqlSession);
+	}
+	// 리뷰 게시글 리스트 조회
+	@Override
+	public ArrayList<ReviewBoard> reviewBoardList(PageInfo pi){
+		return boardDao.selectList(sqlSession, pi);
+	}
+	
+	
+	
 	// 리뷰게시판 => 글작성
 	@Override
 	public int insertReviewBoard(ReviewBoard b) {
-
 		return boardDao.insertReviewBoard(sqlSession, b);
 	}
+	
 
-	// 리뷰게시판
+	// 리뷰게시판 => 조회수 증가
 	@Override
-	public int increaseReviewCount(int boardNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int increaseReviewCount(int reviewNo) {
+		return boardDao.increaseReviewCount(sqlSession, reviewNo);
 	}
+	
 
-	// 리뷰게시판
+	// 리뷰게시판. 조회 성공 시 => db에서 데이터를 가져와야한다.
 	@Override
-	public ReviewBoard selectReviewBoard(int boardNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public ReviewBoard selectReviewBoard(int reviewNo) {
+		
+		return boardDao.selectReviewBoard(sqlSession, reviewNo);
 	}
 
 	// 리뷰게시판

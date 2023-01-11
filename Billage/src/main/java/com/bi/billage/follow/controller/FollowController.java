@@ -7,9 +7,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bi.billage.follow.model.service.FollowService;
+import com.bi.billage.follow.model.vo.Follow;
 import com.bi.billage.user.model.vo.User;
 
 @Controller
@@ -62,6 +64,38 @@ public class FollowController {
 	@RequestMapping("reviewList.fo")
 	public String selectFollowReviewList() {
 		return "follow/followReviewListView";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="insert.fo", produces ="application/json; charset=UTF-8")
+	public ModelAndView insertFollow(int userNo2, ModelAndView mv, HttpSession session) {
+		
+			int userNo = ((User)session.getAttribute("loginUser")).getUserNo();
+			
+			Follow follow = new Follow(userNo, userNo2);
+			
+			int result = followService.insertFollow(follow);
+			
+			System.out.println(result);
+			
+			mv.addObject(result);
+			
+		return mv;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="delete.fo", produces="application/json; charset=UTF-8")
+	public ModelAndView deleteFollow(int userNo2, ModelAndView mv, HttpSession session) {
+		
+		int userNo = ((User)session.getAttribute("loginUser")).getUserNo();
+		
+		Follow follow = new Follow(userNo, userNo2);
+		
+		int result = followService.deleteFollow(follow);
+		
+		mv.addObject(result);
+		
+		return mv;
 	}
 
 }

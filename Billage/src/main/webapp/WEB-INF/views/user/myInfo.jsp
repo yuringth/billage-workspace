@@ -35,8 +35,16 @@
 		    		<legend>개인 정보</legend>
 		    		
 		    		<div id="img-area">
-						 <span><img width="200" height="200" id="file-insert" src="resources/images/plus.png"></span>
-						 <input type="file" name="upfile" id="file">
+		    			<c:choose>
+							<c:when test="${ !empty loginUser.profileImg }">
+								 <span><img width="200" height="200" id="file-insert" src="${ sessionScope.loginUser.profileImg }"></span>
+								 <input type="file" name="upfile" id="file">
+							</c:when>
+							<c:otherwise>
+								 <span><img width="200" height="200" id="file-insert" src="resources/images/plus.png"></span>
+								 <input type="file" name="upfile" id="file">
+							</c:otherwise>		    			
+		    			</c:choose>
 		    		</div>
 		    		
 		    		<div id="input-area">
@@ -64,7 +72,7 @@
 		    			<br><br>
 		    			
 		    		<div id="update-btn">
-		    			<button type="submit" id="modify-btn"> 수정하기 </button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <button type="button"> 비밀번호 수정 </button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <button type="button"> 탈퇴하기 </button>
+		    			<button type="submit" id="modify-btn"> 수정하기 </button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <button type="button"> 비밀번호 수정 </button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <button type="button" onclick="location.href='userDeleteForm.me'"> 탈퇴하기 </button>
 	    			</div>
 		  		</fieldset>
 			</form>

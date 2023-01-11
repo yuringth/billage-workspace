@@ -209,7 +209,7 @@
 		<form id="reviewEnrollForm" action="insertBoard.re" method="post" enctype="multipart/form-data">
 		
 			<!-- 작성자 식별자로 넘기기 -->
-			<input type="hidden" neme="userNo" value="#">
+			<input type="hidden" name="userNo" value="${ loginUser.userNo }">
 			
 			<!-- api에서 가져온 책 정보 -->
 			<div class="book-detail-outer">

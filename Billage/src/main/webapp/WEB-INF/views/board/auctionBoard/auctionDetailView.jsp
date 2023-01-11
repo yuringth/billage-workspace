@@ -91,15 +91,15 @@
 	<div class="outer">
 
 		<div class="writerarea">
-			<p>작성자 : ${ b.nickName }</p>
+			<p>작성자 : ${ b.nickname }</p>
 		</div>
 		<!--이미지 영역-->
 		<div class="imgarea">
-			<img style="width: 600px; height: 600px;"src="https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2FMjAyMDA4MDVfMjY2%2FMDAxNTk2NTY3NDEwNzA4.fW0LNc9ezTC45UeZP4C72irFTFC23cB7YklNQdu1G-Ig.uUzznBuV_lL2adb0KTMAwzWFN6n0d0HE__fS_ihBmpog.JPEG%2FexternalFile.jpg&type=sc960_832">
+			<img style="width: 600px; height: 600px;"src="${ b.changeName }">
 		</div>
 
 		
-		<p class="time">남은 시간 : ${ b.remaindTime }</p>
+		<p class="time"></p>
 		<p class="genre">${ b.genre }</p>
 		<p class="title">"${ b.title }"</p>
 		<p class="bookWriter">${ b.bookWriter }</p>
@@ -131,8 +131,54 @@
 			</div>
 		</form>
 
-
+		<c:if test="${ loginUser.userNo ==  b.userNo}">
+			<button onclick="deleteBtn();" >삭제하기</button>
+		</c:if>
 	</div>
+	
+	
+	<script>
+		
+		$(function(){
+			closeCount();
+			setInterval(closeCount, 500);
+		})
+		
+		function closeCount(){
+			var end = new Date('${ b.closeDate }');
+			var now = new Date(); 
+			
+			var remaindTime = end - now;
+			
+			var day = Math.floor(remaindTime / (1000*60*60*24));
+		    var hour = Math.floor((remaindTime / (1000*60*60)) % 24);
+		    var min = Math.floor((remaindTime / (1000*60)) % 60);
+		    var sec = Math.floor(remaindTime / 1000 % 60);
+			
+		    if(sec < 10){
+		    	sec = '0' + sec;
+		    }
+		    if(min < 10){
+		    	min = '0' + min;
+		    }
+		    if(hour < 10){
+		    	hour = '0' + hour;
+		    }
+		    if(remaindTime >= 0){
+		    	$('.time').text(day +'일 ' + hour + ':' + min + ':' + sec);
+		    } else {
+		    	$('.time').text('응모 시간 종료');
+		    }
+		}
+		
+		function deleteBtn(){
+			console.log(${b.boardNo})
+			if(confirm('삭제하시겠습니까?')){
+				location.href='delete.ac?bno=' + ${b.boardNo};
+			}
+		}
+	
+	</script>
 	
 	
 

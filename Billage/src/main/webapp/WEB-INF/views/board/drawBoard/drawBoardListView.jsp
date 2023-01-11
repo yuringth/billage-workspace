@@ -95,10 +95,11 @@
 
 
 
-		<div class="align-left-outer">
+		<div class="align-left-outer" id="contentArea">
 	        <c:forEach items="${ list }" var="b">
-		        <div class="one-content">
-		        	<input type="hidden" value="${ b.boardNo }" class="boardNo">
+	        	<input type="hidden" value="${ b.boardNo }" class="boardNo">
+		        <div class="one-content" value="b">
+		        	<input type="hidden" value="${ b.closeDate }" class="closeDate">
 		            <div class="img-area">
 		                <img src="${ b.changeName }">
 		            </div>
@@ -106,7 +107,7 @@
 		            	<!-- <p class="genre">${ b.genre }</p> -->
 		                <p class="title-text">${ b.title }</p>
 		                <p class="textsize">응모 가격 : ${ b.tryPoint }P</p>
-		                <p class="textsize">남은 시간 : ${b.remaindTime }</p>
+		                <p class="textsize time"></p>
 		                <p class="countnum">조회 : ${ b.count }</p>
 		            </div>
 		        </div>
@@ -118,12 +119,54 @@
     <jsp:include page="../../common/footer.jsp"/>
     
     <script>
+    
     	$(function(){
     		$('.one-content').click(function(){
     			location.href='detail.dr?bno='+ $('.boardNo').val();
     		})	
+    		closeCount();
+			setInterval(closeCount, 500);
     	})
+    	
+    	
+    	function closeCount(){
+    		$('.one-content').each(function(){
+    			
+    			var endTime = $(this).find('.closeDate').val();
+    			var end = new Date(endTime);
+				var now = new Date(); 
+				
+				var remaindTime = end - now;
+				
+				var day = Math.floor(remaindTime / (1000*60*60*24));
+			    var hour = Math.floor((remaindTime / (1000*60*60)) % 24);
+			    var min = Math.floor((remaindTime / (1000*60)) % 60);
+			    var sec = Math.floor(remaindTime / 1000 % 60);
+				
+			    if(sec < 10){
+			    	sec = '0' + sec;
+			    }
+			    if(min < 10){
+			    	min = '0' + min;
+			    }
+			    if(hour < 10){
+			    	hour = '0' + hour;
+			    }
+			    if(remaindTime >= 0){
+			    	$(this).find('.time').text('남은 시간 : ' + day +'일 ' + hour + ':' + min + ':' + sec);
+			    } else {
+			    	$(this).find('.time').text('응모 시간 종료');
+			    }
+    			
+    			
+    		});
+    	}
+    	
     </script>
+    
+    
+
+   
 
 </body>
 </html>

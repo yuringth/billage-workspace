@@ -157,18 +157,33 @@ public interface BoardService {
 	ArrayList<UsedBoard> selectTopBoard();
 	
 	
+	
+	
 	// 리뷰게시판 => book테이블에서 책제목으로 isbn 문자열 select하기
 	Book selectIsbn(String title);
+	
+	
+	// 리뷰 게시글의 총 개수 조회
+	int selectListCount();
+	// 리뷰 게시글 리스트 조회
+	ArrayList<ReviewBoard> reviewBoardList(PageInfo pi);
+	
 	
 	
 	
 	// 리뷰게시판 작성 (insert) 
 	int insertReviewBoard(ReviewBoard b);
 	
+	
+	
 	// 리뷰게시글 조회수 증가 (update)
-	int increaseReviewCount(int boardNo);
+	int increaseReviewCount(int reviewNo);
+	
 	// 리뷰게시판 상세 조회 (select)
-	ReviewBoard selectReviewBoard(int boardNo);
+	ReviewBoard selectReviewBoard(int reviewNo);
+	
+	
+	
 	
 	// 리뷰게시판 삭제 (update)
 	int deleteReviewBoard(int boardNo);

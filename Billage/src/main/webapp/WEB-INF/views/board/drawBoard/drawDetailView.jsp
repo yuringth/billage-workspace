@@ -116,10 +116,53 @@
 			</button>
 		</form>
 
-
-	<button onclick="location.href='delete.dr'">삭제하기</button>
+		<c:if test="${ loginUser.userNo ==  b.userNo}">
+			<button onclick="deleteBtn();" >삭제하기</button>
+		</c:if>
 	</div>
 	
+	
+	<script>
+		$(function(){
+			closeCount();
+			setInterval(closeCount, 500);
+		})
+		
+		function closeCount(){
+			var end = new Date('${ b.closeDate }');
+			var now = new Date(); 
+			
+			var remaindTime = end - now;
+			
+			var day = Math.floor(remaindTime / (1000*60*60*24));
+		    var hour = Math.floor((remaindTime / (1000*60*60)) % 24);
+		    var min = Math.floor((remaindTime / (1000*60)) % 60);
+		    var sec = Math.floor(remaindTime / 1000 % 60);
+			
+		    if(sec < 10){
+		    	sec = '0' + sec;
+		    }
+		    if(min < 10){
+		    	min = '0' + min;
+		    }
+		    if(hour < 10){
+		    	hour = '0' + hour;
+		    }
+		    if(remaindTime >= 0){
+		    	$('.time').text(day +'일 ' + hour + ':' + min + ':' + sec + ':');
+		    } else {
+		    	$('.time').text('응모 시간 종료');
+		    }
+		}
+	
+		function deleteBtn(){
+			if(confirm('삭제하시겠습니까?')){
+				location.href='delete.dr?bno=${b.boardNo}';
+			}
+		}
+	
+	
+	</script>
 	
 
 	<jsp:include page="../../common/footer.jsp"/>

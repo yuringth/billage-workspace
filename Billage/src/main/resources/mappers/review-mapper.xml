@@ -16,6 +16,7 @@
 		<result column="CREATE_DATE"	property="createDate" />
 		<result column="COUNT"		    property="count" />
 		<result column="REVIEW_STATUS"	property="reviewStatus" />
+		<result column="BOOK_TITLE" 	property="bookTitle" />
 		<result column="BOOK_AUTHOR"	property="bookAuthor" />
 		<result column="BOOK_GENRE"		property="bookGenre" />
 		<result column="BOOK_IMAG"		property="bookImag" />
@@ -41,8 +42,40 @@
 	</select>
 	
 	
+	<!-- 리뷰 게시글의 총 개수 조회(모든 행 조회) -->
+	<select id="selectListCount" resultType="_int">
+		select
+		       count(*)
+		  from
+		       review
+		 where
+		       review_status = 'N'  
+	</select>
+	
+	<!-- 게시글 리스트 조회 쿼리문 -->
+	<select id="selectList" resultMap="reviewResultSet">
+		select
+		        review_no
+		       ,user_no
+		       ,review_star
+		       ,book_imag
+		       ,book_title
+		       ,review_content
+		       ,count
+		       ,to_char(create_date, 'YYYY-MM-DD') as "create_date"
+		  from
+		       review
+		  join
+		       member using(user_no)
+		 where
+		       review_status = 'N'
+		 order
+		    by
+		      review_no desc
+	</select>
+	
+	
 	<!-- 글작성 쿼리문 -->
-
 	<insert id="insertReviewBoard" parameterType="review">
 	INSERT 
 	  INTO 
@@ -50,10 +83,8 @@
 	       (
 	        REVIEW_NO
 	       ,USER_NO
-	       <!-- ,REVIEW_STAR -->
+	       ,REVIEW_STAR
 	       ,REVIEW_CONTENT
-	       <!-- ,CREATE_DATE -->
-	       <!-- ,COUNT -->
 	       ,REVIEW_STATUS
 	       ,BOOK_TITLE
 	       ,BOOK_IMAG
@@ -63,16 +94,49 @@
 	       (
 	        SEQ_RNO.NEXTVAL
 	       ,#{userNo}
-	      <!--  ,#{reviewStar} -->
+	       ,#{reviewStar}
 	       ,#{reviewContent}
-	       <!-- ,SYSDATE -->
-	       <!-- ,default -->
 	       ,'N'
 	       ,#{bookTitle}
-	       ,{bookImg} 
+	       ,#{bookImag} 
 	       ,10
 	       )
 	</insert>
+	
+	
+	<!-- 글 조회시, 조회수 증가 쿼리문 -->
+	<update id="increaseReviewCount" parameterType="_int">
+		update
+		       review
+		   set
+		       count = count + 1
+		 where
+		       review_no = #{ reviewNo }
+		   and
+		       review_status = 'N'
+	</update>
+		
+	
+	<!--  리뷰게시판. 조회 성공 시 => db에서 데이터를 가져와야한다. -->
+	<select id="selectReviewBoard" resultType="review" resultMap="reviewResultSet">
+		select
+			    board_no
+		       ,board_title
+		       ,board_writer
+		       ,board_content
+		       ,origin_name
+		       ,change_name
+		       ,count 
+		       ,to_char(create_date, 'YYYY-MM-DD') as "CREATE_DATE"
+		  from
+		       board
+		 where
+		 	   status = 'Y'
+		   and
+		       board_no = #{boardNo}
+	</select>	
+	
+	
 	
 	
 	
