@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bi.billage.board.model.service.BoardService;
 import com.bi.billage.board.model.vo.Novel;
+import com.bi.billage.board.model.vo.Serial;
 import com.bi.billage.board.model.vo.SerialRequest;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.common.template.Pagination;
@@ -57,14 +59,32 @@ public class BoardController {
 		return mv;
 	}
 	
-	// 연재 작성 화면
+	// 연재 등록 화면
 	@RequestMapping("enrollForm.se")
-	public String serialEnroll() {
+	public String serialEnroll(int novelNo, Model model) {
+		model.addAttribute("novelNo", novelNo);
+		//System.out.println(nno);
+		//System.out.println(novel);
+		//System.out.println(model);
 		return "board/serialBoard/serialEnrollForm";
 	}
 	
-	// 연재 신청 메소드
+	// 연재 작성 메소드
 	@RequestMapping("insert.se")
+	public String insertSerial(Serial se, int novelNo, HttpServletRequest request, HttpSession session, Model model) {
+		System.out.println(se);
+		if(boardService.insertSerial(se, novelNo) > 0) { // 성공 => 이전화면으로
+			session.setAttribute("alertMsg", "등록 완료");
+			return "redirect:" + request.getHeader("Referer");
+		} else {
+			model.addAttribute("erroMsg", "등록 실패");
+			return "common/errorPage";
+		}
+		
+	}
+	
+	// 연재 신청 메소드
+	@RequestMapping("insert.sr")
 	public String insertSerialRequest(SerialRequest sr, MultipartFile upfile, HttpSession session, Model model) {
 			
 		if(!upfile.getOriginalFilename().equals("")) { 

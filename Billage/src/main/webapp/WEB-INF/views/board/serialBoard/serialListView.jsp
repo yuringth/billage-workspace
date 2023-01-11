@@ -33,14 +33,19 @@
         </div>
             <br>
             <!-- 로그인 후 작가본인일 경우만 보여지는 글쓰기 버튼 -->
-            <c:if test="${ loginUser eq null }">
-            <a class="btn btn-secondary" style="float:right;" href="enrollForm.se">연재하기</a>
-            </c:if>
+            <%-- <c:if test="${ loginUser eq null }"> --%>
+            <c:forEach items="${ list }" var="s" begin="1" end="1">
+            <form action="enrollForm.se" method="post">
+            <input type="hidden" class="nno" name="novelNo" value="${ s.novelNo }">
+            <input type="submit" class="btn btn-secondary" style="float:right;" value="연재하기">
+            </form>
+            </c:forEach>
+            <%-- </c:if> --%>
             <!-- 로그인 후 독자일 경우만 보여지는 버튼 -->
-            <c:if test="${ loginUser eq null }">
-            <a class="btn btn-secondary" style="float:right;" href="enrollForm.se">작품 추천</a>
-            <a class="btn btn-secondary" style="float:right;" href="enrollForm.se">작품 후원</a>
-            </c:if>
+            <%-- <c:if test="${ loginUser eq null }"> --%>
+            <a class="btn btn-secondary" style="float:right;">작품 추천</a>
+            <a class="btn btn-secondary" style="float:right;">작품 후원</a>
+            <%-- </c:if> --%>
             <br><br>
             <table id="boardList" class="table table-hover" align="center">
                 <thead>
@@ -75,6 +80,12 @@
             			location.href = 'detail.se?nno=' + $(this).children('.nno').val() + '&sno=' + $(this).children('.sno').text();
             		})
             	})
+            	
+/*             	$(function() {
+            		$('#write').click(function() {
+            			location.href =  'enrollForm.se?nno=' + $(this).children('.nno').val();
+            		})
+            	}) */
             
             </script>
        
