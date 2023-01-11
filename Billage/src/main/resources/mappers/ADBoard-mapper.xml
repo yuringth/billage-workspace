@@ -50,7 +50,7 @@
 		  		DRAW_BOARD
 		  		(
 		  		DRAW_NO
-		  		,TITLE
+		  		,TITLE${
 		  		,USER_NO
 		  		,BOOK_WRITER
 		  		,GENRE

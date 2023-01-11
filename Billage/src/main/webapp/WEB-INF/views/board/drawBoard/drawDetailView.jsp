@@ -139,13 +139,13 @@
 		    var sec = Math.floor(remaindTime / 1000 % 60);
 			
 		    if(sec < 10){
-		    	sec = sec + '0';
+		    	sec = '0' + sec;
 		    }
 		    if(min < 10){
-		    	min = min + '0';
+		    	min = '0' + min;
 		    }
 		    if(hour < 10){
-		    	hour = hour + '0';
+		    	hour = '0' + hour;
 		    }
 		    if(remaindTime >= 0){
 		    	$('.time').text(day +'일 ' + hour + ':' + min + ':' + sec + ':');

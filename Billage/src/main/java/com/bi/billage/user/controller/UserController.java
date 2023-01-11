@@ -244,8 +244,11 @@ public class UserController {
 		}
 	}
 	
-	
-	
+	// 회원탈퇴폼으로 이동
+	@RequestMapping("userDeleteForm.me")
+	public String userDeleteForm() {
+		return "user/userDeleteForm";
+	}
 	
 	
 	
