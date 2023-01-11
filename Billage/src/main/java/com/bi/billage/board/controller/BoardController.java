@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bi.billage.board.model.service.BoardService;
+import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.SerialRequest;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.common.template.Pagination;
@@ -81,31 +82,52 @@ public class BoardController {
 				return "common/errorPage";
 			}
 		}
-		
-		public String saveFile(MultipartFile upfile, HttpSession session) { // 실제 넘어온 파일의 이름을 변경해서 서버에 업로드
-			
+	
+	// 작품 등록 메소드
+	@RequestMapping("insert.nv")
+	public String insertNover(Novel n, MultipartFile upfile, HttpSession session, Model model) {
+	
+		if(!upfile.getOriginalFilename().equals("")) { 
+					
+					
+				n.setOriginName(upfile.getOriginalFilename()); // 원본명
+				n.setChangeName("resources/uploadFiles/" + saveFile(upfile, session));
+			}
+				
+			if(boardService.insertNovel(n) > 0) { // 성공 => 메인화면으로
+				session.setAttribute("alertMsg", "연재 신청 완료");
+				return "main"; //
+			} else {
+				model.addAttribute("errorMsg", "작성 실패");
+				return "common/errorPage";
+			}
+		}
+	
+	// 첨부파일 메소드
+	public String saveFile(MultipartFile upfile, HttpSession session) { // 실제 넘어온 파일의 이름을 변경해서 서버에 업로드
+				
 			String originName = upfile.getOriginalFilename();
-			
+				
 			// 년월일시분초
 			String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 			// 12321(5자리 랜덤값)
 			int ranNum = (int)(Math.random() * 90000 + 10000);
 			// 확장자
 			String ext = originName.substring(originName.lastIndexOf("."));
-			
+				
 			String changeName = currentTime + ranNum + ext;
-			
+				
 			// 업로드 시키고자하는 폴더의 물리적인 경로
 			String savePath = session.getServletContext().getRealPath("/resources/uploadFiles/");
-			
+				
 			try {
 				upfile.transferTo(new File(savePath + changeName));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
+				
 			return changeName;
-			
+				
 		}
 	
 	// 광진영역 끝

@@ -18,6 +18,7 @@ public class FollowController {
 	@Autowired
 	private FollowService followService;
 	
+	
 	@RequestMapping("selectFollowing.fo")
 	public ModelAndView selectFollowingList(int uno, ModelAndView mv) {
 		
@@ -31,11 +32,11 @@ public class FollowController {
 	@RequestMapping("selectFollower.fo")
 	public ModelAndView selectFollowerList(int uno, ModelAndView mv) {
 		
-		ArrayList<User> followerList = followService.selectFollowerList(uno);
+		ArrayList<User> followerList1 = followService.selectFollowerList1(uno);
 		
-		ArrayList<User> followingList = followService.selectFollowingList(uno);
+		ArrayList<User> followerList2 = followService.selectFollowerList2(uno);
 		
-		mv.addObject("followerList",followerList).addObject("followingList", followingList).setViewName("follow/followerListView");
+		mv.addObject("followerList1",followerList1).addObject("followerList2", followerList2).setViewName("follow/followerListView");
 		
 		return mv;
 	}

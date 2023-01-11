@@ -24,7 +24,7 @@
 		<result column="GROUP_LOCATION" property="groupLocation" />
 		<result column="GROUP_STATUS" property="groupStatus" />
 		<result column="GROUP_IMG" property="groupImg" />
-	
+		<result column="newCount" property="newCount" />
 	</resultMap>
 	
 	<select id="selectList" resultMap="groupResultSet">
@@ -38,6 +38,11 @@
 			  ,GROUP_DAY
 			  ,GROUP_LOCATION
 			  ,GROUP_IMG
+              ,CASE WHEN
+                      (select to_date(SYSDATE, 'YY-MM-DD') from dual) - (select to_date(group_createdate, 'YY-MM-DD') from dual) <![CDATA[ > ]]> 30 THEN 0
+                   WHEN
+                      (select to_date(SYSDATE, 'YY-MM-DD') from dual) - (select to_date(group_createdate, 'YY-MM-DD') from dual) <![CDATA[ < ]]> 30 THEN 1
+                   END AS "newCount"
 	  	  FROM
 	  	  	   "GROUP"
   	  	 WHERE

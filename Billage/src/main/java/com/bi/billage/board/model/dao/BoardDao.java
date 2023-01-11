@@ -326,6 +326,11 @@ public class BoardDao {
 	public int insertSerialRequest(SqlSessionTemplate sqlSession, SerialRequest sr) {
 		return sqlSession.insert("serialMapper.insertSerialRequest", sr);
 	}
+
+
+	public int insertNovel(SqlSessionTemplate sqlSession, Novel n) {
+		return sqlSession.insert("novelMapper.insertNovel", n);
+	}
 	
 	// 광진구역 끝
 
