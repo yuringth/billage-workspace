@@ -88,4 +88,14 @@ public class UserDao {
 
 
 	
+	// 닉네임 중복체크
+	public int nicknameCheck(SqlSessionTemplate sqlSession, String checkNickname) {
+		return sqlSession.selectOne("userMapper.nicknameCheck", checkNickname);
+	}
+	
+	// 회원정보수정
+	public int updateUser(SqlSessionTemplate sqlSession, User u) {
+		return sqlSession.update("userMapper.updateUser", u);
+	}
+	
 }

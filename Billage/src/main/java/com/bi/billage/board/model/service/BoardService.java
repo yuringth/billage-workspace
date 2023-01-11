@@ -41,6 +41,9 @@ public interface BoardService {
 	// 연재신청 서비스(insert)
 	int insertSerialRequest(SerialRequest sr);
 	
+	// 작품등록 서비스(insert)
+	int insertNovel(Novel n);
+	
 	//광진 구역끝
 	
 	//휘수 구역
@@ -149,8 +152,17 @@ public interface BoardService {
 	ArrayList<UsedBoard> selectTopBoard();
 	
 	
+	
+	
 	// 리뷰게시판 => book테이블에서 책제목으로 isbn 문자열 select하기
 	Book selectIsbn(String title);
+	
+	
+	// 리뷰 게시글의 총 개수 조회
+	int selectListCount();
+	// 리뷰 게시글 리스트 조회
+	ArrayList<ReviewBoard> selectList(PageInfo pi);
+	
 	
 	
 	
@@ -167,9 +179,8 @@ public interface BoardService {
 	
 	// 리뷰게시글 수정 서비스(update)
 	int updateReviewBoard(UsedBoard b);
-	
-	
-	
+
+
 	
 	// 댓글 나중에......
 	// 댓글 리스트 조회서비스(Ajax)(select)

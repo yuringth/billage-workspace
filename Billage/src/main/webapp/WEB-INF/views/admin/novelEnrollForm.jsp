@@ -106,58 +106,71 @@ textarea:focus {
 }
 </style>
 <body>
-	<jsp:include page="../common/header.jsp"/>
-<form action="#">
-
-  <header align="center">
-    <h2>작품 등록하기</h2>
-    <div>환영합니다 관리자님. 연재 승인된 작가님의 소중한 작품을 등록해주세요!</div>
-  </header>
-  <div>
-    <label class="desc">
-    	유료/무료
-    </label>
-    <div>
-    <select id="inqType" name="inqType" class="inqType" tabindex="11"> 
-      <option value="First Choice">First Choice</option>
-      <option value="Second Choice">Second Choice</option>
-      <option value="Third Choice">Third Choice</option>
-    </select>
-    </div>
-  </div>
-  <div>
-    <label class="desc">
-      	작가명
-    </label>
-    <div>
-      <input name="Field1" type="text" class="field text fn" value="" size="8" tabindex="1" placeholder="작가명을 입력하세요.">
-    </div>
-  </div>
-  <div>
-    <label class="desc">
-      	작품명
-    </label>
-    <div>
-      <input name="Field1" type="text" class="field text fn" value="" size="8" tabindex="1" placeholder="제목을 입력하세요.">
-    </div>
-  </div>
-    <br>
-  <div>
-    <label class="desc">
-      	작품 설명
-    </label>
-    <div>
-      <textarea name="Field2" spellcheck="true" rows="10" cols="50" tabindex="4" style="resize:none"></textarea>
-    </div>
-  </div>
-  <div>
-	<div>
-  		<input id="saveForm" name="saveForm" type="submit" value="등록" class="">
-    </div>
-</div>
-  
-</form>
-<jsp:include page="../common/footer.jsp"/>
+		<jsp:include page="../common/header.jsp"/>
+	<form id="enrollForm" method="post" action="insert.nv" enctype="multipart/form-data">
+	  <header align="center">
+	    <h2>작품 등록하기</h2>
+	    <div>환영합니다 관리자님. 연재 승인된 작가님의 소중한 작품을 등록해주세요!</div>
+	  </header>
+	  <div>
+	    <label for="charge">
+	    	유료/무료
+	    </label>
+	    <div>
+	    <select id="charge" name="chargeStatus" class="charge" tabindex="11"> 
+	      <option value="유료">유료</option>
+	      <option value="무료">무료</option>
+	    </select>
+	    </div>
+	  </div>
+<!-- 	  <div>
+	    <label for="nickname">
+	      	작가명
+	    </label>
+	    <div>
+	      <input name="nickname" type="text" class="field text fn" size="8" tabindex="1" placeholder="작가명(닉네임or필명)을 입력하세요." requierd>
+	    </div>
+	  </div> -->
+	  <div>
+	    <label for="userNo">
+	      	회원번호
+	    </label>
+	    <div>
+	      <input name="userNo" type="text" class="field text fn" size="8" tabindex="1" placeholder="작가의 회원번호를 입력하세요." requierd>
+	    </div>
+	  </div>
+	  <div>
+	    <label for="novelTitle">
+	      	작품명
+	    </label>
+	    <div>
+	      <input name="novelTitle" type="text" class="field text fn" value="" size="8" tabindex="1" placeholder="제목을 입력하세요." requierd>
+	    </div>
+	  </div>
+	    <br>
+	  <div>
+	    <label for="novelDisplay">
+	      	작품 설명
+	    </label>
+	    <div>
+	      <textarea name="novelDisplay" spellcheck="true" rows="10" cols="50" tabindex="4" style="resize:none" placeholder="작품에 대한 간략한 설명" requierd></textarea>
+	    </div>
+	  </div>
+	  <div>
+		<label for="upfile">
+			썸네일
+		</label>
+		<div>
+	    	<input type="file" id="upfile" class="form-control-file border" name="upfile" required>
+		</div><br>
+	    <div align="left">
+	  		<button type="submit" class="btn btn-primary">등록하기</button>
+	        <button type="reset" class="btn btn-danger">취소하기</button>
+	    </div>
+	</div>
+	  
+	</form>
+	<jsp:include page="../common/footer.jsp"/>
 
 </body>
 </html>

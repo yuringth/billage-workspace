@@ -16,7 +16,6 @@
 		<result column="novel_title"		property="novelTitle" />
 		<result column="nickname"			property="nickName" />
 		<result column="novel_display"		property="novelDisplay" />
-		<result column="novel_img"			property="novelImg" />
 	</resultMap>
 	
 	<resultMap type="serialRequest" id="serialRequestResultSet">
@@ -49,7 +48,6 @@
 				n.user_no,
 				n.novel_title,
 				n.novel_display,
-				n.novel_img,
                 (select nickname from member m where m.user_no = s.user_no) as nickName
 		from
 				serial s
@@ -76,7 +74,6 @@
 				n.user_no,
 				n.novel_title,
 				n.novel_display,
-				n.novel_img,
                 (select nickname from member m where m.user_no = s.user_no) as nickName
 		from
 				serial s
