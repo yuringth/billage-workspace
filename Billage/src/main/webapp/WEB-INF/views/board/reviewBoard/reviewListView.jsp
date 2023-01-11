@@ -136,7 +136,10 @@
 		        
 		        	<!-- 작성자/별 -->
 		            <div class="one-content-detail1">
-		            	<div class="bno">게시글번호 : ${ b.reviewNo }</div>
+		            	<input type="hidden" value="${ b.bookAuthor }">
+		            	<%-- <div>책 작가 : ${ b.bookAuthor }</div> --%>
+		            	<input class="bno" type="hidden" value="${ b.reviewNo }">
+		            	<%-- <div class="bno">게시글번호 : ${ b.reviewNo }</div> --%>
 		                <div>유저 닉네임: ${ b.userNo }</div>                                              
 		                <div class="card-footer">
 		                 	   별점 : ${ b.reviewStar } <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -219,7 +222,8 @@
 	<!-- 게시글 상세보기 :되지만 나중에 페이징처리로 이동하기 -->
 	<script>
 		function reviewDetail(){
-			location.href = 'detail.re?reviewNo=' + $(this).children('.bno').text();
+			location.href = 'detail.re?reviewNo=' + $(this).val('.bno');
+			
 		}
 	</script>
 	
