@@ -82,5 +82,20 @@ public class FollowController {
 			
 		return mv;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="delete.fo", produces="application/json; charset=UTF-8")
+	public ModelAndView deleteFollow(int userNo2, ModelAndView mv, HttpSession session) {
+		
+		int userNo = ((User)session.getAttribute("loginUser")).getUserNo();
+		
+		Follow follow = new Follow(userNo, userNo2);
+		
+		int result = followService.deleteFollow(follow);
+		
+		mv.addObject(result);
+		
+		return mv;
+	}
 
 }

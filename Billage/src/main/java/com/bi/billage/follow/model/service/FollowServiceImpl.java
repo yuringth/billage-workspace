@@ -48,4 +48,10 @@ public class FollowServiceImpl implements FollowService{
 		return followDao.insertFollow(sqlSession, follow);
 	}
 
+	@Override
+	public int deleteFollow(Follow follow) {
+		
+		return followDao.deleteFollow(sqlSession, follow);
+	}
+
 }
