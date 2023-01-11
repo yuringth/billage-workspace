@@ -30,9 +30,20 @@ public class GroupServiceImpl implements GroupService {
 	}
 		
 	@Override
+	public int increaseCount(int groupNo) {
+		return groupDao.increaseCount(sqlSession, groupNo);
+	}
+	
+	@Override
+	public Group selectDetailGroup(int groupNo) {
+		return groupDao.selectDetailGroup(sqlSession, groupNo);
+	}
+	
+	@Override
 	public int insertGroup(Group group) {
 		return groupDao.insertGroup(sqlSession, group);
 	}
+
 
 
 

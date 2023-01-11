@@ -110,6 +110,7 @@
 		<div id="list-area">
 			<c:forEach items="${ groupList }" var="g">
 			<div id="thum-area" class="thumbnail" align="center">
+				<input type="hidden" name="groupNo" value="${ g.groupNo }" />
 				<div id="new-group" value="${ g.newCount }">new</div>
 				<img src="${ g.groupImg }" alt="">
 				<h3>${ g.groupTitle }</h3> 
@@ -167,8 +168,10 @@
 				});
 				
 				
-				$('#list-area > .thumbnail').click(function(){
-					location.href = "detail.gr";
+				$('#list-area > #thum-area').click(function(){
+					console.log($(this).children().eq());
+					location.href = "detail.gr?groupNo=" + $(this).children().eq(0).val()
+											 +"&newCount=" + $(this).find('#new-group').attr('value');
 					//글번호 들고 가야 돼
 				});
 			});
@@ -178,20 +181,7 @@
 				
 				
 				
-				/*
-				안녕?? 나는 팡숀이야 ~
-						
-						팡숀은 뜻이 뭐야 ~
-						
-						팡숀팡숀팡숀~~~
-						
-						이게 바로 팡숀이야 ~ 너무 즐거워버려 ~
-						
-						팡숀 팡숀 ~
-						
-						팡숀 ~ 디스가 뭐야?? 디스 디스가 담배야 담배 ~
-								
-								디스플러스도있어 아주 팡숀이야 ~ */
+
 	
 		</script>
 		

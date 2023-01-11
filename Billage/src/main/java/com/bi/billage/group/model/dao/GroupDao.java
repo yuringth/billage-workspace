@@ -22,6 +22,13 @@ public class GroupDao {
 		return (ArrayList)sqlSession.selectList("groupMapper.selectList", null, rowBounds);
 	}
 	
+	public int increaseCount(SqlSessionTemplate sqlSession, int groupNo) {
+		return sqlSession.update("groupMapper.increaseCount", groupNo);
+	}
+	
+	public Group selectDetailGroup(SqlSessionTemplate sqlSession, int groupNo) {
+		return sqlSession.selectOne("groupMapper.selectDetailGroup", groupNo);
+	}
 	
 	public int insertGroup(SqlSessionTemplate sqlSession, Group group) {
 		return sqlSession.insert("groupMapper.insertGroup", group);
