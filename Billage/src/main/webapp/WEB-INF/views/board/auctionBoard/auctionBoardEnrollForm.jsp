@@ -67,8 +67,8 @@
 
     <div class="outer">
 
-        <form action="insert.ac">
-
+        <form action="insert.ac" method="post" action="insert.bo" enctype="multipart/form-data">
+			<input type="hidden" value="${ loginUser.userNo }" name="userNo">
             <div class="longdiv align-left">
                 <div class="textdiv">
                     <p>제목:</p>
@@ -126,7 +126,7 @@
                         <p>시작가:</p>
                     </div>
                     <div class="inputdiv">
-                        <input type="number" class="form-control" id="startPrice" value="100" name="startPrice">
+                        <input type="number" class="form-control" id="startPrice" value="100" name="startPrice" required>
                     </div>
                 </div>
                 <div class="shortdiv align-left">
@@ -134,7 +134,7 @@
                         <p>입찰단위:</p>
                     </div>
                     <div class="inputdiv">
-                        <input type="number" class="form-control" id="bidPrice" value="100" name="bidPrice">
+                        <input type="number" class="form-control" id="bidPrice" value="100" name="bidPrice" required> 
                     </div>
                 </div>
             </div>
@@ -143,7 +143,16 @@
             <div style="width : 790px;">
                 <textarea class="form-control" rows="15" id="content" name="content" style="resize: none;" placeholder="내용을 입력하세요"></textarea>
             </div>
-
+			
+			 <div class="longdiv align-left">
+                <div class="textdiv">
+                    <p>첨부파일:</p>
+                </div>
+                <div class="titlediv">
+                    <input type="file"  id=upFile name="upFile" required style="padding-top : 6px;">
+                </div>
+            </div>
+			
             <div class="longdiv align-left">
                 <button class="btnleft btn btn-dark">
                     <p class="btntitle">등록</p>
