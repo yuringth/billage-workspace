@@ -207,11 +207,11 @@
 		   SET
 		   		COUNT = COUNT + 1
 		 WHERE
-		 		DRAW_NO = #{boardNo}
+		 		AUCTION_NO = #{boardNo}
 	</update>
 	
 	<!-- 경매글 상세조회 -->
-	<select id="selectAuctionBoard">
+	<select id="selectAuctionBoard" resultMap="auctionBoardResultSet">
 		SELECT
 				AUCTION_NO
 				,NICKNAME
@@ -232,7 +232,7 @@
 		  JOIN
 		  		MEMBER M ON (A.USER_NO = M.USER_NO)
 		 WHERE
-		 		DRAW_NO = #{boardNO} 
+		 		AUCTION_NO = #{boardNO} 
 	</select>
 	
 	<!-- 경매글 삭제 -->
