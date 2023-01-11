@@ -95,7 +95,7 @@
 		</div>
 		<!--이미지 영역-->
 		<div class="imgarea">
-			<img style="width: 600px; height: 600px;"src="https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2FMjAyMDA4MDVfMjY2%2FMDAxNTk2NTY3NDEwNzA4.fW0LNc9ezTC45UeZP4C72irFTFC23cB7YklNQdu1G-Ig.uUzznBuV_lL2adb0KTMAwzWFN6n0d0HE__fS_ihBmpog.JPEG%2FexternalFile.jpg&type=sc960_832">
+			<img style="width: 600px; height: 600px;"src="${ b.changeName }">
 		</div>
 
 		
@@ -153,20 +153,21 @@
 	    var sec = Math.floor(remaindTime / 1000 % 60);
 		
 	    if(sec < 10){
-	    	sec = sec + '0';
+	    	sec = '0' + sec;
 	    }
 	    if(min < 10){
-	    	min = min + '0';
+	    	min = '0' + min;
 	    }
 	    if(hour < 10){
-	    	hour = hour + '0';
+	    	hour = '0' + hour;
 	    }
 	    if(remaindTime >= 0){
-	    	$('.time').text(day +'일' + hour + ':' + min + ':' + sec + ':');
+	    	$('.time').text(day +'일 ' + hour + ':' + min + ':' + sec);
 	    } else {
 	    	$('.time').text('응모 시간 종료');
 	    }
 	}
+	
 	</script>
 	
 	
