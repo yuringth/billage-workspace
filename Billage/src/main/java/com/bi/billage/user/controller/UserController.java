@@ -183,4 +183,14 @@ public class UserController {
 	public String idCheck(String checkId) {
 		return userService.idCheck(checkId) > 0 ? "NNNNN" : "NNNNY";
 	}
+	
+	// 마이페이지 개인정보
+	@RequestMapping("myInfo.me")
+	public String myInfo() {
+		return "user/myInfo";
+	}
+	
+	
+	
+	
 }

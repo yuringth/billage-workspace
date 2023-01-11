@@ -26,7 +26,7 @@ public class SaveFile {
 			// 확장자
 			String ext = originName.substring(originName.lastIndexOf(".")); // 마지막 .을 기준으로 뒤에만 자르겠다
 			
-			String changeName = currentTime + ranNum + ext; //변경된 파일 이름
+			String changeName = "resources/uploadFiles/" + currentTime + ranNum + ext; //변경된 파일 이름
 			
 			// 업로드시키고자하는 폴더의 물리적인 경로 알아내기
 			String savePath = session.getServletContext().getRealPath("resources/uploadFiles/");

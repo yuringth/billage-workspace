@@ -19,7 +19,7 @@ public class FollowController {
 	private FollowService followService;
 	
 	@RequestMapping("selectFollowing.fo")
-	public ModelAndView selectFollowingList(HttpSession session, int uno, ModelAndView mv) {
+	public ModelAndView selectFollowingList(int uno, ModelAndView mv) {
 		
 		ArrayList<User> followingList = followService.selectFollowingList(uno);
 		
@@ -29,9 +29,15 @@ public class FollowController {
 	}
 	
 	@RequestMapping("selectFollower.fo")
-	public String selectFollowerList() {
+	public ModelAndView selectFollowerList(int uno, ModelAndView mv) {
 		
-		return "follow/followerListView";
+		ArrayList<User> followerList = followService.selectFollowerList(uno);
+		
+		ArrayList<User> followingList = followService.selectFollowingList(uno);
+		
+		mv.addObject("followerList",followerList).addObject("followingList", followingList).setViewName("follow/followerListView");
+		
+		return mv;
 	}
 	
 	//로그인한 유저의 팔로우 프로필 
