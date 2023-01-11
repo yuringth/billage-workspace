@@ -1,6 +1,7 @@
 package com.bi.billage.group.controller;
 
 import java.io.BufferedReader;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -98,7 +99,7 @@ public class GroupController {
 	// 모임등록 하면 값 들어오는 메소드 --------------------------------- 기능 구현 필요함 
 	@RequestMapping("create.gr")
 	public String insertGroup(Model model, Group group, MultipartFile upfile, HttpSession session) {
-		System.out.println(group);
+		//System.out.println(group);
 		
 		if(!upfile.getOriginalFilename().equals("")) {
 			String changeName = SaveFile.getSaveFile(upfile, session);

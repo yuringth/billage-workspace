@@ -41,8 +41,44 @@
 	</select>
 	
 	
+	<!-- 리뷰 게시글의 총 개수 조회(모든 행 조회) -->
+	<select id="selectListCount" resultType="_int">
+		select
+		       count(*)
+		  from
+		       review
+		 where
+		       review_status = 'N'  
+	</select>
+	
+	<!-- 게시글 리스트 조회 쿼리문 -->
+	<select id="selectList" resultMap="reviewResultSet">
+		select
+		        review_no
+		       ,review_star
+		       ,book_imag
+		       ,book_title
+		       ,review_content
+		       ,count
+		       ,to_char(create_date, 'YYYY-MM-DD') as "create_date"
+		     
+		  from
+		       review
+		 where
+		       review_status = 'N'
+		 order
+		    by
+		      review_no desc
+	</select>
+	
+	
+	
+	
+	
+		
+	
+	
 	<!-- 글작성 쿼리문 -->
-
 	<insert id="insertReviewBoard" parameterType="review">
 	INSERT 
 	  INTO 
@@ -50,26 +86,22 @@
 	       (
 	        REVIEW_NO
 	       ,USER_NO
-	       <!-- ,REVIEW_STAR -->
+	       ,REVIEW_STAR
 	       ,REVIEW_CONTENT
-	       <!-- ,CREATE_DATE -->
-	       <!-- ,COUNT -->
 	       ,REVIEW_STATUS
 	       ,BOOK_TITLE
-	       <!-- ,BOOK_IMAG -->
+	       ,BOOK_IMAG
 	       ,BOOK_POINT
 	       )
 	values
 	       (
 	        SEQ_RNO.NEXTVAL
 	       ,#{userNo}
-	      <!--  ,#{reviewStar} -->
+	       ,#{reviewStar}
 	       ,#{reviewContent}
-	       <!-- ,SYSDATE -->
-	       <!-- ,default -->
 	       ,'N'
 	       ,#{bookTitle}
-	       <!-- ,{bookImg} -->
+	       ,#{bookImag} 
 	       ,10
 	       )
 	</insert>

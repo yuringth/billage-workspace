@@ -159,6 +159,20 @@
     	width:75px;
     }    
     
+    
+    
+    /* 별관련 스타일 */
+    #star-area img{
+        margin: 0 25px;
+    }
+
+    #star-area label{
+        display: inline-block;
+    }
+
+    #star-area input[name=reviewStar] {
+        display: none;
+    } 
 
 </style>
 
@@ -195,16 +209,18 @@
 		<form id="reviewEnrollForm" action="insertBoard.re" method="post" enctype="multipart/form-data">
 		
 			<!-- 작성자 식별자로 넘기기 -->
-			<input type="hidden" neme="userNo" value="#">
+			<input type="hidden" name="userNo" value="${ loginUser.userNo }">
 			
 			<!-- api에서 가져온 책 정보 -->
 			<div class="book-detail-outer">
 				<div class="book-detail-area">
 					<div class="content-photo-detail">
 						<!-- api에서 끌고 오는거니까 첨부파일로 안해도 되는게 맞겠지? <input type="file" name="upfile"> 이런식으로.. -->
-						<div id="book_imag" name="bookImag">
+						<div id="book_imag">
 						<!-- 	<img src="" id="book_src" name="bookImg"> -->
-							<input src="" type="image" id="book_src" name="bookImg"  required value="사진">
+							<input src="" type="image" id="book_src"  required value="사진"> 
+							<input type="hidden" id="bookImag" name="bookImag" value=""> 
+							
 						</div>
 					</div>
 					
@@ -228,9 +244,39 @@
 			<hr>
 	
 			<!-- 별점 : 매란언니한테 알려달라하기 -->
-			<div style="text-align:center;" name="reviewStar">별점 : ☆☆☆★ 
+			<div id="star-area" align="center" >
+               <label for="rate1">
+                   <input type="radio" name="reviewStar" value="1" id="rate1" checked>
+                   <img src="resources/images/star1.png" width="50" height="50" alt="">
+               </label>
+
+               <label for="rate2">
+                   <input type="radio" name="reviewStar" value="2" id="rate2">
+                   <img src="resources/images/star2.png" width="50" height="50" alt="">
+               </label>
+
+               <label for="rate3">
+                   <input type="radio" name="reviewStar" value="3" id="rate3">
+                   <img src="resources/images/star2.png" width="50" height="50" alt="">
+               </label>
+
+               <label for="rate4">
+                   <input type="radio" name="reviewStar" value="4" id="rate4">
+                   <img src="resources/images/star2.png" width="50" height="50" alt="">
+               </label>
+               
+               <label for="rate5">
+                   <input type="radio" name="reviewStar" value="5" id="rate5">
+                   <img src="resources/images/star2.png" width="50" height="50" alt="">
+               </label>
+            </div>
+            <!-- 별관련 끝  -->
+			
+			
+			
+<!-- 			<div style="text-align:center;" name="reviewStar">별점 : ☆☆☆★ 
 				<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-			</div>
+			</div> -->
 	
 			<br>
 	
@@ -377,15 +423,15 @@
 				 console.log($('#md_book_author').text());
 				 console.log($('#md_book_date').text());
 				 console.log($('#md_book_publisher').text());
-				 console.log($('#md_img').attr('src')); // http:// sljdgkjslkg.jpg
+				 console.log($('#md_img').attr('src')); // https://image.aladin.co.kr/product/7608/30/coversum/8994492038_1.jpg
 				 
 				 
 				 $('#book_title').val($('#md_book_title').text());
 				 $('#book_author').val($('#md_book_author').text());
 				 $('#book_publisher').val($('#md_book_publisher').text());
 				 $('#book_date').val($('#md_book_date').text());
-				 $('#book_src').attr('src', $('#md_img').attr('src'));
-				 
+				 $('#book_src').attr('src', $('#md_img').attr('src')); //https://image.aladin.co.kr/product/7608/30/coversum/8994492038_1.jpg
+				 $('#bookImag').val($('#md_img').attr('src')); //https://image.aladin.co.kr/product/7608/30/coversum/8994492038_1.jpg
 				 
 				 
 				 $('#modal-book-search').hide();
@@ -408,6 +454,22 @@
        });
    	</script>
    	
+   	
+   	<script>
+    $('input[name=reviewStar]').click(function(){
+
+        var $num = $(this).val();
+
+        $('input[name=reviewStar]').each(function(){
+
+            if($(this).val() <= $num){
+                $(this).next().attr('src','resources/images/star1.png');
+            } else {
+                $(this).next().attr('src','resources/images/star2.png');
+            }
+        })
+    });
+   	</script>
  
    	
    	

@@ -101,7 +101,7 @@
 			<c:forEach items="${ groupList }" var="g">
 			<div id="thum-area" class="thumbnail" align="center">
 			
-				<div id="new-group" value="1">new</div>
+				<div id="new-group" value="${ g.newCount }">new</div>
 				<img src="${ g.groupImg }" alt="">
 				<h3>${ g.groupTitle }</h3> 
 				<div id="thum-text-area">

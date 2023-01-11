@@ -53,6 +53,13 @@ public interface UserService {
 	
 	// id중복체크
 	int idCheck(String checkId);
+	
+	// 닉네임 중복체크
+	int nicknameCheck(String checkNickname);
+	
+	// 회원정보수정
+	int updateUser(User u);
+	
 
 
 }

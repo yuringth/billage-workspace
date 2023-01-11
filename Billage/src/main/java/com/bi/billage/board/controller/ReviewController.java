@@ -8,12 +8,16 @@ import java.net.URL;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bi.billage.board.model.service.BoardService;
 import com.bi.billage.board.model.vo.Book;
 import com.bi.billage.board.model.vo.ReviewBoard;
+import com.bi.billage.common.model.vo.PageInfo;
+import com.bi.billage.common.template.Pagination;
 
 @Controller
 public class ReviewController {
@@ -76,7 +80,20 @@ public class ReviewController {
 	
 	// 리뷰게시판 목록 조회 화면
 	@RequestMapping("list.re")
-	public String reviewBoardList() {
+	public String reviewBoardList(@RequestParam(value="cPage", defaultValue="1") int currentPage, Model model) {
+		
+		System.out.println(currentPage);
+		System.out.println(model);
+		
+		// int listCount, int currentPage, int pageLimit, int boardLimit
+		PageInfo pi = Pagination.getPageInfo(boardService.selectListCount(), currentPage, 10, 4);
+		
+		// (페이징 pi를 가지고)게시글 리스트 조회
+		// ArrayList<ReviewBoard> list = boardService.selectList(pi);
+		model.addAttribute("list", boardService.selectList(pi)); // Model은 단지 담는 용도
+		model.addAttribute("pi", pi);
+		
+		// model에 담았으니까 포워딩해주기(/WEB-INF/views/		board/reviewBoard/reviewListView	.jsp
 		return "board/reviewBoard/reviewListView";
 	}
 	
@@ -102,15 +119,17 @@ public class ReviewController {
 		return "board/reviewBoard/reviewUploadForm";
 	}
 	
-	
+	// 리뷰게시판 -> 글작성 
 	@RequestMapping("insertBoard.re")
 	public String insertReviewBoard(ReviewBoard b) {
 		
+		System.out.println(b);
 		boardService.insertReviewBoard(b);
 		
-		System.out.println(b);
 		
-		return "board/reviewBoard/reviewListView";
+		//return "board/reviewBoard/reviewListView";
+		return "redirect:list.re";
+	
 	}
 	
 	
