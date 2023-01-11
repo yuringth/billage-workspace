@@ -102,24 +102,18 @@
 				        member m
 				  where
 				         user_no in (select
-				                            f1.user_no2
+				                          user_no1
 				                        from
-				                            follow f1
-				                       where
-				                            f1.user_no1 = #{userNo}
-				                            MINUS
-						                                select
-						                                     DISTINCT(f2.user_no1)
-						                                from
-						                                    follow f1
-						                                join
-						                                    follow f2
-						                                ON
-						                                    (f1.user_no1 = f2.user_no2)
-						                                where
-						                                    f1.user_no1 = #{userNo}
-						                                and
-						                                	 f2.user_no2 = #{userNo})
+				                          follow
+				                         where
+				                         user_no2 = #{userNo}
+				                    INTERSECT
+				                            select
+				                                    user_no2
+				                                from
+				                                    follow
+				                                 where
+				                                        user_no1 = #{userNo})
 		</select>
 		
 		<!-- 나를 팔로잉한 사람들 나는 안 함 -->
@@ -142,24 +136,18 @@
 				        member m
 				  where
 				         user_no in (select
-				                            f1.user_no2
+				                          user_no1
 				                        from
-				                            follow f1
-				                       where
-				                            f1.user_no1 = #{userNo}
-				                            INTERSECT
-						                                select
-						                                     DISTINCT(f2.user_no1)
-						                                from
-						                                    follow f1
-						                                join
-						                                    follow f2
-						                                ON
-						                                    (f1.user_no1 = f2.user_no2)
-						                                where
-						                                    f1.user_no1 = #{userNo}
-						                                and
-						                                	 f2.user_no2 = #{userNo})
+				                          follow
+				                         where
+				                         user_no2 = #{userNo}
+				                    MINUS
+				                            select
+				                                    user_no2
+				                                from
+				                                    follow
+				                                 where
+				                                        user_no1 = #{userNo})
 		</select>
 		
 
