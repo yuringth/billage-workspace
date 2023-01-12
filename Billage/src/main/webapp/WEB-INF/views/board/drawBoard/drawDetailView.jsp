@@ -111,9 +111,25 @@
 		
 		<c:choose>
 			<c:when test="${ not empty loginUser }">
-				<button class="btn1 btn btn-secondary" onclick="postFormSubmit(2);">
-					${b.tryPoint}P 응모하기
-				</button>
+				<c:choose>
+					<c:when test="${ loginUser.userNo == b.userNo }">
+						<button class="btn1 btn btn-secondary" disabled">
+							작성자입니다.
+						</button>
+					</c:when>
+					<c:otherwise>
+						<c:if test="${ loginUser.point < b.tryPoint }">
+							<button class="btn1 btn btn-secondary" onclick="notEnoughtPoint();">
+									${b.tryPoint}P 응모하기
+							</button>
+						</c:if>
+						<c:if test="${ loginUser.point >= b.tryPoint }">
+							<button class="btn1 btn btn-secondary" onclick="postFormSubmit(2);">
+								${b.tryPoint}P 응모하기
+							</button>
+						</c:if>
+					</c:otherwise>
+				</c:choose>
 			</c:when>
 			<c:otherwise>
 				<button class="btn1 btn btn-secondary" onclick="notLogin();">
@@ -126,8 +142,10 @@
 			<input type="hidden" name="tryPoint" value="${b.tryPoint}">
 			<input type="hidden" name="changeName" value="${b.changeName}">
 			<input type="hidden" name="boardNo" value="${b.boardNo}">
-			
+			<!-- 로그인 한 유저번호 -->
+			<input type="hidden" name="userNo" value="${loginUser.userNo}"> 
 		</form>
+		
 		<c:if test="${ loginUser.userNo ==  b.userNo}">
 			<button onclick="postFormSubmit(1);" >삭제하기</button>
 		</c:if>
@@ -139,6 +157,7 @@
 		$(function(){
 			closeCount();
 			setInterval(closeCount, 500);
+			tryBtnChange();
 		})
 		
 	
@@ -177,12 +196,36 @@
 					$('#postForm').attr('action','delete.dr').submit();
 				}
 			}
+			if(num == 2){
+				if(confirm("${b.tryPoint}P 로 응모하시겠습니까?")){
+					$('#postForm').attr('action','draw.dr').submit();
+				}
+			}
 		}
 		
 		function notLogin(){
 			alert('로그인을 하셔야 이용 가능합니다.');
 		}
-	
+		
+		function notEnoughtPoint(){
+			confirm('포인트가 부족합니다. 충전하시겠습니까?');
+		}
+		
+		function tryBtnChange(){
+			$.ajax({
+				url : 'checkDraw.dr',
+				data : {
+					boardNo : ${b.boardNo},
+					userNo : ${loginUser.userNo}
+				},
+				success : function(result){
+					
+				}
+				
+				
+			});
+		}
+		
 	</script>
 	
 

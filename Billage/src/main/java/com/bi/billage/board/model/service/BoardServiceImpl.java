@@ -262,6 +262,23 @@ public class BoardServiceImpl implements BoardService {
 	public int insertSerial(Serial se, int novelNo) {
 		return boardDao.insertSerial(sqlSession, se, novelNo);
 	}
+	// 추첨자 등록
+	@Override
+	public int insertDrawUser(ADBoard b) {
+		return boardDao.insertDrawUser(sqlSession, b);
+	}
+
+	//추첨자 삭제
+	@Override
+	public int deleteDrawUser(ADBoard b) {
+		return boardDao.deleteDrawUser(sqlSession, b);
+	}
+	
+	//추첨 여부 조회
+	@Override
+	public int checkDraw(ADBoard b) {
+		return 0;
+	}
 
 
 	

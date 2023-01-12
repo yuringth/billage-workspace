@@ -181,16 +181,13 @@ public class BoardDao {
 		return sqlSession.update("ADBoardMapper.deleteAuctionBoard", boardNo);
 	}
 
+	public int insertDrawUser(SqlSessionTemplate sqlSession, ADBoard b) {
+		return sqlSession.insert("ADBoardMapper.insertDrawUser", b);
+	}
 
-
-
-
-
-
-
-
-
-
+	public int deleteDrawUser(SqlSessionTemplate sqlSession, ADBoard b) {
+		return sqlSession.insert("ADBoardMapper.deleteDrawUser", b);
+	}
 
 
 
@@ -351,6 +348,12 @@ public class BoardDao {
 		map.put("novelNo", novelNo);
 		return sqlSession.insert("serialMapper.insertSerial", map);
 	}
+
+
+	
+
+
+	
 
 
 
