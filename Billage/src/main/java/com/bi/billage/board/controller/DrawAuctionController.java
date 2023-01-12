@@ -62,6 +62,7 @@ public class DrawAuctionController {
 	public ModelAndView drawDetailView(int bno, ModelAndView mv) throws ParseException {
 		
 		if(boardService.drawIncreaseCount(bno) > 0) {
+			System.out.println(boardService.selectDrawBoard(bno));
 			mv.addObject("b",boardService.selectDrawBoard(bno)).setViewName("board/drawBoard/drawDetailView");
 		} else {
 			mv.addObject("errorMsg", "게시글 조회 실패").setViewName("common/errorPage");
