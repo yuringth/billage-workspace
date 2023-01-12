@@ -104,6 +104,7 @@
 		<p class="title">"${ b.title }"</p>
 		<p class="bookWriter">${ b.bookWriter }</p>
 		<div class="content" style="width : 550px">
+			<p id="prizeUser">${ b.prizeUser }</p>
 			<p>
 				${ b.content }
 			</p>
@@ -230,7 +231,7 @@
 					}
 				},
 				error : function(){
-					console.log(실패 ㅠ);
+					console.log('실패 ㅠ');
 				}
 			});
 		}
@@ -243,7 +244,9 @@
 					boardNo : ${b.boardNo},
 				},
 				success : function(result){
-					
+					if(result>0){
+						location.href="href";
+					}
 				}
 			});
 		}
