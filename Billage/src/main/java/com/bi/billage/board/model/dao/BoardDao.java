@@ -261,7 +261,7 @@ public class BoardDao {
 	
 	// 리뷰게시판 => 조회수 증가
 	public int increaseReviewCount(SqlSessionTemplate sqlSession, int reviewNo) {
-		return sqlSession.insert("reviewMapper.insertReviewBoard", reviewNo);
+		return sqlSession.insert("reviewMapper.increaseReviewCount", reviewNo);
 	}
 	
 	

@@ -455,6 +455,7 @@
    	</script>
    	
    	
+   	<!-- 평점 관련 스크립트  -->
    	<script>
     $('input[name=reviewStar]').click(function(){
 
