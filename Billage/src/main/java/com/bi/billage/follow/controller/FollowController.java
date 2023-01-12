@@ -23,24 +23,27 @@ public class FollowController {
 	
 	//following list
 	@RequestMapping("selectFollowing.fo")
-	public ModelAndView selectFollowingList(int uno, ModelAndView mv) {
+	public ModelAndView selectFollowingList(int uno, ModelAndView mv,HttpSession session) {
 		
 		ArrayList<User> followingList = followService.selectFollowingList(uno);
 		
-		mv.addObject("followingList",followingList).setViewName("follow/followingListView");
+		mv.addObject("followingList",followingList)
+			.setViewName("follow/followingListView");
 		
 		return mv;
 	}
 	
 	//followerList 내가 follow 한 사람과 하지 않은 사람을 각각 나누어서 select 함
 	@RequestMapping("selectFollower.fo")
-	public ModelAndView selectFollowerList(int uno, ModelAndView mv) {
+	public ModelAndView selectFollowerList(int uno, ModelAndView mv, HttpSession session) {
 		
 		ArrayList<User> followerList1 = followService.selectFollowerList1(uno);
 		
 		ArrayList<User> followerList2 = followService.selectFollowerList2(uno);
 		
-		mv.addObject("followerList1",followerList1).addObject("followerList2", followerList2).setViewName("follow/followerListView");
+		mv.addObject("followerList1",followerList1)
+			.addObject("followerList2", followerList2)
+			.setViewName("follow/followerListView");
 		
 		return mv;
 	}
@@ -79,11 +82,7 @@ public class FollowController {
 			
 			int result = followService.insertFollow(follow);
 			
-			System.out.println(result);
-			
-			
-			
-		return new Gson().toJson(result);
+			return new Gson().toJson(result);
 	}
 	
 	
@@ -92,14 +91,11 @@ public class FollowController {
 	@RequestMapping(value="delete.fo", produces ="application/json; charset=UTF-8")
 	public String deleteFollow(int userNo2, ModelAndView mv, HttpSession session) {
 		
-		System.out.println('s');
-		
 		int userNo = ((User)session.getAttribute("loginUser")).getUserNo();
 		
 		Follow follow = new Follow(userNo, userNo2);
 		
 		int result = followService.deleteFollow(follow);
-		System.out.println(result);
 		
 		return new Gson().toJson(result);
 	}
