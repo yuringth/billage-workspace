@@ -136,7 +136,8 @@ public class ReviewController {
 	@RequestMapping("detail.re")
 	public String reviewDetail(int reviewNo, Model model) {
 		
-		System.out.println(reviewNo);
+		// System.out.println(reviewNo); 리뷰번호 잘 가져옴
+		
 		// 조회수 증가
 		if(boardService.increaseReviewCount(reviewNo) > 0) { // 조회수 성공 시 => 상세보기 들어감
 			// >> 성공적으로 조회수 증가

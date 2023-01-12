@@ -348,7 +348,9 @@ public class BoardDao {
 		map.put("novelNo", novelNo);
 		return sqlSession.insert("serialMapper.insertSerial", map);
 	}
-	
+
+
+
 	// 광진구역 끝
 
 }

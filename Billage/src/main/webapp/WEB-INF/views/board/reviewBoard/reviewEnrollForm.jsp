@@ -270,14 +270,7 @@
                    <img src="resources/images/star2.png" width="50" height="50" alt="">
                </label>
             </div>
-            <!-- 별관련 끝  -->
-			
-			
-			
-<!-- 			<div style="text-align:center;" name="reviewStar">별점 : ☆☆☆★ 
-				<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-			</div> -->
-	
+
 			<br>
 	
 			<!-- 리뷰 작성 란 -->
@@ -453,6 +446,8 @@
            });
        });
    	</script>
+   	
+   	
    	
    	
    	<!-- 평점 관련 스크립트  -->
