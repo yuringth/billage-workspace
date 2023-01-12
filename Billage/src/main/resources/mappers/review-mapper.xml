@@ -57,6 +57,7 @@
 	<select id="selectList" resultMap="reviewResultSet">
 		select
 		        review_no
+		       ,nickname
 		       ,user_no
 		       ,review_star
 		       ,book_imag

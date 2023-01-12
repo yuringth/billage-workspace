@@ -139,7 +139,7 @@
 		            <div class="one-content-detail1">
 		            	<input type="hidden" value="${ b.bookAuthor }">
 		            	<input class="bno" type="hidden" value="${ b.reviewNo }">
-		                <div>유저 닉네임: ${ b.userNo }</div>                                              
+		                <div>유저 닉네임: ${ b.nickname }</div>                                              
 		                <div class="card-footer">
 		                 	   별점 : ${ b.reviewStar }
 		                </div>
