@@ -1,6 +1,8 @@
 package com.bi.billage.user.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -105,5 +107,14 @@ public class UserDao {
 	// 회원탈퇴
 	public int deleteUser(SqlSessionTemplate sqlSession, int userNo) {
 		return sqlSession.update("userMapper.deleteUser", userNo);
+	}
+
+	public int updateInquiry(SqlSessionTemplate sqlSession, Inquiry iq) {
+		
+//		HashMap<String, Object> map = new HashMap<>();
+//		map.put("inqNo", inqNo);
+//		map.put("answer", answer);
+		
+		return sqlSession.update("userMapper.updateInquiry", iq);
 	}
 }

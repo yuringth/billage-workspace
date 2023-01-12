@@ -15,5 +15,6 @@ public class Inquiry {
 	private Date inqDate; // INQ_DATE	DATE
 	private String inqStatus; // INQ_STATUS	VARCHAR2(1 BYTE)
 	private String nickname;
+	private String answer;
 
 }

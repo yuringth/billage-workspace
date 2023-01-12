@@ -43,6 +43,7 @@
 			<result column="inq_type"		property="inqType" />
 			<result column="inq_date"		property="inqDate" />
 			<result column="inq_status"		property="inqStatus" />
+			<result column="answer"			property="answer" />
 	</resultMap>
 	
 	<!-- 회원가입용 쿼리문 -->
@@ -195,6 +196,15 @@
 				USER_NO = #{userNo}
 	</update>
 	
+	<!-- 회원탈퇴 쿼리문 -->
+	<update id="deleteUser">
+		UPDATE
+				MEMBER
+		SET
+				STATUS = 'Y'
+		WHERE
+				USER_NO = #{userNo}
+	</update>
 	
 	<!-- 문의 총 몇개 세기 -->
 	<select id="selectInqListCount" resultType="_int">
@@ -243,18 +253,8 @@
 				)
 	</insert>
 	
-	<!-- 회원탈퇴 쿼리문 -->
-	<update id="deleteUser">
-		UPDATE
-				MEMBER
-		SET
-				STATUS = 'Y'
-		WHERE
-				USER_NO = #{userNo}
-	</update>
-	
-	<!-- 1:1문의 상세조회 쿼리문 -->
-	<select id ="selectInquiry" resultMap="inqResultSet">
+	<!-- 1:1문의 상세조회 쿼리문(일단은 관리자입장) -->
+	<select id="selectInquiry" resultMap="inqResultSet">
 		select
 				inq_no,
 				user_no,
@@ -263,11 +263,22 @@
 				inq_content,
 				inq_type,
 				inq_date,
-				inq_status
+				inq_status,
+				answer
 		from
 				inquiry iq
 		where
 				inq_no = #{ inqNo }
-	
 	</select>
+	
+	<!-- 1:1문의 답변 쿼리문 -->
+	<update id="updateInquiry" parameterType="inquiry">
+		update
+				inquiry
+		set
+				answer = #{ answer },
+				inq_status = 'Y'
+		where
+				inq_no = #{ inqNo }
+	</update>
 </mapper>

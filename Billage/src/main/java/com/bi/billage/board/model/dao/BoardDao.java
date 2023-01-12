@@ -332,7 +332,7 @@ public class BoardDao {
 	public ArrayList<Serial> selectSerialDetail(SqlSessionTemplate sqlSession, PageInfo pi, int novelNo, String serialNo) {
 		int offset = (pi.getCurrentPage()- 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		Map<String, Object> map = new HashMap<>();
+		HashMap<String, Object> map = new HashMap<>();
 		map.put("serial_no", serialNo);
 		map.put("novel_no", novelNo);
 		return (ArrayList)sqlSession.selectList("serialMapper.selectSerialDetail", map, rowBounds);
