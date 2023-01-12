@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import com.bi.billage.board.model.vo.Inquiry;
 import com.bi.billage.board.model.vo.SerialRequest;
+import com.bi.billage.club.model.vo.Club;
 import com.bi.billage.common.model.vo.PageInfo;
-import com.bi.billage.group.model.vo.Group;
 import com.bi.billage.user.model.vo.User;
 
 
@@ -40,7 +40,7 @@ public interface UserService {
 	int selectGroupListCount();
 	
 	// 모임 리스트 조회
-	ArrayList<Group> selectGroupList(PageInfo pi);
+	ArrayList<Club> selectGroupList(PageInfo pi);
 	
 	// 문의 총 개수 조회
 	int selectInqListCount();

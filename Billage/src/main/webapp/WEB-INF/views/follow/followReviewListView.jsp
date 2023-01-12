@@ -20,7 +20,8 @@
 <jsp:include page="../common/header.jsp"/>
 	
 	<div class="outer">
-		
+	
+			
 		<div class="reviewBox" style="width:70%; background-color: rgb(235, 235, 235); margin:auto;" >
 			
 			<div class="profile" style="display:flex; flex-direction: row; justify-content: flex-start; margin-left:30px;"">
