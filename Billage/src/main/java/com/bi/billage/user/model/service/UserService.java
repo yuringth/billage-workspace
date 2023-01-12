@@ -54,6 +54,9 @@ public interface UserService {
 	// 문의 요청
 	int insertInquiry(Inquiry iq);
 	
+	// 문의 답변
+	int updateInquiry(Inquiry iq);
+	
 	// id중복체크
 	int idCheck(String checkId);
 	
