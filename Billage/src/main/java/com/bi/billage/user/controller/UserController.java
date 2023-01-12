@@ -63,6 +63,14 @@ public class UserController {
 		return mv;
 	}
 	
+	// 문의 상세보기
+	@RequestMapping("detail.iq")
+	public ModelAndView selectInquiry(ModelAndView mv, int ino) {
+		mv.addObject("iq", userService.selectInquiry(ino)).setViewName("admin/inqDetailView");
+		
+		return mv;
+	}
+	
 	// 1:1 문의 작성폼
 	@RequestMapping("enroll.iq")
 	public String enrollInquiry() {
@@ -250,6 +258,31 @@ public class UserController {
 		return "user/userDeleteForm";
 	}
 	
-	
+	// 회원탈퇴
+	@RequestMapping("delete.me")
+	public String deleteUser(int userNo, String userPwd, HttpSession session) {
+		
+		String encPwd = ((User)session.getAttribute("loginUser")).getUserPwd();
+		
+		if(bcryptPasswordEncoder.matches(userPwd, encPwd)) {
+			//	비밀번호가 사용자가 입력한 평문으로 만들어진 암호문일 경우
+			
+			if(userService.deleteUser(userNo) >0) {
+				// 탈퇴처리 성공 => session에서 loginUsr지움, alert문구 담기 => 메인페이지 url요청
+				session.removeAttribute("loginUser");
+				session.setAttribute("alertMsg", "잘가");
+				return "redirect:/";
+				
+			} else {
+				session.setAttribute("errorMsg", "탈퇴처리실패");
+				return "common/errorPage";
+			}
+			
+		} else {
+			session.setAttribute("alertMsg", "비밀번호 틀림");
+			return "redirect:myPage.me";
+		}
+		
+	}
 	
 }

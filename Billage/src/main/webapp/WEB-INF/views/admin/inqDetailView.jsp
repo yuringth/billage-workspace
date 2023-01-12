@@ -135,40 +135,27 @@
         </div>
         <div class="main_content">
             <div class="title">
-				<h1 class="title-text">연재 요청 조회 및 관리</h1>
+				<h1 class="title-text">1:1 문의 조회 및 관리</h1>
 			</div><br>
 			<table id="contentArea" algin="center" class="table">
                 <tr>
                     <th width="100">제목</th>
-                    <td colspan="3">${ sr.requestTitle }</td>
+                    <td colspan="3">${ iq.inqTitle }</td>
                 </tr>
-                <tr>
                 <tr>
                     <th width="100">작성자</th>
-                    <td colspan="3">${ sr.nickname }</td>
+                    <td colspan="3">${ iq.nickname }</td>
                 </tr>
+                <tr>
                     <th>작성일</th>
-                    <td>${ sr.requestDate }</td>
+                    <td>${ iq.inqDate }</td>
                 </tr>
                 <tr>
-                    <th>내용</th>
-                    <td colspan="3"></td>
+                    <th>문의유형</th>
+                    <td colspan="3">${ iq.inqType }</td>
                 </tr>
                 <tr>
-                    <td colspan="4"><p style="height:150px;">${ sr.requestContent }</p></td>
-                </tr>
-                <tr>
-                    <th>첨부파일</th>
-                    <td colspan="3">
-                    	<c:choose>
-                    		<c:when test="${ empty sr.originName }">
-                    			첨부파일이 없습니다.
-                    		</c:when>
-                    		<c:otherwise>
-                        		<a href="${ sr.changeName }" download="${ sr.originName }">${ sr.originName }</a>
-                        	</c:otherwise>
-                        </c:choose>
-                    </td>
+                    <td colspan="4"><p style="height:150px;">${ iq.inqContent }</p></td>
                 </tr>
             </table>
             <div>
@@ -176,7 +163,7 @@
             	<input type="hidden" name="rno" value="${ sr.requestNo }">
             	<input type="hidden" name="uno" value="${ sr.userNo }">
             </form>
-            <a class="btn btn-primary" onclick="agreeRequest();">수락하기</a>
+            <a class="btn btn-primary" onclick="answerRequest();">답변하기</a>
             </div>
             <br>
         </div>

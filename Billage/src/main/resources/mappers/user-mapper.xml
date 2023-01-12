@@ -19,6 +19,7 @@
 		<result column="USER_NO"			property="userNo" />
 		<result column="ENROLL_DATE"		property="enrollDate" />
 		<result column="PROFILE_IMG"		property="profileImg" />
+		<result column="STATUS"				property="status" />
 	</resultMap>
 
 	<resultMap id="groupResultSet" type="group">
@@ -241,4 +242,32 @@
 				'N'
 				)
 	</insert>
+	
+	<!-- 회원탈퇴 쿼리문 -->
+	<update id="deleteUser">
+		UPDATE
+				MEMBER
+		SET
+				STATUS = 'Y'
+		WHERE
+				USER_NO = #{userNo}
+	</update>
+	
+	<!-- 1:1문의 상세조회 쿼리문 -->
+	<select id ="selectInquiry" resultMap="inqResultSet">
+		select
+				inq_no,
+				user_no,
+				(select nickname from member m where m.user_no = iq.user_no) as nickName,
+				inq_title,
+				inq_content,
+				inq_type,
+				inq_date,
+				inq_status
+		from
+				inquiry iq
+		where
+				inq_no = #{ inqNo }
+	
+	</select>
 </mapper>

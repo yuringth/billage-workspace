@@ -81,6 +81,10 @@ public class UserDao {
 		return sqlSession.insert("userMapper.insertInq", iq);
 	}
 	
+	public Inquiry selectInquiry(SqlSessionTemplate sqlSession, int inqNo) {
+		return sqlSession.selectOne("userMapper.selectInquiry", inqNo);
+	}
+	
 	// id 중복체크
 	public int idCheck(SqlSessionTemplate sqlSession, String checkId) {
 		return sqlSession.selectOne("userMapper.idCheck", checkId);
@@ -98,4 +102,8 @@ public class UserDao {
 		return sqlSession.update("userMapper.updateUser", u);
 	}
 	
+	// 회원탈퇴
+	public int deleteUser(SqlSessionTemplate sqlSession, int userNo) {
+		return sqlSession.update("userMapper.deleteUser", userNo);
+	}
 }
