@@ -65,8 +65,9 @@
     			<p>${ group.likeCount }명이 찜했어요!</p>
     		</div>
     		<div id="detail-right">
-    			<p>${ group.groupDay }</p>
-    			<div>참여자</div>
+    			<p>(${ group.groupDay }) 독서 모임 </p>
+    			<div id="participant-area">참여자
+    			</div>
     		</div>
     	</div>
     	<div id="group-info-area">
@@ -95,6 +96,24 @@
     
     
     <script>
+    	
+    	participant();
+    	
+    	function participant(){
+    		$.ajax({
+    			url : "",
+    			data : {},
+    			success : function(result){
+    				
+    			},
+    			error : function(){
+					console.log('비동기 통신 실패, 참가자 조회');    				
+    			}
+    			
+    		})
+    	};
+    
+    
     
     	//new 상태 표시 ----------------------------------------------------------
     	$(function(){

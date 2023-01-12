@@ -92,6 +92,7 @@
 		       ,BOOK_POINT
 		       ,BOOK_PUBLISHER
 		       ,BOOK_AUTHOR
+		       
 		       )
 		values
 		       (
@@ -134,6 +135,7 @@
 		       ,book_imag
 		       ,review_star
 		       ,review_content
+		       ,book_point
 		  from
 		       review
 		 where
@@ -143,8 +145,30 @@
 	</select>	
 	
 	
+	<update id="deleteReviewBoard" parameterType="_int">
+		update
+		       review
+		   set
+		       review_status = 'Y'
+		where
+		       review_no = #{ reviewNo }
+		 
+	</update>
 	
 	
-	
+	<!-- 글 수정 쿼리문 -->
+	<update id="updateReviewBoard" parameterType="review">
+		update
+		       review
+		   set
+		        book_title = #{ bookTitle }
+	              ,book_author = #{ bookAuthor }
+	              ,book_publisher = #{ bookPublisher }
+	              ,book_imag = #{ bookImag }
+	              ,review_star = #{ reviewStar }
+	              ,review_content = #{ reviewContent }
+		  where
+		        review_no = #{ reviewNo }
+	</update>
 	
 </mapper>

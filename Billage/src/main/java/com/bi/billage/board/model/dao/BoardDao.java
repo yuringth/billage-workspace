@@ -181,18 +181,17 @@ public class BoardDao {
 		return sqlSession.update("ADBoardMapper.deleteAuctionBoard", boardNo);
 	}
 
+	public int insertDrawUser(SqlSessionTemplate sqlSession, ADBoard b) {
+		return sqlSession.insert("ADBoardMapper.insertDrawUser", b);
+	}
 
+	public int deleteDrawUser(SqlSessionTemplate sqlSession, ADBoard b) {
+		return sqlSession.insert("ADBoardMapper.deleteDrawUser", b);
+	}
 
-
-
-
-
-
-
-
-
-
-
+	public int checkDraw(SqlSessionTemplate sqlSession, ADBoard b) {
+		return sqlSession.selectOne("ADBoardMapper.checkDraw", b);
+	}
 
 
 
@@ -270,10 +269,16 @@ public class BoardDao {
 		return sqlSession.selectOne("reviewMapper.selectReviewBoard", reviewNo);
 	}
 	
+	// 리뷰게시판 => 게시글 삭제
+	public int deleteReviewBoard(SqlSessionTemplate sqlSession, int reviewNo) {
+		return sqlSession.update("reviewMapper.deleteReviewBoard", reviewNo);
+	}
 	
 	
-	
-	
+	// 리뷰게시판 => 게시글 수정
+	public int updateReviewBoard(SqlSessionTemplate sqlSession, ReviewBoard b) {
+		return sqlSession.update("reviewMapper.updateReviewBoard", b);
+	}
 	
 	
 	
@@ -326,7 +331,7 @@ public class BoardDao {
 	public ArrayList<Serial> selectSerialDetail(SqlSessionTemplate sqlSession, PageInfo pi, int novelNo, String serialNo) {
 		int offset = (pi.getCurrentPage()- 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		Map<String, Object> map = new HashMap<>();
+		HashMap<String, Object> map = new HashMap<>();
 		map.put("serial_no", serialNo);
 		map.put("novel_no", novelNo);
 		return (ArrayList)sqlSession.selectList("serialMapper.selectSerialDetail", map, rowBounds);
@@ -348,6 +353,15 @@ public class BoardDao {
 		map.put("novelNo", novelNo);
 		return sqlSession.insert("serialMapper.insertSerial", map);
 	}
+
+
+	
+
+
+	
+
+
+	
 
 
 

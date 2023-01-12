@@ -217,18 +217,18 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectReviewBoard(sqlSession, reviewNo);
 	}
 
-	// 리뷰게시판
+	
+	
+	// 리뷰게시판 => 게시글 삭제
 	@Override
-	public int deleteReviewBoard(int boardNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteReviewBoard(int reviewNo) {
+		return boardDao.deleteReviewBoard(sqlSession, reviewNo);
 	}
 
-	// 리뷰게시판
+	// 리뷰게시판 => 글수정
 	@Override
-	public int updateReviewBoard(UsedBoard b) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateReviewBoard(ReviewBoard b) {
+		return boardDao.updateReviewBoard(sqlSession, b);
 	}
 
 	
@@ -260,6 +260,23 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int insertSerial(Serial se, int novelNo) {
 		return boardDao.insertSerial(sqlSession, se, novelNo);
+	}
+	// 추첨자 등록
+	@Override
+	public int insertDrawUser(ADBoard b) {
+		return boardDao.insertDrawUser(sqlSession, b);
+	}
+
+	//추첨자 삭제
+	@Override
+	public int deleteDrawUser(ADBoard b) {
+		return boardDao.deleteDrawUser(sqlSession, b);
+	}
+	
+	//추첨 여부 조회
+	@Override
+	public int checkDraw(ADBoard b) {
+		return boardDao.checkDraw(sqlSession, b);
 	}
 
 

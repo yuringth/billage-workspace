@@ -130,8 +130,13 @@ public interface BoardService {
 	int deleteAuctionBoard(int boardNo);
 	// 경매게시글 수정
 	int updateAuctionBoard(int boardNo);
-
 	
+	//추첨신청자 등록
+	int insertDrawUser(ADBoard b);
+	//추첨신청 취소
+	int deleteDrawUser(ADBoard b);
+	//추첨여부 조회
+	int checkDraw(ADBoard b);
 	
 	
 	
@@ -179,17 +184,17 @@ public interface BoardService {
 	// 리뷰게시글 조회수 증가 (update)
 	int increaseReviewCount(int reviewNo);
 	
-	// 리뷰게시판 상세 조회 (select)
+	// 리뷰게시판 상세 조회 (select) & 리뷰게시판 수정시 폼화면 띄울때도 사용
 	ReviewBoard selectReviewBoard(int reviewNo);
 	
 	
 	
 	
 	// 리뷰게시판 삭제 (update)
-	int deleteReviewBoard(int boardNo);
+	int deleteReviewBoard(int reviewNo);
 	
 	// 리뷰게시글 수정 서비스(update)
-	int updateReviewBoard(UsedBoard b);
+	int updateReviewBoard(ReviewBoard b);
 
 
 
