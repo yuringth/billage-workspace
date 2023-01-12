@@ -58,7 +58,7 @@
 				<li class="menu"><a href="list.ms">쪽지함보기</a></li>
 				<li class="menu"><a href="">연재/구독목록</a></li>
 				<li class="menu"><a href="">내 리뷰목록보기</a></li>
-				<li class="menu"><a href="general.me">모임 관련</a></li>
+				<li class="menu"><a href="general.cl">모임 관련</a></li>
 				<li class="menu"><a href="">경매, 추첨 관련</a></li>
 				<li class="menu"><a href="">책 대여 목록보기</a></li>
 				<li class="menu"><a href="">중고 거래 목록보기</a></li>

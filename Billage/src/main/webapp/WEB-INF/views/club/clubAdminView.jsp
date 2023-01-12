@@ -5,23 +5,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>일반 회원 모임페이지</title>
-
+<title>안녕 여긴 모임관리페이지</title>
 <style>
-	#all-group-general{ width:1200px; margin:auto; }
+	#all-group-admin{ width:1200px; margin:auto; }
+
+
+
 
 </style>
-
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
 	<jsp:include page="../user/myPageBar.jsp" />
 	
-	<div id="all-group-general">
+	<div id="all-group-admin">
 		<h1>${ loginUser.nickname }의 모임 리스트입니다. </h1>
 		<%-- 모임에 대한 값이 있으면 list 없으면 참여중인 모임이 없습니다. core로 조건문 걸어서 생성하기   --%>
 		
-		<button onclick="location.href='admin.me';">관리자 페이지 가기</button> <!-- 클릭시 모임 개설 페이지 이동  -->
+		<button onclick="location.href='enrollForm.cl';">모임 개설하기</button> <!-- 클릭시 모임 개설 페이지 이동  -->
 		
 		<table border="1">
 			<thead>

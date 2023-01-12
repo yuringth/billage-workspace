@@ -2,20 +2,19 @@
 <!DOCTYPE mapper PUBLIC 
 "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="groupMapper">
+<mapper namespace="clubMapper">
 	
 	
-	<resultMap type="group" id="groupResultSet">
-		<result column="GROUP_NO" property="groupNo" />
-		<result column="USER_NO" property="userNo" />
-		<result column="GROUP_TITLE" property="groupTitle" />
-		<result column="GROUP_NUM" property="groupNum" />
-		<result column="GROUP_CREATEDATE" property="groupCreatedate" />
-		<result column="GROUP_DESCRIBE" property="groupDescribe" />
-		<result column="GROUP_DAY" property="groupDay" />
-		<result column="GROUP_LOCATION" property="groupLocation" />
-		<result column="GROUP_STATUS" property="groupStatus" />
-		<result column="GROUP_IMG" property="groupImg" />
+	<resultMap type="club" id="groupResultSet">
+		<result column="CLUB_NO" property="clubNo" />
+		<result column="CLUB_NO" property="userNo" />
+		<result column="CLUB_NAME" property="clubName" />
+		<result column="CLUB_LIMIT" property="clubLimit" />
+		<result column="CLUB_CREATEDATE" property="clubCreatedate" />
+		<result column="CLUB_DISCRIPT" property="clubDiscript" />
+		<result column="CLUB_LOCATION" property="clubLocation" />
+		<result column="CLUB_STATUS" property="clubStatus" />
+		<result column="CLUB_IMG" property="clubImg" />
 		<result column="newCount" property="newCount" />
 		<result column="GROUP_COUNT" property="groupCount" />
 		<result column="likeCount" property="likeCount" />
@@ -26,53 +25,54 @@
 		SELECT 
 				COUNT(*)
 		  FROM
-		  		"GROUP"
+		  		club
   		 WHERE
-  		 		GROUP_STATUS = 'Y'
+  		 		club_status = 'Y'
 	</select>
 	
 	<!-- 모임 리스트 페이지에 뿌려줄 정보  조회 -->
 	<select id="selectList" resultMap="groupResultSet">
 		SELECT 
-			   GROUP_NO
+			   CLUB_NO
 			  ,USER_NO
-			  ,GROUP_TITLE
-			  ,GROUP_NUM
-			  ,GROUP_CREATEDATE
-			  ,GROUP_DESCRIBE
-			  ,GROUP_DAY
-			  ,GROUP_LOCATION
+			  ,CLUB_NAME
+			  ,CLUB_LIMIT
+			  ,CLUB_CREATEDATE
+			  ,CLUB_DISCRIPT
+			  ,CLUB_IMG
+			  ,CLUB_LOCATION
 			  ,GROUP_IMG
 			  ,GROUP_COUNT
               ,CASE WHEN
-                      (select to_date(SYSDATE, 'YY-MM-DD') from dual) - (select to_date(group_createdate, 'YY-MM-DD') from dual) <![CDATA[ > ]]> 30 THEN 0
+                      (select to_date(SYSDATE, 'YY-MM-DD') from dual) - (select to_date(CLUB_CREATEDATE, 'YY-MM-DD') from dual) <![CDATA[ > ]]> 30 THEN 0
                    WHEN
-                      (select to_date(SYSDATE, 'YY-MM-DD') from dual) - (select to_date(group_createdate, 'YY-MM-DD') from dual) <![CDATA[ < ]]> 30 THEN 1
+                      (select to_date(SYSDATE, 'YY-MM-DD') from dual) - (select to_date(CLUB_CREATEDATE, 'YY-MM-DD') from dual) <![CDATA[ < ]]> 30 THEN 1
                    END AS "newCount"
 	  	  FROM
-	  	  	   "GROUP"
+	  	  	   club
   	  	 WHERE
-  	  	 	   GROUP_STATUS = 'Y'
+  	  	 	   CLUB_STATUS = 'Y'
  	  	 ORDER
  	  	    BY
- 	  	       GROUP_NO DESC
+ 	  	       CLUB_NO DESC
 	
 	</select>
 	
 	<!-- 모임 생성 쿼리문  -->
-	<insert id="insertGroup" parameterType="group">
+	<insert id="insertGroup" parameterType="club">
 		insert
 		  into 
-		       "GROUP"
+		       club
 		       (
-		        GROUP_NO,
+		        CLUB_NO,
 		        USER_NO,
-			    GROUP_TITLE,
-			    GROUP_NUM,
-				GROUP_DESCRIBE,
-				GROUP_DAY,
-				GROUP_LOCATION,
-				GROUP_IMG
+			    CLUB_NAME,
+			    CLUB_LIMIT,
+				CLUB_CREATEDATE,
+				CLUB_DISCRIPT,
+				CLUB_IMG,
+				CLUB_LOCATION,
+				CLUB_STATUS
 		       )
 	    values 
 			   (
