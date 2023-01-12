@@ -130,8 +130,13 @@ public interface BoardService {
 	int deleteAuctionBoard(int boardNo);
 	// 경매게시글 수정
 	int updateAuctionBoard(int boardNo);
-
 	
+	//추첨신청자 등록
+	int insertDrawUser(ADBoard b);
+	//추첨신청 취소
+	int deleteDrawUser(ADBoard b);
+	//추첨여부 조회
+	int checkDraw(ADBoard b);
 	
 	
 	

@@ -247,5 +247,34 @@
 		 		DRAW_NO = #{boardNo}
 	</update>
 
+	<!-- 추첨자 등록 -->
+	<insert id="insertDrawUser" parameterType="adboard">
+		INSERT
+		  INTO
+		  		DRAW
+		  		(
+		  		DRAW_NO
+		  		,USER_NO
+		  		,POINT
+		  		)
+		VALUES
+				(
+				#{boardNo}
+				,#{userNo}
+				,#{tryPoint}
+				)
+	</insert>
+	
+	<!-- 추첨 취소 -->
+	<delete id="deleteDrawUser">
+		DELETE
+		  FROM
+		  		DRAW
+		 WHERE
+		 		DRAW_NO = #{boardNo}
+		   AND
+		   		USER_NO = #{userNo}
+	</delete>
+	
 </mapper>
 
