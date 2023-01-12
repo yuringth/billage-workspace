@@ -217,8 +217,8 @@
 					<div class="content-photo-detail">
 						<!-- api에서 끌고 오는거니까 첨부파일로 안해도 되는게 맞겠지? <input type="file" name="upfile"> 이런식으로.. -->
 						<div id="book_imag">
-							<input src="${ b.bookImag }" type="image" id="book_src"  required value=""> 
-							<input type="hidden" id="bookImag" name="bookImag" value=""> 
+								<input src="${ b.bookImag }" type="image" id="book_src"  required value=""> 
+								<input type="hidden" id="bookImag" name="bookImag" value="${ b.bookImag }">
 						</div>
 					</div>
 					
@@ -429,7 +429,6 @@
        $(function(){
            $('.review-content-outer #review_content').keyup(function(){
                $('#count').text($(this).val().length);
-               
            });
        });
    	</script>

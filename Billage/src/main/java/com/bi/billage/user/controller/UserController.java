@@ -175,13 +175,13 @@ public class UserController {
 	
 	@RequestMapping("general.me")
 	public String groupGeneral() {
-		return "group/groupGeneralView";
+		return "club/clubGeneralView";
 	}
 	
 	
 	@RequestMapping("admin.me")
 	public String groupAdmin() {
-		return "group/groupAdminView";
+		return "club/clubAdminView";
 	}
 	
 	// 로그인 폼으로

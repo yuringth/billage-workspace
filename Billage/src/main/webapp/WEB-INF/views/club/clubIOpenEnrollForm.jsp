@@ -77,7 +77,18 @@
 	<div id="all-enrollFrom" >
 		<h1>모임 개설하기</h1>
 
-
+	<!-- 
+			모임번호 :  시퀀스로 생김 ( SEQ_CNO.nextval ) 
+				회원번호 : loginUser.userNo
+				모임명 : input 
+				모임정원 : input 
+			모임생성일자 : default  sysdate 
+				모임상세설명 : input 
+				모임이미지 : input / null 가능 
+				모임중심지역 : input 
+			모임상태값 : default  'y' 
+			
+	 -->
 		<!--모임 개설 : 모임이름, 모임요일, 모임 설명, 모임 지역, 모임 참여 인원 받아야 함 -->
 		<form action="create.gr" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="userNo" value="${ loginUser.userNo }"/>
@@ -90,12 +101,12 @@
 				<tbody>
 					<tr>
 						<th scope="row">*모임 이름</th>
-						<td><div><input type="text" name="groupTitle" required></div></td>
+						<td><div><input type="text" name="clubName" required></div></td>
 					</tr>
 					<tr>
 						<th scope="row">*모임 요일</th>
 						<td>
-							<select name="groupDay">
+							<select name="">
 								<option name="groupDay">월</option>
 								<option name="groupDay">화</option>
 								<option name="groupDay">수</option>
