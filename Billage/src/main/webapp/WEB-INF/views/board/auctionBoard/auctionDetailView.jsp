@@ -172,7 +172,6 @@
 		}
 		
 		function deleteBtn(){
-			console.log(${b.boardNo})
 			if(confirm('삭제하시겠습니까?')){
 				location.href='delete.ac?bno=' + ${b.boardNo};
 			}
