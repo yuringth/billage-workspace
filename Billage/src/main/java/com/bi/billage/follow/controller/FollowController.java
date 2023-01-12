@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bi.billage.board.model.vo.ReviewBoard;
 import com.bi.billage.follow.model.service.FollowService;
 import com.bi.billage.follow.model.vo.Follow;
 import com.bi.billage.user.model.vo.User;
@@ -98,6 +99,17 @@ public class FollowController {
 		int result = followService.deleteFollow(follow);
 		
 		return new Gson().toJson(result);
+	}
+	
+	@RequestMapping(value="selectReviewList")
+	public ModelAndView selectReviewList(int uno , ModelAndView mv) {
+		
+		ArrayList<ReviewBoard> list = followService.selectReviewList(uno);
+		
+		mv.addObject("list", list).setViewName("follow/followReviewListView");
+		
+		return mv;
+		
 	}
 
 }
