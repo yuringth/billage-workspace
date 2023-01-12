@@ -97,8 +97,8 @@
 
 		<div class="align-left-outer" id="contentArea">
 	        <c:forEach items="${ list }" var="b">
-	        	<input type="hidden" value="${ b.boardNo }" class="boardNo">
 		        <div class="one-content" value="b">
+	        		<input type="hidden" value="${ b.boardNo }" class="boardNo">
 		        	<input type="hidden" value="${ b.closeDate }" class="closeDate">
 		            <div class="img-area">
 		                <img src="${ b.changeName }">
@@ -122,8 +122,9 @@
     
     	$(function(){
     		$('.one-content').click(function(){
-    			location.href='detail.dr?bno='+ $('.boardNo').val();
-    		})	
+    			location.href='detail.dr?bno='+ $(this).find('.boardNo').val();
+    		})
+    		
     		closeCount();
 			setInterval(closeCount, 500);
     	})

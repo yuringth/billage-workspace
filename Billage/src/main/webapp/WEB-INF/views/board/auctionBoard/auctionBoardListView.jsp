@@ -92,8 +92,8 @@
 		<div class="align-left-outer">
 		
 			<c:forEach items="${ list }" var="b">
-		        <input type="hidden" value="${ b.boardNo }" class="boardNo">
 		        <div class="one-content">
+		       		<input type="hidden" value="${ b.boardNo }" class="boardNo">
 		        	<input type="hidden" value="${ b.closeDate }" class="closeDate">
 		            <div class="img-area">
 		                <img src="${ b.changeName }">
@@ -104,7 +104,6 @@
 		                <p class="textsize time"></p>
 		                <p class="countnum">입찰 : <!-- 카운트해서 --> 조회 : ${ b.count }</p>
 		            </div>
-		
 		        </div>
 		        
 			</c:forEach>
@@ -118,11 +117,14 @@
     
     <script>
     	$(function(){
+    		
     		$('.one-content').click(function(){
-    			location.href='detail.ac?bno='+ $('.boardNo').val();
-    		})	
-    		closeCount();
+    			location.href='detail.ac?bno='+ $(this).find('.boardNo').val();
+    		})
+    		
+	    	closeCount();
 			setInterval(closeCount, 500);
+		
     	})
     	
     	function closeCount(){
