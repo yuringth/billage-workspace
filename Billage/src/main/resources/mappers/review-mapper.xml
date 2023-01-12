@@ -131,6 +131,9 @@
 		       ,book_publisher
 		       ,count 
 		       ,to_char(create_date, 'YYYY-MM-DD') as "CREATE_DATE"
+		       ,book_imag
+		       ,review_star
+		       ,review_content
 		  from
 		       review
 		 where

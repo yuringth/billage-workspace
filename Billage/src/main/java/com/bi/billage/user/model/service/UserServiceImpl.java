@@ -112,6 +112,12 @@ public class UserServiceImpl implements UserService{
 		return userDao.insertInquiry(sqlSession, iq);
 
 	}
+	
+	// 회원탈퇴
+	@Override
+	public int deleteUser(int userNo) {
+		return userDao.deleteUser(sqlSession, userNo);
+	}
 
 	@Override
 	public Inquiry selectInquiry(int inqNo) {

@@ -138,9 +138,7 @@
 		        	<!-- 작성자/별 -->
 		            <div class="one-content-detail1">
 		            	<input type="hidden" value="${ b.bookAuthor }">
-		            	<%-- <div>책 작가 : ${ b.bookAuthor }</div> --%>
 		            	<input class="bno" type="hidden" value="${ b.reviewNo }">
-		            	<%-- <div class="bno">게시글번호 : ${ b.reviewNo }</div> --%>
 		                <div>유저 닉네임: ${ b.userNo }</div>                                              
 		                <div class="card-footer">
 		                 	   별점 : ${ b.reviewStar } <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -152,7 +150,7 @@
 					
 						<div class="book-detail1">
 				            <div>
-				            	<img class="card-img-top" src="${ b.bookImag }" alt="" style= "width:200px; height:220px;">
+				            	<img class="card-img-top" src="${ b.bookImag }" alt="책사진" style= "width:200px; height:220px;">
 				            </div>
 						</div>
 						

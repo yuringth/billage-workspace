@@ -63,6 +63,8 @@ public interface UserService {
 	// 회원정보수정
 	int updateUser(User u);
 	
+	// 회원 탈퇴
+	int deleteUser(int userNo);
 	
 
 
