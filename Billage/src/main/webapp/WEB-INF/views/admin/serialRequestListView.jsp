@@ -149,7 +149,7 @@
                 <tbody>
                 		<tr>
                 			<td class="rno">${sr.requestNo}</td>
-                			<td>${sr.nickName}</td>
+                			<td>${sr.nickname}</td>
                 			<td>${sr.requestTitle}</td>
                 			<td>${sr.requestDate}</td>
                 			<td>${sr.acceptance}</td>
