@@ -90,7 +90,7 @@
 			
 	 -->
 		<!--모임 개설 : 모임이름, 모임요일, 모임 설명, 모임 지역, 모임 참여 인원 받아야 함 -->
-		<form action="create.gr" method="post" enctype="multipart/form-data">
+		<form action="create.cl" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="userNo" value="${ loginUser.userNo }"/>
 			<table border="1" align="center">
 				<caption style="text-align:left;">*필수입력사항</caption>	
@@ -215,7 +215,7 @@
 			if($text.replace(/\s| /gi, "").length != 0){
 			
 			$.ajax({
-				url : "searchAddr.gr",
+				url : "searchAddr.cl",
 				data : { keyword:$('#search').val() },
 				success: function(result){
 					
