@@ -98,4 +98,8 @@ public class UserDao {
 		return sqlSession.update("userMapper.updateUser", u);
 	}
 	
+	// 회원탈퇴
+	public int deleteUser(SqlSessionTemplate sqlSession, int userNo) {
+		return sqlSession.update("userMapper.deleteUser", userNo);
+	}
 }

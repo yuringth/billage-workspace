@@ -19,6 +19,7 @@
 		<result column="USER_NO"			property="userNo" />
 		<result column="ENROLL_DATE"		property="enrollDate" />
 		<result column="PROFILE_IMG"		property="profileImg" />
+		<result column="STATUS"				property="status" />
 	</resultMap>
 
 	<resultMap id="groupResultSet" type="group">
@@ -241,4 +242,15 @@
 				'N'
 				)
 	</insert>
+	
+	<!-- 회원탈퇴 쿼리문 -->
+	<update id="deleteUser">
+		UPDATE
+				MEMBER
+		SET
+				STATUS = 'Y'
+		WHERE
+				USER_NO = #{userNo}
+	</update>
+	
 </mapper>
