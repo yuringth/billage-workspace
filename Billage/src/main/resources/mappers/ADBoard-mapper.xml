@@ -276,5 +276,17 @@
 		   		USER_NO = #{userNo}
 	</delete>
 	
+	<!-- 추첨여부 조회  -->
+	<select id="checkDraw" parameterType="adboard" resultType="_int">
+		SELECT
+				COUNT(*)
+		  FROM
+		  		DRAW
+		 WHERE
+		 		DRAW_NO = #{boardNo}
+		   AND
+		   		USER_NO = #{userNo}
+	</select>
+	
 </mapper>
 

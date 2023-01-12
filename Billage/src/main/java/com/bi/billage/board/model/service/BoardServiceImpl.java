@@ -276,7 +276,7 @@ public class BoardServiceImpl implements BoardService {
 	//추첨 여부 조회
 	@Override
 	public int checkDraw(ADBoard b) {
-		return 0;
+		return boardDao.checkDraw(sqlSession, b);
 	}
 
 

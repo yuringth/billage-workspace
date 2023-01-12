@@ -189,7 +189,9 @@ public class BoardDao {
 		return sqlSession.insert("ADBoardMapper.deleteDrawUser", b);
 	}
 
-
+	public int checkDraw(SqlSessionTemplate sqlSession, ADBoard b) {
+		return sqlSession.selectOne("ADBoardMapper.checkDraw", b);
+	}
 
 
 
@@ -351,6 +353,9 @@ public class BoardDao {
 		map.put("novelNo", novelNo);
 		return sqlSession.insert("serialMapper.insertSerial", map);
 	}
+
+
+	
 
 
 	
