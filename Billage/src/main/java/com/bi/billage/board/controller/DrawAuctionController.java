@@ -113,7 +113,6 @@ public class DrawAuctionController {
 			}
 			b.setRemaindTime(remaindTime);
 			mv.addObject("b",b).setViewName("board/drawBoard/drawDetailView");
-			System.out.println(b.getCloseDate());
 		} else {
 			mv.addObject("errorMsg", "게시글 조회 실패").setViewName("common/errorPage");
 		}
@@ -221,8 +220,8 @@ public class DrawAuctionController {
 		
 	}
 	@RequestMapping("delete.ac")
-	public String deleteAuction(int bno, HttpSession session, ModelAndView mv, String changeName) {
-		if(boardService.deleteAuctionBoard(bno) > 0) {
+	public String deleteAuction(int boardNo, HttpSession session, ModelAndView mv, String changeName) {
+		if(boardService.deleteAuctionBoard(boardNo) > 0) {
 			if(!changeName.equals("")) {
 				new File(session.getServletContext().getRealPath(changeName)).delete();
 			}
