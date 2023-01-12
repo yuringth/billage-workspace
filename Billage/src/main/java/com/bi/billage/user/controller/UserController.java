@@ -270,7 +270,7 @@ public class UserController {
 			if(userService.deleteUser(userNo) >0) {
 				// 탈퇴처리 성공 => session에서 loginUsr지움, alert문구 담기 => 메인페이지 url요청
 				session.removeAttribute("loginUser");
-				session.setAttribute("alertMsg", "잘가");
+				session.setAttribute("alertMsg", "탈퇴처리가 완료됐습니다.");
 				return "redirect:/";
 				
 			} else {

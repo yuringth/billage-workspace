@@ -70,7 +70,7 @@
 						<input type="hidden" name="userNo" value="${ sessionScope.loginUser.userNo }">
 							<div id="del-check">
 							
-								<div>비밀번호 : <input type="password" placeholder="비밀번호를 입력하세요"></div><br>
+								<div>비밀번호 : <input type="password" name="userPwd" placeholder="비밀번호를 입력하세요"></div><br>
 								<span>회원 탈퇴 유의사항을 숙지하였으며 회원 탈퇴를 진행하겠습니다.</span>
 								<span><input type="checkbox" id="del-checkbox" onchange="abledBtn();"></span>
 								
@@ -86,7 +86,7 @@
     <jsp:include page="../common/footer.jsp" />
     <script>
       	$('#cancle-btn').click(function(){
-	          location.href = "";
+	          location.href = "myInfo.me";
 	      })
 	
 	      function abledBtn() {
