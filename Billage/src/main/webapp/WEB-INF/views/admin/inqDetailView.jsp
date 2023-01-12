@@ -159,18 +159,23 @@
                 </tr>
             </table>
             <div>
+            <h2>답변 : ${ iq.answer }</h2>
+            </div>
+            <div>
+            <c:if test="${ iq.answer eq '아직 답변이 등록되지 않았습니다'}">
             <form action="" method="get" id="updateForm">
-            	<input type="hidden" name="rno" value="${ sr.requestNo }">
-            	<input type="hidden" name="uno" value="${ sr.userNo }">
+            	<input type="hidden" name="ino" value="${ iq.inqNo }">
+            	<textarea name="answer" id="answer" spellcheck="true" style="resize:none" rows="5" cols="160" tabindex="4" placeholder="문의에 대한 답변을 남겨주세요" required></textarea>
+            	<br><a class="btn btn-primary" onclick="answerInq();">답변하기</a>
             </form>
-            <a class="btn btn-primary" onclick="answerRequest();">답변하기</a>
+            </c:if>
             </div>
             <br>
         </div>
       </div>
       <script>
-      	function agreeRequest() {
-      		$('#updateForm').attr('action', 'update.re').submit();
+      	function answerInq() {
+      		$('#updateForm').attr('action', 'update.iq').submit();
       	}
       </script>
    <jsp:include page="../common/footer.jsp"/>

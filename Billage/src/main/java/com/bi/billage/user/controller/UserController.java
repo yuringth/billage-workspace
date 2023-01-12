@@ -90,6 +90,24 @@ public class UserController {
 			}
 		}
 	
+	// 문의 답변 메소드
+	@RequestMapping("update.iq")
+	public String updateInquiry(int ino, String answer, HttpSession session, Model model) {
+		
+		Inquiry iq = new Inquiry();
+		iq.setInqNo(ino);
+		iq.setAnswer(answer);
+		
+		if(userService.updateInquiry(iq) > 0) { // 성공 => 메인화면으로
+			session.setAttribute("alertMsg", "답변 완료");
+			return "main";
+		} else {
+			model.addAttribute("errorMsg", "답변 오류");
+			return "common/errorPage";
+		}
+		
+	}
+	
 	// 연재 요청 리스트 화면 +페이징처리
 	@RequestMapping("list.sr")
 	public ModelAndView selectList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
