@@ -77,7 +77,24 @@
 	</select>
 	
 	
-	<!-- 글작성 쿼리문 -->
+	
+	
+	<!-- 글작성 쿼리문. 1) 책 중복되는지 확인 select : bookTitle로 조회 => 한 행이 있는지 없는지 -->
+	<select id="selectBookTitle" parameterType="review" resultMap="reviewResultSet">
+       select
+              book_title
+         from
+              review
+        where
+              book_title = #{bookTitle}	
+          and
+              user_no = #{userNo}
+          and
+           	  review_status = 'N'
+	</select>
+	
+		
+	<!-- 글작성 쿼리문. 2) 중복 된 책 없으면 insert : 글작성 -->
 	<insert id="insertReviewBoard" parameterType="review">
 		INSERT 
 		  INTO 

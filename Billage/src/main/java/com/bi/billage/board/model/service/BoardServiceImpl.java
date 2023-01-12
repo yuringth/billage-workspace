@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.bi.billage.board.model.dao.BoardDao;
 import com.bi.billage.board.model.vo.ADBoard;
@@ -196,7 +195,13 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	
-	// 리뷰게시판 => 글작성
+	
+	// 리뷰게시판 => 1) 책 중복되는지 확인 select : bookTitle로 조회 => 한 행이 있는지 없는지
+	@Override
+	public ReviewBoard selectBookTitle(ReviewBoard b) {
+		return boardDao.selectBookTitle(sqlSession, b);
+	}
+	// 리뷰게시판 => 2) 중복 된 책 없으면 insert : 글작성
 	@Override
 	public int insertReviewBoard(ReviewBoard b) {
 		return boardDao.insertReviewBoard(sqlSession, b);
@@ -225,6 +230,10 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.deleteReviewBoard(sqlSession, reviewNo);
 	}
 
+	
+	
+	
+	
 	// 리뷰게시판 => 글수정
 	@Override
 	public int updateReviewBoard(ReviewBoard b) {
