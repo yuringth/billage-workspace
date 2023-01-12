@@ -228,8 +228,7 @@ public class BoardServiceImpl implements BoardService {
 	// 리뷰게시판 => 글수정
 	@Override
 	public int updateReviewBoard(ReviewBoard b) {
-		//return boardDao.updateReviewBoard(sqlSession, b);
-		return 0;
+		return boardDao.updateReviewBoard(sqlSession, b);
 	}
 
 	
