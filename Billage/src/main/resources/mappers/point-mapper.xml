@@ -37,7 +37,17 @@
 				,#{pointAdd}
 				,#{pointStatus}
 				)
-		  		
 	</insert>
+	
+	<select id="selectUserNo" parameterType="string" resultType="_int">
+		SELECT
+				USER_NO
+		  FROM
+		  		MEMBER
+		 WHERE
+		 		USER_ID = #{userId}
+	</select>
+	
+	
 </mapper>
 

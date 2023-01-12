@@ -21,4 +21,8 @@ public class PointDao {
 		
 	}
 
+	public int selectUserNo(String userId, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("pointMapper.selectUserNo", userId);
+	}
+
 }

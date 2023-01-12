@@ -25,6 +25,11 @@ public class PointServiceImpl implements PointService{
 	public int selectPoint(int userNo) {
 		return pointDao.selectPoint(userNo, sqlSession);
 	}
+
+	@Override
+	public int selectUserNo(String userId) {
+		return pointDao.selectUserNo(userId, sqlSession);
+	}
 	
 	
 

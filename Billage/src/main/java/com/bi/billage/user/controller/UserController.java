@@ -17,6 +17,7 @@ import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.common.savefile.SaveFile;
 import com.bi.billage.common.template.Pagination;
 import com.bi.billage.point.model.service.PointService;
+import com.bi.billage.point.model.vo.Point;
 import com.bi.billage.user.model.service.UserService;
 import com.bi.billage.user.model.vo.User;
 
@@ -182,6 +183,14 @@ public class UserController {
 		int result = userService.insertUser(u);
 		
 		if(result > 0 ) {	// 가입성공되면 메인페이지로
+			
+			//가입된 아이디로 userNo를 조회한 후에 가입 포인트 50p 등록
+			Point p = new Point();
+			p.setUserNo(pointService.selectUserNo(u.getUserId()));
+			p.setPointAdd(50);
+			p.setPointStatus("적립");
+			pointService.addPoint(p);
+			
 			return "redirect:/";
 		} else {			// 실패 에러메세지
 			model.addAttribute("errorMsg", "가입에 실패했습니다.");

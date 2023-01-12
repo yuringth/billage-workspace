@@ -7,4 +7,6 @@ public interface PointService {
 	int addPoint(Point p);
 	
 	int selectPoint(int userNo);
+	
+	int selectUserNo(String userId);
 }
