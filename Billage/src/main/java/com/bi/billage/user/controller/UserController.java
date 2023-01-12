@@ -173,15 +173,15 @@ public class UserController {
 		return "user/myPage";
 	}
 	
-	@RequestMapping("general.me")
+	@RequestMapping("general.cl")
 	public String groupGeneral() {
-		return "group/groupGeneralView";
+		return "club/clubGeneralView";
 	}
 	
 	
-	@RequestMapping("admin.me")
+	@RequestMapping("admin.cl")
 	public String groupAdmin() {
-		return "group/groupAdminView";
+		return "club/clubAdminView";
 	}
 	
 	// 로그인 폼으로
@@ -318,6 +318,12 @@ public class UserController {
 			return "redirect:myPage.me";
 		}
 		
+	}
+	
+	// 비밀번호찾기 email입력폼
+	@RequestMapping("writeEmailForm.me")
+	public String writeEmailForm(String email) {
+		return "user/writeEmailForm";
 	}
 	
 }

@@ -184,7 +184,7 @@
 			
 			<div id="outer-bottom"> 
 				<ul>
-					<li><a href="list.gr">모임</a></li>
+					<li><a href="list.cl">모임</a></li>
 					<li><a href="list.nv">연재</a></li>
 					<li><a href="#">대여</a></li>
 					<li><a href="list.re">리뷰</a></li>
@@ -213,7 +213,7 @@
 						<input type="password" class="login-field" placeholder="비밀번호를 입력하세요." id="login-pass" name="userPwd"/>
 					
 						<button type="submit" class="">로그인하기</button>
-						<button class="login-link" onclick="" >비밀번호찾기</button>
+						<button type="button" class="login-link" id="goEmailForm">비밀번호찾기</button>
 					</div>
 				</form>
 			</div>
@@ -225,15 +225,17 @@
 			// 로그인 모달창 띄우고 지우는 이벤트 
 	        $('#login-btn').click(function(){
 	        	$('#modal-login-area').fadeIn();
-	        	
 	        });
 	        
 			$('.close').click(function(){
 				$('#modal-login-area').fadeOut();
 			});
 			
+			$('#goEmailForm').click(function(){
+				location.href='writeEmailForm.me';
+			});
+		
 		});
-	
 	
 	</script>
 
