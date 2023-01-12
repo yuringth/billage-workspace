@@ -99,11 +99,11 @@
 				
 				<!-- review 테이블 : book_content, book_publisher, book_date 컬럼 추가  -->
 				<div class="content-book-detail">
-					<div id="boo_content" name="bookContent">책내용</div>
-					<div id="book_title" name="bookTitle">제목</div>
-					<div id="book_author" name="bookAuthor">저자</div>
-					<div id="book_publisher" name="bookPublisher">츨판사</div>
-					<div id="book_date" name="bookDate">발행일자</div>
+					<div id="book_content" name="bookContent">${ b.reviewContent }</div>
+					<div id="book_title" name="bookTitle">${ b.bookTitle }</div>
+					<div id="book_author" name="bookAuthor">${ b.bookAuthor }</div>
+					<div id="book_publisher" name="bookPublisher">${ b.bookPublisher }</div>
+					<div id="book_date" name="bookDate">${ b.createDate }</div>
 				</div>
 			</div>
 		</div>
@@ -113,7 +113,7 @@
 
 		<!-- 매란언니한테 알려달라하기 -->
 		<div style="text-align:center;">별점 : ☆☆☆★ 
-			<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+			${ b.reviewStar }<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
 		</div>
 
 		<br>

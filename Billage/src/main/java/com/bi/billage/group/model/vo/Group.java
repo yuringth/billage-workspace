@@ -19,5 +19,6 @@ public class Group {
 	private String groupImg; // GROUP_IMG	VARCHAR2(3000 BYTE)
 	private String nickname;
 	private String newCount;
-	
+	private int groupCount;
+	private int likeCount;
 }

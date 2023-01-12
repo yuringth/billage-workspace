@@ -136,24 +136,25 @@ public class ReviewController {
 	@RequestMapping("detail.re")
 	public String reviewDetail(int reviewNo, Model model) {
 		
-		
+		System.out.println(reviewNo);
 		// 조회수 증가
 		if(boardService.increaseReviewCount(reviewNo) > 0) { // 조회수 성공 시 => 상세보기 들어감
 			// >> 성공적으로 조회수 증가
-			// 	>> boardDetailView.jsp상에 필요한 데이터를 조회(게시글 상세정보 조회용 서비스 호출)
+			// 	>> reviewDetailView.jsp상에 필요한 데이터를 조회(게시글 상세정보 조회용 서비스 호출)
 			//		>> 조회된 데이터를 담아서 board/reviewBoard/reviewDetailView로 포워딩
 			
 			// 조회 성공 시 => db에서 데이터를 가져와야한다.
 			ReviewBoard b = boardService.selectReviewBoard(reviewNo);
 			
+			model.addAttribute("b", b);
 			
-			
-			
+			return "board/reviewBoard/reviewDetailView";
+		} 
+		else {
+			model.addAttribute("errorMsg","게시글 상세조회 실패");
+			return "common/errorPage";
 		}
 		
-		
-		
-		return "board/reviewBoard/reviewDetailView";
 	}
 	
 	

@@ -19,5 +19,6 @@ public class ReviewBoard {
 	private String bookImag; //BOOK_IMAG	VARCHAR2(4000 BYTE)
 	private int bookPoint; //BOOK_POINT	NUMBER
 	private int bookNo; //BOOK_NO	NUMBER
+	private String bookPublisher; // 출판사
 	
 }

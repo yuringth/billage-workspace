@@ -22,6 +22,7 @@
 		<result column="BOOK_IMAG"		property="bookImag" />
 		<result column="BOOK_POINT"  	property="bookPoint" />
 		<result column="BOOK_NO"	    property="bookNo" />
+		<result column="BOOK_PUBLISHER"	    property="bookPublisher" />
 	</resultMap>
 
 	<resultMap id="bookResultSet" type="book">
@@ -77,30 +78,34 @@
 	
 	<!-- 글작성 쿼리문 -->
 	<insert id="insertReviewBoard" parameterType="review">
-	INSERT 
-	  INTO 
-	       REVIEW
-	       (
-	        REVIEW_NO
-	       ,USER_NO
-	       ,REVIEW_STAR
-	       ,REVIEW_CONTENT
-	       ,REVIEW_STATUS
-	       ,BOOK_TITLE
-	       ,BOOK_IMAG
-	       ,BOOK_POINT
-	       )
-	values
-	       (
-	        SEQ_RNO.NEXTVAL
-	       ,#{userNo}
-	       ,#{reviewStar}
-	       ,#{reviewContent}
-	       ,'N'
-	       ,#{bookTitle}
-	       ,#{bookImag} 
-	       ,10
-	       )
+		INSERT 
+		  INTO 
+		       REVIEW
+		       (
+		        REVIEW_NO
+		       ,USER_NO
+		       ,REVIEW_STAR
+		       ,REVIEW_CONTENT
+		       ,REVIEW_STATUS
+		       ,BOOK_TITLE
+		       ,BOOK_IMAG
+		       ,BOOK_POINT
+		       ,BOOK_PUBLISHER
+		       ,BOOK_AUTHOR
+		       )
+		values
+		       (
+		        SEQ_RNO.NEXTVAL
+		       ,#{userNo}
+		       ,#{reviewStar}
+		       ,#{reviewContent}
+		       ,'N'
+		       ,#{bookTitle}
+		       ,#{bookImag} 
+		       ,10
+		       ,#{bookPublisher}
+		       ,#{bookAuthor}
+		       )
 	</insert>
 	
 	
@@ -120,20 +125,18 @@
 	<!--  리뷰게시판. 조회 성공 시 => db에서 데이터를 가져와야한다. -->
 	<select id="selectReviewBoard" resultType="review" resultMap="reviewResultSet">
 		select
-			    board_no
-		       ,board_title
-		       ,board_writer
-		       ,board_content
-		       ,origin_name
-		       ,change_name
+			    review_no
+		       ,book_title
+		       ,book_author
+		       ,book_publisher
 		       ,count 
 		       ,to_char(create_date, 'YYYY-MM-DD') as "CREATE_DATE"
 		  from
-		       board
+		       review
 		 where
-		 	   status = 'Y'
+		 	   review_status = 'N'
 		   and
-		       board_no = #{boardNo}
+		       review_no = #{ reviewNo }
 	</select>	
 	
 	
