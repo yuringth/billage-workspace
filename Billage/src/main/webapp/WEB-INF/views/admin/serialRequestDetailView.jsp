@@ -175,8 +175,8 @@
             <form action="" method="get" id="updateForm">
             	<input type="hidden" name="rno" value="${ sr.requestNo }">
             	<input type="hidden" name="uno" value="${ sr.userNo }">
-            </form>
             <a class="btn btn-primary" onclick="agreeRequest();">수락하기</a>
+            </form>
             </div>
             <br>
         </div>

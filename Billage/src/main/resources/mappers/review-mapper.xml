@@ -143,6 +143,15 @@
 	</select>	
 	
 	
+	<update id="deleteReviewBoard" parameterType="_int">
+		update
+		       review
+		   set
+		       review_status = 'Y'
+		where
+		       review_no = #{ reviewNo }
+		 
+	</update>
 	
 	
 	

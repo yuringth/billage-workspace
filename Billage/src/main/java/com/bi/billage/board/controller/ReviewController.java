@@ -158,12 +158,35 @@ public class ReviewController {
 		
 	}
 	
+
+	
+	// 리뷰게시판 => 글삭제
+	@RequestMapping("delete.re")
+	public String deleteReviewBoard(int reviewNo) {
+		
+		boardService.deleteReviewBoard(reviewNo);
+		
+		return "redirect:list.re";
+		// 왜 포워딩으로 보내면 안되는거지?? db에 들려서 status를 'Y'로 고쳐서 그런가??		
+	}
+	
 	
 	
 	// 리뷰게시판 -> 글수정 누를 시 -> 수정폼 화면 나옴
+//	@RequestMapping("enrollForm.re")
+//	public String reviewEnrollForm() {
+//		return "board/reviewBoard/reviewUploadForm";
+//	}
+	
+	
+	// 리뷰게시판 => 글 수정
 	@RequestMapping("enrollForm.re")
-	public String reviewEnrollForm() {
+	public String updateReviewBoard(/*int reviewNo*/) {
+	
+//		boardService.updateReviewBoard(reviewNo);
+//		
 		return "board/reviewBoard/reviewUploadForm";
+	
 	}
 	
 	

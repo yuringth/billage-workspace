@@ -85,7 +85,7 @@
 		<h1 style="text-align:center;">리뷰 상세페이지</h1>
 		
 		<!-- 리뷰넘버 식별자로 넘기기 -->
-		<input type="hidden" neme="reviewNo" value="#">
+		<input type="hidden" neme="reviewNo" value="${ b.reviewNo }">
 
 		<hr>
 		
@@ -130,7 +130,7 @@
 			<!-- 작성자한테만 보이게 하기 -->	
 			<div style="text-align:center;">
 				<button onclick="location.href='enrollForm.re'">글수정</button>
-				<button>글삭제</button>
+				<button onclick="location.href='delete.re?reviewNo=${ b.reviewNo }'">글삭제</button>
 				<button>뒤로가기</button>
 			</div>
 
