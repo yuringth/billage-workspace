@@ -113,8 +113,8 @@
 		<hr>
 
 		<!-- 매란언니한테 알려달라하기 -->
-		<div style="text-align:center;">별점 : ${ b.reviewStar } ☆☆☆★ 
-			<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+		<div style="text-align:center;">
+			별점 : ${ b.reviewStar } 
 		</div>
 
 		<br>
@@ -129,11 +129,29 @@
 			
 			<!-- 작성자한테만 보이게 하기 -->	
 			<div style="text-align:center;">
-				<button onclick="location.href='enrollForm.re'">글수정</button>
+				<button onclick="postFormSubmit()">글수정</button>
 				<button onclick="location.href='delete.re?reviewNo=${ b.reviewNo }'">글삭제</button>
 				<button>뒤로가기</button>
 			</div>
+			
+			<form action="" method="post" id="postForm">
+				<input type="hidden" name="reviewNo" value="${ b.reviewNo }" />
+				<input type="hidden" name="bookTitle" value="${ b.bookTitle }" />
+				<input type="hidden" name="bookAuthor" value="${ b.bookAuthor }" />
+				<input type="hidden" name="bookPublisher" value="${ b.bookPublisher }" />
+				<input type="hidden" name="createDate" value="${ b.createDate }" />
+				<input type="hidden" name="bookImag" value="${ b.bookImag }" />
+				<input type="hidden" name="reviewStar" value="${ b.reviewStar }" />
+				<input type="hidden" name="reviewContent" value="${ b.reviewContent }" />
+			</form>
 
+			<script>
+				function postFormSubmit(){
+					$('#postForm').attr('action', 'enrollForm.re').submit();
+					console.log('버튼눌럿음');
+				}
+			</script>
+		
 		</div>
 
 

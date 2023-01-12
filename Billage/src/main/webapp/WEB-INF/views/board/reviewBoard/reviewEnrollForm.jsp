@@ -26,7 +26,7 @@
 
 
 .book-detail-outer{
-	border : 1px solid blue;
+	border : 1px solid blue; 
 	width:620px;
 	height:200px;
 	margin:auto;
@@ -34,7 +34,7 @@
 
 
 .book-detail-area{
-	border : 1px solid black;
+	/* border : 1px solid black; */
 	width:620px;
 	height:200px; 
 	display:flex;
@@ -43,7 +43,7 @@
 
 /* 사진  */
 .content-photo-detail{
-	border:1px solid red;
+/* 	border:1px solid red; */
 	width:200px;
 	height:200px;
 	margin-right:20px;
@@ -56,13 +56,13 @@
 
 /* 책 정보 */
 .content-book-detail{
-	border:1px solid pink;
+	/* border:1px solid pink; */
 	width:400px;
 	height:200px;
 }
 
 #book_title, #book_author, #book_publisher, #book_data{
-	border:1px solid pink;
+	/* border:1px solid pink; */
 	height:50px;
 }
 
@@ -114,7 +114,6 @@
 
 
 /* 모달 content 스타일  */
-
     .text-div{
     	text-align:center;
     }
@@ -124,6 +123,7 @@
     	margin:auto;
     	width:700px;
     	height:200px;
+    	align:center;
     }
     
     
@@ -218,7 +218,7 @@
 						<!-- api에서 끌고 오는거니까 첨부파일로 안해도 되는게 맞겠지? <input type="file" name="upfile"> 이런식으로.. -->
 						<div id="book_imag">
 						<!-- 	<img src="" id="book_src" name="bookImg"> -->
-							<input src="" type="image" id="book_src"  required value="사진"> 
+							<input src="resources/images/no_image.jpg" type="image" id="book_src"  required value="사진"> 
 							<input type="hidden" id="bookImag" name="bookImag" value=""> 
 							
 						</div>
@@ -227,10 +227,10 @@
 					<!-- review 테이블 : book_content, book_publisher, book_date 컬럼 추가  -->
 					<div class="content-book-detail">
 						<!-- input에 넣어야 데이터가 넘어간다. div안에 넣으면 안넘어간다  -->
-						<div><input type="text" id="book_title" name="bookTitle"  required value="제목"></div>
-						<div><input type="text" id="book_author" name="bookAuthor" required value="작가"></div>
-						<div><input type="text" id="book_publisher" name="bookPublisher" required value="출판사"></div>
-						<div><input type="text" id="book_date" name="bookDate" required value="발행일자"></div>
+						<div><input type="text" id="book_title" name="bookTitle"  required value=""></div>
+						<div><input type="text" id="book_author" name="bookAuthor" required value=""></div>
+						<div><input type="text" id="book_publisher" name="bookPublisher" required value=""></div>
+						<div><input type="text" id="book_date" name="bookDate" required value=""></div>
 
 					<!-- 	<div id="book_title" name="bookTitle">제목</div>
 						<div id="book_author" name="bookAuthor">작가</div>
@@ -272,6 +272,8 @@
             </div>
 
 			<br>
+	
+	
 	
 			<!-- 리뷰 작성 란 -->
 			<div class="review-content-outer">

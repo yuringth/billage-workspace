@@ -181,18 +181,17 @@ public class BoardDao {
 		return sqlSession.update("ADBoardMapper.deleteAuctionBoard", boardNo);
 	}
 
+	public int insertDrawUser(SqlSessionTemplate sqlSession, ADBoard b) {
+		return sqlSession.insert("ADBoardMapper.insertDrawUser", b);
+	}
 
+	public int deleteDrawUser(SqlSessionTemplate sqlSession, ADBoard b) {
+		return sqlSession.insert("ADBoardMapper.deleteDrawUser", b);
+	}
 
-
-
-
-
-
-
-
-
-
-
+	public int checkDraw(SqlSessionTemplate sqlSession, ADBoard b) {
+		return sqlSession.selectOne("ADBoardMapper.checkDraw", b);
+	}
 
 
 
@@ -276,7 +275,10 @@ public class BoardDao {
 	}
 	
 	
-	
+	// 리뷰게시판 => 게시글 수정
+	public int updateReviewBoard(SqlSessionTemplate sqlSession, ReviewBoard b) {
+		return sqlSession.update("reviewMapper.updateReviewBoard", b);
+	}
 	
 	
 	
@@ -351,6 +353,15 @@ public class BoardDao {
 		map.put("novelNo", novelNo);
 		return sqlSession.insert("serialMapper.insertSerial", map);
 	}
+
+
+	
+
+
+	
+
+
+	
 
 
 
