@@ -86,6 +86,7 @@
 		
 		<!-- 리뷰넘버 식별자로 넘기기 -->
 		<input type="hidden" neme="reviewNo" value="${ b.reviewNo }">
+		<input type="hidden" neme="userNo" value="${ b.userNo }">
 
 		<hr>
 		
@@ -120,18 +121,25 @@
 		<br>
 
 		<div class="review-content-outer">
-			<textarea id="review_content" name="reviewContent" rows="20" cols="100" style="resize:none" maxlength="1000" required>${ b.reviewContent }</textarea>
+			<textarea id="review_content" name="reviewContent" rows="20" cols="100" style="resize:none" maxlength="1000" required readonly>${ b.reviewContent }</textarea>
 			
 			<hr>
 			
 			<!-- 좋아요기능 -->
-			<button>♡</button>
+			<div><button>♡</button></div>
 			
-			<!-- 작성자한테만 보이게 하기 -->	
+			<!-- 유저넘버 == 글작성자한테 보이게 하기 -->	
 			<div style="text-align:center;">
-				<button onclick="postFormSubmit()">글수정</button>
-				<button onclick="location.href='delete.re?reviewNo=${ b.reviewNo }'">글삭제</button>
-				<button>뒤로가기</button>
+				<c:choose>
+					<c:when test="${loginUser.userNo eq b.userNo}">
+						<button onclick="postFormSubmit()">글수정</button>
+						<button onclick="location.href='delete.re?reviewNo=${ b.reviewNo }'">글삭제</button>
+						<button>뒤로가기</button>
+					</c:when>
+					<c:otherwise>	
+						<button>뒤로가기</button>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			
 			<form action="" method="post" id="postForm">
@@ -148,7 +156,6 @@
 			<script>
 				function postFormSubmit(){
 					$('#postForm').attr('action', 'enrollForm.re').submit();
-					console.log('버튼눌럿음');
 				}
 			</script>
 		

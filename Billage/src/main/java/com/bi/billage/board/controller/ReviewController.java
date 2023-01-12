@@ -176,6 +176,8 @@ public class ReviewController {
 	@RequestMapping("enrollForm.re")
 	public ModelAndView reviewEnrollForm(int reviewNo, ModelAndView mv) {
 		mv.addObject("b", boardService.selectReviewBoard(reviewNo)).setViewName("board/reviewBoard/reviewUploadForm");
+		System.out.println(mv);
+		System.out.println(reviewNo);
 		return mv;
 	}
 	

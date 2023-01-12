@@ -39,22 +39,76 @@
 			
 			<hr>
 			
-			<c:forEach items="${ followingList }" var="f">
-					<div id="following" style="display:flex; flex-direction: row; justify-content: space-evenly;">
-						<div id="profile">
-							<img src="https://i.pinimg.com/originals/4c/f0/16/4cf0163a9db5f4b69499b9365be5fcda.png" width="100px;" height="100px;">
-						</div>
-						<div id="userDetail">
-							<div id="userNickName" ><a href="followDetail.fo?uno=${f.userNo }">${ f.nickname }</a></div>
-							<div id="reviewCount">리뷰100</div>
-						</div>
-						<button id="followingBtn" style="width:100px; height:50px;">팔로잉</button>
-						</div>
+			<c:choose>
+				<c:when test="${ !empty sessionScope.loginUser }">
+					<c:forEach items="${ followingList }" var="f">
+						<div id="following${ f.userNo}" style="display:flex; flex-direction: row; justify-content: space-evenly;">
+							<div id="profile${ f.userNo}">
+								<img src="https://i.pinimg.com/originals/4c/f0/16/4cf0163a9db5f4b69499b9365be5fcda.png" width="100px;" height="100px;">
+							</div>
+							<div id="userDetail${ f.userNo}">
+								<div id="userNickName"${ f.userNo} ><a href="followDetail.fo?uno=${f.userNo }">${ f.nickname }</a></div>
+								<div id="reviewCount${ f.userNo}">리뷰100</div>
+							</div>
+							<input type="hidden" id="f${f.userNo }" value="${ f.userNo }">
+							<button id="followingBtn" class="1" style="width:100px; height:50px;" onclick="follow(this);">팔로잉</button>
+						</div> 
 						<br><br>
 					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<h1>로그인 해주세요</h1>
+				</c:otherwise>
+			</c:choose>
 				
 			</div>
 		</div>
+		
+		<script>
+			function follow(e){
+				var num = $(e).attr('class');
+				var userNo2 = $(e).prev().val();
+				
+				if(num > 0){
+					$.ajax({
+						url : 'delete.fo',
+						method : 'post',
+						data : {
+							userNo2 : userNo2
+						},
+						success : function(result){
+							if(result > 0){
+								$(e).text('팔로우');
+								$(e).attr('class' , '0');
+							}
+						},
+						error : function() {
+							console.log('에러');
+						}
+					})
+				}
+				else {
+					$.ajax({
+						url : 'insert.fo',
+						method : 'post',
+						data : {
+							userNo2 : userNo2
+						},
+						success : function(result){
+							if(result > 0){
+								$(e).text('팔로잉');
+								$(e).attr('class','1');
+							}
+						},
+						error : function() {
+							console.log('에러');
+						}
+					})
+				}
+			}
+		
+		
+		</script>
 
 	
 	<jsp:include page="../common/footer.jsp"/>
