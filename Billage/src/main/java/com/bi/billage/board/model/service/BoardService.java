@@ -2,8 +2,6 @@ package com.bi.billage.board.model.service;
 
 import java.util.ArrayList;
 
-import org.springframework.web.servlet.ModelAndView;
-
 import com.bi.billage.board.model.vo.ADBoard;
 import com.bi.billage.board.model.vo.Book;
 import com.bi.billage.board.model.vo.Novel;
@@ -137,7 +135,10 @@ public interface BoardService {
 	int deleteDrawUser(ADBoard b);
 	//추첨여부 조회
 	int checkDraw(ADBoard b);
-	
+	// 추첨 당첨자 선정
+	ArrayList<Integer> selectPrizeUser(int boardNo);
+	// 당첨자 등록
+	int insertPrizeUser(ADBoard b);
 	
 	
 	
@@ -195,6 +196,9 @@ public interface BoardService {
 	
 	// 리뷰게시글 수정 서비스(update)
 	int updateReviewBoard(ReviewBoard b);
+
+
+	
 
 
 

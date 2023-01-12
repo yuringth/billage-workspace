@@ -276,7 +276,18 @@ public class BoardServiceImpl implements BoardService {
 	//추첨 여부 조회
 	@Override
 	public int checkDraw(ADBoard b) {
-		return 0;
+		return boardDao.checkDraw(sqlSession, b);
+	}
+	// 추첨 당첨자 선정
+	@Override
+	public ArrayList<Integer> selectPrizeUser(int boardNo) {
+		return boardDao.selectPrizeUser(sqlSession, boardNo);
+	}
+	
+	//추첨 당첨자 등록
+	@Override
+	public int insertPrizeUser(ADBoard b) {
+		return boardDao.insertPrizeUser(sqlSession, b);
 	}
 
 

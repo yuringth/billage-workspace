@@ -41,6 +41,7 @@
 		<result column="BID_PRICE" property="bidPrice"/>
 		<result column="NOW_PRICE" property="nowPrice"/>
 		<result column="NICKNAME" property="nickname"/>
+		<result column="NICKNAME_1" property="prizeUser"/>
 	</resultMap>	
 		
 	<!-- 추첨 글 작성 -->
@@ -50,7 +51,7 @@
 		  		DRAW_BOARD
 		  		(
 		  		DRAW_NO
-		  		,TITLE${
+		  		,TITLE
 		  		,USER_NO
 		  		,BOOK_WRITER
 		  		,GENRE
@@ -111,7 +112,8 @@
 		SELECT
 				DRAW_NO
 				,D.USER_NO
-				,NICKNAME
+				,M.NICKNAME
+				,A.NICKNAME
 				,ORIGIN_NAME
 				,CHANGE_NAME
 				,CLOSE_DATE
@@ -125,6 +127,9 @@
 		  		DRAW_BOARD D
 		  JOIN
 		  		MEMBER M ON (D.USER_NO = M.USER_NO)
+		  LEFT
+		  JOIN
+		  		MEMBER A ON (PRIZE_USER = A.USER_NO)
 		 WHERE
 		 		DRAW_NO = #{boardNO} 
 	</select>
@@ -275,6 +280,39 @@
 		   AND
 		   		USER_NO = #{userNo}
 	</delete>
+	
+	<!-- 추첨여부 조회  -->
+	<select id="checkDraw" parameterType="adboard" resultType="_int">
+		SELECT
+				COUNT(*)
+		  FROM
+		  		DRAW
+		 WHERE
+		 		DRAW_NO = #{boardNo}
+		   AND
+		   		USER_NO = #{userNo}
+	</select>
+	
+	<!-- 응모자 리스트 조회 -->
+	<select id="selectPrizeUser" parameterType="_int" resultType="arraylist">
+		SELECT
+				USER_NO
+		  FROM
+		  		DRAW
+		 WHERE
+		 		DRAW_NO = #{ boardNo }
+	</select>
+	
+	<!-- 추첨자 등록 -->
+	<update id="insertPrizeUser" parameterType="_int">
+		UPDATE
+				DRAW_BOARD
+		   SET
+		   		PRIZE_USER = #{userNo}
+		 WHERE
+		 		DRAW_NO = #{boardNo}
+	</update>
+	
 	
 </mapper>
 

@@ -2,6 +2,7 @@ package com.bi.billage.board.controller;
 
 import java.io.File;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
 
@@ -173,18 +174,59 @@ public class DrawAuctionController {
 		if(pointService.addPoint(p) * boardService.insertDrawUser(b) > 0) {
 			// 포인트 차감, 추첨 등록 성공
 			((User)session.getAttribute("loginUser")).setPoint(pointService.selectPoint(b.getUserNo()));
+//			System.out.println("응모 성공, 남은 포인트 :" + ((User)session.getAttribute("loginUser")).getPoint());
 			return "redirect:detail.dr?bno=" + b.getBoardNo();
 		} else { //뭐든 실패
-			mv.addObject("errorMsg", "포인트 차감 실패");
+			mv.addObject("errorMsg", "응모 실패");
 			return "common/errorPage";
 		}
 		
 	}
 	
+	@RequestMapping("cancel.dr")
+	public String deleteDrawUser(ADBoard b, HttpSession session, ModelAndView mv) {
+		Point p = new Point();
+		//응모포인트만큼 현재 포인트에서 차감
+		p.setUserNo(b.getUserNo());
+		p.setPointAdd( b.getTryPoint());
+		p.setPointStatus("취소");
+		
+		if(pointService.addPoint(p) * boardService.deleteDrawUser(b) > 0) {
+			// 포인트 환불, 추첨 취소 성공
+			((User)session.getAttribute("loginUser")).setPoint(pointService.selectPoint(b.getUserNo()));
+//			System.out.println("응모 취소, 남은 포인트 :" + ((User)session.getAttribute("loginUser")).getPoint());
+			return "redirect:detail.dr?bno=" + b.getBoardNo();
+		} else {//뭐든 실패
+			mv.addObject("errorMsg", "취소 실패");
+			return "common/errorPage";
+		}
+	}
+	
+	// 추첨신청여부에 따라서 버튼 바꾸는 녀석
 	@ResponseBody
 	@RequestMapping(value="checkDraw.dr", produces="appliction/json; charset=UTF-8")
-	public String checkDraw(ADBoard b){
+	public String checkDraw(ADBoard b, HttpSession session){
+		b.setUserNo(((User)session.getAttribute("loginUser")).getUserNo());
 		return new Gson().toJson(boardService.checkDraw(b));
 	}
+	//당첨자 
+	@ResponseBody
+	@RequestMapping(value="prize.dr", produces="appliction/json; charset=UTF-8")
+	public String selectPrizeUser(int boardNo, HttpSession session){
+		//추첨자 리스트 가져오기
+		ArrayList<Integer> list = boardService.selectPrizeUser(boardNo);
+		// 추첨자 리스트에서 랜덤으로 하나 선정
+		int userNo = 0;
+		if(list.size() > 0) {
+			userNo = list.get((int)Math.random() * list.size());
+		}
+		
+		ADBoard b = new ADBoard();
+		b.setUserNo(userNo);
+		b.setBoardNo(boardNo);
+		// 보드테이블의 당첨자 컬럼에  당첨자 회원번호 입력 
+		return new Gson().toJson(boardService.insertPrizeUser(b));
+	}
+	
 	
 }

@@ -35,7 +35,7 @@ public class BoardController {
 	// 작품 리스트 화면 +페이징처리
 	@RequestMapping("list.nv")
 	public ModelAndView selectNovelList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
-		PageInfo pi = Pagination.getPageInfo(boardService.selectNovelListCount(), currentPage, 10, 12);
+		PageInfo pi = Pagination.getPageInfo(boardService.selectNovelListCount(), currentPage, 10, 9);
 		mv.addObject("pi", pi).addObject("list", boardService.selectNovelList(pi)).setViewName("board/novelBoard/novelListView");
 		
 		return mv;
@@ -72,7 +72,8 @@ public class BoardController {
 	// 연재 작성 메소드
 	@RequestMapping("insert.se")
 	public String insertSerial(Serial se, int novelNo, HttpServletRequest request, HttpSession session, Model model) {
-		System.out.println(se);
+		
+		
 		if(boardService.insertSerial(se, novelNo) > 0) { // 성공 => 이전화면으로
 			session.setAttribute("alertMsg", "등록 완료");
 			return "redirect:" + request.getHeader("Referer");
@@ -115,7 +116,7 @@ public class BoardController {
 			}
 				
 			if(boardService.insertNovel(n) > 0) { // 성공 => 메인화면으로
-				session.setAttribute("alertMsg", "연재 신청 완료");
+				session.setAttribute("alertMsg", "작품 등록 완료");
 				return "main"; //
 			} else {
 				model.addAttribute("errorMsg", "작성 실패");
