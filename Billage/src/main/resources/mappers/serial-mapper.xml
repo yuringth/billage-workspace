@@ -48,7 +48,8 @@
 				n.user_no,
 				n.novel_title,
 				n.novel_display,
-                (select nickname from member m where m.user_no = s.user_no) as nickName
+                (select nickname from member m where m.user_no = s.user_no) as nickName,
+                n.change_name as novelImg
 		from
 				serial s
 		left join

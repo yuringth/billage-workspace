@@ -20,7 +20,8 @@
 		<result column="USER_NO" property="userNo"/>
 		<result column="ACCEPT_STATUS" property="acceptStatus"/>
 		<result column="TRY_POINT" property="tryPoint"/>
-		<result column="NICKNAME" property="nickname"/>
+		<result column="M.NICKNAME" property="nickname"/>
+		<result column="A.NICKNAME" property="prizeUser"/>
 	</resultMap>
 	<resultMap type="adboard" id="auctionBoardResultSet">
 		<result column="AUCTION_NO" property="boardNo"/>
@@ -294,7 +295,7 @@
 	</select>
 	
 	<!-- 응모자 리스트 조회 -->
-	<select id="selectPrizeUser" parameterType="_int" resultType="arraylist">
+	<select id="selectPrizeUser" parameterType="_int" resultType="_int">
 		SELECT
 				USER_NO
 		  FROM
