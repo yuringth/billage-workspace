@@ -109,10 +109,18 @@
 			</p>
 		</div>
 		
-		
-		<button class="btn1 btn btn-secondary" onclick="postFormSubmit(2);">
-			${b.tryPoint}P 응모하기
-		</button>
+		<c:choose>
+			<c:when test="${ not empty loginUser }">
+				<button class="btn1 btn btn-secondary" onclick="postFormSubmit(2);">
+					${b.tryPoint}P 응모하기
+				</button>
+			</c:when>
+			<c:otherwise>
+				<button class="btn1 btn btn-secondary" onclick="notLogin();">
+					${b.tryPoint}P 응모하기
+				</button>
+			</c:otherwise>
+		</c:choose>
 		
 		<form action="" method="post" id="postForm">
 			<input type="hidden" name="tryPoint" value="${b.tryPoint}">
@@ -170,7 +178,10 @@
 				}
 			}
 		}
-	
+		
+		function notLogin(){
+			alert('로그인을 하셔야 이용 가능합니다.');
+		}
 	
 	</script>
 	
