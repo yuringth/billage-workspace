@@ -105,17 +105,17 @@
 					</tr>
 					<tr>
 						<th>*모임 설명</th>
-						<td><div><textarea name="groupDescribe" row="50" style="width:800px; height:200px; resize: none;" 
+						<td><div><textarea name="clubDiscript" row="50" style="width:800px; height:200px; resize: none;" 
 											placeholder="10자 이상 입력해주세요"></textarea></div></td>
 					</tr>
 					<tr>
 						<th>*모임 중심 지역</th>
-						<td><input type="button" id="addr-btn" value="찾기" /><div><input type="text" name="groupLocation" required readonly></div></td>
+						<td><input type="button" id="addr-btn" value="찾기" /><div><input type="text" name="clubLocation" required readonly></div></td>
 					</tr>
 					<tr>
 						<th>*모임 정원</th>
 						<td>
-							<div><input type="number" name="groupNum" max="300" required/></div>
+							<div><input type="number" name="clubLimit" max="300" required/></div>
 							*최대 300명까지 
 						</td>
 					</tr>
@@ -180,7 +180,7 @@
 		});
 		
 		// 버튼 비활성화 기능 ---------------------------------------------------------------------------------
-	    $('textarea[name=groupDescribe]').keyup(function(){
+	    $('textarea[name=clubDiscript]').keyup(function(){
 			if($(this).val().length >= 10){
 	        	$('#enroll-btn-area > button[type=submit]').removeAttr('disabled');
 			} else {
@@ -191,7 +191,7 @@
 	    // 검색을 위한 모달창 띄우기 
 	    $(function(){
 	    	$('#addr-btn').click(function(){
-	    		$('input[name=groupLocation]').val('');
+	    		$('input[name=clubLocation]').val('');
 	    		$('#modal-serach-area').show();
 	    	});
 	    	
@@ -271,7 +271,7 @@
 			$(document).on('click', '.enter-addr', function(){
 				var $addr = $(this).text().split(/[" ",)]/);
 				console.log($addr[2]);
-				$('input[name=groupLocation]').val($addr[2]);
+				$('input[name=clubLocation]').val($addr[2]);
 				$('#modal-serach-area').hide();
 				$('#search').val('');
 				$('#enter-addr-in').empty();
