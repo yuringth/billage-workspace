@@ -320,4 +320,10 @@ public class UserController {
 		
 	}
 	
+	// 비밀번호찾기 email입력폼
+	@RequestMapping("writeEmailForm.me")
+	public String writeEmailForm(String email) {
+		return "user/writeEmailForm";
+	}
+	
 }
