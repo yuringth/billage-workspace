@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pointMapper">
+	
+		
+	<resultMap type="point" id="pointResultset">
+		<result column="USER_NO" property="userNo"/>
+		<result column="POINT_ADD" property="pointAdd"/>
+		<result column="POINT_DATE" property="pointDate"/>
+		<result column="POINT_STATUS" property="pointStatus"/>
+	</resultMap>
+	
+	<select id="selectPoint" parameterType="_int" resultType="_int">
+		SELECT
+				SUM(POINT_ADD)
+		  FROM
+		  		POINT
+		 WHERE
+		 		USER_NO = #{userNo}
+	</select>
+	
+	
+	<insert id="addPoint" parameterType="point">
+		INSERT
+		  INTO
+		  		POINT
+		  		(
+		  		USER_NO
+		  		,POINT_ADD
+		  		,POINT_STATUS
+		  		)
+		VALUES
+				(
+				#{userNo}
+				,#{pointAdd}
+				,#{pointStatus}
+				)
+	</insert>
+	
+	<select id="selectUserNo" parameterType="string" resultType="_int">
+		SELECT
+				USER_NO
+		  FROM
+		  		MEMBER
+		 WHERE
+		 		USER_ID = #{userId}
+	</select>
+	
+	
+</mapper>
+
