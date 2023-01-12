@@ -103,15 +103,15 @@
     		$.ajax({
     			url : "",
     			data : {},
-    			success : function(){
+    			success : function(result){
     				
     			},
     			error : function(){
-    				
+					console.log('비동기 통신 실패, 참가자 조회');    				
     			}
     			
     		})
-    	}
+    	};
     
     
     

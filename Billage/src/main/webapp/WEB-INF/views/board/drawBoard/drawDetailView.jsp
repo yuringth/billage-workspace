@@ -124,7 +124,7 @@
 							</button>
 						</c:if>
 						<c:if test="${ loginUser.point >= b.tryPoint }">
-							<button class="btn1 btn btn-secondary" onclick="postFormSubmit(2);">
+							<button class="btn1 btn btn-secondary" id="drawBtn" onclick="postFormSubmit(2);">
 								${b.tryPoint}P 응모하기
 							</button>
 						</c:if>
@@ -184,9 +184,10 @@
 		    if(remaindTime >= 0){
 		    	$('.time').text(day +'일 ' + hour + ':' + min + ':' + sec);
 		    } else {
+		    	//당첨자 선정하는 메소드
+		    	selectPrizeUser();
 		    	$('.time').text('응모 시간 종료');
 		    	$('.btn1').attr('disabled', true).text('응모 시간 종료');
-		    	//여기에서 당첨자 돌리는 함수  호출
 		    }
 		}
 	
@@ -201,6 +202,11 @@
 					$('#postForm').attr('action','draw.dr').submit();
 				}
 			}
+			if(num == 3){
+				if(confirm("응모 취소하시겠습니까?")){
+					$('#postForm').attr('action','cancel.dr').submit();
+				}
+			}
 		}
 		
 		function notLogin(){
@@ -211,18 +217,34 @@
 			confirm('포인트가 부족합니다. 충전하시겠습니까?');
 		}
 		
+		//추점신청한 사람 버튼 바꿔주는 함수
 		function tryBtnChange(){
 			$.ajax({
 				url : 'checkDraw.dr',
 				data : {
 					boardNo : ${b.boardNo},
-					userNo : ${loginUser.userNo}
+				},
+				success : function(result){
+					if(result > 0){
+						$('#drawBtn').attr('onclick', 'postFormSubmit(3)').text('응모취소');
+					}
+				},
+				error : function(){
+					console.log(실패 ㅠ);
+				}
+			});
+		}
+		
+		//당첨자 선정하는 함수
+		function selectPrizeUser(){
+			$.ajax({
+				url : 'prize.dr',
+				data : {
+					boardNo : ${b.boardNo},
 				},
 				success : function(result){
 					
 				}
-				
-				
 			});
 		}
 		

@@ -144,11 +144,11 @@ body {
 	      </div>
 	      
 	      <div class="textForm">
-	        <input name="userPwd" type="password" class="pw" placeholder="비밀번호">
+	        <input name="userPwd" type="password" class="pw" placeholder="비밀번호" id="userPwd">
 	      </div>
 	      
 	       <div class="textForm">
-	        <input name="checkPwd" type="password" class="pw" placeholder="비밀번호 확인">
+	        <input name="checkPwd" type="password" class="pw" placeholder="8~15자의 영문 대 소문자, 숫자, 특수문자로" id="checkPwd">
 	      </div>
 	      
 	      <div class="textForm">
@@ -250,10 +250,39 @@ body {
 		});
 		
 	});
+</script>
 
+<script>
+	//비밀번호 유효성 검사
+	
+	$('input[name=userPwd]').focusout(function(){
+		var regExp = /^[a-zA-Z\d!@#$%^]{8,15}$/;
+        var $userPwd = $('#userPwd').val();
+        
+        if($userPwd=="") {
+           alert('필수입력사항입니다.');
+           return false;
+		}
+        if(!regExp.test($('#userPwd').val())){ 
+            alert('8~15자의 영문 대 소문자, 숫자, 특수문자로 입력해주세요.');
+            return false;
+        } 
+	});
+	
+	$('input[name=checkPwd]').focusout(function(){
+        var $userPwd = $('#userPwd').val();
+        var $checkPwd = $('#checkPwd').val();
 
-
-
+        if($userPwd=="") {
+        	alert('필수입력사항입니다.');
+        	return false;
+        } 
+        if(!($checkPwd==$userPwd)) {
+            alert('비밀번호가 일치하지않습니다.')
+            return false;
+        } 
+    });
+	
 </script>
 
 </html>
