@@ -125,9 +125,9 @@
         <div class="sidebar">
             <h2>관리자 페이지</h2>
             <ul>
-                <li><a href="selectUser.ad"><i class="fas fa-user"></i>회원 관리</a></li>
-                <li><a href="selectGroup.ad"><i class="fas fa-home"></i>모임 관리</a></li>
-                <li><a href="inquiryList.ad"><i class="fas fa-address-card"></i>1:1 문의</a></li>
+                <li><a href="userList.ad"><i class="fas fa-user"></i>회원 관리</a></li>
+                <li><a href="groupList.ad"><i class="fas fa-home"></i>모임 관리</a></li>
+                <li><a href="inqList.ad"><i class="fas fa-address-card"></i>1:1 문의</a></li>
                 <li><a href="faqList.fa"><i class="fas fa-project-diagram"></i>FAQ 관리</a></li>
                 <li><a href="noticeList.no"><i class="fas fa-blog"></i>공지사항</a></li>
                 <li><a href="list.sr"><i class="fas fa-address-book"></i>연재 요청</a></li>
@@ -136,45 +136,34 @@
         <div class="main_content">
             <div class="title">
 				<h1 class="title-text">1:1 문의 조회 및 관리</h1>
-			</div>
+			</div><br>
 			<table id="contentArea" algin="center" class="table">
                 <tr>
                     <th width="100">제목</th>
                     <td colspan="3">${ iq.inqTitle }</td>
                 </tr>
                 <tr>
+                    <th width="100">작성자</th>
+                    <td colspan="3">${ iq.nickname }</td>
+                </tr>
+                <tr>
                     <th>작성일</th>
-                    <td>${ sr.requestDate }</td>
+                    <td>${ iq.inqDate }</td>
                 </tr>
                 <tr>
-                    <th>내용</th>
-                    <td colspan="3"></td>
+                    <th>문의유형</th>
+                    <td colspan="3">${ iq.inqType }</td>
                 </tr>
                 <tr>
-                    <td colspan="4"><p style="height:150px;">${ sr.requestContent }</p></td>
-                </tr>
-                <tr>
-                    <th>첨부파일</th>
-                    <td colspan="3">
-                    	<c:choose>
-                    		<c:when test="${ empty sr.originName }">
-                    			첨부파일이 없습니다.
-                    		</c:when>
-                    		<c:otherwise>
-                        		<a href="${ sr.changeName }" download="${ sr.originName }">${ sr.originName }</a>
-                        	</c:otherwise>
-                        </c:choose>
-                    </td>
+                    <td colspan="4"><p style="height:150px;">${ iq.inqContent }</p></td>
                 </tr>
             </table>
             <div>
-            ${ sr.requestNo }
-            ${ sr.userNo }
             <form action="" method="get" id="updateForm">
             	<input type="hidden" name="rno" value="${ sr.requestNo }">
             	<input type="hidden" name="uno" value="${ sr.userNo }">
             </form>
-            <a class="btn btn-primary" onclick="agreeRequest();">수락하기</a>
+            <a class="btn btn-primary" onclick="answerRequest();">답변하기</a>
             </div>
             <br>
         </div>

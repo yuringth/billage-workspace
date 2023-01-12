@@ -134,7 +134,7 @@
         <div class="main_content">
             <div class="title">
 				<h1 class="title-text">연재 요청 조회 및 관리</h1>
-			</div>
+			</div><br>
 				<table id="serialRequestList" class="table table-hover" align="center">
                 <thead>
                     <tr>
