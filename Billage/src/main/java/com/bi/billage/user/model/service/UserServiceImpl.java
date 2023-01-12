@@ -119,4 +119,9 @@ public class UserServiceImpl implements UserService{
 		return userDao.deleteUser(sqlSession, userNo);
 	}
 
+	@Override
+	public Inquiry selectInquiry(int inqNo) {
+		return userDao.selectInquiry(sqlSession, inqNo);
+	}
+
 }
