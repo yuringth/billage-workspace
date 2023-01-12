@@ -9,10 +9,10 @@
 		<result column="USER_NO" property="userNo"/>
 		<result column="POINT_ADD" property="pointAdd"/>
 		<result column="POINT_DATE" property="pointDate"/>
-		<result column="point_STATUS" property="pointStatus"/>
+		<result column="POINT_STATUS" property="pointStatus"/>
 	</resultMap>
 	
-	<select id="selectPoint" parameterType="_int">
+	<select id="selectPoint" parameterType="_int" resultType="_int">
 		SELECT
 				SUM(POINT_ADD)
 		  FROM
@@ -21,5 +21,23 @@
 		 		USER_NO = #{userNo}
 	</select>
 	
+	
+	<insert id="addPoint" parameterType="point">
+		INSERT
+		  INTO
+		  		POINT
+		  		(
+		  		USER_NO
+		  		,POINT_ADD
+		  		,POINT_STATUS
+		  		)
+		VALUES
+				(
+				#{userNo}
+				,#{pointAdd}
+				,#{pointStatus}
+				)
+		  		
+	</insert>
 </mapper>
 

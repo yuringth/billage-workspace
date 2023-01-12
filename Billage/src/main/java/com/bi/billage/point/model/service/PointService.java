@@ -1,8 +1,10 @@
 package com.bi.billage.point.model.service;
 
+import com.bi.billage.point.model.vo.Point;
+
 public interface PointService {
 
-	int addPoint(int point);
+	int addPoint(Point p);
 	
 	int selectPoint(int userNo);
 }
