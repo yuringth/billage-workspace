@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bi.billage.follow.model.service.FollowService;
 import com.bi.billage.follow.model.vo.Follow;
 import com.bi.billage.user.model.vo.User;
+import com.google.gson.Gson;
 
 @Controller
 public class FollowController {
@@ -20,7 +21,7 @@ public class FollowController {
 	@Autowired
 	private FollowService followService;
 	
-	
+	//following list
 	@RequestMapping("selectFollowing.fo")
 	public ModelAndView selectFollowingList(int uno, ModelAndView mv) {
 		
@@ -31,6 +32,7 @@ public class FollowController {
 		return mv;
 	}
 	
+	//followerList 내가 follow 한 사람과 하지 않은 사람을 각각 나누어서 select 함
 	@RequestMapping("selectFollower.fo")
 	public ModelAndView selectFollowerList(int uno, ModelAndView mv) {
 		
@@ -66,9 +68,10 @@ public class FollowController {
 		return "follow/followReviewListView";
 	}
 	
+	//팔로우 insert
 	@ResponseBody
 	@RequestMapping(value="insert.fo", produces ="application/json; charset=UTF-8")
-	public ModelAndView insertFollow(int userNo2, ModelAndView mv, HttpSession session) {
+	public String insertFollow(int userNo2, ModelAndView mv, HttpSession session) {
 		
 			int userNo = ((User)session.getAttribute("loginUser")).getUserNo();
 			
@@ -78,24 +81,27 @@ public class FollowController {
 			
 			System.out.println(result);
 			
-			mv.addObject(result);
 			
-		return mv;
+			
+		return new Gson().toJson(result);
 	}
 	
+	
+	//팔로우 delete
 	@ResponseBody
-	@RequestMapping(value="delete.fo", produces="application/json; charset=UTF-8")
-	public ModelAndView deleteFollow(int userNo2, ModelAndView mv, HttpSession session) {
+	@RequestMapping(value="delete.fo", produces ="application/json; charset=UTF-8")
+	public String deleteFollow(int userNo2, ModelAndView mv, HttpSession session) {
+		
+		System.out.println('s');
 		
 		int userNo = ((User)session.getAttribute("loginUser")).getUserNo();
 		
 		Follow follow = new Follow(userNo, userNo2);
 		
 		int result = followService.deleteFollow(follow);
+		System.out.println(result);
 		
-		mv.addObject(result);
-		
-		return mv;
+		return new Gson().toJson(result);
 	}
 
 }

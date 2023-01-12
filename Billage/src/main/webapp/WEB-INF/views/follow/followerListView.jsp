@@ -43,29 +43,30 @@
 				
 				<div>
 					<c:forEach items="${ followerList1 }" var="f1">
-					<div id="follower" style="display:flex; flex-direction: row; justify-content: space-evenly;">
-						<div id="profile">
+					<div id="followeing${f1.userNo }" style="display:flex; flex-direction: row; justify-content: space-evenly;">
+						<div id="profile${f1.userNo }">
 							<img src="https://i.pinimg.com/originals/4c/f0/16/4cf0163a9db5f4b69499b9365be5fcda.png" width="100px;" height="100px;">
 						</div>
-						<div id="userDetail">
-							<div id="userNickName" ><a href="followDetail.fo?uno=${f1.userNo}">${ f1.nickname }</a></div>
-							<div id="reviewCount"><a href="reviewList.fo"></a>리뷰100</div>
+						<div id="userDetail${f1.userNo }">
+							<div id="userNickName${f1.userNo }" ><a href="followDetail.fo?uno=${f1.userNo}">${ f1.nickname }</a></div>
+							<div id="reviewCount${f1.userNo }"><a href="reviewList.fo"></a>리뷰100</div>
 						</div>
-							<button id="followingBtn" class="1" width="50px;" height="20px;">팔로잉</button>
+							<input type="hidden"  id="f1${f1.userNo }" value="${ f1.userNo }">
+							<button id="followingBtn${f1.userNo }" class="1" width="50px;" height="20px;" onclick="follow(this);">팔로잉</button>
 					</div>
 					</c:forEach>
 					
 					<c:forEach items="${ followerList2 }" var="f2">
-						<div id="follower" style="display:flex; flex-direction: row; justify-content: space-evenly;">
-						<div id="profile">
+						<div id="follower${f2.userNo }" style="display:flex; flex-direction: row; justify-content: space-evenly;">
+						<div id="profile${f2.userNo }">
 							<img src="https://i.pinimg.com/originals/4c/f0/16/4cf0163a9db5f4b69499b9365be5fcda.png" width="100px;" height="100px;">
 						</div>
-						<div id="userDetail">
-							<div id="userNickName" ><a href="followDetail.fo?uno=${f2.userNo}">${f2.nickname }</a></div>
-							<div id="reviewCount"><a href="reviewList.fo"></a>리뷰100</div>
+						<div id="userDetail${f2.userNo }">
+							<div id="userNickName${f2.userNo }" ><a href="followDetail.fo?uno=${f2.userNo}">${f2.nickname }</a></div>
+							<div id="reviewCount${f2.userNo }"><a href="reviewList.fo"></a>리뷰100</div>
 						</div>
-							<input type="hidden"  id="userNo2" value="${ f2.userNo }">
-							<button id="followerBtn" class="0" width="50px;" height="20px;">팔로우</button>
+							<input type="hidden"  id="f2${f2.userNo }" value="${ f2.userNo }">
+							<button id="followerBtn${f2.userNo }" class="0" width="50px;" height="20px;" onclick="follow(this);">팔로우</button>
 							</div>
 					</c:forEach>
 				</div>
@@ -74,102 +75,58 @@
 		</div>
 	</div>
 	
-	<jsp:include page="../common/footer.jsp"/>
+	
 	
 	<script>
-		$(function(){
-			
-			$('#followingBtn').click(function(){
-							
-							var num = $('#followingBtn').attr('class');
-							
-							if(num>0){
-								
-								$.ajax({
-									url : 'delete.fo',
-									method : 'post',
-									data : {
-										userNo2 : $('#userNo2').val()
-									},
-									success : function(result){
-										if(result > 0){
-											$('#followingBtn').text('팔로우');
-										}
-									},
-									error : function() {
-										console.log('안됨....');
-									}
-								})
-								
-							}
-								else{
-									
-									$.ajax({
-										url : 'insert.fo',
-										method:'post',
-										data : {
-											userNo2 : $('#userNo2').val()
-										},
-										success:function(result){
-												if(result > 0){
-													$('#followingBtn').text('팔로잉');
-											}
-										},
-										error:function(){
-											console.log('안됨... 모름요');
-										}
-									})
-								}
-							
-						})
-			
-			
-			$('#followerBtn').click(function(){
-				
-				var num = $('#followerBtn').attr('class');
-				
-				if(num>0){
-					
-					$.ajax({
-						url : 'delete.fo',
-						method : 'post',
-						data : {
-							userNo2 : $('#userNo2').val()
-						},
-						success : function(result){
-							if(result > 0){
-								$('#followerBtn').text('팔로우');
-							}
-						},
-						error : function() {
-							console.log('안됨....');
-						}
-					})
-					
-				}
-					else{
-						
-						$.ajax({
-							url : 'insert.fo',
-							method:'post',
-							data : {
-								userNo2 : $('#userNo2').val()
-							},
-							success:function(result){
-									if(result > 0){
-										$('#followerBtn').text('팔로잉');
-								}
-							},
-							error:function(){
-								console.log('안됨... 모름요');
-							}
-						})
-					}
-				
-			})
-			
 		
-		})
+		function follow(e){
+			var num = $(e).attr('class');
+			var userNo2 = $(e).prev().val();
+			
+			
+			if(num > 0){
+				$.ajax({
+					url : 'delete.fo',
+					method : 'post',
+					data : {
+						userNo2 : userNo2
+					},
+					success : function(result){
+						if(result > 0){
+							$(e).text('팔로우');
+							$(e).attr('class','0');
+						}
+					},
+					error : function(){
+						console.log('에러');
+					}
+				})
+			}
+			else{
+				$.ajax({
+					url : 'insert.fo',
+					method : 'post',
+					data : {
+						userNo2 : userNo2
+					},
+					success : function(result){
+						if(result > 0){
+							$(e).text('팔로잉');
+							$(e).attr('class','1');
+						}
+					},
+					error: function(){
+						console.log('에러');
+					}
+				})
+			}
+		}	
+	
+			
 	</script>
+	
+	
+	<jsp:include page="../common/footer.jsp"/>
+	
 </body>
 </html>
