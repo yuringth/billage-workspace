@@ -63,6 +63,14 @@ public class UserController {
 		return mv;
 	}
 	
+	// 문의 상세보기
+	@RequestMapping("detail.iq")
+	public ModelAndView selectInquiry(ModelAndView mv, int ino) {
+		mv.addObject("iq", userService.selectInquiry(ino)).setViewName("admin/inqDetailView");
+		
+		return mv;
+	}
+	
 	// 1:1 문의 작성폼
 	@RequestMapping("enroll.iq")
 	public String enrollInquiry() {

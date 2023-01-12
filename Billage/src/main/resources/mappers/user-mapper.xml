@@ -241,4 +241,22 @@
 				'N'
 				)
 	</insert>
+	
+	<!-- 1:1문의 상세조회 쿼리문 -->
+	<select id ="selectInquiry" resultMap="inqResultSet">
+		select
+				inq_no,
+				user_no,
+				(select nickname from member m where m.user_no = iq.user_no) as nickName,
+				inq_title,
+				inq_content,
+				inq_type,
+				inq_date,
+				inq_status
+		from
+				inquiry iq
+		where
+				inq_no = #{ inqNo }
+	
+	</select>
 </mapper>
