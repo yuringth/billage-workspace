@@ -16,6 +16,8 @@ import com.bi.billage.board.model.vo.Inquiry;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.common.savefile.SaveFile;
 import com.bi.billage.common.template.Pagination;
+import com.bi.billage.point.model.service.PointService;
+import com.bi.billage.point.model.vo.Point;
 import com.bi.billage.user.model.service.UserService;
 import com.bi.billage.user.model.vo.User;
 
@@ -24,6 +26,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private PointService pointService;
 	
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -196,6 +201,14 @@ public class UserController {
 		int result = userService.insertUser(u);
 		
 		if(result > 0 ) {	// 가입성공되면 메인페이지로
+			
+			//가입된 아이디로 userNo를 조회한 후에 가입 포인트 50p 등록
+			Point p = new Point();
+			p.setUserNo(pointService.selectUserNo(u.getUserId()));
+			p.setPointAdd(50);
+			p.setPointStatus("적립");
+			pointService.addPoint(p);
+			
 			return "redirect:/";
 		} else {			// 실패 에러메세지
 			model.addAttribute("errorMsg", "가입에 실패했습니다.");
@@ -210,6 +223,10 @@ public class UserController {
 		User loginUser = userService.loginUser(u);
 		
 		if(loginUser != null && bcryptPasswordEncoder.matches(u.getUserPwd(), loginUser.getUserPwd())) {	// 로그인 성공 시
+			
+			//로그인 하고 포인트 조회해서 point필드에 넣어줌
+			loginUser.setPoint(pointService.selectPoint(loginUser.getUserNo()));
+			
 			session.setAttribute("loginUser", loginUser);
 			mv.setViewName("redirect:/");
 		} else {	// 로그인 실패 시
@@ -288,7 +305,7 @@ public class UserController {
 			if(userService.deleteUser(userNo) >0) {
 				// 탈퇴처리 성공 => session에서 loginUsr지움, alert문구 담기 => 메인페이지 url요청
 				session.removeAttribute("loginUser");
-				session.setAttribute("alertMsg", "잘가");
+				session.setAttribute("alertMsg", "탈퇴처리가 완료됐습니다.");
 				return "redirect:/";
 				
 			} else {

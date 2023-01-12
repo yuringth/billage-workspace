@@ -238,7 +238,7 @@
 	</select>
 	
 	<!-- 경매글 삭제 -->
-	<update id="deleteAuctionBoard">
+	<update id="deleteAuctionBoard" parameterType="_int">
 		UPDATE
 				AUCTION_BOARD
 		   SET

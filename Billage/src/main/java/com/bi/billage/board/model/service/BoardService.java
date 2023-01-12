@@ -186,10 +186,10 @@ public interface BoardService {
 	
 	
 	// 리뷰게시판 삭제 (update)
-	int deleteReviewBoard(int boardNo);
+	int deleteReviewBoard(int reviewNo);
 	
 	// 리뷰게시글 수정 서비스(update)
-	int updateReviewBoard(UsedBoard b);
+	int updateReviewBoard(ReviewBoard b);
 
 
 

@@ -217,17 +217,18 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectReviewBoard(sqlSession, reviewNo);
 	}
 
-	// 리뷰게시판
+	
+	
+	// 리뷰게시판 => 게시글 삭제
 	@Override
-	public int deleteReviewBoard(int boardNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteReviewBoard(int reviewNo) {
+		return boardDao.deleteReviewBoard(sqlSession, reviewNo);
 	}
 
-	// 리뷰게시판
+	// 리뷰게시판 => 글수정
 	@Override
-	public int updateReviewBoard(UsedBoard b) {
-		// TODO Auto-generated method stub
+	public int updateReviewBoard(ReviewBoard b) {
+		//return boardDao.updateReviewBoard(sqlSession, b);
 		return 0;
 	}
 

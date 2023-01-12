@@ -270,7 +270,10 @@ public class BoardDao {
 		return sqlSession.selectOne("reviewMapper.selectReviewBoard", reviewNo);
 	}
 	
-	
+	// 리뷰게시판 => 게시글 삭제
+	public int deleteReviewBoard(SqlSessionTemplate sqlSession, int reviewNo) {
+		return sqlSession.update("reviewMapper.deleteReviewBoard", reviewNo);
+	}
 	
 	
 	
@@ -348,7 +351,9 @@ public class BoardDao {
 		map.put("novelNo", novelNo);
 		return sqlSession.insert("serialMapper.insertSerial", map);
 	}
-	
+
+
+
 	// 광진구역 끝
 
 }
