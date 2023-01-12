@@ -113,4 +113,9 @@ public class UserServiceImpl implements UserService{
 
 	}
 
+	@Override
+	public Inquiry selectInquiry(int inqNo) {
+		return userDao.selectInquiry(sqlSession, inqNo);
+	}
+
 }
