@@ -48,8 +48,14 @@ public interface UserService {
 	// 문의 리스트 조희
 	ArrayList<Inquiry> selectInqList(PageInfo pi);
 	
+	// 문의 디테일 조회
+	Inquiry selectInquiry(int inqNo);
+	
 	// 문의 요청
 	int insertInquiry(Inquiry iq);
+	
+	// 문의 답변
+	int updateInquiry(Inquiry iq);
 	
 	// id중복체크
 	int idCheck(String checkId);
@@ -59,6 +65,9 @@ public interface UserService {
 	
 	// 회원정보수정
 	int updateUser(User u);
+	
+	// 회원 탈퇴
+	int deleteUser(int userNo);
 	
 
 

@@ -50,7 +50,7 @@
 
 #book_content, #book_title, #book_author, #book_publisher, #book_data{
 	border:1px solid pink;
-	height:40px;
+	height:50px;
 }
 
 
@@ -85,25 +85,26 @@
 		<h1 style="text-align:center;">리뷰 상세페이지</h1>
 		
 		<!-- 리뷰넘버 식별자로 넘기기 -->
-		<input type="hidden" neme="reviewNo" value="#">
+		<input type="hidden" neme="reviewNo" value="${ b.reviewNo }">
 
 		<hr>
 		
+				<!-- 	<div id="book_imag" name="bookImag">${ b.bookImag }</div> -->
 		<!-- api 책정보 끌어오기 -->
 		<div class="book-detail-outer">
 			<div class="book-detail-area">
 				<div class="content-photo-detail">
 					<!-- api에서 끌고 오는거니까 첨부파일로 안해도 되는게 맞겠지? <input type="file" name="upfile"> 이런식으로.. -->
-					<div id="book_imag" name="bookImag">사진</div>
+					<img id="book_imag" class="card-img-top" src="${ b.bookImag }" alt="책사진" style= "width:200px; height:200px;">
+					
 				</div>
 				
 				<!-- review 테이블 : book_content, book_publisher, book_date 컬럼 추가  -->
 				<div class="content-book-detail">
-					<div id="boo_content" name="bookContent">책내용</div>
-					<div id="book_title" name="bookTitle">제목</div>
-					<div id="book_author" name="bookAuthor">저자</div>
-					<div id="book_publisher" name="bookPublisher">츨판사</div>
-					<div id="book_date" name="bookDate">발행일자</div>
+					<div id="book_title" name="bookTitle">${ b.bookTitle }</div>
+					<div id="book_author" name="bookAuthor">${ b.bookAuthor }</div>
+					<div id="book_publisher" name="bookPublisher">${ b.bookPublisher }</div>
+					<div id="book_date" name="bookDate">${ b.createDate }</div>
 				</div>
 			</div>
 		</div>
@@ -112,14 +113,14 @@
 		<hr>
 
 		<!-- 매란언니한테 알려달라하기 -->
-		<div style="text-align:center;">별점 : ☆☆☆★ 
+		<div style="text-align:center;">별점 : ${ b.reviewStar } ☆☆☆★ 
 			<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
 		</div>
 
 		<br>
 
 		<div class="review-content-outer">
-			<textarea id="review_content" name="reviewContent" rows="20" cols="100" style="resize:none" maxlength="1000" required>책 내용 불러오기</textarea>
+			<textarea id="review_content" name="reviewContent" rows="20" cols="100" style="resize:none" maxlength="1000" required>${ b.reviewContent }</textarea>
 			
 			<hr>
 			
@@ -129,7 +130,7 @@
 			<!-- 작성자한테만 보이게 하기 -->	
 			<div style="text-align:center;">
 				<button onclick="location.href='enrollForm.re'">글수정</button>
-				<button>글삭제</button>
+				<button onclick="location.href='delete.re?reviewNo=${ b.reviewNo }'">글삭제</button>
 				<button>뒤로가기</button>
 			</div>
 

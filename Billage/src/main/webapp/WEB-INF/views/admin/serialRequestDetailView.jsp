@@ -125,9 +125,9 @@
         <div class="sidebar">
             <h2>관리자 페이지</h2>
             <ul>
-                <li><a href="selectUser.ad"><i class="fas fa-user"></i>회원 관리</a></li>
-                <li><a href="selectGroup.ad"><i class="fas fa-home"></i>모임 관리</a></li>
-                <li><a href="inquiryList.ad"><i class="fas fa-address-card"></i>1:1 문의</a></li>
+                <li><a href="userList.ad"><i class="fas fa-user"></i>회원 관리</a></li>
+                <li><a href="groupList.ad"><i class="fas fa-home"></i>모임 관리</a></li>
+                <li><a href="inqList.ad"><i class="fas fa-address-card"></i>1:1 문의</a></li>
                 <li><a href="faqList.fa"><i class="fas fa-project-diagram"></i>FAQ 관리</a></li>
                 <li><a href="noticeList.no"><i class="fas fa-blog"></i>공지사항</a></li>
                 <li><a href="list.sr"><i class="fas fa-address-book"></i>연재 요청</a></li>
@@ -136,13 +136,17 @@
         <div class="main_content">
             <div class="title">
 				<h1 class="title-text">연재 요청 조회 및 관리</h1>
-			</div>
+			</div><br>
 			<table id="contentArea" algin="center" class="table">
                 <tr>
                     <th width="100">제목</th>
                     <td colspan="3">${ sr.requestTitle }</td>
                 </tr>
                 <tr>
+                <tr>
+                    <th width="100">작성자</th>
+                    <td colspan="3">${ sr.nickname }</td>
+                </tr>
                     <th>작성일</th>
                     <td>${ sr.requestDate }</td>
                 </tr>
@@ -168,13 +172,11 @@
                 </tr>
             </table>
             <div>
-            ${ sr.requestNo }
-            ${ sr.userNo }
             <form action="" method="get" id="updateForm">
             	<input type="hidden" name="rno" value="${ sr.requestNo }">
             	<input type="hidden" name="uno" value="${ sr.userNo }">
-            </form>
             <a class="btn btn-primary" onclick="agreeRequest();">수락하기</a>
+            </form>
             </div>
             <br>
         </div>

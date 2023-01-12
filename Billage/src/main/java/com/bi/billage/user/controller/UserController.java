@@ -16,6 +16,8 @@ import com.bi.billage.board.model.vo.Inquiry;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.common.savefile.SaveFile;
 import com.bi.billage.common.template.Pagination;
+import com.bi.billage.point.model.service.PointService;
+import com.bi.billage.point.model.vo.Point;
 import com.bi.billage.user.model.service.UserService;
 import com.bi.billage.user.model.vo.User;
 
@@ -24,6 +26,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private PointService pointService;
 	
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -63,6 +68,14 @@ public class UserController {
 		return mv;
 	}
 	
+	// 문의 상세보기
+	@RequestMapping("detail.iq")
+	public ModelAndView selectInquiry(ModelAndView mv, int ino) {
+		mv.addObject("iq", userService.selectInquiry(ino)).setViewName("admin/inqDetailView");
+		
+		return mv;
+	}
+	
 	// 1:1 문의 작성폼
 	@RequestMapping("enroll.iq")
 	public String enrollInquiry() {
@@ -81,6 +94,24 @@ public class UserController {
 				return "common/errorPage";
 			}
 		}
+	
+	// 문의 답변 메소드
+	@RequestMapping("update.iq")
+	public String updateInquiry(int ino, String answer, HttpSession session, Model model) {
+		
+		Inquiry iq = new Inquiry();
+		iq.setInqNo(ino);
+		iq.setAnswer(answer);
+		
+		if(userService.updateInquiry(iq) > 0) { // 성공 => 메인화면으로
+			session.setAttribute("alertMsg", "답변 완료");
+			return "main";
+		} else {
+			model.addAttribute("errorMsg", "답변 오류");
+			return "common/errorPage";
+		}
+		
+	}
 	
 	// 연재 요청 리스트 화면 +페이징처리
 	@RequestMapping("list.sr")
@@ -170,6 +201,14 @@ public class UserController {
 		int result = userService.insertUser(u);
 		
 		if(result > 0 ) {	// 가입성공되면 메인페이지로
+			
+			//가입된 아이디로 userNo를 조회한 후에 가입 포인트 50p 등록
+			Point p = new Point();
+			p.setUserNo(pointService.selectUserNo(u.getUserId()));
+			p.setPointAdd(50);
+			p.setPointStatus("적립");
+			pointService.addPoint(p);
+			
 			return "redirect:/";
 		} else {			// 실패 에러메세지
 			model.addAttribute("errorMsg", "가입에 실패했습니다.");
@@ -184,6 +223,10 @@ public class UserController {
 		User loginUser = userService.loginUser(u);
 		
 		if(loginUser != null && bcryptPasswordEncoder.matches(u.getUserPwd(), loginUser.getUserPwd())) {	// 로그인 성공 시
+			
+			//로그인 하고 포인트 조회해서 point필드에 넣어줌
+			loginUser.setPoint(pointService.selectPoint(loginUser.getUserNo()));
+			
 			session.setAttribute("loginUser", loginUser);
 			mv.setViewName("redirect:/");
 		} else {	// 로그인 실패 시
@@ -250,6 +293,31 @@ public class UserController {
 		return "user/userDeleteForm";
 	}
 	
-	
+	// 회원탈퇴
+	@RequestMapping("delete.me")
+	public String deleteUser(int userNo, String userPwd, HttpSession session) {
+		
+		String encPwd = ((User)session.getAttribute("loginUser")).getUserPwd();
+		
+		if(bcryptPasswordEncoder.matches(userPwd, encPwd)) {
+			//	비밀번호가 사용자가 입력한 평문으로 만들어진 암호문일 경우
+			
+			if(userService.deleteUser(userNo) >0) {
+				// 탈퇴처리 성공 => session에서 loginUsr지움, alert문구 담기 => 메인페이지 url요청
+				session.removeAttribute("loginUser");
+				session.setAttribute("alertMsg", "탈퇴처리가 완료됐습니다.");
+				return "redirect:/";
+				
+			} else {
+				session.setAttribute("errorMsg", "탈퇴처리실패");
+				return "common/errorPage";
+			}
+			
+		} else {
+			session.setAttribute("alertMsg", "비밀번호 틀림");
+			return "redirect:myPage.me";
+		}
+		
+	}
 	
 }

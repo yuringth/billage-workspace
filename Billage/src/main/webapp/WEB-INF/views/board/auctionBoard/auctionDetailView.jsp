@@ -130,9 +130,14 @@
 				</button>
 			</div>
 		</form>
-
+		
+		<form action="" method="post" id="postForm">
+			<input type="hidden" name="changeName" value="${b.changeName}">
+			<input type="hidden" name="boardNo" value="${b.boardNo}">
+			
+		</form>
 		<c:if test="${ loginUser.userNo ==  b.userNo}">
-			<button onclick="deleteBtn();" >삭제하기</button>
+			<button onclick="postFormSubmit(1);" >삭제하기</button>
 		</c:if>
 	</div>
 	
@@ -171,10 +176,11 @@
 		    }
 		}
 		
-		function deleteBtn(){
-			console.log(${b.boardNo})
-			if(confirm('삭제하시겠습니까?')){
-				location.href='delete.ac?bno=' + ${b.boardNo};
+		function postFormSubmit(num){
+			if(num == 1){
+				if(confirm('삭제하시겠습니까?')){
+					$('#postForm').attr('action','delete.dr').submit();
+				}
 			}
 		}
 	

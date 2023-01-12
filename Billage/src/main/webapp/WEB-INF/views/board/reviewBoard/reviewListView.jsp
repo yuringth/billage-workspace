@@ -132,14 +132,13 @@
    	<c:forEach items="${ list }" var="b">
 		<div class="list-outer">
 	        <!-- 리뷰 하나를 감싸는 div -->
-		        <div class="one-content" onclick="reviewDetail()">
+		        <div class="one-content">
+		        <!-- <div class="one-content" onclick="reviewDetail()"> -->
 		        
 		        	<!-- 작성자/별 -->
 		            <div class="one-content-detail1">
 		            	<input type="hidden" value="${ b.bookAuthor }">
-		            	<%-- <div>책 작가 : ${ b.bookAuthor }</div> --%>
 		            	<input class="bno" type="hidden" value="${ b.reviewNo }">
-		            	<%-- <div class="bno">게시글번호 : ${ b.reviewNo }</div> --%>
 		                <div>유저 닉네임: ${ b.userNo }</div>                                              
 		                <div class="card-footer">
 		                 	   별점 : ${ b.reviewStar } <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -151,7 +150,7 @@
 					
 						<div class="book-detail1">
 				            <div>
-				            	<img class="card-img-top" src="${ b.bookImag }" alt="" style= "width:200px; height:220px;">
+				            	<img class="card-img-top" src="${ b.bookImag }" alt="책사진" style= "width:200px; height:220px;">
 				            </div>
 						</div>
 						
@@ -221,13 +220,25 @@
 
 	<!-- 게시글 상세보기 :되지만 나중에 페이징처리로 이동하기 -->
 	<script>
+		$(function(){
+			$('.one-content').click(function(){
+				location.href = 'detail.re?reviewNo=' + $(this).find('.bno').val();
+				console.log($(this).find('.bno').val()); // http://localhost:8787/billage/detail.re?reviewNo=16
+			})
+			
+		})
+		
+		
+	</script>
+<%-- 	
+		
 		function reviewDetail(){
-			location.href = 'detail.re?reviewNo=' + $(this).val('.bno');
+			location.href = 'detail.re?reviewNo=' + $(this);
 			
 		}
-	</script>
-	
-
+		
+		
+ --%>
 
 
 

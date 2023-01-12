@@ -261,7 +261,7 @@ public class BoardDao {
 	
 	// 리뷰게시판 => 조회수 증가
 	public int increaseReviewCount(SqlSessionTemplate sqlSession, int reviewNo) {
-		return sqlSession.insert("reviewMapper.insertReviewBoard", reviewNo);
+		return sqlSession.insert("reviewMapper.increaseReviewCount", reviewNo);
 	}
 	
 	
@@ -270,7 +270,10 @@ public class BoardDao {
 		return sqlSession.selectOne("reviewMapper.selectReviewBoard", reviewNo);
 	}
 	
-	
+	// 리뷰게시판 => 게시글 삭제
+	public int deleteReviewBoard(SqlSessionTemplate sqlSession, int reviewNo) {
+		return sqlSession.update("reviewMapper.deleteReviewBoard", reviewNo);
+	}
 	
 	
 	
@@ -326,7 +329,7 @@ public class BoardDao {
 	public ArrayList<Serial> selectSerialDetail(SqlSessionTemplate sqlSession, PageInfo pi, int novelNo, String serialNo) {
 		int offset = (pi.getCurrentPage()- 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		Map<String, Object> map = new HashMap<>();
+		HashMap<String, Object> map = new HashMap<>();
 		map.put("serial_no", serialNo);
 		map.put("novel_no", novelNo);
 		return (ArrayList)sqlSession.selectList("serialMapper.selectSerialDetail", map, rowBounds);
@@ -348,7 +351,9 @@ public class BoardDao {
 		map.put("novelNo", novelNo);
 		return sqlSession.insert("serialMapper.insertSerial", map);
 	}
-	
+
+
+
 	// 광진구역 끝
 
 }

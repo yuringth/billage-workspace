@@ -108,17 +108,30 @@
 				${ b.content }
 			</p>
 		</div>
-
-		<form action="">
+		
+		<c:choose>
+			<c:when test="${ not empty loginUser }">
+				<button class="btn1 btn btn-secondary" onclick="postFormSubmit(2);">
+					${b.tryPoint}P 응모하기
+				</button>
+			</c:when>
+			<c:otherwise>
+				<button class="btn1 btn btn-secondary" onclick="notLogin();">
+					${b.tryPoint}P 응모하기
+				</button>
+			</c:otherwise>
+		</c:choose>
+		
+		<form action="" method="post" id="postForm">
 			<input type="hidden" name="tryPoint" value="${b.tryPoint}">
-			<button class="btn1 btn btn-secondary">
-				${b.tryPoint}P 응모하기
-			</button>
+			<input type="hidden" name="changeName" value="${b.changeName}">
+			<input type="hidden" name="boardNo" value="${b.boardNo}">
+			
 		</form>
-
 		<c:if test="${ loginUser.userNo ==  b.userNo}">
-			<button onclick="deleteBtn();" >삭제하기</button>
+			<button onclick="postFormSubmit(1);" >삭제하기</button>
 		</c:if>
+		
 	</div>
 	
 	
@@ -128,6 +141,7 @@
 			setInterval(closeCount, 500);
 		})
 		
+	
 		function closeCount(){
 			var end = new Date('${ b.closeDate }');
 			var now = new Date(); 
@@ -149,18 +163,25 @@
 		    	hour = '0' + hour;
 		    }
 		    if(remaindTime >= 0){
-		    	$('.time').text(day +'일 ' + hour + ':' + min + ':' + sec + ':');
+		    	$('.time').text(day +'일 ' + hour + ':' + min + ':' + sec);
 		    } else {
 		    	$('.time').text('응모 시간 종료');
+		    	$('.btn1').attr('disabled', true).text('응모 시간 종료');
+		    	//여기에서 당첨자 돌리는 함수  호출
 		    }
 		}
 	
-		function deleteBtn(){
-			if(confirm('삭제하시겠습니까?')){
-				location.href='delete.dr?bno=${b.boardNo}';
+		function postFormSubmit(num){
+			if(num == 1){
+				if(confirm('삭제하시겠습니까?')){
+					$('#postForm').attr('action','delete.dr').submit();
+				}
 			}
 		}
-	
+		
+		function notLogin(){
+			alert('로그인을 하셔야 이용 가능합니다.');
+		}
 	
 	</script>
 	

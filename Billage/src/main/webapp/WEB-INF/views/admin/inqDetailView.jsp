@@ -92,6 +92,7 @@
         }
     }
     /*-----------------------------------*/
+    @import url("https://fonts.googleapis.com/css?family=IBM Plex Sans:400,400i,700");
 
 	*, :before, :after {
 		box-sizing: border-box;
@@ -119,6 +120,7 @@
 <body>
    <jsp:include page="../common/header.jsp"/>
 
+   <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
     <div class="wrapper">
         <div class="sidebar">
             <h2>관리자 페이지</h2>
@@ -135,48 +137,47 @@
             <div class="title">
 				<h1 class="title-text">1:1 문의 조회 및 관리</h1>
 			</div><br>
-				<table id="inqList" class="table table-hover" align="center">
-                <thead>
-                    <tr>
-                        <th>문의번호</th>
-                        <th>문의회원</th>
-                        <th>문의유형</th>
-                        <th>문의제목</th>
-                        <th>문의날짜</th>
-                        <th>답변여부</th>
-                    </tr>
-                </thead>
-                <c:forEach items="${ list }" var="iq">
-                <tbody>
-                		<tr>
-                			<td class="ino">${ iq.inqNo }</td>
-                			<td>${ iq.nickname }</td>
-                			<td>${ iq.inqType }</td>
-                			<td>${ iq.inqTitle }</td>
-                			<td>${ iq.inqDate }</td>
-                			<td>${ iq.inqStatus }</td>
-                		</tr>
-                </tbody>
-                </c:forEach>
+			<table id="contentArea" algin="center" class="table">
+                <tr>
+                    <th width="100">제목</th>
+                    <td colspan="3">${ iq.inqTitle }</td>
+                </tr>
+                <tr>
+                    <th width="100">작성자</th>
+                    <td colspan="3">${ iq.nickname }</td>
+                </tr>
+                <tr>
+                    <th>작성일</th>
+                    <td>${ iq.inqDate }</td>
+                </tr>
+                <tr>
+                    <th>문의유형</th>
+                    <td colspan="3">${ iq.inqType }</td>
+                </tr>
+                <tr>
+                    <td colspan="4"><p style="height:150px;">${ iq.inqContent }</p></td>
+                </tr>
             </table>
+            <div>
+            <h2>답변 : ${ iq.answer }</h2>
+            </div>
+            <div>
+            <c:if test="${ iq.answer eq '아직 답변이 등록되지 않았습니다'}">
+            <form action="" method="get" id="updateForm">
+            	<input type="hidden" name="ino" value="${ iq.inqNo }">
+            	<textarea name="answer" id="answer" spellcheck="true" style="resize:none" rows="5" cols="160" tabindex="4" placeholder="문의에 대한 답변을 남겨주세요" required></textarea>
+            	<br><a class="btn btn-primary" onclick="answerInq();">답변하기</a>
+            </form>
+            </c:if>
+            </div>
             <br>
-            
-            <script>
-            
-            	$(function(){
-            		$('#inqList>tbody>tr').click(function(){
-            			location.href = 'detail.iq?ino=' + $(this).children('.ino').text();
-            		})
-            	})
-            
-            </script>
-       
-            <br><br>
         </div>
-        <br><br>
-			<br>
-        </div>
-    </div>
+      </div>
+      <script>
+      	function answerInq() {
+      		$('#updateForm').attr('action', 'update.iq').submit();
+      	}
+      </script>
    <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

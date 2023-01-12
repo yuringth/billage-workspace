@@ -136,32 +136,57 @@ public class ReviewController {
 	@RequestMapping("detail.re")
 	public String reviewDetail(int reviewNo, Model model) {
 		
+		// System.out.println(reviewNo); 리뷰번호 잘 가져옴
 		
 		// 조회수 증가
 		if(boardService.increaseReviewCount(reviewNo) > 0) { // 조회수 성공 시 => 상세보기 들어감
 			// >> 성공적으로 조회수 증가
-			// 	>> boardDetailView.jsp상에 필요한 데이터를 조회(게시글 상세정보 조회용 서비스 호출)
+			// 	>> reviewDetailView.jsp상에 필요한 데이터를 조회(게시글 상세정보 조회용 서비스 호출)
 			//		>> 조회된 데이터를 담아서 board/reviewBoard/reviewDetailView로 포워딩
 			
 			// 조회 성공 시 => db에서 데이터를 가져와야한다.
 			ReviewBoard b = boardService.selectReviewBoard(reviewNo);
 			
+			model.addAttribute("b", b);
 			
-			
-			
+			return "board/reviewBoard/reviewDetailView";
+		} 
+		else {
+			model.addAttribute("errorMsg","게시글 상세조회 실패");
+			return "common/errorPage";
 		}
 		
+	}
+	
+
+	
+	// 리뷰게시판 => 글삭제
+	@RequestMapping("delete.re")
+	public String deleteReviewBoard(int reviewNo) {
 		
+		boardService.deleteReviewBoard(reviewNo);
 		
-		return "board/reviewBoard/reviewDetailView";
+		return "redirect:list.re";
+		// 왜 포워딩으로 보내면 안되는거지?? db에 들려서 status를 'Y'로 고쳐서 그런가??		
 	}
 	
 	
 	
 	// 리뷰게시판 -> 글수정 누를 시 -> 수정폼 화면 나옴
+//	@RequestMapping("enrollForm.re")
+//	public String reviewEnrollForm() {
+//		return "board/reviewBoard/reviewUploadForm";
+//	}
+	
+	
+	// 리뷰게시판 => 글 수정
 	@RequestMapping("enrollForm.re")
-	public String reviewEnrollForm() {
+	public String updateReviewBoard(/*int reviewNo*/) {
+	
+//		boardService.updateReviewBoard(reviewNo);
+//		
 		return "board/reviewBoard/reviewUploadForm";
+	
 	}
 	
 	
