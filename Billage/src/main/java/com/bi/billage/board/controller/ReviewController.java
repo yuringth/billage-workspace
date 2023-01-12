@@ -180,7 +180,7 @@ public class ReviewController {
 	
 	
 	// 리뷰게시판 => 글 수정
-	@RequestMapping("update.re")
+	@RequestMapping("enrollForm.re")
 	public String updateReviewBoard(/*int reviewNo*/) {
 	
 //		boardService.updateReviewBoard(reviewNo);
