@@ -136,6 +136,7 @@
 		       ,review_star
 		       ,review_content
 		       ,book_point
+		       ,user_no
 		  from
 		       review
 		 where

@@ -141,7 +141,7 @@
 		            	<input class="bno" type="hidden" value="${ b.reviewNo }">
 		                <div>유저 닉네임: ${ b.userNo }</div>                                              
 		                <div class="card-footer">
-		                 	   별점 : ${ b.reviewStar } <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+		                 	   별점 : ${ b.reviewStar }
 		                </div>
 		            </div>
 					
@@ -209,6 +209,8 @@
         </ul>
     </div>
 
+
+	<!-- 로그인 한 유저만 버튼 보임 -->
 	<c:if test="${ not empty loginUser }">
 		<div class="pagingArea">
 			<button class="btn btn-secondary" onclick="location.href='insert.re'">글작성</button>
@@ -230,16 +232,6 @@
 		
 		
 	</script>
-<%-- 	
-		
-		function reviewDetail(){
-			location.href = 'detail.re?reviewNo=' + $(this);
-			
-		}
-		
-		
- --%>
-
 
 
   </div>
