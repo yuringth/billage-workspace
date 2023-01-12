@@ -184,7 +184,7 @@ public interface BoardService {
 	// 리뷰게시글 조회수 증가 (update)
 	int increaseReviewCount(int reviewNo);
 	
-	// 리뷰게시판 상세 조회 (select)
+	// 리뷰게시판 상세 조회 (select) & 리뷰게시판 수정시 폼화면 띄울때도 사용
 	ReviewBoard selectReviewBoard(int reviewNo);
 	
 	
