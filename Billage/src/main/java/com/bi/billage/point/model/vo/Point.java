@@ -1,5 +1,11 @@
 package com.bi.billage.point.model.vo;
 
-public class Point {
+import lombok.Data;
 
+@Data
+public class Point {
+	private int userNo;
+	private int pointAdd;
+	private String pointDate;
+	private String pointStatus;
 }

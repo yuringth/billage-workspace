@@ -16,6 +16,7 @@ import com.bi.billage.board.model.vo.Inquiry;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.common.savefile.SaveFile;
 import com.bi.billage.common.template.Pagination;
+import com.bi.billage.point.model.service.PointService;
 import com.bi.billage.user.model.service.UserService;
 import com.bi.billage.user.model.vo.User;
 
@@ -24,6 +25,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private PointService pointService;
 	
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -192,6 +196,10 @@ public class UserController {
 		User loginUser = userService.loginUser(u);
 		
 		if(loginUser != null && bcryptPasswordEncoder.matches(u.getUserPwd(), loginUser.getUserPwd())) {	// 로그인 성공 시
+			
+			//로그인 하고 포인트 조회해서 point필드에 넣어줌
+			loginUser.setPoint(pointService.selectPoint(loginUser.getUserNo()));
+			
 			session.setAttribute("loginUser", loginUser);
 			mv.setViewName("redirect:/");
 		} else {	// 로그인 실패 시
