@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.bi.billage.board.model.vo.Inquiry;
 import com.bi.billage.board.model.vo.SerialRequest;
 import com.bi.billage.common.model.vo.PageInfo;
-import com.bi.billage.group.model.vo.Group;
+import com.bi.billage.club.model.vo.Club;
 import com.bi.billage.user.model.vo.User;
 
 @Repository
@@ -63,7 +63,7 @@ public class UserDao {
 		return sqlSession.selectOne("userMapper.selectGroupListCount");
 	}
 	
-	public ArrayList<Group> selectGroupList(SqlSessionTemplate sqlSession, PageInfo pi) {
+	public ArrayList<Club> selectGroupList(SqlSessionTemplate sqlSession, PageInfo pi) {
 		int offset = (pi.getCurrentPage()- 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return (ArrayList)sqlSession.selectList("userMapper.selectGroupList", null, rowBounds);
