@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.bi.billage.board.model.vo.Board" alias="board" />
 		<typeAlias type="com.bi.billage.board.model.vo.ADBoard" alias="adboard" />
 		<typeAlias type="com.bi.billage.reply.model.vo.Reply" alias="reply" />
-		<typeAlias type="com.bi.billage.group.model.vo.Group" alias="group" />
+		<typeAlias type="com.bi.billage.group.model.vo.Club" alias="club" />
 		<typeAlias type="com.bi.billage.board.model.vo.Novel" alias="novel" />
 		<typeAlias type="com.bi.billage.board.model.vo.Serial" alias="serial" />
 		<typeAlias type="com.bi.billage.board.model.vo.SerialRequest" alias="serialRequest" />
@@ -30,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<mappers>
 		<mapper resource="/mappers/user-mapper.xml"/>
 		<mapper resource="/mappers/board-mapper.xml"/>
-		<mapper resource="/mappers/group-mapper.xml" />
+		<mapper resource="/mappers/club-mapper.xml" />
 		<mapper resource="/mappers/ADBoard-mapper.xml" />
 		<mapper resource="/mappers/novel-mapper.xml" />
 		<mapper resource="/mappers/serial-mapper.xml" />
