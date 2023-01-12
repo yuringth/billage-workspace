@@ -173,13 +173,13 @@ public class UserController {
 		return "user/myPage";
 	}
 	
-	@RequestMapping("general.me")
+	@RequestMapping("general.cl")
 	public String groupGeneral() {
 		return "club/clubGeneralView";
 	}
 	
 	
-	@RequestMapping("admin.me")
+	@RequestMapping("admin.cl")
 	public String groupAdmin() {
 		return "club/clubAdminView";
 	}
