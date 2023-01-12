@@ -2,6 +2,8 @@ package com.bi.billage.board.model.service;
 
 import java.util.ArrayList;
 
+import org.springframework.web.servlet.ModelAndView;
+
 import com.bi.billage.board.model.vo.ADBoard;
 import com.bi.billage.board.model.vo.Book;
 import com.bi.billage.board.model.vo.Novel;
@@ -43,6 +45,9 @@ public interface BoardService {
 	
 	// 작품등록 서비스(insert)
 	int insertNovel(Novel n);
+	
+	// 연재 등록 서비스(insert)
+	int insertSerial(Serial se, int novelNo);
 	
 	//광진 구역끝
 	
@@ -185,6 +190,7 @@ public interface BoardService {
 	
 	// 리뷰게시글 수정 서비스(update)
 	int updateReviewBoard(UsedBoard b);
+
 
 
 	

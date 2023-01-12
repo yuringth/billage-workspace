@@ -111,54 +111,55 @@ textarea {
 }
 </style>
 <body>
-	<jsp:include page="../../common/header.jsp"/>
-<form action="#">
-
-  <header align="center">
-    <h2>작품 연재</h2>
-    <div>작가님! 안녕하세요. 오늘도 좋은 연재 부탁드립니다!</div>
-  </header>
-  <div>
-    <label class="desc">
-      	제목
-    </label>
-    <div>
-      <input name="Field1" type="text" class="field text fn" value="" size="8" tabindex="1" placeholder="제목을 입력하세요.">
-    </div>
-  </div>
-    <br>
-  <div>
-    <label class="desc">
-      	본문 내용
-    </label>
-    <div>
-      <textarea name="Field2" id="newTweetContent" onkeydown="resize(this)" onkeyup="resize(this)" spellcheck="true" rows="20" cols="52" tabindex="4"></textarea>
-    </div>
-  </div>
-  <div>
-    <label class="desc">
-      	작가의 말
-    </label>
-    <div>
-      <input name="Field1" type="text" class="field text fn" value="" size="8" tabindex="1" placeholder="연재 소감등을 남겨주세요!">
-    </div>
-  </div>
-  <div>
-	<div>
-  		<input id="saveForm" name="saveForm" type="submit" value="등록" class="">
-    </div>
-  </div>
-  
-</form>
-
-<script>
-function resize(obj) {
-    obj.style.height = '1px';
-    obj.style.height = (12 + obj.scrollHeight) + 'px';
-}
-</script>
-
-<jsp:include page="../../common/footer.jsp"/>
+		<jsp:include page="../../common/header.jsp"/>
+	<form id="enrollForm" method="post" action="insert.se">
+	<input type="hidden" name="novelNo" value="${ novelNo }">
+	<input type="hidden" name="userNo" value="${ loginUser.userNo }">
+	  <header align="center">
+	    <h2>작품 연재</h2>
+	    <div>작가님! 안녕하세요. 오늘도 좋은 연재 부탁드립니다!${ novelNo }</div>
+	  </header>
+	  <div>
+	    <label for="serialtitle">
+	      	제목
+	    </label>
+	    <div>
+	      <input name="serialTitle" type="text" class="field text fn" size="8" tabindex="1" placeholder="이번 화의 제목을 입력하세요." required>
+	    </div>
+	  </div>
+	    <br>
+	  <div>
+	    <label for="serialContent">
+	      	본문 내용
+	    </label>
+	    <div>
+	      <textarea name="serialContent" id="newTweetContent" onkeydown="resize(this)" onkeyup="resize(this)" spellcheck="true" rows="20" cols="52" tabindex="4" required></textarea>
+	    </div>
+	  </div>
+	  <div>
+	    <label for="authorComment">
+	      	작가의 말
+	    </label>
+	    <div>
+	      <textarea name="authorComment" id="newTweetContent" onkeydown="resize(this)" onkeyup="resize(this)" spellcheck="true" rows="20" cols="20" tabindex="4" placeholder="연재 소감, 다음화 공지 등을 남겨주세요!" required></textarea>
+	    </div>
+	  </div>
+	  <div>
+	    <div align="left">
+	  		<button type="submit" class="btn btn-primary">등록하기</button>
+	        <button type="reset" class="btn btn-danger">취소하기</button>
+	    </div>
+	</div>
+	</form>
+	
+	<script>
+	function resize(obj) {
+	    obj.style.height = '1px';
+	    obj.style.height = (12 + obj.scrollHeight) + 'px';
+	}
+	</script>
+	
+	<jsp:include page="../../common/footer.jsp"/>
 
 </body>
 </html>

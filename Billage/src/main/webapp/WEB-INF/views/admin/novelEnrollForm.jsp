@@ -123,14 +123,6 @@ textarea:focus {
 	    </select>
 	    </div>
 	  </div>
-<!-- 	  <div>
-	    <label for="nickname">
-	      	작가명
-	    </label>
-	    <div>
-	      <input name="nickname" type="text" class="field text fn" size="8" tabindex="1" placeholder="작가명(닉네임or필명)을 입력하세요." requierd>
-	    </div>
-	  </div> -->
 	  <div>
 	    <label for="userNo">
 	      	회원번호
@@ -168,7 +160,6 @@ textarea:focus {
 	        <button type="reset" class="btn btn-danger">취소하기</button>
 	    </div>
 	</div>
-	  
 	</form>
 	<jsp:include page="../common/footer.jsp"/>
 

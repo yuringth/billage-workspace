@@ -8,7 +8,8 @@
 <title>안녕 나는 모임 디테일뷰야</title>
 
 <style>
-	body{ padding-bottom:160px;}
+	body{ padding-bottom:160px; box-sizing:border-box;}
+	#all-detail h1, h3 { display:inline-block;}
 	#all-detail{ margin:auto; width:1200px;}
 	#group-btn-area { width:100%;  height: 160px; position:fixed; bottom:0; left:0; right:0; background-color: gray;}
 	#btn-zone{ width:1200px; height:200px; margin:auto; text-align: center;}
@@ -26,6 +27,26 @@
 		margin-right:30px;
 	}
 	#btn-zone button:hover{ cursor:pointer; font-weight:900;}
+	
+	
+	#new-group{
+		position:absolute;
+		border: 2px solid black;
+		border-radius: 50px;
+		margin-left: -50px;
+		line-height: 35px;
+		width:40px;
+		display:none;
+		z-index:900;
+	}
+	
+	#group-title-area{ margin:auto; width: 1000px; height:100px; }
+	#group-detail-area{ width:1200px; height:600px;}
+	#detail-left, #detail-right{ width:600px; display:block; float:left;}
+	
+	#group-info-area{ display:block; width:1200px; height:500px;}
+	
+	#group-reply-area{ display:bolck; width:1200px; height:300px;}
 </style>
 
 </head>
@@ -35,25 +56,25 @@
     
     <div id="all-detail">
     	<div id="group-title-area">
-			<p>태그</p>
-			<h1>여긴 모임명 자리</h1>
+			<span id="new-group" value="${ group.newCount }">new</span>
+			<h1>${ group.groupTitle }</h1>
     	</div>
     	<div id="group-detail-area">
     		<div id="detail-left">
-    			<img src="">사진
-    			<span>0명이 찜했어요!</span>
+    			<img width="500px" height="500px" src="${ group.groupImg }">
+    			<p>${ group.likeCount }명이 찜했어요!</p>
     		</div>
     		<div id="detail-right">
-    			<div>모임요일</div>
+    			<p>${ group.groupDay }</p>
     			<div>참여자</div>
     		</div>
     	</div>
     	<div id="group-info-area">
     		<h3>모임소개 : </h3>
-    		<div>
-    			<pre>여긴 모임 소개가 들어갈 공간입니다.</pre>
+    		<div id="info-top">
+    			<pre>${ group.groupDescribe }</pre>
     		</div>
-    		<div style="height:400px;">
+    		<div id="info-bottom">
     		
     		</div>
     	</div>
@@ -71,6 +92,24 @@
 			</div>
 		</div>
     </div>
+    
+    
+    <script>
+    
+    	//new 상태 표시 ----------------------------------------------------------
+    	$(function(){
+			$('#new-group').each(function(){
+				if($(this).attr('value') == 1){
+					$(this).show();
+				}					
+			});    
+    	});
+    	
+    	
+    
+    
+    </script>
+    
 
     <jsp:include page="../common/footer.jsp" />
 </body>

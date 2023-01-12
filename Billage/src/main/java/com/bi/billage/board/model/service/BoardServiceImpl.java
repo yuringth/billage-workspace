@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.bi.billage.board.model.dao.BoardDao;
 import com.bi.billage.board.model.vo.ADBoard;
@@ -255,6 +256,12 @@ public class BoardServiceImpl implements BoardService {
 	public int insertNovel(Novel n) {
 		return boardDao.insertNovel(sqlSession, n);
 	}
+
+	@Override
+	public int insertSerial(Serial se, int novelNo) {
+		return boardDao.insertSerial(sqlSession, se, novelNo);
+	}
+
 
 	
 

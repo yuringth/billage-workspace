@@ -1,7 +1,6 @@
 package com.bi.billage.group.controller;
 
 import java.io.BufferedReader;
-
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -49,9 +48,21 @@ public class GroupController {
 	
 	// 모임 상세보기 메소드 
 	@RequestMapping("detail.gr")
-	public String selectDetailGroup(/*게시글 번호*/) {
-		//게시글 번호 조회 
-		return "group/groupDetailView";
+	public ModelAndView selectDetailGroup(int groupNo, String newCount, ModelAndView mv) {
+		
+		//게시글 번호 들고 가서 group_count증가 
+		if(groupService.increaseCount(groupNo) > 0) {
+			Group group = groupService.selectDetailGroup(groupNo);
+			group.setNewCount(newCount);
+			//게시글 번호로 해당 글 상세 조회 
+			mv.addObject("group", group);
+			mv.setViewName("group/groupDetailView");
+			return mv;
+			
+		} else {
+			mv.addObject("group", "group게시글 조회에 실패했습니다").setViewName("common/errorPage");
+			return mv;
+		} 
 	}
 	
 

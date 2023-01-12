@@ -107,7 +107,7 @@ textarea:focus {
 </style>
 <body>
 		<jsp:include page="../common/header.jsp"/>
-	<form id="enrollForm" method="post" action="insert.se" enctype="multipart/form-data">
+	<form id="enrollForm" method="post" action="insert.sr" enctype="multipart/form-data">
 	  <header align="center">
 	    <h2>연재 신청</h2>
 	    <div>Billage에서 연재 작가님들을 모십니다. 연재 자격 요건에 대해서는 공지사항을 확인해 주세요.</div>

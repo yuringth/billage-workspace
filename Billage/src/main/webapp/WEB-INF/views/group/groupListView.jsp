@@ -7,6 +7,12 @@
 <meta charset="UTF-8">
 
 <title>여기는 모임 리스트 </title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
 <style>
 	p { padding:0px; margin:0px; }
 	
@@ -104,6 +110,7 @@
 		<div id="list-area">
 			<c:forEach items="${ groupList }" var="g">
 			<div id="thum-area" class="thumbnail" align="center">
+				<input type="hidden" name="groupNo" value="${ g.groupNo }" />
 				<div id="new-group" value="${ g.newCount }">new</div>
 				<img src="${ g.groupImg }" alt="">
 				<h3>${ g.groupTitle }</h3> 
@@ -127,11 +134,11 @@
                     	<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
                		</c:when>
                		<c:otherwise>
-                    	<li class="page-item"><a class="page-link" href="list.bo?cpage=${ pi.currentPage -1 }">Previous</a></li>
+                    	<li class="page-item"><a class="page-link" href="list.gr?cpage=${ pi.currentPage -1 }">Previous</a></li>
                		</c:otherwise>
 				</c:choose>
 				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-                   	<li class="page-item"><a class="page-link" href="list.bo?cpage=${ p }">${ p }</a></li>
+                   	<li class="page-item"><a class="page-link" href="list.gr?cpage=${ p }">${ p }</a></li>
 				</c:forEach>
 				
 				<c:choose>
@@ -139,7 +146,7 @@
                    		<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
 					</c:when>
 					<c:otherwise>
-						<li class="page-item"><a class="page-link" href="list.bo?cpage=${ pi.currentPage + 1 }">Next</a></li>
+						<li class="page-item"><a class="page-link" href="list.gr?cpage=${ pi.currentPage + 1 }">Next</a></li>
 					</c:otherwise>
 				</c:choose>
                </ul>
@@ -161,8 +168,10 @@
 				});
 				
 				
-				$('#list-area > .thumbnail').click(function(){
-					location.href = "detail.gr";
+				$('#list-area > #thum-area').click(function(){
+					console.log($(this).children().eq());
+					location.href = "detail.gr?groupNo=" + $(this).children().eq(0).val()
+											 +"&newCount=" + $(this).find('#new-group').attr('value');
 					//글번호 들고 가야 돼
 				});
 			});
@@ -172,20 +181,7 @@
 				
 				
 				
-				/*
-				안녕?? 나는 팡숀이야 ~
-						
-						팡숀은 뜻이 뭐야 ~
-						
-						팡숀팡숀팡숀~~~
-						
-						이게 바로 팡숀이야 ~ 너무 즐거워버려 ~
-						
-						팡숀 팡숀 ~
-						
-						팡숀 ~ 디스가 뭐야?? 디스 디스가 담배야 담배 ~
-								
-								디스플러스도있어 아주 팡숀이야 ~ */
+
 	
 		</script>
 		

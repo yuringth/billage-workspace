@@ -135,7 +135,7 @@
             <div class="title">
 				<h1 class="title-text">연재 요청 조회 및 관리</h1>
 			</div>
-				<table id="serialRequestList" class="table table-hover" align="center">
+				<table id="inqList" class="table table-hover" align="center">
                 <thead>
                     <tr>
                         <th>문의번호</th>
@@ -164,8 +164,8 @@
             <script>
             
             	$(function(){
-            		$('#serialRequestList>tbody>tr').click(function(){
-            			location.href = 'detail.sr?rno=' + $(this).children('.rno').text();
+            		$('#inqList>tbody>tr').click(function(){
+            			location.href = 'detail.iq?ino=' + $(this).children('.ino').text();
             		})
             	})
             

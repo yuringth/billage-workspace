@@ -135,11 +135,13 @@
             </div>
 
             <div class="longdiv align-left">
-                <button class="btnleft btn btn-dark">
-                    <p class="btntitle">등록</p>
+                <button class="btnleft btn btn-dark" type="submit">
+                	등록
+                   <!--  <p class="btntitle">등록</p> -->
                 </button>
-                <button class="btnright btn btn-secondary">
-                    <p class="btntitle ">취소</p>
+                <button class="btnright btn btn-secondary" type="reset">
+                	취소
+                    <!-- <p class="btntitle ">취소</p> -->
                 </button>
             </div>
         </form> 
