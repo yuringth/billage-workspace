@@ -113,8 +113,8 @@
 		<hr>
 
 		<!-- 매란언니한테 알려달라하기 -->
-		<div style="text-align:center;">별점 : ${ b.reviewStar } ☆☆☆★ 
-			<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+		<div style="text-align:center;">
+			별점 : ${ b.reviewStar } 
 		</div>
 
 		<br>
