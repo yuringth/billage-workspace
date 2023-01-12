@@ -100,8 +100,22 @@
 				</colgroup>
 				<tbody>
 					<tr>
-						<th scope="row">*모임명</th>
+						<th scope="row">*모임 이름</th>
 						<td><div><input type="text" name="clubName" required></div></td>
+					</tr>
+					<tr>
+						<th scope="row">*모임 요일</th>
+						<td>
+							<select name="">
+								<option name="groupDay">월</option>
+								<option name="groupDay">화</option>
+								<option name="groupDay">수</option>
+								<option name="groupDay">목</option>
+								<option name="groupDay">금</option>
+								<option name="groupDay">토</option>
+								<option name="groupDay">일</option>
+							</select>
+						</td>
 					</tr>
 					<tr>
 						<th>*모임 설명</th>
@@ -109,15 +123,12 @@
 											placeholder="10자 이상 입력해주세요"></textarea></div></td>
 					</tr>
 					<tr>
-						<th>*모임 중심 지역</th>
+						<th>*모임 지역</th>
 						<td><input type="button" id="addr-btn" value="찾기" /><div><input type="text" name="groupLocation" required readonly></div></td>
 					</tr>
 					<tr>
-						<th>*모임 정원</th>
-						<td>
-							<div><input type="number" name="groupNum" max="300" required/></div>
-							*최대 300명까지 
-						</td>
+						<th>*모임 참여 인원</th>
+						<td><div><input type="number" name="groupNum" required/></div></td>
 					</tr>
 					<tr>
 						<th>모임 대표 이미지</th>
