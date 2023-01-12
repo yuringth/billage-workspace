@@ -157,7 +157,7 @@
 	
 		function deleteBtn(){
 			if(confirm('삭제하시겠습니까?')){
-				location.href='delete.dr?bno=${b.boardNo}';
+				location.href='delete.dr?bno=' ${b.boardNo};
 			}
 		}
 	
