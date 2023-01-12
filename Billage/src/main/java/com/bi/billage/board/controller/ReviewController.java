@@ -173,19 +173,27 @@ public class ReviewController {
 	
 	
 	// 리뷰게시판 -> 글수정 누를 시 -> 수정폼 화면 나옴
-//	@RequestMapping("enrollForm.re")
-//	public String reviewEnrollForm() {
-//		return "board/reviewBoard/reviewUploadForm";
-//	}
+	@RequestMapping("enrollForm.re")
+	public ModelAndView reviewEnrollForm(int reviewNo, ModelAndView mv) {
+		mv.addObject("b", boardService.selectReviewBoard(reviewNo)).setViewName("board/reviewBoard/reviewUploadForm");
+		return mv;
+	}
 	
 	
 	// 리뷰게시판 => 글 수정
-	@RequestMapping("enrollForm.re")
-	public String updateReviewBoard(/*int reviewNo*/) {
+	@RequestMapping("updateReview.re")
+	public String updateReviewBoard(ReviewBoard b, Model model) {
 	
-//		boardService.updateReviewBoard(reviewNo);
-//		
-		return "board/reviewBoard/reviewUploadForm";
+		System.out.println(b);
+		// 이미지 안들어옴
+		
+		if(boardService.updateReviewBoard(b) > 0 ) { // 수정 성공 시
+			return "redirect:detail.re?reviewNo=" + b.getReviewNo();
+		} else {
+			model.addAttribute("errorMsg", "게시글 수정 실패");
+			return "common/errorPage";
+		}
+		
 	
 	}
 	

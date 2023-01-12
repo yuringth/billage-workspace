@@ -7,10 +7,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style>
 // font stuff
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,600,700,900);
-
 
 // colour stuff
 @white: #ffffff;
@@ -59,6 +59,7 @@ a.btn:active {
 }
 
 div.cards {
+  align: center;
   margin: 80px auto;
   max-width: 960px;
   text-align: center;
@@ -136,6 +137,10 @@ div.card {
       }
     }
   }
+  
+  div {
+  	margin: auto;
+  }
 
   div.card-description {
     padding: 0 15px 10px;
@@ -212,58 +217,85 @@ div.card.show {
   }
 }
 
-
-
+.pagination {
+	align: center;
+	}
 </style>
 <body>
 		<jsp:include page="../../common/header.jsp"/>
+		
 		<!-- 로그인 후 관리자일 경우만 보여지는 글쓰기 버튼 -->
         <c:if test="${ loginUser eq null }">
-        <div align="center">
-        <a class="btn btn-secondary" href="enrollForm.nv">작품등록</a>
-        </div>
+	        <div align="center">
+	        	<a class="btn btn-secondary" href="enrollForm.nv">작품등록</a>
+	        </div>
         </c:if>
+        
 		<div class="cards">
-		        <c:forEach items="${ list }" var="n">
-		        <div class="card">
-		            <div class="card__image-holder">
-		                <!-- <img class="card__image" src="https://source.unsplash.com/300x225/?wave" alt="wave" /> -->
-		                <img class="card_image" src="${ n.changeName }" width="350" height="400">
-		            </div>
-		            <div class="card-title" title="${ n.novelTitle }">
-		                <h2 style="display: block;
-      								white-space: nowrap;
-	  								text-overflow: ellipsis;
-	  								overflow: hidden;">
-		                    ${ n.novelTitle }
-		                </h2>
-		            </div>
-		            <div class="card-flap flap1">
-		                <div class="card-description">
-		                    작가명 : ${ n.nickName }<br>최신화 : <br>추천수 : ${ n.heart }<br>별점 (평균): 
-		                </div>
-		                <div class="card-flap flap2">
-		                    <div class="card-actions">
-		                    <input type="hidden" class="nno" value="${ n.novelNo }">
-		                        <a class="btn">읽으러가기</a>
-		                    </div>
-		                </div>
-		            </div>
-		        </div>
-		        </c:forEach>
-		    </div>
-		    <jsp:include page="../../common/footer.jsp"/>
-	<script>
+	        <c:forEach items="${ list }" var="n">
+	        <div class="card">
+	            <div class="card__image-holder">
+	                <!-- <img class="card__image" src="https://source.unsplash.com/300x225/?wave" alt="wave" /> -->
+	                <img class="card_image" src="${ n.changeName }" width="295" height="400">
+	            </div>
+	            <div class="card-title" title="${ n.novelTitle }">
+	                <h2 style="display: block;
+     								white-space: nowrap;
+  								text-overflow: ellipsis;
+  								overflow: hidden;">
+	                    ${ n.novelTitle }
+	                </h2>
+	            </div>
+	            <div class="card-flap flap1">
+	                <div class="card-description">
+	                    작가명 : ${ n.nickName }<br>최신화 : <br>추천수 : ${ n.heart }<br>별점 (평균): 
+	                </div>
+	                <div class="card-flap flap2">
+	                    <div class="card-actions">
+	                    <input type="hidden" class="nno" value="${ n.novelNo }">
+	                        <a class="btn">읽으러가기</a>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	        </c:forEach>
+		    
+		      <div id="pagingArea" style="align:center;">
+                <ul class="pagination">
+                	<c:choose>
+                		<c:when test="${ pi.currentPage eq 1 }">
+                    		<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                    	</c:when>
+                		<c:otherwise>
+                		<li class="page-item"><a class="page-link" href="list.nv?cpage=${ pi.currentPage - 1 }">Previous</a></li>
+                		</c:otherwise>
+                	</c:choose>
+                <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                    <li class="page-item"><a class="page-link" href="list.nv?cpage=${p}">${ p }</a></li>
+                </c:forEach>
+                <c:choose>
+                	<c:when test="${ pi.currentPage eq pi.maxPage }">
+	                    <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                	</c:when>
+                	<c:otherwise>
+	                    <li class="page-item"><a class="page-link" href="list.nv?cpage=${ pi.currentPage + 1 }">Next</a></li>
+	                </c:otherwise>
+	            </c:choose>
+                </ul>
+              </div>
+		</div>
+		<script>
 	
-	$(function () {
+		$(function () {
     	
-        $('.card-actions').click(function () {
+        	$('.card-actions').click(function () {
 
-            location.href = 'list.se?nno=' + $(this).children('.nno').val();
+        	    location.href = 'list.se?nno=' + $(this).children('.nno').val();
             		
-        })
-	})
+    	    })
+		})
 	
-	</script>
+		</script>
+	<jsp:include page="../../common/footer.jsp"/>
 </body>
 </html>
