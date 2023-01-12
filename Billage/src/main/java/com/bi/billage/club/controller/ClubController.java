@@ -1,4 +1,4 @@
-package com.bi.billage.group.controller;
+package com.bi.billage.club.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,43 +20,43 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.common.savefile.SaveFile;
 import com.bi.billage.common.template.Pagination;
-import com.bi.billage.group.model.service.GroupService;
-import com.bi.billage.group.model.vo.Group;
+import com.bi.billage.club.model.service.ClubService;
+import com.bi.billage.club.model.vo.Club;
 
 @Controller
-public class GroupController {
+public class ClubController {
 	
 	// API serviceKey
 	private static final String serviceKey = "B15BD225-F8CB-34E6-9DC3-A77C2FE5F5A9";
 	
 	@Autowired
-	private GroupService groupService;
+	private ClubService clubService;
 	
 	//등록된 모임 리스트를 가지고 와야 함 , 페이징 처리 필요
-	@RequestMapping("list.gr")
+	@RequestMapping("list.cl")
 	public ModelAndView selectGroup(@RequestParam(value="cpage", defaultValue="1")int currentPage, ModelAndView mv) {
 		
-		PageInfo pi = Pagination.getPageInfo(groupService.selectListCount(), currentPage, 10, 9);
+		PageInfo pi = Pagination.getPageInfo(clubService.selectListCount(), currentPage, 10, 9);
 		
 		mv.addObject("pi", pi);
-		mv.addObject("groupList", groupService.selectList(pi));
+		mv.addObject("groupList", clubService.selectList(pi));
 		
-		mv.setViewName("group/groupListView");
+		mv.setViewName("club/clubListView");
 		return mv;
 	}
 	
 	
 	// 모임 상세보기 메소드 
-	@RequestMapping("detail.gr")
-	public ModelAndView selectDetailGroup(int groupNo, String newCount, ModelAndView mv) {
+	@RequestMapping("detail.cl")
+	public ModelAndView selectDetailGroup(int clubNo, String newCount, ModelAndView mv) {
 		
 		//게시글 번호 들고 가서 group_count증가 
-		if(groupService.increaseCount(groupNo) > 0) {
-			Group group = groupService.selectDetailGroup(groupNo);
-			group.setNewCount(newCount);
+		if(clubService.increaseCount(clubNo) > 0) {
+			Club club = clubService.selectDetailGroup(clubNo);
+			club.setNewCount(newCount);
 			//게시글 번호로 해당 글 상세 조회 
-			mv.addObject("group", group);
-			mv.setViewName("group/groupDetailView");
+			mv.addObject("club", club);
+			mv.setViewName("club/clubDetailView");
 			return mv;
 			
 		} else {
@@ -70,7 +70,7 @@ public class GroupController {
 	
 	// 지역을 찾는 API을 구현 함 
 	@ResponseBody
-	@RequestMapping(value="searchAddr.gr", produces = "application/json; charset=UTF-8")
+	@RequestMapping(value="searchAddr.cl", produces = "application/json; charset=UTF-8")
 	public String ajaxSearchAddr(String keyword) throws IOException {
 		
 		String url = "http://api.vworld.kr/req/search";
@@ -102,24 +102,24 @@ public class GroupController {
 	
 	
 	// 마이페이지에서 모임 개설하기 클릭시 실행되는 메소드  -- 모임등록폼 작성 페이지 
-	@RequestMapping("enrollForm.gr")
+	@RequestMapping("enrollForm.cl")
 	public String enrollGroup() {
-		return "group/groupEnrollForm";
+		return "club/clubEnrollForm";
 	}
 	
 	// 모임등록 하면 값 들어오는 메소드 --------------------------------- 기능 구현 필요함 
-	@RequestMapping("create.gr")
-	public String insertGroup(Model model, Group group, MultipartFile upfile, HttpSession session) {
+	@RequestMapping("create.cl")
+	public String insertGroup(Model model, Club club, MultipartFile upfile, HttpSession session) {
 		//System.out.println(group);
 		
 		if(!upfile.getOriginalFilename().equals("")) {
 			String changeName = SaveFile.getSaveFile(upfile, session);
-			group.setGroupImg(changeName);
+			club.setClubImg(changeName);
 		}
 		
-		if(0 < groupService.insertGroup(group)) {
+		if(0 < clubService.insertGroup(club)) {
 			
-			return "group/groupAdminView";
+			return "club/clubAdminView";
 		} else {
 			model.addAttribute("errorMsg", "그룹 인설트 오류");
 			return "common/errorPage";

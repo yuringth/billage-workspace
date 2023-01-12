@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.bi.billage.board.model.vo.ReviewBoard;
 import com.bi.billage.follow.model.vo.Follow;
 import com.bi.billage.user.model.vo.User;
 @Repository
@@ -34,6 +35,10 @@ public class FollowDao {
 	
 	public int deleteFollow (SqlSession sqlSession, Follow follow) {
 		return (int)sqlSession.delete("followMapper.deleteFollow", follow);
+	}
+	
+	public ArrayList<ReviewBoard> selectReviewList (SqlSession sqlSession, int userNo) {
+		return (ArrayList) sqlSession.selectList("followMapper.selectReviewList", userNo);
 	}
 
 }

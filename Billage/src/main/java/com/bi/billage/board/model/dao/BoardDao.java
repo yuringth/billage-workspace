@@ -192,8 +192,14 @@ public class BoardDao {
 	public int checkDraw(SqlSessionTemplate sqlSession, ADBoard b) {
 		return sqlSession.selectOne("ADBoardMapper.checkDraw", b);
 	}
+	
+	public ArrayList<Integer> selectPrizeUser(SqlSessionTemplate sqlSession, int boardNo) {
+		return (ArrayList)sqlSession.selectList("ADBoardMapper.selectPrizeUser", boardNo);
+	}
 
-
+	public int insertPrizeUser(SqlSessionTemplate sqlSession, ADBoard b) {
+		return sqlSession.update("ADBoardMapper.insertPrizeUser", b);
+	}
 
 
 
@@ -361,6 +367,10 @@ public class BoardDao {
 		return sqlSession.insert("serialMapper.insertSerial", map);
 	}
 
+
+
+
+	
 
 	
 

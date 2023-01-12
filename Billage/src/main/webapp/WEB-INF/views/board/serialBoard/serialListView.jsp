@@ -20,16 +20,14 @@
 	   <div class="content">
         <div class="innerOuter" style="padding:5% 10%;">
         <div class="novelCover" style="float:left;">
-        <img src="https://comicthumb-phinf.pstatic.net/20210705_110/pocket_1625477242961kEPYS_JPEG/-__.jpg?type=m260">
         </div>
-        <br><br><br>
         <div class="novelInfo" align="left">
         <c:forEach items="${ list }" var="s" begin="1" end="1">
+        	<img src="${s.novelImg}" style="float:left;" width="150" height="200">
             <h2>제목 : ${s.novelTitle}</h2>
             <h4>작가명 : ${s.nickName}</h4>
             <h6>설명 : ${s.novelDisplay }</h6>
         </c:forEach>
-        <h1>${serial.novelTitle }</h1>
         </div>
             <br>
             <!-- 로그인 후 작가본인일 경우만 보여지는 글쓰기 버튼 -->
@@ -88,11 +86,7 @@
             	}) */
             
             </script>
-       
-            <br><br>
-        </div>
-        <br><br>
-
+    	</div>
     </div>
 	<jsp:include page="../../common/footer.jsp"/>
 

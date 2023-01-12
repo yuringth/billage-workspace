@@ -22,17 +22,16 @@
 		<result column="STATUS"				property="status" />
 	</resultMap>
 
-	<resultMap id="groupResultSet" type="group">
-			<result column="group_no" 			property="groupNo" />
-			<result column="user_no" 			property="userNo" />
-			<result column="group_title" 		property="groupTitle" />
-			<result column="group_num" 			property="groupNum" />
-			<result column="group_createdate" 	property="groupCreatedate" />
-			<result column="group_describe" 	property="groupDescribe" />
-			<result column="group_day" 			property="groupDay" />
-			<result column="group_location" 	property="groupLocation" />
-			<result column="group_status"		property="groupStatus" />
-			<result column="group_img" 			property="groupImg" />
+	<resultMap id="groupResultSet" type="club">
+			<result column="CLUB_NO" 		     	property="clubNo" />
+			<result column="USER_NO" 	      		property="userNo" />
+			<result column="CLUB_NAME" 		        property="clubName" />
+			<result column="CLUB_LIMIT" 			property="clubLimit" />
+			<result column="CLUB_CREATEDATE"    	property="clubCreatedate" />
+			<result column="CLUB_DISCRIPT" 			property="clubDiscript" />
+			<result column="CLUB_LOCATION" 			property="clubLocation" />
+			<result column="CLUB_STATUS"			property="clubStatus" />
+			<result column="CLUB_IMG" 				property="clubImg" />
 	</resultMap>
 	
 	<resultMap id="inqResultSet" type="inquiry">
@@ -154,19 +153,19 @@
 		select
 				count(*)
 		from
-				"GROUP"
+				CLUB
 	</select>
 	
 	<!-- 관리자 모임조회 쿼리문 -->
 	<select id="selectGroupList" resultMap="groupResultSet">
 		select
-				group_no,
-				(select nickname from member m where m.user_no = g.user_no) as nickName,
-				group_title,
-				group_createdate,
-				group_status
+				CLUB_NO,
+				(select nickname from member m where m.user_no = c.user_no) as nickName,
+				CLUB_NAME,
+				CLUB_CREATEDATE,
+				CLUB_STATUS
 		from
-				"GROUP" g
+				CLUB c
 	</select>
 	
 	<!-- 닉네임 중복체크용 쿼리문 -->

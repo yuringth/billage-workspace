@@ -21,6 +21,24 @@
 			<result column="FOLLOWER"         property="follower"/> 
 		</resultMap>
 		
+		<resultMap id="reviewResultSet2" type="review">
+			<result column="REVIEW_NO"      property="reviewNo" />
+			<result column="USER_NO"		property="userNo" />
+			<result column="REVIEW_STAR"	property="reviewStar" />
+			<result column="REVIEW_TITLE"	property="reviewTitle" />
+			<result column="REVIEW_CONTENT"	property="reviewContent" />
+			<result column="CREATE_DATE"	property="createDate" />
+			<result column="COUNT"		    property="count" />
+			<result column="REVIEW_STATUS"	property="reviewStatus" />
+			<result column="BOOK_TITLE" 	property="bookTitle" />
+			<result column="BOOK_AUTHOR"	property="bookAuthor" />
+			<result column="BOOK_GENRE"		property="bookGenre" />
+			<result column="BOOK_IMAG"		property="bookImag" />
+			<result column="BOOK_POINT"  	property="bookPoint" />
+			<result column="BOOK_NO"	    property="bookNo" />
+			<result column="BOOK_PUBLISHER"	    property="bookPublisher" />
+		</resultMap>
+		
 		<select id="selectLoginUser" parameterType="_int" resultMap="userResultSet2">
 			select
 					user_id
@@ -173,5 +191,28 @@
 			           user_no2 = #{userNo2}      
 		</delete>
 		
+		<select id="selectReviewList" parameterType="_int" resultMap="userResultSet2">
+			select
+					REVIEW_NO
+					,USER_NO
+					,REVIEW_STAR
+					,REVIEW_TITLE
+					,REVIEW_CONTENT
+					,CREATE_DATE
+					,COUNT
+					,REVIEW_STATUS
+					,BOOK_TITLE
+					,BOOK_AUTHOR
+					,BOOK_GENRE
+					,BOOK_IMAG
+					,BOOK_POINT
+					,BOOK_NO
+					,BOOK_PUBLISHER
+			from
+			       review
+			where
+			        user_no = #{userNo}       
+					
+		</select>
 
 </mapper>

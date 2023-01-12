@@ -47,6 +47,10 @@ public class BoardController {
 		PageInfo pi = Pagination.getPageInfo(boardService.selectSerialListCount(), currentPage, 10, 10);
 		mv.addObject("pi", pi).addObject("list", boardService.selectSerialList(pi, nno)).setViewName("board/serialBoard/serialListView");
 		
+		// mv.addObject("뭐시기", 뭐시기).addObject("화면단에불러올값", 서비스.메소드(넘길꺼).setViewName("최종적으로어디화면에뿌릴건지"); => addObject 계속할수있다.....
+		
+		//mv.addObject("nv", boardService.selectNovelInfo(nno).serViewName)
+		
 		return mv;
 	}
 	

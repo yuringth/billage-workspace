@@ -104,6 +104,7 @@
 		<p class="title">"${ b.title }"</p>
 		<p class="bookWriter">${ b.bookWriter }</p>
 		<div class="content" style="width : 550px">
+			<p id="prizeUser">${ b.prizeUser }</p>
 			<p>
 				${ b.content }
 			</p>
@@ -154,14 +155,20 @@
 	
 	
 	<script>
+		//전역변수 선언
+		var interval;
+		
 		$(function(){
-			closeCount();
-			setInterval(closeCount, 500);
 			tryBtnChange();
+			console.log(new Date('${ b.closeDate }') > new Date);
+			if(new Date('${ b.closeDate }') >= new Date){
+				interval = setInterval(closeCount, 500);
+			}
 		})
 		
 	
 		function closeCount(){
+			
 			var end = new Date('${ b.closeDate }');
 			var now = new Date(); 
 			
@@ -184,13 +191,18 @@
 		    if(remaindTime >= 0){
 		    	$('.time').text(day +'일 ' + hour + ':' + min + ':' + sec);
 		    } else {
-		    	//당첨자 선정하는 메소드
-		    	selectPrizeUser();
+		    	
+		    	clearInterval(interval); //인터벌 종료
+		    	
 		    	$('.time').text('응모 시간 종료');
 		    	$('.btn1').attr('disabled', true).text('응모 시간 종료');
+		    	//당첨자 필드가 비어있을 경우
+		    	if(${ empty b.prizeUser }){
+			    	selectPrizeUser();
+		    	}
 		    }
 		}
-	
+
 		function postFormSubmit(num){
 			if(num == 1){
 				if(confirm('삭제하시겠습니까?')){
@@ -219,20 +231,22 @@
 		
 		//추점신청한 사람 버튼 바꿔주는 함수
 		function tryBtnChange(){
-			$.ajax({
-				url : 'checkDraw.dr',
-				data : {
-					boardNo : ${b.boardNo},
-				},
-				success : function(result){
-					if(result > 0){
-						$('#drawBtn').attr('onclick', 'postFormSubmit(3)').text('응모취소');
+			if(${not empty loginUser}){
+				$.ajax({
+					url : 'checkDraw.dr',
+					data : {
+						boardNo : ${b.boardNo},
+					},
+					success : function(result){
+						if(result > 0){
+							$('#drawBtn').attr('onclick', 'postFormSubmit(3)').text('응모취소');
+						}
+					},
+					error : function(){
+						console.log('실패 ㅠ');
 					}
-				},
-				error : function(){
-					console.log(실패 ㅠ);
-				}
-			});
+				});
+			}
 		}
 		
 		//당첨자 선정하는 함수
@@ -243,7 +257,11 @@
 					boardNo : ${b.boardNo},
 				},
 				success : function(result){
-					
+					if(result>0){
+						window.location.reload()
+					}
+				},error : function(){
+					console.log('오류');
 				}
 			});
 		}
