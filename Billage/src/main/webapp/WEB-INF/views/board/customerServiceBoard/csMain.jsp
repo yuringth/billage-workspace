@@ -307,7 +307,7 @@ a:hover {
 	
 	  <div class="row">
 	    <div class="large-12 columns">
-	      <hgroup>
+	      <hgroup style="text-align:center">
 	        <h2>WelCome to</h3>
 	        <h1>Billage Customer Service Center </h1>
 	        <br><br><br>
@@ -396,7 +396,7 @@ a:hover {
 	
 	        <li ontouchstart="this.classList.toggle('hover');">
 	          <div class="large button card-front">
-	            <a href="http://www.aicfchurch.org">고객센터 TEL</a>
+	            <a href="http://www.aicfchurch.org">고객센터</a>
 	            <i class="fa fa-users card-icon"></i>
 	          </div>
 	
@@ -404,9 +404,9 @@ a:hover {
 	            <i class="fa fa-users card-icon"></i>
 	            <div class="hub-info">
 	              <br><a href="http://www.aicfchurch.org">고객센터 연락처</a><br>
-	              <p>TEL : 010 - 4662 - 2644</p>
-	            </div>
 	            <small class="clear">매주 월~금 휴무. 심심할때 전화받음.</small>
+	            </div>
+	              <p>TEL : 010 - 4662 - 2644</p>
 	          </div>
 	        </li>
 	

@@ -115,32 +115,19 @@
             </div>
             <div id="footer-area-right">
             <img src="resources/images/logo.png.jpg" style="float:left;" width="240" height="240">
-<br><p>
-(주)마지막잎새 <br>
-서울특별시 남대문로120 대일빌딩 2층 C-Class <br>
-대표이사:6명 <br>
-사업자 등록번호 : 123-12-1234555 <a href="#">[사업자정보확인]</a> <br>
-고객센터:02-1234-1234 <br><br>
-© 2023 Billage Co., Ltd. All rights reserved.
-</p>
+			<br><p>
+			(주)마지막잎새 <br>
+			서울특별시 남대문로120 대일빌딩 2층 C-Class <br>
+			대표이사:6명 <br>
+			사업자 등록번호 : 123-12-1234555 <a href="#">[사업자정보확인]</a> <br>
+			고객센터:02-1234-1234 <br><br>
+			© 2023 Billage Co., Ltd. All rights reserved.
+			</p>
             </div>
         </div>
     </div>
     <script>
-    // 푸터 하단 각종 이동
-/*     $(function () {
-    	
-        $('#center').click(function () {
-            location.href = "enroll.iq";
-        })
-        $('#apply').click(function () {
-            location.href = "request.se";
-        })
-        $('#notice').click(function () {
-            location.href = "enroll.iq";
-        })
-        
-   }); */
+
     </script>
     
 </body>
