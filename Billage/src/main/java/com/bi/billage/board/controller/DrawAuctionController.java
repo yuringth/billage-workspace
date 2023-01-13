@@ -214,8 +214,10 @@ public class DrawAuctionController {
 	@ResponseBody
 	@RequestMapping(value="prize.dr", produces="appliction/json; charset=UTF-8")
 	public String selectPrizeUser(int boardNo, HttpSession session){
+		
 		//추첨자 리스트 가져오기
 		ArrayList<Integer> list = boardService.selectPrizeUser(boardNo);
+		
 		// 추첨자 리스트에서 랜덤으로 하나 선정
 		int userNo = 0;
 		if(list.size() > 0) {
@@ -226,7 +228,12 @@ public class DrawAuctionController {
 		b.setUserNo(userNo);
 		b.setBoardNo(boardNo);
 		// 보드테이블의 당첨자 컬럼에  당첨자 회원번호 입력 
-		return new Gson().toJson(boardService.insertPrizeUser(b));
+		boardService.insertPrizeUser(b);
+		
+		b = boardService.selectDrawBoard(boardNo);
+		b.getPrizeUserNo();
+		
+		return new Gson().toJson();
 	}
 	
 	

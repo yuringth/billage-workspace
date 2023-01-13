@@ -157,20 +157,23 @@
 	<script>
 		//전역변수 선언
 		var interval;
+		var end = new Date('${ b.closeDate }');
+		var now = new Date(); 
 		
 		$(function(){
 			tryBtnChange();
-			console.log(new Date('${ b.closeDate }') > new Date);
-			if(new Date('${ b.closeDate }') >= new Date){
-				interval = setInterval(closeCount, 500);
-			}
+			interval = setInterval(closeCount, 500);
+			if(${ empty b.prizeUser } && (end - now) <= 0){
+		    	selectPrizeUser();
+	    	}
 		})
 		
 	
+		
 		function closeCount(){
 			
-			var end = new Date('${ b.closeDate }');
-			var now = new Date(); 
+			end = new Date('${ b.closeDate }');
+			now = new Date(); 
 			
 			var remaindTime = end - now;
 			
@@ -196,10 +199,7 @@
 		    	
 		    	$('.time').text('응모 시간 종료');
 		    	$('.btn1').attr('disabled', true).text('응모 시간 종료');
-		    	//당첨자 필드가 비어있을 경우
-		    	if(${ empty b.prizeUser }){
-			    	selectPrizeUser();
-		    	}
+		    	
 		    }
 		}
 
@@ -258,7 +258,7 @@
 				},
 				success : function(result){
 					if(result>0){
-						window.location.reload()
+						
 					}
 				},error : function(){
 					console.log('오류');
