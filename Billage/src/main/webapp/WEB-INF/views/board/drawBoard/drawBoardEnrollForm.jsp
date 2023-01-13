@@ -115,7 +115,7 @@
                         <p>응모포인트:</p>
                     </div>
                     <div class="inputdiv">
-                        <input type="number" class="form-control" id="tryPoint" value="50P" name="tryPoint" required>
+                        <input type="number" class="form-control" id="tryPoint" value="0" name="tryPoint" required>
                     </div>
                 </div>
             </div>

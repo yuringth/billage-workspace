@@ -16,12 +16,16 @@ public class PointController {
 	
 	@RequestMapping("addpoint")
 	public String addPoint(Point p, ModelAndView mv) {
-		if(pointService.addPoint(p) > 0) {// 성공 
-			return "main";
-		} else { // 실패
-			mv.addObject("errorMsg", "게시글 삭제에 실패했어용 ㅠ");
-			return "common/errorPage";
-		}
+		
+		if(p.getPointAdd() != 0) { // add포인트가 0이 아닐 경우에만 실행
+			if(pointService.addPoint(p) > 0) {// 성공 
+				return "main";
+			} else { // 실패
+				mv.addObject("errorMsg", "게시글 삭제에 실패했어용 ㅠ");
+				return "common/errorPage";
+			}
+		} 
+		return "main";
 	}
 	
 	@RequestMapping("selectPoint")
