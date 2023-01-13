@@ -320,12 +320,6 @@ public class BoardServiceImpl implements BoardService {
 		return null;
 	}
 
-	@Override
-	public ReviewBoard selectBookTitle2(ReviewBoard b) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 	
 
