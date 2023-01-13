@@ -17,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bi.billage.board.model.service.BoardService;
 import com.bi.billage.board.model.vo.ADBoard;
 import com.bi.billage.common.savefile.SaveFile;
+import com.bi.billage.message.model.service.MessageService;
+import com.bi.billage.message.model.vo.Message;
 import com.bi.billage.point.model.service.PointService;
 import com.bi.billage.point.model.vo.Point;
 import com.bi.billage.user.model.vo.User;
@@ -30,6 +32,9 @@ public class DrawAuctionController {
 	
 	@Autowired
 	private PointService pointService;
+	
+	@Autowired
+	private MessageService messageService;
 	
 	//추첨글목록
 	@RequestMapping("list.dr")
@@ -213,10 +218,10 @@ public class DrawAuctionController {
 	//당첨자 
 	@ResponseBody
 	@RequestMapping(value="prize.dr", produces="appliction/json; charset=UTF-8")
-	public String selectPrizeUser(int boardNo, HttpSession session){
+	public String selectPrizeUser(ADBoard a, HttpSession session){
 		
 		//추첨자 리스트 가져오기
-		ArrayList<Integer> list = boardService.selectPrizeUser(boardNo);
+		ArrayList<Integer> list = boardService.selectPrizeUser(a.getBoardNo());
 		
 		// 추첨자 리스트에서 랜덤으로 하나 선정
 		int userNo = 0;
@@ -226,14 +231,44 @@ public class DrawAuctionController {
 		
 		ADBoard b = new ADBoard();
 		b.setUserNo(userNo);
-		b.setBoardNo(boardNo);
+		b.setBoardNo(a.getBoardNo());
 		// 보드테이블의 당첨자 컬럼에  당첨자 회원번호 입력 
 		boardService.insertPrizeUser(b);
 		
-		b = boardService.selectDrawBoard(boardNo);
-		b.getPrizeUserNo();
+		// 쪽지 보내기, 조회한 값 반환하기 위해 변수에 넣는다
+		b = boardService.selectDrawBoard(a.getBoardNo());
+		System.out.println("================");
+		System.out.println(a);
+		System.out.println(b);
+		if(userNo != 0) { //당첨자가 존재할 경우에만 쪽지 전송
+			Message m = new Message();
+			// 1. 당첨자에게 쪽지 보내기
+			m.setUserNo(1); //보낸 사람은 관리자
+			m.setUserNo2(b.getPrizeUserNo()); //받는 사람은 당첨자
+			m.setMessageContent("축하드립니다!\r\n" + 
+								" " + a.getTitle() + "의 추첨 결과 당첨되셨습니다.\r\n" + 
+								"주소를 확인해 주세요");
+			messageService.insertMessage(m);
+			// 2. 글 쓴 사람한테 쪽지 보내기
+			m.setUserNo2(a.getUserNo()); //받는 사람은 게시글 작성자
+			m.setMessageContent( a.getTitle() + "의 추첨 결과가 발표되었습니다.\r\n" + 
+								"상품을 저희측으로 보내주시면 포인트 정산해서 적립해드리겠습니다. (생략)");
+			messageService.insertMessage(m);
+		}
 		
-		return new Gson().toJson();
+		// 적립된 포인트를 조회해와서 글 쓴 사람한테 insert
+		if(a.getTryPoint() != 0) { //무료추첨이 아닌 경우에만 실행
+			
+			// 총 적립된 포인트 조회해와서 포인트 적립하기
+			Point p = new Point();
+			p.setPointAdd(boardService.selectDrawPoint(a.getBoardNo()));
+			p.setUserNo(a.getUserNo());
+			p.setPointStatus("적립");
+			pointService.addPoint(p);
+			
+		}
+		
+		return new Gson().toJson(b);
 	}
 	
 	
