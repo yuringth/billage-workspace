@@ -175,6 +175,22 @@
 	</update>
 	
 	
+	
+	<!-- 글 수정 쿼리문. 1) 책 중복되는지 확인(리뷰넘버로 책제목조회) -->
+	<select id="selectBookTitle2" parameterType="review" resultMap="reviewResultSet">
+       select
+              book_title
+         from
+              review
+        where
+              review_no = #{reviewNo}
+          and
+              user_no = #{userNo}
+          and
+           	  review_status = 'N'
+	</select>	
+	
+	
 	<!-- 글 수정 쿼리문 -->
 	<update id="updateReviewBoard" parameterType="review">
 		update

@@ -19,5 +19,5 @@ public class UsedBoard {
 	private String bookTitle; //BOOK_TITLE	VARCHAR2(50 BYTE)
 	private String originName; //ORIGIN_NAME	VARCHAR2(4000 BYTE)
 	private String changeName; //CHANGE_NAME	VARCHAR2(4000 BYTE)
-	
+	private String nickname; // 닉네임 member하고 join
 }
