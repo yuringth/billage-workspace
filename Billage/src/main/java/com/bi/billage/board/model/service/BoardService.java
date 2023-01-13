@@ -145,6 +145,13 @@ public interface BoardService {
 	
 	// 유림 시작
 	
+	
+	// 중고 게시글의 총 개수 조회
+	int selectListUsedCount();
+	
+	// 중고게시판 목록 조회
+	ArrayList<UsedBoard> usedBoardList(PageInfo pi);
+	
 	// 중고게시판 작성 (insert) 
 	int insertUsedBoard(UsedBoard b);
 	
@@ -171,17 +178,24 @@ public interface BoardService {
 	
 	// 리뷰 게시글의 총 개수 조회
 	int selectListCount();
+	
 	// 리뷰 게시글 리스트 조회
 	ArrayList<ReviewBoard> reviewBoardList(PageInfo pi);
 	
 	
 	
-	// 리뷰게시판 => 1) 책 중복되는지 확인 select : bookTitle로 조회 => 한 행이 있는지 없는지
+	// 리뷰게시판 글작성 => 1) 책 중복되는지 확인 select : bookTitle로 조회 => 한 행이 있는지 없는지
 	ReviewBoard selectBookTitle(ReviewBoard b);
-	
-	
-	// 리뷰게시판 => 2) 중복 된 책 없으면 insert : 글작성
+	// 리뷰게시판 글작성=> 2) 중복 된 책 없으면 insert : 글작성
 	int insertReviewBoard(ReviewBoard b);
+	
+	
+	
+	// 리뷰게시글 수정 서비스(select) => 1) 책 중복되는지 확인(리뷰넘버로 책제목조회)
+	ReviewBoard selectBookTitle2(ReviewBoard b);
+	// 리뷰게시글 수정 서비스(update) => 2) 책 중복되는지 확인(리뷰넘버로 책제목조회)
+	int updateReviewBoard(ReviewBoard b);
+	
 	
 	
 	
@@ -199,9 +213,6 @@ public interface BoardService {
 	
 	
 	
-	
-	// 리뷰게시글 수정 서비스(update)
-	int updateReviewBoard(ReviewBoard b);
 
 
 	

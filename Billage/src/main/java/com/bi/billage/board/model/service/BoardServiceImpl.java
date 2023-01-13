@@ -138,11 +138,26 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectSerialDetail(sqlSession, pi, novelNo, serialNo);
 	}
 	
-	//중고게시판
+	
+	
+	// 중고 게시글의 총 개수 조회
+	@Override
+	public int selectListUsedCount() {
+		return boardDao.selectListUsedCount(sqlSession);
+	}
+	
+	// 중고게시판 목록 조회
+	@Override
+	public ArrayList<UsedBoard> usedBoardList(PageInfo pi){
+		return boardDao.usedBoardList(sqlSession, pi);
+	}
+	
+	
+	
+	//중고게시판 => 글작성
 	@Override
 	public int insertUsedBoard(UsedBoard b) {
-		// TODO Auto-generated method stub
-		return 0;
+		return boardDao.insertUsedBoard(sqlSession, b);
 	}
 	
 	//중고게시판
@@ -185,7 +200,7 @@ public class BoardServiceImpl implements BoardService {
 	// 리뷰 게시글의 총 개수 조회
 	@Override
 	public int selectListCount() {
-		return boardDao.selectNovelListCount(sqlSession);
+		return boardDao.selectListCount(sqlSession);
 	}
 	// 리뷰 게시글 리스트 조회
 	@Override
@@ -196,16 +211,22 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	
-	// 리뷰게시판 => 1) 책 중복되는지 확인 select : bookTitle로 조회 => 한 행이 있는지 없는지
+	// 리뷰게시판 글작성 => 1) 책 중복되는지 확인 select : bookTitle로 조회 => 한 행이 있는지 없는지
 	@Override
 	public ReviewBoard selectBookTitle(ReviewBoard b) {
 		return boardDao.selectBookTitle(sqlSession, b);
 	}
-	// 리뷰게시판 => 2) 중복 된 책 없으면 insert : 글작성
+	// 리뷰게시판 글작성 => 2) 중복 된 책 없으면 insert : 글작성
 	@Override
 	public int insertReviewBoard(ReviewBoard b) {
 		return boardDao.insertReviewBoard(sqlSession, b);
 	}
+	
+	
+	
+	
+	
+	
 	
 
 	// 리뷰게시판 => 조회수 증가
@@ -232,7 +253,11 @@ public class BoardServiceImpl implements BoardService {
 
 	
 	
-	
+	// 리뷰게시판 글수정 => 1) 책 중복되는지 확인(리뷰넘버로 책제목조회)
+	@Override
+	public ReviewBoard selectBookTitle2(ReviewBoard b) {
+		return boardDao.selectBookTitle(sqlSession, b);
+	}	
 	
 	// 리뷰게시판 => 글수정
 	@Override

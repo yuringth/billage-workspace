@@ -297,18 +297,30 @@ public class BoardDao {
 	
 	
 	
-	// 중고게시판
+	// 중고게시판 => 글작성
 	public int insertUsedBoard(SqlSessionTemplate sqlSession, UsedBoard b) {
 		return sqlSession.insert("usedMapper.insertUsedBoard", b);	
 		
 	}
 
 
+	
+	// 중고 게시글의 총 개수 조회
+	public int selectListUsedCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("usedMapper.selectListUsedCount");
+	}
 
-
-
-
-
+	
+	// 중고게시판 목록 조회
+	public ArrayList<UsedBoard> usedBoardList(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("usedMapper.usedBoardList", null, rowBounds);
+		
+	}
 
 
 	
