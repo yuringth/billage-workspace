@@ -36,9 +36,10 @@
 				<c:forEach items="${ clubList }" var="c" >
 					<tr>
 						<td>${ c + 1 }</td>
-						<td><a href="">풀벌레소리</a></td>
-						<td>수</td>
-						<td>모임장</td>
+						<td><img width="50px" heighy="50px" src="${ c.clubImg }"></td>
+						<td><a>${ c.clubName }</a></td>
+						<td>${ c.culbLocation }</td>
+						<td>${ c.memCount }</td>
 						<td><button>관리</button></td>
 					</tr>
 					</c:forEach>
