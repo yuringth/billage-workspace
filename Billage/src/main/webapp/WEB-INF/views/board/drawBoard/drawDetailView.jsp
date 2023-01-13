@@ -267,8 +267,11 @@
 					tryPoint : tryPoint
 				},
 				success : function(result){
-					console.log(result.prizeUser);
-					$('#prizeUser').text('당첨자 : ' + result.prizeUser)
+					if(result.prizeUser != null){
+						$('#prizeUser').text('당첨자 : ' + result.prizeUser)
+					} else {
+						$('#prizeUser').text('신청자가 없어서 당첨자가 없습니다.')
+					}
 				},error : function(){
 					console.log('오류');
 				}
