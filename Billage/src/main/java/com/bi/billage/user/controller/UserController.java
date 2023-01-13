@@ -110,12 +110,11 @@ public class UserController {
 			model.addAttribute("errorMsg", "답변 오류");
 			return "common/errorPage";
 		}
-		
 	}
 	
 	// 연재 요청 리스트 화면 +페이징처리
 	@RequestMapping("list.sr")
-	public ModelAndView selectList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
+	public ModelAndView selectSerialRequestList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
 		PageInfo pi = Pagination.getPageInfo(userService.selectSerialRequestListCount(), currentPage, 10, 10);
 		mv.addObject("pi", pi).addObject("list", userService.selectSerialRequestList(pi)).setViewName("admin/serialRequestListView");
 		
@@ -151,14 +150,26 @@ public class UserController {
 		return "admin/novelEnrollForm";
 	}
 	
-	
-	
-	
-	
+	// FAQ 관리화면
+	@RequestMapping("faqList.ad")
+	public String selectFaqList() {
+		return "admin/adminFaqListView";
+	}
 	
 	
 	// 관리자 관련 끝
+	//--------------------------------------------------------------------------------
+
+	// 고객센터 화면
+	@RequestMapping("center.cs")
+	public String customerService() {
+		return "board/customerServiceBoard/csMain";
+	}
 	
+	
+	
+	
+	//--------------------------------------------------------------------------------
 	// 회원가입 폼으로
 	@RequestMapping("userEnrollForm.me")
 	public String userEnrollForm() {

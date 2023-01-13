@@ -67,7 +67,6 @@ public class DrawAuctionController {
 	public ModelAndView drawDetailView(int bno, ModelAndView mv) throws ParseException {
 		
 		if(boardService.drawIncreaseCount(bno) > 0) {
-			System.out.println(boardService.selectDrawBoard(bno));
 			mv.addObject("b",boardService.selectDrawBoard(bno)).setViewName("board/drawBoard/drawDetailView");
 		} else {
 			mv.addObject("errorMsg", "게시글 조회 실패").setViewName("common/errorPage");
@@ -223,49 +222,61 @@ public class DrawAuctionController {
 		//추첨자 리스트 가져오기
 		ArrayList<Integer> list = boardService.selectPrizeUser(a.getBoardNo());
 		
-		// 추첨자 리스트에서 랜덤으로 하나 선정
-		int userNo = 0;
-		if(list.size() > 0) {
-			userNo = list.get((int)Math.random() * list.size());
-		}
-		
+		// 추첨자 리스트에서 랜덤으로 하나 선정, 신청자가 있을 경우에만 실행
 		ADBoard b = new ADBoard();
-		b.setUserNo(userNo);
-		b.setBoardNo(a.getBoardNo());
-		// 보드테이블의 당첨자 컬럼에  당첨자 회원번호 입력 
-		boardService.insertPrizeUser(b);
 		
-		// 쪽지 보내기, 조회한 값 반환하기 위해 변수에 넣는다
-		b = boardService.selectDrawBoard(a.getBoardNo());
-		System.out.println("================");
-		System.out.println(a);
-		System.out.println(b);
-		if(userNo != 0) { //당첨자가 존재할 경우에만 쪽지 전송
-			Message m = new Message();
-			// 1. 당첨자에게 쪽지 보내기
-			m.setUserNo(1); //보낸 사람은 관리자
-			m.setUserNo2(b.getPrizeUserNo()); //받는 사람은 당첨자
-			m.setMessageContent("축하드립니다!\r\n" + 
-								" " + a.getTitle() + "의 추첨 결과 당첨되셨습니다.\r\n" + 
-								"주소를 확인해 주세요");
-			messageService.insertMessage(m);
-			// 2. 글 쓴 사람한테 쪽지 보내기
-			m.setUserNo2(a.getUserNo()); //받는 사람은 게시글 작성자
-			m.setMessageContent( a.getTitle() + "의 추첨 결과가 발표되었습니다.\r\n" + 
-								"상품을 저희측으로 보내주시면 포인트 정산해서 적립해드리겠습니다. (생략)");
-			messageService.insertMessage(m);
-		}
-		
-		// 적립된 포인트를 조회해와서 글 쓴 사람한테 insert
-		if(a.getTryPoint() != 0) { //무료추첨이 아닌 경우에만 실행
+		if(list.size() > 0) {
 			
-			// 총 적립된 포인트 조회해와서 포인트 적립하기
-			Point p = new Point();
-			p.setPointAdd(boardService.selectDrawPoint(a.getBoardNo()));
-			p.setUserNo(a.getUserNo());
-			p.setPointStatus("적립");
-			pointService.addPoint(p);
+			int userNo = 0;
+
+			// 10보다 큰 수면 그냥 랜덤값을 뽑는다
+			if(list.size() >= 10) {
+				userNo = list.get((int)Math.random() * list.size());
+			} else { // 10보다 작으면 계속 0이 나오기 때문에 0~10까지 구한 후에 list.size()보다 큰 값이 나오면 작은 값이 나올때까지 반복한다
+				
+				int rNo = (int)(Math.random() * 10);
+				
+				while(rNo > list.size()) {
+					rNo = (int)(Math.random() * 10);
+				};
+				
+				userNo = list.get(rNo);;
+			};
 			
+			b.setUserNo(userNo);
+			b.setBoardNo(a.getBoardNo());
+			// 보드테이블의 당첨자 컬럼에  당첨자 회원번호 입력 
+			boardService.insertPrizeUser(b);
+			
+			// 쪽지 보내기, 조회한 값 반환하기 위해 변수에 넣는다
+			b = boardService.selectDrawBoard(a.getBoardNo());
+			if(userNo != 0) { //당첨자가 존재할 경우에만 쪽지 전송
+				Message m = new Message();
+				// 1. 당첨자에게 쪽지 보내기
+				m.setUserNo(1); //보낸 사람은 관리자
+				m.setUserNo2(b.getPrizeUserNo()); //받는 사람은 당첨자
+				m.setMessageContent("축하드립니다!\r\n" + 
+						" " + a.getTitle() + "의 추첨 결과 당첨되셨습니다.\r\n" + 
+						"주소를 확인해 주세요");
+				messageService.insertMessage(m);
+				// 2. 글 쓴 사람한테 쪽지 보내기
+				m.setUserNo2(a.getUserNo()); //받는 사람은 게시글 작성자
+				m.setMessageContent( a.getTitle() + "의 추첨 결과가 발표되었습니다.\r\n" + 
+						"상품을 저희측으로 보내주시면 포인트 정산해서 적립해드리겠습니다. (생략)");
+				messageService.insertMessage(m);
+			}
+			
+			// 적립된 포인트를 조회해와서 글 쓴 사람한테 insert
+			if(a.getTryPoint() != 0) { //무료추첨이 아닌 경우에만 실행
+				
+				// 총 적립된 포인트 조회해와서 포인트 적립하기
+				Point p = new Point();
+				p.setPointAdd(boardService.selectDrawPoint(a.getBoardNo()));
+				p.setUserNo(a.getUserNo());
+				p.setPointStatus("적립");
+				pointService.addPoint(p);
+				
+			}
 		}
 		
 		return new Gson().toJson(b);

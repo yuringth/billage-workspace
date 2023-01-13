@@ -11,10 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.bi.billage.board.model.service.BoardService;
 import com.bi.billage.board.model.vo.UsedBoard;
+import com.bi.billage.common.model.vo.PageInfo;
+import com.bi.billage.common.savefile.SaveFile;
+import com.bi.billage.common.template.Pagination;
 
 @Controller
 public class UsedController {
@@ -26,10 +31,30 @@ public class UsedController {
 
 	// 중고게시판 목록 조회 화면
 	@RequestMapping("list.ud")
-	public String usedBoardList() {
-		return "board/usedBoard/usedListView";
+	public ModelAndView usedBoardList(@RequestParam(value="cPage", defaultValue="1") int currentPage, ModelAndView mv) {
+		
+		PageInfo pi = Pagination.getPageInfo(boardService.selectListUsedCount(), currentPage, 10, 6);
+		
+		System.out.println(currentPage);
+		System.out.println("pi : " + pi);
+		
+		
+		mv.addObject("pi", pi).addObject("list", boardService.usedBoardList(pi)).setViewName("board/usedBoard/usedListView");
+		// ModelAndView는 메소드체인이 가능해서 코드의 길이가 짧아진다 => 그래서 String으로 사용했을 때 보다 좋다
+		return mv;
+		
 	}
 	
+	/*
+	@RequestMapping("list.ud")
+	public String usedBoardList() {
+		
+		
+		boardService.usedBoardList();
+		
+		return "board/usedBoard/usedListView";
+	}
+	*/
 	
 	// 중고게시판 -> 글쓰기버튼 클릭 시 -> 중고게시판 글작성 폼화면으로 이동
 	@RequestMapping("insert.ud")
@@ -41,45 +66,16 @@ public class UsedController {
 	// 글작성
 	@RequestMapping("upload.ud")
 	public String insertUsedBoard(UsedBoard b, MultipartFile upfile,  HttpSession session, Model model) {
-		System.out.println(b);
+		
+		System.out.println("중고게시판 : " + b);
 		System.out.println(upfile);
 		
 		if(!upfile.getOriginalFilename().equals("")) { // => 파일이 있을 경우. //getOriginalFilename == filename필드의 값을 반환함
 			
-			/*
-			// 파일 명 수정 작업 후 서버에 업로드 시키기("image.png" => 20221238123123.png)
-			String originName = upfile.getOriginalFilename();
-			
-			// "20221226104430"(년월일시분초)
-			// Date import => util
-			String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); // new Date():오늘날짜
-			// 12321(5자리 랜덤값)
-			int ranNum = (int)(Math.random() * 90000 + 10000);
-			// 확장자 땡겨오기
-			String ext = originName.substring(originName.lastIndexOf("."));
-			
-			String changeName = currentTime + ranNum + ext;
-			
-			// 업로드 시키고자하는 폴더의 물리적인 경로 알아내기 session.getServletContext() == application
-			String savePath = session.getServletContext().getRealPath("/resources/uploadFiles/");
-			
-			try {
-				// transferTo() : 서버에 파일을 업로드해주는 메소드
-				// 무조건 File 객체를 만들어야함
-				// 파일경로+변경된이름을 가지고 서버에 파일을 업로드 하겠다
-				upfile.transferTo(new File(savePath + changeName)); // 경로 + 파일명 => 경로가 존재 안할수도있기에 예외처리
-			} catch (IOException e) {
-				e.printStackTrace();
-			} 
-			// 이렇게하면 파일이 잘 올라감
-			// 근데 맘에 안드는게 생김 => Template으로 만들어서 공유하는게 좋다
-			 */
-			
 			//saveFile(upfile, session); //=> changeName => 이게 왜???????????????
+			String changeName = SaveFile.getSaveFile(upfile, session);
 			b.setOriginName(upfile.getOriginalFilename()); // 원본명
-			b.setChangeName("resources/uploadFiles/" + saveFile(upfile, session)); // 저장경로(경로+changeName)
-			
-			
+			b.setChangeName(changeName); // 저장경로(경로+changeName)
 		}
 		
 
@@ -98,39 +94,6 @@ public class UsedController {
 		}
 	
 	}
-	
-
-	// 첨부파일 공용으로 사용
-	// @ 요청 받지 않은 것도 메소드로 사용가능하다는 것을 보여줌
-	public String saveFile(MultipartFile upfile, HttpSession session) { // 실제 넘어온 파일의 이름을 변경해서 서버에 업로드까지
-		
-		// 파일 명 수정 작업 후 서버에 업로드 시키기("image.png" => 20221238123123.png)
-		String originName = upfile.getOriginalFilename();
-		
-		// "20221226104430"(년월일시분초)
-		// Date import => util
-		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-		// 12321(5자리 랜덤값)
-		int ranNum = (int)(Math.random() * 90000 + 10000);
-		// 확장자 땡겨오기
-		String ext = originName.substring(originName.lastIndexOf("."));
-		
-		String changeName = currentTime + ranNum + ext;
-		
-		// 업로드 시키고자하는 폴더의 물리적인 경로 알아내기
-		String savePath = session.getServletContext().getRealPath("/resources/uploadFiles/");
-		
-		try {
-			// transferTo() : 서버에 파일을 업로드해주는 메소드
-			upfile.transferTo(new File(savePath + changeName)); // 경로 + 파일명 => 경로가 존재 안할수도있기에 예외처리
-		} catch (IOException e) {
-			e.printStackTrace();
-		} 
-		
-		return changeName; // 갑자기 이걸 왜 반환함??????????????????????????????????????????????????
-		
-	}
-	
 	
 	
 	

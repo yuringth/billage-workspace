@@ -116,7 +116,6 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public ArrayList<Novel> selectNovelList(PageInfo pi) {
-		// TODO Auto-generated method stub
 		return boardDao.selectNovelList(sqlSession, pi);
 	}
 
@@ -303,6 +302,24 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int selectDrawPoint(int boardNo) {
 		return boardDao.selectDrawPoint(sqlSession, boardNo);
+	}
+
+	@Override
+	public int selectListUsedCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public ArrayList<UsedBoard> usedBoardList(PageInfo pi) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ReviewBoard selectBookTitle2(ReviewBoard b) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
