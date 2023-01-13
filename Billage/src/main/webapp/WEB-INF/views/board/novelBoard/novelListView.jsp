@@ -6,11 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style>
 // font stuff
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,600,700,900);
+/* @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,600,700,900); */
 
 // colour stuff
 @white: #ffffff;
@@ -215,28 +214,32 @@ div.card.show {
   div.flap2 {
     transition: all 0.3s 0.2s ease-out;
   }
+  
+/*   .pagination { */
+/*   	display: flex; */
+/*   	padding-left: 0; */
+/*   	list-style: none; */
+/*   	border-radius: .25rem; */
+/*   	align: center; */
+/*   } */
 }
-
-.pagination {
-	align: center;
-	}
 </style>
+</head>
 <body>
 		<jsp:include page="../../common/header.jsp"/>
-		
+		<br><br><br>
 		<!-- 로그인 후 관리자일 경우만 보여지는 글쓰기 버튼 -->
         <c:if test="${ loginUser eq null }">
 	        <div align="center">
 	        	<a class="btn btn-secondary" href="enrollForm.nv">작품등록</a>
 	        </div>
         </c:if>
-        
 		<div class="cards">
 	        <c:forEach items="${ list }" var="n">
 	        <div class="card">
 	            <div class="card__image-holder">
 	                <!-- <img class="card__image" src="https://source.unsplash.com/300x225/?wave" alt="wave" /> -->
-	                <img class="card_image" src="${ n.changeName }" width="295" height="400">
+	                <img class="card_image" src="${ n.changeName }" width="295" height="395">
 	            </div>
 	            <div class="card-title" title="${ n.novelTitle }">
 	                <h2 style="display: block;
@@ -259,15 +262,15 @@ div.card.show {
 	            </div>
 	        </div>
 	        </c:forEach>
-		    
-		      <div id="pagingArea" style="align:center;">
+	        
+        	  <div id="pagingArea">
                 <ul class="pagination">
                 	<c:choose>
                 		<c:when test="${ pi.currentPage eq 1 }">
                     		<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
                     	</c:when>
                 		<c:otherwise>
-                		<li class="page-item"><a class="page-link" href="list.nv?cpage=${ pi.currentPage - 1 }">Previous</a></li>
+                			<li class="page-item"><a class="page-link" href="list.nv?cpage=${ pi.currentPage - 1 }">Previous</a></li>
                 		</c:otherwise>
                 	</c:choose>
                 <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
@@ -283,7 +286,9 @@ div.card.show {
 	            </c:choose>
                 </ul>
               </div>
+              
 		</div>
+		
 		<script>
 	
 		$(function () {
@@ -296,6 +301,7 @@ div.card.show {
 		})
 	
 		</script>
+		
 	<jsp:include page="../../common/footer.jsp"/>
 </body>
 </html>
