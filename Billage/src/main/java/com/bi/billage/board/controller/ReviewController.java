@@ -199,7 +199,7 @@ public class ReviewController {
 	@RequestMapping("updateReview.re")
 	public String updateReviewBoard(ReviewBoard b, Model model) {
 	
-		// System.out.println(b);
+		System.out.println(b);
 		
 		
 		// 1) 책 중복되는지 확인 select
@@ -207,12 +207,13 @@ public class ReviewController {
 		if(boardService.selectBookTitle(b) == null) {
 		
 			
-			// 2) 중복 된 책 없으면 insert
+			// 2) 중복 된 책 없으면 update
 			boardService.updateReviewBoard(b);
 			
 			return "redirect:detail.re?reviewNo=" + b.getReviewNo();
 			
 		} else {
+			
 			
 			model.addAttribute("errorMsg","게시글 상세조회 실패");
 			return "common/errorPage";
