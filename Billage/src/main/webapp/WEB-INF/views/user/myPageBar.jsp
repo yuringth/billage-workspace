@@ -10,7 +10,7 @@
 	div{ box-sizing : border-box;}
 	
 	#all-mypage{
-		width:300px;
+		width:200px;
 		position:fixed;
 		top:288px;
 		left:0;
@@ -18,14 +18,14 @@
 	}
 	
 	#mypage-bar-area{
-		width:300px;
+		width:200px;
 		height:560px;
 		background-color: white;
 		border-right: 2px solid black;
 	}
 	
 	.menubar-area > .menu { 
-		font-size:25px; 
+		font-size:18px; 
 		height:50px; 
 		border-bottom:1px solid gray;
 		text-align:center;	

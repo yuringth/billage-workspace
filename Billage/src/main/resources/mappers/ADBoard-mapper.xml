@@ -20,8 +20,8 @@
 		<result column="USER_NO" property="userNo"/>
 		<result column="ACCEPT_STATUS" property="acceptStatus"/>
 		<result column="TRY_POINT" property="tryPoint"/>
-		<result column="M.NICKNAME" property="nickname"/>
-		<result column="A.NICKNAME" property="prizeUser"/>
+		<result column="NICKNAME" property="nickname"/>
+		<result column="PRIZE_USER" property="prizeUser"/>
 	</resultMap>
 	<resultMap type="adboard" id="auctionBoardResultSet">
 		<result column="AUCTION_NO" property="boardNo"/>

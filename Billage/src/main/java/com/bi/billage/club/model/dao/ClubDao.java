@@ -30,6 +30,8 @@ public class ClubDao {
 		return sqlSession.selectOne("clubMapper.selectDetailGroup", clubNo);
 	}
 	
+	
+	// 클럽 등록 
 	public int insertGroup(SqlSessionTemplate sqlSession, Club Club) {
 		return sqlSession.insert("clubMapper.insertGroup", Club);
 	}

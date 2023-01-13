@@ -18,6 +18,6 @@ public class Club {
 	private String clubStatus; //CLUB_STATUS	VARCHAR2(1 BYTE)
 	private String nickname;
 	private String newCount;
-	private int groupCount;
+	private int clubCount;
 	private int likeCount;
 }

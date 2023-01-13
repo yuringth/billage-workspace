@@ -16,7 +16,7 @@
 		<result column="CLUB_STATUS" property="clubStatus" />
 		<result column="CLUB_IMG" property="clubImg" />
 		<result column="newCount" property="newCount" />
-		<result column="GROUP_COUNT" property="groupCount" />
+		<result column="CLUB_COUNT" property="clubCount" />
 		<result column="likeCount" property="likeCount" />
 	</resultMap>
 	
@@ -41,15 +41,15 @@
 			  ,CLUB_DISCRIPT
 			  ,CLUB_IMG
 			  ,CLUB_LOCATION
-			  ,GROUP_IMG
-			  ,GROUP_COUNT
+			  ,CLUB_IMG
+			  ,CLUB_COUNT
               ,CASE WHEN
                       (select to_date(SYSDATE, 'YY-MM-DD') from dual) - (select to_date(CLUB_CREATEDATE, 'YY-MM-DD') from dual) <![CDATA[ > ]]> 30 THEN 0
                    WHEN
                       (select to_date(SYSDATE, 'YY-MM-DD') from dual) - (select to_date(CLUB_CREATEDATE, 'YY-MM-DD') from dual) <![CDATA[ < ]]> 30 THEN 1
                    END AS "newCount"
 	  	  FROM
-	  	  	   club
+	  	  	   CLUB
   	  	 WHERE
   	  	 	   CLUB_STATUS = 'Y'
  	  	 ORDER
@@ -60,9 +60,9 @@
 	
 	<!-- 모임 생성 쿼리문  -->
 	<insert id="insertGroup" parameterType="club">
-		insert
-		  into 
-		       club
+		INSERT
+		  INTO 
+		        CLUB
 		       (
 		        CLUB_NO,
 		        USER_NO,
@@ -74,16 +74,17 @@
 				CLUB_LOCATION,
 				CLUB_STATUS
 		       )
-	    values 
+	    VALUES 
 			   (
-			   seq_gno.nextval
+			   SEQ_CNO.NEXTVAL
 			  ,#{userNo}
-			  ,#{groupTitle}
-			  ,#{groupNum}
-			  ,#{groupDescribe}
-			  ,#{groupDay}
-			  ,#{groupLocation}
-			  ,#{groupImg}
+			  ,#{clubName}
+			  ,#{clubLimit}
+			  ,SYSDATE
+			  ,#{clubDiscript}
+			  ,#{clubImg}
+			  ,#{clubLocation}
+			  ,'Y'
 			   )
 	</insert>
 	

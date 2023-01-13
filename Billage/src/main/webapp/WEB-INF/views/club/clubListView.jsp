@@ -108,15 +108,15 @@
 		</div>
 
 		<div id="list-area">
-			<c:forEach items="${ groupList }" var="g">
+			<c:forEach items="${ clubList }" var="c">
 			<div id="thum-area" class="thumbnail" align="center">
-				<input type="hidden" name="groupNo" value="${ g.groupNo }" />
-				<div id="new-group" value="${ g.newCount }">new</div>
-				<img src="${ g.groupImg }" alt="">
-				<h3>${ g.groupTitle }</h3> 
+				<input type="hidden" name="groupNo" value="${ c.groupNo }" />
+				<div id="new-group" value="${ c.newCount }">new</div>
+				<img src="${ c.groupImg }" alt="">
+				<h3>${ c.groupTitle }</h3> 
 				<div id="thum-text-area">
-					<span>모임진행요일 : ${ g.groupDay }</span></br>
-					<span>${ g.groupLocation } | 모집인원 ${ g.groupNum }</span></br>
+					<span>모임진행요일 : ${ c.groupDay }</span></br>
+					<span>${ c.clubLocation } | 모집인원 ${ g.clubpNum }</span></br>
 				</div>
 				<div id="thum-like-area">
 					<span>찜하기<img src=""></span>
