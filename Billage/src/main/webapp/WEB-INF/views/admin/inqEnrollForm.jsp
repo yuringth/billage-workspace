@@ -107,6 +107,7 @@ textarea:focus {
 </style>
 <body>
 		<jsp:include page="../common/header.jsp"/>
+		<br><br><br>
 	<form id="enrollForm" method="post" action="insert.iq">
 	  <header align="center">
 	    <h2>1:1 문의</h2>

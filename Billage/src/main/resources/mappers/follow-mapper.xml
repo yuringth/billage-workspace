@@ -18,7 +18,10 @@
 			<result column="USER_GRADE"			property="userGrade" />
 			<result column="USER_NO"			property="userNo" />
 			<result column="FOLLOWING"       property="following"/>
-			<result column="FOLLOWER"         property="follower"/> 
+			<result column="FOLLOWER"         property="follower"/>
+			<result column="REVIEWCOUNT"         property="reviewCount"/>
+			<result column="AVGSTAR"         property="avgStar"/>
+			<result column="MAXSTAR"         property="maxStar"/>
 		</resultMap>
 		
 		<resultMap id="reviewResultSet2" type="review">
@@ -39,6 +42,14 @@
 			<result column="BOOK_PUBLISHER"	    property="bookPublisher" />
 			<result column="BOOK_PUBLISHER"	    property="bookPublisher" />
 			<result column="NICKNAME"	    property="nickname" />
+		</resultMap>
+		
+		<resultMap type="star" id="starRsultSet">
+			<result column="STAR1"      property="star1" />
+			<result column="STAR2"      property="star2" />
+			<result column="STAR3"      property="star3" />
+			<result column="STAR4"      property="star4" />
+			<result column="STAR5"      property="star5" />
 		</resultMap>
 		
 		<select id="selectLoginUser" parameterType="_int" resultMap="userResultSet2">
@@ -256,10 +267,106 @@
 					where
 					        user_no2 = #{userNo}		
 					) follower
+					,(
+					select
+					       count(*)
+					from
+					       review       
+					where
+					       user_no=#{userNo}     
+					) reviewCount
+					,
+					(
+					select
+							round(avg(review_star),1)
+					from
+					      review
+					where
+					     user_no = #{ userNo}
+					) avgStar
+					, (
+						select
+			                    review_star
+			              from
+			                   review
+			            group
+			               by
+			                  review_star, user_no
+			            having
+			                   user_no = #{userNo}
+			              and 
+			                count(review_star) = (
+						                                      select 
+						                                            max(count(review_star)) 
+						                                       from 
+						                                           review 
+						                                     group 
+						                                        by 
+						                                          review_star)
+						)	maxStar
 			from
 			       member
 			where
 			       user_no = #{userNo}       		
+		</select>
+		
+		<select id="selectStar" parameterType="_int" resultMap="starRsultSet">
+			select
+					(
+					select
+					        count(*)
+					    from
+					         review
+					    where
+					         user_no=#{user_no}
+					      and
+					          review_star = 1       
+					) star1
+					,(
+					select
+					        count(*)
+					    from
+					         review
+					    where
+					         user_no=#{user_no}
+					      and
+					          review_star = 2       
+					) star2
+					,(
+					select
+					        count(*)
+					    from
+					         review
+					    where
+					         user_no=#{user_no}
+					      and
+					          review_star = 3       
+					) star3
+					,(
+					select
+					        count(*)
+					    from
+					         review
+					    where
+					         user_no=#{user_no}
+					      and
+					          review_star = 4      
+					) star4
+					,(
+					select
+					        count(*)
+					    from
+					         review
+					    where
+					         user_no=#{user_no}
+					      and
+					          review_star = 5       
+					) star5
+					from
+					       review
+					where
+					        rownum = 1      
+		
 		</select>
 
 </mapper>

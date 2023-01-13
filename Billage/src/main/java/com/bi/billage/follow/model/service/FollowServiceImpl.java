@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.bi.billage.board.model.vo.ReviewBoard;
 import com.bi.billage.follow.model.dao.FollowDao;
 import com.bi.billage.follow.model.vo.Follow;
+import com.bi.billage.follow.model.vo.Star;
 import com.bi.billage.user.model.vo.User;
 
 @Service
@@ -65,6 +66,11 @@ public class FollowServiceImpl implements FollowService{
 	public User selectUser(int userNo) {
 	
 		return followDao.selectUser(sqlSession, userNo);
+	}
+
+	@Override
+	public Star selectStar(int userNo) {
+		return followDao.selectStar(sqlSession, userNo);
 	}
 
 }

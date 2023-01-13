@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.bi.billage.board.model.vo.ReviewBoard;
 import com.bi.billage.follow.model.vo.Follow;
+import com.bi.billage.follow.model.vo.Star;
 import com.bi.billage.user.model.vo.User;
 
 public interface FollowService {
@@ -23,4 +24,6 @@ public interface FollowService {
 	ArrayList<ReviewBoard> selectReviewList(int userNo);
 	
 	User selectUser (int userNo);
+	
+	Star selectStar (int userNo);
 }

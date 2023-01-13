@@ -107,6 +107,7 @@ textarea:focus {
 </style>
 <body>
 		<jsp:include page="../common/header.jsp"/>
+		<br><br><br>
 	<form id="enrollForm" method="post" action="insert.nv" enctype="multipart/form-data">
 	  <header align="center">
 	    <h2>작품 등록하기</h2>
