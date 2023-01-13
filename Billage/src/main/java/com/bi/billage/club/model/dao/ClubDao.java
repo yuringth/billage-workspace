@@ -36,5 +36,9 @@ public class ClubDao {
 		return sqlSession.insert("clubMapper.insertGroup", Club);
 	}
 	
+	// 클럽 일반회원 리스트 조회
+	public ArrayList<Club> clubGeneral(SqlSessionTemplate sqlSession, int userbNo){
+		return (ArrayList)sqlSession.selectList("clubMapper.clubGeneral", userbNo);
+	}
 	
 }
