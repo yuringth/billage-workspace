@@ -323,10 +323,10 @@ a:hover {
 	          <div class="panel card-back">
 	            <i class="fa fa-code card-icon"></i>
 	            <div class="hub-info">
-	              <a href="#">JKLCode.com</a>
-	              <p>Find coding gists, cheatsheets, plugins, themes, resources, and tutorials.</p>
+	              <br><a href="#">공지사항 확인하러 가기</a><br>
+	            <small class="clear">Billage의 공지사항을 확인하세요.</small>
 	            </div>
-	            <small class="clear">Updated TTH.</small>
+	              <p>공모전, 이벤트, 사이트 이용 등 각종 알림이 올라옵니다.</p>
 	          </div>
 	        </li>
 	
@@ -339,58 +339,58 @@ a:hover {
 	          <div class="panel card-back">
 	            <i class="fa fa-pencil-square-o card-icon"></i>
 	            <div class="hub-info">
-	              <a href="http://www.aaronsnowberger.com">AaronSnowberger.com</a>
-	              <p>Take a look at my graphic design portfolio and contact me for design work.</p>
+	              <br><a href="#">FAQ 보러가기</a><br>
+	            <small class="clear">자주묻는 질문을 통해 궁금증을 해결하세요.</small>
 	            </div>
-	            <small class="clear">Updated Saturdays.</small>
-	          </div>
-	        </li>
-	
-	        <li ontouchstart="this.classList.toggle('hover');">
-	          <div class="large button card-front">
-	            <a href="">약관</a>
-	            <i class="fa fa-paper-plane-o card-icon"></i>
-	          </div>
-	
-	          <div class="panel card-back">
-	            <i class="fa fa-paper-plane-o card-icon"></i>
-	            <div class="hub-info">
-	              <a href="">Udemy.com</a>
-	              <p>Join classes about Computers, Technology, Coding, Design, and Language Learning.</p>
-	            </div>
-	            <small class="clear">Updated Mondays.</small>
+	              <p>FAQ에 없는 내용은 1:1문의를 이용해주세요.</p>
 	          </div>
 	        </li>
 	
 	        <li ontouchstart="this.classList.toggle('hover');">
 	          <div class="large button card-front">
 	            <a href="">1:1문의</a>
-	            <i class="fa fa-map-o card-icon"></i>
+	            <i class="fa fa-paper-plane-o card-icon"></i>
 	          </div>
 	
 	          <div class="panel card-back">
-	            <i class="fa fa-map-o card-icon"></i>
+	            <i class="fa fa-paper-plane-o card-icon"></i>
 	            <div class="hub-info">
-	              <a href="">KeysToAGoodLife.com</a>
-	              <p>Find resources about business, family, exercise, and other various topics.</p>
+	              <br><a href="enroll.iq">1:1문의하기</a><br>
+	            <small class="clear">서비스 이용시 불편한 점은 언제든 문의주세요.</small>
 	            </div>
-	            <small class="clear">Updated monthly.</small>
+	              <p>연재 관련 문의는 연재신청란을 통해 이용부탁드립니다.</p>
 	          </div>
 	        </li>
 	
 	        <li ontouchstart="this.classList.toggle('hover');">
 	          <div class="large button card-front">
-	            <a href="http://www.keytokorean.com">연재신청</a>
+	            <a href="#">연재신청</a>
+	            <i class="fa fa-map-o card-icon"></i>
+	          </div>
+	
+	          <div class="panel card-back">
+	            <i class="fa fa-map-o card-icon"></i>
+	            <div class="hub-info">
+	              <br><a href="request.se">연재신청하기</a><br>
+	            <small class="clear">Billage에서 당신의 능력을 보여주세요.</small>
+	            </div>
+	              <p>실력과 개성있는 작가분들을 모십니다. 많은 신청바랍니다.</p>
+	          </div>
+	        </li>
+	
+	        <li ontouchstart="this.classList.toggle('hover');">
+	          <div class="large button card-front">
+	            <a href="http://www.keytokorean.com">Blank</a>
 	            <i class="fa fa-language card-icon"></i>
 	          </div>
 	
 	          <div class="panel card-back">
 	            <i class="fa fa-language card-icon"></i>
 	            <div class="hub-info">
-	              <a href="http://www.keytokorean.com">KeyToKorean.com</a>
-	              <p>Take your Korean from "foreign" to fluent with vocab lists and grammar guides.</p>
+	              <br><a href="#">공란</a><br>
+	            <small class="clear">안녕?</small>
 	            </div>
-	            <small class="clear">Updated MWF.</small>
+	              <p>잘지냈어?</p>
 	          </div>
 	        </li>
 	
@@ -403,10 +403,10 @@ a:hover {
 	          <div class="panel card-back">
 	            <i class="fa fa-users card-icon"></i>
 	            <div class="hub-info">
-	              <a href="http://www.aicfchurch.org">AICFChurch.org</a>
-	              <p>Listen to sermon podcasts or download church graphic design resources.</p>
+	              <br><a href="http://www.aicfchurch.org">고객센터 연락처</a><br>
+	              <p>TEL : 010 - 4662 - 2644</p>
 	            </div>
-	            <small class="clear">Updated the 4th Sunday.</small>
+	            <small class="clear">매주 월~금 휴무. 심심할때 전화받음.</small>
 	          </div>
 	        </li>
 	
