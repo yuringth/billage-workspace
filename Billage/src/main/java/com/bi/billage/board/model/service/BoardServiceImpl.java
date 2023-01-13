@@ -298,6 +298,12 @@ public class BoardServiceImpl implements BoardService {
 	public int insertPrizeUser(ADBoard b) {
 		return boardDao.insertPrizeUser(sqlSession, b);
 	}
+	
+	// 총 적립된 응모 포인트 조회
+	@Override
+	public int selectDrawPoint(int boardNo) {
+		return boardDao.selectDrawPoint(sqlSession, boardNo);
+	}
 
 
 	
