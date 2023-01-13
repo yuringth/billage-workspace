@@ -241,7 +241,6 @@ public class ReviewController {
 			// return "reviewBoard/reviewListView"; 
 			// => 안됨. list를 가져오지 않았기때문임 => db에 들려서 list를 조회해서 가져와야함. 즉 sendRedirect사용해야함
 			return "redirect:enrollForm.re?reviewNo=" + b.getReviewNo();
-			
 		}
 			
 			
