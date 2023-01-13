@@ -40,5 +40,9 @@ public class FollowDao {
 	public ArrayList<ReviewBoard> selectReviewList (SqlSession sqlSession, int userNo) {
 		return (ArrayList) sqlSession.selectList("followMapper.selectReviewList", userNo);
 	}
+	
+	public User selectUser(SqlSession sqlSession, int userNo) {
+		return (User)sqlSession.selectOne("followMapper.selectUser",userNo);
+	}
 
 }
