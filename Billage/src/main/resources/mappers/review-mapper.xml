@@ -180,6 +180,7 @@
 	<select id="selectBookTitle2" parameterType="review" resultMap="reviewResultSet">
        select
               book_title
+             ,review_no 
          from
               review
         where

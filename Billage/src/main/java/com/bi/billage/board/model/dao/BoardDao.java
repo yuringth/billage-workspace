@@ -290,6 +290,15 @@ public class BoardDao {
 	}
 	
 	
+	
+	// 리뷰게시판 글수정 => 1) 책 중복되는지 확인(리뷰넘버로 책제목조회)
+	public ReviewBoard selectBookTitle2(SqlSessionTemplate sqlSession, ReviewBoard b) {
+		System.out.println(b);
+		return sqlSession.selectOne("reviewMapper.selectBookTitle2", b);
+	}
+	
+	
+	
 	// 리뷰게시판 => 게시글 수정
 	public int updateReviewBoard(SqlSessionTemplate sqlSession, ReviewBoard b) {
 		return sqlSession.update("reviewMapper.updateReviewBoard", b);

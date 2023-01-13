@@ -196,7 +196,7 @@
 					<li><a href="list.re">리뷰</a></li>
 					<li><a href="list.dr">추첨</a></li>
 					<li><a href="list.ac">경매</a></li>
-					<li><a href="list.ud">중고</a></li>
+					<li><a href="list.ud">중고</a></li><!-- 컨트롤러매핑값 -->
 					<li><a href="#">마을</a></li>
 					<li><a href="center.cs">주민센터</a></li>
 				</ul>
