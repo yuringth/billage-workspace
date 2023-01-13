@@ -20,4 +20,5 @@ public class Club {
 	private String newCount;
 	private int clubCount;
 	private int likeCount;
+	private int memCount;
 }

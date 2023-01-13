@@ -61,4 +61,10 @@ public class FollowServiceImpl implements FollowService{
 		return followDao.selectReviewList(sqlSession, userNo);
 	}
 
+	@Override
+	public User selectUser(int userNo) {
+	
+		return followDao.selectUser(sqlSession, userNo);
+	}
+
 }
