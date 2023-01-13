@@ -101,12 +101,23 @@ public class FollowController {
 		return new Gson().toJson(result);
 	}
 	
-	@RequestMapping(value="selectReviewList")
+	@RequestMapping("selectReviewList.fo")
 	public ModelAndView selectReviewList(int uno , ModelAndView mv) {
 		
 		ArrayList<ReviewBoard> list = followService.selectReviewList(uno);
 		
 		mv.addObject("list", list).setViewName("follow/followReviewListView");
+		
+		return mv;
+		
+	}
+	
+	@RequestMapping("selectUser.fo")
+	public ModelAndView selectUser (int uno, ModelAndView mv) {
+		
+		User user = followService.selectUser(uno);
+		
+		mv.addObject("user", user).setViewName("follow/followDetailView");
 		
 		return mv;
 		
