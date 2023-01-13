@@ -37,6 +37,8 @@
 			<result column="BOOK_POINT"  	property="bookPoint" />
 			<result column="BOOK_NO"	    property="bookNo" />
 			<result column="BOOK_PUBLISHER"	    property="bookPublisher" />
+			<result column="BOOK_PUBLISHER"	    property="bookPublisher" />
+			<result column="NICKNAME"	    property="nickname" />
 		</resultMap>
 		
 		<select id="selectLoginUser" parameterType="_int" resultMap="userResultSet2">
@@ -191,7 +193,7 @@
 			           user_no2 = #{userNo2}      
 		</delete>
 		
-		<select id="selectReviewList" parameterType="_int" resultMap="userResultSet2">
+		<select id="selectReviewList" parameterType="_int" resultMap="reviewResultSet2">
 			select
 					REVIEW_NO
 					,USER_NO
@@ -208,6 +210,14 @@
 					,BOOK_POINT
 					,BOOK_NO
 					,BOOK_PUBLISHER
+					, (
+						select
+						        nickname
+						   from
+						         member
+						   where
+						         user_no = #{userNo}           
+					)NICKNAME
 			from
 			       review
 			where
