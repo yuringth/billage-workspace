@@ -139,6 +139,8 @@ public interface BoardService {
 	ArrayList<Integer> selectPrizeUser(int boardNo);
 	// 당첨자 등록
 	int insertPrizeUser(ADBoard b);
+	// 추첨글의 총 적립된 포인트 조회
+	int selectDrawPoint(int boardNo);
 	
 	
 	

@@ -75,6 +75,11 @@
 		margin-top: 30px;
 		margin-left: 500px;
 	}
+	#prizeUser {
+		font-size: 20px;
+		font-weight: 800;
+		text-align: center;
+	}
 
 
 
@@ -96,7 +101,6 @@
 		<div class="imgarea">
 			<img style="width: 600px; height: 600px;"src="${ b.changeName }">
 		</div>
-		
 
 		
 		<p class="time">${b.remaindTime }</p>
@@ -104,10 +108,10 @@
 		<p class="title">"${ b.title }"</p>
 		<p class="bookWriter">${ b.bookWriter }</p>
 		<div class="content" style="width : 550px">
-			<p id="prizeUser">${ b.prizeUser }</p>
 			<p>
 				${ b.content }
 			</p>
+			<p id="prizeUser">${ b.prizeUser }</p>
 		</div>
 		
 		<c:choose>
@@ -157,23 +161,20 @@
 	<script>
 		//전역변수 선언
 		var interval;
-		var end = new Date('${ b.closeDate }');
-		var now = new Date(); 
+		
 		
 		$(function(){
 			tryBtnChange();
 			interval = setInterval(closeCount, 500);
-			if(${ empty b.prizeUser } && (end - now) <= 0){
-		    	selectPrizeUser();
-	    	}
+			
 		})
 		
 	
 		
 		function closeCount(){
 			
-			end = new Date('${ b.closeDate }');
-			now = new Date(); 
+			var end = new Date('${ b.closeDate }');
+			var now = new Date(); 
 			
 			var remaindTime = end - now;
 			
@@ -199,6 +200,9 @@
 		    	
 		    	$('.time').text('응모 시간 종료');
 		    	$('.btn1').attr('disabled', true).text('응모 시간 종료');
+		    	if(${ empty b.prizeUser }){
+			    	selectPrizeUser();
+		    	}
 		    	
 		    }
 		}
@@ -251,15 +255,20 @@
 		
 		//당첨자 선정하는 함수
 		function selectPrizeUser(){
+			
+			var tryPoint = ${b.tryPoint};
+			
 			$.ajax({
 				url : 'prize.dr',
 				data : {
 					boardNo : ${b.boardNo},
+					userNo : ${b.userNo},
+					title : '${b.title}',
+					tryPoint : tryPoint
 				},
 				success : function(result){
-					if(result>0){
-						
-					}
+					console.log(result.prizeUser);
+					$('#prizeUser').text('당첨자 : ' + result.prizeUser)
 				},error : function(){
 					console.log('오류');
 				}
