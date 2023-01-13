@@ -14,11 +14,15 @@ public interface ClubService {
 	ArrayList<Club> selectList(PageInfo pi);
 	
 	// 게시글 클릭 시 조회수 증가
-	int increaseCount(int groupNo);
+	int increaseCount(int clubNo);
 	
 	// 게시글 조회수 증가 후 해당 게시글의 상세정보 조회 
-	Club selectDetailGroup(int groupNo);
+	Club selectDetailGroup(int clubNo);
 	
 	// 모임 insert 
-	int insertGroup(Club group);
+	int insertGroup(Club club);
+	
+	//모임 마이페이지에서 <일반 >리스트 조회해오기
+	ArrayList<Club> clubGeneral(int userNo);
+	
 }

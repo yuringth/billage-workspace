@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.common.savefile.SaveFile;
 import com.bi.billage.common.template.Pagination;
+import com.bi.billage.user.model.vo.User;
 import com.bi.billage.club.model.service.ClubService;
 import com.bi.billage.club.model.vo.Club;
 
@@ -64,6 +65,27 @@ public class ClubController {
 			return mv;
 		} 
 	}
+	
+	
+	// 모임 마이페이지에서 <일반 >
+	@RequestMapping("general.cl")
+	public ModelAndView clubGeneral(HttpSession session, ModelAndView mv) {
+		
+		int userNo = ((User)session.getAttribute("logunUser")).getUserNo();
+		
+		mv.addObject("clubList", clubService.clubGeneral(userNo));
+		mv.setViewName("club/clubGeneralView");
+		
+		return mv;
+	}
+	
+	// 모임 마이페이지에서 <모임장>
+	@RequestMapping("admin.cl")
+	public String groupAdmin() {
+		return "club/clubAdminView";
+	}
+	
+	
 	
 
 	

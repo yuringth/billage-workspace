@@ -173,17 +173,7 @@ public class UserController {
 		return "user/myPage";
 	}
 	
-	@RequestMapping("general.cl")
-	public String groupGeneral() {
-		return "club/clubGeneralView";
-	}
-	
-	
-	@RequestMapping("admin.cl")
-	public String groupAdmin() {
-		return "club/clubAdminView";
-	}
-	
+
 	// 로그인 폼으로
 	@RequestMapping("loginUserForm.me")
 	public String loginUserForm() {
