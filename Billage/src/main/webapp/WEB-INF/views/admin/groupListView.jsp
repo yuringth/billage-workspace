@@ -148,11 +148,11 @@
                 <c:forEach items="${ list }" var="g">
                 <tbody>
                 		<tr>
-                			<td class="gno">${ g.groupNo }</td>
+                			<td class="gno">${ g.clubNo }</td>
                 			<td>${ g.nickname }</td>
-                			<td>${ g.groupTitle }</td>
-                			<td>${ g.groupCreatedate }</td>
-                			<td>${ g.groupStatus }</td>
+                			<td>${ g.clubName }</td>
+                			<td>${ g.clubCreatedate }</td>
+                			<td>${ g.clubStatus }</td>
                 		</tr>
                 </tbody>
                 </c:forEach>

@@ -22,16 +22,19 @@
 		<result column="STATUS"				property="status" />
 	</resultMap>
 
-	<resultMap id="groupResultSet" type="club">
-			<result column="CLUB_NO" 		     	property="clubNo" />
-			<result column="USER_NO" 	      		property="userNo" />
-			<result column="CLUB_NAME" 		        property="clubName" />
-			<result column="CLUB_LIMIT" 			property="clubLimit" />
-			<result column="CLUB_CREATEDATE"    	property="clubCreatedate" />
-			<result column="CLUB_DISCRIPT" 			property="clubDiscript" />
-			<result column="CLUB_LOCATION" 			property="clubLocation" />
-			<result column="CLUB_STATUS"			property="clubStatus" />
-			<result column="CLUB_IMG" 				property="clubImg" />
+	<resultMap type="club" id="groupResultSet">
+		<result column="CLUB_NO" property="clubNo" />
+		<result column="CLUB_NO" property="userNo" />
+		<result column="CLUB_NAME" property="clubName" />
+		<result column="CLUB_LIMIT" property="clubLimit" />
+		<result column="CLUB_CREATEDATE" property="clubCreatedate" />
+		<result column="CLUB_DISCRIPT" property="clubDiscript" />
+		<result column="CLUB_LOCATION" property="clubLocation" />
+		<result column="CLUB_STATUS" property="clubStatus" />
+		<result column="CLUB_IMG" property="clubImg" />
+		<result column="newCount" property="newCount" />
+		<result column="CLUB_COUNT" property="clubCount" />
+		<result column="likeCount" property="likeCount" />
 	</resultMap>
 	
 	<resultMap id="inqResultSet" type="inquiry">
