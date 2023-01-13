@@ -181,11 +181,11 @@
 		       review
 		   set
 		        book_title = #{ bookTitle }
-	              ,book_author = #{ bookAuthor }
-	              ,book_publisher = #{ bookPublisher }
-	              ,book_imag = #{ bookImag }
-	              ,review_star = #{ reviewStar }
-	              ,review_content = #{ reviewContent }
+               ,book_author = #{ bookAuthor }
+               ,book_publisher = #{ bookPublisher }
+               ,book_imag = #{ bookImag }
+               ,review_star = #{ reviewStar }
+               ,review_content = #{ reviewContent }
 		  where
 		        review_no = #{ reviewNo }
 	</update>

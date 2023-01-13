@@ -1,5 +1,17 @@
 package com.bi.billage.message.model.service;
 
-public interface MessageService {
+import java.util.ArrayList;
 
+import com.bi.billage.message.model.vo.Message;
+
+public interface MessageService {
+	
+	//쪽지 보내기
+	int insertMessage(Message m);
+	
+	// 쪽지 리스트 조회
+	ArrayList<Message> selectMessgageList(int userNo);
+	
+	// 쪽지 상세 조회
+	Message selectMessage(int messageNo);
 }
