@@ -224,5 +224,42 @@
 			        user_no = #{userNo}       
 					
 		</select>
+		
+		<select id="selectUser" parameterType="_int" resultMap="userResultSet2">
+		
+		select
+					user_id
+					,user_pwd
+					,name
+					,email
+					,nickname
+					,phone
+					,birth_date
+					,gender
+					,address
+					,detail_address
+					,user_grade
+					,user_no
+					,(
+					select 
+							count(*)
+					from
+						   follow
+					 where
+					       user_no1 = #{userNo}   	
+					) following
+					,(
+					select
+							count(*)
+					  from
+							follow
+					where
+					        user_no2 = #{userNo}		
+					) follower
+			from
+			       member
+			where
+			       user_no = #{userNo}       		
+		</select>
 
 </mapper>
