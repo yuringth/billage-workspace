@@ -110,7 +110,6 @@ public class UserController {
 			model.addAttribute("errorMsg", "답변 오류");
 			return "common/errorPage";
 		}
-		
 	}
 	
 	// 연재 요청 리스트 화면 +페이징처리
@@ -158,11 +157,19 @@ public class UserController {
 	}
 	
 	
-	
-	
-	
 	// 관리자 관련 끝
+	//--------------------------------------------------------------------------------
+
+	// 고객센터 화면
+	@RequestMapping("center.cs")
+	public String customerService() {
+		return "board/customerServiceBoard/csMain";
+	}
 	
+	
+	
+	
+	//--------------------------------------------------------------------------------
 	// 회원가입 폼으로
 	@RequestMapping("userEnrollForm.me")
 	public String userEnrollForm() {
