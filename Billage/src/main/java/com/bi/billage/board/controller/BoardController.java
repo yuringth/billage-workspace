@@ -155,6 +155,12 @@ public class BoardController {
 				
 		}
 	
+	// FAQ화면
+	@RequestMapping("faqList.fa")
+	public String selectfaqList() {
+		return "board/faqBoard/faqListView";
+	}
+	
 	// 광진영역 끝
 
 }

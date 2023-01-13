@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bi.billage.board.model.vo.ReviewBoard;
 import com.bi.billage.follow.model.service.FollowService;
 import com.bi.billage.follow.model.vo.Follow;
+import com.bi.billage.follow.model.vo.Star;
 import com.bi.billage.user.model.vo.User;
 import com.google.gson.Gson;
 
@@ -55,9 +56,15 @@ public class FollowController {
 		
 		int userNo = ((User)session.getAttribute("loginUser")).getUserNo();
 		
-		 User user = followService.selectLoginUser(userNo);
+		 User user = followService.selectUser(userNo);
+		 
+		 Star star = followService.selectStar(userNo);
+		 
+		 System.out.println(user);
 		 
 		 session.setAttribute("user", user);
+		 
+		 session.setAttribute("star", star);
 		 
 		return "follow/loginUserFollowView";
 	}
@@ -101,6 +108,7 @@ public class FollowController {
 		return new Gson().toJson(result);
 	}
 	
+	// 리뷰 목록
 	@RequestMapping("selectReviewList.fo")
 	public ModelAndView selectReviewList(int uno , ModelAndView mv) {
 		
@@ -112,15 +120,19 @@ public class FollowController {
 		
 	}
 	
+	//클릭한 사용자 follow 상세프로필
 	@RequestMapping("selectUser.fo")
 	public ModelAndView selectUser (int uno, ModelAndView mv) {
 		
 		User user = followService.selectUser(uno);
 		
-		mv.addObject("user", user).setViewName("follow/followDetailView");
+		Star star = followService.selectStar(uno);
+		
+		mv.addObject("user", user).addObject("star", star).setViewName("follow/followDetailView");
 		
 		return mv;
 		
 	}
+	
 
 }

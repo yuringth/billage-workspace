@@ -25,11 +25,10 @@
 		div{ box-sizing: border-box; }
 		a { text-decoration: none; color: black; }
 		ul { list-style:none; margin:0px; } 
-		body{ padding-top:280px;}
+		body{ padding-top:10px;}
 		
 		#all-header{ 
 			width:100%;
-			position:fixed;
 			top:0;
 			left:0;
 			right:0;
@@ -169,7 +168,7 @@
 								<a id="login-btn" >로그인하기</a>
 							</div>
 						</c:when>
-						<c:when test="${ loginUser.nickname eq 'test' }">
+						<c:when test="${ loginUser.userId eq 'test01' }">
 							<div>
 								${ loginUser.nickname } 님 환영합니다!! <br> 
 								<a href="admin.ad">이장실</a>
@@ -196,7 +195,7 @@
 					<li><a href="list.re">리뷰</a></li>
 					<li><a href="list.dr">추첨</a></li>
 					<li><a href="list.ac">경매</a></li>
-					<li><a href="list.ud">중고</a></li>
+					<li><a href="list.ud">중고</a></li><!-- 컨트롤러매핑값 -->
 					<li><a href="#">마을</a></li>
 					<li><a href="center.cs">주민센터</a></li>
 				</ul>

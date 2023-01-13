@@ -55,9 +55,9 @@
 		<br><br>
 		
 		<div class="starList" style="display:flex; flex-direction: row; justify-content: space-evenly;">
-			<div id="starAverage"><h2>별점 평균 : ?</h2></div>
-			<div id="starCount"><h2>별점 갯수 : ?</h2></div>
-			<div id="starMany"><h2>많이 준 별점 : ?</h2></div>
+			<div id="starAverage"><h2>별점 평균 : ${user.avgStar }</h2></div>
+			<div id="starCount"><h2>별점 갯수 : ${user.reviewCount }</h2></div>
+			<div id="starMany"><h2>많이 준 별점 : ${user.maxStar }</h2></div>
 		</div>
 	</div>
 	<br><br><br>
@@ -68,10 +68,10 @@
 	  new Chart(ctx, {
 	    type: 'bar',
 	    data: {
-	      labels: ['', '1', '', '2', '', '3', '','4','','5'],
+	      labels: [ '1', '2', '3','4','5'],
 	      datasets: [{
 	        label: '평점☆',
-	        data: [12, 30, 3, 5, 2, 3, 10, 11, 12,3],
+	        data: [${star.star1},${star.star2},${star.star3},${star.star4},${star.star5}],
 	        borderWidth: 1,
 	        borderColor: 'rgb(236, 219, 71,0.8)',
 	        backgroundColor: 'rgb(236, 219, 71,0.8)'

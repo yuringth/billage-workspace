@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -198,20 +200,23 @@ public class ReviewController {
 	
 	// 리뷰게시판 => 글 수정
 	@RequestMapping("updateReview.re")
-	public String updateReviewBoard(ReviewBoard b, Model model) {
+	public String updateReviewBoard(ReviewBoard b, Model model, HttpSession session) {
 	
 		
-//		System.out.println("수정한 뒤 책정보 " + b);
+		System.out.println("수정한 뒤 책정보 " + b);
 		
 		
 		// 1) 리뷰넘버로 책제목조회
+		// 수정 책 제목 == 기존 db의 책 타이틀
 		// 수정할 책제목과 비교
-		// 똑같은 책이면 UPDATE => 책 정보는 그대로 두되 내용만 수정하고싶을 경우
+		// 똑같은 책이면 UPDATE => 
+		// 1_책 정보는 그대로 두되 내용만 수정하고싶을 경우
 		ReviewBoard reviewBoard = boardService.selectBookTitle2(b);
-//		System.out.println("select 해온 책 정보 : " + reviewBoard);
+		System.out.println("널"+reviewBoard);
 		
 	
 		if(b.getBookTitle().equals(reviewBoard.getBookTitle())) { 
+			// 1_ 책 정보는 그대로 두되 내용만 수정하고싶을 경우
 			// select 해온 책 제목 == 수정할 책제목과 일치하면 update 가능 => 내용만 수정가능
 			
 			boardService.updateReviewBoard(b);
@@ -223,12 +228,19 @@ public class ReviewController {
 			
 			boardService.updateReviewBoard(b);
 			
+			
 			return "redirect:detail.re?reviewNo=" + b.getReviewNo();
 		} else {
 			// 근데 이미 작성한 책정보가 있을 경우 => 수정 불가
+			/*
 			model.addAttribute("errorMsg","게시글 상세조회 실패");
 			return "common/errorPage";
+			*/
 			
+			session.setAttribute("alertMsg", "동일한 책은 작성할 수 없습니다");
+			// return "reviewBoard/reviewListView"; 
+			// => 안됨. list를 가져오지 않았기때문임 => db에 들려서 list를 조회해서 가져와야함. 즉 sendRedirect사용해야함
+			return "redirect:enrollForm.re?reviewNo=" + b.getReviewNo();
 		}
 			
 			

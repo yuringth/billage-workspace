@@ -31,6 +31,7 @@
         display: flex;
         flex-wrap: wrap;
     }
+    
     .one-content{
         width : 400px;
         height: 534px;
@@ -38,11 +39,20 @@
         padding-right: 8px;
         padding-bottom: 16px;
     }
+    
+    
     .img-area{
-        width : 100%;
+        width : 100%; 
+        /* width: 400px; */
         height : 414px;
         overflow: hidden;
     }
+    
+    #img-area2{
+      	width: 400px;
+        height : 414px;
+    }
+    
     .text-area{
         width: 344px;
         height: 100px;
@@ -99,64 +109,31 @@
 		</div>
 
 
-	  	<c:forEach items="${ list }" var="b">
 			<!-- 상품 하나를 감싸는 div -->
 			<div class="align-left-outer">
-		        <div class="one-content">
-		            <div class="img-area">
-		                
-		                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5_IFlIbljPs9It0_9sTvNctqXsDbvUCWjPpeLjw6w&s" onclick="location.href='detail.ud'">
-		            	
-		            </div>
-		            <div class="text-area">
-		                <p class="title-text">${ b.bookTitle }</p>
-		                <p class="textsize">${ b.point }</p>
-		                <p class="textsize">♡</p>
-		                <p class="countnum">조회 : ${ b.count }</p>
-		            </div>
-		
-		        </div>
-			</div>
+			  	<c:forEach items="${ list }" var="b">
+			        <div class="one-content">
+			            <div class="img-area">
+			                
+			                <img id="img-area2" src="https://file.mk.co.kr/meet/neds/2022/09/image_readtop_2022_802387_16627716615153649.jpg" onclick="location.href='detail.ud'">
+			            	
+			            </div>
+			            <div class="text-area">
+			                <p class="title-text">${ b.bookTitle }</p>
+			                <p class="textsize">${ b.point }</p>
+			                <p class="textsize">♡</p>
+			                <p class="countnum">조회 : ${ b.count }</p>
+			            </div>
 			
-			<!-- 상품 하나를 감싸는 div -->
-			<div class="align-left-outer">
-		        <div class="one-content">
-		            <div class="img-area">
-		                
-		                <img src="" onclick="location.href='detail.ud'">
-		            	
-		            </div>
-		            <div class="text-area">
-		                <p class="title-text">${ b.bookTitle }</p>
-		                <p class="textsize">${ b.point }</p>
-		                <p class="textsize">♡</p>
-		                <p class="countnum">조회 : ${ b.count }</p>
-		            </div>
-		
-		        </div>
-			</div>
-			
-			
-			<!-- 상품 하나를 감싸는 div -->
-			<div class="align-left-outer">
-		        <div class="one-content">
-		            <div class="img-area">
-		                
-		                <img src="" onclick="location.href='detail.ud'">
-		            	
-		            </div>
-		            <div class="text-area">
-		                <p class="title-text">${ b.bookTitle }</p>
-		                <p class="textsize">${ b.point }</p>
-		                <p class="textsize">♡</p>
-		                <p class="countnum">조회 : ${ b.count }</p>
-		            </div>
-		
-		        </div>
+			        </div>
+			        
+			        
+			        
+		        </c:forEach>
 			</div>
 			
 									
-		</c:forEach>	
+			
 		
 		
 		

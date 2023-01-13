@@ -30,7 +30,7 @@ public class UsedController {
 	
 
 	// 중고게시판 목록 조회 화면
-	@RequestMapping("list.ud")
+	@RequestMapping("list.ud") 
 	public ModelAndView usedBoardList(@RequestParam(value="cPage", defaultValue="1") int currentPage, ModelAndView mv) {
 		
 		PageInfo pi = Pagination.getPageInfo(boardService.selectListUsedCount(), currentPage, 10, 6);
@@ -38,10 +38,13 @@ public class UsedController {
 		System.out.println(currentPage);
 		System.out.println("pi : " + pi);
 		
-		
-		mv.addObject("pi", pi).addObject("list", boardService.usedBoardList(pi)).setViewName("board/usedBoard/usedListView");
+//		키 == 밸류
+		mv.addObject("pi", pi);
+		mv.addObject("list", boardService.usedBoardList(pi));
+		mv.setViewName("board/usedBoard/usedListView");
 		// ModelAndView는 메소드체인이 가능해서 코드의 길이가 짧아진다 => 그래서 String으로 사용했을 때 보다 좋다
 		return mv;
+//		클라이언트의 요청에 응답을 해주는 것
 		
 	}
 	

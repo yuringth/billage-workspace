@@ -307,7 +307,7 @@ a:hover {
 	
 	  <div class="row">
 	    <div class="large-12 columns">
-	      <hgroup>
+	      <hgroup style="text-align:center">
 	        <h2>WelCome to</h3>
 	        <h1>Billage Customer Service Center </h1>
 	        <br><br><br>
@@ -332,14 +332,14 @@ a:hover {
 	
 	        <li ontouchstart="this.classList.toggle('hover');">
 	          <div class="large button card-front">
-	            <a href="http://www.aaronsnowberger.com">FAQ</a>
+	            <a href="#">FAQ</a>
 	            <i class="fa fa-pencil-square-o card-icon"></i>
 	          </div>
 	
 	          <div class="panel card-back">
 	            <i class="fa fa-pencil-square-o card-icon"></i>
 	            <div class="hub-info">
-	              <br><a href="#">FAQ 보러가기</a><br>
+	              <br><a href="faqList.fa">FAQ 보러가기</a><br>
 	            <small class="clear">자주묻는 질문을 통해 궁금증을 해결하세요.</small>
 	            </div>
 	              <p>FAQ에 없는 내용은 1:1문의를 이용해주세요.</p>
@@ -348,7 +348,7 @@ a:hover {
 	
 	        <li ontouchstart="this.classList.toggle('hover');">
 	          <div class="large button card-front">
-	            <a href="">1:1문의</a>
+	            <a href="#">1:1문의</a>
 	            <i class="fa fa-paper-plane-o card-icon"></i>
 	          </div>
 	
@@ -380,7 +380,7 @@ a:hover {
 	
 	        <li ontouchstart="this.classList.toggle('hover');">
 	          <div class="large button card-front">
-	            <a href="http://www.keytokorean.com">Blank</a>
+	            <a href="#">Blank</a>
 	            <i class="fa fa-language card-icon"></i>
 	          </div>
 	
@@ -396,17 +396,17 @@ a:hover {
 	
 	        <li ontouchstart="this.classList.toggle('hover');">
 	          <div class="large button card-front">
-	            <a href="http://www.aicfchurch.org">고객센터 TEL</a>
+	            <a href="http://www.aicfchurch.org">고객센터</a>
 	            <i class="fa fa-users card-icon"></i>
 	          </div>
 	
 	          <div class="panel card-back">
 	            <i class="fa fa-users card-icon"></i>
 	            <div class="hub-info">
-	              <br><a href="http://www.aicfchurch.org">고객센터 연락처</a><br>
-	              <p>TEL : 010 - 4662 - 2644</p>
-	            </div>
+	              <br><a href="#">고객센터 연락처</a><br>
 	            <small class="clear">매주 월~금 휴무. 심심할때 전화받음.</small>
+	            </div>
+	              <p>TEL : 010 - 4662 - 2644</p>
 	          </div>
 	        </li>
 	
@@ -416,7 +416,7 @@ a:hover {
 	    <div class="large-12 columns">
 	      <div class="small-12 small-centered medium-6 medium-centered large-3 large-centered columns clients">
 	        <a href="#">
-	          <h6 class="text-center">Clients Click Here</h6>
+	          <h6 class="text-center"></h6>
 	          <p class="text-center">
 	            <span class="fa-stack">
 							<i class="fa fa-circle fa-stack-2x"></i>

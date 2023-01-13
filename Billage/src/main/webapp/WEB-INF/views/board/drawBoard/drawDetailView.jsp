@@ -111,8 +111,11 @@
 			<p>
 				${ b.content }
 			</p>
-			<p id="prizeUser">${ b.prizeUser }</p>
 		</div>
+			<c:if test="${ not empty b.prizeUser }">
+				<p id="prizeUser">당첨자 : ${ b.prizeUser }</p>
+			</c:if>
+				<p id="prizeUser"></p>
 		
 		<c:choose>
 			<c:when test="${ not empty loginUser }">
@@ -256,15 +259,13 @@
 		//당첨자 선정하는 함수
 		function selectPrizeUser(){
 			
-			var tryPoint = ${b.tryPoint};
-			
 			$.ajax({
 				url : 'prize.dr',
 				data : {
 					boardNo : ${b.boardNo},
 					userNo : ${b.userNo},
 					title : '${b.title}',
-					tryPoint : tryPoint
+					tryPoint : ${b.tryPoint}
 				},
 				success : function(result){
 					if(result.prizeUser != null){

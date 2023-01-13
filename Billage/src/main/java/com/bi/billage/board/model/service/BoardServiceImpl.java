@@ -230,9 +230,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	
-	
-	
-	
+
+	// 리뷰게시판 글수정 => 1) 책 중복되는지 확인(리뷰넘버로 책제목조회)
+	@Override
+	public ReviewBoard selectBookTitle2(ReviewBoard b) {
+		return boardDao.selectBookTitle2(sqlSession, b);
+	}	
+
 	// 리뷰게시판 => 글수정
 	@Override
 	public int updateReviewBoard(ReviewBoard b) {
@@ -312,12 +316,6 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public ArrayList<UsedBoard> usedBoardList(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ReviewBoard selectBookTitle2(ReviewBoard b) {
 		// TODO Auto-generated method stub
 		return null;
 	}

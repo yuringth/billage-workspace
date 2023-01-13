@@ -25,6 +25,9 @@ public class User {
 	private String status;			// 탈퇴여부
 	private int following; 			// 팔로잉 수
 	private int follower;				// 팔로워 수 
+	private int reviewCount; 		// 리뷰 수
+	private String avgStar;				// 별점 평균
+	private int maxStar;				// 제일 많이 준 별점 
 	
 	private int point; 				// 포인트
 }
