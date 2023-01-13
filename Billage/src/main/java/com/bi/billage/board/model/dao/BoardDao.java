@@ -258,7 +258,14 @@ public class BoardDao {
 	
 	
 	
-	// 리뷰게시판 => 글작성
+	
+	// 리뷰게시판 => 1) 책 중복되는지 확인 select : bookTitle로 조회 => 한 행이 있는지 없는지
+	public ReviewBoard selectBookTitle(SqlSessionTemplate sqlSession, ReviewBoard b) {
+		// selectOne은 값이 없으면 null로 리턴됨
+		return sqlSession.selectOne("reviewMapper.selectBookTitle", b);
+	}
+	
+	// 리뷰게시판 => 2) 중복 된 책 없으면 insert : 글작성
 	public int insertReviewBoard(SqlSessionTemplate sqlSession, ReviewBoard b) {
 		return sqlSession.insert("reviewMapper.insertReviewBoard", b);
 	}

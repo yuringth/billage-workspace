@@ -18,7 +18,7 @@
 	<jsp:include page="../user/myPageBar.jsp" />
 	
 	<div id="all-group-general">
-		<h1>${ loginUser.nickname }의 모임 리스트입니다. </h1>
+		<h1>${ loginUser.nickname }의 참여모임 리스트입니다. </h1>
 		<%-- 모임에 대한 값이 있으면 list 없으면 참여중인 모임이 없습니다. core로 조건문 걸어서 생성하기   --%>
 		
 		<button onclick="location.href='admin.cl';">관리자 페이지 가기</button> <!-- 클릭시 모임 개설 페이지 이동  -->

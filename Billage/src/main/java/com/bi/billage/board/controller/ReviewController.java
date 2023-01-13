@@ -114,13 +114,26 @@ public class ReviewController {
 	
 	// 리뷰게시판 -> 글작성 
 	@RequestMapping("insertBoard.re")
-	public String insertReviewBoard(ReviewBoard b) {
+	public String insertReviewBoard(ReviewBoard b,  Model model) {
 		
-		System.out.println(b);
-		boardService.insertReviewBoard(b);
+		System.out.println("리뷰보드 : " + b);
+		System.out.println("model : " + model);
 		
-		//return "board/reviewBoard/reviewListView";
-		return "redirect:list.re";
+		// 1) 책 중복되는지 확인 select
+		if(boardService.selectBookTitle(b) == null) {
+		
+			
+			// 2) 중복 된 책 없으면 insert
+			boardService.insertReviewBoard(b);
+			
+			//return "board/reviewBoard/reviewListView";
+			return "redirect:list.re";
+			
+		} else {
+			
+			model.addAttribute("errorMsg","게시글 상세조회 실패");
+			return "common/errorPage";
+		}
 		
 	}
 	
@@ -186,16 +199,35 @@ public class ReviewController {
 	@RequestMapping("updateReview.re")
 	public String updateReviewBoard(ReviewBoard b, Model model) {
 	
-		System.out.println(b);
-		// 이미지 안들어옴
+		// System.out.println(b);
 		
+		
+		// 1) 책 중복되는지 확인 select
+		// 글만 수정 안됨,,, 수정해야한다!!!
+		if(boardService.selectBookTitle(b) == null) {
+		
+			
+			// 2) 중복 된 책 없으면 insert
+			boardService.updateReviewBoard(b);
+			
+			return "redirect:detail.re?reviewNo=" + b.getReviewNo();
+			
+		} else {
+			
+			model.addAttribute("errorMsg","게시글 상세조회 실패");
+			return "common/errorPage";
+		}
+		
+		
+		
+		/* 글만 수정 가능
 		if(boardService.updateReviewBoard(b) > 0 ) { // 수정 성공 시
 			return "redirect:detail.re?reviewNo=" + b.getReviewNo();
 		} else {
 			model.addAttribute("errorMsg", "게시글 수정 실패");
 			return "common/errorPage";
 		}
-		
+		*/
 	
 	}
 	

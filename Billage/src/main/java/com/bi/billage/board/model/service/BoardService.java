@@ -176,8 +176,11 @@ public interface BoardService {
 	
 	
 	
+	// 리뷰게시판 => 1) 책 중복되는지 확인 select : bookTitle로 조회 => 한 행이 있는지 없는지
+	ReviewBoard selectBookTitle(ReviewBoard b);
 	
-	// 리뷰게시판 작성 (insert) 
+	
+	// 리뷰게시판 => 2) 중복 된 책 없으면 insert : 글작성
 	int insertReviewBoard(ReviewBoard b);
 	
 	
@@ -193,6 +196,9 @@ public interface BoardService {
 	
 	// 리뷰게시판 삭제 (update)
 	int deleteReviewBoard(int reviewNo);
+	
+	
+	
 	
 	// 리뷰게시글 수정 서비스(update)
 	int updateReviewBoard(ReviewBoard b);
