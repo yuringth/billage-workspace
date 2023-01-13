@@ -133,62 +133,50 @@
         </div>
         <div class="main_content">
             <div class="title">
-				<h1 class="title-text">1:1 문의 조회 및 관리</h1>
+				<h1 class="title-text">FAQ 관리</h1>
 			</div><br>
-				<table id="inqList" class="table table-hover" align="center">
+				<table id="serialRequestList" class="table table-hover" align="center">
                 <thead>
                     <tr>
-                        <th>문의번호</th>
-                        <th>문의회원</th>
-                        <th>문의유형</th>
-                        <th>문의제목</th>
-                        <th>문의날짜</th>
-                        <th>답변여부</th>
+                        <th>F</th>
+                        <th>A</th>
+                        <th>Q</th>
+                        <th>는</th>
+                        <th>뭘</th>
                     </tr>
                 </thead>
-                <c:forEach items="${ list }" var="iq">
+                <c:forEach items="${ list }" var="g">
                 <tbody>
                 		<tr>
-                			<td class="ino">${ iq.inqNo }</td>
-                			<td>${ iq.nickname }</td>
-                			<td>${ iq.inqType }</td>
-                			<td>${ iq.inqTitle }</td>
-                			<td>${ iq.inqDate }</td>
-                			<td>${ iq.inqStatus }</td>
+                			<td class="gno">$</td>
+                			<td>$</td>
+                			<td>$</td>
+                			<td>$</td>
+                			<td>$</td>
                 		</tr>
                 </tbody>
                 </c:forEach>
             </table>
             <br>
-            
-            <script>
-            
-            	$(function(){
-            		$('#inqList>tbody>tr').click(function(){
-            			location.href = 'detail.iq?ino=' + $(this).children('.ino').text();
-            		})
-            	})
-            
-            </script>
-       		   <div id="pagingArea" class="title">
+               <div id="pagingArea" class="title">
                 <ul class="pagination">
                 	<c:choose>
                 		<c:when test="${ pi.currentPage eq 1 }">
                     		<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
                     	</c:when>
                 		<c:otherwise>
-                		<li class="page-item"><a class="page-link" href="inqList.ad?cpage=${ pi.currentPage - 1 }">Previous</a></li>
+                		<li class="page-item"><a class="page-link" href="groupList.ad?cpage=${ pi.currentPage - 1 }">Previous</a></li>
                 		</c:otherwise>
                 	</c:choose>
                 <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-                    <li class="page-item"><a class="page-link" href="inqList.ad?cpage=${p}">${ p }</a></li>
+                    <li class="page-item"><a class="page-link" href="groupList.ad?cpage=${p}">${ p }</a></li>
                 </c:forEach>
                 <c:choose>
                 	<c:when test="${ pi.currentPage eq pi.maxPage }">
 	                    <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
                 	</c:when>
                 	<c:otherwise>
-	                    <li class="page-item"><a class="page-link" href="inqList.ad?cpage=${ pi.currentPage + 1 }">Next</a></li>
+	                    <li class="page-item"><a class="page-link" href="groupList.ad?cpage=${ pi.currentPage + 1 }">Next</a></li>
 	                </c:otherwise>
 	            </c:choose>
                 </ul>

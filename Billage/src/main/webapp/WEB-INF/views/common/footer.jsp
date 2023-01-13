@@ -21,7 +21,7 @@
 
     #ft-list-area > ul li{
         list-style: none;
-        line-height: 30px;
+        line-height: 28px;
     }
 
 	#ft-list-area li a{
@@ -32,7 +32,6 @@
     #ft-list-area li a:hover{
         font-weight: 900;
     }
-
 
     #ft-info-area{
         margin-top: 40px;
@@ -47,12 +46,10 @@
     #footer-area{
         width:100%;
         /* background-color: blanchedalmond; */
-        height:450px;
-        
-
+        height:100px;
     }
     #footer-area-all, #footer-area-right, #footer-area-left{
-        height: 450px;
+        height: 100px;
     }
 
     #footer-area-all{
@@ -94,29 +91,6 @@
         background-color:  rgba(138, 178, 164, 0.837);
     }
 
-
-    #ft-btn-table img{
-		width:70%;
-        height:50%;
-        margin: auto;
-
-    }
-
-
-    #ft-btn-table{
-        width:500px;
-        margin: auto;
-    }
-	
-	.ft-img-area{
-		height: 200px;
-	}
-
-
-
-
-
-
 </style>
 
 </head>
@@ -131,60 +105,30 @@
                 <div id="ft-list-area">
                     <ul>
                         <li><a href="#">회사소개</a></li> 
-                        <li><a href="#">광고문의</a></li> 
                         <li><a href="#">인재채용</a></li> 
+                        <li><a href="#">제휴제안</a></li> 
                         <li><a href="#">이용약관</a></li> 
                         <li><a href="#">개인정보처리방침</a></li> 
-                        <li><a href="#">커뮤니티 가이드라인</a></li> 
+                        <li><a href="#">빌리지 정책</a></li> 
                     </ul>
                 </div>
-
-               <div id="ft-info-area">
-                    <p>
-                        (주)Billage친구들 <br>
-                        서울특별시 남대문로120 대일빌딩 2층 C-Class <br>
-                        대표이사:6명 <br>
-                        사업자 등록번호 : 123-12-1234555 <a href="#">[사업자정보확인]</a> <br>
-                        고객센터:02-1234-1234 <br>
-                        <br>
-                        © 2023 Billage Co., Ltd. All rights reserved.
-                    </p>
-               </div>
             </div>
             <div id="footer-area-right">
-                <table id="ft-btn-table">
-                    <tr>
-                        <th class="ft-img-area" colspan="2">
-                            <img src="resources/images/logo.png" alt="">
-                        </th>
-                    </tr>
-                    <tr>
-                        <th class="ft-table-area"><button class="click-box" id="center">고객센터</button></th>
-                        <td> 커맨드센터아님ㅎ😉 </td>
-                    </tr>
-                    <tr>
-                        <th class="ft-table-area"><button class="click-box" id="apply">연재신청</button></th>
-                        <td> 연재신청하세용 </td>
-                    </tr>
-                    <tr>
-                        <th class="ft-table-area"><button class="click-box" id="notice">공지사항</button></th>
-                        <td> billage한 공지공지사항사항 👀🌼 </td>
-                    </tr>
-                </table>
+            <img src="resources/images/logo.png.jpg" style="float:left;" width="240" height="240">
+<br><p>
+(주)마지막잎새 <br>
+서울특별시 남대문로120 대일빌딩 2층 C-Class <br>
+대표이사:6명 <br>
+사업자 등록번호 : 123-12-1234555 <a href="#">[사업자정보확인]</a> <br>
+고객센터:02-1234-1234 <br><br>
+© 2023 Billage Co., Ltd. All rights reserved.
+</p>
             </div>
         </div>
     </div>
-    
-    
-
-    
-    
-    
-    
-    
     <script>
     // 푸터 하단 각종 이동
-    $(function () {
+/*     $(function () {
     	
         $('#center').click(function () {
             location.href = "enroll.iq";
@@ -196,19 +140,8 @@
             location.href = "enroll.iq";
         })
         
-      
-        
-        
-        
-        
-        
-   });
-    
-    
-    
-    
-    
-    
+   }); */
     </script>
+    
 </body>
 </html>

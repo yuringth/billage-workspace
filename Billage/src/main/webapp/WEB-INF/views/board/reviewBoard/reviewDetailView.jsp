@@ -142,6 +142,9 @@
 				</c:choose>
 			</div>
 			
+			
+			
+			<!-- 책정보가 같이 넘어가야한다  -->
 			<form action="" method="post" id="postForm">
 				<input type="hidden" name="reviewNo" value="${ b.reviewNo }" />
 				<input type="hidden" name="bookTitle" value="${ b.bookTitle }" />
