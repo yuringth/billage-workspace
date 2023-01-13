@@ -31,5 +31,6 @@ public class ADBoard {
 	private String closeTime;
 	
 	private String nickname;
+	private int	prizeUserNo;
 
 }
