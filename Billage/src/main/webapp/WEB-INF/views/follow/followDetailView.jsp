@@ -31,14 +31,17 @@
 		해당 유저의 취향을 볼 수 있다.
 		해당 유저와의 취향을 볼 수 있다.
 	 -->
+	 
+	
 	<div class="outer">
+		
 		<div id="userProfile">
 			<div id="profile"><img src="https://i.pinimg.com/originals/4c/f0/16/4cf0163a9db5f4b69499b9365be5fcda.png" width="100px;" height="100px;"></div>
-			<div id="nickName"><a href="followDetail.fo">유저 02</a></div>
+			<div id="nickName"><a href="selectUser.fo?uno=${ user.userNo }">${ user.nickname }</a></div>
 			<div class="detailList" style="display:flex; flex-direction: row;">
-				<div id="review"><a href="reviewList.fo">평가 150 &nbsp;</a></div>
-				<div id="following" ><a href="selectFollowing.fo">팔로잉5&nbsp;</a></div>
-				<div id="follower" ><a href="selectFollower.fo">팔로워5&nbsp;</a></div>
+				<div id="review"><a href="selectReviewList.fo?uno=${ user.userNo }">평가 150 &nbsp;</a></div>
+				<div id="following" ><a href="selectFollowing.fo">팔로잉&nbsp;${ user.following }&nbsp;</a></div>
+				<div id="follower" ><a href="selectFollower.fo">팔로우&nbsp;${ user.follower }&nbsp;</a></div>
 			</div>
 		</div>
 		<br>	
@@ -91,6 +94,7 @@
 				</div>	
 			</div>
 		</div>
+	
 	</div>
 	<br><br><br>
 	

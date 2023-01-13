@@ -21,4 +21,6 @@ public interface FollowService {
 	int deleteFollow(Follow follow);
 	
 	ArrayList<ReviewBoard> selectReviewList(int userNo);
+	
+	User selectUser (int userNo);
 }

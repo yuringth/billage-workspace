@@ -33,21 +33,25 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>1</td>
-					<!--눌리면 해당모임 상세페이지로 넘어가기-->
-					<td><a href="">풀벌레소리</a></td>
-					<td>수</td>
-					<td>모임장</td>
-					<td><button>관리</button></td>
-				</tr>
+				<c:forEach items="${ clubList }" var="c" >
+					<tr>
+						<td>${ c + 1 }</td>
+						<td><img width="50px" heighy="50px" src="${ c.clubImg }"></td>
+						<td><a>${ c.clubName }</a></td>
+						<td>${ c.culbLocation }</td>
+						<td>${ c.memCount }</td>
+						<td><button>관리</button></td>
+					</tr>
+					</c:forEach>
+					
+				<!-- 더미쓰 
 				<tr>
 					<td>2</td>
 					<td><a href="">바다를 볼 수 있을까</a></td>
 					<td>토</td>
 					<td>회원</td>
 					<td></td>
-				</tr>
+				</tr> -->
 			</tbody>
 		</table>
 		

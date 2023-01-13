@@ -201,7 +201,9 @@ public class BoardDao {
 		return sqlSession.update("ADBoardMapper.insertPrizeUser", b);
 	}
 
-
+	public int selectDrawPoint(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.selectOne("ADBoardMapper.selectDrawPoint", boardNo);
+	}
 
 
 
@@ -378,6 +380,9 @@ public class BoardDao {
 		map.put("novelNo", novelNo);
 		return sqlSession.insert("serialMapper.insertSerial", map);
 	}
+
+
+	
 
 
 

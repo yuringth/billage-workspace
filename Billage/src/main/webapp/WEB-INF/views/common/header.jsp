@@ -67,7 +67,7 @@
 
 		#header-outer > #outer-top #login-area {  }
 		
-		#header-outer > #outer-bottom{ height: 110px;}
+		#header-outer > #outer-bottom{ height: 100px;}
 
 		#header-outer > #outer-bottom{ width: 100%; display:block; }
 
@@ -169,7 +169,13 @@
 								<a id="login-btn" >로그인하기</a>
 							</div>
 						</c:when>
-						
+						<c:when test="${ loginUser.nickname eq 'test' }">
+							<div>
+								${ loginUser.nickname } 님 환영합니다!! <br> 
+								<a href="admin.ad">이장실</a>
+								<a href="logout.me">로그아웃</a>
+							</div>
+						</c:when>
 						<c:otherwise>
 							<div>
 								${ loginUser.nickname } 님 환영합니다!! <br> 
@@ -192,7 +198,7 @@
 					<li><a href="list.ac">경매</a></li>
 					<li><a href="list.ud">중고</a></li>
 					<li><a href="#">마을</a></li>
-					<li><a href="admin.ad">임시</a></li>
+					<li><a href="center.cs">주민센터</a></li>
 				</ul>
 			</div> <!-- outer-bottom 끝 -->
 		</div> <!-- header-outer 끝 -->

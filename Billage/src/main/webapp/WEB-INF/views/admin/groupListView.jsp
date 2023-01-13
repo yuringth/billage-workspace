@@ -126,8 +126,8 @@
                 <li><a href="userList.ad"><i class="fas fa-user"></i>회원 관리</a></li>
                 <li><a href="groupList.ad"><i class="fas fa-home"></i>모임 관리</a></li>
                 <li><a href="inqList.ad"><i class="fas fa-address-card"></i>1:1 문의</a></li>
-                <li><a href="faqList.fa"><i class="fas fa-project-diagram"></i>FAQ 관리</a></li>
-                <li><a href="noticeList.no"><i class="fas fa-blog"></i>공지사항</a></li>
+                <li><a href="faqList.ad"><i class="fas fa-project-diagram"></i>FAQ 관리</a></li>
+                <li><a href="noticeList.ad"><i class="fas fa-blog"></i>공지사항</a></li>
                 <li><a href="list.sr"><i class="fas fa-address-book"></i>연재 요청</a></li>
             </ul>
         </div>
@@ -148,11 +148,11 @@
                 <c:forEach items="${ list }" var="g">
                 <tbody>
                 		<tr>
-                			<td class="gno">${ g.groupNo }</td>
+                			<td class="gno">${ g.clubNo }</td>
                 			<td>${ g.nickname }</td>
-                			<td>${ g.groupTitle }</td>
-                			<td>${ g.groupCreatedate }</td>
-                			<td>${ g.groupStatus }</td>
+                			<td>${ g.clubName }</td>
+                			<td>${ g.clubCreatedate }</td>
+                			<td>${ g.clubStatus }</td>
                 		</tr>
                 </tbody>
                 </c:forEach>

@@ -22,6 +22,7 @@
 		<result column="TRY_POINT" property="tryPoint"/>
 		<result column="NICKNAME" property="nickname"/>
 		<result column="PRIZE_USER" property="prizeUser"/>
+		<result column="PRIZE_USER_NO" property="prizeUserNo"/>
 	</resultMap>
 	<resultMap type="adboard" id="auctionBoardResultSet">
 		<result column="AUCTION_NO" property="boardNo"/>
@@ -114,7 +115,8 @@
 				DRAW_NO
 				,D.USER_NO
 				,M.NICKNAME
-				,A.NICKNAME
+				,A.NICKNAME PRIZE_USER
+				,A.USER_NO PRIZE_USER_NO
 				,ORIGIN_NAME
 				,CHANGE_NAME
 				,CLOSE_DATE
@@ -313,6 +315,16 @@
 		 WHERE
 		 		DRAW_NO = #{boardNo}
 	</update>
+	
+	<!-- 총 적립된 추첨 포인트 조회 -->
+	<select id="selectDrawPoint" parameterType="_int" resultType="_int">
+		SELECT
+				SUM(POINT)
+		  FROM
+		  		DRAW
+		 WHERE
+		 		DRAW_NO = #{boardNo}
+	</select>
 	
 	
 </mapper>

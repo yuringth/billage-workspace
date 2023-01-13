@@ -115,7 +115,7 @@ public class UserController {
 	
 	// 연재 요청 리스트 화면 +페이징처리
 	@RequestMapping("list.sr")
-	public ModelAndView selectList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
+	public ModelAndView selectSerialRequestList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
 		PageInfo pi = Pagination.getPageInfo(userService.selectSerialRequestListCount(), currentPage, 10, 10);
 		mv.addObject("pi", pi).addObject("list", userService.selectSerialRequestList(pi)).setViewName("admin/serialRequestListView");
 		
@@ -151,7 +151,11 @@ public class UserController {
 		return "admin/novelEnrollForm";
 	}
 	
-	
+	// FAQ 관리화면
+	@RequestMapping("faqList.ad")
+	public String selectFaqList() {
+		return "admin/adminFaqListView";
+	}
 	
 	
 	
@@ -173,17 +177,7 @@ public class UserController {
 		return "user/myPage";
 	}
 	
-	@RequestMapping("general.cl")
-	public String groupGeneral() {
-		return "club/clubGeneralView";
-	}
-	
-	
-	@RequestMapping("admin.cl")
-	public String groupAdmin() {
-		return "club/clubAdminView";
-	}
-	
+
 	// 로그인 폼으로
 	@RequestMapping("loginUserForm.me")
 	public String loginUserForm() {

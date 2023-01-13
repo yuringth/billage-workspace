@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="messageMapper">
+	
+	
+	<resultMap type="message" id="messageResultSet">
+		<result column="MESSAGE_NO" property="messageNo" />
+		<result column="USER_NO" property="userNo" />
+		<result column="USER_NO2" property="userNo2" />
+		<result column="MESSAGE_CONTENT" property="messageContent" />
+		<result column="MESSAGE_DATE" property="messageDate" />
+		<result column="MESSAGE_STATUS" property="messageStatus" />
+	</resultMap>
+	
+	<!-- 쪽지 전송 -->
+	<insert id="insertMessage" parameterType="message">
+		INSERT
+		  INTO
+		  		MESSAGE
+		  		(
+		  		MESSAGE_NO
+		  		,USER_NO
+		  		,USER_NO2
+		  		,MESSAGE_CONTENT
+		  		)
+		VALUES
+		 		(
+		 		SEQ_MNO.NEXTVAL
+		 		,#{userNo}
+		 		,#{userNo2}
+		 		,#{messageContent}
+		 		)
+	</insert>
+	
+	
+</mapper>
