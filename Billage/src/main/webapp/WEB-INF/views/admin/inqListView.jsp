@@ -118,7 +118,7 @@
 </style>
 <body>
    <jsp:include page="../common/header.jsp"/>
-
+	<br>
     <div class="wrapper">
         <div class="sidebar">
             <h2>관리자 페이지</h2>
