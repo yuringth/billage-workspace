@@ -22,9 +22,17 @@
 		<h1>${ loginUser.nickname }의 참여모임 리스트입니다. </h1>
 		<%-- 모임에 대한 값이 있으면 list 없으면 참여중인 모임이 없습니다. core로 조건문 걸어서 생성하기   --%>
 		
-		<button onclick="location.href='admin.cl';">모임 개설자 모임 관리 페이지 가기</button> <!-- 클릭시 모임 개설 페이지 이동  -->
+		나중에 로그인회원 등급에 따라서 보일 수 있게 수정 
+		<br>
+		<!-- 
+		<c:if test="${ loginUser.userGrade ge 4 }">
+		</c:if>
 		
-		<br><br>
+		 -->
+		<button onclick="location.href='admin.cl';">모임 개설자 모임 관리 페이지 가기</button> <!-- 클릭시 모임 개설 페이지 이동  -->
+		|
+		<button onclick="location.href='enrollForm.cl';">모임 개설하기</button> <!-- 클릭시 모임 개설 페이지 이동  -->
+		<br><br><br>
 		
 		<table id="general-area" border="1">
 			<thead>
@@ -35,6 +43,7 @@
 					<th>모임 중심 지역</th>
 					<th>모임 가입 일자</th>
 					<th>회원 수 </th>
+					<th>참가유형</th>
 					<th>모임탈퇴</th>
 				</tr>
 			</thead>
@@ -54,8 +63,16 @@
 						<td>${ c.clubLocation }</td>
 						<td>${ c.enrollDate }</td>
 						<td>${ c.memCount }</td>
-						<!-- 여기 구현해야 함  -->
-						<td><button onclick="deleteClub(${ c.clubNo });">탈퇴</button></td>
+						<c:choose>
+							<c:when test="${ c.userNo eq loginUser.userNo }">
+								<td>개설자 </td>
+								<td><button onclick="">관리</button></td>
+							</c:when>
+							<c:otherwise>
+								<td>참가자</td>
+								<td><button onclick="deleteClub(${ c.clubNo });">탈퇴</button></td>
+							</c:otherwise>
+						</c:choose>
 					</tr>
 					</c:forEach>
 					

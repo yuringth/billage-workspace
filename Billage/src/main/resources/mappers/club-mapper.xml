@@ -7,7 +7,7 @@
 	
 	<resultMap type="club" id="clubResultSet">
 		<result column="CLUB_NO"			 property="clubNo" />
-		<result column="CLUB_NO"		 	 property="userNo" />
+		<result column="USER_NO"		 	 property="userNo" />
 		<result column="CLUB_NAME"			 property="clubName" />
 		<result column="CLUB_LIMIT"			 property="clubLimit" />
 		<result column="CLUB_CREATEDATE"	 property="clubCreatedate" />
@@ -137,6 +137,7 @@
 	<select id="clubGeneral" parameterType="_int" resultMap="clubResultSet">
 		SELECT 
 				C.CLUB_NO
+			   ,C.USER_NO
 			   ,C.CLUB_NAME
 			   ,C.CLUB_IMG
 			   ,C.CLUB_LOCATION
@@ -147,6 +148,7 @@
 	  	  JOIN	
 			   (SELECT 
 						C.CLUB_NO
+					   ,C.USER_NO
 					   ,CLUB_NAME
 					   ,CLUB_IMG
 					   ,CLUB_LOCATION
@@ -160,6 +162,7 @@
 		  GROUP
 		     BY
 		     	 C.CLUB_NO
+		     	,C.USER_NO
 		     	,CLUB_NAME
 		     	,CLUB_IMG
 		     	,CLUB_LOCATION
@@ -278,7 +281,10 @@
 	           ,C.CLUB_STATUS
 	           ,C.CLUB_COUNT
 	           ,MEMCOUNT
-	           ,LIKECOUNT	
+	           ,LIKECOUNT
+		ORDER 
+		   BY
+		   	   C.CLUB_NO DESC
 	</select>	
 	
 	
