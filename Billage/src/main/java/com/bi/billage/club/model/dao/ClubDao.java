@@ -41,4 +41,11 @@ public class ClubDao {
 		return (ArrayList)sqlSession.selectList("clubMapper.clubGeneral", userbNo);
 	}
 	
+	
+	// 클럽 일반회원 club_member 테이블에서 삭제하기 
+	public int ajaxDeleteClub(SqlSessionTemplate sqlSession, Club club) {
+		return sqlSession.delete("clubMapper.ajaxDeleteClub", club); 
+	}
+	
+	
 }

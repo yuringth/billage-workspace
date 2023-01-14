@@ -17,12 +17,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bi.billage.club.model.service.ClubService;
+import com.bi.billage.club.model.vo.Club;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.common.savefile.SaveFile;
 import com.bi.billage.common.template.Pagination;
 import com.bi.billage.user.model.vo.User;
-import com.bi.billage.club.model.service.ClubService;
-import com.bi.billage.club.model.vo.Club;
+import com.google.gson.Gson;
 
 @Controller
 public class ClubController {
@@ -71,7 +72,7 @@ public class ClubController {
 	@RequestMapping("general.cl")
 	public ModelAndView clubGeneral(HttpSession session, ModelAndView mv) {
 		
-		int userNo = ((User)session.getAttribute("logunUser")).getUserNo();
+		int userNo = ((User)session.getAttribute("loginUser")).getUserNo();
 		
 		mv.addObject("clubList", clubService.clubGeneral(userNo));
 		mv.setViewName("club/clubGeneralView");
@@ -79,13 +80,35 @@ public class ClubController {
 		return mv;
 	}
 	
+	
+	// 모임 마이페이지에서 <일반> 모임가입자 모임 탈퇴하기
+	@ResponseBody
+	@RequestMapping(value="ajaxDeleteClub.cl", produces="application/json; charset=UTF-8")
+	public String ajaxDeleteClub(Club club, Model model) {
+		
+		/*
+		 * int clubNo, int userNo
+		HashMap<String, String> map = new HashMap();
+		map.put("clubNo", clubNo);
+		map.put("userNo", userNo);
+		
+		Club club = new Club();
+		club.setClubNo(clubNo);
+		club.setUserNo(userNo);
+		 */
+
+		return new Gson().toJson(clubService.ajaxDeleteClub(club));
+	}
+	
+	
+	
 	// 모임 마이페이지에서 <모임장>
 	@RequestMapping("admin.cl")
 	public String groupAdmin() {
 		return "club/clubAdminView";
 	}
 	
-	
+
 	
 
 	

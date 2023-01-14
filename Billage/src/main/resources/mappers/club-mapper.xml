@@ -19,6 +19,7 @@
 		<result column="CLUB_COUNT"			 property="clubCount" />
 		<result column="likeCount"			 property="likeCount" />
 		<result column="memCount"			 property="memCount" />
+		<result column="enrollDate"			 property="enrollDate" />
 	</resultMap>
 	
 	<!-- 모임 페이지 리스트 종 갯수 조회  -->
@@ -138,6 +139,7 @@
 			   ,C.CLUB_NAME
 			   ,C.CLUB_IMG
 			   ,C.CLUB_LOCATION
+			   ,C.ENROLL_DATE as "enrollDate"
 			   ,COUNT(C.CLUB_NO) AS "memCount"
 		  FROM
 		  		CLUB_MEMBER M 
@@ -146,7 +148,8 @@
 						C.CLUB_NO
 					   ,CLUB_NAME
 					   ,CLUB_IMG
-					   ,CLUB_LOACTION
+					   ,CLUB_LOCATION
+					   ,M.ENROLL_DATE
 				  FROM 
 				  		CLUB C
 				  JOIN  
@@ -159,9 +162,22 @@
 		     	,CLUB_NAME
 		     	,CLUB_IMG
 		     	,CLUB_LOCATION
+		     	,C.ENROLL_DATE
+	     ORDER
+	        BY
+	        	C.ENROLL_DATE DESC
 	</select>
 	
-	
+	<!--  update / delete resultType 필요없음  -->
+	<delete id="ajaxDeleteClub" parameterType="club">
+		DELETE
+		  FROM  
+		       CLUB_MEMBER
+	     WHERE
+	     	   CLUB_NO = #{ clubNo }
+	       AND	   
+		       USER_NO = #{ userNo }
+	</delete>
 	
 	
 	

@@ -8,7 +8,7 @@ import lombok.Data;
 public class Club {
 	
 	private int clubNo; //CLUB_NO	NUMBER
-	private String userNo; //USER_NO	NUMBER
+	private int userNo; //USER_NO	NUMBER
 	private String clubName; //CLUB_NAME	VARCHAR2(300 BYTE)
 	private int clubLimit; // CLUB_LIMIT	NUMBER
 	private Date clubCreatedate;//CLUB_CREATEDATE	DATE
@@ -21,4 +21,5 @@ public class Club {
 	private int clubCount;
 	private int likeCount;
 	private int memCount;
+	private Date enrollDate;
 }
