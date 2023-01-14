@@ -386,7 +386,7 @@ public class BoardDao {
 	}
 
 
-	public int insertSerial(SqlSessionTemplate sqlSession, Serial se, int novelNo) {
+	public int insertSerial(SqlSessionTemplate sqlSession, Serial se, Integer novelNo) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("se", se);
 		map.put("novelNo", novelNo);

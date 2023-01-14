@@ -12,6 +12,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -45,7 +46,7 @@ public class BoardController {
 	@RequestMapping("list.se")
 	public ModelAndView selectSerialList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv, int nno) {
 		PageInfo pi = Pagination.getPageInfo(boardService.selectSerialListCount(), currentPage, 10, 10);
-		mv.addObject("pi", pi).addObject("list", boardService.selectSerialList(pi, nno)).setViewName("board/serialBoard/serialListView");
+		mv.addObject("pi", pi)/*.addObject("novelInfo", boardService.selectNovelInfo(nno))*/.addObject("list", boardService.selectSerialList(pi, nno)).setViewName("board/serialBoard/serialListView");
 		
 		// mv.addObject("뭐시기", 뭐시기).addObject("화면단에불러올값", 서비스.메소드(넘길꺼).setViewName("최종적으로어디화면에뿌릴건지"); => addObject 계속할수있다.....
 		
@@ -65,7 +66,7 @@ public class BoardController {
 	
 	// 연재 등록 화면
 	@RequestMapping("enrollForm.se")
-	public String serialEnroll(int novelNo, Model model) {
+	public String serialEnroll(Integer novelNo, Model model) {
 		model.addAttribute("novelNo", novelNo);
 		//System.out.println(nno);
 		//System.out.println(novel);
@@ -75,8 +76,8 @@ public class BoardController {
 	
 	// 연재 작성 메소드
 	@RequestMapping("insert.se")
-	public String insertSerial(Serial se, int novelNo, HttpServletRequest request, HttpSession session, Model model) {
-		
+	public String insertSerial(Serial se,/* Integer novelNo,*/ HttpServletRequest request, HttpSession session, Model model) {
+		Integer novelNo = Integer.parseInt(request.getParameter("novelNo"));
 		
 		if(boardService.insertSerial(se, novelNo) > 0) { // 성공 => 이전화면으로
 			session.setAttribute("alertMsg", "등록 완료");

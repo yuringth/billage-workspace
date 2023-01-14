@@ -291,7 +291,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int insertSerial(Serial se, int novelNo) {
+	public int insertSerial(Serial se, Integer novelNo) {
 		return boardDao.insertSerial(sqlSession, se, novelNo);
 	}
 	// 추첨자 등록

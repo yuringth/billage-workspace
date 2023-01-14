@@ -251,7 +251,7 @@ div.card.show {
 	            </div>
 	            <div class="card-flap flap1">
 	                <div class="card-description">
-	                    작가명 : ${ n.nickName }<br>최신화 : <br>추천수 : ${ n.heart }<br>별점 (평균): 
+	                    작가명 : ${ n.nickName }<br>최신화 : <br>추천수 : ${ n.heart }
 	                </div>
 	                <div class="card-flap flap2">
 	                    <div class="card-actions">
@@ -262,8 +262,8 @@ div.card.show {
 	            </div>
 	        </div>
 	        </c:forEach>
-	        
-        	  <div id="pagingArea">
+	        <br /><br /><br />
+        	  <div id="pagingArea" style="display:inline-block; align:center;">
                 <ul class="pagination">
                 	<c:choose>
                 		<c:when test="${ pi.currentPage eq 1 }">
@@ -286,7 +286,6 @@ div.card.show {
 	            </c:choose>
                 </ul>
               </div>
-              
 		</div>
 		
 		<script>
@@ -294,7 +293,7 @@ div.card.show {
 		$(function () {
     	
         	$('.card-actions').click(function () {
-
+				//alert('test:' + $(this).children('.nno').val());
         	    location.href = 'list.se?nno=' + $(this).children('.nno').val();
             		
     	    })

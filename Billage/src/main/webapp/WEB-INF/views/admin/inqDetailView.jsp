@@ -165,7 +165,7 @@
             <c:if test="${ iq.answer eq '아직 답변이 등록되지 않았습니다'}">
             <form action="" method="get" id="updateForm">
             	<input type="hidden" name="ino" value="${ iq.inqNo }">
-            	<textarea name="answer" id="answer" spellcheck="true" style="resize:none" rows="5" cols="160" tabindex="4" placeholder="문의에 대한 답변을 남겨주세요" required></textarea>
+            	<textarea name="answer" id="answer" spellcheck="true" style="resize:none" rows="5" cols="140" tabindex="4" placeholder="문의에 대한 답변을 남겨주세요" required></textarea>
             	<br><a class="btn btn-primary" onclick="answerInq();">답변하기</a>
             </form>
             </c:if>
