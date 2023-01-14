@@ -102,10 +102,16 @@ public class ClubController {
 	
 	
 	
-	// 모임 마이페이지에서 <모임장>
+	// 모임 마이페이지에서 <모임장> 페이지 넘어가기 
 	@RequestMapping("admin.cl")
-	public String groupAdmin() {
-		return "club/clubAdminView";
+	public ModelAndView clubAdmin(HttpSession session, ModelAndView mv) {
+		
+		int userNo = ((User)session.getAttribute("loginUser")).getUserNo();
+		
+		mv.addObject("clubList",  clubService.clubAdmin(userNo));
+		mv.setViewName("club/clubAdminView");
+		
+		return mv;
 	}
 	
 
@@ -146,11 +152,17 @@ public class ClubController {
 	}
 	
 	
+	
+	
+	
 	// 마이페이지에서 모임 개설하기 클릭시 실행되는 메소드  -- 모임등록폼 작성 페이지 
 	@RequestMapping("enrollForm.cl")
 	public String enrollGroup() {
 		return "club/clubEnrollForm";
 	}
+	
+	
+	
 	
 	// 모임등록 하면 값 들어오는 메소드 --------------------------------- 기능 구현 필요함 
 	@RequestMapping("create.cl")

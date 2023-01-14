@@ -8,7 +8,7 @@
 <title>안녕 여긴 모임관리페이지</title>
 <style>
 	#all-group-admin{ width:1200px; margin:auto; }
-
+	#admin-area th,td{text-align : center;}
 
 
 
@@ -25,30 +25,52 @@
 		<button onclick="location.href='enrollForm.cl';">모임 개설하기</button> <!-- 클릭시 모임 개설 페이지 이동  -->
 		<br><br>
 		
-		<table border="1">
+		<table id="admin-area" border="1">
 			<thead>
 				<tr>
 					<th>순번</th>
-					<th>참여모임명</th>
-					<th>진행요일</th>
-					<th colspan="2">권한</th>
+					<th>모임이미지</th>
+					<th>개설모임명</th>
+					<th>모임최대정원</th>
+					<th>모임개설일</th>
+					<th>중심지역</th>
+					<th>모임조회수</th>
+					<th>총 회원 수</th>
+					<th>모임 좋아요 총 갯수</th>
+					<th>모임열린횟수</th>
+					<th>모임관리</th>
 				</tr>
 			</thead>
+								<!--눌리면 해당모임 상세페이지로 넘어가기-->
 			<tbody>
 				<c:choose>
 					<c:when test="${ !empty clubList }" >
-						<tr>
-							<td>1</td>
-							<!--눌리면 해당모임 상세페이지로 넘어가기-->
-							<td><a href="">풀벌레소리</a></td>
-							<td>수</td>
-							<td>모임장</td>
-							<td><button>관리</button></td>
-						</tr>
+						<c:forEach items="${ clubList }" var="c" varStatus="status">
+							<tr>
+								<td>${ status.index + 1 }</td>
+								<c:choose>
+									<c:when test="${ !empty c.clubImg  }">
+										<td><img width="150px" height="150px" src="${ c.clubImg }"></td>
+									</c:when>
+									<c:otherwise>
+										<td><img width="150px" height="150px" src="resources/images/plus.png"></td>
+									</c:otherwise>
+								</c:choose>
+								<td><a href="goDetail(${ c.clubNo });">${ c.clubName }</a></td>
+								<td>${ c.clubLimit }</td>
+								<td>${ c.clubCreatedate }</td>
+								<td>${ c.clubLocation }</td>
+								<td>${ c.clubCreatedate }</td>
+								<td>${ c.memCount }</td>
+								<td>${ c.likeCount }</td>
+								<td>${ c.openCount }</td>
+								<td><button>관리</button></td>
+							</tr>
+						</c:forEach>
 					</c:when>
 					<c:otherwise>
 						<tr>
-							<th colspan="4">
+							<th colspan="10">
 								<p> 📢 개설한 모임이 없습니다. </p>	
 							</th>
 						</tr>
@@ -57,6 +79,15 @@
 			</tbody>
 		</table>
 	</div>
+	
+	<script>
+	function goDetail(clubNo){
+		location.href = 'detail.cl?clubNo' + clubNo;
+	}
+	
+	</script>
+	
+	
 	
 	<jsp:include page="../common/footer.jsp" />
 </body>

@@ -15,11 +15,12 @@ public class Club {
 	private String clubDiscript; //CLUB_DISCRIPT	VARCHAR2(4000 BYTE)
 	private String clubImg; //CLUB_IMG	VARCHAR2(4000 BYTE)
 	private String clubLocation; //CLUB_LOCATION	VARCHAR2(100 BYTE)
+	private String clubCount;
 	private String clubStatus; //CLUB_STATUS	VARCHAR2(1 BYTE)
 	private String nickname;
-	private String newCount;
-	private int clubCount;
-	private int likeCount;
-	private int memCount;
+	private String newCount; // 새로 등록된 모임인지 아닌지 컬럼값으로 가져옴 
+	private int likeCount; // 클럽 현재 좋아요 수 
+	private int memCount; // 클럽 현재 멤버 수 
+	private int openCount; // 여태껏 클럽 갯수
 	private Date enrollDate;
 }

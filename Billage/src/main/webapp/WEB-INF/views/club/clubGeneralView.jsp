@@ -9,7 +9,8 @@
 
 <style>
 	#all-group-general{ width:1200px; margin:auto; }
-
+	#general-area th,td{text-align : center;}
+	
 </style>
 
 </head>
@@ -25,7 +26,7 @@
 		
 		<br><br>
 		
-		<table border="1">
+		<table id="general-area" border="1">
 			<thead>
 				<tr>
 					<th>순번</th>
@@ -105,7 +106,7 @@
 		
 		
 		function goDetail(clubNo){
-			location.href = 'etail.cl?clubNo' + clubNo;
+			location.href = 'detail.cl?clubNo' + clubNo;
 		}
 		
 	</script>

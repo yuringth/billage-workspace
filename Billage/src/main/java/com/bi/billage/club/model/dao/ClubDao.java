@@ -37,14 +37,20 @@ public class ClubDao {
 	}
 	
 	// 클럽 일반회원 리스트 조회
-	public ArrayList<Club> clubGeneral(SqlSessionTemplate sqlSession, int userbNo){
-		return (ArrayList)sqlSession.selectList("clubMapper.clubGeneral", userbNo);
+	public ArrayList<Club> clubGeneral(SqlSessionTemplate sqlSession, int userNo){
+		return (ArrayList)sqlSession.selectList("clubMapper.clubGeneral", userNo);
 	}
 	
 	
 	// 클럽 일반회원 club_member 테이블에서 삭제하기 
 	public int ajaxDeleteClub(SqlSessionTemplate sqlSession, Club club) {
 		return sqlSession.delete("clubMapper.ajaxDeleteClub", club); 
+	}
+	
+	
+	// 클럽 모임장 개설리스트 조회
+	public ArrayList<Club> clubAdmin(SqlSessionTemplate sqlSession, int userNo){
+		return (ArrayList)sqlSession.selectList("clubMapper.clubAdmin", userNo);
 	}
 	
 	

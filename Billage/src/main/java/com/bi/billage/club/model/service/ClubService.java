@@ -25,8 +25,10 @@ public interface ClubService {
 	//모임 마이페이지에서 <일반 >리스트 조회해오기
 	ArrayList<Club> clubGeneral(int userNo);
 	
-	
 	// 모임 마이페이지에서 <일반 > 모임가입자 모입 탈퇴하기 
 	int ajaxDeleteClub(Club club);
+	
+	// 모임 마이페이지 <관리자> 모임 관리 페이지 가기 
+	ArrayList<Club> clubAdmin(int userNo);
 	
 }

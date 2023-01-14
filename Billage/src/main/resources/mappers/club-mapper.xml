@@ -17,9 +17,10 @@
 		<result column="CLUB_IMG" 			 property="clubImg" />
 		<result column="newCount"			 property="newCount" />
 		<result column="CLUB_COUNT"			 property="clubCount" />
-		<result column="likeCount"			 property="likeCount" />
-		<result column="memCount"			 property="memCount" />
+		<result column="LIKECOUNT"			 property="likeCount" />
+		<result column="MEMCOUNT"			 property="memCount" />
 		<result column="enrollDate"			 property="enrollDate" />
+		<result column="OPENCOUNT"			 property="openCount" />
 	</resultMap>
 	
 	<!-- 모임 페이지 리스트 종 갯수 조회  -->
@@ -119,7 +120,7 @@
 			   ,GROUP_LOCATION
 			   ,GROUP_IMG
 			   ,GROUP_COUNT
-               ,(select count(*) from group_like where group_no = 13) as "likeCount"			   
+               ,(select count(*) from group_like where group_no = 13) as "LIKECOUNT"			   
 		 FROM
 		       "GROUP" G
 		 JOIN
@@ -140,7 +141,7 @@
 			   ,C.CLUB_IMG
 			   ,C.CLUB_LOCATION
 			   ,C.ENROLL_DATE as "enrollDate"
-			   ,COUNT(C.CLUB_NO) AS "memCount"
+			   ,COUNT(C.CLUB_NO) AS "MEMCOUNT"
 		  FROM
 		  		CLUB_MEMBER M 
 	  	  JOIN	
@@ -178,6 +179,107 @@
 	       AND	   
 		       USER_NO = #{ userNo }
 	</delete>
+	
+	<!-- 모임 관리자 모임 정보 SELECT 쿼리  -->
+	<select id="clubAdmin" parameterType="_int" resultMap="clubResultSet">
+		SELECT
+	            C.CLUB_NO
+	           ,C.USER_NO
+	           ,C.CLUB_NAME
+	           ,C.CLUB_LIMIT
+	           ,C.CLUB_CREATEDATE
+	           ,C.CLUB_DISCRIPT
+	           ,C.CLUB_IMG
+	           ,C.CLUB_LOCATION
+	           ,C.CLUB_STATUS
+	           ,C.CLUB_COUNT
+	           ,MEMCOUNT
+	           ,LIKECOUNT
+	           ,COUNT(CO.CLUB_NO) "OPENCOUNT"       
+		 FROM 
+		  		CLUB_OPEN CO      
+		RIGHT
+	   	 JOIN                 
+     		   (
+     		    SELECT  
+			            C.CLUB_NO
+			           ,C.USER_NO
+			           ,C.CLUB_NAME
+			           ,C.CLUB_LIMIT
+			           ,C.CLUB_CREATEDATE
+			           ,C.CLUB_DISCRIPT
+			           ,C.CLUB_IMG
+			           ,C.CLUB_LOCATION
+			           ,C.CLUB_STATUS
+			           ,C.CLUB_COUNT
+			           ,MEMCOUNT
+			           ,COUNT(CL.CLUB_NO) "LIKECOUNT"     
+			      FROM 
+			            CLUB_LIKE CL
+			     RIGHT
+			      JOIN                 
+			           (
+			            SELECT 
+			            	    C.CLUB_NO
+					           ,C.USER_NO
+					           ,C.CLUB_NAME
+					           ,C.CLUB_LIMIT
+					           ,C.CLUB_CREATEDATE
+					           ,C.CLUB_DISCRIPT
+					           ,C.CLUB_IMG
+					           ,C.CLUB_LOCATION
+					           ,C.CLUB_STATUS
+					           ,C.CLUB_COUNT
+			            	   ,COUNT(CM.CLUB_NO) "MEMCOUNT"
+			              FROM 
+			              		CLUB C
+			              LEFT
+			              JOIN
+			                    CLUB_MEMBER CM ON (C.CLUB_NO = CM.CLUB_NO)
+			             GROUP
+			                BY
+			            	    C.CLUB_NO
+					           ,C.USER_NO
+					           ,C.CLUB_NAME
+					           ,C.CLUB_LIMIT
+					           ,C.CLUB_CREATEDATE
+					           ,C.CLUB_DISCRIPT
+					           ,C.CLUB_IMG
+					           ,C.CLUB_LOCATION
+					           ,C.CLUB_STATUS
+					           ,C.CLUB_COUNT
+			            HAVING 
+			            		C.USER_NO = #{ userNo }
+			               AND 
+			               		C.CLUB_STATUS ='Y' ) C ON (C.CLUB_NO = CL.CLUB_NO)
+			      GROUP
+			         BY 
+	            	    C.CLUB_NO
+			           ,C.USER_NO
+			           ,C.CLUB_NAME
+			           ,C.CLUB_LIMIT
+			           ,C.CLUB_CREATEDATE
+			           ,C.CLUB_DISCRIPT
+			           ,C.CLUB_IMG
+			           ,C.CLUB_LOCATION
+			           ,C.CLUB_STATUS
+			           ,C.CLUB_COUNT
+			           , MEMCOUNT) C ON(C.CLUB_NO = CO.CLUB_NO)
+		GROUP 
+		   BY 
+	            C.CLUB_NO
+	           ,C.USER_NO
+	           ,C.CLUB_NAME
+	           ,C.CLUB_LIMIT
+	           ,C.CLUB_CREATEDATE
+	           ,C.CLUB_DISCRIPT
+	           ,C.CLUB_IMG
+	           ,C.CLUB_LOCATION
+	           ,C.CLUB_STATUS
+	           ,C.CLUB_COUNT
+	           ,MEMCOUNT
+	           ,LIKECOUNT	
+	</select>	
 	
 	
 	
