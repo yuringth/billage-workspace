@@ -288,7 +288,7 @@
 	           ,C.USER_NO
 	           ,C.CLUB_NAME
 	           ,C.CLUB_LIMIT
-	           ,C.CLUB_CREATEDATE
+	           ,TO_CHAR(C.CLUB_CREATEDATE, 'YYYY/MM/DD/HH:MI:SS') "CLUB_CREATEDATE"
 	           ,C.CLUB_DISCRIPT
 	           ,C.CLUB_IMG
 	           ,C.CLUB_LOCATION
