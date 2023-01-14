@@ -90,6 +90,10 @@
 			
 	 -->
 		<!--모임 개설 : 모임이름, 모임요일, 모임 설명, 모임 지역, 모임 참여 인원 받아야 함 -->
+		
+		<br><br>
+		<button onclick="history.back()">뒤로가기</button>
+		<br><br>
 		<form action="create.cl" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="userNo" value="${ loginUser.userNo }"/>
 			<table border="1" align="center">
