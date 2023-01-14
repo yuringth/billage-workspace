@@ -15,12 +15,13 @@
 		<result column="CLUB_LOCATION" 		 property="clubLocation" />
 		<result column="CLUB_STATUS" 		 property="clubStatus" />
 		<result column="CLUB_IMG" 			 property="clubImg" />
-		<result column="newCount"			 property="newCount" />
+		<result column="NEWCOUNT"			 property="newCount" />
 		<result column="CLUB_COUNT"			 property="clubCount" />
 		<result column="LIKECOUNT"			 property="likeCount" />
 		<result column="MEMCOUNT"			 property="memCount" />
 		<result column="enrollDate"			 property="enrollDate" />
 		<result column="OPENCOUNT"			 property="openCount" />
+		<result column="NICKNAME"   		 property="nickname" />
 	</resultMap>
 	
 	<!-- 모임 페이지 리스트 종 갯수 조회  -->
@@ -28,37 +29,71 @@
 		SELECT 
 				COUNT(*)
 		  FROM
-		  		club
+		  		CLUB
   		 WHERE
-  		 		club_status = 'Y'
+  		 		CLUB_STATUS = 'Y'
 	</select>
 	
 	<!-- 모임 리스트 페이지에 뿌려줄 정보  조회 -->
 	<select id="selectList" resultMap="clubResultSet">
-		SELECT 
-			   CLUB_NO
-			  ,USER_NO
-			  ,CLUB_NAME
-			  ,CLUB_LIMIT
-			  ,CLUB_CREATEDATE
-			  ,CLUB_DISCRIPT
-			  ,CLUB_IMG
-			  ,CLUB_LOCATION
-			  ,CLUB_IMG
-			  ,CLUB_COUNT
-              ,CASE WHEN
-                      (select to_date(SYSDATE, 'YY-MM-DD') from dual) - (select to_date(CLUB_CREATEDATE, 'YY-MM-DD') from dual) <![CDATA[ > ]]> 30 THEN 0
-                   WHEN
-                      (select to_date(SYSDATE, 'YY-MM-DD') from dual) - (select to_date(CLUB_CREATEDATE, 'YY-MM-DD') from dual) <![CDATA[ < ]]> 30 THEN 1
-                   END AS "newCount"
-	  	  FROM
-	  	  	   CLUB
-  	  	 WHERE
-  	  	 	   CLUB_STATUS = 'Y'
- 	  	 ORDER
- 	  	    BY
- 	  	       CLUB_NO DESC
-	
+		SELECT	
+			   C.CLUB_NO
+			  ,C.USER_NO
+			  ,C.NICKNAME
+		 	  ,C.CLUB_NAME
+			  ,C.CLUB_LIMIT
+			  ,C.CLUB_CREATEDATE
+			  ,C.CLUB_DISCRIPT
+			  ,C.CLUB_IMG
+			  ,C.CLUB_LOCATION
+			  ,C.CLUB_COUNT
+			  ,C.NEWCOUNT
+			  ,COUNT(CL.CLUB_NO) "LIKECOUNT"
+		 FROM
+		 	  CLUB_LIKE CL 	
+		 RIGHT
+		  JOIN
+			  (
+			   SELECT 
+					   CLUB_NO
+					  ,C.USER_NO
+					  ,M.NICKNAME
+				 	  ,CLUB_NAME
+					  ,CLUB_LIMIT
+					  ,CLUB_CREATEDATE
+					  ,CLUB_DISCRIPT
+					  ,CLUB_IMG
+					  ,CLUB_LOCATION
+					  ,CLUB_COUNT
+		              ,CASE WHEN
+		                         (SELECT TO_DATE(SYSDATE, 'YY-MM-DD') FROM DUAL) 
+		                       - (SELECT TO_DATE(CLUB_CREATEDATE, 'YY-MM-DD') FROM DUAL) <![CDATA[ > ]]> 30 THEN 0
+		                    WHEN
+		                         (SELECT TO_DATE(SYSDATE, 'YY-MM-DD') FROM DUAL)
+		                       - (SELECT TO_DATE(CLUB_CREATEDATE, 'YY-MM-DD') from dual) <![CDATA[ < ]]> 30 THEN 1
+		                     END AS "NEWCOUNT"
+			  	 FROM
+			  	  	   CLUB C
+		 	  	 JOIN
+		 	  	  	   MEMBER M ON (C.USER_NO = M.USER_NO)
+		  	    WHERE
+		  	  	 	   CLUB_STATUS = 'Y') C ON (C.CLUB_NO = CL.CLUB_NO)
+		 GROUP
+		    BY
+			    C.CLUB_NO
+			   ,C.USER_NO
+			   ,C.NICKNAME
+			   ,C.CLUB_NAME
+			   ,C.CLUB_LIMIT
+			   ,C.CLUB_CREATEDATE
+			   ,C.CLUB_DISCRIPT
+			   ,C.CLUB_IMG
+			   ,C.CLUB_LOCATION
+			   ,C.CLUB_COUNT	  	 	   
+		  	   ,C.NEWCOUNT 	 	   
+		 ORDER
+		    BY
+		       C.CLUB_NO DESC
 	</select>
 	
 	<!-- 모임 생성 쿼리문  

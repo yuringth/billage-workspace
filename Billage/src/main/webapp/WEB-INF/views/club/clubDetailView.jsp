@@ -54,7 +54,10 @@
 
     <jsp:include page="../common/header.jsp" />
     
+
     <div id="all-detail">
+    
+
     	<div id="group-title-area">
 			<span id="new-group" value="${ group.newCount }">new</span>
 			<h1>${ group.groupTitle }</h1>
@@ -94,7 +97,7 @@
 		</div>
     </div>
     
-    
+
     <script>
     	
     	participant();
