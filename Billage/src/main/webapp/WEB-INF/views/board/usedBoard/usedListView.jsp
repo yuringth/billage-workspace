@@ -116,8 +116,8 @@
 			        <div class="one-content">
 			            <div class="img-area">
 			                
-			                <img id="img-area2" src="" value="${ b.originName }" onclick="location.href='detail.ud'">
-			            	
+			                <img id="img-area2" src="${ b.changeName }" value="" onclick="location.href='detail.ud'">
+			            
 			            </div>
 			            <div class="text-area">
 			                <p class="title-text">${ b.bookTitle }</p>

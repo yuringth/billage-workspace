@@ -33,7 +33,7 @@ public class UsedController {
 	@RequestMapping("list.ud") 
 	public ModelAndView usedBoardList(@RequestParam(value="cPage", defaultValue="1") int currentPage, ModelAndView mv) {
 		
-		PageInfo pi = Pagination.getPageInfo(boardService.selectListUsedCount(), currentPage, 10, 2);
+		PageInfo pi = Pagination.getPageInfo(boardService.selectListUsedCount(), currentPage, 10, 3);
 		
 		// System.out.println(currentPage);
 		// System.out.println("pi : " + pi);
