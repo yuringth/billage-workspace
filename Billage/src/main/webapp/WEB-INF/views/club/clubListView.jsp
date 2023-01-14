@@ -107,7 +107,7 @@
 		</div>
 
 		<div id="list-area">
-			<c:forEach items="${ clubList }" var="c">
+			<c:forEach items="${ clubList }" var="c" varStatus="status" >
 			<div id="thum-area" class="thumbnail" align="center">
 				<input type="hidden" name="clubNo" value="${ c.clubNo }" />
 				<div id="new-club" value="${ c.newCount }">new</div>
@@ -115,15 +115,32 @@
 				<h3>${ c.clubName }</h3> 
 				<div id="thum-text-area">
 					<span>중심지역 : ${ c.clubLocation }</span></br>
-					<span>멤버수  : ${ c.clubLimit } | 조회수 : ${ c.clubCount }</span></br>
+					<span>멤버수  : ${ c.memCount } / ${ c.clubLimit } | 조회수 : ${ c.clubCount }</span></br>
 				</div>
 				<div id="thum-like-area">
-					<span>찜하기<img src=""></span>
-					<span>좋아요 : ${ c.likeCount }명</span>
+						<c:forEach items="${ likeList }" var="i" begin="${ status.index }" >
+								<c:if test="${ c.clubNo eq i.clubNo }" >
+									<span>찜취소(찜중)<img src=""></span>
+								</c:if>
+									<span>찜하기(찜아님)</span>										
+						</c:forEach>
+						<span>좋아요 : ${ c.likeCount }명</span>
+
 				</div>
 			</div>
 			</c:forEach>
 		</div> <!-- list-area끝  -->
+		
+		<%--
+							<c:choose>
+								<c:when test="${ c.clubNo eq i.clubNo }" >
+									<span>찜취소(찜중)<img src=""></span>
+								</c:when>
+								<c:otherwise>
+									<span>찜하기(찜아님)</span>					
+								</c:otherwise>
+							</c:choose>	
+		 --%>
 		
 		
          <div id="pagingArea">

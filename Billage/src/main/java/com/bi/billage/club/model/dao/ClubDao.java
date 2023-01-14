@@ -53,5 +53,8 @@ public class ClubDao {
 		return (ArrayList)sqlSession.selectList("clubMapper.clubAdmin", userNo);
 	}
 	
-	
+	// 회원 조아요 리스트 조회
+	public ArrayList<Club> selectClubLike(SqlSessionTemplate sqlSession, int userNo){
+		return (ArrayList)sqlSession.selectList("clubMapper.selectClubLike", userNo);
+	}
 }
