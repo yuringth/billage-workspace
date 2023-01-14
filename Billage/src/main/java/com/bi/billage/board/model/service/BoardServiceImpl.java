@@ -137,12 +137,29 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectSerialDetail(sqlSession, pi, novelNo, serialNo);
 	}
 	
-	//중고게시판
+	//중고게시판 => 글작성 시 insert
 	@Override
 	public int insertUsedBoard(UsedBoard b) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		return boardDao.insertUsedBoard(sqlSession, b);
 	}
+	
+	
+	// 중고게시판 => 조회수 셀랙
+	@Override
+	public int selectListUsedCount() {
+		return boardDao.selectListUsedCount(sqlSession);
+	}
+
+	// 중고게시판 => 목록조회
+	@Override
+	public ArrayList<UsedBoard> usedBoardList(PageInfo pi) {
+		System.out.println("pi : imple " + pi);
+		return boardDao.usedBoardList(sqlSession, pi);
+	}
+
+
+	
 	
 	//중고게시판
 	@Override
@@ -181,10 +198,14 @@ public class BoardServiceImpl implements BoardService {
 
 	
 	
+	
+	
 	// 리뷰 게시글의 총 개수 조회
 	@Override
 	public int selectListCount() {
-		return boardDao.selectNovelListCount(sqlSession);
+		// 자꾸 selectNovelListCount 이걸로 변동되네.. 나중에 이름 바꾸기
+		// 일단 selectListCount 이거임
+		return boardDao.selectListCount(sqlSession);
 	}
 	// 리뷰 게시글 리스트 조회
 	@Override
@@ -307,19 +328,6 @@ public class BoardServiceImpl implements BoardService {
 	public int selectDrawPoint(int boardNo) {
 		return boardDao.selectDrawPoint(sqlSession, boardNo);
 	}
-
-	@Override
-	public int selectListUsedCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public ArrayList<UsedBoard> usedBoardList(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 	
 
