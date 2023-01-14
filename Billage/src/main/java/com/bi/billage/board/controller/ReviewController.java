@@ -114,6 +114,7 @@ public class ReviewController {
 		
 		mv.addObject("pi", pi).addObject("list", boardService.reviewBoardList(pi)).setViewName("board/reviewBoard/reviewListView");
 		// ModelAndView는 메소드체인이 가능해서 코드의 길이가 짧아진다 => 그래서 String으로 사용했을 때 보다 좋다
+		System.out.println(mv);
 		return mv;
 		
 	}

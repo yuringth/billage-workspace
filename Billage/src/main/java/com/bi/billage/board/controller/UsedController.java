@@ -33,15 +33,15 @@ public class UsedController {
 	@RequestMapping("list.ud") 
 	public ModelAndView usedBoardList(@RequestParam(value="cPage", defaultValue="1") int currentPage, ModelAndView mv) {
 		
-		PageInfo pi = Pagination.getPageInfo(boardService.selectListUsedCount(), currentPage, 10, 6);
+		PageInfo pi = Pagination.getPageInfo(boardService.selectListUsedCount(), currentPage, 10, 2);
 		
-		System.out.println(currentPage);
-		System.out.println("pi : " + pi);
+		// System.out.println(currentPage);
+		// System.out.println("pi : " + pi);
+		
 		
 //		키 == 밸류
-		mv.addObject("pi", pi);
-		mv.addObject("list", boardService.usedBoardList(pi));
-		mv.setViewName("board/usedBoard/usedListView");
+		mv.addObject("pi", pi).addObject("list", boardService.usedBoardList(pi)).setViewName("board/usedBoard/usedListView");
+		System.out.println(mv); // list가 안담김
 		// ModelAndView는 메소드체인이 가능해서 코드의 길이가 짧아진다 => 그래서 String으로 사용했을 때 보다 좋다
 		return mv;
 //		클라이언트의 요청에 응답을 해주는 것
@@ -86,6 +86,7 @@ public class UsedController {
 		// case2. 넘어온 첨부파일이 있는 경우 b : 제목, 작성자, 내용 + 파일원본명, 파일저장경로
 		if(boardService.insertUsedBoard(b) > 0) { // 성공 => 게시글 리스트 페이지
 			
+			System.out.println("성공 시 b의 리스트 : " + b);
 			session.setAttribute("alertMsg", "게시글등록성공");
 			// return "reviewBoard/reviewListView"; 
 			// => 안됨. list를 가져오지 않았기때문임 => db에 들려서 list를 조회해서 가져와야함. 즉 sendRedirect사용해야함

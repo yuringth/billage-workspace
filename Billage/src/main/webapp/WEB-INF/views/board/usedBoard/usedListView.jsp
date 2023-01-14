@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -115,7 +116,7 @@
 			        <div class="one-content">
 			            <div class="img-area">
 			                
-			                <img id="img-area2" src="https://file.mk.co.kr/meet/neds/2022/09/image_readtop_2022_802387_16627716615153649.jpg" onclick="location.href='detail.ud'">
+			                <img id="img-area2" src="" value="${ b.originName }" onclick="location.href='detail.ud'">
 			            	
 			            </div>
 			            <div class="text-area">
@@ -126,9 +127,6 @@
 			            </div>
 			
 			        </div>
-			        
-			        
-			        
 		        </c:forEach>
 			</div>
 			
@@ -152,12 +150,12 @@
 		            	<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
 		            </c:when>
 					<c:otherwise>	            
-		            	<li class="page-item"><a class="page-link" href="list.re?cPage=${ pi.currentPage - 1 }">Previous</a></li>
+		            	<li class="page-item"><a class="page-link" href="list.ud?cPage=${ pi.currentPage - 1 }">Previous</a></li>
 	            	</c:otherwise>
 	            </c:choose>
 	            
 	            <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
-	            	<li class="page-item"><a class="page-link" href="list.re?cPage=${ p }">${ p }</a></li>
+	            	<li class="page-item"><a class="page-link" href="list.ud?cPage=${ p }">${ p }</a></li>
 	            </c:forEach>
 	
 				<c:choose>
@@ -165,7 +163,7 @@
 	       	    		<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
 	        		</c:when>
 	 				<c:otherwise>
-	       	    		<li class="page-item"><a class="page-link" href="list.re?cPage=${ pi.currentPage + 1 }">Next</a></li>
+	       	    		<li class="page-item"><a class="page-link" href="list.ud?cPage=${ pi.currentPage + 1 }">Next</a></li>
 	        		</c:otherwise>
 	        	</c:choose>
 	        
