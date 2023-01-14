@@ -45,7 +45,7 @@ public interface BoardService {
 	int insertNovel(Novel n);
 	
 	// 연재 등록 서비스(insert)
-	int insertSerial(Serial se, int novelNo);
+	int insertSerial(Serial se, Integer novelNo);
 	
 	//광진 구역끝
 	
