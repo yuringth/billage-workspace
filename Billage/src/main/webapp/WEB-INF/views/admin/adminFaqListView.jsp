@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -116,6 +115,7 @@
 	#boardList {text-align:center;}
     #boardList>tbody>tr:hover {cursor:pointer;}
 </style>
+</head>
 <body>
    <jsp:include page="../common/header.jsp"/>
 	<br>
@@ -133,26 +133,26 @@
         </div>
         <div class="main_content">
             <div class="title">
-				<h1 class="title-text">모임 조회 및 관리</h1>
+				<h1 class="title-text">FAQ 관리</h1>
 			</div><br>
 				<table id="serialRequestList" class="table table-hover" align="center">
                 <thead>
                     <tr>
-                        <th>모임번호</th>
-                        <th>모임장</th>
-                        <th>모임이름</th>
-                        <th>모임생성일</th>
-                        <th>모임상태</th>
+                        <th>F</th>
+                        <th>A</th>
+                        <th>Q</th>
+                        <th>는</th>
+                        <th>뭘</th>
                     </tr>
                 </thead>
                 <c:forEach items="${ list }" var="g">
                 <tbody>
                 		<tr>
-                			<td class="gno">${ g.clubNo }</td>
-                			<td>${ g.nickname }</td>
-                			<td>${ g.clubName }</td>
-                			<td>${ g.clubCreatedate }</td>
-                			<td>${ g.clubStatus }</td>
+                			<td class="gno">$</td>
+                			<td>$</td>
+                			<td>$</td>
+                			<td>$</td>
+                			<td>$</td>
                 		</tr>
                 </tbody>
                 </c:forEach>

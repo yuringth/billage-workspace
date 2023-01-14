@@ -116,7 +116,6 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public ArrayList<Novel> selectNovelList(PageInfo pi) {
-		// TODO Auto-generated method stub
 		return boardDao.selectNovelList(sqlSession, pi);
 	}
 
@@ -231,9 +230,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	
-	
-	
-	
+
+	// 리뷰게시판 글수정 => 1) 책 중복되는지 확인(리뷰넘버로 책제목조회)
+	@Override
+	public ReviewBoard selectBookTitle2(ReviewBoard b) {
+		return boardDao.selectBookTitle2(sqlSession, b);
+	}	
+
 	// 리뷰게시판 => 글수정
 	@Override
 	public int updateReviewBoard(ReviewBoard b) {
@@ -303,6 +306,18 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int selectDrawPoint(int boardNo) {
 		return boardDao.selectDrawPoint(sqlSession, boardNo);
+	}
+
+	@Override
+	public int selectListUsedCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public ArrayList<UsedBoard> usedBoardList(PageInfo pi) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

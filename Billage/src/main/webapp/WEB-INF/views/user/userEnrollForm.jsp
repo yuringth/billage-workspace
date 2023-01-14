@@ -148,27 +148,27 @@ body {
 	      </div>
 	      
 	       <div class="textForm">
-	        <input name="checkPwd" type="password" class="pw" placeholder="8~15자의 영문 대 소문자, 숫자, 특수문자로" id="checkPwd">
+	        <input name="checkPwd" type="password" class="pw" placeholder="8~15자의 영문,숫자,특수문자 중 2개 조합" id="checkPwd">
 	      </div>
 	      
 	      <div class="textForm">
-	        <input name="name" type="text" class="name" placeholder="이름">
+	        <input name="name" type="text" class="name" placeholder="이름" id="name">
 	      </div>
 	      
 	       <div class="textForm">
-	        <input name="email" type="text" class="email" placeholder="이메일">
+	        <input name="email" type="text" class="email" placeholder="이메일" id="email">
 	      </div>
 	      
 	      <div class="textForm">
-	        <input name="nickname" type="text" class="nickname" placeholder="닉네임">
+	        <input name="nickname" type="text" class="nickname" placeholder="닉네임" id="nickname">
 	      </div>
 	      
 	      <div class="textForm">
-	        <input name="phone" type="text" class="cellphoneNo" placeholder="전화번호       - 없이 입력">
+	        <input name="phone" type="text" class="cellphoneNo" placeholder="전화번호       - 없이 입력" id="phone">
 	      </div>
 	      
 	      <div class="textForm">
-	        <input name="birthDate" type="text" class="cellphoneNo" placeholder="생년월일 6자를 입력">
+	        <input name="birthDate" type="text" class="cellphoneNo" placeholder="생년월일 6자를 입력" id="birthDate">
 	      </div>
 	      
 	      <div class="textForm">
@@ -187,7 +187,7 @@ body {
 	        <input name="detailAddress" type="text" class="name" placeholder="상세 주소를 입력해주세요.">
 	      </div>
 	      
-	      <input type="submit" class="btn" value="J O I N"/> <button type="button" class="btn" onclick="history.back();">홈으로 돌아가기</button>
+	      <input id="joinBTN" type="button" class="btn" value="J O I N" /> <input type="button" class="btn" onclick="history.back();" value="홈으로돌아가기">
 	    </form>
 	    
 	</div>
@@ -213,6 +213,25 @@ body {
 // id 중복 체크용 스크립트
 
 	$(function(){
+		
+		$(document).on('click', '#joinBTN', function(){
+			$(':input').each(function(){
+			console.log($(this).attr('name') + $(this).val());
+				if($(this).val() == ''){
+					alert('빈칸이 있는지 확인해주세요.');
+					$('#joinBTN').attr('type', 'button');
+					return false;
+				} else {
+					$('#joinBTN').attr('type', 'submit');
+				}
+			
+			});
+		});
+		
+		$(document).on('keyup', ':input', function(){
+			$('#joinBTN').attr('type', 'submit');
+		})
+		
 		
 		const $idInput = $('.textForm #userId');
 		
@@ -264,11 +283,12 @@ body {
            return false;
 		}
         if(!regExp.test($('#userPwd').val())){ 
-            alert('8~15자의 영문 대 소문자, 숫자, 특수문자로 입력해주세요.');
+            alert('8~15자의 영문,숫자,특수문자 중 2개 조합해주세요');
             return false;
         } 
 	});
 	
+	// 비밀번호 일치 검사
 	$('input[name=checkPwd]').focusout(function(){
         var $userPwd = $('#userPwd').val();
         var $checkPwd = $('#checkPwd').val();
@@ -283,6 +303,23 @@ body {
         } 
     });
 	
+</script>
+
+<!--  
+<script>
+	function checkForm(){
+		
+		$(':input').each(function(){
+			if($(this).val() == ''){
+				alert('빈칸이 있는지 확인해주세요.');
+				$('input[type=submit]').attr('disabled', true);
+				return false;
+			}
+		});
+		
+		
+	}
+-->	
 </script>
 
 </html>

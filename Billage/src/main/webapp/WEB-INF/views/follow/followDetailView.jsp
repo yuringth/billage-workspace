@@ -39,9 +39,9 @@
 			<div id="profile"><img src="https://i.pinimg.com/originals/4c/f0/16/4cf0163a9db5f4b69499b9365be5fcda.png" width="100px;" height="100px;"></div>
 			<div id="nickName"><a href="selectUser.fo?uno=${ user.userNo }">${ user.nickname }</a></div>
 			<div class="detailList" style="display:flex; flex-direction: row;">
-				<div id="review"><a href="reviewList.fo">평가 150 &nbsp;</a></div>
-				<div id="following" ><a href="selectFollowing.fo">${ user.follwing }&nbsp;</a></div>
-				<div id="follower" ><a href="selectFollower.fo">${ user.follower }&nbsp;</a></div>
+				<div id="review"><a href="selectReviewList.fo?uno=${ user.userNo }">평가 150 &nbsp;</a></div>
+				<div id="following" ><a href="selectFollowing.fo">팔로잉&nbsp;${ user.following }&nbsp;</a></div>
+				<div id="follower" ><a href="selectFollower.fo">팔로우&nbsp;${ user.follower }&nbsp;</a></div>
 			</div>
 		</div>
 		<br>	
@@ -68,9 +68,9 @@
 		<br><br>
 		
 		<div class="starList" style="display:flex; flex-direction: row; justify-content: space-evenly;">
-			<div id="starAverage"><h2>별점 평균 : ?</h2></div>
-			<div id="starCount"><h2>별점 갯수 : ?</h2></div>
-			<div id="starMany"><h2>많이 준 별점 : ?</h2></div>
+			<div id="starAverage"><h2>별점 평균 : ${user.avgStar }</h2></div>
+			<div id="starCount"><h2>별점 갯수 : ${user.reviewCount }</h2></div>
+			<div id="starMany"><h2>많이 준 별점 : ${user.maxStar }</h2></div>
 		</div>
 		<hr>
 		<h2>둘 다 재미있게 본 책</h2>
@@ -105,10 +105,10 @@
 	  new Chart(ctx, {
 	    type: 'bar',
 	    data: {
-	      labels: ['', '1', '', '2', '', '3', '','4','','5'],
+	      labels: [ '1', '2', '3','4','5'],
 	      datasets: [{
 	        label: '평점☆',
-	        data: [12, 30, 3, 5, 2, 3, 10, 11, 12,3],
+	        data: [${star.star1},${star.star2},${star.star3},${star.star4},${star.star5}],
 	        borderWidth: 1,
 	        borderColor: 'rgb(236, 219, 71,0.8)',
 	        backgroundColor: 'rgb(236, 219, 71,0.8)'
@@ -122,6 +122,16 @@
 	      }
 	    }
 	  });
+	  
+	  $(function(){
+			$('#following').click(function(){
+				location.href='selectFollowing.fo?uno=' +${user.userNo};
+			});
+			
+			$('#follower').click(function(){
+				location.href='selectFollower.fo?uno=' +${user.userNo};
+			});
+		});
 	</script>
 
 

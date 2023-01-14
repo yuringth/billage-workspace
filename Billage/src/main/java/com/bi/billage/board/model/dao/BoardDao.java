@@ -290,6 +290,15 @@ public class BoardDao {
 	}
 	
 	
+	
+	// 리뷰게시판 글수정 => 1) 책 중복되는지 확인(리뷰넘버로 책제목조회)
+	public ReviewBoard selectBookTitle2(SqlSessionTemplate sqlSession, ReviewBoard b) {
+		System.out.println(b);
+		return sqlSession.selectOne("reviewMapper.selectBookTitle2", b);
+	}
+	
+	
+	
 	// 리뷰게시판 => 게시글 수정
 	public int updateReviewBoard(SqlSessionTemplate sqlSession, ReviewBoard b) {
 		return sqlSession.update("reviewMapper.updateReviewBoard", b);
@@ -299,18 +308,30 @@ public class BoardDao {
 	
 	
 	
-	// 중고게시판
+	// 중고게시판 => 글작성
 	public int insertUsedBoard(SqlSessionTemplate sqlSession, UsedBoard b) {
 		return sqlSession.insert("usedMapper.insertUsedBoard", b);	
 		
 	}
 
 
+	
+	// 중고 게시글의 총 개수 조회
+	public int selectListUsedCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("usedMapper.selectListUsedCount");
+	}
 
-
-
-
-
+	
+	// 중고게시판 목록 조회
+	public ArrayList<UsedBoard> usedBoardList(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("usedMapper.usedBoardList", null, rowBounds);
+		
+	}
 
 
 	

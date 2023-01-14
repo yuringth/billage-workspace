@@ -28,7 +28,7 @@
 	<insert id="insertUsedBoard" parameterType="used">
 		insert
 		  into
-		  	   usedBoard
+		  	   used_board
 		       (
 		       used_no
 		      ,user_no
@@ -38,6 +38,8 @@
 		      ,point
 		      ,book_title
 		      ,used_content
+		      ,origin_name
+		      ,change_name
 		       )
 		values
 			   (
@@ -49,13 +51,55 @@
 			  ,#{point}
 			  ,#{bookTitle}
 			  ,#{usedContent}
+			  ,#{originName}
+			  ,#{changeName}
 			   )
 	</insert>
+
 	
+	<!-- 중고 게시글의 총 개수 조회(모든 행 조회) -->
+	<select id="selectListUsedCount" resultType="_int">
+		select
+		       count(*)
+		  from
+		       used_board
+		 where
+		       used_status = 'N'  
+	</select>
+		
+		
+	<!-- 게시글 리스트 조회 쿼리문 -->
+	<select id="usedBoardList" resultMap="usedResultSet">
+		select
+			    used_no
+		       ,user_no
+	           ,nickname
+		       ,used_title
+		       ,used_content
+		       ,book_author
+		       ,book_genre
+		       ,point
+		       ,book_title
+		       ,stock_status
+		       ,count 
+		       ,to_char(create_date, 'YYYY-MM-DD') as "CREATE_DATE"
+		       ,origin_name 
+		  from
+		       used_board
+	      join
+	           member using(user_no)
+	           
+		 where
+		 	   used_status = 'N'
+		   and
+		       used_no = #{userNo}
+		 order
+		    by
+		       used_no desc
+	</select>
 	
 	
 	<!-- 게시글 삭제 -->
-	
 	<update id="deleteUsedBoard" parameterType="_int">
 		update
 		       usedBoard

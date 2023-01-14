@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bi.billage.board.model.vo.ReviewBoard;
 import com.bi.billage.follow.model.vo.Follow;
+import com.bi.billage.follow.model.vo.Star;
 import com.bi.billage.user.model.vo.User;
 @Repository
 public class FollowDao {
@@ -43,6 +44,10 @@ public class FollowDao {
 	
 	public User selectUser(SqlSession sqlSession, int userNo) {
 		return (User)sqlSession.selectOne("followMapper.selectUser",userNo);
+	}
+	
+	public Star selectStar(SqlSession sqlSession, int userNo) {
+		return (Star)sqlSession.selectOne("followMapper.selectStar", userNo);
 	}
 
 }
