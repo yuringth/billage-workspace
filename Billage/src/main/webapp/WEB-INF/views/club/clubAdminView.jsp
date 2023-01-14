@@ -22,7 +22,8 @@
 		<h1>${ loginUser.nickname }님의 모임 관리 페이지입니다. </h1>
 		<%-- 모임에 대한 값이 있으면 list 없으면 참여중인 모임이 없습니다. core로 조건문 걸어서 생성하기   --%>
 		
-		<button onclick="location.href='enrollForm.cl';">모임 개설하기</button> <!-- 클릭시 모임 개설 페이지 이동  -->
+		<button onclick="history.back()">뒤로가기</button>
+		
 		<br><br>
 		
 		<table id="admin-area" border="1">

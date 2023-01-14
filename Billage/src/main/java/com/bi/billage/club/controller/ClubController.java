@@ -41,7 +41,7 @@ public class ClubController {
 		PageInfo pi = Pagination.getPageInfo(clubService.selectListCount(), currentPage, 10, 9);
 		
 		mv.addObject("pi", pi);
-		mv.addObject("groupList", clubService.selectList(pi));
+		mv.addObject("clubList", clubService.selectList(pi));
 		
 		mv.setViewName("club/clubListView");
 		return mv;
@@ -62,7 +62,7 @@ public class ClubController {
 			return mv;
 			
 		} else {
-			mv.addObject("group", "group게시글 조회에 실패했습니다").setViewName("common/errorPage");
+			mv.addObject("errorMsg", "club게시글 조회에 실패했습니다").setViewName("common/errorPage");
 			return mv;
 		} 
 	}

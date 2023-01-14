@@ -21,6 +21,9 @@ import com.bi.billage.board.model.vo.Book;
 import com.bi.billage.board.model.vo.ReviewBoard;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.common.template.Pagination;
+import com.bi.billage.point.model.service.PointService;
+import com.bi.billage.point.model.vo.Point;
+import com.bi.billage.user.model.vo.User;
 
 @Controller
 public class ReviewController {
@@ -28,6 +31,9 @@ public class ReviewController {
 	@Autowired
 	private BoardService boardService;
 
+	@Autowired
+	private PointService pointService;
+	
 	
 	// api 오픈 키 => 나중에 알라딘 api 발급받아서 serviceKey에 업데이트 하세용
 	private static final String serviceKey="ttbiuui12341246001";
@@ -127,6 +133,28 @@ public class ReviewController {
 			
 			// 2) 중복 된 책 없으면 insert
 			boardService.insertReviewBoard(b);
+			
+			// ===============
+			/*
+			// 3) 포인트 insert
+			Point p = new Point();
+			//응모포인트만큼 현재 포인트에서 차감
+			p.setUserNo(b.getUserNo());
+			p.setPointAdd(b.getBookPoint());
+			p.setPointStatus("적립");
+			
+			if(pointService.addBookPoint(p) * boardService.insertReviewBoard(b) > 0) {
+				// 포인트 적립, 리뷰 등록 성공
+				((User)session.getAttribute("loginUser")).setPoint(pointService.selectPoint(b.getUserNo()));
+//				System.out.println("응모 성공, 남은 포인트 :" + ((User)session.getAttribute("loginUser")).getPoint());
+				return "redirect:detail.dr?bno=" + b.getBoardNo();
+			} else { //뭐든 실패
+				mv.addObject("errorMsg", "응모 실패");
+				return "common/errorPage";
+			}
+
+			// ===============
+			*/
 			
 			//return "board/reviewBoard/reviewListView";
 			return "redirect:list.re";

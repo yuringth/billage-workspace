@@ -58,7 +58,7 @@
 		position:
 	}
 
-	#new-group{
+	#new-club{
 		position: absolute;
 		border: 2px solid black;
 		border-radius: 50px;
@@ -87,8 +87,7 @@
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
-	
-	
+            
 	<div id="outer-area">
 		<div>
 			<a>최신순</a>
@@ -110,17 +109,17 @@
 		<div id="list-area">
 			<c:forEach items="${ clubList }" var="c">
 			<div id="thum-area" class="thumbnail" align="center">
-				<input type="hidden" name="groupNo" value="${ c.groupNo }" />
-				<div id="new-group" value="${ c.newCount }">new</div>
-				<img src="${ c.groupImg }" alt="">
-				<h3>${ c.groupTitle }</h3> 
+				<input type="hidden" name="clubNo" value="${ c.clubNo }" />
+				<div id="new-club" value="${ c.newCount }">new</div>
+				<img src="${ c.clubImg }" alt="">
+				<h3>${ c.clubName }</h3> 
 				<div id="thum-text-area">
-					<span>모임진행요일 : ${ c.groupDay }</span></br>
-					<span>${ c.clubLocation } | 모집인원 ${ g.clubpNum }</span></br>
+					<span>중심지역 : ${ c.clubLocation }</span></br>
+					<span>멤버수  : ${ c.clubLimit } | 조회수 : ${ c.clubCount }</span></br>
 				</div>
 				<div id="thum-like-area">
 					<span>찜하기<img src=""></span>
-					<span>(명)</span>
+					<span>좋아요 : ${ c.likeCount }명</span>
 				</div>
 			</div>
 			</c:forEach>
@@ -161,7 +160,7 @@
 				/* 이거 구현할 때 모임생성날짜 계산해서 1이랑 0이랑 구분할 수 있게 값을 들고오고 싶은데 어떻게 하징? 
 						DB에서 조건문 걸어서 가지고 와야 하나?
 								어떠카지!!!!!!!!? ㅠㅠ */
-				$('#list-area #new-group').each(function(){
+				$('#list-area #new-club').each(function(){
 					if($(this).attr('value') == 1){
 						$(this).show();
 					}					
@@ -170,8 +169,8 @@
 				
 				$('#list-area > #thum-area').click(function(){
 					console.log($(this).children().eq());
-					location.href = "detail.gr?groupNo=" + $(this).children().eq(0).val()
-											 +"&newCount=" + $(this).find('#new-group').attr('value');
+					location.href = "detail.gr?clubNo=" + $(this).children().eq(0).val()
+											 +"&newCount=" + $(this).find('#new-club').attr('value');
 					//글번호 들고 가야 돼
 				});
 			});
