@@ -59,16 +59,16 @@
     
 
     	<div id="group-title-area">
-			<span id="new-group" value="${ group.newCount }">new</span>
+			<span id="new-group" value="${ club.newCount }">new</span>
 			<h1>${ group.groupTitle }</h1>
     	</div>
     	<div id="group-detail-area">
     		<div id="detail-left">
-    			<img width="500px" height="500px" src="${ group.groupImg }">
-    			<p>${ group.likeCount }명이 찜했어요!</p>
+    			<img width="500px" height="500px" src="${ club.clubImg }">
+    			<p>${ club.likeCount }명이 찜했어요!</p>
     		</div>
     		<div id="detail-right">
-    			<p>(${ group.groupDay }) 독서 모임 </p>
+    			<p>(${ club }) 독서 모임 </p>
     			<div id="participant-area">참여자
     			</div>
     		</div>
@@ -76,7 +76,7 @@
     	<div id="group-info-area">
     		<h3>모임소개 : </h3>
     		<div id="info-top">
-    			<pre>${ group.groupDescribe }</pre>
+    			<pre>${ club.clubDiscript }</pre>
     		</div>
     		<div id="info-bottom">
     		

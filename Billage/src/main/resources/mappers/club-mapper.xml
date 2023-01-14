@@ -132,13 +132,14 @@
 		    BY
 		       C.CLUB_NO DESC
 	</select>
+
 	
 	<!-- 모임 생성 쿼리문  
 		CLUB_CREATEDATE / CLUB_STATUS 컬럼 빼고 쓰니까 
 		ORA-01747: invalid user.table.column, table.column, or column specification
 		해당 오류 발생.. ㅠ 	
 	 -->
-	<insert id="insertGroup" parameterType="club">
+	<insert id="insertClub" parameterType="club">
 		INSERT
 		  INTO 
 		        CLUB
@@ -165,42 +166,67 @@
 			  ,#{clubLocation}
 			  ,'Y'
 			   )
+
+			   
 	</insert>
+	
+	<!-- 모임 INSERT가 잘 되었다면 모임 개설자 CLUB_MEMBER에 INSET해주기 -->
+	<insert id="insertClubAdmin" parameterType="club">
+	   <selectKey resultType="_int" keyProperty="clubNo" order="BEFORE" >
+	   		SELECT  SEQ_CNO.CURRVAL FROM DUAL 
+	   </selectKey>
+		INSERT
+		  INTO
+		       CLUB_MEMBER
+		       (
+		       	CLUB_NO
+		       ,USER_NO
+		       ,ENROLL_DATE
+		       )
+        VALUES
+			   (
+			    #{ clubNo }
+			   ,#{ userNo }
+			   ,SYSDATE
+			   )	
+	</insert>
+	
+	
 	
 	<!-- Group List 조회수 Update -->
 	<update id="increaseCount" parameterType="_int">
 		UPDATE 
-				"GROUP"
+				CLUB
 		   SET
-				GROUP_COUNT = ( GROUP_COUNT + 1 )
+				CLUB_COUNT = ( CLUB_COUNT + 1 )
 		 WHERE
-		 		GROUP_NO = #{ groupNo }
+		 		CLUB_NO = #{ clubNo }
 		   AND
-		   		GROUP_STATUS = 'Y'				
+		   		CLUB_STATUS = 'Y'				
 	</update>
 	
 	<!-- Club List Detail Select -->
-	<select id="selectDetailGroup" parameterType="_int" resultMap="clubResultSet" >
+	<select id="selectDetailClub" parameterType="_int" resultMap="clubResultSet" >
 		SELECT 
-				GROUP_NO
+				C.CLUB_NO
 			   ,M.NICKNAME
-			   ,GROUP_TITLE
-			   ,GROUP_NUM
-			   ,GROUP_CREATEDATE
-			   ,GROUP_DESCRIBE
-			   ,GROUP_DAY
-			   ,GROUP_LOCATION
-			   ,GROUP_IMG
-			   ,GROUP_COUNT
-               ,(select count(*) from group_like where group_no = 13) as "LIKECOUNT"			   
+		       ,C.USER_NO
+			   ,CLUB_NAME
+			   ,CLUB_LIMIT
+			   ,CLUB_CREATEDATE
+			   ,CLUB_DISCRIPT
+			   ,CLUB_IMG
+			   ,CLUB_LOCATION
+			   ,CLUB_STATUS
+               ,(select count(*) from CLUB_LIKE where CLUB_NO = ${ clubNo }) as "LIKECOUNT"			   
 		 FROM
-		       "GROUP" G
+		       CLUB C
 		 JOIN
-		       MEMBER M ON(G.USER_NO = M.USER_NO)
+		       MEMBER M ON(C.USER_NO = M.USER_NO)
 		WHERE
-		       GROUP_NO = ${ groupNo }
+		       C.CLUB_NO = ${ clubNo }
 		  AND 
-		       GROUP_STATUS = 'Y'      
+		       C.CLUB_STATUS = 'Y'      
 		                 	   
 	</select>
 	
@@ -370,5 +396,7 @@
 	
 	</select>
 	
+	
+
 	
 </mapper>

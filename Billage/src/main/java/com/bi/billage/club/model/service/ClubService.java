@@ -17,10 +17,13 @@ public interface ClubService {
 	int increaseCount(int clubNo);
 	
 	// 게시글 조회수 증가 후 해당 게시글의 상세정보 조회 
-	Club selectDetailGroup(int clubNo);
+	Club selectDetailClub(int clubNo);
 	
 	// 모임 insert 
-	int insertGroup(Club club);
+	int insertClub(Club club);
+	
+	// 모임 insert 후 모임장 club_member insert
+	int insertClubAdmin(Club club);
 	
 	//모임 마이페이지에서 <일반 >리스트 조회해오기
 	ArrayList<Club> clubGeneral(int userNo);
