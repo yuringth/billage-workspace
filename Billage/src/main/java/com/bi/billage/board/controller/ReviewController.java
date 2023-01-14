@@ -241,7 +241,7 @@ public class ReviewController {
 		// 똑같은 책이면 UPDATE => 
 		// 1_책 정보는 그대로 두되 내용만 수정하고싶을 경우
 		ReviewBoard reviewBoard = boardService.selectBookTitle2(b);
-		System.out.println("널"+reviewBoard);
+		System.out.println("책 중복되는지 확인(리뷰넘버로 책제목조회) "+ reviewBoard);
 		
 	
 		if(b.getBookTitle().equals(reviewBoard.getBookTitle())) { 
@@ -249,6 +249,7 @@ public class ReviewController {
 			// select 해온 책 제목 == 수정할 책제목과 일치하면 update 가능 => 내용만 수정가능
 			
 			boardService.updateReviewBoard(b);
+			System.out.println("내용만 수정 : " + b);
 			
 			return "redirect:detail.re?reviewNo=" + b.getReviewNo();
 
@@ -256,7 +257,7 @@ public class ReviewController {
 			// 근데 똑같은 책이 아닐경우
 			
 			boardService.updateReviewBoard(b);
-			
+			System.out.println("책/내용 변경 후 : " + b);
 			
 			return "redirect:detail.re?reviewNo=" + b.getReviewNo();
 		} else {
