@@ -112,12 +112,16 @@
 
 			<!-- 상품 하나를 감싸는 div -->
 			<div class="align-left-outer">
+			
+			<input class="bno" type="hidden" value="${ b.usedNo }">
+			
 			  	<c:forEach items="${ list }" var="b">
 			        <div class="one-content">
 			            <div class="img-area">
 			                
-			                <img id="img-area2" src="${ b.changeName }" value="" onclick="location.href='detail.ud'">
-			            
+			                <img id="img-area2" src="${ b.changeName }">
+			            	<!--  onclick="location.href='detail.ud?usedNo='" + b.getUsedNo() -->
+			            	
 			            </div>
 			            <div class="text-area">
 			                <p class="title-text">${ b.bookTitle }</p>
@@ -173,6 +177,17 @@
     
     </div>	
 
+
+
+	<!-- 게시글 눌렀을 시 상세보기로 이동 -->	
+	<script>
+		$(function(){
+			$('.align-left-outer').click(function(){
+				location.href='detail.ud?usedNo=' + $(this).children().eq(0).text(); 
+				console.log($(this).children().eq(0).text()); // http://localhost:8787/billage/detail.re?reviewNo=16
+			})
+		})
+	</script>
 
 
     <jsp:include page="../../common/footer.jsp"/>
