@@ -31,4 +31,7 @@ public interface ClubService {
 	// 모임 마이페이지 <관리자> 모임 관리 페이지 가기 
 	ArrayList<Club> clubAdmin(int userNo);
 	
+	// 모임 리스트 조회 시 로그인 회원 조아요 조회 
+	ArrayList<Club> selectClubLike(int userNo);
+	
 }

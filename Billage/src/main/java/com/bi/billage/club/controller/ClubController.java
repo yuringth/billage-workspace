@@ -36,12 +36,18 @@ public class ClubController {
 	
 	//등록된 모임 리스트를 가지고 와야 함 , 페이징 처리 필요
 	@RequestMapping("list.cl")
-	public ModelAndView selectGroup(@RequestParam(value="cpage", defaultValue="1")int currentPage, ModelAndView mv) {
+	public ModelAndView selectGroup(@RequestParam(value="cpage", defaultValue="1")int currentPage
+								   , ModelAndView mv, HttpSession session ) {
 		
 		PageInfo pi = Pagination.getPageInfo(clubService.selectListCount(), currentPage, 10, 9);
 		
 		mv.addObject("pi", pi);
 		mv.addObject("clubList", clubService.selectList(pi));
+	
+		
+		if(null != session.getAttribute("loginUser")) {
+			mv.addObject("likeList", clubService.selectClubLike(((User)session.getAttribute("loginUser")).getUserNo()));
+		}
 		
 		mv.setViewName("club/clubListView");
 		return mv;
