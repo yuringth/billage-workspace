@@ -32,4 +32,22 @@ public class PointController {
 	public int selectPoint(int userNo) {
 		return pointService.selectPoint(userNo);
 	}
+	
+	
+	/*
+	//유림 리뷰 등록시 10포인트 적립되게 하고싶은디
+	@RequestMapping("addBookPoint")
+	public String addBookPoint(Point p, ModelAndView mv) {
+		return piontService.addBookPoint
+		
+	}
+	*/
+	
+	
+	
+	
+	
+	
+	
+	
 }
