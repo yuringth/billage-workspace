@@ -368,5 +368,27 @@
 					        rownum = 1      
 		
 		</select>
+		
+		<select id="selectGoodReview" parameterType="follow" resultMap="reviewResultSet2">
+			select
+				      book_title
+				      ,book_imag
+				from
+				      review
+			 where
+				       user_no = #{userNo1}
+				and
+				      review_star = 5
+				INTERSECT
+				select
+					      book_title
+					      ,book_imag
+				  from
+				          review
+				where
+				          user_no =#{userNo2}
+				   and
+				         review_star = 5
+		</select>
 
 </mapper>

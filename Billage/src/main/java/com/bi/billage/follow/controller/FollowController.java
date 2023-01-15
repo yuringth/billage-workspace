@@ -122,13 +122,19 @@ public class FollowController {
 	
 	//클릭한 사용자 follow 상세프로필
 	@RequestMapping("selectUser.fo")
-	public ModelAndView selectUser (int uno, ModelAndView mv) {
+	public ModelAndView selectUser (int uno, HttpSession session ,ModelAndView mv) {
+		
+		int userNo1 = ((User)session.getAttribute("loginUser")).getUserNo();
+		
+		Follow follow = new Follow(userNo1, uno);
 		
 		User user = followService.selectUser(uno);
 		
 		Star star = followService.selectStar(uno);
 		
-		mv.addObject("user", user).addObject("star", star).setViewName("follow/followDetailView");
+		ArrayList<ReviewBoard> goodReview = followService.selectGoodReview(follow);
+		
+		mv.addObject("user", user).addObject("star", star).addObject("goodReview",goodReview).setViewName("follow/followDetailView");
 		
 		return mv;
 		

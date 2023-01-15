@@ -73,4 +73,10 @@ public class FollowServiceImpl implements FollowService{
 		return followDao.selectStar(sqlSession, userNo);
 	}
 
+	@Override
+	public ArrayList<ReviewBoard> selectGoodReview(Follow follow) {
+		
+		return followDao.selectGoodReview(sqlSession, follow);
+	}
+
 }

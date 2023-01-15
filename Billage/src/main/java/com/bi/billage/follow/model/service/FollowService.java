@@ -26,4 +26,6 @@ public interface FollowService {
 	User selectUser (int userNo);
 	
 	Star selectStar (int userNo);
+	
+	ArrayList<ReviewBoard> selectGoodReview (Follow follow);
 }

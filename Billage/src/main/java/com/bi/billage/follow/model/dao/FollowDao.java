@@ -49,5 +49,9 @@ public class FollowDao {
 	public Star selectStar(SqlSession sqlSession, int userNo) {
 		return (Star)sqlSession.selectOne("followMapper.selectStar", userNo);
 	}
+	
+	public ArrayList<ReviewBoard> selectGoodReview (SqlSession sqlSession, Follow follow){
+		return (ArrayList)sqlSession.selectList("followMapper.selectGoodReview", follow);
+	}
 
 }
