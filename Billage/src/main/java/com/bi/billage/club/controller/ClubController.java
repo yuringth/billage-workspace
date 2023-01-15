@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
 
@@ -109,7 +110,7 @@ public class ClubController {
 	@RequestMapping(value="clubMember.cl", produces = "application/json; charset=UTF-8")
 	public String clubParticipate(Club club, int partiStatus) {
 		
-		System.out.println(partiStatus);
+		//System.out.println(partiStatus);
 		int result = 0;
 		
 		if(partiStatus > 0) {
@@ -119,7 +120,7 @@ public class ClubController {
 			result = (clubService.ajaxInsertClub(club) > 0)? 1 : -1;
 		}
 		
-		System.out.println(result);
+		//System.out.println(result);
 		return new Gson().toJson(result);
 	}			
 			
@@ -173,9 +174,18 @@ public class ClubController {
 	}
 	
 
-	
-
-	
+	// 모임 회원 관리 clubMemAdmin.cl
+	@RequestMapping("clubMemAdmin.cl")
+	public ModelAndView clubMemerSelectAdmin(int clubNo, ModelAndView mv) {
+		
+		ArrayList<Club> ClubMemberList = clubService.clubMemerSelectAdmin(clubNo);
+		System.out.println(ClubMemberList);
+		
+		mv.addObject("memberList", ClubMemberList);
+		mv.setViewName("club/clubMemberAdminView");
+		
+		return mv;
+	}
 	
 	// 지역을 찾는 API을 구현 함 
 	@ResponseBody

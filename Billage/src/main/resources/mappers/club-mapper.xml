@@ -12,6 +12,7 @@
 		<result column="CLUB_LIMIT"			 property="clubLimit" />
 		<result column="CLUB_CREATEDATE"	 property="clubCreatedate" />
 		<result column="CLUB_DISCRIPT"       property="clubDiscript" />
+		<result column="USER_ID"          property="clubDiscript" />
 		<result column="CLUB_LOCATION" 		 property="clubLocation" />
 		<result column="CLUB_STATUS" 		 property="clubStatus" />
 		<result column="CLUB_IMG" 			 property="clubImg" />
@@ -445,6 +446,28 @@
 		   BY
 		   	   C.CLUB_NO DESC
 	</select>	
+	
+	<!-- Club_Member List Select -->
+	<select id="clubMemerSelectAdmin" parameterType="_int" resultMap="clubResultSet">
+		 SELECT 
+		         CM.CLUB_NO
+		        ,CM.USER_NO
+		        ,M.USER_ID
+		        ,M.NICKNAME
+		        ,CM.ENROLL_DATE "enrollDate"
+		  FROM
+		        CLUB_MEMBER CM
+		  JOIN
+		        MEMBER M ON(M.USER_NO = CM.USER_NO)
+		 WHERE
+		        CM.CLUB_NO = #{ clubNo }
+		   AND 
+		   		M.STATUS = 'N'
+		 ORDER 
+		    BY 
+		        CM.ENROLL_DATE DESC 
+	</select>
+	
 	
 	<!-- clubLikeResultset -->
 	<select id="selectClubLike" parameterType="_int" resultMap="clubResultSet">

@@ -25,4 +25,5 @@ public class Club {
 	private Date enrollDate;
 	private int likeUser; // 좋아요 멤버인지 
 	private int memUser; // 클럼 멤버인지
+	//private String userId;
 }

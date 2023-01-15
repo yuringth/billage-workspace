@@ -63,6 +63,11 @@ public class ClubDao {
 		return (ArrayList)sqlSession.selectList("clubMapper.clubAdmin", userNo);
 	}
 	
+	// club club_member 회원리스트 조회
+	public ArrayList<Club> clubMemerSelectAdmin(SqlSessionTemplate sqlSession, int clubNo){
+		return (ArrayList)sqlSession.selectList("clubMapper.clubMemerSelectAdmin", clubNo);
+	}
+	
 	// 회원 조아요 리스트 조회
 	public ArrayList<Club> selectClubLike(SqlSessionTemplate sqlSession, int userNo){
 		return (ArrayList)sqlSession.selectList("clubMapper.selectClubLike", userNo);

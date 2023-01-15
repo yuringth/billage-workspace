@@ -88,6 +88,14 @@
     		</div>
     	</div>
 		
+		<div id="open-activity-area">
+		
+		
+		
+		</div>
+		
+		
+		
 		
 		<div id="group-reply-area">
 			<div>댓글존</div>

@@ -68,6 +68,11 @@ public class ClubServiceImpl implements ClubService {
 	public ArrayList<Club> clubAdmin(int userNo) {
 		return clubDao.clubAdmin(sqlSession, userNo);
 	}
+	
+	@Override
+	public ArrayList<Club> clubMemerSelectAdmin(int clubNo) {
+		return clubDao.clubMemerSelectAdmin(sqlSession, clubNo);
+	}
 
 	@Override
 	public ArrayList<Club> selectClubLike(int userNo) {
@@ -83,6 +88,8 @@ public class ClubServiceImpl implements ClubService {
 	public int clubLikeDelete(Club club) {
 		return clubDao.clubLikeDelete(sqlSession, club);
 	}
+
+
 
 
 
