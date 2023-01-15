@@ -10,4 +10,9 @@ public class RentBoardController {
 	public String rentBoardView() {
 		return "board/rentBoard/rentBoardView";
 	}
+	
+	@RequestMapping("insert.rt")
+	public String insertRent() {
+		return "board/rentBoard/rentEnrollForm";
+	}
 }
