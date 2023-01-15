@@ -94,6 +94,7 @@
 			<a>인기순</a>
 		</div>
 		
+		<%-- 
 		<div align="center">
 			<form action="" method="">
 				<select name="search">
@@ -105,7 +106,8 @@
 				<button name="" >검색</button>
 			</form>
 		</div>
-
+		--%>
+		
 		<div id="list-area">
 			<c:forEach items="${ clubList }" var="c" varStatus="status" >
 			<div id="thum-area" class="thumbnail" align="center">
@@ -184,7 +186,8 @@
 				});
 				
 				
-				$('#list-area > #thum-area').click(function(){
+				$('#list-area > #thum-area').one('click', function(){
+					console.log('ggGG?');
 					location.href = "detail.cl?clubNo=" + $(this).children().eq(0).val()
 											 +"&newCount=" + $(this).find('#new-club').attr('value');
 					//글번호 들고 가야 돼
