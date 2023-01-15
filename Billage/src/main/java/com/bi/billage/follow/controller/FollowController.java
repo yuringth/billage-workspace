@@ -60,8 +60,6 @@ public class FollowController {
 		 
 		 Star star = followService.selectStar(userNo);
 		 
-		 System.out.println(user);
-		 
 		 session.setAttribute("user", user);
 		 
 		 session.setAttribute("star", star);
@@ -123,7 +121,14 @@ public class FollowController {
 	//클릭한 사용자 follow 상세프로필
 	@RequestMapping("selectUser.fo")
 	public ModelAndView selectUser (int uno, HttpSession session ,ModelAndView mv) {
-		
+		//로그인 유저 번호 -> userNo1 , 내가 클릭한 유저 번호-> uno로 받아옴
+		/*
+		 * follow에 담아서 전달
+		 * user -> 클릭한 유저에 관한 정보를 user 객체에 담아온다
+		 * star -> 클릭한 유저가 준 리뷰 별점을 담아온다.
+		 * goodReview => 클릭한 유저와 로그인한 유저가 준 별점5점 책들 중에 동일한 책만 ArrayList로 가져온ㄷ
+		 * 
+		 */
 		int userNo1 = ((User)session.getAttribute("loginUser")).getUserNo();
 		
 		Follow follow = new Follow(userNo1, uno);
