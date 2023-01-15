@@ -90,10 +90,20 @@
 		
 		
 		<div id="group-btn-area">
-			<div id="btn-zone">
-				<button type="button" class="like-btn" id="${ club.likeUser }"></button>
-				<button type="button" class="parti-btn" id="${ club.memUser }"></button>
-			</div>
+			<c:choose>
+				<c:when test="${ loginUser.userNo eq club.userNo }">
+					<div id="btn-zone">
+						<button type="button" class="like-btn" id="${ club.likeUser }"></button>
+						<button type="button" onclick="location.href='admin.cl'">관리하기</button>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div id="btn-zone">
+						<button type="button" class="like-btn" id="${ club.likeUser }"></button>
+						<button type="button" class="parti-btn" id="${ club.memUser }"></button>
+					</div>
+				</c:otherwise>
+			</c:choose>
 		</div>
     </div>
     
@@ -101,7 +111,7 @@
 	    <c:when test="${ !empty loginUser }">
 	    	<script>
 				//찜하기 / 찜취소  ||  클럽신청	 / 신청취소 버튼 구분하기 
-				let userNo  = ${ club.userNo };  
+				let userNo  = ${ loginUser.userNo };  
 				let clubNo = ${ club.clubNo };
 				
 				$('#btn-zone .like-btn').click(function(){
@@ -117,6 +127,17 @@
 						},
 						success : function( result ){
 							console.log(result);
+							if(result > 0){
+								$('#btn-zone .like-btn').empty();
+								$('.like-btn').attr('id', userNo);
+					    		$($('.like-btn').text('찜취소')).prependTo($('#btn-zone'));
+					    	} else if (result == 0) {
+					    		$('#btn-zone .like-btn').empty();
+					    		$('.like-btn').attr('id', 0);
+					    		$($('.like-btn').text('찜하기')).prependTo($('#btn-zone'));
+					    	} else{
+					    		alert('다시 시도해주세요 ');
+					    	}
 						},
 						error : function(){
 							console.log('찜하기 비동기 실패');
@@ -125,7 +146,7 @@
 					}) // like ajax
 				}); //like 버튼 클릭 
 			  
-				$('#btn-zone .like-btn').click(function(){
+				$('#btn-zone .parti-btn').click(function(){
 					
 					var $partiStatus = $(this).attr('id');
 
@@ -138,6 +159,8 @@
 						},
 						success : function(result){
 							console.log(result);
+
+					    	
 						},
 						error : function(){
 							console.log('신청하기 비동기 실패');

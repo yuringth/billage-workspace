@@ -92,16 +92,25 @@ public class ClubController {
 	@RequestMapping(value="clubLike.cl", produces = "application/json; charset=UTF-8")
 	public String clubLike(Club club, int likeStatus) {
 		
-		return new Gson.toJson(clubService.ajaxLikeClub(club));
+		// 0보다 크면 찜하기 취소  | 0이면 찜하기 신청 
+		int result = 0;
+		
+		if(likeStatus > 0) {
+			result = (clubService.clubLikeDelete(club) > 0 )? 0 : -1; 
+		} else {
+			result = (clubService.clubLikeInsert(club) > 0 )? 1 : -1;
+		} 
+		
+		return new Gson().toJson(result);
 	}
 		
 	// parti ajax
-	@ResponseBody
-	@RequestMapping(value="clubLike.cl", produces = "application/json; charset=UTF-8")
-	public String clubLike(Club club, int likeStatus) {
+	//@ResponseBody
+	//@RequestMapping(value="clubLike.cl", produces = "application/json; charset=UTF-8")
+	//public String clubLike(Club club, int likeStatus) {
 		
-		return new Gson.toJson(clubService.ajaxPartiClub(club));
-	}			
+	//	return new Gson.toJson(clubService.ajaxPartiClub(club));
+	//}			
 			
 			
 			

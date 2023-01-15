@@ -436,7 +436,32 @@
 	
 	</select>
 	
+	<!-- Club Like Insert -->
+	<insert id="clubLikeInsert" parameterType="club">
+		INSERT 
+		  INTO
+		       CLUB_LIKE
+		       (
+		        CLUB_NO
+		       ,USER_NO
+		       )
+        VALUES
+        	   (
+        	   #{clubNo}
+        	  ,#{userNo}
+        	   )
+	</insert>
 	
-
+	
+	<!-- Club Like delete -->
+	<delete id="clubLikeDelete" parameterType="club">
+		DELETE
+		  FROM  
+		       CLUB_LIKE
+	     WHERE
+	     	   CLUB_NO = #{ clubNo }
+	       AND	   
+		       USER_NO = #{ userNo }
+	</delete>
 	
 </mapper>

@@ -37,4 +37,14 @@ public interface ClubService {
 	// 모임 리스트 조회 시 로그인 회원 조아요 조회 
 	ArrayList<Club> selectClubLike(int userNo);
 	
+	// like insert 
+	int clubLikeInsert(Club club);
+	
+	// like delete 
+	int clubLikeDelete(Club club);
+	
+	// parti insert
+	
+	// parti delete
+	
 }

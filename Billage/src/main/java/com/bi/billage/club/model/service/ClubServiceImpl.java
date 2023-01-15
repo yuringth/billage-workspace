@@ -69,6 +69,16 @@ public class ClubServiceImpl implements ClubService {
 		return clubDao.selectClubLike(sqlSession, userNo);
 	}
 
+	@Override
+	public int clubLikeInsert(Club club) {
+		return clubDao.clubLikeInsert(sqlSession, club);
+	}
+
+	@Override
+	public int clubLikeDelete(Club club) {
+		return clubDao.clubLikeDelete(sqlSession, club);
+	}
+
 
 
 

@@ -63,4 +63,19 @@ public class ClubDao {
 	public ArrayList<Club> selectClubLike(SqlSessionTemplate sqlSession, int userNo){
 		return (ArrayList)sqlSession.selectList("clubMapper.selectClubLike", userNo);
 	}
+	
+	// 클럽 찜하기 Insert
+	public int clubLikeInsert(SqlSessionTemplate sqlSession, Club club) {
+		return sqlSession.insert("clubMapper.clubLikeInsert", club);
+	}
+
+	// 클럽 찜하기 Delete
+	public int clubLikeDelete(SqlSessionTemplate sqlSession, Club club) {
+		return sqlSession.delete("clubMapper.clubLikeDelete", club);
+	}
+	
+	
+	
+	
+	
 }
