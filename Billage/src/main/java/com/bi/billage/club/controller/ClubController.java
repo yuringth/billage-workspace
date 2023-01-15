@@ -59,24 +59,23 @@ public class ClubController {
 	@RequestMapping("detail.cl")
 	public ModelAndView selectDetailClub(Club club, String newCount, ModelAndView mv,  HttpSession session) {
 		
-		if(null != session.getAttribute("loginUser")) {
-			club.setUserNo(((User)session.getAttribute("loginUser")).getUserNo());
-			System.out.println(club);
-		} 
-
+		System.out.println("왜 두번 돌아?");
+		
 		//게시글 번호 들고 가서 group_count증가 
 		int result = clubService.increaseCount(club);
-		
 		if(result > 0) {
+			if(null != session.getAttribute("loginUser")) {
+				club.setUserNo(((User)session.getAttribute("loginUser")).getUserNo());
+				System.out.println(club);
+			} 
+		
+		
 			System.out.println(club);
-			
-			club = clubService.selectDetailClub(club);
-			
-			System.out.println(club);
-			
-			club.setNewCount(newCount);				
 			//게시글 번호로 해당 글 상세 조회 
-			
+			club = clubService.selectDetailClub(club);
+			System.out.println(club);
+			club.setNewCount(newCount);				
+		
 			mv.addObject("club", club);
 			mv.setViewName("club/clubDetailView");
 			return mv;
@@ -87,6 +86,25 @@ public class ClubController {
 		} 
 	}
 	
+	
+	// like ajax 
+	@ResponseBody
+	@RequestMapping(value="clubLike.cl", produces = "application/json; charset=UTF-8")
+	public String clubLike(Club club, int likeStatus) {
+		
+		return new Gson.toJson(clubService.ajaxLikeClub(club));
+	}
+		
+	// parti ajax
+	@ResponseBody
+	@RequestMapping(value="clubLike.cl", produces = "application/json; charset=UTF-8")
+	public String clubLike(Club club, int likeStatus) {
+		
+		return new Gson.toJson(clubService.ajaxPartiClub(club));
+	}			
+			
+			
+			
 	
 	// 모임 마이페이지에서 <일반 >
 	@RequestMapping("general.cl")

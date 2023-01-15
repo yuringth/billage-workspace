@@ -91,13 +91,70 @@
 		
 		<div id="group-btn-area">
 			<div id="btn-zone">
-				<button>찜하기</button>
-				<button>클럽가입</button>
+				<button type="button" class="like-btn" id="${ club.likeUser }"></button>
+				<button type="button" class="parti-btn" id="${ club.memUser }"></button>
 			</div>
 		</div>
     </div>
     
+    <c:choose>
+	    <c:when test="${ !empty loginUser }">
+	    	<script>
+				//찜하기 / 찜취소  ||  클럽신청	 / 신청취소 버튼 구분하기 
+				let userNo  = ${ club.userNo };  
+				let clubNo = ${ club.clubNo };
+				
+				$('#btn-zone .like-btn').click(function(){
+					
+					var $likeStatus = $(this).attr('id');
 
+					$.ajax({
+						url : 'clubLike.cl',
+						data : {
+							likeStatus : $likeStatus,
+							userNo : userNo,
+							clubNo : clubNo
+						},
+						success : function( result ){
+							console.log(result);
+						},
+						error : function(){
+							console.log('찜하기 비동기 실패');
+						}
+						
+					}) // like ajax
+				}); //like 버튼 클릭 
+			  
+				$('#btn-zone .like-btn').click(function(){
+					
+					var $partiStatus = $(this).attr('id');
+
+					$.ajax({
+						url : 'clubMember.cl',
+						data : {
+							likeStatus : $partiStatus,
+							userNo : userNo,
+							clubNo : clubNo
+						},
+						success : function(result){
+							console.log(result);
+						},
+						error : function(){
+							console.log('신청하기 비동기 실패');
+						}
+					}) // parti ajax
+				}); //parti 버튼 클릭 
+	    	</script>
+	    </c:when>
+	    <c:otherwise>
+	    	<script>
+	    		$('#btn-zone button[type=button]').click(function(){
+					alert("로그인유저만 가능합니다.");
+	    		})
+	    	</script>
+	    </c:otherwise>
+    </c:choose>
+    
     <script>
     	
     	participant();
@@ -118,14 +175,29 @@
     
     
     
-    	//new 상태 표시 ----------------------------------------------------------
     	$(function(){
+	    	//new 상태 표시 ----------------------------------------------------------
 			$('#new-group').each(function(){
 				if($(this).attr('value') == 1){
 					$(this).show();
 				}					
 			});    
-    	});
+			
+			
+	    	if($('#btn-zone .like-btn').attr('id') != 0){
+	    		$('#btn-zone .like-btn').text('찜취소');
+	    	} else {
+	    		$('#btn-zone .like-btn').text('찜하기');
+	    	}
+			
+	    	if($('#btn-zone .parti-btn').attr('id') != 0){
+	    		$('#btn-zone .parti-btn').text('신청취소');
+	    	} else {
+	    		$('#btn-zone .parti-btn').text('클럽신청');
+	    	}
+			
+			
+    	}); //$(function()) 닫음
     	
     	
     
