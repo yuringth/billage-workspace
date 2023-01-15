@@ -310,6 +310,7 @@ public class BoardDao {
 	
 	// 중고게시판 => 글작성
 	public int insertUsedBoard(SqlSessionTemplate sqlSession, UsedBoard b) {
+		System.out.println("b의 dao : "  + b);
 		return sqlSession.insert("usedMapper.insertUsedBoard", b);	
 		
 	}
@@ -328,6 +329,8 @@ public class BoardDao {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		System.out.println("rowBounds dao: " + rowBounds);
 		
 		return (ArrayList)sqlSession.selectList("usedMapper.usedBoardList", null, rowBounds);
 		
@@ -383,7 +386,7 @@ public class BoardDao {
 	}
 
 
-	public int insertSerial(SqlSessionTemplate sqlSession, Serial se, int novelNo) {
+	public int insertSerial(SqlSessionTemplate sqlSession, Serial se, Integer novelNo) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("se", se);
 		map.put("novelNo", novelNo);

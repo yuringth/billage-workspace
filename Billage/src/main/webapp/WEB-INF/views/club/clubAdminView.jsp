@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +23,7 @@
 		<h1>${ loginUser.nickname }님의 모임 관리 페이지입니다. </h1>
 		<%-- 모임에 대한 값이 있으면 list 없으면 참여중인 모임이 없습니다. core로 조건문 걸어서 생성하기   --%>
 		
-		<button onclick="history.back()">뒤로가기</button>
+		<button onclick="location.href='general.cl'">뒤로가기</button>
 		
 		<br><br>
 		
@@ -43,11 +44,12 @@
 				</tr>
 			</thead>
 								<!--눌리면 해당모임 상세페이지로 넘어가기-->
-			<tbody>
+			<tbody id="admin-list-area">
 				<c:choose>
 					<c:when test="${ !empty clubList }" >
 						<c:forEach items="${ clubList }" var="c" varStatus="status">
 							<tr>
+								<input type="hidden" name="clubNo" value="${c.clubNo }"/>
 								<td>${ status.index + 1 }</td>
 								<c:choose>
 									<c:when test="${ !empty c.clubImg  }">
@@ -57,11 +59,11 @@
 										<td><img width="150px" height="150px" src="resources/images/plus.png"></td>
 									</c:otherwise>
 								</c:choose>
-								<td><a href="goDetail(${ c.clubNo });">${ c.clubName }</a></td>
+								<td><a onclick="goDetail();">${ c.clubName }</a></td>
 								<td>${ c.clubLimit }</td>
-								<td>${ c.clubCreatedate }</td>
+								<td id="createDate">${ c.clubCreatedate }</td>
 								<td>${ c.clubLocation }</td>
-								<td>${ c.clubCreatedate }</td>
+								<td>${ c.clubCount }</td>
 								<td>${ c.memCount }</td>
 								<td>${ c.likeCount }</td>
 								<td>${ c.openCount }</td>
@@ -81,10 +83,31 @@
 		</table>
 	</div>
 	
+
 	<script>
-	function goDetail(clubNo){
-		location.href = 'detail.cl?clubNo' + clubNo;
-	}
+	
+	
+		function goDetail(){
+			
+			var clubNo = $('#admin-list-area input[type=hidden]').val();
+			var createDate = $('#createDate').text();
+			var cdArr = createDate.split('/');
+			
+			//등록일로부터 한달 후 계산한 날짜
+			let cd = new Date(cdArr[0], cdArr[1], cdArr[2]);
+			let today = new Date(); 
+			
+			var newCount = 0;
+		
+			//(등록일 + 한달 ) > today 보다 크다면 한달이 안넘은 것이므로 new태그 활성화 시켜줌  
+			if(cd >= today){
+				newCount = 1;
+			} else {
+				newCount = 0;
+			}
+
+			location.href = 'detail.cl?clubNo=' + clubNo + '&newCount=' + newCount ;
+		}
 	
 	</script>
 	

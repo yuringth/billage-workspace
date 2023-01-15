@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,12 +37,18 @@ public class ClubController {
 	
 	//등록된 모임 리스트를 가지고 와야 함 , 페이징 처리 필요
 	@RequestMapping("list.cl")
-	public ModelAndView selectGroup(@RequestParam(value="cpage", defaultValue="1")int currentPage, ModelAndView mv) {
+	public ModelAndView selectGroup(@RequestParam(value="cpage", defaultValue="1")int currentPage
+								   , ModelAndView mv, HttpSession session ) {
 		
 		PageInfo pi = Pagination.getPageInfo(clubService.selectListCount(), currentPage, 10, 9);
 		
 		mv.addObject("pi", pi);
-		mv.addObject("groupList", clubService.selectList(pi));
+		mv.addObject("clubList", clubService.selectList(pi));
+	
+		
+		if(null != session.getAttribute("loginUser")) {
+			mv.addObject("likeList", clubService.selectClubLike(((User)session.getAttribute("loginUser")).getUserNo()));
+		}
 		
 		mv.setViewName("club/clubListView");
 		return mv;
@@ -50,19 +57,32 @@ public class ClubController {
 	
 	// 모임 상세보기 메소드 
 	@RequestMapping("detail.cl")
-	public ModelAndView selectDetailGroup(int clubNo, String newCount, ModelAndView mv) {
+	public ModelAndView selectDetailClub(Club club, String newCount, ModelAndView mv,  HttpSession session) {
 		
+		if(null != session.getAttribute("loginUser")) {
+			club.setUserNo(((User)session.getAttribute("loginUser")).getUserNo());
+			System.out.println(club);
+		} 
+
 		//게시글 번호 들고 가서 group_count증가 
-		if(clubService.increaseCount(clubNo) > 0) {
-			Club club = clubService.selectDetailGroup(clubNo);
-			club.setNewCount(newCount);
+		int result = clubService.increaseCount(club);
+		
+		if(result > 0) {
+			System.out.println(club);
+			
+			club = clubService.selectDetailClub(club);
+			
+			System.out.println(club);
+			
+			club.setNewCount(newCount);				
 			//게시글 번호로 해당 글 상세 조회 
+			
 			mv.addObject("club", club);
 			mv.setViewName("club/clubDetailView");
 			return mv;
 			
 		} else {
-			mv.addObject("group", "group게시글 조회에 실패했습니다").setViewName("common/errorPage");
+			mv.addObject("errorMsg", "club게시글 조회에 실패했습니다").setViewName("common/errorPage");
 			return mv;
 		} 
 	}
@@ -165,8 +185,9 @@ public class ClubController {
 	
 	
 	// 모임등록 하면 값 들어오는 메소드 --------------------------------- 기능 구현 필요함 
+	@Transactional
 	@RequestMapping("create.cl")
-	public String insertGroup(Model model, Club club, MultipartFile upfile, HttpSession session) {
+	public String insertclub(Model model, Club club, MultipartFile upfile, HttpSession session) {
 		//System.out.println(group);
 		
 		if(!upfile.getOriginalFilename().equals("")) {
@@ -174,9 +195,13 @@ public class ClubController {
 			club.setClubImg(changeName);
 		}
 		
-		if(0 < clubService.insertGroup(club)) {
-			
-			return "club/clubAdminView";
+		if(0 < clubService.insertClub(club)) {
+			if( 0 < clubService.insertClubAdmin(club)) {
+				return "redirect:admin.cl";
+			} else {
+				model.addAttribute("errorMsg", "club인설트 후 모임장 멤버 등록 실패");
+				return "common/errorPage";
+			}
 		} else {
 			model.addAttribute("errorMsg", "그룹 인설트 오류");
 			return "common/errorPage";

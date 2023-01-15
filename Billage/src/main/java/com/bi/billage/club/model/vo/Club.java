@@ -11,7 +11,7 @@ public class Club {
 	private int userNo; //USER_NO	NUMBER
 	private String clubName; //CLUB_NAME	VARCHAR2(300 BYTE)
 	private int clubLimit; // CLUB_LIMIT	NUMBER
-	private Date clubCreatedate;//CLUB_CREATEDATE	DATE
+	private String clubCreatedate;//CLUB_CREATEDATE	DATE
 	private String clubDiscript; //CLUB_DISCRIPT	VARCHAR2(4000 BYTE)
 	private String clubImg; //CLUB_IMG	VARCHAR2(4000 BYTE)
 	private String clubLocation; //CLUB_LOCATION	VARCHAR2(100 BYTE)
@@ -23,4 +23,6 @@ public class Club {
 	private int memCount; // 클럽 현재 멤버 수 
 	private int openCount; // 여태껏 클럽 갯수
 	private Date enrollDate;
+	private int likeUser; // 좋아요 멤버인지 
+	private int memUser; // 클럼 멤버인지
 }

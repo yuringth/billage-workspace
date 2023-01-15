@@ -21,6 +21,9 @@ import com.bi.billage.board.model.vo.Book;
 import com.bi.billage.board.model.vo.ReviewBoard;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.common.template.Pagination;
+import com.bi.billage.point.model.service.PointService;
+import com.bi.billage.point.model.vo.Point;
+import com.bi.billage.user.model.vo.User;
 
 @Controller
 public class ReviewController {
@@ -28,6 +31,9 @@ public class ReviewController {
 	@Autowired
 	private BoardService boardService;
 
+	@Autowired
+	private PointService pointService;
+	
 	
 	// api 오픈 키 => 나중에 알라딘 api 발급받아서 serviceKey에 업데이트 하세용
 	private static final String serviceKey="ttbiuui12341246001";
@@ -108,6 +114,7 @@ public class ReviewController {
 		
 		mv.addObject("pi", pi).addObject("list", boardService.reviewBoardList(pi)).setViewName("board/reviewBoard/reviewListView");
 		// ModelAndView는 메소드체인이 가능해서 코드의 길이가 짧아진다 => 그래서 String으로 사용했을 때 보다 좋다
+		System.out.println(mv);
 		return mv;
 		
 	}
@@ -127,6 +134,28 @@ public class ReviewController {
 			
 			// 2) 중복 된 책 없으면 insert
 			boardService.insertReviewBoard(b);
+			
+			// ===============
+			/*
+			// 3) 포인트 insert
+			Point p = new Point();
+			//응모포인트만큼 현재 포인트에서 차감
+			p.setUserNo(b.getUserNo());
+			p.setPointAdd(b.getBookPoint());
+			p.setPointStatus("적립");
+			
+			if(pointService.addBookPoint(p) * boardService.insertReviewBoard(b) > 0) {
+				// 포인트 적립, 리뷰 등록 성공
+				((User)session.getAttribute("loginUser")).setPoint(pointService.selectPoint(b.getUserNo()));
+//				System.out.println("응모 성공, 남은 포인트 :" + ((User)session.getAttribute("loginUser")).getPoint());
+				return "redirect:detail.dr?bno=" + b.getBoardNo();
+			} else { //뭐든 실패
+				mv.addObject("errorMsg", "응모 실패");
+				return "common/errorPage";
+			}
+
+			// ===============
+			*/
 			
 			//return "board/reviewBoard/reviewListView";
 			return "redirect:list.re";
@@ -212,7 +241,7 @@ public class ReviewController {
 		// 똑같은 책이면 UPDATE => 
 		// 1_책 정보는 그대로 두되 내용만 수정하고싶을 경우
 		ReviewBoard reviewBoard = boardService.selectBookTitle2(b);
-		System.out.println("널"+reviewBoard);
+		System.out.println("책 중복되는지 확인(리뷰넘버로 책제목조회) "+ reviewBoard);
 		
 	
 		if(b.getBookTitle().equals(reviewBoard.getBookTitle())) { 
@@ -220,6 +249,7 @@ public class ReviewController {
 			// select 해온 책 제목 == 수정할 책제목과 일치하면 update 가능 => 내용만 수정가능
 			
 			boardService.updateReviewBoard(b);
+			System.out.println("내용만 수정 : " + b);
 			
 			return "redirect:detail.re?reviewNo=" + b.getReviewNo();
 
@@ -227,7 +257,7 @@ public class ReviewController {
 			// 근데 똑같은 책이 아닐경우
 			
 			boardService.updateReviewBoard(b);
-			
+			System.out.println("책/내용 변경 후 : " + b);
 			
 			return "redirect:detail.re?reviewNo=" + b.getReviewNo();
 		} else {

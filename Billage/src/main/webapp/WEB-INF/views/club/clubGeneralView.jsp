@@ -59,7 +59,7 @@
 								<td><img width="150px" height="150px" src="resources/images/plus.png"></td>
 							</c:otherwise>
 						</c:choose>
-						<td onclick="goDetail(${ c.clubNo });">${ c.clubName }</td>
+						<td onclick="goDetail(${ c.clubNo },${ c.newCount });">${ c.clubName }</td>
 						<td>${ c.clubLocation }</td>
 						<td>${ c.enrollDate }</td>
 						<td>${ c.memCount }</td>
@@ -91,6 +91,14 @@
 	
 	
 	<script>
+		function goDetail(clubNo, newCount){
+			// 일반페이지 상세보기 갈 때 clubNo와 newCount 필요한데.. 
+			// 계속 들고 다니기 귀찮은데...? 
+			location.href = 'detail.cl?clubNo=' + clubNo + '&newCount=' + newCount ;
+			
+		}
+	
+	
 		function deleteClub(clubNo){	
 			
 			var ans = confirm("모임에서 탈퇴하시겠습니까?");
@@ -121,10 +129,6 @@
 		};
 		
 		
-		
-		function goDetail(clubNo){
-			location.href = 'detail.cl?clubNo' + clubNo;
-		}
 		
 	</script>
 	

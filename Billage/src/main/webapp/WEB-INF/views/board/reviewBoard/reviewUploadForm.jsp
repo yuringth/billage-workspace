@@ -211,7 +211,7 @@
 			<!-- 작성자 식별자로 넘기기 -->
 			<input type="hidden" name="userNo" value="${ loginUser.userNo }">
 			<input type="hidden" name="reviewNo" value="${ b.reviewNo }">
-			${ b.reviewNo }
+			
 			<!-- api에서 가져온 책 정보 -->
 			<div class="book-detail-outer">
 				<div class="book-detail-area">

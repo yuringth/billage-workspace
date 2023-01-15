@@ -84,6 +84,7 @@
 		       ,count 
 		       ,to_char(create_date, 'YYYY-MM-DD') as "CREATE_DATE"
 		       ,origin_name 
+		       ,change_name
 		  from
 		       used_board
 	      join
@@ -91,8 +92,6 @@
 	           
 		 where
 		 	   used_status = 'N'
-		   and
-		       used_no = #{userNo}
 		 order
 		    by
 		       used_no desc

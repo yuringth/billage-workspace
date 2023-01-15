@@ -22,19 +22,25 @@ public class ClubDao {
 		return (ArrayList)sqlSession.selectList("clubMapper.selectList", null, rowBounds);
 	}
 	
-	public int increaseCount(SqlSessionTemplate sqlSession, int clubNo) {
-		return sqlSession.update("clubMapper.increaseCount", clubNo);
+	public int increaseCount(SqlSessionTemplate sqlSession, Club club) {
+		return sqlSession.update("clubMapper.increaseCount", club);
 	}
 	
-	public Club selectDetailGroup(SqlSessionTemplate sqlSession, int clubNo) {
-		return sqlSession.selectOne("clubMapper.selectDetailGroup", clubNo);
+	public Club selectDetailClub(SqlSessionTemplate sqlSession, Club club) {
+		return sqlSession.selectOne("clubMapper.selectDetailClub", club);
 	}
 	
 	
 	// 클럽 등록 
-	public int insertGroup(SqlSessionTemplate sqlSession, Club Club) {
-		return sqlSession.insert("clubMapper.insertGroup", Club);
+	public int insertClub(SqlSessionTemplate sqlSession, Club Club) {
+		return sqlSession.insert("clubMapper.insertClub", Club);
 	}
+	
+	// 클럽 등록 후 모임장 insert
+	public int insertClubAdmin(SqlSessionTemplate sqlSession, Club club) {
+		return sqlSession.insert("clubMapper.insertClubAdmin", club);
+	}
+	
 	
 	// 클럽 일반회원 리스트 조회
 	public ArrayList<Club> clubGeneral(SqlSessionTemplate sqlSession, int userNo){
@@ -53,5 +59,8 @@ public class ClubDao {
 		return (ArrayList)sqlSession.selectList("clubMapper.clubAdmin", userNo);
 	}
 	
-	
+	// 회원 조아요 리스트 조회
+	public ArrayList<Club> selectClubLike(SqlSessionTemplate sqlSession, int userNo){
+		return (ArrayList)sqlSession.selectList("clubMapper.selectClubLike", userNo);
+	}
 }

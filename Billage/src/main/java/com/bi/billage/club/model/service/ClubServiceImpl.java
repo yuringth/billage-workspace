@@ -30,18 +30,23 @@ public class ClubServiceImpl implements ClubService {
 	}
 		
 	@Override
-	public int increaseCount(int clubpNo) {
-		return clubDao.increaseCount(sqlSession, clubpNo);
+	public int increaseCount(Club club) {
+		return clubDao.increaseCount(sqlSession, club);
 	}
 	
 	@Override
-	public Club selectDetailGroup(int clubpNo) {
-		return clubDao.selectDetailGroup(sqlSession, clubpNo);
+	public Club selectDetailClub(Club club) {
+		return clubDao.selectDetailClub(sqlSession, club);
 	}
 	
 	@Override
-	public int insertGroup( Club club) {
-		return clubDao.insertGroup(sqlSession, club);
+	public int insertClub( Club club) {
+		return clubDao.insertClub(sqlSession, club);
+	}
+
+	@Override
+	public int insertClubAdmin(Club club) {
+		return clubDao.insertClubAdmin(sqlSession, club);
 	}
 
 	@Override
@@ -58,6 +63,12 @@ public class ClubServiceImpl implements ClubService {
 	public ArrayList<Club> clubAdmin(int userNo) {
 		return clubDao.clubAdmin(sqlSession, userNo);
 	}
+
+	@Override
+	public ArrayList<Club> selectClubLike(int userNo) {
+		return clubDao.selectClubLike(sqlSession, userNo);
+	}
+
 
 
 

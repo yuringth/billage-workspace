@@ -32,7 +32,7 @@
             <br>
             <!-- 로그인 후 작가본인일 경우만 보여지는 글쓰기 버튼 -->
             <%-- <c:if test="${ loginUser eq null }"> --%>
-            <c:forEach items="${ list }" var="s" begin="1" end="1">
+            <c:forEach items="${ list }" var="s" varStatus="row">
             <form action="enrollForm.se" method="post">
             <input type="hidden" class="nno" name="novelNo" value="${ s.novelNo }">
             <input type="submit" class="btn btn-secondary" style="float:right;" value="연재하기">
