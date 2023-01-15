@@ -321,6 +321,27 @@
 		       USER_NO = #{ userNo }
 	</delete>
 	
+	
+	<!--  Insert Club Member -->
+	<insert id="ajaxInsertClub" parameterType="club">
+		INSERT
+		  INTO
+		       CLUB_MEMBER
+		       (
+		       	CLUB_NO
+		       ,USER_NO
+		       ,ENROLL_DATE
+		       )
+        VALUES
+			   (
+			    #{ clubNo }
+			   ,#{ userNo }
+			   ,SYSDATE
+			   )
+	</insert>
+	
+	
+	
 	<!-- 모임 관리자 모임 정보 SELECT 쿼리  -->
 	<select id="clubAdmin" parameterType="_int" resultMap="clubResultSet">
 		SELECT

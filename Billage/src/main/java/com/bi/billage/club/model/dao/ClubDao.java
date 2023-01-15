@@ -53,6 +53,10 @@ public class ClubDao {
 		return sqlSession.delete("clubMapper.ajaxDeleteClub", club); 
 	}
 	
+	// 클럽 일반회원 club_member 테이블에 isnert 
+	public int ajaxInsertClub(SqlSessionTemplate sqlSession, Club club) {
+		return sqlSession.insert("clubMapper.ajaxInsertClub", club);
+	}
 	
 	// 클럽 모임장 개설리스트 조회
 	public ArrayList<Club> clubAdmin(SqlSessionTemplate sqlSession, int userNo){

@@ -105,12 +105,23 @@ public class ClubController {
 	}
 		
 	// parti ajax
-	//@ResponseBody
-	//@RequestMapping(value="clubLike.cl", produces = "application/json; charset=UTF-8")
-	//public String clubLike(Club club, int likeStatus) {
+	@ResponseBody
+	@RequestMapping(value="clubMember.cl", produces = "application/json; charset=UTF-8")
+	public String clubParticipate(Club club, int partiStatus) {
 		
-	//	return new Gson.toJson(clubService.ajaxPartiClub(club));
-	//}			
+		System.out.println(partiStatus);
+		int result = 0;
+		
+		if(partiStatus > 0) {
+			result = (clubService.ajaxDeleteClub(club) > 0)? 0 : -1;
+			
+		} else {
+			result = (clubService.ajaxInsertClub(club) > 0)? 1 : -1;
+		}
+		
+		System.out.println(result);
+		return new Gson().toJson(result);
+	}			
 			
 			
 			
