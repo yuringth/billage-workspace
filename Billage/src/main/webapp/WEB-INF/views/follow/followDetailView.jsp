@@ -104,7 +104,7 @@
 	<script>
 	  const ctx = document.getElementById('myChart');
 	
-	  new Chart(ctx, {
+	 var mychart = new Chart(ctx, {
 	    type: 'bar',
 	    data: {
 	      labels: [ '1', '2', '3','4','5'],
@@ -124,6 +124,9 @@
 	      }
 	    }
 	  });
+	 
+	 
+
 	  
 	  $(function(){
 			$('#following').click(function(){
@@ -133,6 +136,8 @@
 			$('#follower').click(function(){
 				location.href='selectFollower.fo?uno=' +${user.userNo};
 			});
+			
+			
 		});
 	</script>
 
