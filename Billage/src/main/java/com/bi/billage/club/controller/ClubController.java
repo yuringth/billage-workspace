@@ -57,13 +57,26 @@ public class ClubController {
 	
 	// 모임 상세보기 메소드 
 	@RequestMapping("detail.cl")
-	public ModelAndView selectDetailClub(int clubNo, String newCount, ModelAndView mv) {
+	public ModelAndView selectDetailClub(Club club, String newCount, ModelAndView mv,  HttpSession session) {
 		
+		if(null != session.getAttribute("loginUser")) {
+			club.setUserNo(((User)session.getAttribute("loginUser")).getUserNo());
+			System.out.println(club);
+		} 
+
 		//게시글 번호 들고 가서 group_count증가 
-		if(clubService.increaseCount(clubNo) > 0) {
-			Club club = clubService.selectDetailClub(clubNo);
-			club.setNewCount(newCount);
+		int result = clubService.increaseCount(club);
+		
+		if(result > 0) {
+			System.out.println(club);
+			
+			club = clubService.selectDetailClub(club);
+			
+			System.out.println(club);
+			
+			club.setNewCount(newCount);				
 			//게시글 번호로 해당 글 상세 조회 
+			
 			mv.addObject("club", club);
 			mv.setViewName("club/clubDetailView");
 			return mv;

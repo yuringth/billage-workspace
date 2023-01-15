@@ -60,7 +60,7 @@
 
     	<div id="group-title-area">
 			<span id="new-group" value="${ club.newCount }">new</span>
-			<h1>${ group.groupTitle }</h1>
+			<h1>${ club.clubName }</h1>
     	</div>
     	<div id="group-detail-area">
     		<div id="detail-left">
@@ -92,7 +92,7 @@
 		<div id="group-btn-area">
 			<div id="btn-zone">
 				<button>찜하기</button>
-				<button>신청하기</button>
+				<button>클럽가입</button>
 			</div>
 		</div>
     </div>

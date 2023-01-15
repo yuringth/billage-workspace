@@ -30,13 +30,13 @@ public class ClubServiceImpl implements ClubService {
 	}
 		
 	@Override
-	public int increaseCount(int clubNo) {
-		return clubDao.increaseCount(sqlSession, clubNo);
+	public int increaseCount(Club club) {
+		return clubDao.increaseCount(sqlSession, club);
 	}
 	
 	@Override
-	public Club selectDetailClub(int clubNo) {
-		return clubDao.selectDetailClub(sqlSession, clubNo);
+	public Club selectDetailClub(Club club) {
+		return clubDao.selectDetailClub(sqlSession, club);
 	}
 	
 	@Override

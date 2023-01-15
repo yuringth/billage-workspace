@@ -93,19 +93,19 @@
 			var createDate = $('#createDate').text();
 			var cdArr = createDate.split('/');
 			
+			//등록일로부터 한달 후 계산한 날짜
 			let cd = new Date(cdArr[0], cdArr[1], cdArr[2]);
 			let today = new Date(); 
 			
 			var newCount = 0;
 		
+			//(등록일 + 한달 ) > today 보다 크다면 한달이 안넘은 것이므로 new태그 활성화 시켜줌  
 			if(cd >= today){
 				newCount = 1;
 			} else {
 				newCount = 0;
 			}
 
-			console.log('detail.cl?clubNo=' + clubNo + '&newCount=' + newCount);
-			
 			location.href = 'detail.cl?clubNo=' + clubNo + '&newCount=' + newCount ;
 		}
 	

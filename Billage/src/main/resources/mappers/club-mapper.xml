@@ -22,6 +22,8 @@
 		<result column="enrollDate"			 property="enrollDate" />
 		<result column="OPENCOUNT"			 property="openCount" />
 		<result column="NICKNAME"   		 property="nickname" />
+		<result column="LIKEUSER"			 property="likeUser" />
+		<result column="MEMUSER"			 property="memUser" />
 	</resultMap>
 
 	<!-- 
@@ -194,7 +196,7 @@
 	
 	
 	<!-- Group List 조회수 Update -->
-	<update id="increaseCount" parameterType="_int">
+	<update id="increaseCount" parameterType="club">
 		UPDATE 
 				CLUB
 		   SET
@@ -206,28 +208,57 @@
 	</update>
 	
 	<!-- Club List Detail Select -->
-	<select id="selectDetailClub" parameterType="_int" resultMap="clubResultSet" >
-		SELECT 
-				C.CLUB_NO
-			   ,M.NICKNAME
-		       ,C.USER_NO
-			   ,CLUB_NAME
-			   ,CLUB_LIMIT
-			   ,CLUB_CREATEDATE
-			   ,CLUB_DISCRIPT
-			   ,CLUB_IMG
-			   ,CLUB_LOCATION
-			   ,CLUB_STATUS
-               ,(select count(*) from CLUB_LIKE where CLUB_NO = ${ clubNo }) as "LIKECOUNT"			   
-		 FROM
-		       CLUB C
-		 JOIN
-		       MEMBER M ON(C.USER_NO = M.USER_NO)
-		WHERE
-		       C.CLUB_NO = ${ clubNo }
-		  AND 
-		       C.CLUB_STATUS = 'Y'      
-		                 	   
+	<select id="selectDetailClub" parameterType="club" resultMap="clubResultSet" >
+  
+		SELECT  
+				 C.CLUB_NO
+		        ,C.USER_NO
+		        ,M.NICKNAME
+		        ,C.CLUB_NAME
+		        ,C.CLUB_LIMIT
+		        ,C.CLUB_CREATEDATE
+		        ,C.CLUB_DISCRIPT
+		        ,C.CLUB_IMG
+		        ,C.CLUB_LOCATION
+		        ,C.CLUB_STATUS
+		        ,C.CLUB_COUNT
+		        ,CM.USER_NO "MEMUSER"
+		        ,CM.ENROLL_DATE
+		        ,CL.USER_NO "LIKEUSER"
+		        ,(select count(*) from CLUB_LIKE where CLUB_NO = ${ clubNo }) as "LIKECOUNT"
+		  FROM 
+		 		CLUB C
+		  LEFT
+		  JOIN
+		       (
+		         SELECT 
+		         		 CM.USER_NO
+		         		,CM.ENROLL_DATE 
+	         	   FROM 
+	         	         CLUB_MEMBER CM 
+          		   WHERE	   
+        	             CM.USER_NO = #{ userNo } 
+        	             AND CM.CLUB_NO = #{ clubNo } 
+														) CM ON (C.CLUB_NO = CLUB_NO)
+		  LEFT
+		  JOIN   
+		        (
+		          SELECT 
+		          		  CL.USER_NO 
+          		    FROM 
+          		    	  CLUB_LIKE CL
+          		   WHERE
+          		   			   
+        	             CL.USER_NO = #{ userNo } 
+        	             AND CL.CLUB_NO = #{ clubNo } 
+						   								) CL ON(C.CLUB_NO = CLUB_NO)
+		  LEFT
+		  JOIN  
+		        MEMBER M ON(C.USER_NO = M.USER_NO)
+		  WHERE
+		         C.CLUB_NO = #{ clubNo }
+		    AND 
+				 C.CLUB_STATUS = 'Y'
 	</select>
 	
 	
@@ -239,6 +270,7 @@
 			   ,C.CLUB_NAME
 			   ,C.CLUB_IMG
 			   ,C.CLUB_LOCATION
+			   ,C.NEWCOUNT
 			   ,C.ENROLL_DATE as "enrollDate"
 			   ,COUNT(C.CLUB_NO) AS "MEMCOUNT"
 		  FROM
@@ -250,6 +282,13 @@
 					   ,CLUB_NAME
 					   ,CLUB_IMG
 					   ,CLUB_LOCATION
+					   ,CASE WHEN
+				                         (SELECT TO_DATE(SYSDATE, 'YY-MM-DD') FROM DUAL) 
+				                       - (SELECT TO_DATE(CLUB_CREATEDATE, 'YY-MM-DD') FROM DUAL) <![CDATA[ > ]]> 30 THEN 0
+				                    WHEN
+				                         (SELECT TO_DATE(SYSDATE, 'YY-MM-DD') FROM DUAL)
+				                       - (SELECT TO_DATE(CLUB_CREATEDATE, 'YY-MM-DD') from dual) <![CDATA[ < ]]> 30 THEN 1
+				                     END AS "NEWCOUNT"
 					   ,M.ENROLL_DATE
 				  FROM 
 				  		CLUB C
@@ -264,6 +303,7 @@
 		     	,CLUB_NAME
 		     	,CLUB_IMG
 		     	,CLUB_LOCATION
+		     	,C.NEWCOUNT
 		     	,C.ENROLL_DATE
 	     ORDER
 	        BY

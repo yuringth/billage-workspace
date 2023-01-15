@@ -22,12 +22,12 @@ public class ClubDao {
 		return (ArrayList)sqlSession.selectList("clubMapper.selectList", null, rowBounds);
 	}
 	
-	public int increaseCount(SqlSessionTemplate sqlSession, int clubNo) {
-		return sqlSession.update("clubMapper.increaseCount", clubNo);
+	public int increaseCount(SqlSessionTemplate sqlSession, Club club) {
+		return sqlSession.update("clubMapper.increaseCount", club);
 	}
 	
-	public Club selectDetailClub(SqlSessionTemplate sqlSession, int clubNo) {
-		return sqlSession.selectOne("clubMapper.selectDetailClub", clubNo);
+	public Club selectDetailClub(SqlSessionTemplate sqlSession, Club club) {
+		return sqlSession.selectOne("clubMapper.selectDetailClub", club);
 	}
 	
 	
