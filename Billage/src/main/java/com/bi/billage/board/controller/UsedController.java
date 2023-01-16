@@ -1,9 +1,6 @@
 package com.bi.billage.board.controller;
 
 import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -166,8 +163,23 @@ public class UsedController {
 		// 2. 새로 첨부된 파일x, 기존 첨부파일 o  내용만 수정 => origin : 기존 첨부파일 이름, change : 기존첨부파일 경로
 		// 3. 새로 첨부된 파일o, 기존 첨부파일 x 파일첨부 변경 시 => origin : 새로 첨부파일 이름, change : 새로 첨부파일 경로
 		
-		if()
-		
+		// 새로 첨부파일이 넘어온 경우 
+		if(!reUpfile.getOriginalFilename().equals("")) {
+			// 기존에 첨부파일이 있었을 경우 => 기존의 첨부파일을 삭제
+			
+			// 히든으로 오리진네임을 넘겼으니까 board에 setter 주입되서 들어가있을것임
+			if(b.getOriginName() != null) {
+				new File(session.getServletContext().getRealPath(b.getChangeName())).delete();
+			}
+			
+			// 새로 넘어온 첨부파일 서버에 업로드 시키기
+			// saveFile() 호출해서 첨부파일 업로드
+			String changeName = saveFile(reUpfile, session);
+			
+			// 첨부파일에 새로 업로드를 했으니, b라는 Board객체에 새로운정보(원본명, 저장경로) 담기
+			b.setOriginName(reUpfile.getOriginalFilename());
+			b.setChangeName("resources/uploadFiles/" + changeName);
+		}
 		
 		
 		
