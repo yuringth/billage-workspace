@@ -217,7 +217,6 @@
 				
 				
 				$('#list-area > #thum-area').on('click', function(){
-					console.log('ggGG?');
 					location.href = "detail.cl?clubNo=" + $(this).children().eq(0).val()
 											 +"&newCount=" + $(this).find('#new-club').attr('value');
 					//글번호 들고 가야 돼

@@ -17,6 +17,14 @@
 	<jsp:include page="../common/header.jsp" />
 	<jsp:include page="../user/myPageBar.jsp" />
 	
+	
+	<c:if test="${ !empty alertMsg }">
+		<script>
+			alert(${ alertMsg });		
+		</script>
+	</c:if>
+	
+	
 	<div id="all-clubMem-admin">
 		<h1> 모임 회원 관리 페이지 입니당 </h1>
 			
@@ -56,7 +64,10 @@
 					// .checked-btn 객체들 중에서 checked된 객체들만 선택해준다. 
 					
 					var $hidden = $('.checked-btn').filter(':checked');
-					var str = '';
+					
+					var $clubNo = $('#getClubNo').val();
+					
+					var str = '<input type="hidden" name="clubNo" value="' + $clubNo + '"/>';
 					
 					$hidden.each(function(i, el){
 						
@@ -66,6 +77,8 @@
 						 str += '<span>' + userNo2 + '</span> <br>'; 
 						
 					}); 
+					
+					console.log(str);
 					
 					// 해당 스트링을 #receiveUser div에 넣어준다. 
 					$(str).insertAfter('#receiveUser');
@@ -95,17 +108,15 @@
 			<thead>
 				<tr>
 					<th>선택</th>
-
 					<th>회원 ID</th>
-
 					<th>회원 NICK</th>
-
 					<th>가입일자</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${ memberList }" var="m">
 					<tr>
+						<input id="getClubNo" type="hidden" name="clubNo" value="${ m.clubNo }" />
 						<td><input type="checkbox" class="checked-btn"/><input class="abc"type="hidden"name="userNo" value="${m.userNo}"/> </td>
 						<!-- userId 담아놓았음  -->
 						<td><div class="userId"> ${ m.clubDiscript }</div></td>
@@ -130,7 +141,7 @@
 					</div>			
 				</div>
 				<div class="receive-area">
-					<h4> &lt; 받는 사람 &gt; </h4>
+					<h4> &lt; 받는 사람  &gt; </h4>
 					<div id="receiveUser"></div>				
 				</div>
 				<div class="message-area">

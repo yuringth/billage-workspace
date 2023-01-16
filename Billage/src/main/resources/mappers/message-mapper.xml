@@ -20,18 +20,40 @@
 		  INTO
 		  		MESSAGE
 		  		(
-		  		MESSAGE_NO
-		  		,USER_NO
+		  		 USER_NO
 		  		,USER_NO2
 		  		,MESSAGE_CONTENT
 		  		)
 		VALUES
 		 		(
-		 		SEQ_MNO.NEXTVAL
-		 		,#{userNo}
+		 		 #{userNo}
 		 		,#{userNo2}
 		 		,#{messageContent}
 		 		)
+	</insert>
+	
+	
+	<!-- (Club Message Insert) 단체 쪽지 전송  -->
+	<insert id="insertClubMessage" parameterType="java.util.List">
+		<foreach item="message" index="index" separator=" " collection="list" open="INSERT ALL" close="SELECT * FROM DUAL" >
+		  INTO
+				MESSAGE
+				(
+				 USER_NO
+				,USER_NO2
+				,MESSAGE_CONTENT
+				,MESSAGE_DATE
+				,MESSAGE_STATUS
+				)
+		VALUES
+		 		(
+		 		 #{ message.userNo }
+		 		,#{ message.userNo2 }
+		 		,#{ message.messageContent }
+		 		,SYSDATE
+		 		,0
+		 		) 
+		</foreach>
 	</insert>
 	
 	
