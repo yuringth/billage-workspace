@@ -1,4 +1,4 @@
-package com.bi.billage.board.model.vo;
+package com.bi.billage.rent.model.vo;
 
 import java.sql.Date;
 
