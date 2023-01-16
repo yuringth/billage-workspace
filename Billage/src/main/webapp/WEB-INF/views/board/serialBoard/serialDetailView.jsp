@@ -92,7 +92,7 @@
                 	<c:when test="${ empty loginUser }">
                     <tr>
                         <th colspan="2">
-                            <textarea class="form-control" readonly cols="55" rows="2" style="resize:none; width:100%;">로그인해 이새끼야</textarea>
+                            <textarea class="form-control" readonly cols="55" rows="2" style="resize:none; width:100%;"></textarea>
                         </th>
                         <th style="vertical-align:middle"><button class="btn btn-secondary disabled">등록하기</button></th>
                     </tr>
@@ -116,40 +116,40 @@
         </div>
     </div>
        <br><br>
-       <table id="boardList" class="table table-hover" align="center">
-           <thead>
-               <tr>
-                   <th>글번호</th>
-                   <th>제목</th>
-                   <th>조회수</th>
-                   <th>작성일</th>
-                   <th>별점</th>
-               </tr>
-           </thead>
-           <c:forEach items="${ list }" var="s">
-           <tbody>
-           		<tr>
-           			<input type="hidden" class="nno" value="${ s.novelNo }">
-           			<td class="sno">${ s.serialNo }</td>
-           			<td>${ s.serialTitle }</td>
-           			<td>${ s.count }</td>
-           			<td>${ s.uploadDate }</td>
-           			<td>${ s.starRating }</td>
-           		</tr>
-           </tbody>
-           </c:forEach>
+<!--        <table id="boardList" class="table table-hover" align="center"> -->
+<!--            <thead> -->
+<!--                <tr> -->
+<%--                    <th>글번호</th> --%>
+<!--                    <th>제목</th> -->
+<!--                    <th>조회수</th> -->
+<!--                    <th>작성일</th> -->
+<!--                    <th>별점</th> -->
+<!--                </tr> -->
+<!--            </thead> -->
+<%--            <c:forEach items="${ list }" var="s"> --%>
+<!--            <tbody> -->
+<!--            		<tr> -->
+<%--            			<input type="hidden" class="nno" value="${ s.novelNo }"> --%>
+<%--            			<td class="sno">${ s.rownum }</td> --%>
+<%--            			<td>${ s.serialTitle }</td> --%>
+<%--            			<td>${ s.count }</td> --%>
+<%--            			<td>${ s.uploadDate }</td> --%>
+<%--            			<td>${ s.starRating }</td> --%>
+<!--            		</tr> -->
+<!--            </tbody> -->
+<%--            </c:forEach> --%>
        </table>
        <br><br>
        <script >
-   	$(function(){
-		$('#boardList>tbody>tr').click(function(){
-			/* location.href = 'detail.bo?bno=' + $(this).children('.bno').text(); */
-			location.href = 'detail.se?nno='
-							+ $(this).children('.nno').val()
-							+ '&sno='
-							+ $(this).children('.sno').text();
-		})
-	})
+//    	$(function(){
+// 		$('#boardList>tbody>tr').click(function(){
+// 			/* location.href = 'detail.bo?bno=' + $(this).children('.bno').text(); */
+// 			location.href = 'detail.se?nno='
+// 							+ $(this).children('.nno').val()
+// 							+ '&sno='
+// 							+ $(this).children('.sno').text();
+// 		})
+// 	})
        </script>
 	<jsp:include page="../../common/footer.jsp"/>
 

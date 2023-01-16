@@ -65,7 +65,7 @@ public class BoardController {
 		mv.addObject("pi", pi)
 		.addObject("serial", boardService.selectSerialDetail(nno, sno))
 		.addObject("novel", boardService.selectNovelInfo(nno))
-		.addObject("list", boardService.selectSerialList(pi, nno))
+		.addObject("list", boardService.selectSerialDetailList(pi, nno, sno))
 		.setViewName("board/serialBoard/serialDetailView");
 		
 		return mv;
