@@ -228,6 +228,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 
+	
+
 	// 리뷰게시판 => 조회수 증가
 	@Override
 	public int increaseReviewCount(int reviewNo) {

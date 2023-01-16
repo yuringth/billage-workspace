@@ -123,17 +123,83 @@ public class ReviewController {
 	
 	// 리뷰게시판 -> 글작성 
 	@RequestMapping("insertBoard.re")
-	public String insertReviewBoard(ReviewBoard b,  Model model) {
+	public String insertReviewBoard(ReviewBoard b,  Model model, HttpSession session, ModelAndView mv) {
+		// 내가 넘긴 b의 정보를 담은 것 
 		
 		System.out.println("리뷰보드 : " + b);
 		System.out.println("model : " + model);
 		
 		// 1) 책 중복되는지 확인 select
 		if(boardService.selectBookTitle(b) == null) {
-		
 			
+		
+			Point p = new Point();
+			//응모포인트만큼 현재 포인트에서 차감
+			p.setUserNo(b.getUserNo());
+			p.setPointAdd(10);
+			p.setPointStatus("적립");
+			
+			// 2) 중복 된 책 없으면 insert + point
+			if(pointService.addPoint(p) * boardService.insertReviewBoard(b) > 0) {
+				// 포인트 적립, 리뷰 등록 성공
+				((User)session.getAttribute("loginUser")).setPoint(pointService.selectPoint(b.getUserNo()));
+		//		System.out.println("응모 성공, 남은 포인트 :" + ((User)session.getAttribute("loginUser")).getPoint());
+				return "redirect:list.re";
+			} else { //뭐든 실패
+				mv.addObject("errorMsg", "게시글 작성 실패");
+				return "common/errorPage";
+			}
+		} else {
+			model.addAttribute("errorMsg","게시글 작성 실패");
+			return "common/errorPage";
+		}
+	}
+
+			
+/*			
+ * 	너무 길어서 짧게 줄임
 			// 2) 중복 된 책 없으면 insert
-			boardService.insertReviewBoard(b);
+			//boardService.insertReviewBoard(b);
+			if(boardService.insertReviewBoard(b) > 0) {
+				
+				Point p = new Point();
+				//응모포인트만큼 현재 포인트에서 차감
+				p.setUserNo(b.getUserNo());
+//				p.setPointAdd(b.getBookPoint());
+				p.setPointAdd(10);
+				p.setPointStatus("적립");
+				
+				// 3) 글작성 성공 시 포인트 insert
+				if(pointService.addPoint(p) > 0) {
+					// b를 넘기는 이유는 어떤 reviewNo에 point적립을 하는지 알아야해서
+					((User)session.getAttribute("loginUser")).setPoint(pointService.selectPoint(b.getUserNo()));
+					return "redirect:list.re";
+					
+				} else {
+					
+					// 포인트 실패시
+					model.addAttribute("errorMsg","게시글 상세조회 실패");
+					return "common/errorPage";
+				}
+			} else {
+				// 중복 된 책 없으면 insert의 실패
+				model.addAttribute("errorMsg","게시글 상세조회 실패");
+				return "common/errorPage";
+			}
+		} else {
+			model.addAttribute("errorMsg","게시글 상세조회 실패");
+			return "common/errorPage";
+		}
+		
+	
+
+
+
+		
+	}
+			
+ */
+
 			
 			// ===============
 			/*
@@ -156,17 +222,7 @@ public class ReviewController {
 
 			// ===============
 			*/
-			
-			//return "board/reviewBoard/reviewListView";
-			return "redirect:list.re";
-			
-		} else {
-			
-			model.addAttribute("errorMsg","게시글 상세조회 실패");
-			return "common/errorPage";
-		}
-		
-	}
+	
 	
 	
 	// 리뷰게시판 -> 글쓰기버튼 클릭 시 -> 리뷰게시판 글작성 폼화면으로 이동
