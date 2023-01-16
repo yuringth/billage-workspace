@@ -109,47 +109,121 @@
 			</p>
 		</div>
 		<p class="nowPrice">현재가격 : ${ b.nowPrice }P</p>
-		<p class="instantlyPrice">즉시구매가 : ${ b.instantlyPrice }P</p>
-
-		<form action="">
-			<div style="display :flex;" class="priceArea" >
-				<div>
-					<p>시작가 : ${ b.startPrice }P 입찰가격 : </p>
-				</div>
-				<div style="width:100px">
-					<input type="number" name="bidPrice" value="${ bidPrice }" width="100px">
-				</div>
+		<c:choose>
+			<c:when test="${ not empty b.instantlyPrice }">
+				<p class="instantlyPrice">즉시구매가 : ${ b.instantlyPrice }P</p>
+			</c:when>
+			<c:otherwise>
+				<p class="instantlyPrice">즉시구매 불가</p>
+			</c:otherwise>
+		</c:choose>
+	
+		<div style="display :flex;" class="priceArea" >
+			<div>
+				<p>시작가 : ${ b.startPrice }P 입찰가격 : </p>
 			</div>
-
-			<div class="btnArea">
-				<button class="btn1 btn btn-dark">
-					즉시구매
-				</button>
-				<button class="btn1 btn btn-secondary">
-					입찰
-				</button>
+			<div style="width:100px">
+			
+					<input type="number" id="bidPrice" value="${ b.nowPrice }" width="100px" step="${ b.bidPrice } }">
+				
 			</div>
-		</form>
+		</div>
+		
+		
+		<div class="btnArea">
+		
+			<c:choose>
+			<c:when test="${ not empty loginUser }">
+				<c:choose>
+				<c:when test="${ loginUser.userNo != b.userNo }">
+					<c:if test="${ loginUser.point >= b.bidPoint && not empty b.instantlyPrice }">
+						
+						<button class="btn1 btn btn-dark" onclick="buy();">
+							즉시구매
+						</button>
+						<button class="btn1 btn btn-secondary" onclick="bid();">
+							입찰
+						</button>
+						
+					</c:if>
+					<c:if test="${ loginUser.point >= b.bidPoint && empty b.instantlyPrice }">
+						
+						<button class="btn1 btn btn-secondary" onclick="bid();">
+							입찰
+						</button>
+						
+					</c:if>
+					<c:if test="${ loginUser.point < b.bidPoint && not empty b.instantlyPrice }">
+						
+						<button class="btn1 btn btn-dark">
+							즉시구매
+						</button>
+						<button class="btn1 btn btn-secondary" onclick="notEnoughtPoint();">
+							입찰
+						</button>
+						
+					</c:if>
+					<c:if test="${ loginUser.point < b.bidPoint && empty b.instantlyPrice }">
+						
+						<button class="btn1 btn btn-secondary" onclick="notEnoughtPoint();">
+							입찰
+						</button>
+						
+					</c:if>
+				</c:when>
+				<c:otherwise>
+				
+					<button class="btn1 btn btn-secondary" disabled>
+						작성자입니다.
+					</button>
+					
+				</c:otherwise>
+				</c:choose>
+			</c:when>
+			<c:otherwise>
+			
+					<button class="btn1 btn btn-secondary" disabled>
+						로그인을 해주세요
+					</button>
+				
+			</c:otherwise>
+			</c:choose>
+			
+		</div>
+		
+		
+
+		
+		
+		
+		<c:if test="${ loginUser.userNo ==  b.userNo}">
+			<button onclick="postFormSubmit();" >삭제하기</button>
+		</c:if>
 		
 		<form action="" method="post" id="postForm">
+			<input type="hidden" name="tryPoint" value="${b.tryPoint}">
 			<input type="hidden" name="changeName" value="${b.changeName}">
 			<input type="hidden" name="boardNo" value="${b.boardNo}">
-			
 		</form>
-		<c:if test="${ loginUser.userNo ==  b.userNo}">
-			<button onclick="postFormSubmit(1);" >삭제하기</button>
-		</c:if>
+		
+		
 	</div>
 	
 	
 	<script>
+		//전역변수 선언
+		var interval;
+		
 		
 		$(function(){
-			closeCount();
-			setInterval(closeCount, 500);
+			interval = setInterval(closeCount, 500);
+			
 		})
 		
+	
+		
 		function closeCount(){
+			
 			var end = new Date('${ b.closeDate }');
 			var now = new Date(); 
 			
@@ -172,18 +246,86 @@
 		    if(remaindTime >= 0){
 		    	$('.time').text(day +'일 ' + hour + ':' + min + ':' + sec);
 		    } else {
-		    	$('.time').text('응모 시간 종료');
+		    	
+		    	clearInterval(interval); //인터벌 종료
+		    	
+		    	$('.time').text('시간 종료');
+		    	$('.btn1').attr('disabled', true).text('시간 종료');
+		    	if(${ empty b.prizeUser }){
+			    	selectPrizeUser();
+		    	}
+		    	
 		    }
 		}
 		
-		function postFormSubmit(num){
-			if(num == 1){
-				if(confirm('삭제하시겠습니까?')){
-					$('#postForm').attr('action','delete.dr').submit();
-				}
+		var prizeUser;
+		
+		if(${not empty prizeUser}){
+			prizeUser = ${prizeUser};
+		} else {
+			prizeUser = null;
+		}
+		
+		if(${not empty loginUser}){
+			function bid(){
+				 $.ajax({
+					 url : bid.ac,
+					 data : {
+						 boardNo : ${b.boardNo},
+						 userNo : ${loginUser.userNo},
+						 bidPrice : ${b.bidPrice},
+						 prizeUser : prizeUser
+					 },
+					 success : function(result){
+						 
+					 },
+					 error : function(){
+						 console.log('error');
+					 }
+					 
+				 })
 			}
 		}
-	
+		
+		
+		function buy(){
+			
+		}
+		
+		
+		function postFormSubmit(){
+			if(confirm('삭제하시겠습니까?')){
+				$('#postForm').attr('action','delete.ac').submit();
+			}
+		}
+		
+		//당첨자 선정하는 함수
+		function selectPrizeUser(){
+			
+			$.ajax({
+				url : 'prize.ac',
+				data : {
+					boardNo : ${b.boardNo},
+					userNo : ${b.userNo},
+					title : '${b.title}',
+					tryPoint : ${b.tryPoint}
+				},
+				success : function(result){
+					if(result.prizeUser != null){
+						$('#prizeUser').text('낙찰자 : ' + result.prizeUser)
+					} else {
+						$('#prizeUser').text('입찰자가 없어서 낙찰자가 없습니다.')
+					}
+				},error : function(){
+					console.log('오류');
+				}
+			});
+		}
+		
+		function notEnoughtPoint(){
+			confirm('포인트가 부족합니다. 충전하시겠습니까?');
+		}
+		
 	</script>
 	
 	

@@ -284,4 +284,13 @@ public class DrawAuctionController {
 	}
 	
 	
+	@ResponseBody
+	@RequestMapping(value="bid.ac", produces="appliction/json; charset=UTF-8")
+	public String isnertBidUser(ADBoard b) {
+		
+		
+		
+		return "";
+	}
+	
 }
