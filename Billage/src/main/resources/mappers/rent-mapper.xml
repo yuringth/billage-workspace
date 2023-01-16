@@ -12,12 +12,12 @@
 		<result column="RENT_CONTENT"	property="rentContent" />
 		<result column="RENT_POINT"		property="rentPoint" />
 		<result column="CREATEDATE"		property="createDate" />
-		<result column="RENT_IMG"		property="rentImg" />
 		<result column="RENT_DATE"		property="rentDate" />
 		<result column="DUE_DATE"		property="dueDate" />
 		<result column="RENT_STATUS"	property="rentStatus" />
 		<result column="RENT_BOOKTITLE"	property="rentBookTitle" />
 		<result column="STATUS"			property="status" />
+		<result column="CHANGE_NAME"	property="changeName" />
 	</resultMap>
 	
 	<!-- 게시글 총 개수 조회 -->
@@ -34,7 +34,7 @@
 	<select id="selectRentBoardList" resultMap="RentBoardResultSet">
 		SELECT
 				RENT_NO,
-				RENT_IMG,
+				CHANGE_NAME,
 				RENT_TITLE,
 				RENT_POINT,
 				RENT_DATE,
@@ -50,5 +50,34 @@
 		   		RENT_NO DESC
 	</select>
 	
+	<!-- 게시글 등록  -->
+	<insert id="insertRentBoard" parameterType="rent">
+		INSERT
+		  INTO
+		  		RENT_BOARD
+		  		(
+		  		RENT_NO,
+		  		USER_NO,
+		  		RENT_TITLE,
+		  		RENT_CONTENT,
+		  		RENT_DATE,
+		  		DUE_DATE,
+		  		RENT_BOOKTITLE,
+		  		RENT_POINT,
+		  		CHANGE_NAME
+		  		)
+		VALUES
+				(
+				SEQ_RENNO.NEXTVAL,
+				#{ userNo },
+				#{ rentTitle },
+				#{ rentContent },
+				#{ rentDate },
+				#{ dueDate },
+				#{ rentBookTitle },
+				#{ rentPoint },
+				#{ changeName }
+				)
+	</insert>
 	
 </mapper>
