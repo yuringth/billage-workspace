@@ -72,10 +72,7 @@
 				upload_date,
 				star_rating,
 				author_comment,
-				n.user_no,
-				n.novel_title,
-				n.novel_display,
-                (select nickname from member m where m.user_no = s.user_no) as nickName
+				n.user_no
 		from
 				serial s
 		left join
@@ -86,9 +83,6 @@
 				n.novel_no = #{ novel_no }
 		and
 				s.serial_no = #{ serial_no }
-		order
-		by
-				serial_no desc
 	</select>
 	
 	<insert id="insertSerialRequest" parameterType="serialRequest">

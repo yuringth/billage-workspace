@@ -14,21 +14,18 @@
         #boardList>tbody>tr:hover {cursor:pointer;}
     </style>
 </head>
-<body>
+<body oncontextmenu="return false" ondragstart="return false" onselectstart="return false">
 	<jsp:include page="../../common/header.jsp"/>
-	
+	   <br><br>
 	   <div class="content">
         <div class="innerOuter" style="padding:5% 10%;">
         <div class="novelCover" style="float:left;">
-        <img src="https://comicthumb-phinf.pstatic.net/20210705_110/pocket_1625477242961kEPYS_JPEG/-__.jpg?type=m260">
         </div>
-        <br><br><br>
         <div class="novelInfo" align="left">
-        <c:forEach items="${ list }" var="s">
-            <h2>제목 : ${s.novelTitle}</h2>
-            <h4>작가명 : ${s.nickName}</h4>
-            <h6>설명 : ${s.novelDisplay }</h6>
-        </c:forEach>
+        	<img src="${novel.changeName}" style="float:left;" width="150" height="200">
+            <h2>제목 : ${novel.novelTitle}</h2>
+            <h4>작가명 : ${novel.nickName}</h4>
+            <h6>설명 : ${novel.novelDisplay }</h6>
         </div>
             <br>
             <!-- 로그인 후 독자일 경우만 보여지는 버튼 -->
@@ -36,21 +33,28 @@
             <a class="btn btn-secondary" style="float:right;" href="enrollForm.se">작품 추천</a>&nbsp;
             <a class="btn btn-secondary" style="float:right;" href="enrollForm.se">작품 후원</a>
             </c:if>
-            <table id="contentArea" algin="center" class="table">
+            <table id="contentArea" algin="center" class="table" >
                 <tr>
                     <th width="100">제목</th>
-                    <td colspan="3">${ serialTitle }</td>
+                    <td colspan="3">${ serial.serialTitle }</td>
                 </tr>
                 <tr>
                     <th>작성일</th>
-                    <td>2022.12.25</td>
+                    <td>${ serial.uploadDate }</td>
                 </tr>
                 <tr>
                     <th>내용</th>
                     <td colspan="3"></td>
                 </tr>
                 <tr>
-                    <td colspan="4"><p style="height:150px;">${ b.boardContent }</p></td>
+                    <td colspan="4"><p style="height:150px;">${ serial.serialContent }</p></td>
+                </tr>
+                <tr>
+                    <th>작가의 말</th>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <td colspan="4"><p style="height:150px;">${ serial.authorComment }</p></td>
                 </tr>
             </table>
             <br>
@@ -110,38 +114,43 @@
                 </tbody>
             </table>
         </div>
-        <br><br>
-
     </div>
-            <br><br>
-            <table id="boardList" class="table table-hover" align="center">
-                <thead>
-                    <tr>
-                        <th>글번호</th>
-                        <th>제목</th>
-                        <th>조회수</th>
-                        <th>작성일</th>
-                        <th>별점</th>
-                    </tr>
-                </thead>
-                <c:forEach items="${ list }" var="s">
-                <tbody>
-                		<tr>
-                			<input type="hidden" class="nno" value="${ s.novelNo }">
-                			<td class="sno">${ s.serialNo }</td>
-                			<td>${ s.serialTitle }</td>
-                			<td>${ s.count }</td>
-                			<td>${ s.uploadDate }</td>
-                			<td>${ s.starRating }</td>
-                		</tr>
-                </tbody>
-                </c:forEach>
-            </table>
-            <br>
-       
-            <br><br>
-        <br><br>
-
+       <br><br>
+       <table id="boardList" class="table table-hover" align="center">
+           <thead>
+               <tr>
+                   <th>글번호</th>
+                   <th>제목</th>
+                   <th>조회수</th>
+                   <th>작성일</th>
+                   <th>별점</th>
+               </tr>
+           </thead>
+           <c:forEach items="${ list }" var="s">
+           <tbody>
+           		<tr>
+           			<input type="hidden" class="nno" value="${ s.novelNo }">
+           			<td class="sno">${ s.serialNo }</td>
+           			<td>${ s.serialTitle }</td>
+           			<td>${ s.count }</td>
+           			<td>${ s.uploadDate }</td>
+           			<td>${ s.starRating }</td>
+           		</tr>
+           </tbody>
+           </c:forEach>
+       </table>
+       <br><br>
+       <script >
+   	$(function(){
+		$('#boardList>tbody>tr').click(function(){
+			/* location.href = 'detail.bo?bno=' + $(this).children('.bno').text(); */
+			location.href = 'detail.se?nno='
+							+ $(this).children('.nno').val()
+							+ '&sno='
+							+ $(this).children('.sno').text();
+		})
+	})
+       </script>
 	<jsp:include page="../../common/footer.jsp"/>
 
 </body>

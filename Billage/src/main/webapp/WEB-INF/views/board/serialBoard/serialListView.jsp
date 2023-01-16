@@ -19,25 +19,19 @@
 	
 	   <div class="content">
         <div class="innerOuter" style="padding:5% 10%;">
-        <div class="novelCover" style="float:left;">
-        </div>
         <div class="novelInfo" align="left">
-        <c:forEach items="${ list }" var="s" begin="1" end="1">
-        	<img src="${s.novelImg}" style="float:left;" width="150" height="200">
-            <h2>제목 : ${s.novelTitle}</h2>
-            <h4>작가명 : ${s.nickName}</h4>
-            <h6>설명 : ${s.novelDisplay }</h6>
-        </c:forEach>
+        	<img src="${novel.changeName}" style="float:left;" width="150" height="200">
+            <h2>제목 : ${novel.novelTitle}</h2>
+            <h4>작가명 : ${novel.nickName}</h4>
+            <h6>설명 : ${novel.novelDisplay }</h6>
         </div>
             <br>
             <!-- 로그인 후 작가본인일 경우만 보여지는 글쓰기 버튼 -->
             <%-- <c:if test="${ loginUser eq null }"> --%>
-            <c:forEach items="${ list }" var="s" varStatus="row">
             <form action="enrollForm.se" method="post">
-            <input type="hidden" class="nno" name="novelNo" value="${ s.novelNo }">
+            <input type="hidden" class="nno" name="novelNo" value="${ novel.novelNo }">
             <input type="submit" class="btn btn-secondary" style="float:right;" value="연재하기">
             </form>
-            </c:forEach>
             <%-- </c:if> --%>
             <!-- 로그인 후 독자일 경우만 보여지는 버튼 -->
             <%-- <c:if test="${ loginUser eq null }"> --%>
@@ -70,24 +64,43 @@
             </table>
             <br>
             
-            <script>
+              <div id="pagingArea" style="display:inline-block; align:center;">
+                <ul class="pagination">
+                	<c:choose>
+                		<c:when test="${ pi.currentPage eq 1 }">
+                    		<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                    	</c:when>
+                		<c:otherwise>
+                			<li class="page-item"><a class="page-link" href="detail.se?cpage=${ pi.currentPage - 1 }">Previous</a></li>
+                		</c:otherwise>
+                	</c:choose>
+                <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                    <li class="page-item"><a class="page-link" href="detail.se?cpage=${p}">${ p }</a></li>
+                </c:forEach>
+                <c:choose>
+                	<c:when test="${ pi.currentPage eq pi.maxPage }">
+	                    <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                	</c:when>
+                	<c:otherwise>
+	                    <li class="page-item"><a class="page-link" href="detail.se?cpage=${ pi.currentPage + 1 }">Next</a></li>
+	                </c:otherwise>
+	            </c:choose>
+                </ul>
+              </div>
+    	</div>
+    </div>
             
+            <script>
             	$(function(){
             		$('#boardList>tbody>tr').click(function(){
             			/* location.href = 'detail.bo?bno=' + $(this).children('.bno').text(); */
-            			location.href = 'detail.se?nno=' + $(this).children('.nno').val() + '&sno=' + $(this).children('.sno').text();
+            			location.href = 'detail.se?nno='
+            							+ $(this).children('.nno').val()
+            							+ '&sno='
+            							+ $(this).children('.sno').text();
             		})
             	})
-            	
-/*             	$(function() {
-            		$('#write').click(function() {
-            			location.href =  'enrollForm.se?nno=' + $(this).children('.nno').val();
-            		})
-            	}) */
-            
             </script>
-    	</div>
-    </div>
 	<jsp:include page="../../common/footer.jsp"/>
 
 </body>
