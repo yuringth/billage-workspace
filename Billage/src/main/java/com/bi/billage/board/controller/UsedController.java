@@ -125,9 +125,18 @@ public class UsedController {
 		}
 	}
 	
-
-	@RequestMapping("delete.ud")
 	
+	//중고게시판 => 게시글 삭제 
+	@RequestMapping("delete.ud")
+	public String deleteUsedBoard(int usedNo, Model model) {
+		
+		if(boardService.deleteUsedBoard(usedNo) > 0) {
+			return "redirect:list.ud";
+		} else {
+			model.addAttribute("errorMsg","게시글 상세조회 실패");
+			return "common/errorPage";
+		}
+	}
 	
 	
 	

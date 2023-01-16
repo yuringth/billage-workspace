@@ -174,11 +174,10 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 
-	//중고게시판
+	//중고게시판 => 게시글 삭제 
 	@Override
-	public int deleteUsedBoard(int boardNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteUsedBoard(int usedNo) {
+		return boardDao.deleteUsedBoard(sqlSession, usedNo);
 	}
 
 	//중고게시판

@@ -144,9 +144,16 @@ font-size: 25px;
 		</div>
 		
 		<div style="text-align:center;">
-			<button onclick="location.href='update.ud'">글수정</button>
-			<button>글삭제</button>
-			<button onclick="location.href='list.ud'">목록가기</button>
+			<c:choose>
+				<c:when test="${ loginUser.userNo == b.userNo }">
+					<button onclick="location.href='update.ud'">글수정</button>
+					<button onclick="location.href='delete.ud?usedNo=${ b.usedNo }'">글삭제</button>
+					<button onclick="location.href='list.ud'">목록가기</button>
+				</c:when>
+				<c:otherwise>
+					<button onclick="location.href='list.ud'">목록가기</button>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	
 		

@@ -110,6 +110,7 @@
 		       used_no = ${ usedNo } 
 	</update>
 	
+	<!-- 게시글 내용을 db에서 select해서 목록 띄우기  -->
 	<select id="selectUsedBoard" resultMap="usedResultSet">
 		select
 			    used_no
@@ -140,7 +141,7 @@
 	<!-- 게시글 삭제 -->
 	<update id="deleteUsedBoard" parameterType="_int">
 		update
-		       usedBoard
+		       used_Board
 		   set
 		       used_status = 'Y'
 		 where
@@ -151,7 +152,7 @@
 	<!-- 게시글 수정 쿼리문 -->
 	<update id="updateUsedBoard" parameterType="used">
 		update
-		       usedBoard
+		       used_Board
 		   set
 		        used_title = #{usedTitle}
 		       ,book_author = #{bookAuthor}

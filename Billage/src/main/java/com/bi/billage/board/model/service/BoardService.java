@@ -168,8 +168,8 @@ public interface BoardService {
 	UsedBoard selectUsedBoard(int usedNo);
 	
 	
-	// 중고게시판 삭제 (update)
-	int deleteUsedBoard(int boardNo);
+	// 중고게시판 삭제 (update) 
+	int deleteUsedBoard(int usedNo);
 	
 	// 중고게시글 수정 서비스(update)
 	int updateUsedBoard(UsedBoard b);
