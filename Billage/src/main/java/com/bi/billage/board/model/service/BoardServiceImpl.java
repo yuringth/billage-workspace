@@ -227,12 +227,7 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.insertReviewBoard(sqlSession, b);
 	}
 	
-	// 리뷰게시판 => 3) 글작성되면 포인트 적립하기
-	@Override
-	public int addReviewPoint(ReviewBoard b) {
-		return boardDao.addReviewPoint(sqlSession, b);
-	}
-	
+
 	
 
 	// 리뷰게시판 => 조회수 증가
