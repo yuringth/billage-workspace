@@ -190,7 +190,8 @@ public interface BoardService {
 	ReviewBoard selectBookTitle(ReviewBoard b);
 	// 리뷰게시판 글작성=> 2) 중복 된 책 없으면 insert : 글작성
 	int insertReviewBoard(ReviewBoard b);
-	
+	// 리뷰게시판 => 3) 글작성되면 포인트 적립하기
+	int addReviewPoint(ReviewBoard b);
 	
 	
 	// 리뷰게시글 수정 서비스(select) => 1) 책 중복되는지 확인(리뷰넘버로 책제목조회)

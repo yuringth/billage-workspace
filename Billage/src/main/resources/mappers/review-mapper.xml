@@ -148,6 +148,7 @@
 		  from 
 		       dual
 	-->
+	
 		INSERT 
 		  INTO 
 		       REVIEW

@@ -272,6 +272,10 @@ public class BoardDao {
 		return sqlSession.insert("reviewMapper.insertReviewBoard", b);
 	}
 	
+	// 리뷰게시판 => 3) 글작성되면 포인트 적립하기
+	public int addReviewPoint(SqlSessionTemplate sqlSession, ReviewBoard b) {
+		return sqlSession.insert("pointMapper.addReviewPoint", b);
+	}
 	
 	// 리뷰게시판 => 조회수 증가
 	public int increaseReviewCount(SqlSessionTemplate sqlSession, int reviewNo) {
@@ -303,6 +307,12 @@ public class BoardDao {
 	public int updateReviewBoard(SqlSessionTemplate sqlSession, ReviewBoard b) {
 		return sqlSession.update("reviewMapper.updateReviewBoard", b);
 	}
+	
+	
+
+	
+	
+	
 	
 	
 	
