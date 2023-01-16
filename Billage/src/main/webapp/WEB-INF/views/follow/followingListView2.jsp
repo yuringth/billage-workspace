@@ -57,7 +57,7 @@
 							</c:if>
 								
 							<c:if test="${ f.followStatus == 0 }">
-								<button id="followingBtn${ f.userNo}" class="1" style="width:100px; height:50px;" onclick="follow(this);">팔로우</button>
+								<button id="followingBtn${ f.userNo}" class="0" style="width:100px; height:50px;" onclick="follow(this);">팔로우</button>
 							</c:if>
 								
 						

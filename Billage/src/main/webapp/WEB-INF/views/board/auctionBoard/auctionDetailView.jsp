@@ -299,7 +299,7 @@
 						 userNo : ${loginUser.userNo},
 						 bidPrice : $('#bidPrice').val(),
 						 prizeUserNo : $('#prizeUserNo').val(),
-						 instantlyPrice : ${ b.instantlyPrice }
+						 bidPrice : ${ b.instantlyPrice }
 					 },
 					 success : function(result){
 						$('#nowPrice').text(result.nowPrice);
