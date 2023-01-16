@@ -147,7 +147,7 @@ public interface BoardService {
 	
 	//경매자 등록
 	int insertBidUser(ADBoard b);
-	
+	//입찰
 	
 	// 유림 시작
 	
