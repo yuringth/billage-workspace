@@ -20,4 +20,5 @@ public class RentBoard {
 	private String rentBookTitle;	// 대여 책 이름
 	private String status;			// 대여게시판에서 글 상태
 	private String changeName;		// changeName
+	private String nickname;
 }
