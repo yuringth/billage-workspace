@@ -312,32 +312,5 @@ public class DrawAuctionController {
 		return  new Gson().toJson(b);
 	}
 	
-	@ResponseBody
-	@RequestMapping(value="bid.ac", produces="appliction/json; charset=UTF-8")
-	public String isnertBuyer(ADBoard b) {
-		
-		if(boardService.insertBidUser(b) * boardService.updatePrizeUser(b) > 0) {
-			
-			Point p = new Point();
-			//sql문 하나로 쓰려고 bidPrice에 담아옴
-			p.setPointAdd(-1 * b.getBidPrice());
-			p.setUserNo(b.getUserNo());
-			p.setPointStatus("사용");
-			
-			pointService.addPoint(p);
-			
-			if(b.getPrizeUserNo() != 0) {
-				p.setPointAdd(b.getNowPrice());
-				p.setUserNo(b.getPrizeUserNo());
-				p.setPointStatus("취소");
-				
-				pointService.addPoint(p);
-			}
-			
-			b = boardService.selectAuctionBoard(b.getBoardNo());
-		}
-		
-		return  new Gson().toJson(b);
-	}
 	
 }
