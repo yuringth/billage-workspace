@@ -286,8 +286,12 @@ public class BoardDao {
 	}
 	
 	// 리뷰게시판 => 게시글 삭제
-	public int deleteReviewBoard(SqlSessionTemplate sqlSession, int reviewNo) {
-		return sqlSession.update("reviewMapper.deleteReviewBoard", reviewNo);
+//	public int deleteReviewBoard(SqlSessionTemplate sqlSession, int reviewNo) {
+//		return sqlSession.update("reviewMapper.deleteReviewBoard", reviewNo);
+//	}
+	
+	public int deleteReviewBoard(SqlSessionTemplate sqlSession, ReviewBoard b) {
+		return sqlSession.update("reviewMapper.deleteReviewBoard", b);
 	}
 	
 	

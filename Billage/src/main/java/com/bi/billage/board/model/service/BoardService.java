@@ -211,8 +211,9 @@ public interface BoardService {
 	
 	
 	// 리뷰게시판 삭제 (update)
-	int deleteReviewBoard(int reviewNo);
-	
+	// int deleteReviewBoard(int reviewNo);
+	int deleteReviewBoard(ReviewBoard b);
+
 	
 	
 

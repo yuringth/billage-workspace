@@ -247,9 +247,14 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	// 리뷰게시판 => 게시글 삭제
+//	@Override
+//	public int deleteReviewBoard(int reviewNo) {
+//		return boardDao.deleteReviewBoard(sqlSession, reviewNo);
+//	}
+	
 	@Override
-	public int deleteReviewBoard(int reviewNo) {
-		return boardDao.deleteReviewBoard(sqlSession, reviewNo);
+	public int deleteReviewBoard(ReviewBoard b) {
+		return boardDao.deleteReviewBoard(sqlSession, b);
 	}
 
 	
