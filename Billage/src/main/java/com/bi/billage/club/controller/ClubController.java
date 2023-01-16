@@ -6,12 +6,12 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -187,6 +187,21 @@ public class ClubController {
 		return mv;
 	}
 	
+	
+	
+	@RequestMapping("message.cl")
+	public String clubMessageInsert(int clubNo, int userNo, int[] userNo2, String messageContent) {
+		System.out.println(Arrays.toString(userNo2));
+		System.out.println(messageContent);
+		
+		return "redirect:clubMemAdmin.cl?clubNo=" + clubNo ;
+	}
+	
+	
+	
+	
+	
+	
 	// 지역을 찾는 API을 구현 함 
 	@ResponseBody
 	@RequestMapping(value="searchAddr.cl", produces = "application/json; charset=UTF-8")
@@ -233,7 +248,6 @@ public class ClubController {
 	
 	
 	// 모임등록 하면 값 들어오는 메소드 --------------------------------- 기능 구현 필요함 
-	@Transactional
 	@RequestMapping("create.cl")
 	public String insertclub(Model model, Club club, MultipartFile upfile, HttpSession session) {
 		//System.out.println(group);

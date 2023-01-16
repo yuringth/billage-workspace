@@ -120,14 +120,7 @@
 					<span>멤버수  : ${ c.memCount } / ${ c.clubLimit } | 조회수 : ${ c.clubCount }</span></br>
 				</div>
 				<div id="thum-like-area">
-						<c:forEach items="${ likeList }" var="i" begin="${ status.index }" >
-								<c:if test="${ c.clubNo eq i.clubNo }" >
-									<span>찜취소(찜중)<img src=""></span>
-								</c:if>
-									<span>찜하기(찜아님)</span>										
-						</c:forEach>
 						<span>좋아요 : ${ c.likeCount }명</span>
-
 				</div>
 			</div>
 			</c:forEach>
@@ -142,7 +135,44 @@
 									<span>찜하기(찜아님)</span>					
 								</c:otherwise>
 							</c:choose>	
-		 --%>
+							
+											<%-- 
+						<c:forEach items="${ likeList }" var="i" begin="${ status.index }" >
+								<c:if test="${ c.clubNo eq i.clubNo }" >
+									<span>찜취소(찜중)<img src=""></span>
+								</c:if>
+									<span>찜하기(찜아님)</span>										
+						</c:forEach>
+				 --%>
+							
+		<c:forEach items="${ likeList }" var="l">
+			<script>
+				$(function(){
+					$('#list-area input[type=hidden]').each(function(){
+						if($(this).val() == ${l.clubNo} ){
+							$(this).(#thum-like-area).text('싫어요 누를 수 있는 상태 ')
+							
+						} else {
+							
+							$(this).(#thum-like-area).text('좋아요 누를 수 있는 상태')
+							
+							
+						}
+
+					})	
+
+					
+				});
+			
+			</script>
+			
+		</c:forEach>		
+		
+		
+		
+		
+		
+		
 		
 		
          <div id="pagingArea">
@@ -186,7 +216,7 @@
 				});
 				
 				
-				$('#list-area > #thum-area').one('click', function(){
+				$('#list-area > #thum-area').on('click', function(){
 					console.log('ggGG?');
 					location.href = "detail.cl?clubNo=" + $(this).children().eq(0).val()
 											 +"&newCount=" + $(this).find('#new-club').attr('value');
