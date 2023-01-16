@@ -34,6 +34,7 @@
 .productbox p {
 	margin: 0px 10px;
 }
+#pagingArea {width:fit-content; margin:auto;}
 </style>
 </head>
 <body>
@@ -46,16 +47,47 @@
 		<hr>
 		<div class="rt-box">
 
-			<%--<c:forEach items="${list}" var="rt">--%>
+			<c:forEach items="${list}" var="rt">
 			<div class="rt-contentbox">
-				<input type="hidden" name="rentNo" value=""> <img src=""
+				<input type="hidden" name="rentNo" value="${ rt.rentNo }"> <img src="${ rt.changeName }"
 					width="255" height="200">
 				<p>
-					<span class="rt-title">제목 : </span><br> 글쓴이 : <br> 포인트 :  <br> 대여시작일 : 2023-01-15
+					<span class="rt-title">제목 : ${ rt.rentTitle } </span><br> 대여자 닉네임 : ${ rt.nickname } <br> 포인트 : ${ rt.rentPoint }  <br> 대여시작일 : ${ rt.rentDate }
 				</p>
 			</div>
-			<%--</c:forEach> --%>
+			</c:forEach>
 		</div>
+		
+		<div id="pagingArea">
+                <ul class="pagination">
+                	
+                	<c:choose>
+                		<c:when test="${ pi.currentPage eq 1 }">
+                    		<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<li class="page-item"><a class="page-link" href="list.rt?cpage=${ pi.currentPage -1 }">Previous</a></li>
+                    	</c:otherwise>
+					</c:choose>
+					
+					<c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+                    	<li class="page-item"><a class="page-link" href="list.rt?cpage=${ p }">${ p }</a></li>
+					</c:forEach>
+					
+					<c:choose>
+						<c:when test="${ pi.currentPage eq pi.maxPage }">
+                    		<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<li class="page-item"><a class="page-link" href="list.rt?cpage=${ pi.currentPage + 1 }">Next</a></li>
+                    	</c:otherwise>
+                    	
+                    </c:choose>
+                    
+                </ul>
+            </div>
+		
+		
 	</div>
 	
 	

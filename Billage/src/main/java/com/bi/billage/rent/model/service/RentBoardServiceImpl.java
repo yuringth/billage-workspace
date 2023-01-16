@@ -34,8 +34,8 @@ public class RentBoardServiceImpl implements RentBoardService {
 	
 	// 대여게시판 글 작성
 	@Override
-	public int insertRent(RentBoard rb) {
-		return 0;
+	public int insertRentBoard(RentBoard rb) {
+		return rentBoardDao.insertRentBoard(sqlSession, rb);
 	}
 
 
