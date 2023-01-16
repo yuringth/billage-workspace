@@ -145,9 +145,10 @@ public interface BoardService {
 	// 추첨글의 총 적립된 포인트 조회
 	int selectDrawPoint(int boardNo);
 	
-	//경매자 등록
-	int insertBidUser(ADBoard b);
 	//입찰
+	int insertBidUser(ADBoard b);
+	//입찰자 테이블에 등록
+	int updatePrizeUser(ADBoard b);
 	
 	// 유림 시작
 	

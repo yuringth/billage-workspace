@@ -157,9 +157,9 @@ public class BoardDao {
 		return sqlSession.insert("ADBoardMapper.insertBidUser", b);
 	}
 
-
-
-
+	public int updatePrizeUser(SqlSessionTemplate sqlSession, ADBoard b) {
+		return sqlSession.update("ADBoardMapper.updatePrizeUser", b);
+	}
 
 
 
@@ -386,6 +386,9 @@ public class BoardDao {
 	public Novel selectNovelInfo(SqlSessionTemplate sqlSession, int novelNo) {
 		return sqlSession.selectOne("novelMapper.selectNovelinfo", novelNo);
 	}
+
+
+	
 
 
 
