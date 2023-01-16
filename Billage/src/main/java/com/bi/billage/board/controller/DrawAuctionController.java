@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -199,7 +200,7 @@ public class DrawAuctionController {
 		if(pointService.addPoint(p) * boardService.deleteDrawUser(b) > 0) {
 			// 포인트 환불, 추첨 취소 성공
 			((User)session.getAttribute("loginUser")).setPoint(pointService.selectPoint(b.getUserNo()));
-//			System.out.println("응모 취소, 남은 포인트 :" + ((User)session.getAttribute("loginUser")).getPoint());
+
 			return "redirect:detail.dr?bno=" + b.getBoardNo();
 		} else {//뭐든 실패
 			mv.addObject("errorMsg", "취소 실패");
@@ -236,11 +237,11 @@ public class DrawAuctionController {
 				
 				int rNo = (int)(Math.random() * 10);
 				
-				while(rNo > list.size()) {
+				while(rNo >= list.size()) {
 					rNo = (int)(Math.random() * 10);
 				};
 				
-				userNo = list.get(rNo);;
+				userNo = list.get(rNo);
 			};
 			
 			b.setUserNo(userNo);
@@ -277,11 +278,72 @@ public class DrawAuctionController {
 				p.setPointStatus("적립");
 				pointService.addPoint(p);
 				
+				
 			}
 		}
 		
 		return new Gson().toJson(b);
 	}
 	
+	
+	// 입찰
+	@ResponseBody
+	@RequestMapping(value="bid.ac", produces="appliction/json; charset=UTF-8")
+	public String isnertBidUser(ADBoard b, HttpSession session) {
+		
+		if(boardService.insertBidUser(b) * boardService.updatePrizeUser(b) > 0) {
+			
+			Point p = new Point();
+			p.setPointAdd(-1 * b.getBidPrice());
+			p.setUserNo(b.getUserNo());
+			p.setPointStatus("사용");
+			
+			pointService.addPoint(p);
+			
+			if(b.getPrizeUserNo() != 0) {
+				p.setPointAdd(b.getNowPrice());
+				p.setUserNo(b.getPrizeUserNo());
+				p.setPointStatus("취소");
+				
+				pointService.addPoint(p);
+				
+				((User)session.getAttribute("loginUser")).setPoint(pointService.selectPoint(b.getUserNo()));
+			}
+			
+			b = boardService.selectAuctionBoard(b.getBoardNo());
+		}
+		
+		return  new Gson().toJson(b);
+	}
+	
+	// 즉시구매
+	@ResponseBody
+	@RequestMapping(value="bid.ac", produces="appliction/json; charset=UTF-8")
+	public String isnertBuyer(ADBoard b, HttpSession session) {
+		
+		if(boardService.insertBidUser(b) * boardService.updatePrizeUser(b) > 0) {
+			
+			Point p = new Point();
+			p.setPointAdd(-1 * b.getBidPrice());
+			p.setUserNo(b.getUserNo());
+			p.setPointStatus("사용");
+			
+			pointService.addPoint(p);
+			
+			((User)session.getAttribute("loginUser")).setPoint(pointService.selectPoint(b.getUserNo()));
+			
+			if(b.getPrizeUserNo() != 0) {
+				p.setPointAdd(b.getNowPrice());
+				p.setUserNo(b.getPrizeUserNo());
+				p.setPointStatus("취소");
+				
+				pointService.addPoint(p);
+			}
+			
+			b = boardService.selectAuctionBoard(b.getBoardNo());
+		}
+		
+		return  new Gson().toJson(b);
+	}
 	
 }

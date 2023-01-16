@@ -1,9 +1,6 @@
 package com.bi.billage.board.controller;
 
 import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -41,7 +38,7 @@ public class UsedController {
 		
 //		키 == 밸류
 		mv.addObject("pi", pi).addObject("list", boardService.usedBoardList(pi)).setViewName("board/usedBoard/usedListView");
-		System.out.println(mv); // list가 안담김
+//		System.out.println(mv); // list가 안담김
 		// ModelAndView는 메소드체인이 가능해서 코드의 길이가 짧아진다 => 그래서 String으로 사용했을 때 보다 좋다
 		return mv;
 //		클라이언트의 요청에 응답을 해주는 것
@@ -66,7 +63,7 @@ public class UsedController {
 	}
 	
 	
-	// 글작성
+	// 중고게시판 => 글작성
 	@RequestMapping("upload.ud")
 	public String insertUsedBoard(UsedBoard b, MultipartFile upfile,  HttpSession session, Model model) {
 		
@@ -108,7 +105,7 @@ public class UsedController {
 	@RequestMapping("detail.ud")
 	public String usedDetailView(int usedNo, Model model) {
 		// 식별값으로 usedNo가져옴
-		System.out.println(usedNo);
+//		System.out.println(usedNo);
 		
 		// 1) 조회수 증가
 		if(boardService.increaseUsedCount(usedNo) > 0) {
@@ -140,14 +137,66 @@ public class UsedController {
 	
 	
 	
-	
-	
-	
 	// 중고게시판 -> 글수정 -> 수정폼 화면
-	@RequestMapping("update.ud")
-	public String usedUpdateForm() {
-		return "board/usedBoard/usedUploadForm";
+	@RequestMapping("enrollUsedForm.ud")
+	public ModelAndView selectUpdateUsedBoard(int usedNo, ModelAndView mv) {
+		
+		// 게시판 번호를 식별자로 DB에서 select해옴
+		// boardService.selectUpdateUsedBoard(usedNo);
+		mv.addObject("b", boardService.selectUpdateUsedBoard(usedNo)).setViewName("board/usedBoard/usedUploadForm");
+		
+		// mv.addObject("data", "12341234"); // 뷰로 보낼 데이터 값
+		// mv.setViewName("/board/content"); // 뷰의 이름
+		
+		return mv;
+
 	}
+	
+	
+	// 중고게시판 -> 글수정 버튼 눌렀을때
+	@RequestMapping("update.ud")
+	public String usedUpdate(UsedBoard b, MultipartFile reUpfile, HttpSession session, Model model) {
+		
+		System.out.println("db갔다오지 않은 b의 값 : " + b);
+		System.out.println("reUpfile : " + reUpfile);
+		
+		// 2. 새로 첨부된 파일x, 기존 첨부파일 o  내용만 수정 => origin : 기존 첨부파일 이름, change : 기존첨부파일 경로
+		// 3. 새로 첨부된 파일o, 기존 첨부파일 x 파일첨부 변경 시 => origin : 새로 첨부파일 이름, change : 새로 첨부파일 경로
+		
+		// 새로 첨부파일이 넘어온 경우 
+		if(!reUpfile.getOriginalFilename().equals("")) {
+			// 기존에 첨부파일이 있었을 경우 => 기존의 첨부파일을 삭제
+			
+			// 히든으로 오리진네임을 넘겼으니까 board에 setter 주입되서 들어가있을것임
+			if(b.getOriginName() != null) {
+				new File(session.getServletContext().getRealPath(b.getChangeName())).delete();
+			}
+			
+			// 새로 넘어온 첨부파일 서버에 업로드 시키기
+			// saveFile() 호출해서 첨부파일 업로드
+			String changeName = saveFile(reUpfile, session);
+			
+			// 첨부파일에 새로 업로드를 했으니, b라는 Board객체에 새로운정보(원본명, 저장경로) 담기
+			b.setOriginName(reUpfile.getOriginalFilename());
+			b.setChangeName("resources/uploadFiles/" + changeName);
+		}
+		
+		
+		
+		
+		if(boardService.usedUpdate(b) > 0) {
+			System.out.println("sql다녀와서 컨트롤러" + b);
+			return "redirect:detail.ud?usedNo=" + b.getUsedNo();
+		} else {
+			model.addAttribute("errorMsg","게시글 수정 실패");
+			return "common/errorPage";
+		}
+		
+		
+	}
+	
+	
+	
 	
 	
 }

@@ -143,10 +143,24 @@ font-size: 25px;
 			<p id="count" name="count">관심 채팅 조회</p>
 		</div>
 		
+		
+		
+		<form action="" method="post" id="postForm">
+			<input type="hidden" name="usedNo" value="${b.usedNo}" />
+			<input type="hidden" name="usedTitle" value="${b.usedTitle }" />
+			<input type="hidden" name="bookAuthor" value="${b.bookAuthor }" />
+			<input type="hidden" name="bookGenre" value="${b.bookGenre}" />
+			<input type="hidden" name="point" value="${b.point}" />
+			<input type="hidden" name="bookTitle" value="${b.bookTitle}" />
+			<input type="hidden" name="usedContent" value="${b.usedContent}" />
+			<input type="hidden" name="filePath" value="${b.changeName }" />
+			<input type="hidden" name="originName" value="${b.originName }" />
+		</form>
+		
 		<div style="text-align:center;">
 			<c:choose>
 				<c:when test="${ loginUser.userNo == b.userNo }">
-					<button onclick="location.href='update.ud'">글수정</button>
+					<button onclick="postFormSubmit();">글수정</button>
 					<button onclick="location.href='delete.ud?usedNo=${ b.usedNo }'">글삭제</button>
 					<button onclick="location.href='list.ud'">목록가기</button>
 				</c:when>
@@ -156,16 +170,17 @@ font-size: 25px;
 			</c:choose>
 		</div>
 	
-		
-		
-		
-		
-		
-		
-
-
 	<!-- 전체를 감싸는 div  -->		
 	</div>
+	
+	
+	
+	<!-- 글 수정 누를 수 key값을 가지고 글수정 페이지로 이동 -->
+	<script>
+		function postFormSubmit(){
+			$('#postForm').attr('action', 'enrollUsedForm.ud').submit();
+		}
+	</script>
 
 
 		<!-- 인기 topN분석 -->

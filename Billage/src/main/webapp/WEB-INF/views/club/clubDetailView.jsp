@@ -52,6 +52,7 @@
 </head>
 <body>
 
+
     <jsp:include page="../common/header.jsp" />
     
 
@@ -229,8 +230,8 @@
     
     <script>
     	
-    	participant();
-    	
+    	//participant();
+    	/*
     	function participant(){
     		$.ajax({
     			url : "",
@@ -244,6 +245,7 @@
     			
     		})
     	};
+    	*/
     
     
     
@@ -271,7 +273,11 @@
     	}); //$(function()) 닫음
     	
     	
-    
+    	
+    	
+    	
+    	
+
     
     </script>
     

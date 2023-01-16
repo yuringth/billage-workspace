@@ -338,6 +338,24 @@ public class BoardServiceImpl implements BoardService {
 	public Novel selectNovelInfo(int novelNo) {
 		return boardDao.selectNovelInfo(sqlSession, novelNo);
 	}
+	
+	// 입찰
+	@Override
+	public int insertBidUser(ADBoard b) {
+		return boardDao.insertBidUser(sqlSession, b);
+	}
+	
+	//입찰자 테이블에 등록
+	@Override
+	public int updatePrizeUser(ADBoard b) {
+		return boardDao.updatePrizeUser(sqlSession, b);
+	}
+	
+	//즉시구매자 테이블에 등록
+	@Override
+	public int insertBuyer(ADBoard b) {
+		return boardDao.insertBuyer(sqlSession, b);
+	}
 
 	@Override
 	public ArrayList<FAQ> selectFaqList(FAQ faq) {
@@ -345,6 +363,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 
+	
+	
 	
 
 

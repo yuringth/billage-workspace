@@ -390,5 +390,53 @@
 				   and
 				         review_star = 5
 		</select>
+		
+		<select id="selectBadReview" parameterType="follow" resultMap="reviewResultSet2">
+			(select
+				      book_title
+				      ,book_imag
+				  from
+				      review
+				  where
+				      user_no = #{userNo1}
+				  and
+				      review_star = 5 
+				      
+				intersect
+				
+				select
+				      book_title
+				      ,book_imag
+				  from
+				      review
+				  where
+				      user_no = #{userNo2}
+				   and
+				     review_star = 1)
+				     
+				union     
+				
+				(select
+				      book_title
+				      ,book_imag
+				  from
+				      review
+				  where
+				      user_no = #{userNo1}
+				  and
+				      review_star = 1 
+				      
+				intersect
+				
+				select
+				      book_title
+				      ,book_imag
+				  from
+				      review
+				  where
+				      user_no = #{userNo2}
+				   and
+				     review_star = 5)     
+		</select>
 
 </mapper>

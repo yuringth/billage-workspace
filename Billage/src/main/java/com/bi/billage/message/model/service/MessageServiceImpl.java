@@ -36,4 +36,10 @@ public class MessageServiceImpl implements MessageService{
 		return null;
 	}
 
+	// (club)회원한테 쪽지 발송 
+	@Override
+	public int insertClubMessage(ArrayList<Message> message) {
+		return messageDao.insertClubMessage(sqlSession, message);
+	}
+
 }

@@ -40,8 +40,8 @@
 			<div id="nickName"><a href="selectUser.fo?uno=${ user.userNo }">${ user.nickname }</a></div>
 			<div class="detailList" style="display:flex; flex-direction: row;">
 				<div id="review"><a href="selectReviewList.fo?uno=${ user.userNo }">평가 150 &nbsp;</a></div>
-				<div id="following" ><a href="selectFollowing.fo">팔로잉&nbsp;${ user.following }&nbsp;</a></div>
-				<div id="follower" ><a href="selectFollower.fo">팔로우&nbsp;${ user.follower }&nbsp;</a></div>
+				<div id="following" ><a href="selectFollowing.fo?uno=${ user.userNo }">팔로잉&nbsp;${ user.following }&nbsp;</a></div>
+				<div id="follower" ><a href="selectFollower.fo?uno=${user.userNo }">팔로우&nbsp;${ user.follower }&nbsp;</a></div>
 			</div>
 		</div>
 		<br>	
@@ -90,9 +90,9 @@
 		<div class="badBook" >
 			<div class="book2Box" style="width:70%; height: 400px; background-color: rgb(235, 235, 235); margin:auto; display:flex; flex-direction: row; justify-content: space-evenly;">
 				<div class="book2" style="margin-top: 50px;">
-					<div id="badbookimg"><img src="" width="150px;" height="250px;"></div>
+					<div id="badbookimg"><img src="${badReview.bookImag }" width="150px;" height="250px;"></div>
 					<br>
-					<div id="badBookTitle">책 제목</div>
+					<div id="badBookTitle">${badReview.bookTitle }</div>
 				</div>	
 			</div>
 		</div>

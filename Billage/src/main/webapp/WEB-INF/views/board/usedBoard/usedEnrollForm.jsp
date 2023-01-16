@@ -66,7 +66,7 @@
 
         <form action="upload.ud" id="usedEnrollForm" method="post" enctype="multipart/form-data">
         	<!-- value로 유저 값을 넘겨야함  -->
-			<input type="hidden" name="userNo" value="${ loginUser.userNo} ">
+			<input type="hidden" name="userNo" value="${loginUser.userNo} ">
 			
             <div class="longdiv align-left">
                 <div class="textdiv">

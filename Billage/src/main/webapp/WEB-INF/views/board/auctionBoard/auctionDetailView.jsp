@@ -98,7 +98,8 @@
 			<img style="width: 600px; height: 600px;"src="${ b.changeName }">
 		</div>
 
-		
+		<input type="hidden" id="prizeUserNo" value="${b.prizeUserNo}">
+		<input type="hidden" id="closeDate" value="${b.closeDate}">
 		<p class="time"></p>
 		<p class="genre">${ b.genre }</p>
 		<p class="title">"${ b.title }"</p>
@@ -108,49 +109,123 @@
 				${ b.content }
 			</p>
 		</div>
-		<p class="nowPrice">현재가격 : ${ b.nowPrice }P</p>
-		<p class="instantlyPrice">즉시구매가 : ${ b.instantlyPrice }P</p>
-
-		<form action="">
-			<div style="display :flex;" class="priceArea" >
-				<div>
-					<p>시작가 : ${ b.startPrice }P 입찰가격 : </p>
-				</div>
-				<div style="width:100px">
-					<input type="number" name="bidPrice" value="${ bidPrice }" width="100px">
-				</div>
+		<p class="nowPrice" id="nowPrice">현재가격 : ${ b.nowPrice }P</p>
+		<c:choose>
+			<c:when test="${ not empty b.instantlyPrice }">
+				<p class="instantlyPrice">즉시구매가 : ${ b.instantlyPrice }P</p>
+			</c:when>
+			<c:otherwise>
+				<p class="instantlyPrice">즉시구매 불가</p>
+			</c:otherwise>
+		</c:choose>
+	
+		<div style="display :flex;" class="priceArea" >
+			<div>
+				<p>시작가 : ${ b.startPrice }P 입찰가격 : </p>
 			</div>
-
-			<div class="btnArea">
-				<button class="btn1 btn btn-dark">
-					즉시구매
-				</button>
-				<button class="btn1 btn btn-secondary">
-					입찰
-				</button>
+			<div style="width:100px">
+					
+					<input type="number" id="bidPrice" value="${ b.nowPrice }" width="100px" step="${ b.bidPrice }">
+				
 			</div>
-		</form>
+		</div>
+		
+		
+		<div class="btnArea">
+		
+			<c:choose>
+			<c:when test="${ not empty loginUser }">
+				<c:choose>
+				<c:when test="${ loginUser.userNo != b.userNo }">
+					<c:if test="${ loginUser.point >= b.bidPrice && not empty b.instantlyPrice }">
+						
+						<button class="btn1 btn btn-dark" onclick="buy();">
+							즉시구매
+						</button>
+						<button class="btn1 btn btn-secondary" onclick="bid();">
+							입찰
+						</button>
+						
+					</c:if>
+					<c:if test="${ loginUser.point >= b.bidPrice && empty b.instantlyPrice }">
+						
+						<button class="btn1 btn btn-secondary" onclick="bid();">
+							입찰
+						</button>
+						
+					</c:if>
+					<c:if test="${ loginUser.point < b.bidPrice && not empty b.instantlyPrice }">
+						
+						<button class="btn1 btn btn-dark" onclick="notEnoughtPoint();">
+							즉시구매
+						</button>
+						<button class="btn1 btn btn-secondary" onclick="notEnoughtPoint();">
+							입찰
+						</button>
+						
+					</c:if>
+					<c:if test="${ loginUser.point < b.bidPrice && empty b.instantlyPrice }">
+						
+						<button class="btn1 btn btn-secondary" onclick="notEnoughtPoint();">
+							입찰
+						</button>
+						
+					</c:if>
+				</c:when>
+				<c:otherwise>
+				
+					<button class="btn1 btn btn-secondary" disabled>
+						작성자입니다.
+					</button>
+					
+				</c:otherwise>
+				</c:choose>
+			</c:when>
+			<c:otherwise>
+			
+					<button class="btn1 btn btn-secondary" disabled>
+						로그인을 해주세요
+					</button>
+				
+			</c:otherwise>
+			</c:choose>
+			
+		</div>
+		
+		
+		
+		
+		
+		
+		<c:if test="${ loginUser.userNo ==  b.userNo}">
+			<button onclick="postFormSubmit();" >삭제하기</button>
+		</c:if>
 		
 		<form action="" method="post" id="postForm">
+			<input type="hidden" name="tryPoint" value="${b.tryPoint}">
 			<input type="hidden" name="changeName" value="${b.changeName}">
 			<input type="hidden" name="boardNo" value="${b.boardNo}">
-			
 		</form>
-		<c:if test="${ loginUser.userNo ==  b.userNo}">
-			<button onclick="postFormSubmit(1);" >삭제하기</button>
-		</c:if>
+		
+		
 	</div>
 	
 	
 	<script>
+		//전역변수 선언
+		var interval;
+		
 		
 		$(function(){
-			closeCount();
-			setInterval(closeCount, 500);
+			interval = setInterval(closeCount, 500);
+			
 		})
 		
+	
+		
 		function closeCount(){
-			var end = new Date('${ b.closeDate }');
+			
+			var end = new Date("$('#closeDate').val()");
 			var now = new Date(); 
 			
 			var remaindTime = end - now;
@@ -172,18 +247,104 @@
 		    if(remaindTime >= 0){
 		    	$('.time').text(day +'일 ' + hour + ':' + min + ':' + sec);
 		    } else {
-		    	$('.time').text('응모 시간 종료');
+		    	
+		    	clearInterval(interval); //인터벌 종료
+		    	
+		    	$('.time').text('시간 종료');
+		    	$('.btn1').attr('disabled', true).text('시간 종료');
+			    selectPrizeUser();
+		    	
 		    }
 		}
 		
-		function postFormSubmit(num){
-			if(num == 1){
-				if(confirm('삭제하시겠습니까?')){
-					$('#postForm').attr('action','delete.dr').submit();
-				}
+		
+		function bid(){
+			
+			if(${not empty loginUser}){
+				 
+				$.ajax({
+					 url : bid.ac,
+					 data : {
+						 boardNo : ${b.boardNo},
+						 userNo : ${loginUser.userNo},
+						 bidPrice : $('#bidPrice').val(),
+						 prizeUserNo : $('#prizeUserNo').val(),
+						 nowPrice : $('#nowPrice').text()
+					 },
+					 success : function(result){
+						$('#nowPrice').text(result.nowPrice);
+						$('#prizeUserNo').val(result.prizeUserNo);
+						$('#bidPrice').val(result.nowPrice);
+						//여기에 최소값 어쩌구 설정하기						 
+					 },
+					 error : function(){
+						 console.log('error');
+					 }
+				 })
+				 
+			}
+			
+		}
+		
+		
+		function buy(){
+			
+			if(${not empty loginUser}){
+				 
+				$.ajax({
+					 url : buy.ac,
+					 data : {
+						 boardNo : ${b.boardNo},
+						 userNo : ${loginUser.userNo},
+						 bidPrice : $('#bidPrice').val(),
+						 prizeUserNo : $('#prizeUserNo').val(),
+						 bidPrice : ${ b.instantlyPrice }
+					 },
+					 success : function(result){
+						$('#nowPrice').text(result.nowPrice);
+						$('#prizeUserNo').val(result.prizeUserNo);
+						$('#bidPrice').val(result.nowPrice);
+						$('#closeDate').val(result.closeDate)
+					 },
+					 error : function(){
+						 console.log('error');
+					 }
+				 })
+				 
+			}
+			
+		}
+		
+		
+		function postFormSubmit(){
+			if(confirm('삭제하시겠습니까?')){
+				$('#postForm').attr('action','delete.ac').submit();
 			}
 		}
-	
+		
+		//당첨자 선정하는 함수
+		function selectPrizeUser(){
+			
+			$.ajax({
+				url : 'prize.ac',
+				data : {
+					boardNo : ${b.boardNo},
+					userNo : ${b.userNo},
+					title : '${b.title}',
+					prizeUserNo : $('#prizeUserNo').val()
+				},
+				success : function(result){
+					
+				},error : function(){
+					console.log('오류');
+				}
+			});
+		}
+		
+		function notEnoughtPoint(){
+			confirm('포인트가 부족합니다. 충전하시겠습니까?');
+		}
+		
 	</script>
 	
 	
