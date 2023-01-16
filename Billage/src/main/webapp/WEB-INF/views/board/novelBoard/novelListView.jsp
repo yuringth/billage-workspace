@@ -215,13 +215,6 @@ div.card.show {
     transition: all 0.3s 0.2s ease-out;
   }
   
-/*   .pagination { */
-/*   	display: flex; */
-/*   	padding-left: 0; */
-/*   	list-style: none; */
-/*   	border-radius: .25rem; */
-/*   	align: center; */
-/*   } */
 }
 </style>
 </head>
@@ -229,7 +222,7 @@ div.card.show {
 		<jsp:include page="../../common/header.jsp"/>
 		<br><br><br>
 		<!-- 로그인 후 관리자일 경우만 보여지는 글쓰기 버튼 -->
-        <c:if test="${ loginUser eq null }">
+        <c:if test="${ loginUser.userId eq 'test01' }">
 	        <div align="center">
 	        	<a class="btn btn-secondary" href="enrollForm.nv">작품등록</a>
 	        </div>

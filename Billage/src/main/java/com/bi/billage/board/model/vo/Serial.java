@@ -20,5 +20,6 @@ public class Serial {
 	private String novelDisplay;
 	private String novelImg;
 	private Integer count;
+	private int rownum;
 
 }

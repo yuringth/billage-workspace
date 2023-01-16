@@ -98,20 +98,61 @@
 	</select>
 	
 	
+	<!-- 게시글 조회수 증가 -->
+	<update id="increaseUsedCount" parameterType="_int">
+		update
+		       used_board
+		   set
+		       count = count + 1
+		 where
+		       used_status = 'N'
+		   and
+		       used_no = ${ usedNo } 
+	</update>
+	
+	<!-- 게시글 내용을 db에서 select해서 목록 띄우기  -->
+	<select id="selectUsedBoard" resultMap="usedResultSet">
+		select
+			    used_no
+		       ,user_no
+	           ,nickname
+		       ,used_title
+		       ,used_content
+		       ,to_char(create_date, 'YYYY-MM-DD') as "create_date"
+		       ,count 
+		       ,point
+		       ,stock_status
+		       ,book_genre
+		       ,book_author
+		       ,book_title
+		       ,origin_name 
+		       ,change_name
+		  from
+		       used_board
+	      join
+	           member using(user_no)
+		 where
+		 	   used_status = 'N'
+		   and
+ 			   used_no = ${ usedNo }		     
+	</select>
+	
+	
 	<!-- 게시글 삭제 -->
 	<update id="deleteUsedBoard" parameterType="_int">
 		update
-		       usedBoard
+		       used_Board
 		   set
 		       used_status = 'Y'
 		 where
 		       used_no = #{usedNo}
 	</update>
 
-
+	
+	<!-- 게시글 수정 쿼리문 -->
 	<update id="updateUsedBoard" parameterType="used">
 		update
-		       usedBoard
+		       used_Board
 		   set
 		        used_title = #{usedTitle}
 		       ,book_author = #{bookAuthor}

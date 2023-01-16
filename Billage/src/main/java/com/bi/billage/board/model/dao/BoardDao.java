@@ -272,6 +272,7 @@ public class BoardDao {
 		return sqlSession.insert("reviewMapper.insertReviewBoard", b);
 	}
 	
+
 	
 	// 리뷰게시판 => 조회수 증가
 	public int increaseReviewCount(SqlSessionTemplate sqlSession, int reviewNo) {
@@ -285,8 +286,12 @@ public class BoardDao {
 	}
 	
 	// 리뷰게시판 => 게시글 삭제
-	public int deleteReviewBoard(SqlSessionTemplate sqlSession, int reviewNo) {
-		return sqlSession.update("reviewMapper.deleteReviewBoard", reviewNo);
+//	public int deleteReviewBoard(SqlSessionTemplate sqlSession, int reviewNo) {
+//		return sqlSession.update("reviewMapper.deleteReviewBoard", reviewNo);
+//	}
+	
+	public int deleteReviewBoard(SqlSessionTemplate sqlSession, ReviewBoard b) {
+		return sqlSession.update("reviewMapper.deleteReviewBoard", b);
 	}
 	
 	
@@ -303,6 +308,12 @@ public class BoardDao {
 	public int updateReviewBoard(SqlSessionTemplate sqlSession, ReviewBoard b) {
 		return sqlSession.update("reviewMapper.updateReviewBoard", b);
 	}
+	
+	
+
+	
+	
+	
 	
 	
 	
@@ -335,8 +346,26 @@ public class BoardDao {
 		return (ArrayList)sqlSession.selectList("usedMapper.usedBoardList", null, rowBounds);
 		
 	}
+	
+	
+	
+	// 중고게시글 조회수 증가 (update)
+	public int increaseUsedCount(SqlSessionTemplate sqlSession, int usedNo) {
+		return sqlSession.update("usedMapper.increaseUsedCount", usedNo);
+	}
+	
+	//중고게시판 상세 조회 (select) => db에서 정보 들고 와서 뿌려주기
+	public UsedBoard selectUsedBoard(SqlSessionTemplate sqlSession, int usedNo) {
+		return sqlSession.selectOne("usedMapper.selectUsedBoard", usedNo);
+	}
 
-
+	
+	// 중고게시판 삭제
+	public int deleteUsedBoard(SqlSessionTemplate sqlSession, int usedNo) {
+		return sqlSession.update("usedMapper.deleteUsedBoard", usedNo);
+	}
+	
+	
 	
 	
 	
@@ -367,13 +396,11 @@ public class BoardDao {
 		
 	}
 
-	public ArrayList<Serial> selectSerialDetail(SqlSessionTemplate sqlSession, PageInfo pi, int novelNo, String serialNo) {
-		int offset = (pi.getCurrentPage()- 1) * pi.getBoardLimit();
-		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+	public Serial selectSerialDetail(SqlSessionTemplate sqlSession, int novelNo, String serialNo) {
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("serial_no", serialNo);
 		map.put("novel_no", novelNo);
-		return (ArrayList)sqlSession.selectList("serialMapper.selectSerialDetail", map, rowBounds);
+		return sqlSession.selectOne("serialMapper.selectSerialDetail", map);
 		}
 	
 	public int insertSerialRequest(SqlSessionTemplate sqlSession, SerialRequest sr) {
@@ -393,6 +420,10 @@ public class BoardDao {
 		return sqlSession.insert("serialMapper.insertSerial", map);
 	}
 
+
+	public Novel selectNovelInfo(SqlSessionTemplate sqlSession, int novelNo) {
+		return sqlSession.selectOne("novelMapper.selectNovelinfo", novelNo);
+	}
 
 	
 

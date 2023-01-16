@@ -112,6 +112,7 @@ textarea {
 </style>
 <body>
 		<jsp:include page="../../common/header.jsp"/>
+		<br><br>
 	<form id="enrollForm" method="post" action="insert.se">
 	<input type="hidden" name="novelNo" value="${ novelNo }">
 	<input type="hidden" name="userNo" value="${ loginUser.userNo }">
