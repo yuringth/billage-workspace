@@ -35,7 +35,8 @@
     
     .one-content{
         width : 400px;
-        height: 534px;
+      /*   height: 534px; */
+        height: 650px;
         padding-left: 8px;
         padding-right: 8px;
         padding-bottom: 16px;
@@ -110,13 +111,21 @@
 		</div>
 
 
-			<!-- 상품 하나를 감싸는 div -->
+			<!-- 상품 크게 감싸는 div -->
 			<div class="align-left-outer">
-			
-			<input class="bno" type="hidden" value="${ b.usedNo }">
-			
+			  
 			  	<c:forEach items="${ list }" var="b">
-			        <div class="one-content">
+			  	<!-- 상품 하나를 감싸는 div  -->
+		        <div class="one-content">
+		        	
+		        	<div>
+						<button>판매가능</button>
+						<button>판매완료</button>
+					</div>
+					
+					<div class="usedNo-area">
+						<input class="bno" type="hidden" value="${ b.usedNo }">
+						
 			            <div class="img-area">
 			                
 			                <img id="img-area2" src="${ b.changeName }">
@@ -126,25 +135,20 @@
 			            <div class="text-area">
 			                <p class="title-text">${ b.bookTitle }</p>
 			                <p class="textsize">${ b.point }</p>
+			            </div>
+					</div>
+			            <div class="text-area">
 			                <p class="textsize">♡</p>
 			                <p class="countnum">조회 : ${ b.count }</p>
 			            </div>
-			
-			        </div>
+					
+	     	    </div>
 		        </c:forEach>
 			</div>
 			
-									
-			
-		
-		
-		
-		
 		<!-- 더보기 누를 시 상품 6개가 뜨게 되는 div -->
 		<div><button type="button" class="btn btn-info" style="width:1200px; height:80px;">더보기</button></div>  
 	
-		
-
                     
 	    <!-- 페이지처리하는 영역-->
 	    <div class="pagingArea">
@@ -182,9 +186,12 @@
 	<!-- 게시글 눌렀을 시 상세보기로 이동 -->	
 	<script>
 		$(function(){
-			$('.align-left-outer').click(function(){
-				location.href='detail.ud?usedNo=' + $(this).children().eq(0).text(); 
-				console.log($(this).children().eq(0).text()); // http://localhost:8787/billage/detail.re?reviewNo=16
+			// $('.one-content').click(function()) // 정적으로 만들어진 요소에 대한 이벤트
+			$(document).on('click','.usedNo-area', function(){ // 동적으로 만들어진 요소에 대한 이벤트 => 동적이란 forEach문으로 생성이 계속 되기때문에 
+			
+				location.href='detail.ud?usedNo=' + $(this).children().val(); // val()에 아무것도 안넣으면 get 해서 가져온다
+				//val('안녕') val()에 무엇을 넣으면 set해서 넣어주는 느낌
+				console.log($(this).children().val()); // http://localhost:8787/billage/detail.re?reviewNo=16
 			})
 		})
 	</script>

@@ -132,9 +132,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public ArrayList<Serial> selectSerialDetail(PageInfo pi, int novelNo, String serialNo) {
-		// TODO Auto-generated method stub
-		return boardDao.selectSerialDetail(sqlSession, pi, novelNo, serialNo);
+	public Serial selectSerialDetail(int novelNo, String serialNo) {
+		return boardDao.selectSerialDetail(sqlSession, novelNo, serialNo);
 	}
 	
 	//중고게시판 => 글작성 시 insert
@@ -161,25 +160,23 @@ public class BoardServiceImpl implements BoardService {
 
 	
 	
-	//중고게시판
+	// 중고게시판 조회수 증가 (update)
 	@Override
-	public int increaseUsedCount(int boardNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int increaseUsedCount(int usedNo) {
+		return boardDao.increaseUsedCount(sqlSession, usedNo);
 	}
 
-	//중고게시판
+	//중고게시판 상세 조회 (select) => db에서 정보 들고 와서 뿌려주기
 	@Override
-	public UsedBoard selectUsedBoard(int boardNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public UsedBoard selectUsedBoard(int usedNo) {
+		return boardDao.selectUsedBoard(sqlSession, usedNo);
 	}
+	
 
-	//중고게시판
+	//중고게시판 => 게시글 삭제 
 	@Override
-	public int deleteUsedBoard(int boardNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteUsedBoard(int usedNo) {
+		return boardDao.deleteUsedBoard(sqlSession, usedNo);
 	}
 
 	//중고게시판
@@ -247,9 +244,14 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	// 리뷰게시판 => 게시글 삭제
+//	@Override
+//	public int deleteReviewBoard(int reviewNo) {
+//		return boardDao.deleteReviewBoard(sqlSession, reviewNo);
+//	}
+	
 	@Override
-	public int deleteReviewBoard(int reviewNo) {
-		return boardDao.deleteReviewBoard(sqlSession, reviewNo);
+	public int deleteReviewBoard(ReviewBoard b) {
+		return boardDao.deleteReviewBoard(sqlSession, b);
 	}
 
 	
@@ -330,6 +332,12 @@ public class BoardServiceImpl implements BoardService {
 	public int selectDrawPoint(int boardNo) {
 		return boardDao.selectDrawPoint(sqlSession, boardNo);
 	}
+
+	@Override
+	public Novel selectNovelInfo(int novelNo) {
+		return boardDao.selectNovelInfo(sqlSession, novelNo);
+	}
+
 
 	
 
