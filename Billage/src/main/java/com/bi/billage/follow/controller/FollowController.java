@@ -206,7 +206,33 @@ public class FollowController {
 		
 		ArrayList<ReviewBoard> goodReview = followService.selectGoodReview(follow);
 		
-		mv.addObject("user", user).addObject("star", star).addObject("goodReview",goodReview).setViewName("follow/followDetailView");
+		ArrayList<ReviewBoard> badReview = followService.selectBadReview(follow);
+		
+		
+		
+		ReviewBoard b = new ReviewBoard();
+		
+		int rNum;
+		
+		if(badReview.size() > 10) {
+			
+			rNum =  (int)(Math.random() * badReview.size());
+			
+		}else {
+			
+				rNum = (int)(Math.random() * 10);
+				
+				while(rNum >= badReview.size()) {
+					rNum = (int)(Math.random() * 10);
+				};
+				
+		}
+		
+		b = badReview.get(rNum);
+		
+		
+		
+		mv.addObject("user", user).addObject("star", star).addObject("goodReview",goodReview).addObject("badReview", b).setViewName("follow/followDetailView");
 		
 		return mv;
 		

@@ -14,5 +14,7 @@ public interface RentBoardService {
 	ArrayList<RentBoard> selectRentBoardList(PageInfo pi);
 	
 	// 대여게시글 등록
-	int insertRent(RentBoard rb);
+	int insertRentBoard(RentBoard rb);
+	
+	
 }

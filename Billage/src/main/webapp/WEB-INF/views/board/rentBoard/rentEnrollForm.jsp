@@ -66,15 +66,17 @@
 	
 	<div class="rentEnroll-outer">
 	
-		<form action="insert.rt" method="post" action="insert.rt" enctype="multipart/form-data">
+		<form action="insert.rt" method="post" enctype="multipart/form-data">
 			<input type="hidden" value="${ loginUser.userNo }" name="userNo">
+			
 			
 			<div class="longdiv align-left">
                 <div class="textdiv">
                     <p>제목:</p>
                 </div>
                 <div class="titlediv">
-                    <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요" name="" required>
+                    <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요" name="rentTitle" required>
+                    
                 </div>
             </div>
             
@@ -84,7 +86,7 @@
                         <p>대여 시작일:</p>
                     </div>
                     <div class="inputdiv2"> <!-- 날짜 min max 추가하기 -->
-                        <input type="date" class="form-control" id="closeDate"  name="closeDate" required>
+                        <input type="date" class="form-control" id="rentDate"  name="rentDate" required>
                     </div>
                 </div>
                 <div class="shortdiv align-left">
@@ -92,7 +94,7 @@
                         <p>책 제목:</p>
                     </div>
                     <div class="inputdiv">
-                        <input type="text" class="form-control" id="genre" placeholder="장르" name="">
+                        <input type="text" class="form-control" id="rentBookTitle" placeholder="책 제목 입력" name="rentBookTitle">
                     </div>
                 </div>
             </div>
@@ -103,7 +105,7 @@
                         <p>책 반납일:</p>
                     </div>
                     <div class="inputdiv2"> <!-- 날짜 min max 추가하기 -->
-                        <input type="date" class="form-control" id="closeDate"  name="closeDate" required>
+                        <input type="date" class="form-control" id="dueDate"  name="dueDate" required>
                     </div>
                        
                 </div>
@@ -112,13 +114,13 @@
                         <p>받을 포인트:</p>
                     </div>
                     <div class="inputdiv">
-                        <input type="number" class="form-control" id="tryPoint" value="0" name="tryPoint" required>
+                        <input type="number" class="form-control" id="rentPoint" value="0" name="rentPoint" required>
                     </div>
                 </div>
             </div>
 			
 			<div style="width : 790px;">
-                <textarea class="form-control" rows="15" id="content" style="resize: none;" name="content" placeholder="내용을 입력하세요" required></textarea>
+                <textarea class="form-control" rows="15" id="rentContent" style="resize: none;" name="rentContent" placeholder="내용을 입력하세요" required></textarea>
             </div>
             
              <div class="longdiv align-left">
@@ -126,7 +128,7 @@
                     <p>첨부파일:</p>
                 </div>
                 <div class="titlediv">
-                    <input type="file"  id=upFile name="upFile" required style="padding-top : 6px;">
+                    <input type="file"  id="changeName" name="upfile" required style="padding-top : 6px;">
                 </div>
             </div>
 

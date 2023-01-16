@@ -354,6 +354,25 @@
 		 		AUCTION_NO = #{boardNo}
 	</update>
 	
+	<insert id="insertBuyer" parameterType="adboard">
+		INSERT
+		  INTO
+		  		AUCTION
+		  		(
+		  		AUCTION_NO
+		  		,USER_NO
+		  		,BID_PRICE
+		  		,CLOSE_DATE
+		  		)
+		VALUES
+				(
+				#{boardNo}
+				,#{userNo}
+				,#{bidPrice}
+				,SYSDATE
+				)
+	</insert>
+	
 	
 </mapper>
 

@@ -179,10 +179,11 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.deleteUsedBoard(sqlSession, usedNo);
 	}
 
-	//중고게시판 수정버튼 클릭 시 => 게시판 번호를 식별자로 DB에서 select해옴
+	//중고게시판
 	@Override
-	public UsedBoard selectUpdateUsedBoard(int usedNo) {
-		return boardDao.selectUpdateUsedBoard(sqlSession, usedNo);
+	public int updateUsedBoard(UsedBoard b) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	
@@ -196,6 +197,7 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	// 중고게시판 => topn분석
+	//중고게시판
 	@Override
 	public ArrayList<UsedBoard> selectTopUsed() {
 		return boardDao.selectTopUsed(sqlSession);
@@ -358,6 +360,11 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.updatePrizeUser(sqlSession, b);
 	}
 	
+	//즉시구매자 테이블에 등록
+	@Override
+	public int insertBuyer(ADBoard b) {
+		return boardDao.insertBuyer(sqlSession, b);
+	}
 
 	
 	
