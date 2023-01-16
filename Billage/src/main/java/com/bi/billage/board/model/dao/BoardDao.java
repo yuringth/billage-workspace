@@ -359,7 +359,13 @@ public class BoardDao {
 		return sqlSession.selectOne("usedMapper.selectUsedBoard", usedNo);
 	}
 
-
+	
+	// 중고게시판 삭제
+	public int deleteUsedBoard(SqlSessionTemplate sqlSession, int usedNo) {
+		return sqlSession.update("usedMapper.deleteUsedBoard", usedNo);
+	}
+	
+	
 	
 	
 	
