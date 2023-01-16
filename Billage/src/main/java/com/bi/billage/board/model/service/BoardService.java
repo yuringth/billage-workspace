@@ -150,6 +150,10 @@ public interface BoardService {
 	//입찰자 테이블에 등록
 	int updatePrizeUser(ADBoard b);
 	
+	
+	
+	
+	
 	// 유림 시작
 	
 	

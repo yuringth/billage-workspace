@@ -316,10 +316,11 @@ public class DrawAuctionController {
 	@RequestMapping(value="bid.ac", produces="appliction/json; charset=UTF-8")
 	public String isnertBuyer(ADBoard b) {
 		
-		if(boardService.isnertBuyer(b) * boardService.updatePrizeUser(b) > 0) {
+		if(boardService.insertBidUser(b) * boardService.updatePrizeUser(b) > 0) {
 			
 			Point p = new Point();
-			p.setPointAdd(-1 * b.getInstantlyPrice());
+			//sql문 하나로 쓰려고 bidPrice에 담아옴
+			p.setPointAdd(-1 * b.getBidPrice());
 			p.setUserNo(b.getUserNo());
 			p.setPointStatus("사용");
 			

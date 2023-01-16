@@ -176,7 +176,6 @@ public class BoardDao {
 
 
 
-
 	
 	
 	
@@ -375,6 +374,9 @@ public class BoardDao {
 	public Novel selectNovelInfo(SqlSessionTemplate sqlSession, int novelNo) {
 		return sqlSession.selectOne("novelMapper.selectNovelinfo", novelNo);
 	}
+
+
+	
 
 
 	

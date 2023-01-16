@@ -327,7 +327,7 @@
 		 		DRAW_NO = #{boardNo}
 	</select>
 	
-	<insert id="insertBidUser" parameterType=adboard>
+	<insert id="insertBidUser" parameterType="adboard">
 		INSERT
 		  INTO
 		  		AUCTION
