@@ -28,4 +28,6 @@ public interface FollowService {
 	Star selectStar (int userNo);
 	
 	ArrayList<ReviewBoard> selectGoodReview (Follow follow);
+	
+	ArrayList<ReviewBoard> selectBadReview (Follow follow);
 }

@@ -53,5 +53,9 @@ public class FollowDao {
 	public ArrayList<ReviewBoard> selectGoodReview (SqlSession sqlSession, Follow follow){
 		return (ArrayList)sqlSession.selectList("followMapper.selectGoodReview", follow);
 	}
+	
+	public ArrayList<ReviewBoard> selectBadReview(SqlSession sqlSession, Follow follow) {
+		return (ArrayList)sqlSession.selectList("followMapper.selectBadReview", follow);
+	}
 
 }
