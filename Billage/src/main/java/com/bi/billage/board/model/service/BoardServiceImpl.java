@@ -339,6 +339,11 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectNovelInfo(sqlSession, novelNo);
 	}
 
+	@Override
+	public ArrayList<Serial> selectSerialDetailList(PageInfo pi, int novelNo, String serialNo) {
+		return boardDao.selectSerialDetailList(sqlSession, pi, novelNo, serialNo);
+	}
+
 	
 
 

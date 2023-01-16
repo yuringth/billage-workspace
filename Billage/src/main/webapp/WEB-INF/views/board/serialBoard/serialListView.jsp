@@ -42,7 +42,7 @@
             <table id="boardList" class="table table-hover" align="center">
                 <thead>
                     <tr>
-                        <th>글번호</th>
+                        <th>글번호${ s.rownum }</th>
                         <th>제목</th>
                         <th>조회수</th>
                         <th>작성일</th>
@@ -53,7 +53,7 @@
                 <tbody>
                 		<tr>
                 			<input type="hidden" class="nno" value="${ s.novelNo }">
-                			<td class="sno">${ s.serialNo }</td>
+                			<td class="sno">${ s.rownum }</td>
                 			<td>${ s.serialTitle }</td>
                 			<td>${ s.count }</td>
                 			<td>${ s.uploadDate }</td>
