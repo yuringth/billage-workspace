@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>followerListView2</title>
 <style>
 	
 	.outer{
@@ -85,6 +85,8 @@
 	
 	
 	<script>
+		
+	
 		
 		function follow(e){
 			var num = $(e).attr('class');

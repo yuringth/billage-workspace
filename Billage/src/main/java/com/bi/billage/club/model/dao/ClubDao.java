@@ -53,14 +53,38 @@ public class ClubDao {
 		return sqlSession.delete("clubMapper.ajaxDeleteClub", club); 
 	}
 	
+	// 클럽 일반회원 club_member 테이블에 isnert 
+	public int ajaxInsertClub(SqlSessionTemplate sqlSession, Club club) {
+		return sqlSession.insert("clubMapper.ajaxInsertClub", club);
+	}
 	
 	// 클럽 모임장 개설리스트 조회
 	public ArrayList<Club> clubAdmin(SqlSessionTemplate sqlSession, int userNo){
 		return (ArrayList)sqlSession.selectList("clubMapper.clubAdmin", userNo);
 	}
 	
+	// club club_member 회원리스트 조회
+	public ArrayList<Club> clubMemerSelectAdmin(SqlSessionTemplate sqlSession, int clubNo){
+		return (ArrayList)sqlSession.selectList("clubMapper.clubMemerSelectAdmin", clubNo);
+	}
+	
 	// 회원 조아요 리스트 조회
 	public ArrayList<Club> selectClubLike(SqlSessionTemplate sqlSession, int userNo){
 		return (ArrayList)sqlSession.selectList("clubMapper.selectClubLike", userNo);
 	}
+	
+	// 클럽 찜하기 Insert
+	public int clubLikeInsert(SqlSessionTemplate sqlSession, Club club) {
+		return sqlSession.insert("clubMapper.clubLikeInsert", club);
+	}
+
+	// 클럽 찜하기 Delete
+	public int clubLikeDelete(SqlSessionTemplate sqlSession, Club club) {
+		return sqlSession.delete("clubMapper.clubLikeDelete", club);
+	}
+	
+	
+	
+	
+	
 }

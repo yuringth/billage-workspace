@@ -28,13 +28,29 @@ public interface ClubService {
 	//모임 마이페이지에서 <일반 >리스트 조회해오기
 	ArrayList<Club> clubGeneral(int userNo);
 	
+	// parti delete
 	// 모임 마이페이지에서 <일반 > 모임가입자 모입 탈퇴하기 
 	int ajaxDeleteClub(Club club);
+	
+	// parti insert
+	int ajaxInsertClub(Club club);
 	
 	// 모임 마이페이지 <관리자> 모임 관리 페이지 가기 
 	ArrayList<Club> clubAdmin(int userNo);
 	
+	// club clubNo에 따른 회원리스트 조회 
+	ArrayList<Club> clubMemerSelectAdmin(int clubNo);
+	
 	// 모임 리스트 조회 시 로그인 회원 조아요 조회 
 	ArrayList<Club> selectClubLike(int userNo);
+	
+	// like insert 
+	int clubLikeInsert(Club club);
+	
+	// like delete 
+	int clubLikeDelete(Club club);
+	
+
+	
 	
 }

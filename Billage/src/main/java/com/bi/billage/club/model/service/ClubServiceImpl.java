@@ -58,16 +58,38 @@ public class ClubServiceImpl implements ClubService {
 	public int ajaxDeleteClub(Club club) {
 		return clubDao.ajaxDeleteClub(sqlSession, club);
 	}
+	
+	@Override
+	public int ajaxInsertClub(Club club) {
+		return clubDao.ajaxInsertClub(sqlSession, club);
+	}
 
 	@Override
 	public ArrayList<Club> clubAdmin(int userNo) {
 		return clubDao.clubAdmin(sqlSession, userNo);
+	}
+	
+	@Override
+	public ArrayList<Club> clubMemerSelectAdmin(int clubNo) {
+		return clubDao.clubMemerSelectAdmin(sqlSession, clubNo);
 	}
 
 	@Override
 	public ArrayList<Club> selectClubLike(int userNo) {
 		return clubDao.selectClubLike(sqlSession, userNo);
 	}
+
+	@Override
+	public int clubLikeInsert(Club club) {
+		return clubDao.clubLikeInsert(sqlSession, club);
+	}
+
+	@Override
+	public int clubLikeDelete(Club club) {
+		return clubDao.clubLikeDelete(sqlSession, club);
+	}
+
+
 
 
 

@@ -31,6 +31,16 @@
 	</resultMap>
 
 
+		
+	<resultMap type="point" id="pointResultset">
+		<result column="USER_NO" property="userNo"/>
+		<result column="POINT_ADD" property="pointAdd"/>
+		<result column="POINT_DATE" property="pointDate"/>
+		<result column="POINT_STATUS" property="pointStatus"/>
+	</resultMap>
+	
+	
+
 
 	<!-- isbn 조회 쿼리문 -->
 	<select id="selectIsbn" parameterType="book" resultMap="bookResultSet">
@@ -96,6 +106,49 @@
 		
 	<!-- 글작성 쿼리문. 2) 중복 된 책 없으면 insert : 글작성 -->
 	<insert id="insertReviewBoard" parameterType="review">
+	<!-- point랑 어케 연결 못하나 못해서 따로 감
+	INSERT ALL
+		  INTO
+		      review(
+		              REVIEW_NO
+		             ,USER_NO
+		             ,REVIEW_STAR
+		             ,REVIEW_CONTENT
+		             ,REVIEW_STATUS
+		             ,BOOK_TITLE
+		             ,BOOK_IMAG
+		             ,BOOK_POINT
+		             ,BOOK_PUBLISHER
+		             ,BOOK_AUTHOR
+		             )
+		      VALUES(
+			          SEQ_RNO.NEXTVAL
+			         ,#{userNo}
+			         ,#{reviewStar}
+			         ,#{reviewContent}
+			         ,'N'
+			         ,#{bookTitle}
+			         ,#{bookImag} 
+			         ,10
+			         ,#{bookPublisher}
+			         ,#{bookAuthor}
+		             )
+		  INTO 
+		       point(
+		              user_no
+		              ,POINT_ADD
+		              ,POINT_STATUS
+		              )
+			  VALUES(
+			          ,#{userNo}
+			          ,10
+			          ,'적립'
+			          )
+		select *
+		  from 
+		       dual
+	-->
+	
 		INSERT 
 		  INTO 
 		       REVIEW
@@ -164,14 +217,14 @@
 	</select>	
 	
 	
-	<update id="deleteReviewBoard" parameterType="_int">
+	<!-- 리뷰 삭제 쿼리문 / 원래 reviewNo로 받았을 떈 parameterType는 _int를 받았음-->
+	<update id="deleteReviewBoard" parameterType="review">
 		update
 		       review
 		   set
 		       review_status = 'Y'
 		where
 		       review_no = #{ reviewNo }
-		 
 	</update>
 	
 	

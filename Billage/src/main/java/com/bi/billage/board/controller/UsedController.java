@@ -106,9 +106,42 @@ public class UsedController {
 	
 	// 중고게시판 -> 글 상세정보 조회 
 	@RequestMapping("detail.ud")
-	public String usedDetailView() {
-		return "board/usedBoard/usedDetailView";
+	public String usedDetailView(int usedNo, Model model) {
+		// 식별값으로 usedNo가져옴
+		System.out.println(usedNo);
+		
+		// 1) 조회수 증가
+		if(boardService.increaseUsedCount(usedNo) > 0) {
+			
+			// 2) db에서 정보 들고 와서 뿌려주기
+			UsedBoard b = boardService.selectUsedBoard(usedNo);
+			
+			model.addAttribute("b", b);
+			return "board/usedBoard/usedDetailView";
+			
+		} else {
+			model.addAttribute("errorMsg","게시글 상세조회 실패");
+			return "common/errorPage";
+		}
 	}
+	
+	
+	//중고게시판 => 게시글 삭제 
+	@RequestMapping("delete.ud")
+	public String deleteUsedBoard(int usedNo, Model model) {
+		
+		if(boardService.deleteUsedBoard(usedNo) > 0) {
+			return "redirect:list.ud";
+		} else {
+			model.addAttribute("errorMsg","게시글 상세조회 실패");
+			return "common/errorPage";
+		}
+	}
+	
+	
+	
+	
+	
 	
 	// 중고게시판 -> 글수정 -> 수정폼 화면
 	@RequestMapping("update.ud")

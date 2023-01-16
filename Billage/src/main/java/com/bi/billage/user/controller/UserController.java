@@ -232,7 +232,7 @@ public class UserController {
 			mv.setViewName("redirect:/");
 		} else {	// 로그인 실패 시
 			// 키 - 밸류 담기
-			mv.addObject("errorMsg", "에러입니다.");
+			mv.addObject("errorMsg", "ID와 비밀번호를 다시 확인해주세요.");
 			mv.setViewName("common/errorPage");
 		}
 		return mv;

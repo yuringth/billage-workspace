@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>followingListView</title>
 <style>
 	
 	.outer{
@@ -51,10 +51,23 @@
 								<div id="reviewCount${ f.userNo}"><a href="selectReviewList.fo?uno=${ f.userNo }">리뷰100</a></div>
 							</div>
 							<input type="hidden" id="${f.userNo }" value="${ f.userNo }">
-							<button id="followingBtn" class="1" style="width:100px; height:50px;" onclick="follow(this);">팔로잉</button>
+							
+							<c:if test="${ f.followStatus == 1 }">
+								<button id="followingBtn${ f.userNo}" class="1" style="width:100px; height:50px;" onclick="follow(this);">팔로잉</button>
+							</c:if>
+								
+							<c:if test="${ f.followStatus == 0 }">
+								<button id="followingBtn${ f.userNo}" class="1" style="width:100px; height:50px;" onclick="follow(this);">팔로우</button>
+							</c:if>
+								
+						
+						
 						</div> 
 						<br><br>
 					</c:forEach>
+					
+					
+					
 				</c:when>
 				<c:otherwise>
 					<h1>로그인 해주세요</h1>

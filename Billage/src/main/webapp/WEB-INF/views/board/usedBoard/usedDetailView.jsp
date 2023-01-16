@@ -121,12 +121,12 @@ font-size: 25px;
 
 	<div class="outer">
 		<div class="photo-area">
-			<img src="https://img.sbs.co.kr/newimg/news/20160122/200906797_700.jpg" onclick="location.href='detail.ud'">
+			<img src="${ b.changeName }" onclick="location.href='detail.ud'" style="height:400px; width:1000px;">
 		</div>
 		
 		<div class="user-area">
 			<div class="user-div">
-				<p id="user_no" name="userNo">유저id</p>
+				<p id="user_no" name="userNo">${ b.nickname }</p>
 				<button>채팅하기</button>
 			</div>
 		</div>
@@ -135,18 +135,25 @@ font-size: 25px;
 		
 		<!-- USED_BOARD 테이블에 used_genre, used_pric, used_content, used_chat(?) 컬럼 추가 -->
 		<div class="writer-area">
-			<p id="used_title" name="usedTitle">글제목</p>
-			<p id="used_genre" name="usedGenre">책장르</p>
-			<p id="used_price" name="usedPrice">가격</p>
-			<p id="used_content" name="usedContent">글내용</p>
+			<p id="used_title" name="usedTitle">게시글 제목 : ${ b.usedTitle }</p>
+			<p id="used_genre" name="usedGenre">책 장르 : ${ b.bookGenre }</p>
+			<p id="used_price" name="usedPrice">판매 가격 : ${ b.point }</p>
+			<p id="used_content" name="usedContent">게시글 내용 : ${ b.usedContent }</p>
 			
 			<p id="count" name="count">관심 채팅 조회</p>
 		</div>
 		
 		<div style="text-align:center;">
-			<button onclick="location.href='update.ud'">글수정</button>
-			<button>글삭제</button>
-			<button>뒤로가기</button>
+			<c:choose>
+				<c:when test="${ loginUser.userNo == b.userNo }">
+					<button onclick="location.href='update.ud'">글수정</button>
+					<button onclick="location.href='delete.ud?usedNo=${ b.usedNo }'">글삭제</button>
+					<button onclick="location.href='list.ud'">목록가기</button>
+				</c:when>
+				<c:otherwise>
+					<button onclick="location.href='list.ud'">목록가기</button>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	
 		

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
 
@@ -59,24 +60,23 @@ public class ClubController {
 	@RequestMapping("detail.cl")
 	public ModelAndView selectDetailClub(Club club, String newCount, ModelAndView mv,  HttpSession session) {
 		
-		if(null != session.getAttribute("loginUser")) {
-			club.setUserNo(((User)session.getAttribute("loginUser")).getUserNo());
-			System.out.println(club);
-		} 
-
+		System.out.println("왜 두번 돌아?");
+		
 		//게시글 번호 들고 가서 group_count증가 
 		int result = clubService.increaseCount(club);
-		
 		if(result > 0) {
+			if(null != session.getAttribute("loginUser")) {
+				club.setUserNo(((User)session.getAttribute("loginUser")).getUserNo());
+				System.out.println(club);
+			} 
+		
+		
 			System.out.println(club);
-			
-			club = clubService.selectDetailClub(club);
-			
-			System.out.println(club);
-			
-			club.setNewCount(newCount);				
 			//게시글 번호로 해당 글 상세 조회 
-			
+			club = clubService.selectDetailClub(club);
+			System.out.println(club);
+			club.setNewCount(newCount);				
+		
 			mv.addObject("club", club);
 			mv.setViewName("club/clubDetailView");
 			return mv;
@@ -87,6 +87,45 @@ public class ClubController {
 		} 
 	}
 	
+	
+	// like ajax 
+	@ResponseBody
+	@RequestMapping(value="clubLike.cl", produces = "application/json; charset=UTF-8")
+	public String clubLike(Club club, int likeStatus) {
+		
+		// 0보다 크면 찜하기 취소  | 0이면 찜하기 신청 
+		int result = 0;
+		
+		if(likeStatus > 0) {
+			result = (clubService.clubLikeDelete(club) > 0 )? 0 : -1; 
+		} else {
+			result = (clubService.clubLikeInsert(club) > 0 )? 1 : -1;
+		} 
+		
+		return new Gson().toJson(result);
+	}
+		
+	// parti ajax
+	@ResponseBody
+	@RequestMapping(value="clubMember.cl", produces = "application/json; charset=UTF-8")
+	public String clubParticipate(Club club, int partiStatus) {
+		
+		//System.out.println(partiStatus);
+		int result = 0;
+		
+		if(partiStatus > 0) {
+			result = (clubService.ajaxDeleteClub(club) > 0)? 0 : -1;
+			
+		} else {
+			result = (clubService.ajaxInsertClub(club) > 0)? 1 : -1;
+		}
+		
+		//System.out.println(result);
+		return new Gson().toJson(result);
+	}			
+			
+			
+			
 	
 	// 모임 마이페이지에서 <일반 >
 	@RequestMapping("general.cl")
@@ -135,9 +174,18 @@ public class ClubController {
 	}
 	
 
-	
-
-	
+	// 모임 회원 관리 clubMemAdmin.cl
+	@RequestMapping("clubMemAdmin.cl")
+	public ModelAndView clubMemerSelectAdmin(int clubNo, ModelAndView mv) {
+		
+		ArrayList<Club> ClubMemberList = clubService.clubMemerSelectAdmin(clubNo);
+		System.out.println(ClubMemberList);
+		
+		mv.addObject("memberList", ClubMemberList);
+		mv.setViewName("club/clubMemberAdminView");
+		
+		return mv;
+	}
 	
 	// 지역을 찾는 API을 구현 함 
 	@ResponseBody

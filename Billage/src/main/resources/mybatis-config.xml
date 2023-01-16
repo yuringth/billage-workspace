@@ -26,6 +26,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.bi.billage.point.model.vo.Point" alias="point" />
 		<typeAlias type="com.bi.billage.message.model.vo.Message" alias="message" />
 		<typeAlias type="com.bi.billage.follow.model.vo.Star" alias="star" />
+		<typeAlias type="com.bi.billage.rent.model.vo.RentBoard" alias="rent" />
 	</typeAliases>
 	<!-- **주의 : 미리 등록을 해두려면 해당 클래스가 진짜 존재하고 있는 상태여야함 -->
 	
@@ -42,6 +43,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="/mappers/follow-mapper.xml"/>
 		<mapper resource="/mappers/point-mapper.xml"/>
 		<mapper resource="/mappers/message-mapper.xml"/>
+		<mapper resource="/mappers/rent-mapper.xml"/>
 	</mappers>
 	<!-- **주의 : 미리 등록을 해두려면 해당 mapper 파일이 진짜 존재하고 있는 상태여야함 + namespace속성까지 작성해둬야함 -->
 	

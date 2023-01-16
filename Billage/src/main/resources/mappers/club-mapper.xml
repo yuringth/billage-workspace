@@ -12,6 +12,7 @@
 		<result column="CLUB_LIMIT"			 property="clubLimit" />
 		<result column="CLUB_CREATEDATE"	 property="clubCreatedate" />
 		<result column="CLUB_DISCRIPT"       property="clubDiscript" />
+		<result column="USER_ID"          property="clubDiscript" />
 		<result column="CLUB_LOCATION" 		 property="clubLocation" />
 		<result column="CLUB_STATUS" 		 property="clubStatus" />
 		<result column="CLUB_IMG" 			 property="clubImg" />
@@ -321,6 +322,27 @@
 		       USER_NO = #{ userNo }
 	</delete>
 	
+	
+	<!--  Insert Club Member -->
+	<insert id="ajaxInsertClub" parameterType="club">
+		INSERT
+		  INTO
+		       CLUB_MEMBER
+		       (
+		       	CLUB_NO
+		       ,USER_NO
+		       ,ENROLL_DATE
+		       )
+        VALUES
+			   (
+			    #{ clubNo }
+			   ,#{ userNo }
+			   ,SYSDATE
+			   )
+	</insert>
+	
+	
+	
 	<!-- 모임 관리자 모임 정보 SELECT 쿼리  -->
 	<select id="clubAdmin" parameterType="_int" resultMap="clubResultSet">
 		SELECT
@@ -425,6 +447,28 @@
 		   	   C.CLUB_NO DESC
 	</select>	
 	
+	<!-- Club_Member List Select -->
+	<select id="clubMemerSelectAdmin" parameterType="_int" resultMap="clubResultSet">
+		 SELECT 
+		         CM.CLUB_NO
+		        ,CM.USER_NO
+		        ,M.USER_ID
+		        ,M.NICKNAME
+		        ,CM.ENROLL_DATE "enrollDate"
+		  FROM
+		        CLUB_MEMBER CM
+		  JOIN
+		        MEMBER M ON(M.USER_NO = CM.USER_NO)
+		 WHERE
+		        CM.CLUB_NO = #{ clubNo }
+		   AND 
+		   		M.STATUS = 'N'
+		 ORDER 
+		    BY 
+		        CM.ENROLL_DATE DESC 
+	</select>
+	
+	
 	<!-- clubLikeResultset -->
 	<select id="selectClubLike" parameterType="_int" resultMap="clubResultSet">
 		SELECT 
@@ -436,7 +480,32 @@
 	
 	</select>
 	
+	<!-- Club Like Insert -->
+	<insert id="clubLikeInsert" parameterType="club">
+		INSERT 
+		  INTO
+		       CLUB_LIKE
+		       (
+		        CLUB_NO
+		       ,USER_NO
+		       )
+        VALUES
+        	   (
+        	   #{clubNo}
+        	  ,#{userNo}
+        	   )
+	</insert>
 	
-
+	
+	<!-- Club Like delete -->
+	<delete id="clubLikeDelete" parameterType="club">
+		DELETE
+		  FROM  
+		       CLUB_LIKE
+	     WHERE
+	     	   CLUB_NO = #{ clubNo }
+	       AND	   
+		       USER_NO = #{ userNo }
+	</delete>
 	
 </mapper>

@@ -67,7 +67,13 @@
 								<td>${ c.memCount }</td>
 								<td>${ c.likeCount }</td>
 								<td>${ c.openCount }</td>
-								<td><button>관리</button></td>
+								<td>
+									<button>club수정</button> |
+									<button onclick="location.href='clubMemAdmin.cl?clubNo='+${c.clubNo}">회원보기</button> |
+									<button >활동</button> |
+									<button>게시글</button> |  
+									<button>club삭제</button> 
+								</td>
 							</tr>
 						</c:forEach>
 					</c:when>
@@ -85,7 +91,7 @@
 	
 
 	<script>
-	
+		
 	
 		function goDetail(){
 			
