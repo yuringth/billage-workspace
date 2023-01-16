@@ -180,13 +180,22 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.deleteUsedBoard(sqlSession, usedNo);
 	}
 
-	//중고게시판
+	//중고게시판 수정버튼 클릭 시 => 게시판 번호를 식별자로 DB에서 select해옴
 	@Override
-	public int updateUsedBoard(UsedBoard b) {
-		// TODO Auto-generated method stub
-		return 0;
+	public UsedBoard selectUpdateUsedBoard(int usedNo) {
+		return boardDao.selectUpdateUsedBoard(sqlSession, usedNo);
 	}
 
+	
+	// 중고게시판 글 수정하기 버튼 클릭시 => 수정되어 update됨
+	@Override
+	public int usedUpdate(UsedBoard b) {
+		System.out.println("여긴 서비스" + b);
+		return boardDao.usedUpdate(sqlSession, b);
+	}
+	
+	
+	
 	//중고게시판
 	@Override
 	public ArrayList<UsedBoard> selectTopBoard() {
