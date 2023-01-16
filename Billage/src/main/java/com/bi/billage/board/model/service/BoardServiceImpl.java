@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.bi.billage.board.model.dao.BoardDao;
 import com.bi.billage.board.model.vo.ADBoard;
 import com.bi.billage.board.model.vo.Book;
+import com.bi.billage.board.model.vo.FAQ;
 import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.ReportBoard;
 import com.bi.billage.board.model.vo.ReviewBoard;
@@ -336,6 +337,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Novel selectNovelInfo(int novelNo) {
 		return boardDao.selectNovelInfo(sqlSession, novelNo);
+	}
+
+	@Override
+	public ArrayList<FAQ> selectFaqList(FAQ faq) {
+		return boardDao.selectFaqList(sqlSession, faq);
 	}
 
 

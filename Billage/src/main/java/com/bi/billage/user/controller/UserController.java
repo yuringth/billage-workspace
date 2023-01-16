@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bi.billage.board.model.vo.FAQ;
 import com.bi.billage.board.model.vo.Inquiry;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.common.savefile.SaveFile;
@@ -152,8 +153,55 @@ public class UserController {
 	
 	// FAQ 관리화면
 	@RequestMapping("faqList.ad")
-	public String selectFaqList() {
-		return "admin/adminFaqListView";
+	public ModelAndView selectfaqList(FAQ faq, ModelAndView mv) {
+		mv.addObject("faq", userService.selectFaqList(faq)).setViewName("admin/adminFaqListView");
+		return mv;
+	}
+	
+	// FAQ 등록폼
+	@RequestMapping("enrollForm.fa")
+	public String enrollFaq() {
+		return "board/faqBoard/faqEnrollForm";
+	}
+	
+	// FAQ 등록메소드
+	@RequestMapping("insert.fa")
+	public String insertFaq(FAQ faq, HttpSession session, Model model) {
+			
+		if(userService.insertFaq(faq) > 0) { // 성공 => 메인화면으로
+			session.setAttribute("alertMsg", "등록 완료");
+			return "main"; //
+		} else {
+			model.addAttribute("errorMsg", "작성 실패");
+			return "common/errorPage";
+		}
+	}
+	
+	// FAQ 삭제메소드
+	@RequestMapping("delete.fa")
+	public String deleteFaq(FAQ faq, HttpSession session, Model model) {
+		
+		if(userService.deleteFaq(faq) > 0) {
+			session.setAttribute("alertMsg", "삭제 완료");
+			return "admin/adminFaqListView";
+		} else {
+			model.addAttribute("errorMsg", "삭제 실패");
+			return "common/errorPage";
+		}
+		
+	}
+	
+	// FAQ 수정메소드
+	@RequestMapping("update.fa")
+	public String updateFaq(FAQ faq, HttpSession session, Model model) {
+		
+		if(userService.updateFaq(faq) > 0) {
+			session.setAttribute("alertMsg", "수정 완료");
+			return "redirect:/faqList.ad";
+		} else {
+			model.addAttribute("errorMsg", "수정 실패");
+			return "common/errorPage";
+		}
 	}
 	
 	
@@ -165,9 +213,6 @@ public class UserController {
 	public String customerService() {
 		return "board/customerServiceBoard/csMain";
 	}
-	
-	
-	
 	
 	//--------------------------------------------------------------------------------
 	// 회원가입 폼으로

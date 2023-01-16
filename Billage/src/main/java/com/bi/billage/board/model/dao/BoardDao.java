@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bi.billage.board.model.vo.ADBoard;
 import com.bi.billage.board.model.vo.Book;
+import com.bi.billage.board.model.vo.FAQ;
 import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.ReportBoard;
 import com.bi.billage.board.model.vo.ReviewBoard;
@@ -423,6 +424,11 @@ public class BoardDao {
 
 	public Novel selectNovelInfo(SqlSessionTemplate sqlSession, int novelNo) {
 		return sqlSession.selectOne("novelMapper.selectNovelinfo", novelNo);
+	}
+
+
+	public ArrayList<FAQ> selectFaqList(SqlSessionTemplate sqlSession, FAQ faq) {
+		return (ArrayList)sqlSession.selectList("faqMapper.selectFaqList", faq);
 	}
 
 	

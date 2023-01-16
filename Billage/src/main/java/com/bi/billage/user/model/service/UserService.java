@@ -2,6 +2,7 @@ package com.bi.billage.user.model.service;
 
 import java.util.ArrayList;
 
+import com.bi.billage.board.model.vo.FAQ;
 import com.bi.billage.board.model.vo.Inquiry;
 import com.bi.billage.board.model.vo.SerialRequest;
 import com.bi.billage.club.model.vo.Club;
@@ -57,6 +58,18 @@ public interface UserService {
 	// 문의 답변
 	int updateInquiry(Inquiry iq);
 	
+	// 관리자 FAQ 조회
+	ArrayList<FAQ> selectFaqList(FAQ faq);
+	
+	// 관리자 FAQ 등록
+	int insertFaq(FAQ faq);
+	
+	// 관리자 FAQ 삭제
+	int deleteFaq(FAQ faq);
+	
+	// 관리자 FAQ 수정
+	int updateFaq(FAQ faq);
+	
 	// id중복체크
 	int idCheck(String checkId);
 	
@@ -68,6 +81,8 @@ public interface UserService {
 	
 	// 회원 탈퇴
 	int deleteUser(int userNo);
+
+
 	
 
 
