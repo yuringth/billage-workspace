@@ -163,10 +163,13 @@ public interface BoardService {
 	// 중고게시판 작성 (insert) 
 	int insertUsedBoard(UsedBoard b);
 	
+	
 	// 중고게시글 조회수 증가 (update)
-	int increaseUsedCount(int boardNo);
+	int increaseUsedCount(int usedNo);
 	// 중고게시판 상세 조회 (select)
-	UsedBoard selectUsedBoard(int boardNo);
+	// select해서 가져온 값을 UsedBoard VO에 담아줘야해서 자료형은 UsedBoard로 사용
+	UsedBoard selectUsedBoard(int usedNo);
+	
 	
 	// 중고게시판 삭제 (update)
 	int deleteUsedBoard(int boardNo);
@@ -217,8 +220,9 @@ public interface BoardService {
 	
 	
 	// 리뷰게시판 삭제 (update)
-	int deleteReviewBoard(int reviewNo);
-	
+	// int deleteReviewBoard(int reviewNo);
+	int deleteReviewBoard(ReviewBoard b);
+
 	
 	
 

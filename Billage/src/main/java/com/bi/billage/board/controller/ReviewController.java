@@ -259,15 +259,49 @@ public class ReviewController {
 	}
 	
 
-	
+	/*
 	// 리뷰게시판 => 글삭제
 	@RequestMapping("delete.re")
 	public String deleteReviewBoard(int reviewNo) {
 		
-		boardService.deleteReviewBoard(reviewNo);
+		if(boardService.deleteReviewBoard(reviewNo) > 0) {
+			
+			return "redirect:list.re";
+			
+		}
 		
-		return "redirect:list.re";
-		// 왜 포워딩으로 보내면 안되는거지?? db에 들려서 status를 'Y'로 고쳐서 그런가??		
+		// 왜 포워딩으로 보내면 안되는거지?? db에 들려서 status를 'Y'로 고쳐서 그런가??	
+	}
+	*/
+	
+	// 리뷰게시판 => 글삭제
+	@RequestMapping("delete.re")
+	public String deleteReviewBoard(ReviewBoard b, Model model,  HttpSession session) {
+		
+		System.out.println(b);
+		System.out.println(model);
+		
+		// 포인트 insert
+		Point p = new Point();
+		//응모포인트만큼 현재 포인트에서 차감
+		p.setUserNo(b.getUserNo());
+		p.setPointAdd(-10);
+		p.setPointStatus("취소");
+			
+		if(pointService.addPoint(p) * boardService.deleteReviewBoard(b) > 0) {
+			
+			((User)session.getAttribute("loginUser")).setPoint(pointService.selectPoint(b.getUserNo()));
+
+			return "redirect:list.re";
+			
+		} 
+		
+		else {
+			
+			model.addAttribute("errorMsg","게시글 상세조회 실패");
+			return "common/errorPage";
+		}
+		// 왜 포워딩으로 보내면 안되는거지?? db에 들려서 status를 'Y'로 고쳐서 그런가??	
 	}
 	
 	

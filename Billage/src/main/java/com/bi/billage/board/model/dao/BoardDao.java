@@ -286,8 +286,12 @@ public class BoardDao {
 	}
 	
 	// 리뷰게시판 => 게시글 삭제
-	public int deleteReviewBoard(SqlSessionTemplate sqlSession, int reviewNo) {
-		return sqlSession.update("reviewMapper.deleteReviewBoard", reviewNo);
+//	public int deleteReviewBoard(SqlSessionTemplate sqlSession, int reviewNo) {
+//		return sqlSession.update("reviewMapper.deleteReviewBoard", reviewNo);
+//	}
+	
+	public int deleteReviewBoard(SqlSessionTemplate sqlSession, ReviewBoard b) {
+		return sqlSession.update("reviewMapper.deleteReviewBoard", b);
 	}
 	
 	
@@ -341,6 +345,18 @@ public class BoardDao {
 		
 		return (ArrayList)sqlSession.selectList("usedMapper.usedBoardList", null, rowBounds);
 		
+	}
+	
+	
+	
+	// 중고게시글 조회수 증가 (update)
+	public int increaseUsedCount(SqlSessionTemplate sqlSession, int usedNo) {
+		return sqlSession.update("usedMapper.increaseUsedCount", usedNo);
+	}
+	
+	//중고게시판 상세 조회 (select) => db에서 정보 들고 와서 뿌려주기
+	public UsedBoard selectUsedBoard(SqlSessionTemplate sqlSession, int usedNo) {
+		return sqlSession.selectOne("usedMapper.selectUsedBoard", usedNo);
 	}
 
 
