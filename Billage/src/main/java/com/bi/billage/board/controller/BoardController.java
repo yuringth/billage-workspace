@@ -58,14 +58,13 @@ public class BoardController {
 		return mv;
 	}
 	
-	// 연재 상세보기 화면 +밑에 페이징+위에 작품정보+ 몇화 제목 작성일 내용...
+	// 연재 상세보기 화면 +위에 작품정보+ 몇화 제목 작성일 내용...
 	@RequestMapping("detail.se")
 	public ModelAndView selectSerialDetail(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv, @Param("novelNo") int nno, @Param("serialNo") String sno) {
 		PageInfo pi = Pagination.getPageInfo(boardService.selectSerialListCount(), currentPage, 10, 5);
 		mv.addObject("pi", pi)
 		.addObject("serial", boardService.selectSerialDetail(nno, sno))
 		.addObject("novel", boardService.selectNovelInfo(nno))
-		.addObject("list", boardService.selectSerialDetailList(pi, nno, sno))
 		.setViewName("board/serialBoard/serialDetailView");
 		
 		return mv;

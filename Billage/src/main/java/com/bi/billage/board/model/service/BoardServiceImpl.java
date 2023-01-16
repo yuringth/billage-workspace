@@ -133,7 +133,6 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public Serial selectSerialDetail(int novelNo, String serialNo) {
-		// TODO Auto-generated method stub
 		return boardDao.selectSerialDetail(sqlSession, novelNo, serialNo);
 	}
 	
@@ -347,12 +346,15 @@ public class BoardServiceImpl implements BoardService {
 	public Novel selectNovelInfo(int novelNo) {
 		return boardDao.selectNovelInfo(sqlSession, novelNo);
 	}
-
+	
+	// 입찰
 	@Override
-	public ArrayList<Serial> selectSerialDetailList(PageInfo pi, int novelNo, String serialNo) {
-		return boardDao.selectSerialDetailList(sqlSession, pi, novelNo, serialNo);
+	public int insertBidUser(ADBoard b) {
+		return boardDao.insertBidUser(sqlSession, b);
 	}
 
+	
+	
 	
 
 

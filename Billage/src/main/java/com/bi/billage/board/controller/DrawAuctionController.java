@@ -284,4 +284,15 @@ public class DrawAuctionController {
 	}
 	
 	
+	// 입찰
+	@ResponseBody
+	@RequestMapping(value="bid.ac", produces="appliction/json; charset=UTF-8")
+	public String isnertBidUser(ADBoard b) {
+		
+		boardService.insertBidUser(b);
+		
+		
+		return "";
+	}
+	
 }

@@ -27,25 +27,63 @@ public class FollowController {
 	@RequestMapping("selectFollowing.fo")
 	public ModelAndView selectFollowingList(int uno, ModelAndView mv,HttpSession session) {
 		
+		//상대방의 팔로잉 리스트
 		ArrayList<User> followingList = followService.selectFollowingList(uno);
+
 		
-		mv.addObject("followingList",followingList)
-			.setViewName("follow/followingListView");
+		mv.addObject("followingList",followingList);
+		
+		if(((User)session.getAttribute("loginUser")).getUserNo() != uno) {
+			
+			//로그인 유저의 팔로잉 리스트
+			ArrayList<User> lgFollowingLlist = followService.selectFollowingList(((User)session.getAttribute("loginUser")).getUserNo());
+			
+			for(int i = 0; i < lgFollowingLlist.size(); i++) {
+				
+				int luserNo = lgFollowingLlist.get(i).getUserNo();
+				
+				for(int j = 0; j < followingList.size(); j++ ) {
+					
+					if (luserNo == followingList.get(j).getUserNo()) {
+						
+						followingList.get(j).setFollowStatus(1);
+					
+					};
+				};
+			};
+			
+			mv.addObject("lgFollowingLlist", lgFollowingLlist).setViewName("follow/followingListView2");			
+			
+		}else {
+			mv.setViewName("follow/followingListView");
+		}
 		
 		return mv;
-	}
+	}	
 	
 	//followerList 내가 follow 한 사람과 하지 않은 사람을 각각 나누어서 select 함
 	@RequestMapping("selectFollower.fo")
 	public ModelAndView selectFollowerList(int uno, ModelAndView mv, HttpSession session) {
 		
-		ArrayList<User> followerList1 = followService.selectFollowerList1(uno);
+		ArrayList<User> followerList1 = followService.selectFollowerList1(uno);//맞팔임
 		
-		ArrayList<User> followerList2 = followService.selectFollowerList2(uno);
+		ArrayList<User> followerList2 = followService.selectFollowerList2(uno);//맞팔아님 
 		
 		mv.addObject("followerList1",followerList1)
-			.addObject("followerList2", followerList2)
-			.setViewName("follow/followerListView");
+			.addObject("followerList2", followerList2);
+			
+		//uno == loginUser.userNo 면 followerListView, 아니라면 folloewrListView2
+		if(((User)session.getAttribute("loginUser")).getUserNo() != uno){
+			
+			ArrayList<User> lgfollowerList1 = followService.selectFollowerList1(((User)session.getAttribute("loginUser")).getUserNo());//맞팔임
+			
+			ArrayList<User> lgfollowerList2 = followService.selectFollowerList2(((User)session.getAttribute("loginUser")).getUserNo());//맞팔 아님
+			
+			mv.setViewName("follow/followerListView2");
+		}else {
+			mv.setViewName("follow/followerListView");
+		}
+			
 		
 		return mv;
 	}
@@ -129,6 +167,7 @@ public class FollowController {
 		 * goodReview => 클릭한 유저와 로그인한 유저가 준 별점5점 책들 중에 동일한 책만 ArrayList로 가져온ㄷ
 		 * 
 		 */
+		
 		int userNo1 = ((User)session.getAttribute("loginUser")).getUserNo();
 		
 		Follow follow = new Follow(userNo1, uno);

@@ -41,9 +41,6 @@ public interface BoardService {
 	// 연재 상세 조회
 	Serial selectSerialDetail(int novelNo, String serialNo);
 	
-	// 연재 상세조회 아래 리스트
-	ArrayList<Serial> selectSerialDetailList(PageInfo pi, int novelNo, String serialNo);
-	
 	// 연재신청 서비스(insert)
 	int insertSerialRequest(SerialRequest sr);
 	
@@ -148,8 +145,9 @@ public interface BoardService {
 	// 추첨글의 총 적립된 포인트 조회
 	int selectDrawPoint(int boardNo);
 	
-	
-	
+	//경매자 등록
+	int insertBidUser(ADBoard b);
+	//입찰
 	
 	// 유림 시작
 	
