@@ -101,58 +101,6 @@ public class BoardDao {
 		return sqlSession.update("ADBoardMapper.drawIncreaseCount", boardNo);
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
 	public ADBoard selectDrawBoard(SqlSessionTemplate sqlSession, int boardNo) {
 		return sqlSession.selectOne("ADBoardMapper.selectDrawBoard", boardNo);
 	}
@@ -205,10 +153,13 @@ public class BoardDao {
 		return sqlSession.selectOne("ADBoardMapper.selectDrawPoint", boardNo);
 	}
 
+	public int insertBidUser(SqlSessionTemplate sqlSession, ADBoard b) {
+		return sqlSession.insert("ADBoardMapper.insertBidUser", b);
+	}
 
-
-
-
+	public int updatePrizeUser(SqlSessionTemplate sqlSession, ADBoard b) {
+		return sqlSession.update("ADBoardMapper.updatePrizeUser", b);
+	}
 
 
 
@@ -424,6 +375,11 @@ public class BoardDao {
 	public Novel selectNovelInfo(SqlSessionTemplate sqlSession, int novelNo) {
 		return sqlSession.selectOne("novelMapper.selectNovelinfo", novelNo);
 	}
+
+
+	
+
+
 
 	
 

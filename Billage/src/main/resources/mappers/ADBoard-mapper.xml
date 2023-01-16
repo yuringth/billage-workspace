@@ -42,8 +42,8 @@
 		<result column="INSTANTLY_PRICE" property="instantlyPrice"/>
 		<result column="BID_PRICE" property="bidPrice"/>
 		<result column="NOW_PRICE" property="nowPrice"/>
-		<result column="NICKNAME" property="nickname"/>
-		<result column="NICKNAME_1" property="prizeUser"/>
+		<result column="PRIZE_USER" property="prizeUser"/>
+		<result column="PRIZE_USER_NO" property="prizeUserNo"/>
 	</resultMap>	
 		
 	<!-- 추첨 글 작성 -->
@@ -223,6 +223,7 @@
 	<select id="selectAuctionBoard" resultMap="auctionBoardResultSet">
 		SELECT
 				AUCTION_NO
+				,PRIZE_USER PRIZE_USER_NO
 				,A.USER_NO
 				,NICKNAME
 				,ORIGIN_NAME
@@ -325,6 +326,33 @@
 		 WHERE
 		 		DRAW_NO = #{boardNo}
 	</select>
+	
+	<insert id="insertBidUser" parameterType=adboard>
+		INSERT
+		  INTO
+		  		AUCTION
+		  		(
+		  		AUCTION_NO
+		  		,USER_NO
+		  		,BID_PRICE
+		  		)
+		VALUES
+				(
+				#{boardNo}
+				,#{userNo}
+				,#{bidPrice}
+				)
+	</insert>
+	
+	<update id="updatePrizeUser" parameterType="adboard">
+		UPDATE
+				AUCTION_BOARD
+		   SET
+		   		PRIZE_USER = #{prizeUser}
+		   		,NOW_PRICE = #{bidPrice}
+		 WHERE
+		 		AUCTION_NO = #{boardNo}
+	</update>
 	
 	
 </mapper>
