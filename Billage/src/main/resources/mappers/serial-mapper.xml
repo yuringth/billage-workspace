@@ -178,28 +178,4 @@
 				)
 	</insert>
 	
-	<select id="selectSerialDetailList" resultMap="serialResultSet">
-		select
-			rownum,
-			serial_no,
-			serial_title,
-			s.count,
-			upload_date,
-			star_rating
-		from
-				serial s
-		left join
-				novel n
-		on
-				s.novel_no = n.novel_no
-		where
-				n.novel_no = #{ novel_no }
-		and
-				rownum = rownum
-		order
-		by
-				rownum desc
-	
-	</select>
-	
 </mapper>

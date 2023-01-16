@@ -419,17 +419,6 @@ public class BoardDao {
 		return sqlSession.selectOne("novelMapper.selectNovelinfo", novelNo);
 	}
 
-
-	public ArrayList<Serial> selectSerialDetailList(SqlSessionTemplate sqlSession, PageInfo pi, int novelNo, String serialNo) {
-		HashMap<String, Object> map = new HashMap<>();
-		map.put("serial_no", serialNo);
-		map.put("novel_no", novelNo);
-		int offset = (pi.getCurrentPage()- 1) * pi.getBoardLimit();
-		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		return (ArrayList)sqlSession.selectList("serialMapper.selectSerialDetailList", map, rowBounds);
-	}
-
-
 	
 
 
