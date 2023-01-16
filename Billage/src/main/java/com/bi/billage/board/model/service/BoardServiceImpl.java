@@ -343,6 +343,12 @@ public class BoardServiceImpl implements BoardService {
 	public int insertBidUser(ADBoard b) {
 		return boardDao.insertBidUser(sqlSession, b);
 	}
+	
+	//입찰자 테이블에 등ㄹ록
+	@Override
+	public int updatePrizeUser(ADBoard b) {
+		return boardDao.updatePrizeUser(sqlSession, b);
+	}
 
 	
 	

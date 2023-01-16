@@ -108,7 +108,7 @@
 				${ b.content }
 			</p>
 		</div>
-		<p class="nowPrice">현재가격 : ${ b.nowPrice }P</p>
+		<p class="nowPrice" id="nowPrice">현재가격 : ${ b.nowPrice }P</p>
 		<c:choose>
 			<c:when test="${ not empty b.instantlyPrice }">
 				<p class="instantlyPrice">즉시구매가 : ${ b.instantlyPrice }P</p>
@@ -192,7 +192,7 @@
 		</div>
 		
 		
-
+		<input type="hidden" id="prizeUserNo" value="${prizeUserNo}">
 		
 		
 		
@@ -261,8 +261,6 @@
 		
 		function bid(){
 			
-			var bidPrice = $('#bidPrice').val();
-			
 			if(${not empty loginUser}){
 				 
 				$.ajax({
@@ -270,23 +268,51 @@
 					 data : {
 						 boardNo : ${b.boardNo},
 						 userNo : ${loginUser.userNo},
-						 bidPrice : bidPrice,
-						 prizeUser : ${b.prizeUserNo}
+						 bidPrice : $('#bidPrice').val(),
+						 prizeUserNo : $('#prizeUserNo').val(),
+						 nowPrice : $('#nowPrice').text()
 					 },
 					 success : function(result){
-						 
+						$('#nowPrice').text(result.nowPrice);
+						$('#prizeUserNo').val(result.prizeUserNo);
+						$('#bidPrice').val(result.nowPrice);
+						//여기에 최소값 어쩌구 설정하기						 
 					 },
 					 error : function(){
 						 console.log('error');
 					 }
-					 
 				 })
 				 
 			}
+			
 		}
 		
 		
 		function buy(){
+			
+			if(${not empty loginUser}){
+				 
+				$.ajax({
+					 url : buy.ac,
+					 data : {
+						 boardNo : ${b.boardNo},
+						 userNo : ${loginUser.userNo},
+						 bidPrice : $('#bidPrice').val(),
+						 prizeUserNo : $('#prizeUserNo').val(),
+						 instantlyPrice : ${ b.instantlyPrice }
+					 },
+					 success : function(result){
+						$('#nowPrice').text(result.nowPrice);
+						$('#prizeUserNo').val(result.prizeUserNo);
+						$('#bidPrice').val(result.nowPrice);
+						//여기에 최소값 어쩌구 설정하기						 
+					 },
+					 error : function(){
+						 console.log('error');
+					 }
+				 })
+				 
+			}
 			
 		}
 		

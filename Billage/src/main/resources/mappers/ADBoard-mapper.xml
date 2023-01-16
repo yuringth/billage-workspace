@@ -344,6 +344,16 @@
 				)
 	</insert>
 	
+	<update id="updatePrizeUser" parameterType="adboard">
+		UPDATE
+				AUCTION_BOARD
+		   SET
+		   		PRIZE_USER = #{prizeUser}
+		   		,NOW_PRICE = #{bidPrice}
+		 WHERE
+		 		AUCTION_NO = #{boardNo}
+	</update>
+	
 	
 </mapper>
 
