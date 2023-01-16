@@ -176,7 +176,6 @@ public class BoardDao {
 
 
 
-
 	
 	
 	
@@ -317,7 +316,18 @@ public class BoardDao {
 	}
 	
 	
+	//중고게시판 수정버튼 클릭 시 => 게시판 번호를 식별자로 DB에서 select해옴
+	public UsedBoard selectUpdateUsedBoard(SqlSessionTemplate sqlSession, int usedNo) {
+		return sqlSession.selectOne("usedMapper.selectUpdateUsedBoard", usedNo);
+	}
 	
+	
+	// 중고게시판 글 수정하기 버튼 클릭시 => 수정되어 update됨
+	public int usedUpdate(SqlSessionTemplate sqlSession, UsedBoard b) {
+		System.out.println("여긴 dao" + b);
+		return sqlSession.update("usedMapper.usedUpdate", b);
+				
+	}
 	
 	
 	// 유림끝  ==========================================================
@@ -375,6 +385,9 @@ public class BoardDao {
 	public Novel selectNovelInfo(SqlSessionTemplate sqlSession, int novelNo) {
 		return sqlSession.selectOne("novelMapper.selectNovelinfo", novelNo);
 	}
+
+
+	
 
 
 	

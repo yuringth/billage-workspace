@@ -335,11 +335,7 @@
 					tryPoint : ${b.tryPoint}
 				},
 				success : function(result){
-					if(result.prizeUser != null){
-						$('#prizeUser').text('낙찰자 : ' + result.prizeUser)
-					} else {
-						$('#prizeUser').text('입찰자가 없어서 낙찰자가 없습니다.')
-					}
+					
 				},error : function(){
 					console.log('오류');
 				}
