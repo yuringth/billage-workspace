@@ -272,6 +272,7 @@ public class BoardDao {
 		return sqlSession.insert("reviewMapper.insertReviewBoard", b);
 	}
 	
+
 	
 	// 리뷰게시판 => 조회수 증가
 	public int increaseReviewCount(SqlSessionTemplate sqlSession, int reviewNo) {
@@ -303,6 +304,12 @@ public class BoardDao {
 	public int updateReviewBoard(SqlSessionTemplate sqlSession, ReviewBoard b) {
 		return sqlSession.update("reviewMapper.updateReviewBoard", b);
 	}
+	
+	
+
+	
+	
+	
 	
 	
 	
