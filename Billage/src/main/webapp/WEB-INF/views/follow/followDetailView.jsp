@@ -90,9 +90,9 @@
 		<div class="badBook" >
 			<div class="book2Box" style="width:70%; height: 400px; background-color: rgb(235, 235, 235); margin:auto; display:flex; flex-direction: row; justify-content: space-evenly;">
 				<div class="book2" style="margin-top: 50px;">
-					<div id="badbookimg"><img src="" width="150px;" height="250px;"></div>
+					<div id="badbookimg"><img src="${badReview.bookImag }" width="150px;" height="250px;"></div>
 					<br>
-					<div id="badBookTitle">책 제목</div>
+					<div id="badBookTitle">${badReview.bookTitle }</div>
 				</div>	
 			</div>
 		</div>

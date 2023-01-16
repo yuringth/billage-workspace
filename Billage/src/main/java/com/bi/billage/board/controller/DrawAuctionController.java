@@ -236,11 +236,11 @@ public class DrawAuctionController {
 				
 				int rNo = (int)(Math.random() * 10);
 				
-				while(rNo > list.size()) {
+				while(rNo >= list.size()) {
 					rNo = (int)(Math.random() * 10);
 				};
 				
-				userNo = list.get(rNo);;
+				userNo = list.get(rNo);
 			};
 			
 			b.setUserNo(userNo);
