@@ -337,8 +337,15 @@ public class BoardServiceImpl implements BoardService {
 	public Novel selectNovelInfo(int novelNo) {
 		return boardDao.selectNovelInfo(sqlSession, novelNo);
 	}
+	
+	// 입찰
+	@Override
+	public int insertBidUser(ADBoard b) {
+		return boardDao.insertBidUser(sqlSession, b);
+	}
 
-
+	
+	
 	
 
 

@@ -205,6 +205,9 @@ public class BoardDao {
 		return sqlSession.selectOne("ADBoardMapper.selectDrawPoint", boardNo);
 	}
 
+	public int insertBidUser(SqlSessionTemplate sqlSession, ADBoard b) {
+		return sqlSession.insert("ADBoardMapper.insertBidUser", b);
+	}
 
 
 
@@ -424,6 +427,8 @@ public class BoardDao {
 	public Novel selectNovelInfo(SqlSessionTemplate sqlSession, int novelNo) {
 		return sqlSession.selectOne("novelMapper.selectNovelinfo", novelNo);
 	}
+
+
 
 	
 

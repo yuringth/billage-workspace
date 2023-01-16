@@ -124,7 +124,7 @@
 			</div>
 			<div style="width:100px">
 			
-					<input type="number" id="bidPrice" value="${ b.nowPrice }" width="100px" step="${ b.bidPrice } }">
+					<input type="number" id="bidPrice" value="${ b.nowPrice }" width="100px" step="${ b.bidPrice }">
 				
 			</div>
 		</div>
@@ -136,7 +136,7 @@
 			<c:when test="${ not empty loginUser }">
 				<c:choose>
 				<c:when test="${ loginUser.userNo != b.userNo }">
-					<c:if test="${ loginUser.point >= b.bidPoint && not empty b.instantlyPrice }">
+					<c:if test="${ loginUser.point >= b.bidPrice && not empty b.instantlyPrice }">
 						
 						<button class="btn1 btn btn-dark" onclick="buy();">
 							즉시구매
@@ -146,16 +146,16 @@
 						</button>
 						
 					</c:if>
-					<c:if test="${ loginUser.point >= b.bidPoint && empty b.instantlyPrice }">
+					<c:if test="${ loginUser.point >= b.bidPrice && empty b.instantlyPrice }">
 						
 						<button class="btn1 btn btn-secondary" onclick="bid();">
 							입찰
 						</button>
 						
 					</c:if>
-					<c:if test="${ loginUser.point < b.bidPoint && not empty b.instantlyPrice }">
+					<c:if test="${ loginUser.point < b.bidPrice && not empty b.instantlyPrice }">
 						
-						<button class="btn1 btn btn-dark">
+						<button class="btn1 btn btn-dark" onclick="notEnoughtPoint();">
 							즉시구매
 						</button>
 						<button class="btn1 btn btn-secondary" onclick="notEnoughtPoint();">
@@ -163,7 +163,7 @@
 						</button>
 						
 					</c:if>
-					<c:if test="${ loginUser.point < b.bidPoint && empty b.instantlyPrice }">
+					<c:if test="${ loginUser.point < b.bidPrice && empty b.instantlyPrice }">
 						
 						<button class="btn1 btn btn-secondary" onclick="notEnoughtPoint();">
 							입찰
@@ -258,23 +258,20 @@
 		    }
 		}
 		
-		var prizeUser;
 		
-		if(${not empty prizeUser}){
-			prizeUser = ${prizeUser};
-		} else {
-			prizeUser = null;
-		}
-		
-		if(${not empty loginUser}){
-			function bid(){
-				 $.ajax({
+		function bid(){
+			
+			var bidPrice = $('#bidPrice').val();
+			
+			if(${not empty loginUser}){
+				 
+				$.ajax({
 					 url : bid.ac,
 					 data : {
 						 boardNo : ${b.boardNo},
 						 userNo : ${loginUser.userNo},
-						 bidPrice : ${b.bidPrice},
-						 prizeUser : prizeUser
+						 bidPrice : bidPrice,
+						 prizeUser : ${b.prizeUserNo}
 					 },
 					 success : function(result){
 						 
@@ -284,6 +281,7 @@
 					 }
 					 
 				 })
+				 
 			}
 		}
 		
