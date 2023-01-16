@@ -46,12 +46,12 @@
 		<hr>
 		<div class="rt-box">
 
-			<%--<c:forEach items="" var="">--%>
+			<%--<c:forEach items="${list}" var="rt">--%>
 			<div class="rt-contentbox">
-				<input type="hidden" name="" value=""> <img src=""
+				<input type="hidden" name="rentNo" value=""> <img src=""
 					width="255" height="200">
 				<p>
-					<span class="rt-title">글제목</span><br> 글쓴이<br> 포인트입력 <br> 대여시작일 : 2023-01-15
+					<span class="rt-title">제목 : </span><br> 글쓴이 : <br> 포인트 :  <br> 대여시작일 : 2023-01-15
 				</p>
 			</div>
 			<%--</c:forEach> --%>

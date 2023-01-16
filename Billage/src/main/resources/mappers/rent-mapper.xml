@@ -4,14 +4,51 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="rentMapper">
 
-
-
-
-
-
-
-
-
-
-
+	<resultMap id="RentBoardResultSet" type="rent">
+		<result column="RENT_NO"		property="rentNo" />
+		<result column="USER_NO"		property="userNo" />
+		<result column="RENT_USERNO"	property="rentUserNo" />
+		<result column="RENT_TITLE"		property="rentTitle" />
+		<result column="RENT_CONTENT"	property="rentContent" />
+		<result column="RENT_POINT"		property="rentPoint" />
+		<result column="CREATEDATE"		property="createDate" />
+		<result column="RENT_IMG"		property="rentImg" />
+		<result column="RENT_DATE"		property="rentDate" />
+		<result column="DUE_DATE"		property="dueDate" />
+		<result column="RENT_STATUS"	property="rentStatus" />
+		<result column="RENT_BOOKTITLE"	property="rentBookTitle" />
+		<result column="STATUS"			property="status" />
+	</resultMap>
+	
+	<!-- 게시글 총 개수 조회 -->
+	<select id="selectRentBoardListCount" resultType="_int">
+		SELECT
+				COUNT(*)
+		FROM
+				RENT_BOARD
+		WHERE
+				STATUS = 'N'
+	</select>
+	
+	<!-- 게시글 조회 -->
+	<select id="selectRentBoardList" resultMap="RentBoardResultSet">
+		SELECT
+				RENT_NO,
+				RENT_IMG,
+				RENT_TITLE,
+				RENT_POINT,
+				RENT_DATE,
+				NICKNAME
+		FROM
+				RENT_BOARD R, MEMBER M
+		WHERE
+				R.USER_NO = M.USER_NO
+		AND
+				R.STATUS = 'N'
+		ORDER
+		   BY
+		   		RENT_NO DESC
+	</select>
+	
+	
 </mapper>
