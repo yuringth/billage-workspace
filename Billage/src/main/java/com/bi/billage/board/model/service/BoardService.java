@@ -187,7 +187,7 @@ public interface BoardService {
 	int updateUsedBoard(UsedBoard b);
 	
 	// 중고게시판 TOP-N 분석(조회수 높은 순으로 띄우기)(select)
-	ArrayList<UsedBoard> selectTopBoard();
+	ArrayList<UsedBoard> selectTopUsed();
 	
 	
 	

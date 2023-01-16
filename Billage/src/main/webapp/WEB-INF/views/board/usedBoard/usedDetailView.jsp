@@ -71,12 +71,14 @@
 	width:1000px;
 	margin:auto;
 	display: flex;
-	
+	flex-wrap: wrap;	
 }
 
   .align-left-outer{
       display: flex;
       flex-wrap: wrap;
+      width : 400px;
+      height: 534px;
   }
   .one-content{
       width : 400px;
@@ -185,7 +187,9 @@ font-size: 25px;
 
 		<!-- 인기 topN분석 -->
 		<h1 class="topn-text">Billage의 인기중고</h1>
+	
 		<div class="topn-outer">
+		
 			<!-- 상품 하나를 감싸는 div -->
 			<div class="align-left-outer">
 		        <div class="one-content">
@@ -202,56 +206,63 @@ font-size: 25px;
 			</div>
 			
 			
-			<!-- 상품 하나를 감싸는 div -->
-			<div class="align-left-outer">
-		        <div class="one-content">
-		            <div class="img-area">
-		                <img src="https://img.sbs.co.kr/newimg/news/20160122/200906797_700.jpg" onclick="location.href='detail.ud'">
-		            </div>
-		            <div class="text-area">
-		                <p class="title-text">상품 제목</p>
-		                <p class="textsize">180,000원</p>
-		                <p class="textsize">♡</p>
-		                <p class="countnum">조회 : 10</p>
-		            </div>
-		        </div>
-			</div>
-			
-			
-			<!-- 내려가게해야함,,,,,,,,,,,  -->
-			<!-- 상품 하나를 감싸는 div -->
-			<div class="align-left-outer">
-		        <div class="one-content">
-		            <div class="img-area">
-		                <img src="https://img.sbs.co.kr/newimg/news/20160122/200906797_700.jpg" onclick="location.href='detail.ud'">
-		            </div>
-		            <div class="text-area">
-		                <p class="title-text">상품 제목</p>
-		                <p class="textsize">180,000원</p>
-		                <p class="textsize">♡</p>
-		                <p class="countnum">조회 : 10</p>
-		            </div>
-		        </div>
-			</div>
-			
-			<!-- 상품 하나를 감싸는 div -->
-			<div class="align-left-outer">
-		        <div class="one-content">
-		            <div class="img-area">
-		                <img src="https://img.sbs.co.kr/newimg/news/20160122/200906797_700.jpg" onclick="location.href='detail.ud'">
-		            </div>
-		            <div class="text-area">
-		                <p class="title-text">상품 제목</p>
-		                <p class="textsize">180,000원</p>
-		                <p class="textsize">♡</p>
-		                <p class="countnum">조회 : 10</p>
-		            </div>
-		        </div>
-			</div>
 		</div>
 
 
-	
+   	
+   	
+   	
+   	<!-- topn분석 -->
+   	<script>
+   		$(function(){
+   			topUsedList();
+   			
+   			
+   			
+   			
+   			
+   			
+   		})
+   	
+	   	function topUsedList(){
+	   		
+	   		$.ajax({
+	   			url:'topList.ud',
+	   			success:function(data){
+	   				console.log(data);
+	   				
+	   				let value = '';
+	   				for(let i in data){
+	   					value += '<div class="align-left-outer">'
+	   						  + '<div class="one-content">'
+	   						  + '<div class="img-area">'
+	   						  + '<img src="https://img.sbs.co.kr/newimg/news/20160122/200906797_700.jpg" onclick="location.href='detail.ud'">'
+	   						  + '</div>'
+	   						  + '<div class="text-area">'
+	   						  + '<p class="title-text">' + data[i].bookTitle + '</p>'
+	   						  + '<p class="textsize">' + data[i].point + '</p>'
+	   						  + '<p class="textsize">' + ♡  + '</p>'
+	   						  + '<p class="countnum">' + 조회 : data[i].count + '</p>'
+	   						  + '</div>'
+	   						  + '</div>'
+	   						  + '</div>';
+	   				}
+	   				$('.topn-outer').html(value);
+	   				
+	   				
+	   			},
+	   			error:function(){
+	   				console.log('실패');
+	   			}
+	   		})
+	   	}
+   	
+   	
+   	</script>
+ 
+   	
+   	
+   	
 	
 	
 	

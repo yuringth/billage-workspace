@@ -323,6 +323,14 @@ public class BoardDao {
 	
 	
 	
+	// 중고게시판 => topn분석
+	public ArrayList<UsedBoard> selectTopUsed(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("usedMapper.selectTopUsed");
+	}
+	
+	
+	
+	
 	// 유림끝  ==========================================================
 	
 	/////////////////////////////////////////////

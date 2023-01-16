@@ -187,11 +187,21 @@ public class BoardServiceImpl implements BoardService {
 		return 0;
 	}
 
+	
+	// 중고게시판 글 수정하기 버튼 클릭시 => 수정되어 update됨
+	@Override
+	public int usedUpdate(UsedBoard b) {
+		System.out.println("여긴 서비스" + b);
+		return boardDao.usedUpdate(sqlSession, b);
+	}
+	
+	
+	
+	// 중고게시판 => topn분석
 	//중고게시판
 	@Override
-	public ArrayList<UsedBoard> selectTopBoard() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<UsedBoard> selectTopUsed() {
+		return boardDao.selectTopUsed(sqlSession);
 	}
 
 	
