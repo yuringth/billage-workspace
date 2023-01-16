@@ -42,11 +42,14 @@ public class BoardController {
 		return mv;
 	}
 	
-	// 연재 리스트 화면 +페이징처리
+	// 연재 리스트 화면 +페이징처리 +작품 정보 조회
 	@RequestMapping("list.se")
 	public ModelAndView selectSerialList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv, int nno) {
 		PageInfo pi = Pagination.getPageInfo(boardService.selectSerialListCount(), currentPage, 10, 10);
-		mv.addObject("pi", pi)/*.addObject("novelInfo", boardService.selectNovelInfo(nno))*/.addObject("list", boardService.selectSerialList(pi, nno)).setViewName("board/serialBoard/serialListView");
+		mv.addObject("pi", pi)
+		.addObject("novel", boardService.selectNovelInfo(nno))
+		.addObject("list", boardService.selectSerialList(pi, nno))
+		.setViewName("board/serialBoard/serialListView");
 		
 		// mv.addObject("뭐시기", 뭐시기).addObject("화면단에불러올값", 서비스.메소드(넘길꺼).setViewName("최종적으로어디화면에뿌릴건지"); => addObject 계속할수있다.....
 		
@@ -55,11 +58,15 @@ public class BoardController {
 		return mv;
 	}
 	
-	// 연재 상세보기 화면
+	// 연재 상세보기 화면 +밑에 페이징+위에 작품정보+ 몇화 제목 작성일 내용...
 	@RequestMapping("detail.se")
 	public ModelAndView selectSerialDetail(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv, @Param("novelNo") int nno, @Param("serialNo") String sno) {
 		PageInfo pi = Pagination.getPageInfo(boardService.selectSerialListCount(), currentPage, 10, 5);
-		mv.addObject("pi", pi).addObject("list", boardService.selectSerialDetail(pi, nno, sno)).setViewName("board/serialBoard/serialDetailView");
+		mv.addObject("pi", pi)
+		.addObject("serial", boardService.selectSerialDetail(nno, sno))
+		.addObject("novel", boardService.selectNovelInfo(nno))
+		.addObject("list", boardService.selectSerialList(pi, nno))
+		.setViewName("board/serialBoard/serialDetailView");
 		
 		return mv;
 	}

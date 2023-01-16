@@ -132,9 +132,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public ArrayList<Serial> selectSerialDetail(PageInfo pi, int novelNo, String serialNo) {
+	public Serial selectSerialDetail(int novelNo, String serialNo) {
 		// TODO Auto-generated method stub
-		return boardDao.selectSerialDetail(sqlSession, pi, novelNo, serialNo);
+		return boardDao.selectSerialDetail(sqlSession, novelNo, serialNo);
 	}
 	
 	//중고게시판 => 글작성 시 insert
@@ -334,6 +334,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int selectDrawPoint(int boardNo) {
 		return boardDao.selectDrawPoint(sqlSession, boardNo);
+	}
+
+	@Override
+	public Novel selectNovelInfo(int novelNo) {
+		return boardDao.selectNovelInfo(sqlSession, novelNo);
 	}
 
 	

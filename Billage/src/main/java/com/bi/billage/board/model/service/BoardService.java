@@ -35,8 +35,11 @@ public interface BoardService {
 	// 연재 리스트 조회
 	ArrayList<Serial> selectSerialList(PageInfo pi, int novelNo);
 	
+	// 연재 리스트 작품 정보 조회
+	Novel selectNovelInfo(int nno);
+	
 	// 연재 상세 조회
-	ArrayList<Serial> selectSerialDetail(PageInfo pi, int novelNo, String serialNo);
+	Serial selectSerialDetail(int novelNo, String serialNo);
 	
 	// 연재신청 서비스(insert)
 	int insertSerialRequest(SerialRequest sr);

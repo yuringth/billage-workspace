@@ -42,7 +42,7 @@
 	<!-- 가로로 4개 세로로 2개  => 한 화면에 8개 -->
 	<div class="rt-outer">
 		<h2>대여게시판</h2>
-		<div style="display: flex; justify-content: end;"><button onclick="location.href='insert.rt'">글 올리기</button></div>
+		<div style="display: flex; justify-content: end;"><button onclick="location.href='enrollForm.rt'">글 올리기</button></div>
 		<hr>
 		<div class="rt-box">
 

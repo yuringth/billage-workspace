@@ -378,13 +378,11 @@ public class BoardDao {
 		
 	}
 
-	public ArrayList<Serial> selectSerialDetail(SqlSessionTemplate sqlSession, PageInfo pi, int novelNo, String serialNo) {
-		int offset = (pi.getCurrentPage()- 1) * pi.getBoardLimit();
-		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+	public Serial selectSerialDetail(SqlSessionTemplate sqlSession, int novelNo, String serialNo) {
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("serial_no", serialNo);
 		map.put("novel_no", novelNo);
-		return (ArrayList)sqlSession.selectList("serialMapper.selectSerialDetail", map, rowBounds);
+		return sqlSession.selectOne("serialMapper.selectSerialDetail", map);
 		}
 	
 	public int insertSerialRequest(SqlSessionTemplate sqlSession, SerialRequest sr) {
@@ -402,6 +400,11 @@ public class BoardDao {
 		map.put("se", se);
 		map.put("novelNo", novelNo);
 		return sqlSession.insert("serialMapper.insertSerial", map);
+	}
+
+
+	public Novel selectNovelInfo(SqlSessionTemplate sqlSession, int novelNo) {
+		return sqlSession.selectOne("novelMapper.selectNovelinfo", novelNo);
 	}
 
 
