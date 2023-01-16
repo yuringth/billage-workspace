@@ -195,11 +195,10 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	
-	//중고게시판
+	// 중고게시판 => topn분석
 	@Override
-	public ArrayList<UsedBoard> selectTopBoard() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<UsedBoard> selectTopUsed() {
+		return boardDao.selectTopUsed(sqlSession);
 	}
 
 	
