@@ -40,8 +40,8 @@
 			<div id="nickName"><a href="selectUser.fo?uno=${ user.userNo }">${ user.nickname }</a></div>
 			<div class="detailList" style="display:flex; flex-direction: row;">
 				<div id="review"><a href="selectReviewList.fo?uno=${ user.userNo }">평가 150 &nbsp;</a></div>
-				<div id="following" ><a href="selectFollowing.fo">팔로잉&nbsp;${ user.following }&nbsp;</a></div>
-				<div id="follower" ><a href="selectFollower.fo">팔로우&nbsp;${ user.follower }&nbsp;</a></div>
+				<div id="following" ><a href="selectFollowing.fo?uno=${ user.userNo }">팔로잉&nbsp;${ user.following }&nbsp;</a></div>
+				<div id="follower" ><a href="selectFollower.fo?uno=${user.userNo }">팔로우&nbsp;${ user.follower }&nbsp;</a></div>
 			</div>
 		</div>
 		<br>	

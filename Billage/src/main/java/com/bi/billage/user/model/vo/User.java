@@ -30,4 +30,6 @@ public class User {
 	private int maxStar;				// 제일 많이 준 별점 
 	
 	private int point; 				// 포인트
+	
+	private int followStatus; // 팔로우 여부
 }

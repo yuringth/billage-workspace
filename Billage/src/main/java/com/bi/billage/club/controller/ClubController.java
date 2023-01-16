@@ -24,6 +24,8 @@ import com.bi.billage.club.model.vo.Club;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.common.savefile.SaveFile;
 import com.bi.billage.common.template.Pagination;
+import com.bi.billage.message.model.service.MessageService;
+import com.bi.billage.message.model.vo.Message;
 import com.bi.billage.user.model.vo.User;
 import com.google.gson.Gson;
 
@@ -35,6 +37,9 @@ public class ClubController {
 	
 	@Autowired
 	private ClubService clubService;
+	
+	@Autowired
+	private MessageService messageService;
 	
 	//등록된 모임 리스트를 가지고 와야 함 , 페이징 처리 필요
 	@RequestMapping("list.cl")
@@ -179,13 +184,48 @@ public class ClubController {
 	public ModelAndView clubMemerSelectAdmin(int clubNo, ModelAndView mv) {
 		
 		ArrayList<Club> ClubMemberList = clubService.clubMemerSelectAdmin(clubNo);
-		System.out.println(ClubMemberList);
+		//System.out.println(ClubMemberList);
 		
 		mv.addObject("memberList", ClubMemberList);
 		mv.setViewName("club/clubMemberAdminView");
 		
 		return mv;
 	}
+	
+	
+	@Transactional
+	@RequestMapping("message.cl")
+	public String clubMessageInsert(Model model, long clubNo, int userNo, int[] userNo2, String messageContent) {
+		// 요청을 받고 보낼 때 값에 문제가 발생해서 강제 형변환 해놓음 
+		//clubNo = (int)clubNo;
+		
+		ArrayList<Message> messageList = new ArrayList();
+		
+		for(int i = 0; i < userNo2.length; i++) {
+			Message message = new Message();
+			message.setUserNo(userNo);
+			message.setUserNo2(userNo2[i]);
+			message.setMessageContent(messageContent);
+
+			messageList.add(message);
+		}
+		
+		if(messageService.insertClubMessage(messageList) > 0 ) {
+			model.addAttribute("alertMsg", "메세지 전송에 성공하였습니다");
+			return "redirect:clubMemAdmin.cl?clubNo=" + (int)clubNo;
+			
+		} else {
+			model.addAttribute("errorMsg", "메세지 전송 실패");
+			return "common/errorPage";
+			
+		}
+				
+	}
+	
+	
+	
+	
+	
 	
 	// 지역을 찾는 API을 구현 함 
 	@ResponseBody
@@ -230,10 +270,7 @@ public class ClubController {
 	}
 	
 	
-	
-	
-	// 모임등록 하면 값 들어오는 메소드 --------------------------------- 기능 구현 필요함 
-	@Transactional
+	// club 등록 후 club 모임장 club Member로 Insert 
 	@RequestMapping("create.cl")
 	public String insertclub(Model model, Club club, MultipartFile upfile, HttpSession session) {
 		//System.out.println(group);

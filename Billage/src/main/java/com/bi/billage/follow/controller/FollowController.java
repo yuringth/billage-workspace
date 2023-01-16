@@ -27,25 +27,91 @@ public class FollowController {
 	@RequestMapping("selectFollowing.fo")
 	public ModelAndView selectFollowingList(int uno, ModelAndView mv,HttpSession session) {
 		
+		//상대방의 팔로잉 리스트
 		ArrayList<User> followingList = followService.selectFollowingList(uno);
+
 		
-		mv.addObject("followingList",followingList)
-			.setViewName("follow/followingListView");
+		mv.addObject("followingList",followingList);
+		
+		if(((User)session.getAttribute("loginUser")).getUserNo() != uno) {
+			
+			//로그인 유저의 팔로잉 리스트
+			ArrayList<User> lgFollowingLlist = followService.selectFollowingList(((User)session.getAttribute("loginUser")).getUserNo());
+			
+			for(int i = 0; i < lgFollowingLlist.size(); i++) {
+				
+				int luserNo = lgFollowingLlist.get(i).getUserNo();
+				
+				for(int j = 0; j < followingList.size(); j++ ) {
+					
+					if (luserNo == followingList.get(j).getUserNo()) {
+						
+						followingList.get(j).setFollowStatus(1);
+					
+					};
+				};
+			};
+			
+			mv.addObject("lgFollowingLlist", lgFollowingLlist).setViewName("follow/followingListView2");			
+			
+		}else {
+			mv.setViewName("follow/followingListView");
+		}
 		
 		return mv;
-	}
+	}	
 	
 	//followerList 내가 follow 한 사람과 하지 않은 사람을 각각 나누어서 select 함
 	@RequestMapping("selectFollower.fo")
 	public ModelAndView selectFollowerList(int uno, ModelAndView mv, HttpSession session) {
 		
-		ArrayList<User> followerList1 = followService.selectFollowerList1(uno);
-		
-		ArrayList<User> followerList2 = followService.selectFollowerList2(uno);
+		ArrayList<User> followerList1 = followService.selectFollowerList1(uno);//맞팔임
+
+		ArrayList<User> followerList2 = followService.selectFollowerList2(uno);//맞팔아님 
 		
 		mv.addObject("followerList1",followerList1)
-			.addObject("followerList2", followerList2)
-			.setViewName("follow/followerListView");
+		.addObject("followerList2", followerList2);
+			
+		//uno == loginUser.userNo 면 followerListView, 아니라면 folloewrListView2
+		if(((User)session.getAttribute("loginUser")).getUserNo() != uno){
+			
+			ArrayList<User> lgFollowerList1 = followService.selectFollowerList1(((User)session.getAttribute("loginUser")).getUserNo());//loginUser맞팔리스트
+			ArrayList<User> lgFollowerList2 = followService.selectFollowerList2(((User)session.getAttribute("loginUser")).getUserNo());//loginUser맞팔아닌 계정 리스트
+		
+			// 맞팔리스트들 끼리 비교해서 로그인 유저와 같은 계정이 있으면 status를 1로 변경
+			for(int i = 0; i<lgFollowerList1.size(); i++) {
+				
+				int lg1No = lgFollowerList1.get(i).getUserNo();
+				
+				for(int j = 0; j<followerList1.size(); j++) {
+					
+					if(lg1No == followerList1.get(j).getUserNo()) {
+						
+						followerList1.get(j).setFollowStatus(1);
+					}
+				}
+				
+			}
+			
+			//맞팔이 아닌 리스트들 끼리 비교해서 로그인 유저와 같은 계정이 있으면 status를 1로 변경 -> 로그인 유저와는 맞팔이라는 뜻 
+			for(int m = 0; m<lgFollowerList2.size(); m++) {
+				
+				int lg2No = lgFollowerList2.get(m).getUserNo();
+				
+				for(int n = 0; n<followerList2.size(); n++) {
+					
+					if(lg2No == followerList2.get(n).getUserNo()) {
+						
+						followerList2.get(n).setFollowStatus(1);
+					}
+				}
+			}
+			
+			mv.setViewName("follow/followerListView2");
+		}else {
+			mv.setViewName("follow/followerListView");
+		}
+			
 		
 		return mv;
 	}
@@ -129,6 +195,7 @@ public class FollowController {
 		 * goodReview => 클릭한 유저와 로그인한 유저가 준 별점5점 책들 중에 동일한 책만 ArrayList로 가져온ㄷ
 		 * 
 		 */
+		
 		int userNo1 = ((User)session.getAttribute("loginUser")).getUserNo();
 		
 		Follow follow = new Follow(userNo1, uno);
@@ -139,7 +206,32 @@ public class FollowController {
 		
 		ArrayList<ReviewBoard> goodReview = followService.selectGoodReview(follow);
 		
-		mv.addObject("user", user).addObject("star", star).addObject("goodReview",goodReview).setViewName("follow/followDetailView");
+		ArrayList<ReviewBoard> badReview = followService.selectBadReview(follow);
+		
+		
+		ReviewBoard b = new ReviewBoard();
+		
+		int rNum;
+		
+		if(badReview.size() > 10) {
+			
+			rNum =  (int)(Math.random() * badReview.size());
+			b = badReview.get(rNum);
+			
+		}else {
+			
+			rNum =  (int)(Math.random() * 10);
+			
+			for(int i = 0; i < badReview.size(); i++) {
+				if (rNum <= badReview.size()) {
+					b = badReview.get(rNum);
+				}
+				
+			}
+		}
+		
+		
+		mv.addObject("user", user).addObject("star", star).addObject("goodReview",goodReview).addObject("badReview", b).setViewName("follow/followDetailView");
 		
 		return mv;
 		

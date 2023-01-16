@@ -145,6 +145,12 @@ public interface BoardService {
 	// 추첨글의 총 적립된 포인트 조회
 	int selectDrawPoint(int boardNo);
 	
+	//입찰
+	int insertBidUser(ADBoard b);
+	//입찰자 테이블에 등록
+	int updatePrizeUser(ADBoard b);
+	
+	
 	
 	
 	
@@ -171,8 +177,11 @@ public interface BoardService {
 	// 중고게시판 삭제 (update) 
 	int deleteUsedBoard(int usedNo);
 	
-	// 중고게시글 수정 서비스(update)
-	int updateUsedBoard(UsedBoard b);
+	// 중고게시글 수정 서비스(update) 수정버튼 클릭 시 => 게시판 번호를 식별자로 DB에서 select해옴
+	UsedBoard selectUpdateUsedBoard(int usedNo);
+	
+	// 중고게시판 글 수정하기 버튼 클릭시 => 수정되어 update됨
+	int usedUpdate(UsedBoard b);
 	
 	// 중고게시판 TOP-N 분석(조회수 높은 순으로 띄우기)(select)
 	ArrayList<UsedBoard> selectTopBoard();
