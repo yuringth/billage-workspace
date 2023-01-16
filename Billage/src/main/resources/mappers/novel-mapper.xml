@@ -75,5 +75,27 @@
 				#{changeName}
 				)
 	</insert>
+	
+	<select id="selectNovelinfo" resultMap="novelResultSet">
+		select
+			novel_no,
+			n.user_no,
+			novel_title,
+			nickname,
+			novel_display,
+			start_date,
+			serial_status,
+			charge_status,
+			origin_name,
+			change_name
+		from
+			novel n
+		join
+			member m
+		on
+				n.user_no = m.user_no
+		where
+			novel_no = #{novelNo}
+	</select>
 
 </mapper>

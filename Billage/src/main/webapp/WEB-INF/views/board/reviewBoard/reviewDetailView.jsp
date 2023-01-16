@@ -86,11 +86,14 @@
 		
 		<!-- 리뷰넘버 식별자로 넘기기 -->
 		<input type="hidden" neme="reviewNo" value="${ b.reviewNo }">
+		${ b.reviewNo }
 		<input type="hidden" neme="userNo" value="${ b.userNo }">
-
+		${ b.userNo }
+		
+		
 		<hr>
 		
-				<!-- 	<div id="book_imag" name="bookImag">${ b.bookImag }</div> -->
+		<!-- 	<div id="book_imag" name="bookImag">${ b.bookImag }</div> -->
 		<!-- api 책정보 끌어오기 -->
 		<div class="book-detail-outer">
 			<div class="book-detail-area">
@@ -133,7 +136,7 @@
 				<c:choose>
 					<c:when test="${loginUser.userNo eq b.userNo}">
 						<button onclick="postFormSubmit()">글수정</button>
-						<button onclick="location.href='delete.re?reviewNo=${ b.reviewNo }'">글삭제</button>
+						<button onclick="location.href='delete.re?reviewNo=${ b.reviewNo }&userNo=${ b.userNo }'">글삭제</button>
 						<button>뒤로가기</button>
 					</c:when>
 					<c:otherwise>	
@@ -154,6 +157,7 @@
 				<input type="hidden" name="bookImag" value="${ b.bookImag }" />
 				<input type="hidden" name="reviewStar" value="${ b.reviewStar }" />
 				<input type="hidden" name="reviewContent" value="${ b.reviewContent }" />
+				
 			</form>
 
 			<script>

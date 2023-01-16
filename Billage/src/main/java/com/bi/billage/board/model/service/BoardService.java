@@ -35,8 +35,11 @@ public interface BoardService {
 	// 연재 리스트 조회
 	ArrayList<Serial> selectSerialList(PageInfo pi, int novelNo);
 	
+	// 연재 리스트 작품 정보 조회
+	Novel selectNovelInfo(int nno);
+	
 	// 연재 상세 조회
-	ArrayList<Serial> selectSerialDetail(PageInfo pi, int novelNo, String serialNo);
+	Serial selectSerialDetail(int novelNo, String serialNo);
 	
 	// 연재신청 서비스(insert)
 	int insertSerialRequest(SerialRequest sr);
@@ -142,6 +145,12 @@ public interface BoardService {
 	// 추첨글의 총 적립된 포인트 조회
 	int selectDrawPoint(int boardNo);
 	
+	//입찰
+	int insertBidUser(ADBoard b);
+	//입찰자 테이블에 등록
+	int updatePrizeUser(ADBoard b);
+	
+	
 	
 	
 	
@@ -157,16 +166,22 @@ public interface BoardService {
 	// 중고게시판 작성 (insert) 
 	int insertUsedBoard(UsedBoard b);
 	
+	
 	// 중고게시글 조회수 증가 (update)
-	int increaseUsedCount(int boardNo);
+	int increaseUsedCount(int usedNo);
 	// 중고게시판 상세 조회 (select)
-	UsedBoard selectUsedBoard(int boardNo);
+	// select해서 가져온 값을 UsedBoard VO에 담아줘야해서 자료형은 UsedBoard로 사용
+	UsedBoard selectUsedBoard(int usedNo);
 	
-	// 중고게시판 삭제 (update)
-	int deleteUsedBoard(int boardNo);
 	
-	// 중고게시글 수정 서비스(update)
-	int updateUsedBoard(UsedBoard b);
+	// 중고게시판 삭제 (update) 
+	int deleteUsedBoard(int usedNo);
+	
+	// 중고게시글 수정 서비스(update) 수정버튼 클릭 시 => 게시판 번호를 식별자로 DB에서 select해옴
+	UsedBoard selectUpdateUsedBoard(int usedNo);
+	
+	// 중고게시판 글 수정하기 버튼 클릭시 => 수정되어 update됨
+	int usedUpdate(UsedBoard b);
 	
 	// 중고게시판 TOP-N 분석(조회수 높은 순으로 띄우기)(select)
 	ArrayList<UsedBoard> selectTopBoard();
@@ -190,7 +205,7 @@ public interface BoardService {
 	ReviewBoard selectBookTitle(ReviewBoard b);
 	// 리뷰게시판 글작성=> 2) 중복 된 책 없으면 insert : 글작성
 	int insertReviewBoard(ReviewBoard b);
-	
+
 	
 	
 	// 리뷰게시글 수정 서비스(select) => 1) 책 중복되는지 확인(리뷰넘버로 책제목조회)
@@ -211,8 +226,9 @@ public interface BoardService {
 	
 	
 	// 리뷰게시판 삭제 (update)
-	int deleteReviewBoard(int reviewNo);
-	
+	// int deleteReviewBoard(int reviewNo);
+	int deleteReviewBoard(ReviewBoard b);
+
 	
 	
 

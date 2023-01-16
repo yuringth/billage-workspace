@@ -38,6 +38,7 @@
 	
 	<select id="selectSerialList" resultMap="serialResultSet">
 		select
+				rownum,
 				serial_no,
 				s.novel_no,
 				serial_title,
@@ -45,11 +46,7 @@
 				upload_date,
 				star_rating,
 				author_comment,
-				n.user_no,
-				n.novel_title,
-				n.novel_display,
-                (select nickname from member m where m.user_no = s.user_no) as nickName,
-                n.change_name as novelImg
+				n.user_no
 		from
 				serial s
 		left join
@@ -60,7 +57,7 @@
 				n.novel_no = #{ novel_no }
 		order
 		by
-				serial_no desc
+				rownum desc
 	</select>
 	
 	<select id="selectSerialDetail" resultMap="serialResultSet" parameterType="Map">
@@ -72,10 +69,7 @@
 				upload_date,
 				star_rating,
 				author_comment,
-				n.user_no,
-				n.novel_title,
-				n.novel_display,
-                (select nickname from member m where m.user_no = s.user_no) as nickName
+				n.user_no
 		from
 				serial s
 		left join
@@ -86,9 +80,6 @@
 				n.novel_no = #{ novel_no }
 		and
 				s.serial_no = #{ serial_no }
-		order
-		by
-				serial_no desc
 	</select>
 	
 	<insert id="insertSerialRequest" parameterType="serialRequest">

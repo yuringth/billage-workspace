@@ -132,9 +132,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public ArrayList<Serial> selectSerialDetail(PageInfo pi, int novelNo, String serialNo) {
-		// TODO Auto-generated method stub
-		return boardDao.selectSerialDetail(sqlSession, pi, novelNo, serialNo);
+	public Serial selectSerialDetail(int novelNo, String serialNo) {
+		return boardDao.selectSerialDetail(sqlSession, novelNo, serialNo);
 	}
 	
 	//중고게시판 => 글작성 시 insert
@@ -161,34 +160,41 @@ public class BoardServiceImpl implements BoardService {
 
 	
 	
-	//중고게시판
+	// 중고게시판 조회수 증가 (update)
 	@Override
-	public int increaseUsedCount(int boardNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int increaseUsedCount(int usedNo) {
+		return boardDao.increaseUsedCount(sqlSession, usedNo);
 	}
 
-	//중고게시판
+	//중고게시판 상세 조회 (select) => db에서 정보 들고 와서 뿌려주기
 	@Override
-	public UsedBoard selectUsedBoard(int boardNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public UsedBoard selectUsedBoard(int usedNo) {
+		return boardDao.selectUsedBoard(sqlSession, usedNo);
+	}
+	
+
+	//중고게시판 => 게시글 삭제 
+	@Override
+	public int deleteUsedBoard(int usedNo) {
+		return boardDao.deleteUsedBoard(sqlSession, usedNo);
 	}
 
-	//중고게시판
+	//중고게시판 수정버튼 클릭 시 => 게시판 번호를 식별자로 DB에서 select해옴
 	@Override
-	public int deleteUsedBoard(int boardNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public UsedBoard selectUpdateUsedBoard(int usedNo) {
+		return boardDao.selectUpdateUsedBoard(sqlSession, usedNo);
 	}
 
-	//중고게시판
+	
+	// 중고게시판 글 수정하기 버튼 클릭시 => 수정되어 update됨
 	@Override
-	public int updateUsedBoard(UsedBoard b) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int usedUpdate(UsedBoard b) {
+		System.out.println("여긴 서비스" + b);
+		return boardDao.usedUpdate(sqlSession, b);
 	}
-
+	
+	
+	
 	//중고게시판
 	@Override
 	public ArrayList<UsedBoard> selectTopBoard() {
@@ -228,6 +234,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 
+	
+
 	// 리뷰게시판 => 조회수 증가
 	@Override
 	public int increaseReviewCount(int reviewNo) {
@@ -245,9 +253,14 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	// 리뷰게시판 => 게시글 삭제
+//	@Override
+//	public int deleteReviewBoard(int reviewNo) {
+//		return boardDao.deleteReviewBoard(sqlSession, reviewNo);
+//	}
+	
 	@Override
-	public int deleteReviewBoard(int reviewNo) {
-		return boardDao.deleteReviewBoard(sqlSession, reviewNo);
+	public int deleteReviewBoard(ReviewBoard b) {
+		return boardDao.deleteReviewBoard(sqlSession, b);
 	}
 
 	
@@ -329,6 +342,26 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectDrawPoint(sqlSession, boardNo);
 	}
 
+	@Override
+	public Novel selectNovelInfo(int novelNo) {
+		return boardDao.selectNovelInfo(sqlSession, novelNo);
+	}
+	
+	// 입찰
+	@Override
+	public int insertBidUser(ADBoard b) {
+		return boardDao.insertBidUser(sqlSession, b);
+	}
+	
+	//입찰자 테이블에 등록
+	@Override
+	public int updatePrizeUser(ADBoard b) {
+		return boardDao.updatePrizeUser(sqlSession, b);
+	}
+	
+
+	
+	
 	
 
 
