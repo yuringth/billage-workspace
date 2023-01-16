@@ -93,7 +93,7 @@
 		
 		<hr>
 		
-				<!-- 	<div id="book_imag" name="bookImag">${ b.bookImag }</div> -->
+		<!-- 	<div id="book_imag" name="bookImag">${ b.bookImag }</div> -->
 		<!-- api 책정보 끌어오기 -->
 		<div class="book-detail-outer">
 			<div class="book-detail-area">

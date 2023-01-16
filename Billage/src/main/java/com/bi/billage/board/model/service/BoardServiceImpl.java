@@ -161,19 +161,18 @@ public class BoardServiceImpl implements BoardService {
 
 	
 	
-	//중고게시판
+	// 중고게시판 조회수 증가 (update)
 	@Override
-	public int increaseUsedCount(int boardNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int increaseUsedCount(int usedNo) {
+		return boardDao.increaseUsedCount(sqlSession, usedNo);
 	}
 
-	//중고게시판
+	//중고게시판 상세 조회 (select) => db에서 정보 들고 와서 뿌려주기
 	@Override
-	public UsedBoard selectUsedBoard(int boardNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public UsedBoard selectUsedBoard(int usedNo) {
+		return boardDao.selectUsedBoard(sqlSession, usedNo);
 	}
+	
 
 	//중고게시판
 	@Override
