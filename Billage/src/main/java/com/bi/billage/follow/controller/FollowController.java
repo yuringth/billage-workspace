@@ -66,18 +66,46 @@ public class FollowController {
 	public ModelAndView selectFollowerList(int uno, ModelAndView mv, HttpSession session) {
 		
 		ArrayList<User> followerList1 = followService.selectFollowerList1(uno);//맞팔임
-		
+
 		ArrayList<User> followerList2 = followService.selectFollowerList2(uno);//맞팔아님 
 		
 		mv.addObject("followerList1",followerList1)
-			.addObject("followerList2", followerList2);
+		.addObject("followerList2", followerList2);
 			
 		//uno == loginUser.userNo 면 followerListView, 아니라면 folloewrListView2
 		if(((User)session.getAttribute("loginUser")).getUserNo() != uno){
 			
-			ArrayList<User> lgfollowerList1 = followService.selectFollowerList1(((User)session.getAttribute("loginUser")).getUserNo());//맞팔임
+			ArrayList<User> lgFollowerList1 = followService.selectFollowerList1(((User)session.getAttribute("loginUser")).getUserNo());//loginUser맞팔리스트
+			ArrayList<User> lgFollowerList2 = followService.selectFollowerList2(((User)session.getAttribute("loginUser")).getUserNo());//loginUser맞팔아닌 계정 리스트
+		
+			// 맞팔리스트들 끼리 비교해서 로그인 유저와 같은 계정이 있으면 status를 1로 변경
+			for(int i = 0; i<lgFollowerList1.size(); i++) {
+				
+				int lg1No = lgFollowerList1.get(i).getUserNo();
+				
+				for(int j = 0; j<followerList1.size(); j++) {
+					
+					if(lg1No == followerList1.get(j).getUserNo()) {
+						
+						followerList1.get(j).setFollowStatus(1);
+					}
+				}
+				
+			}
 			
-			ArrayList<User> lgfollowerList2 = followService.selectFollowerList2(((User)session.getAttribute("loginUser")).getUserNo());//맞팔 아님
+			//맞팔이 아닌 리스트들 끼리 비교해서 로그인 유저와 같은 계정이 있으면 status를 1로 변경 -> 로그인 유저와는 맞팔이라는 뜻 
+			for(int m = 0; m<lgFollowerList2.size(); m++) {
+				
+				int lg2No = lgFollowerList2.get(m).getUserNo();
+				
+				for(int n = 0; n<followerList2.size(); n++) {
+					
+					if(lg2No == followerList2.get(n).getUserNo()) {
+						
+						followerList2.get(n).setFollowStatus(1);
+					}
+				}
+			}
 			
 			mv.setViewName("follow/followerListView2");
 		}else {
