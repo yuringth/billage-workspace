@@ -16,6 +16,8 @@ public class ClubOpen {
 	
 	private String nickname;
 	private String clubName;
+	private int openMemCount;
+	
 }
 
 
