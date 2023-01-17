@@ -28,4 +28,9 @@ public class RentBoardDao {
 	public int insertRentBoard(SqlSessionTemplate sqlSession, RentBoard rb) {
 		return sqlSession.insert("rentMapper.insertRentBoard", rb);
 	}
+	
+	// 게시글 상세보기
+	public RentBoard detailRentBoard(SqlSessionTemplate sqlSession, int rentNo) {
+		return sqlSession.selectOne("rentMapper.detailRentBoard", rentNo);
+	}
 }
