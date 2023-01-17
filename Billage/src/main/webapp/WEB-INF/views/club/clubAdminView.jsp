@@ -24,6 +24,9 @@
 		<%-- 모임에 대한 값이 있으면 list 없으면 참여중인 모임이 없습니다. core로 조건문 걸어서 생성하기   --%>
 		
 		<button onclick="location.href='general.cl'">뒤로가기</button>
+		|
+		<button onclick="location.href='enrollForm.cl';">모임 개설하기</button> <!-- 클릭시 모임 개설 페이지 이동  -->
+		
 		<br><br>
 		
 		<table id="admin-area" border="1">
@@ -68,8 +71,8 @@
 								<td>${ c.openCount }</td>
 								<td>
 									<button>club수정</button> |
-									<button onclick="location.href='clubMemAdmin.cl?clubNo='+${c.clubNo}">회원보기</button> |
-									<button onclick="location.href='clubOpenAdmin.cl?clubNo=+${c.clubNo}">활동</button> |
+									<button onclick="location.href='clubMemAdmin.cl?clubNo=${c.clubNo}'">회원보기</button> |
+									<button onclick="location.href='clubOpenAdmin.cl?clubNo=${c.clubNo}'">활동</button> |
 									<button>게시글</button> |  
 									<button>club삭제</button> 
 								</td>

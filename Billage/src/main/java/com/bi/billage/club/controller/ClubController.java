@@ -301,7 +301,7 @@ public class ClubController {
 	public ModelAndView clubOpenSelectAdmin(ModelAndView mv, int clubNo) {
 		
 		mv.addObject("clubOpenList", clubService.clubOpenSelectAdmin(clubNo));
-		mv.setViewName("club/clubOpenListAdmin");
+		mv.setViewName("club/clubOpenListAdminView");
 		
 		return mv;
 	}
@@ -309,8 +309,9 @@ public class ClubController {
 	
 	// club 활동 개설 화면 전환 
 	@RequestMapping("clubEnroll.cl")
-	public String clubOpenEnrollForm(){
-		return "club/clubOpenEnrollForm";
+	public String clubOpenEnrollForm(int clubNo, Model model){
+		
+		return "";
 	}
 	
 	// club Open 등록폼 Insert

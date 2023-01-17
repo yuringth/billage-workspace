@@ -25,10 +25,10 @@
 	<div id="all-clubOpen-admin">
 		<h1>${ loginUser.nickname }님의 모임 관리 페이지입니다. </h1>
 		<%-- 모임에 대한 값이 있으면 list 없으면 참여중인 모임이 없습니다. core로 조건문 걸어서 생성하기   --%>
-		 <h1>개설 된 클럽 리스트 조회 화면</h1>
+		 <h1> ${ clubOpenList[0].clubName } CLUB 리스트 조회 화면</h1>
 		
 		<button onclick="location.href='general.cl'">뒤로가기</button>
-		<button onclick="clubEnroll.cl">클럽 등록 폼 버튼</button> 
+		<button onclick="location.href='clubEnroll.cl?clubNo=${ clubOpenList[0].clubNo}'">클럽 등록 폼 버튼</button> 
 		
 		<br><br>
 		
@@ -66,17 +66,16 @@
 								<td>${ co.openTime }</td>
 								<td>${ co.openLimit }</td>
 								<td>${ co.openMemCount }</td>
-								<c:if test="${ openStatus eq 'Y' }">
-									<td>활동중</td>
-								</c:if>
-								<c:if test="${ openStatus eq 'D' }">
-									<td>활동종료</td>
-								</c:if>
 								<td>
-									<button></button> |
+									<c:if test="${ co.openStatus eq 'Y' }">
+										활동활성화
+									</c:if>
+									<c:if test="${ co.openStatus eq 'N' }">
+										활동종료
+									</c:if>
+								</td>
+								<td>
 									<button >회원보기</button> |
-									<button ><button> |
-									<button></button> |  
 									<button>clubOpen 삭제</button> 
 								</td>
 							</tr>
