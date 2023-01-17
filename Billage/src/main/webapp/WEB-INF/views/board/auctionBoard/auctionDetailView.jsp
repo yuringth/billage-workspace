@@ -98,7 +98,8 @@
 			<img style="width: 600px; height: 600px;"src="${ b.changeName }">
 		</div>
 
-		
+		<input type="hidden" id="prizeUserNo" value="${b.prizeUserNo}">
+		<input type="hidden" id="closeDate" value="${b.closeDate}">
 		<p class="time"></p>
 		<p class="genre">${ b.genre }</p>
 		<p class="title">"${ b.title }"</p>
@@ -123,7 +124,7 @@
 				<p>시작가 : ${ b.startPrice }P 입찰가격 : </p>
 			</div>
 			<div style="width:100px">
-			
+					
 					<input type="number" id="bidPrice" value="${ b.nowPrice }" width="100px" step="${ b.bidPrice }">
 				
 			</div>
@@ -192,7 +193,7 @@
 		</div>
 		
 		
-		<input type="hidden" id="prizeUserNo" value="${prizeUserNo}">
+		
 		
 		
 		
@@ -224,7 +225,7 @@
 		
 		function closeCount(){
 			
-			var end = new Date('${ b.closeDate }');
+			var end = new Date("$('#closeDate').val()");
 			var now = new Date(); 
 			
 			var remaindTime = end - now;
@@ -251,9 +252,7 @@
 		    	
 		    	$('.time').text('시간 종료');
 		    	$('.btn1').attr('disabled', true).text('시간 종료');
-		    	if(${ empty b.prizeUser }){
-			    	selectPrizeUser();
-		    	}
+			    selectPrizeUser();
 		    	
 		    }
 		}
@@ -305,7 +304,7 @@
 						$('#nowPrice').text(result.nowPrice);
 						$('#prizeUserNo').val(result.prizeUserNo);
 						$('#bidPrice').val(result.nowPrice);
-						//여기에 최소값 어쩌구 설정하기						 
+						$('#closeDate').val(result.closeDate)
 					 },
 					 error : function(){
 						 console.log('error');
@@ -332,7 +331,7 @@
 					boardNo : ${b.boardNo},
 					userNo : ${b.userNo},
 					title : '${b.title}',
-					tryPoint : ${b.tryPoint}
+					prizeUserNo : $('#prizeUserNo').val()
 				},
 				success : function(result){
 					

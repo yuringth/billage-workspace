@@ -110,6 +110,7 @@
 		       used_no = ${ usedNo } 
 	</update>
 	
+	
 	<!-- 게시글 내용을 db에서 select해서 목록 띄우기  -->
 	<select id="selectUsedBoard" resultMap="usedResultSet">
 		select
@@ -175,7 +176,7 @@
 	</select>
 
 	
-	<!-- 게시글 수정 쿼리문(첨부파일) -->
+	<!-- 게시글 수정 쿼리문(첨부파일) => 안배웠음 안된다구~~!! -->
 	<update id="usedUpdate" parameterType="used">
 		update
 		       used_Board
@@ -191,6 +192,36 @@
 		 where
 		       used_no = #{usedNo}
 	</update>
+	
+	
+	<!--  -->
+	<select id="selectTopUsed" resultMap="usedResultSet">
+		select
+		     *
+		  from(select
+		               user_no
+				      ,used_no
+				      ,book_title
+				      ,point
+				      ,count
+				      ,to_char(create_date, 'YYYY-MM-DD') as "create_date"
+				      ,origin_name
+				  from
+				       used_board
+				 where
+				       used_status = 'N'
+                   and
+                       stock_status = 'N'
+				 order
+				    by
+				       count desc)
+		  where
+		        rownum between 1 and 4
+	
+	</select>
+	
+	
+	
 
 
 </mapper>

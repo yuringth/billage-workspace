@@ -23,4 +23,9 @@ public class RentBoardDao {
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return (ArrayList)sqlSession.selectList("rentMapper.selectRentBoardList", null, rowBounds);
 	}
+	
+	// 게시글 등록
+	public int insertRentBoard(SqlSessionTemplate sqlSession, RentBoard rb) {
+		return sqlSession.insert("rentMapper.insertRentBoard", rb);
+	}
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.bi.billage.board.model.dao.BoardDao;
 import com.bi.billage.board.model.vo.ADBoard;
 import com.bi.billage.board.model.vo.Book;
+import com.bi.billage.board.model.vo.FAQ;
 import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.ReportBoard;
 import com.bi.billage.board.model.vo.ReviewBoard;
@@ -179,11 +180,13 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.deleteUsedBoard(sqlSession, usedNo);
 	}
 
-	//중고게시판 수정버튼 클릭 시 => 게시판 번호를 식별자로 DB에서 select해옴
+	// 중고게시판 => 게시판 번호를 식별자로 DB에서 select해옴
 	@Override
 	public UsedBoard selectUpdateUsedBoard(int usedNo) {
 		return boardDao.selectUpdateUsedBoard(sqlSession, usedNo);
 	}
+	
+	
 
 	
 	// 중고게시판 글 수정하기 버튼 클릭시 => 수정되어 update됨
@@ -195,11 +198,11 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	
+	// 중고게시판 => topn분석
 	//중고게시판
 	@Override
-	public ArrayList<UsedBoard> selectTopBoard() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<UsedBoard> selectTopUsed() {
+		return boardDao.selectTopUsed(sqlSession);
 	}
 
 	
@@ -359,6 +362,17 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.updatePrizeUser(sqlSession, b);
 	}
 	
+	//즉시구매자 테이블에 등록
+	@Override
+	public int insertBuyer(ADBoard b) {
+		return boardDao.insertBuyer(sqlSession, b);
+	}
+
+	@Override
+	public ArrayList<FAQ> selectFaqList(FAQ faq) {
+		return boardDao.selectFaqList(sqlSession, faq);
+	}
+
 
 	
 	

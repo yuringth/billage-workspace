@@ -1,7 +1,5 @@
 package com.bi.billage.board.controller;
 
-import java.io.File;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -17,6 +16,7 @@ import com.bi.billage.board.model.vo.UsedBoard;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.common.savefile.SaveFile;
 import com.bi.billage.common.template.Pagination;
+import com.google.gson.Gson;
 
 @Controller
 public class UsedController {
@@ -137,7 +137,7 @@ public class UsedController {
 	
 	
 	
-	// 중고게시판 -> 글수정 -> 수정폼 화면
+	// 중고게시판 -> 글수정 버튼 클릭시 -> 수정폼 화면뜨면서 기존 데이터 가져오기
 	@RequestMapping("enrollUsedForm.ud")
 	public ModelAndView selectUpdateUsedBoard(int usedNo, ModelAndView mv) {
 		
@@ -162,7 +162,10 @@ public class UsedController {
 		
 		// 2. 새로 첨부된 파일x, 기존 첨부파일 o  내용만 수정 => origin : 기존 첨부파일 이름, change : 기존첨부파일 경로
 		// 3. 새로 첨부된 파일o, 기존 첨부파일 x 파일첨부 변경 시 => origin : 새로 첨부파일 이름, change : 새로 첨부파일 경로
+
 		
+		
+/* 배우지않았다!!!!!!!!!!!!!!!!!1
 		// 새로 첨부파일이 넘어온 경우 
 		if(!reUpfile.getOriginalFilename().equals("")) {
 			// 기존에 첨부파일이 있었을 경우 => 기존의 첨부파일을 삭제
@@ -180,8 +183,7 @@ public class UsedController {
 			b.setOriginName(reUpfile.getOriginalFilename());
 			b.setChangeName("resources/uploadFiles/" + changeName);
 		}
-		
-		
+*/
 		
 		
 		if(boardService.usedUpdate(b) > 0) {
@@ -196,6 +198,14 @@ public class UsedController {
 	}
 	
 	
+	
+	
+	// 중고게시판 => topn분석
+	@ResponseBody
+	@RequestMapping(value = "topList.ud", produces = "application/json; charset=UTF-8")
+	public String ajaxTopUsedList() {
+		return new Gson().toJson(boardService.selectTopUsed());
+	}
 	
 	
 	

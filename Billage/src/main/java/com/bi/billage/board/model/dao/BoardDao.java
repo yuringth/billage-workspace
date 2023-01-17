@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bi.billage.board.model.vo.ADBoard;
 import com.bi.billage.board.model.vo.Book;
+import com.bi.billage.board.model.vo.FAQ;
 import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.ReportBoard;
 import com.bi.billage.board.model.vo.ReviewBoard;
@@ -161,6 +162,9 @@ public class BoardDao {
 		return sqlSession.update("ADBoardMapper.updatePrizeUser", b);
 	}
 
+	public int insertBuyer(SqlSessionTemplate sqlSession, ADBoard b) {
+		return sqlSession.insert("ADBoardMapper.insertBuyer", b);
+	}
 
 
 
@@ -315,19 +319,25 @@ public class BoardDao {
 		return sqlSession.update("usedMapper.deleteUsedBoard", usedNo);
 	}
 	
-	
-	//중고게시판 수정버튼 클릭 시 => 게시판 번호를 식별자로 DB에서 select해옴
+	// 중고게시판 => 게시판 번호를 식별자로 DB에서 select해옴
 	public UsedBoard selectUpdateUsedBoard(SqlSessionTemplate sqlSession, int usedNo) {
 		return sqlSession.selectOne("usedMapper.selectUpdateUsedBoard", usedNo);
 	}
 	
-	
+
 	// 중고게시판 글 수정하기 버튼 클릭시 => 수정되어 update됨
 	public int usedUpdate(SqlSessionTemplate sqlSession, UsedBoard b) {
-		System.out.println("여긴 dao" + b);
+		System.out.println("여긴 서비스" + b);
 		return sqlSession.update("usedMapper.usedUpdate", b);
-				
 	}
+	
+	
+	// 중고게시판 => topn분석
+	public ArrayList<UsedBoard> selectTopUsed(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("usedMapper.selectTopUsed");
+	}
+	
+	
 	
 	
 	// 유림끝  ==========================================================
@@ -387,6 +397,9 @@ public class BoardDao {
 	}
 
 
+	public ArrayList<FAQ> selectFaqList(SqlSessionTemplate sqlSession, FAQ faq) {
+		return (ArrayList)sqlSession.selectList("faqMapper.selectFaqList", faq);
+	}
 	
 
 
