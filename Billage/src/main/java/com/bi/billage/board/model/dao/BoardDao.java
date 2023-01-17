@@ -341,9 +341,9 @@ public class BoardDao {
 	
 	
 	// 중고 게시판 => 검색
-	public ArrayList<UsedBoard> searchUsedList(SqlSessionTemplate sqlSession){
-		return (ArrayList)sqlSession.selectList("usedMapper.searchUsedList"); 
-	}
+//	public ArrayList<UsedBoard> searchUsedList(SqlSessionTemplate sqlSession){
+//		return (ArrayList)sqlSession.selectList("usedMapper.searchUsedList"); 
+//	}
 	
 	
 	

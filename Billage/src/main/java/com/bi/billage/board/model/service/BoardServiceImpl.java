@@ -207,11 +207,10 @@ public class BoardServiceImpl implements BoardService {
 
 	
 	// 중고게시판 => 검색
-	@Override
-	public ArrayList<UsedBoard> searchUsedList(){
-		return boardDao.searchUsedList(sqlSession);
-	}
-	
+//	@Override
+//	public ArrayList<UsedBoard> searchUsedList(String condition, String keyword){
+//		return boardDao.searchUsedList(sqlSession, condition, keyword);
+//	}
 	
 	
 	
