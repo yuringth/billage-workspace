@@ -114,11 +114,13 @@
                     </div>
                     <div class="inputdiv">
 						<select name="stockStatus" id="stockStatus">
-							<option value="판매중"></option>
-							<option value="판매완료"></option>
+							<option value="N">판매중</option>
+							<option value="Y">판매완료</option>
 						</select>                   
 					</div>
                 </div>
+                
+                
             </div>
             
             
