@@ -28,10 +28,10 @@
             <h6>설명 : ${novel.novelDisplay }</h6>
         </div>
             <br>
-            <!-- 로그인 후 독자일 경우만 보여지는 버튼 -->
-            <c:if test="${ loginUser eq null }">
-            <a class="btn btn-secondary" style="float:right;" href="enrollForm.se">작품 추천</a>&nbsp;
-            <a class="btn btn-secondary" style="float:right;" href="enrollForm.se">작품 후원</a>
+            <!-- 로그인 후 작가본인이 아닐 경우만 보여지는 버튼 -->
+            <c:if test="${ loginUser.userNo ne novel.userNo and loginUser.userNo ne null }">
+            <a id="like-novel" class="btn btn-secondary" style="float:right;">작품추천</a>
+            <a id="donate-novel" class="btn btn-secondary" style="float:right;">작품후원</a>
             </c:if>
             <table id="contentArea" algin="center" class="table" >
                 <tr>

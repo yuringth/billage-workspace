@@ -355,7 +355,13 @@ a:hover {
 	          <div class="panel card-back">
 	            <i class="fa fa-paper-plane-o card-icon"></i>
 	            <div class="hub-info">
+	        	<!-- 로그인 해야 문의할 수 있음 -->
+           		  <c:if test="${ loginUser.userNo ne null }">
 	              <br><a href="enroll.iq">1:1문의하기</a><br>
+            	  </c:if>
+            	  <c:if test="${ loginUser.userNo eq null }">
+	              <br><a href="#">1:1문의하기</a><br>
+            	  </c:if>
 	            <small class="clear">서비스 이용시 불편한 점은 언제든 문의주세요.</small>
 	            </div>
 	              <p>연재 관련 문의는 연재신청란을 통해 이용부탁드립니다.</p>
@@ -371,7 +377,12 @@ a:hover {
 	          <div class="panel card-back">
 	            <i class="fa fa-map-o card-icon"></i>
 	            <div class="hub-info">
+	              <c:if test="${ loginUser.userNo ne null }">
 	              <br><a href="request.se">연재신청하기</a><br>
+	              </c:if>
+	              <c:if test="${ loginUser.userNo eq null }">
+	              <br><a href="#">연재신청하기</a><br>
+	              </c:if>
 	            <small class="clear">Billage에서 당신의 능력을 보여주세요.</small>
 	            </div>
 	              <p>실력과 개성있는 작가분들을 모십니다. 많은 신청바랍니다.</p>
