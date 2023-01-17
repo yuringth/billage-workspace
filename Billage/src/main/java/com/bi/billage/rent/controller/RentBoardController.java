@@ -58,6 +58,15 @@ public class RentBoardController {
 		}
 	}
 	
-	
+	// 대여게시글 상세보기
+	@RequestMapping("detail.rt")
+	public ModelAndView detailRentBoard(ModelAndView mv, int rentNo) {
+		
+		mv.addObject("rb", rentBoardService.detailRentBoard(rentNo)).setViewName("board/rent/rentDeailView");
+		
+		mv.addObject("errorMsg", "조회실패").setViewName("common/errorPage");
+		
+		return mv;
+	}
 	
 }
