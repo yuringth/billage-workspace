@@ -5,12 +5,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>안녕 여긴 메인</title>
+<title>개별 클럽 활동 보기</title>
 </head>
 <body>
-	<jsp:include page="common/header.jsp"/>
-	너가가진포인트 : ${ loginUser.point }
-	<jsp:include page="common/footer.jsp"/>
+
+	<h1>개설 된 클럽 리스트 조회 화면</h1>
 	
+	<button onclick="clubEnroll.cl">클럽 등록 폼 버튼</button> 
+		
+
+
 </body>
 </html>

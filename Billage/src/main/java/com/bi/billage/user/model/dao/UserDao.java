@@ -134,4 +134,5 @@ public class UserDao {
 	public int updateFaq(SqlSessionTemplate sqlSession, FAQ faq) {
 		return sqlSession.update("faqMapper.updateFaq", faq);
 	}
+
 }

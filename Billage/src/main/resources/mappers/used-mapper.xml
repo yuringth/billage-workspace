@@ -54,7 +54,7 @@
 			  ,#{usedContent}
 			  ,#{originName}
 			  ,#{changeName}
-			  ,'판매중'<!-- 기본값 N -->
+			  ,#{stockStatus} <!-- 기본값 N -->
 			   )
 	</insert>
 
@@ -175,8 +175,6 @@
 		       used_no = #{usedNo}
 		   and
 		       used_status = 'N'
-		   and
-		       stock_status = 'N'
 	</select>
 
 	
@@ -198,7 +196,7 @@
 	</update>
 	
 	
-	<!--  -->
+	<!-- topN분석 쿼리문 -->
 	<select id="selectTopUsed" resultMap="usedResultSet">
 		select
 		     *
@@ -210,6 +208,7 @@
 				      ,count
 				      ,to_char(create_date, 'YYYY-MM-DD') as "create_date"
 				      ,origin_name
+				      ,change_name
 				  from
 				       used_board
 				 where
@@ -221,10 +220,14 @@
 				       count desc)
 		  where
 		        rownum between 1 and 4
-	
 	</select>
 	
 	
+	<select id="searchUsedList" resultMap="usedResultSet">
+
+	
+	
+	</select>
 	
 
 

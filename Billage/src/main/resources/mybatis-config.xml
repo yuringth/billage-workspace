@@ -9,25 +9,26 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	</settings>
 	
 	<typeAliases>
-		<typeAlias type="com.bi.billage.user.model.vo.User" alias="user" />
-		<typeAlias type="com.bi.billage.board.model.vo.Board" alias="board" />
-		<typeAlias type="com.bi.billage.board.model.vo.ADBoard" alias="adboard" />
-		<typeAlias type="com.bi.billage.reply.model.vo.Reply" alias="reply" />
-		<typeAlias type="com.bi.billage.club.model.vo.Club" alias="club" />
-		<typeAlias type="com.bi.billage.board.model.vo.Novel" alias="novel" />
-		<typeAlias type="com.bi.billage.board.model.vo.Serial" alias="serial" />
-		<typeAlias type="com.bi.billage.board.model.vo.SerialRequest" alias="serialRequest" />
-		<typeAlias type="com.bi.billage.board.model.vo.ReportBoard" alias="Report" />
-		<typeAlias type="com.bi.billage.board.model.vo.UsedBoard" alias="used" />
-		<typeAlias type="com.bi.billage.board.model.vo.ReviewBoard" alias="review" />
-		<typeAlias type="com.bi.billage.board.model.vo.Book" alias="book" />
-		<typeAlias type="com.bi.billage.follow.model.vo.Follow" alias="follow" />
-		<typeAlias type="com.bi.billage.board.model.vo.Inquiry" alias="inquiry" />
-		<typeAlias type="com.bi.billage.board.model.vo.FAQ" alias="faq" />
-		<typeAlias type="com.bi.billage.point.model.vo.Point" alias="point" />
-		<typeAlias type="com.bi.billage.message.model.vo.Message" alias="message" />
-		<typeAlias type="com.bi.billage.follow.model.vo.Star" alias="star" />
-		<typeAlias type="com.bi.billage.rent.model.vo.RentBoard" alias="rent" />
+		<typeAlias type="com.bi.billage.user.model.vo.User" 			alias="user" />
+		<typeAlias type="com.bi.billage.board.model.vo.Board" 			alias="board" />
+		<typeAlias type="com.bi.billage.board.model.vo.ADBoard" 		alias="adboard" />
+		<typeAlias type="com.bi.billage.reply.model.vo.Reply" 			alias="reply" />
+		<typeAlias type="com.bi.billage.club.model.vo.Club" 			alias="club" />
+		<typeAlias type="com.bi.billage.club.model.vo.ClubOpen" 		alias="clubOpen" />
+		<typeAlias type="com.bi.billage.board.model.vo.Novel" 			alias="novel" />
+		<typeAlias type="com.bi.billage.board.model.vo.Serial" 			alias="serial" />
+		<typeAlias type="com.bi.billage.board.model.vo.SerialRequest"	alias="serialRequest" />
+		<typeAlias type="com.bi.billage.board.model.vo.ReportBoard" 	alias="Report" />
+		<typeAlias type="com.bi.billage.board.model.vo.UsedBoard" 		alias="used" />
+		<typeAlias type="com.bi.billage.board.model.vo.ReviewBoard" 	alias="review" />
+		<typeAlias type="com.bi.billage.board.model.vo.Book" 			alias="book" />
+		<typeAlias type="com.bi.billage.follow.model.vo.Follow" 		alias="follow" />
+		<typeAlias type="com.bi.billage.board.model.vo.Inquiry" 		alias="inquiry" />
+		<typeAlias type="com.bi.billage.board.model.vo.FAQ" 			alias="faq" />
+		<typeAlias type="com.bi.billage.point.model.vo.Point" 			alias="point" />
+		<typeAlias type="com.bi.billage.message.model.vo.Message" 		alias="message" />
+		<typeAlias type="com.bi.billage.follow.model.vo.Star" 			alias="star" />
+		<typeAlias type="com.bi.billage.rent.model.vo.RentBoard" 		alias="rent" />
 	</typeAliases>
 	<!-- **주의 : 미리 등록을 해두려면 해당 클래스가 진짜 존재하고 있는 상태여야함 -->
 	

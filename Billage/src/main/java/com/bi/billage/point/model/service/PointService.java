@@ -9,4 +9,5 @@ public interface PointService {
 	int selectPoint(int userNo);
 	
 	int selectUserNo(String userId);
+
 }

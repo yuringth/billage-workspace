@@ -75,22 +75,20 @@
 	
 
 	<div id="all-enrollFrom" >
-		<h1>모임 개설하기</h1>
+		<h1>모임 [ CLUB_OPEN ] / 모임 활동 등록폼 </h1>
 
 	<!-- 
-			모임번호 :  시퀀스로 생김 ( SEQ_CNO.nextval ) 
-				회원번호 : loginUser.userNo
-				모임명 : input 
-				모임정원 : input 
-			모임생성일자 : default  sysdate 
-				모임상세설명 : input 
-				모임이미지 : input / null 가능 
-				모임중심지역 : input 
-			모임상태값 : default  'y' 
-			
+		액티비티번호	OPEN_NO	NUMBER
+		모임번호		CLUB_NO	NUMBER
+		액티비티명		OPEN_TITLE	VARCHAR2(1000 BYTE)
+		액티비티장소	OPEN_LOCATION	VARCHAR2(500 BYTE)
+		액티비티날짜	OPEN_DATE	VARCHAR2(1000 BYTE)
+		액티비티시간	OPEN_TIME	VARCHAR2(1000 BYTE)
+		액티비티정원	OPEN_LIMIT	NUMBER
+		액티비티상태	OPEN_STATUS	VARCHAR2(1 BYTE)
 	 -->
-		<!--모임 개설 : 모임이름, 모임요일, 모임 설명, 모임 지역, 모임 참여 인원 받아야 함 -->
-		<form action="create.gr" method="post" enctype="multipart/form-data">
+	 
+		<form action="createOpen.cl" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="userNo" value="${ loginUser.userNo }"/>
 			<table border="1" align="center">
 				<caption style="text-align:left;">*필수입력사항</caption>	
@@ -213,6 +211,16 @@
 	    		$('#enter-addr-in').empty();
 	    		
 	    	});
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	
+    		location.href = location.href;
 	    });
 	    
 		//

@@ -373,6 +373,15 @@
 				)
 	</insert>
 	
+	<update id="updatePrizeEnd" parameterType="_int">
+		UPDATE
+				AUCTION_BOARD
+		   SET
+		   		PRIZE_USER = 1
+		 WHERE
+		 		AUCTION_NO = #{boardNo}
+	</update>
+	
 	
 </mapper>
 

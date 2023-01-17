@@ -22,6 +22,9 @@
    	text-align:center;
 }
 
+.stock-status{
+	text-align:center;
+}
 
 /* 이것도 왜 버튼 flex잘 안되냐고~~~!  */
 .user-area{
@@ -42,7 +45,7 @@
 
 .writer-area{
 	border:1px solid blue;
-	height:550px;
+	height:660px;
 	margin:0px;
 }
 #used_title, #used_genre, #used_price, #count{
@@ -128,7 +131,7 @@ font-size: 25px;
 		
 		<div class="user-area">
 			<div class="user-div">
-				<p id="user_no" name="userNo">${ b.nickname }</p>
+				<p id="user_no" name="userNo">유저 : ${ b.nickname }</p>
 				<button>채팅하기</button>
 			</div>
 		</div>
@@ -137,13 +140,22 @@ font-size: 25px;
 		
 		<!-- USED_BOARD 테이블에 used_genre, used_pric, used_content, used_chat(?) 컬럼 추가 -->
 		<div class="writer-area">
-			<p id="stock_status" name="stockStatus">판매상태 : ${ b.stockStatus }</p>
+        	<div class="stock-status">
+				<c:if test="${ b.stockStatus == 'N'}">
+					<p>판매 상태 : 판매중</p>
+				</c:if>		        		
+					<c:if test="${ b.stockStatus == 'Y'}">
+					<p>판매 상태 : 판매완료</p>
+				</c:if>		
+			</div>
 			<p id="used_title" name="usedTitle">게시글 제목 : ${ b.usedTitle }</p>
 			<p id="used_genre" name="usedGenre">책 장르 : ${ b.bookGenre }</p>
 			<p id="used_price" name="usedPrice">판매 가격 : ${ b.point }</p>
 			<p id="used_content" name="usedContent">게시글 내용 : ${ b.usedContent }</p>
 			
-			<p id="count" name="count">관심 채팅 조회</p>
+			<p id="count" name="count">조회수</p>
+			<p id="count" name="count">관심수</p>
+			<p id="count" name="count">채팅수</p>
 		</div>
 		
 		
@@ -241,8 +253,8 @@ font-size: 25px;
 	   					value += '<div class="align-left-outer">'
 	   						  + '<div class="one-content">'
 	   						  + '<div class="img-area">'
-	   						  + '<input id="clickNo" type="hidden" name="usedNo" value="' + data[i].usedNo+ '"/>'
-	   						  + '<img src="${ b.changeName }">'
+	   						  + '<input id="clickNo" type="hidden" name="usedNo" value="' + data[i].usedNo + '"/>'
+	   						  + '<img src="' + data[i].changeName + '">'
 	   						  + '</div>'
 	   						  + '<div class="text-area">'
 	   						  + '<p class="title-text">' + data[i].bookTitle + '</p>'
