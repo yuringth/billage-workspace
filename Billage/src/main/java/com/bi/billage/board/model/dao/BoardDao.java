@@ -275,7 +275,7 @@ public class BoardDao {
 	
 	// 중고게시판 => 글작성
 	public int insertUsedBoard(SqlSessionTemplate sqlSession, UsedBoard b) {
-		System.out.println("b의 dao : "  + b);
+		// System.out.println("b의 dao : "  + b);
 		return sqlSession.insert("usedMapper.insertUsedBoard", b);	
 		
 	}
@@ -337,6 +337,11 @@ public class BoardDao {
 		return (ArrayList)sqlSession.selectList("usedMapper.selectTopUsed");
 	}
 	
+	
+	// 중고 게시판 => 검색
+	public ArrayList<UsedBoard> searchUsedList(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("usedMapper.searchUsedList"); 
+	}
 	
 	
 	

@@ -9,7 +9,7 @@
 </head>
 <body>
 	<jsp:include page="common/header.jsp"/>
-	메인
+	너가가진포인트 : ${ loginUser.point }
 	<jsp:include page="common/footer.jsp"/>
 	
 </body>

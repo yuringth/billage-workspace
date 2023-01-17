@@ -1,5 +1,7 @@
 package com.bi.billage.board.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,12 @@ public class UsedController {
 		// System.out.println(currentPage);
 		// System.out.println("pi : " + pi);
 		
+		/*
+		 * ArrayList<UsedBoard> list = boardService.usedBoardList(pi); for(UsedBoard l :
+		 * list) { System.out.println("리스트 :" +l);
+		 * 
+		 * }
+		 */
 		
 //		키 == 밸류
 		mv.addObject("pi", pi).addObject("list", boardService.usedBoardList(pi)).setViewName("board/usedBoard/usedListView");
@@ -67,8 +75,8 @@ public class UsedController {
 	@RequestMapping("upload.ud")
 	public String insertUsedBoard(UsedBoard b, MultipartFile upfile,  HttpSession session, Model model) {
 		
-		System.out.println("중고게시판 : " + b);
-		System.out.println(upfile);
+//		System.out.println("중고게시판 : " + b);
+//		System.out.println(upfile);
 		
 		if(!upfile.getOriginalFilename().equals("")) { // => 파일이 있을 경우. //getOriginalFilename == filename필드의 값을 반환함
 			
@@ -83,7 +91,7 @@ public class UsedController {
 		// case2. 넘어온 첨부파일이 있는 경우 b : 제목, 작성자, 내용 + 파일원본명, 파일저장경로
 		if(boardService.insertUsedBoard(b) > 0) { // 성공 => 게시글 리스트 페이지
 			
-			System.out.println("성공 시 b의 리스트 : " + b);
+//			System.out.println("성공 시 b의 리스트 : " + b);
 			session.setAttribute("alertMsg", "게시글등록성공");
 			// return "reviewBoard/reviewListView"; 
 			// => 안됨. list를 가져오지 않았기때문임 => db에 들려서 list를 조회해서 가져와야함. 즉 sendRedirect사용해야함
@@ -113,7 +121,10 @@ public class UsedController {
 			// 2) db에서 정보 들고 와서 뿌려주기
 			UsedBoard b = boardService.selectUsedBoard(usedNo);
 			
+			//System.out.println("게시판 디테일 정보:"+b);
+			
 			model.addAttribute("b", b);
+			
 			return "board/usedBoard/usedDetailView";
 			
 		} else {
@@ -205,6 +216,16 @@ public class UsedController {
 	@RequestMapping(value = "topList.ud", produces = "application/json; charset=UTF-8")
 	public String ajaxTopUsedList() {
 		return new Gson().toJson(boardService.selectTopUsed());
+	}
+	
+	
+	// 중고게시판 => 검색기능
+	@RequestMapping("searchForm.ud")
+	public ModelAndView searchUsedList(ModelAndView mv) {
+		
+		mv.addObject("list", boardService.searchUsedList()).setViewName("board/usedBoard/usedListView");
+		
+		return mv;
 	}
 	
 	

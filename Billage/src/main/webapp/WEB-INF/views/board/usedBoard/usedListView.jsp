@@ -109,6 +109,25 @@
 			</div>
 			<div><button type="button" class="btn btn-info" onclick="location.href='insert.ud'">글쓰기</button></div>   
 		</div>
+		
+		
+		
+		
+		<div class="search-area">
+			<form id="searchForm" action="searchForm.ud" method="get" align="center">
+			    <div class="select">
+			        <select class="custom-select" name="condition">
+			            <option value="title">책제목</option>
+			            <option value="content">내용</option>
+			        </select>
+			    </div>
+			    <div class="text">
+			        <input type="text" class="form-control" name="keyword">
+			    </div>
+			    <button type="submit" class="searchBtn btn btn-secondary">검색</button>
+			</form>
+		</div>
+
 
 
 			<!-- 상품 크게 감싸는 div -->
@@ -118,9 +137,13 @@
 			  	<!-- 상품 하나를 감싸는 div  -->
 		        <div class="one-content">
 		        	
-		        	<div>
-						<button>판매가능</button>
-						<button>판매완료</button>
+		        	<div class="stock-status">
+						<c:if test="${ b.stockStatus == 'N'}">
+							<p>판매중</p>
+						</c:if>		        		
+							<c:if test="${ b.stockStatus == 'Y'}">
+							<p>판매완료</p>
+						</c:if>		
 					</div>
 					
 					<div class="usedNo-area">
@@ -129,6 +152,7 @@
 			            <div class="img-area">
 			                
 			                <img id="img-area2" src="${ b.changeName }">
+			                ${b.changeName }
 			            	<!--  onclick="location.href='detail.ud?usedNo='" + b.getUsedNo() -->
 			            	
 			            </div>
@@ -196,6 +220,17 @@
 		})
 	</script>
 
+
+
+	<script>
+		$(function(){
+			//$('.stock-status p').text();
+			//console.log($('.stock-status p').text());
+			
+		})
+	
+	
+	</script>
 
     <jsp:include page="../../common/footer.jsp"/>
     

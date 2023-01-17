@@ -50,17 +50,19 @@
 		</c:if>
 		
 		<hr>
-		<div class="rt-box">
+		<div class="rt-box" style="display:flex; flex-wrap : wrap;">
 
 			<c:forEach items="${list}" var="rt">
-			<div class="rt-contentbox">
+			<div class="rt-contentbox" style="padding:20px;">
 				<input type="hidden" name="rentNo" value="${ rt.rentNo }"> <img src="${ rt.changeName }"
 					width="255" height="200">
 				<p>
 					<span class="rt-title">제목 : ${ rt.rentTitle } </span><br> 대여자 닉네임 : ${ rt.nickname } <br> 포인트 : ${ rt.rentPoint }  <br> 대여시작일 : ${ rt.rentDate }
 				</p>
+				
 			</div>
 			</c:forEach>
+			
 		</div>
 		
 		<div id="pagingArea">
@@ -95,7 +97,13 @@
 		
 	</div>
 	
-	
+	<script>
+		$(function(){
+			$('.rt-contentbox').click(function(){
+				location.href = 'detail.rt?rentNo=' + $(this).children().eq(0).val();
+			})
+		});
+	</script>
 	
 	<jsp:include page="../../common/footer.jsp" />
 </body>

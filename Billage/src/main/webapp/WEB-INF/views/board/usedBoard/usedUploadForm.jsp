@@ -64,7 +64,7 @@
     <div class="outer">
 
         <form action="update.ud" id="usedEnrollForm" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="bookTitle" value="${b.bookTitle}" />
+	
 			<input type="hidden" name="userNo" value="${b.userNo}" />
 			<input type="hidden" name="usedNo" value="${b.usedNo}" />
             <div class="longdiv align-left">
@@ -95,6 +95,41 @@
                     </div>
                 </div>
             </div>
+
+
+            <div class="longdiv align-left">
+                <div class="shortdiv align-left">
+                    <div class="textdiv">
+                        <p>책제목:</p>
+                    </div>
+                    <div class="inputdiv">
+                        <input type="text" class="form-control" id="book_title" placeholder="책제목" name="bookTitle" value="${ b.bookTitle }">
+                    </div>
+                </div>
+                
+                
+                <div class="shortdiv align-left">
+                    <div class="textdiv">
+                        <p>판매상태:</p>
+                    </div>
+                    <div class="inputdiv">
+						<select name="stockStatus" id="stockStatus">
+							<option value="N">판매중</option>
+							<option value="Y">판매완료</option>
+						</select>                   
+					</div>
+                </div>
+                
+                
+            </div>
+            
+            
+            <script>
+            $(function(){
+            	$('#stockStatus').val('${b.stockStatus}').attr('selected', selected);
+            })
+            </script>
+            
 
             <div class="longdiv align-left">
                 

@@ -208,6 +208,7 @@
 		       ,review_content
 		       ,book_point
 		       ,user_no
+		       ,stock_status
 		  from
 		       review
 		 where
