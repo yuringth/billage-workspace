@@ -268,10 +268,12 @@ public class UserController {
 		
 		User loginUser = userService.loginUser(u);
 		
+		System.out.println(loginUser);
+		
 		if(loginUser != null && bcryptPasswordEncoder.matches(u.getUserPwd(), loginUser.getUserPwd())) {	// 로그인 성공 시
 			
 			//로그인 하고 포인트 조회해서 point필드에 넣어줌
-			loginUser.setPoint(pointService.selectPoint(loginUser.getUserNo()));
+			//loginUser.setPoint(pointService.selectPoint(loginUser.getUserNo()));
 			
 			session.setAttribute("loginUser", loginUser);
 			mv.setViewName("redirect:/");

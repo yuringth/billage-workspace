@@ -191,21 +191,23 @@ font-size: 25px;
 		<div class="topn-outer">
 		
 			<!-- 상품 하나를 감싸는 div -->
+<!-- 		
 			<div class="align-left-outer">
 		        <div class="one-content">
 		            <div class="img-area">
-		                <img src="https://img.sbs.co.kr/newimg/news/20160122/200906797_700.jpg" onclick="location.href='detail.ud'">
+		            	<input type="hidden" name="usedNo" value="${b.usedNo }"/>
+		                <img src="https://img.sbs.co.kr/newimg/news/20160122/200906797_700.jpg">
 		            </div>
 		            <div class="text-area">
-		                <p class="title-text">상품 제목</p>
-		                <p class="textsize">180,000원</p>
+		                <p class="title-text">${b.bookTitle }</p>
+		                <p class="textsize">${b.point }</p>
 		                <p class="textsize">♡</p>
-		                <p class="countnum">조회 : 10</p>
+		                <p class="countnum">조회 : ${b.count }</p>
 		            </div>
 		        </div>
 			</div>
 			
-			
+			 -->
 		</div>
 
 
@@ -217,15 +219,16 @@ font-size: 25px;
    		$(function(){
    			topUsedList();
    			
-   			
-   			
-   			
-   			
+   			// ***** 동적으로 만들어진 요소에 이벤트 부여방법 *****
+			$(document).on('click', '.topn-outer>#imgClick', function(){
+				location.href='detail.ud?usedNo=' + $(this).text();
+				console.log($(this).text());
+			})
+			// setInterval(topBoardList, 10000000); // 몇초당 나오게 하는 것
    			
    		})
    	
 	   	function topUsedList(){
-	   		
 	   		$.ajax({
 	   			url:'topList.ud',
 	   			success:function(data){
@@ -236,13 +239,14 @@ font-size: 25px;
 	   					value += '<div class="align-left-outer">'
 	   						  + '<div class="one-content">'
 	   						  + '<div class="img-area">'
-	   						  + '<img src="https://img.sbs.co.kr/newimg/news/20160122/200906797_700.jpg" onclick="location.href='detail.ud'">'
+	   						  + '<input type="hidden" name="usedNo" value="${b.usedNo }"/>'
+	   						  + '<img src="${ b.changeName }">'
 	   						  + '</div>'
 	   						  + '<div class="text-area">'
 	   						  + '<p class="title-text">' + data[i].bookTitle + '</p>'
 	   						  + '<p class="textsize">' + data[i].point + '</p>'
-	   						  + '<p class="textsize">' + ♡  + '</p>'
-	   						  + '<p class="countnum">' + 조회 : data[i].count + '</p>'
+	   						  + '<p class="textsize">' + '♡'  + '</p>'
+	   						  + '<p class="countnum">' + '조회 :' + data[i].count + '</p>'
 	   						  + '</div>'
 	   						  + '</div>'
 	   						  + '</div>';

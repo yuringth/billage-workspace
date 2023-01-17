@@ -183,10 +183,11 @@ public interface BoardService {
 	// 중고게시판 삭제 (update) 
 	int deleteUsedBoard(int usedNo);
 	
+	// 중고게시판 => 게시판 번호를 식별자로 DB에서 select해옴
+	UsedBoard selectUpdateUsedBoard(int usedNo);
 	
-	
-	// 중고게시글 수정 서비스(update)
-	int updateUsedBoard(UsedBoard b);
+	// 중고게시글 수정 서비스(update) =>글수정 버튼 눌렀을때
+	int usedUpdate(UsedBoard b);
 	
 	// 중고게시판 TOP-N 분석(조회수 높은 순으로 띄우기)(select)
 	ArrayList<UsedBoard> selectTopUsed();
