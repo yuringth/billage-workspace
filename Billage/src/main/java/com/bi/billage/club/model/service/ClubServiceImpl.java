@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.club.model.dao.ClubDao;
 import com.bi.billage.club.model.vo.Club;
+import com.bi.billage.club.model.vo.ClubOpen;
 
 @Service
 public class ClubServiceImpl implements ClubService {
@@ -70,8 +71,8 @@ public class ClubServiceImpl implements ClubService {
 	}
 	
 	@Override
-	public ArrayList<Club> clubMemerSelectAdmin(int clubNo) {
-		return clubDao.clubMemerSelectAdmin(sqlSession, clubNo);
+	public ArrayList<Club> clubMemberSelectAdmin(int clubNo) {
+		return clubDao.clubMemberSelectAdmin(sqlSession, clubNo);
 	}
 
 	@Override
@@ -89,7 +90,17 @@ public class ClubServiceImpl implements ClubService {
 		return clubDao.clubLikeDelete(sqlSession, club);
 	}
 
+	@Override
+	public int selectClubLikeCount(Club club) {
+		return clubDao.selectClubLikeCount(sqlSession, club);
+	}
 
+	@Override
+	public ArrayList<ClubOpen> clubOpenSelectAdmin(int ClubNo) {
+		return clubDao.clubOpenSelectAdmin(sqlSession, ClubNo);
+	}
+
+	 
 
 
 

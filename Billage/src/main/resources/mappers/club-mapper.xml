@@ -12,7 +12,7 @@
 		<result column="CLUB_LIMIT"			 property="clubLimit" />
 		<result column="CLUB_CREATEDATE"	 property="clubCreatedate" />
 		<result column="CLUB_DISCRIPT"       property="clubDiscript" />
-		<result column="USER_ID"          property="clubDiscript" />
+		<result column="USER_ID"         	 property="clubDiscript" />
 		<result column="CLUB_LOCATION" 		 property="clubLocation" />
 		<result column="CLUB_STATUS" 		 property="clubStatus" />
 		<result column="CLUB_IMG" 			 property="clubImg" />
@@ -26,6 +26,22 @@
 		<result column="LIKEUSER"			 property="likeUser" />
 		<result column="MEMUSER"			 property="memUser" />
 	</resultMap>
+	
+	
+	<resultMap type="clubOpen" id="clubOpenResultSet">
+		<result column="OPEN_NO" 			property="openNo" />
+		<result column="CLUB_NO" 			property="clubNo" />
+		<result column="OPEN_TITLE"		 	property="openTitle" />
+		<result column="OPEN_LOCATION"		property="openLocation" />
+		<result column="OPEN_DATE"			property="openDate" />
+		<result column="OPEN_TIME" 			property="openTime" />
+		<result column="OPEN_LIMIT" 		property="openLimit" />
+		<result column="OPEN_STATUS" 		property="openStatus" />
+		<result column="NICKNAME" 			property="nickname" />
+		<result column="CLUB_NAME" 			property="clubName" />
+		<result column="OPEN_MEM_COUNT" 	property="openMemCount" />
+	</resultMap>
+	
 
 	<!-- 
 	<resultMap type="club" id="clubLikeResultSet">
@@ -449,7 +465,7 @@
 	</select>	
 	
 	<!-- Club_Member List Select -->
-	<select id="clubMemerSelectAdmin" parameterType="_int" resultMap="clubResultSet">
+	<select id="clubMemberSelectAdmin" parameterType="_int" resultMap="clubResultSet">
 		 SELECT 
 		         CM.CLUB_NO
 		        ,CM.USER_NO
@@ -509,4 +525,107 @@
 		       USER_NO = #{ userNo }
 	</delete>
 	
+	
+	<!-- Club Like Count -->
+	<select id="selectClubLikeCount" parameterType="club" resultType="_int">
+		SELECT 
+				COUNT(*) "LIKECOUNT"
+		  FROM
+				CLUB_LIKE
+		  WHERE
+				CLUB_NO = #{ clubNo }
+	</select>
+	
+	
+	
+	<!--  ClubOpen Table Select List : Admin -->
+	<select id="clubOpenSelectAdmin" resultMap="clubOpenResultSet" >
+		SELECT
+				C.CLUB_NO
+		       ,C.USER_NO
+		       ,C.NICKNAME
+		       ,C.CLUB_NAME
+		       ,C.OPEN_NO
+		       ,C.OPEN_TITLE
+		       ,C.OPEN_LOCATION
+		       ,C.OPEN_DATE
+		       ,C.OPEN_TIME
+		       ,C.OPEN_LIMIT
+		       ,C.OPEN_STATUS   
+		       ,COUNT(OM.OPEN_NO) "OPEN_MEM_COUNT"
+		  FROM
+		        OPEN_MEMBER OM
+		 RIGHT        
+		  JOIN 
+		        (
+		        SELECT 
+		        		 C.CLUB_NO
+						,C.USER_NO
+						,C.NICKNAME
+						,C.CLUB_NAME
+						,CO.OPEN_NO
+						,CO.OPEN_TITLE
+						,CO.OPEN_LOCATION
+						,CO.OPEN_DATE
+						,CO.OPEN_TIME
+						,CO.OPEN_LIMIT
+						,CO.OPEN_STATUS 
+				  FROM
+						CLUB_OPEN CO
+				  JOIN
+		                (
+		                SELECT  
+								 C.CLUB_NO
+								,C.USER_NO
+								,M.NICKNAME 
+								,C.CLUB_NAME
+						  FROM 
+						  		CLUB C 
+		                  JOIN 
+		                  		MEMBER M ON (C.USER_NO = M.USER_NO)) C
+		                  		ON( C.CLUB_NO = CO.CLUB_NO)) C 
+								ON(C.OPEN_NO = OM.OPEN_NO)
+		 GROUP
+		    BY      
+		    	C.CLUB_NO
+		       ,C.USER_NO
+		       ,C.NICKNAME
+		       ,C.CLUB_NAME
+		       ,C.OPEN_NO
+		       ,C.OPEN_TITLE
+		       ,C.OPEN_LOCATION
+		       ,C.OPEN_DATE
+		       ,C.OPEN_TIME
+		       ,C.OPEN_LIMIT
+		       ,C.OPEN_STATUS     
+		 ORDER 
+		    BY    
+				C.OPEN_NO DESC
+	</select>
+	
+	
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

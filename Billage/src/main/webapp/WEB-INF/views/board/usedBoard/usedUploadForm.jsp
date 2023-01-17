@@ -64,7 +64,7 @@
     <div class="outer">
 
         <form action="update.ud" id="usedEnrollForm" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="bookTitle" value="${b.bookTitle}" />
+	
 			<input type="hidden" name="userNo" value="${b.userNo}" />
 			<input type="hidden" name="usedNo" value="${b.usedNo}" />
             <div class="longdiv align-left">

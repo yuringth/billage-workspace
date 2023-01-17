@@ -44,11 +44,10 @@
 					<c:forEach items="${ followingList }" var="f">
 						<div id="following${ f.userNo}" style="display:flex; flex-direction: row; justify-content: space-evenly;">
 							<div id="profile${ f.userNo}">
-								<img src="https://i.pinimg.com/originals/4c/f0/16/4cf0163a9db5f4b69499b9365be5fcda.png" width="100px;" height="100px;">
+								<img src="${ f.profileImg }" width="100px;" height="100px;">
 							</div>
 							<div id="userDetail${ f.userNo}">
 								<div id="userNickName"${ f.userNo} ><a href="selectUser.fo?uno=${f.userNo }">${ f.nickname }</a></div>
-								<div id="reviewCount${ f.userNo}"><a href="selectReviewList.fo?uno=${ f.userNo }">리뷰100</a></div>
 							</div>
 							<input type="hidden" id="${f.userNo }" value="${ f.userNo }">
 							<button id="followingBtn" class="1" style="width:100px; height:50px;" onclick="follow(this);">팔로잉</button>

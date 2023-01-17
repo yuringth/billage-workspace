@@ -30,7 +30,5 @@ public class PointServiceImpl implements PointService{
 	public int selectUserNo(String userId) {
 		return pointDao.selectUserNo(userId, sqlSession);
 	}
-	
-	
 
 }

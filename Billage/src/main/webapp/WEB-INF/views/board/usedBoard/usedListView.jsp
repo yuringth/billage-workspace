@@ -109,6 +109,25 @@
 			</div>
 			<div><button type="button" class="btn btn-info" onclick="location.href='insert.ud'">글쓰기</button></div>   
 		</div>
+		
+		
+		
+		
+		<div class="search-area">
+			<form id="searchForm" action="searchForm.ud" method="get" align="center">
+			    <div class="select">
+			        <select class="custom-select" name="condition">
+			            <option value="title">책제목</option>
+			            <option value="content">내용</option>
+			        </select>
+			    </div>
+			    <div class="text">
+			        <input type="text" class="form-control" name="keyword">
+			    </div>
+			    <button type="submit" class="searchBtn btn btn-secondary">검색</button>
+			</form>
+		</div>
+
 
 
 			<!-- 상품 크게 감싸는 div -->
@@ -119,14 +138,12 @@
 		        <div class="one-content">
 		        	
 		        	<div class="stock-status">
-		        		<c:choose>
-		        			<c:when test="${b.stockStatus eq 'N'} ">
-								<p>판매상태 : 판매중</p>
-							</c:when>
-							<c:otherwise>
-								<p>판매상태 : 판매완료</p>
-							</c:otherwise>		        		
-		        		</c:choose>
+						<c:if test="${ b.stockStatus == 'N'}">
+							<p>판매중</p>
+						</c:if>		        		
+							<c:if test="${ b.stockStatus == 'Y'}">
+							<p>판매완료</p>
+						</c:if>		
 					</div>
 					
 					<div class="usedNo-area">
@@ -135,6 +152,7 @@
 			            <div class="img-area">
 			                
 			                <img id="img-area2" src="${ b.changeName }">
+			                ${b.changeName }
 			            	<!--  onclick="location.href='detail.ud?usedNo='" + b.getUsedNo() -->
 			            	
 			            </div>

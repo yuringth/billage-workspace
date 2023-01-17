@@ -1,5 +1,7 @@
 package com.bi.billage.board.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,12 @@ public class UsedController {
 		// System.out.println(currentPage);
 		// System.out.println("pi : " + pi);
 		
+		/*
+		 * ArrayList<UsedBoard> list = boardService.usedBoardList(pi); for(UsedBoard l :
+		 * list) { System.out.println("리스트 :" +l);
+		 * 
+		 * }
+		 */
 		
 //		키 == 밸류
 		mv.addObject("pi", pi).addObject("list", boardService.usedBoardList(pi)).setViewName("board/usedBoard/usedListView");
@@ -113,7 +121,10 @@ public class UsedController {
 			// 2) db에서 정보 들고 와서 뿌려주기
 			UsedBoard b = boardService.selectUsedBoard(usedNo);
 			
+			//System.out.println("게시판 디테일 정보:"+b);
+			
 			model.addAttribute("b", b);
+			
 			return "board/usedBoard/usedDetailView";
 			
 		} else {
@@ -205,6 +216,16 @@ public class UsedController {
 	@RequestMapping(value = "topList.ud", produces = "application/json; charset=UTF-8")
 	public String ajaxTopUsedList() {
 		return new Gson().toJson(boardService.selectTopUsed());
+	}
+	
+	
+	// 중고게시판 => 검색기능
+	@RequestMapping("searchForm.ud")
+	public ModelAndView searchUsedList(ModelAndView mv) {
+		
+		mv.addObject("list", boardService.searchUsedList()).setViewName("board/usedBoard/usedListView");
+		
+		return mv;
 	}
 	
 	
