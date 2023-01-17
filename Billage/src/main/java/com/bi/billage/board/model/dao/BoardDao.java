@@ -340,11 +340,11 @@ public class BoardDao {
 	}
 	
 	
-	// 중고 게시판 => 검색
-//	public ArrayList<UsedBoard> searchUsedList(SqlSessionTemplate sqlSession){
-//		return (ArrayList)sqlSession.selectList("usedMapper.searchUsedList"); 
+//	// 중고 게시판 => 검색
+//	public int selectSearchCount(SqlSessionTemplate sqlSession, HashMap<String, String> map){
+//		return sqlSession.selectOne("usedMapper.selectSearchCount", map); 
 //	}
-	
+//	
 	
 	
 	// 유림끝  ==========================================================

@@ -14,8 +14,11 @@ public class ClubOpen {
 	private int openLimit; //OPEN_LIMIT	NUMBER
 	private String openStatus; //OPEN_STATUS	VARCHAR2(1 BYTE)
 	
+	private int userNo;
 	private String nickname;
 	private String clubName;
+	private int openMemCount;
+	
 }
 
 

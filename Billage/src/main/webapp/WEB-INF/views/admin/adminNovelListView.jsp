@@ -136,18 +136,18 @@
         </div>
         <div class="main_content">
             <div class="title">
-				<h1 class="title-text">전체 회원 조회 및 관리</h1>
+				<h1 class="title-text">전체 작품 조회 및 관리</h1>
 			</div><br>
 				<table id="serialRequestList" class="table table-hover" align="center">
                 <thead>
                     <tr>
-                        <th>회원번호</th>
-                        <th>회원아이디</th>
-                        <th>회원닉네임</th>
-                        <th>이메일</th>
-                        <th>가입일</th>
-                        <th>회원등급</th>
-                        <th>탈퇴여부</th>
+                        <th>작품번호</th>
+                        <th>작품명</th>
+                        <th>작가명</th>
+                        <th>시작일</th>
+                        <th>추천수</th>
+                        <th>상태</th>
+                        <th>유/무료</th>
                     </tr>
                 </thead>
                 <c:forEach items="${ list }" var="u">

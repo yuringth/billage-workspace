@@ -1,6 +1,7 @@
 package com.bi.billage.board.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -208,8 +209,8 @@ public class BoardServiceImpl implements BoardService {
 	
 	// 중고게시판 => 검색
 //	@Override
-//	public ArrayList<UsedBoard> searchUsedList(String condition, String keyword){
-//		return boardDao.searchUsedList(sqlSession, condition, keyword);
+//	public int selectSearchCount(HashMap<String, String> map){
+//		return boardDao.selectSearchCount(sqlSession, map);
 //	}
 	
 	
