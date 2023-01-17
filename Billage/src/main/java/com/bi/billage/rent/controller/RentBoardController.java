@@ -13,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.common.savefile.SaveFile;
 import com.bi.billage.common.template.Pagination;
+import com.bi.billage.point.model.service.PointService;
+import com.bi.billage.point.model.vo.Point;
 import com.bi.billage.rent.model.service.RentBoardService;
 import com.bi.billage.rent.model.vo.RentBoard;
 import com.bi.billage.user.model.vo.User;
@@ -22,6 +24,9 @@ public class RentBoardController {
 	
 	@Autowired
 	private RentBoardService rentBoardService;
+	
+	@Autowired
+	private PointService pointService;
 	
 	// 대여게시판으로 이동 화면
 	@RequestMapping("list.rt")
@@ -78,9 +83,39 @@ public class RentBoardController {
 		
 		rb.setRentUserNo(((User)session.getAttribute("loginUser")).getUserNo());
 		int result = rentBoardService.updatePoint(rb);
+	}
+	*/
 	
+	// 대여 신청 서비스
+	@RequestMapping("apply.rt")
+	public String applyRent(HttpSession session, RentBoard rb) {
+		
+		// 빌리는 사람 유저넘버
+		int renterNo = ((User)session.getAttribute("loginUser")).getUserNo();
+		
+		Point renter = new Point();	// 빌리는 사람
+		
+		renter.setUserNo(renterNo);
+		renter.setPointAdd(rb.getRentPoint() * (-1));
+		renter.setPointStatus("사용");
+		
+		pointService.addPoint(renter);
+		
+		
+		Point writer = new Point();	// 빌려주는 사람(글 작성자)
+		
+		writer.setUserNo(rb.getUserNo());
+		writer.setPointAdd(rb.getRentPoint());
+		writer.setPointStatus("적립");
+		
+		pointService.addPoint(writer);
+		
+		return "board/rentBoard/chkApply";
+		
+		
 		
 		
 	}
-	*/
+	
+	
 }

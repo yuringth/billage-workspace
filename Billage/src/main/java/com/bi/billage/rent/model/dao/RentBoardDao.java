@@ -43,4 +43,9 @@ public class RentBoardDao {
 		return sqlSession.update("rentMapper.plusPoint", rb);
 	}
 	*/
+	
+	// 대여게시판 대여 신청 -> 빌려주는 사람 포인트 증가
+	public int getPoint(SqlSessionTemplate sqlSession, RentBoard rb) {
+		return sqlSession.update("rentMapper.minusPoint", rb);
+	}
 }

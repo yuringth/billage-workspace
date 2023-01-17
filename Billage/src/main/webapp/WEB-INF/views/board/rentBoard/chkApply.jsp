@@ -20,7 +20,7 @@
     <br><br>
     <div>
     	<div style="text-align: center;">
-        	<button onclick="location.href='/'">홈으로 가기</button> <button onclick="history.back()">뒤로 가기</button>
+        	<button onclick="location.href='/billage'">홈으로 가기</button> <button onclick="history.back()">뒤로 가기</button>
         </div>
     </div>
 

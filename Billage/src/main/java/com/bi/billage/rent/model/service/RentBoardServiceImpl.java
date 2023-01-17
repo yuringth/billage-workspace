@@ -53,7 +53,8 @@ public class RentBoardServiceImpl implements RentBoardService {
 		return rentBoardDao.minusPoint(sqlSession, rb) * rentBoardDao.plusPoint(sqlSession, rb);
 	}
 	*/
-
+	
+	
 
 
 }

@@ -105,16 +105,6 @@
 	</select>
 	
 	
-	<!-- 포인트 차감 
-	<update id="minusPoint" parameterType="rent">
-		UPDATE
-				RENT_BOARD
-		SET
-				RENT_POINT
-		WHERE
-				RENT_USERNO = #{rentUserNo}
 	
 	
-	</update>
-	-->
 </mapper>
