@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>The Draw</title>
+<title>경매게시판</title>
 <style>
     p {
         margin-bottom : 0px;
