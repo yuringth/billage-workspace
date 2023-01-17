@@ -316,10 +316,11 @@ public class DrawAuctionController {
 		return  new Gson().toJson(b);
 	}
 	
+	/*
 	// 즉시구매
 	@ResponseBody
 	@RequestMapping(value="bid.ac", produces="appliction/json; charset=UTF-8")
-	public String isnertBuyer(ADBoard b, HttpSession session) {
+	public String insertBuyer(ADBoard b, HttpSession session) {
 		
 		if(boardService.insertBidUser(b) * boardService.updatePrizeUser(b) > 0) {
 			
@@ -345,5 +346,5 @@ public class DrawAuctionController {
 		
 		return  new Gson().toJson(b);
 	}
-	
+	*/
 }

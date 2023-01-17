@@ -43,7 +43,12 @@
 	<!-- 가로로 4개 세로로 2개  => 한 화면에 8개 -->
 	<div class="rt-outer">
 		<h2>대여게시판</h2>
+		
+		<!-- 로그인 유저만 보이게 -->
+		<c:if test="${ not empty sessionScope.loginUser }">
 		<div style="display: flex; justify-content: end;"><button onclick="location.href='enrollForm.rt'">글 올리기</button></div>
+		</c:if>
+		
 		<hr>
 		<div class="rt-box">
 
