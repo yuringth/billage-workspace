@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bi.billage.board.model.service.BoardService;
+import com.bi.billage.board.model.vo.FAQ;
 import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.Serial;
 import com.bi.billage.board.model.vo.SerialRequest;
@@ -164,8 +165,9 @@ public class BoardController {
 	
 	// FAQ화면
 	@RequestMapping("faqList.fa")
-	public String selectfaqList() {
-		return "board/faqBoard/faqListView";
+	public ModelAndView selectfaqList(FAQ faq, ModelAndView mv) {
+		mv.addObject("faq", boardService.selectFaqList(faq)).setViewName("board/faqBoard/faqListView");
+		return mv;
 	}
 	
 	// 광진영역 끝

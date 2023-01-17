@@ -8,6 +8,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.bi.billage.board.model.vo.FAQ;
 import com.bi.billage.board.model.vo.Inquiry;
 import com.bi.billage.board.model.vo.SerialRequest;
 import com.bi.billage.common.model.vo.PageInfo;
@@ -116,5 +117,21 @@ public class UserDao {
 //		map.put("answer", answer);
 		
 		return sqlSession.update("userMapper.updateInquiry", iq);
+	}
+
+	public ArrayList<FAQ> selectFaqList(SqlSessionTemplate sqlSession, FAQ faq) {
+		return (ArrayList)sqlSession.selectList("faqMapper.selectFaqList", faq);
+	}
+
+	public int insertFaq(SqlSessionTemplate sqlSession, FAQ faq) {
+		return sqlSession.insert("faqMapper.insertFaq", faq);
+	}
+
+	public int deleteFaq(SqlSessionTemplate sqlSession, FAQ faq) {
+		return sqlSession.delete("faqMapper.deleteFaq", faq);
+	}
+
+	public int updateFaq(SqlSessionTemplate sqlSession, FAQ faq) {
+		return sqlSession.update("faqMapper.updateFaq", faq);
 	}
 }

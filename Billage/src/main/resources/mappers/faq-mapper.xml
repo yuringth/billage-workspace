@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="faqMapper">
+
+	<resultMap type="faq" id="faqResultSet">
+		<result column="faq_no"			property="faqNo" />
+		<result column="user_no"		property="userNo" />
+		<result column="faq_type"		property="faqType" />
+		<result column="faq_title"		property="faqTitle" />
+		<result column="faq_answer"		property="faqAnswer" />
+		<result column="enroll_date"	property="enrollDate" />
+	</resultMap>
+	
+	<select id="selectFaqList" resultMap="faqResultSet">
+		select
+			faq_no,
+			user_no,
+			faq_type,
+			faq_title,
+			faq_answer,
+			enroll_date
+		from
+			faq
+	</select>
+	
+	<insert id="insertFaq" parameterType="faq">
+		insert
+			into
+				faq
+				(
+				faq_no,
+				user_no,
+				faq_type,
+				faq_title,
+				faq_answer,
+				enroll_date
+				)
+			values
+				(
+				seq_fno.nextval,
+				#{userNo},
+				#{faqType},
+				#{faqTitle},
+				#{faqAnswer},
+				sysdate
+				)
+	</insert>
+	
+	<delete id="deleteFaq">
+		delete
+		from	faq
+		where	faq_no = #{faqNo}
+	</delete>
+	
+	<update id="updateFaq">
+		update
+				faq
+		set
+				faq_title = #{faqTitle},
+				faq_answer = #{faqAnswer}
+		where
+				faq_no = #{faqNo}	
+	</update>
+</mapper>

@@ -138,26 +138,38 @@
 				<table id="serialRequestList" class="table table-hover" align="center">
                 <thead>
                     <tr>
-                        <th>F</th>
-                        <th>A</th>
-                        <th>Q</th>
-                        <th>는</th>
-                        <th>뭘</th>
+                        <th>유형</th>
+                        <th>질문</th>
+                        <th>답변</th>
+                        <th>수정</th>
+                        <th>삭제</th>
                     </tr>
                 </thead>
-                <c:forEach items="${ list }" var="g">
+                <c:forEach items="${ faq }" var="f">
                 <tbody>
-                		<tr>
-                			<td class="gno">$</td>
-                			<td>$</td>
-                			<td>$</td>
-                			<td>$</td>
-                			<td>$</td>
-                		</tr>
+               		<tr>
+						<td>${f.faqType}</td>
+						<form id="update" method="post" action="update.fa">
+               			<td><input type="text" name="faqTitle" style="width:250px" value="${ f.faqTitle }"></td>
+               			<td><input type="text" name="faqAnswer" style="width:300px" value="${ f.faqAnswer }"></td>
+               			<td>
+               			<input type="hidden" name="faqNo" value="${ f.faqNo }">
+               			<button type="submit" class="btn btn-secondary">수정</button>
+               			</form>
+               			</td>
+               			<td>
+               			<form id="delete" method="post" action="delete.fa">
+               			<input type="hidden" name="faqNo" value="${ f.faqNo }">
+               			<button type="submit" class="btn btn-secondary">삭제</button>
+               			</form>
+               			</td>
+               		</tr>
                 </tbody>
                 </c:forEach>
             </table>
             <br>
+            <a href="enrollForm.fa" class="btn btn-secondary" style="display:inline-block; align:center;">새로 작성</a> 
+            <br><br>
                <div id="pagingArea" class="title">
                 <ul class="pagination">
                 	<c:choose>
@@ -165,18 +177,18 @@
                     		<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
                     	</c:when>
                 		<c:otherwise>
-                		<li class="page-item"><a class="page-link" href="groupList.ad?cpage=${ pi.currentPage - 1 }">Previous</a></li>
+                		<li class="page-item"><a class="page-link" href="faqList.ad?cpage=${ pi.currentPage - 1 }">Previous</a></li>
                 		</c:otherwise>
                 	</c:choose>
                 <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-                    <li class="page-item"><a class="page-link" href="groupList.ad?cpage=${p}">${ p }</a></li>
+                    <li class="page-item"><a class="page-link" href="faqList.ad?cpage=${p}">${ p }</a></li>
                 </c:forEach>
                 <c:choose>
                 	<c:when test="${ pi.currentPage eq pi.maxPage }">
 	                    <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
                 	</c:when>
                 	<c:otherwise>
-	                    <li class="page-item"><a class="page-link" href="groupList.ad?cpage=${ pi.currentPage + 1 }">Next</a></li>
+	                    <li class="page-item"><a class="page-link" href="faq.ad?cpage=${ pi.currentPage + 1 }">Next</a></li>
 	                </c:otherwise>
 	            </c:choose>
                 </ul>

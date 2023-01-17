@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.bi.billage.board.model.vo.ADBoard;
 import com.bi.billage.board.model.vo.Book;
+import com.bi.billage.board.model.vo.FAQ;
 import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.ReportBoard;
 import com.bi.billage.board.model.vo.ReviewBoard;
@@ -49,6 +50,9 @@ public interface BoardService {
 	
 	// 연재 등록 서비스(insert)
 	int insertSerial(Serial se, Integer novelNo);
+	
+	// FAQ 리스트 조회
+	ArrayList<FAQ> selectFaqList(FAQ faq);
 	
 	//광진 구역끝
 	
@@ -183,7 +187,7 @@ public interface BoardService {
 	int updateUsedBoard(UsedBoard b);
 	
 	// 중고게시판 TOP-N 분석(조회수 높은 순으로 띄우기)(select)
-	ArrayList<UsedBoard> selectTopBoard();
+	ArrayList<UsedBoard> selectTopUsed();
 	
 	
 	

@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bi.billage.board.model.vo.FAQ;
 import com.bi.billage.board.model.vo.Inquiry;
 import com.bi.billage.board.model.vo.SerialRequest;
 import com.bi.billage.club.model.vo.Club;
@@ -127,6 +128,26 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public int updateInquiry(Inquiry iq) {
 		return userDao.updateInquiry(sqlSession, iq);
+	}
+
+	@Override
+	public ArrayList<FAQ> selectFaqList(FAQ faq) {
+		return userDao.selectFaqList(sqlSession, faq);
+	}
+
+	@Override
+	public int insertFaq(FAQ faq) {
+		return userDao.insertFaq(sqlSession, faq);
+	}
+
+	@Override
+	public int deleteFaq(FAQ faq) {
+		return userDao.deleteFaq(sqlSession, faq);
+	}
+
+	@Override
+	public int updateFaq(FAQ faq) {
+		return userDao.updateFaq(sqlSession, faq);
 	}
 
 }
