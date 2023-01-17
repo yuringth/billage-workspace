@@ -268,8 +268,6 @@ public class UserController {
 		
 		User loginUser = userService.loginUser(u);
 		
-		System.out.println(loginUser);
-		
 		if(loginUser != null && bcryptPasswordEncoder.matches(u.getUserPwd(), loginUser.getUserPwd())) {	// 로그인 성공 시
 			
 			//로그인 하고 포인트 조회해서 point필드에 넣어줌
@@ -374,4 +372,33 @@ public class UserController {
 		return "user/writeEmailForm";
 	}
 	
+	// 작품 후원 메소드
+	@RequestMapping("donate.nv")
+	public String donateNovel(int point, int userPoint, int userNo1, int userNo2, HttpSession session) {
+		
+		//System.out.println(userPoint);
+		//System.out.println(point);
+		if(point <= userPoint) {
+			Point p1 = new Point();
+			p1.setUserNo(userNo1);
+			p1.setPointAdd(-1 * point);
+			p1.setPointStatus("사용");
+			
+			if(pointService.addPoint(p1)> 0) {
+				Point p2 = new Point();
+				p2.setUserNo(userNo2);
+				p2.setPointAdd(point);
+				p2.setPointStatus("적립");
+				pointService.addPoint(p2);
+				session.setAttribute("alertMsg", "후원 성공!");
+				//((User)session.getAttribute("loginUser")).setPoint(pointService.selectPoint(userNo1));
+				((User)session.getAttribute("loginUser")).setPoint(userPoint - point);
+			}
+			
+				return "redirect:/";
+		} else {
+			session.setAttribute("alertMsg", "보유 포인트가 부족합니다.");
+			return "redirect:/";
+		}
+	}
 }
