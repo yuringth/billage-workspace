@@ -118,8 +118,15 @@
 			  	<!-- 상품 하나를 감싸는 div  -->
 		        <div class="one-content">
 		        	
-		        	<div>
-						<p>${b.stockStatus }</p>
+		        	<div class="stock-status">
+		        		<c:choose>
+		        			<c:when test="${b.stockStatus eq 'N'} ">
+								<p>판매상태 : 판매중</p>
+							</c:when>
+							<c:otherwise>
+								<p>판매상태 : 판매완료</p>
+							</c:otherwise>		        		
+		        		</c:choose>
 					</div>
 					
 					<div class="usedNo-area">
@@ -195,6 +202,17 @@
 		})
 	</script>
 
+
+
+	<script>
+		$(function(){
+			//$('.stock-status p').text();
+			//console.log($('.stock-status p').text());
+			
+		})
+	
+	
+	</script>
 
     <jsp:include page="../../common/footer.jsp"/>
     

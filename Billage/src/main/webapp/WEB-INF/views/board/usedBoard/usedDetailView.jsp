@@ -137,11 +137,20 @@ font-size: 25px;
 		
 		<!-- USED_BOARD 테이블에 used_genre, used_pric, used_content, used_chat(?) 컬럼 추가 -->
 		<div class="writer-area">
-			<p id="stock_status" name="stockStatus">판매상태 : ${ b.stockStatus }</p>
-			<p id="used_title" name="usedTitle">게시글 제목 : ${ b.usedTitle }</p>
-			<p id="used_genre" name="usedGenre">책 장르 : ${ b.bookGenre }</p>
-			<p id="used_price" name="usedPrice">판매 가격 : ${ b.point }</p>
-			<p id="used_content" name="usedContent">게시글 내용 : ${ b.usedContent }</p>
+			<c:choose>
+				<c:when test="${b.stockStatus eq 'N'} ">
+					<p>판매상태 : 판매중</p>
+				</c:when>
+				<c:otherwise>
+					<p>판매상태 : 판매완료</p>
+				</c:otherwise>
+			</c:choose>
+			
+					
+				<p id="used_title" name="usedTitle">게시글 제목 : ${ b.usedTitle }</p>
+				<p id="used_genre" name="usedGenre">책 장르 : ${ b.bookGenre }</p>
+				<p id="used_price" name="usedPrice">판매 가격 : ${ b.point }</p>
+				<p id="used_content" name="usedContent">게시글 내용 : ${ b.usedContent }</p>
 			
 			<p id="count" name="count">관심 채팅 조회</p>
 		</div>

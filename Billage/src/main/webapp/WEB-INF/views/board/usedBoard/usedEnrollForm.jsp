@@ -100,8 +100,8 @@
                     </div>
                     <div class="inputdiv">
 						<select name="stockStatus">
-							<option value="판매중" select>판매중</option>
-							<option value="판매완료">판매완료</option>
+							<option value="N">판매중</option>
+							<option value="Y">판매완료</option>
 						</select>
                     </div>
                 </div>

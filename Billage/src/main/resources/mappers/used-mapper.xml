@@ -54,7 +54,7 @@
 			  ,#{usedContent}
 			  ,#{originName}
 			  ,#{changeName}
-			  ,'판매중'<!-- 기본값 N -->
+			  ,#{stockStatus} <!-- 기본값 N -->
 			   )
 	</insert>
 
@@ -175,8 +175,6 @@
 		       used_no = #{usedNo}
 		   and
 		       used_status = 'N'
-		   and
-		       stock_status = 'N'
 	</select>
 
 	

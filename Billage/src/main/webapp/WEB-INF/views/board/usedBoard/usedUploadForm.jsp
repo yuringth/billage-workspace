@@ -106,19 +106,28 @@
                         <input type="text" class="form-control" id="book_title" placeholder="책제목" name="bookTitle" value="${ b.bookTitle }">
                     </div>
                 </div>
+                
+                
                 <div class="shortdiv align-left">
                     <div class="textdiv">
                         <p>판매상태:</p>
                     </div>
                     <div class="inputdiv">
-						<select name="stockStatus">
-							${b.stockStatus }
-							<option value="판매중" select>판매중</option>
-							<option value="판매완료">판매완료</option>
+						<select name="stockStatus" id="stockStatus">
+							<option value="판매중"></option>
+							<option value="판매완료"></option>
 						</select>                   
 					</div>
                 </div>
             </div>
+            
+            
+            <script>
+            $(function(){
+            	$('#stockStatus').val('${b.stockStatus}').attr('selected', selected);
+            })
+            </script>
+            
 
             <div class="longdiv align-left">
                 
