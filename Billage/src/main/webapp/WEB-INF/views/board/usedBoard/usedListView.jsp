@@ -117,8 +117,8 @@
 			<form id="searchForm" action="searchForm.ud" method="get" align="center">
 			    <div class="select">
 			        <select class="custom-select" name="condition">
-			            <option value="title">책제목</option>
-			            <option value="content">내용</option>
+			            <option value="bookTitle">책제목</option>
+			            <option value="usedContent">내용</option>
 			        </select>
 			    </div>
 			    <div class="text">
