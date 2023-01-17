@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.bi.billage.board.model.vo.FAQ;
 import com.bi.billage.board.model.vo.Inquiry;
+import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.SerialRequest;
 import com.bi.billage.club.model.vo.Club;
 import com.bi.billage.common.model.vo.PageInfo;
@@ -148,6 +149,16 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public int updateFaq(FAQ faq) {
 		return userDao.updateFaq(sqlSession, faq);
+	}
+
+	@Override
+	public int selectNovelListCount() {
+		return userDao.selectNovelListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Novel> selectNovelList(PageInfo pi) {
+		return userDao.selectNovelList(sqlSession, pi);
 	}
 
 

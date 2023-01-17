@@ -60,6 +60,15 @@ public class UserController {
 		return mv;
 	}
 	
+	// 작품관리화면
+	@RequestMapping("novelList.ad")
+	public ModelAndView selectNovelList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
+		PageInfo pi = Pagination.getPageInfo(userService.selectNovelListCount(), currentPage, 10, 10);
+		mv.addObject("pi", pi).addObject("list", userService.selectNovelList(pi)).setViewName("admin/adminNovelListView");
+		
+		return mv;
+	}
+	
 	// 1:1 문의내역
 	@RequestMapping("inqList.ad")
 	public ModelAndView selectinqList(@RequestParam(value="cpage", defaultValue="1") int currentPage, ModelAndView mv) {
