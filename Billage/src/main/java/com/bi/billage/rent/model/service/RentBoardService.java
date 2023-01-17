@@ -19,4 +19,8 @@ public interface RentBoardService {
 	// 대여게시글 상세조회
 	RentBoard detailRentBoard(int rentNo);
 	
+	/*
+	// 빌리는 사람 포인트 차감
+	int updatePoint(RentBoard rb);
+	*/
 }

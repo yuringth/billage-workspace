@@ -84,7 +84,7 @@
 	<select id="detailRentBoard" resultMap="RentBoardResultSet">
 		SELECT
 				RENT_NO,
-				USER_NO,
+				R.USER_NO,
 				RENT_USERNO,
 				RENT_TITLE,
 				RENT_CONTENT,
@@ -92,14 +92,29 @@
 				RENT_DATE,
 				DUE_DATE,
 				RENT_BOOKTITLE,
-				CHANGE_NAME
+				CHANGE_NAME,
+				NICKNAME
 		FROM
-				RENT_BOARD
+				RENT_BOARD R, MEMBER M
 		WHERE
-				STATUS = 'N'
+				R.USER_NO = M.USER_NO
+		  AND 	
+		  		R.STATUS = 'N'
 		  AND
-		  		RENT_NO = #{rentNo}
+		  		R.RENT_NO = #{rentNo}
 	</select>
 	
 	
+	<!-- 포인트 차감 
+	<update id="minusPoint" parameterType="rent">
+		UPDATE
+				RENT_BOARD
+		SET
+				RENT_POINT
+		WHERE
+				RENT_USERNO = #{rentUserNo}
+	
+	
+	</update>
+	-->
 </mapper>
