@@ -104,20 +104,20 @@
 		
 		
 		<div id="group-btn-area">
-			<c:choose>
-				<c:when test="${ loginUser.userNo eq club.userNo }">
-					<div id="btn-zone">
-						<button type="button" class="like-btn" id="${ club.likeUser }"></button>
-						<button type="button" onclick="location.href='admin.cl'">관리하기</button>
-					</div>
-				</c:when>
-				<c:otherwise>
-					<div id="btn-zone">
-						<button type="button" class="like-btn" id="${ club.likeUser }"></button>
-						<button type="button" class="parti-btn" id="${ club.memUser }"></button>
-					</div>
-				</c:otherwise>
-			</c:choose>
+				<c:choose>
+					<c:when test="${ loginUser.userNo eq club.userNo }">
+						<div id="btn-zone">
+							<button type="button" class="like-btn" id="${ club.likeUser }"></button>
+							<button type="button" onclick="location.href='admin.cl'">관리하기</button>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div id="btn-zone">
+							<button type="button" class="like-btn" id="${ club.likeUser }"></button>
+							<button type="button" class="parti-btn" id="${ club.memUser }"></button>
+						</div>
+					</c:otherwise>
+				</c:choose>
 		</div>
     </div>
     
@@ -248,8 +248,8 @@
     	*/
     
     
-    
     	$(function(){
+    var count = 0;
 	    	//new 상태 표시 ----------------------------------------------------------
 			$('#new-group').each(function(){
 				if($(this).attr('value') == 1){
@@ -267,12 +267,21 @@
 	    	
 	    	if($('#btn-zone .parti-btn').attr('id') > 0){
 	    		$('#btn-zone .parti-btn').text('탈퇴');
+	    		count++;
 	    	} else {
 	    		$('#btn-zone .parti-btn').text('가입');
 	    	}
+	    	
+	    	// 문서 로딩될 때 버튼 상태2 ---------------------------------------------------
+	    	// 클럽제한수가 클럽멤버 총 수 보다 크면 가입버튼 비활성화 !! 
+	    	if(${ club.clubLimit > club.memCount } || $('#btn-zone .parti-btn').attr('id') > 0){
+	    		$('#btn-zone .parti-btn').attr('disabled', false);
+	    	} else {
+	    		$('#btn-zone .parti-btn').attr('disabled', true);
+	    	}
+	    	
+	    	
     	}); //$(function()) 닫음
-    	
-    	
     	
     	
     	

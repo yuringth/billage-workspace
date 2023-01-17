@@ -9,7 +9,7 @@
 <style>
 	#all-clubMem-admin{ width:1000px; margin:auto; }
 	#club-member-area th,td{text-align : center;}
-	#message-area{ width:500px; border:1px solid black; }
+	#message-area{ width:500px; border:1px solid black; text-align : center;}
 
 </style>
 </head>
@@ -18,18 +18,14 @@
 	<jsp:include page="../user/myPageBar.jsp" />
 	
 	
-	<c:if test="${ !empty alertMsg }">
-		<script>
-			alert(${ alertMsg });		
-		</script>
-	</c:if>
-	
 	
 	<div id="all-clubMem-admin">
 		<h1> 모임 회원 관리 페이지 입니당 </h1>
 			
 		
 		<script>
+
+		
 		
 		// 전체선택 or 취소 ----------------------------------------------------------------------
 			$(document).on('change','#all-select' , function(){
@@ -132,7 +128,7 @@
 		
 		<form action="message.cl" method="post">
 			<div id="message-area">
-				<h3> 메시지 보내기 </h3> 
+				<h3> 🧡 메시지 보내기🧡 </h3> 
 				<div class="send-area">
 					<h4> &lt; 보내는 사람 &gt; </h4>
 					<div id="sendUser">

@@ -226,7 +226,8 @@
 		        ,CM.USER_NO "MEMUSER"
 		        ,CM.ENROLL_DATE
 		        ,CL.USER_NO "LIKEUSER"
-		        ,(select count(*) from CLUB_LIKE where CLUB_NO = ${ clubNo }) as "LIKECOUNT"
+		        ,(SELECT COUNT(*) FROM CLUB_LIKE WHERE CLUB_NO = ${ clubNo }) as "LIKECOUNT"
+		        ,(SELECT COUNT(*) FROM CLUB_MEMBER WHERE CLUB_NO = ${ clubNo }) as "MEMCOUNT"
 		  FROM 
 		 		CLUB C
 		  LEFT
