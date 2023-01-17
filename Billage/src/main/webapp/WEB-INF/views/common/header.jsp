@@ -171,7 +171,7 @@
 						<c:when test="${ loginUser.userId eq 'test01' }">
 							<div>
 								${ loginUser.nickname } 님 환영합니다!! <br> 
-								<a href="admin.ad">이장실</a>
+								<a href="userList.ad">이장실</a>
 								<a href="logout.me">로그아웃</a>
 							</div>
 						</c:when>

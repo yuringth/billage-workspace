@@ -275,7 +275,7 @@ public class BoardDao {
 	
 	// 중고게시판 => 글작성
 	public int insertUsedBoard(SqlSessionTemplate sqlSession, UsedBoard b) {
-		System.out.println("b의 dao : "  + b);
+		// System.out.println("b의 dao : "  + b);
 		return sqlSession.insert("usedMapper.insertUsedBoard", b);	
 		
 	}
