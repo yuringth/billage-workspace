@@ -1,6 +1,7 @@
 package com.bi.billage.board.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.bi.billage.board.model.vo.ADBoard;
 import com.bi.billage.board.model.vo.Book;
@@ -195,10 +196,9 @@ public interface BoardService {
 	ArrayList<UsedBoard> selectTopUsed();
 	
 	
-	// 중고게시판 => 검색 기능 select
-//	ArrayList<UsedBoard> searchUsedList(String condition, String keyword);
-	
-	
+//	// 중고게시판 => 검색 기능 select
+//	int selectSearchCount(HashMap<String, String> map);
+//	
 	
 	
 	

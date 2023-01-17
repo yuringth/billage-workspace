@@ -223,7 +223,7 @@
 	</select>
 	
 	
-	<select id="searchUsedList" resultMap="usedResultSet">
+	<select id="selectSearchCount" resultMap="usedResultSet">
 
 	
 	

@@ -1,6 +1,7 @@
 package com.bi.billage.board.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -219,13 +220,26 @@ public class UsedController {
 	}
 	
 	
-	// 중고게시판 => 검색기능
+//	// 중고게시판 => 검색기능
 //	@RequestMapping("searchForm.ud")
 //	public String searchUsedList(String condition, String keyword) {
 //		
-//		 UsedBoard b = boardService.searchUsedList(condition, keyword);
-//		 boardService.searchUsedList(b);
-//		 
+//
+//		HashMap<String, String> map = new HashMap();
+//		map.put("condition", condition); // key는 value
+//		map.put("keyword", keyword);
+//		
+//		
+		// 페이지처리
+//		int searchCount; // 현재 검색 결과에 맞는 게시글의 총 개수 => db가서 조회
+//		int currentPage = RequestParam(value="cPage", defaultValue="1"); // 현재페이지의 값을 가져오기
+//		int pageLimit = 10;
+//		int boardLimit = 5;
+//		
+//		PageInfo pi = Pagination.getPageInfo(searchCount, currentPage, pageLimit,boardLimit);
+//		
+//		boardService.selectSearchCount(map);
+//
 //		return "board/usedBoard/usedListView";
 //	}
 	
