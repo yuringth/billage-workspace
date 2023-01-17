@@ -16,5 +16,7 @@ public interface RentBoardService {
 	// 대여게시글 등록
 	int insertRentBoard(RentBoard rb);
 	
+	// 대여게시글 상세조회
+	RentBoard detailRentBoard(int rentNo);
 	
 }

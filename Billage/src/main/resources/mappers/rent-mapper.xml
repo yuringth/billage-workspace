@@ -80,4 +80,26 @@
 				)
 	</insert>
 	
+	<!-- 게시글 상세보기 -->
+	<select id="detailRentBoard" resultMap="RentBoardResultSet">
+		SELECT
+				RENT_NO,
+				USER_NO,
+				RENT_USERNO,
+				RENT_TITLE,
+				RENT_CONTENT,
+				RENT_POINT,
+				RENT_DATE,
+				DUE_DATE,
+				RENT_BOOKTITLE,
+				CHANGE_NAME
+		FROM
+				RENT_BOARD
+		WHERE
+				STATUS = 'N'
+		  AND
+		  		RENT_NO = #{rentNo}
+	</select>
+	
+	
 </mapper>
