@@ -373,6 +373,12 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectFaqList(sqlSession, faq);
 	}
 
+	// 경매 종료 등록
+	@Override
+	public int updatePrizeEnd(int boardNo) {
+		return boardDao.updatePrizeEnd(sqlSession, boardNo);
+	}
+
 
 	
 	

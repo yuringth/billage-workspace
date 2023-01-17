@@ -166,7 +166,9 @@ public class BoardDao {
 		return sqlSession.insert("ADBoardMapper.insertBuyer", b);
 	}
 
-
+	public int updatePrizeEnd(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.update("ADBoardMapper.updatePrizeEnd", boardNo);
+	}
 
 
 
@@ -400,6 +402,9 @@ public class BoardDao {
 	public ArrayList<FAQ> selectFaqList(SqlSessionTemplate sqlSession, FAQ faq) {
 		return (ArrayList)sqlSession.selectList("faqMapper.selectFaqList", faq);
 	}
+
+
+	
 	
 
 
