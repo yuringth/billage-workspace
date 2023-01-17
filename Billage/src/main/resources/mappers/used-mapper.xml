@@ -208,6 +208,7 @@
 				      ,count
 				      ,to_char(create_date, 'YYYY-MM-DD') as "create_date"
 				      ,origin_name
+				      ,change_name
 				  from
 				       used_board
 				 where
