@@ -91,7 +91,7 @@ public class ClubDao {
 	
 	// ClubOpen List Select
 	public ArrayList<ClubOpen> clubOpenSelectAdmin(SqlSessionTemplate sqlSession, int clubNo){
-		return sqlSession.selectList("clubMapper.clubOpenSelectAdmin", clubNo);
+		return (ArrayList)sqlSession.selectList("clubMapper.clubOpenSelectAdmin", clubNo);
 	}
 	
 	

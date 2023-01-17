@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bi.billage.board.model.vo.FAQ;
 import com.bi.billage.board.model.vo.Inquiry;
+import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.SerialRequest;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.club.model.vo.Club;
@@ -133,6 +134,14 @@ public class UserDao {
 
 	public int updateFaq(SqlSessionTemplate sqlSession, FAQ faq) {
 		return sqlSession.update("faqMapper.updateFaq", faq);
+	}
+	
+	public int selectNovelListCount(SqlSessionTemplate sqlSession) {
+		return 0;
+	}
+
+	public ArrayList<Novel> selectNovelList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		return null;
 	}
 
 }

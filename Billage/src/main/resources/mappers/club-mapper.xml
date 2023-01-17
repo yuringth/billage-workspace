@@ -539,7 +539,7 @@
 	
 	
 	<!--  ClubOpen Table Select List : Admin -->
-	<select id="clubOpenSelectAdmin" resultMap="clubOpenResultSet" >
+	<select id="clubOpenSelectAdmin" parameterType="_int" resultMap="clubOpenResultSet" >
 		SELECT
 				C.CLUB_NO
 		       ,C.USER_NO
@@ -597,7 +597,9 @@
 		       ,C.OPEN_DATE
 		       ,C.OPEN_TIME
 		       ,C.OPEN_LIMIT
-		       ,C.OPEN_STATUS     
+		       ,C.OPEN_STATUS
+		HAVING
+				C.CLUB_NO = #{ clubNo }            
 		 ORDER 
 		    BY    
 				C.OPEN_NO DESC

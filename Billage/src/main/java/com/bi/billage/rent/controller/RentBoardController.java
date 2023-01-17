@@ -15,6 +15,7 @@ import com.bi.billage.common.savefile.SaveFile;
 import com.bi.billage.common.template.Pagination;
 import com.bi.billage.rent.model.service.RentBoardService;
 import com.bi.billage.rent.model.vo.RentBoard;
+import com.bi.billage.user.model.vo.User;
 
 @Controller
 public class RentBoardController {
@@ -49,7 +50,7 @@ public class RentBoardController {
 			
 		}
 		if(rentBoardService.insertRentBoard(rb) > 0) {
-			System.out.println(rb);
+			//System.out.println(rb);
 			session.setAttribute("alertMsg", "게시글 등록 성공");
 			return "redirect:list.rt";
 		} else {
@@ -62,11 +63,24 @@ public class RentBoardController {
 	@RequestMapping("detail.rt")
 	public ModelAndView detailRentBoard(ModelAndView mv, int rentNo) {
 		
-		mv.addObject("rb", rentBoardService.detailRentBoard(rentNo)).setViewName("board/rent/rentDeailView");
-		
-		mv.addObject("errorMsg", "조회실패").setViewName("common/errorPage");
-		
+		if(rentBoardService.detailRentBoard(rentNo) != null) {
+			mv.addObject("rb", rentBoardService.detailRentBoard(rentNo)).setViewName("board/rentBoard/rentDetailView");
+		} else {
+			mv.addObject("errorMsg", "조회실패").setViewName("common/errorPage");
+		}
 		return mv;
 	}
 	
+	/*
+	// 대여 신청 서비스
+	@RequestMapping("apply.rt")
+	public ModelAndView applyRent(ModelAndView mv, RentBoard rb, HttpSession session) {
+		
+		rb.setRentUserNo(((User)session.getAttribute("loginUser")).getUserNo());
+		int result = rentBoardService.updatePoint(rb);
+	
+		
+		
+	}
+	*/
 }

@@ -30,8 +30,7 @@
 		
 		 -->
 		<button onclick="location.href='admin.cl';">모임 개설자 모임 관리 페이지 가기</button> <!-- 클릭시 모임 개설 페이지 이동  -->
-		|
-		<button onclick="location.href='enrollForm.cl';">모임 개설하기</button> <!-- 클릭시 모임 개설 페이지 이동  -->
+
 		<br><br><br>
 		
 		<table id="general-area" border="1">
