@@ -70,7 +70,7 @@
 								<td>
 									<button>club수정</button> |
 									<button onclick="location.href='clubMemAdmin.cl?clubNo='+${c.clubNo}">회원보기</button> |
-									<button >활동</button> |
+									<button onclick="location.href='clubOpenAdmin.cl?clubNo='+${c.clubNo}">활동</button> |
 									<button>게시글</button> |  
 									<button>club삭제</button> 
 								</td>

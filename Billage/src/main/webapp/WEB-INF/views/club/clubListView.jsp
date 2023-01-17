@@ -147,23 +147,7 @@
 							
 		<c:forEach items="${ likeList }" var="l">
 			<script>
-				$(function(){
-					$('#list-area input[type=hidden]').each(function(){
-						if($(this).val() == ${l.clubNo} ){
-							$(this).(#thum-like-area).text('싫어요 누를 수 있는 상태 ')
-							
-						} else {
-							
-							$(this).(#thum-like-area).text('좋아요 누를 수 있는 상태')
-							
-							
-						}
 
-					})	
-
-					
-				});
-			
 			</script>
 			
 		</c:forEach>		
