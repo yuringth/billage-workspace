@@ -137,7 +137,7 @@ public class UsedController {
 	
 	
 	
-	// 중고게시판 -> 글수정 -> 수정폼 화면
+	// 중고게시판 -> 글수정 버튼 클릭시 -> 수정폼 화면뜨면서 기존 데이터 가져오기
 	@RequestMapping("enrollUsedForm.ud")
 	public ModelAndView selectUpdateUsedBoard(int usedNo, ModelAndView mv) {
 		
