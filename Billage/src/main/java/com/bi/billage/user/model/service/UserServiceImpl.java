@@ -150,4 +150,5 @@ public class UserServiceImpl implements UserService{
 		return userDao.updateFaq(sqlSession, faq);
 	}
 
+
 }

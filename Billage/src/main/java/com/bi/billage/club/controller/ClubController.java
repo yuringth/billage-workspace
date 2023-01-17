@@ -99,14 +99,18 @@ public class ClubController {
 	public String clubLike(Club club, int likeStatus) {
 		
 		// 0보다 크면 찜하기 취소  | 0이면 찜하기 신청 
-		int result = 0;
 		
+		int[] result = new int[2];
+		
+		// club좋아요 삭제 여부 
 		if(likeStatus > 0) {
-			result = (clubService.clubLikeDelete(club) > 0 )? 0 : -1; 
+			result[0] = (clubService.clubLikeDelete(club) > 0 )? 0 : -1;
 		} else {
-			result = (clubService.clubLikeInsert(club) > 0 )? 1 : -1;
+			result[0] = (clubService.clubLikeInsert(club) > 0 )? 1 : -1;
 		} 
 		
+		result[1] = clubService.selectClubLikeCount(club);
+
 		return new Gson().toJson(result);
 	}
 		
@@ -117,14 +121,13 @@ public class ClubController {
 		
 		//System.out.println(partiStatus);
 		int result = 0;
-		
+
 		if(partiStatus > 0) {
 			result = (clubService.ajaxDeleteClub(club) > 0)? 0 : -1;
-			
 		} else {
 			result = (clubService.ajaxInsertClub(club) > 0)? 1 : -1;
 		}
-		
+	
 		//System.out.println(result);
 		return new Gson().toJson(result);
 	}			
@@ -181,9 +184,9 @@ public class ClubController {
 
 	// 모임 회원 관리 clubMemAdmin.cl
 	@RequestMapping("clubMemAdmin.cl")
-	public ModelAndView clubMemerSelectAdmin(int clubNo, ModelAndView mv) {
+	public ModelAndView clubMemberSelectAdmin(int clubNo, ModelAndView mv) {
 		
-		ArrayList<Club> ClubMemberList = clubService.clubMemerSelectAdmin(clubNo);
+		ArrayList<Club> ClubMemberList = clubService.clubMemberSelectAdmin(clubNo);
 		//System.out.println(ClubMemberList);
 		
 		mv.addObject("memberList", ClubMemberList);
@@ -292,6 +295,37 @@ public class ClubController {
 			return "common/errorPage";
 		}
 	}
+	
+	//모임 관리자 페이지에서 활동 클릭 하면 해당 클럽활동 오픈 리스트 화면 오픈 시키기
+	@RequestMapping("clubOpenAdmin.cl")
+	public ModelAndView clubOpenSelectAdmin(ModelAndView mv, int clubNo) {
+		
+		mv.addObject("clubOpenList", clubService.clubOpenSelectAdmin(clubNo));
+		mv.setViewName("club/clubOpenListAdmin");
+		
+		return mv;
+	}
+	
+	
+	// club 활동 개설 화면 전환 
+	@RequestMapping("clubEnroll.cl")
+	public String clubOpenEnrollForm(){
+		return "club/clubOpenEnrollForm";
+	}
+	
+	// club Open 등록폼 Insert
+	@RequestMapping("createOpen.cl")
+	public String insertClubOpen(){
+		
+		
+		return "redirect:";
+	}
+	
+	
+	
+		
+	
+	
 	
 	
 }

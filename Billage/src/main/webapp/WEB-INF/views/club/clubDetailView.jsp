@@ -128,8 +128,6 @@
 				const userNo  = ${ loginUser.userNo };  
 				const clubNo = ${ club.clubNo };
 				
-				let likeCount = $('#like-count').text();
-				
 				//------------찜하기 /찜취소
 				$('#btn-zone .like-btn').click(function(){
 					
@@ -143,19 +141,17 @@
 							clubNo : clubNo
 						},
 						success : function( result ){
-							console.log(result);
-							if(result > 0){
+							console.log(result[0]);
+							if(result[0] > 0){
 								$('#btn-zone .like-btn').empty();
 								$('#like-count').empty();
-								$('#like-count').text((likeCount * 1) + 1);
+								$('#like-count').text(result[1]);
 								$('.like-btn').attr('id', userNo);
 					    		$($('.like-btn').text('찜취소')).prependTo($('#btn-zone'));
-					    	} else if (result == 0) {
+					    	} else if (result[0] == 0) {
 					    		$('#btn-zone .like-btn').empty();
 					    		$('#like-count').empty();
-					    		likeCount = likeCount == 0? '1' : likeCount;
-					    		// 안됨.....ㅎ 
-								$('#like-count').text((likeCount * 1) - 1);
+								$('#like-count').text(result[1]);
 					    		$('.like-btn').attr('id', 0);
 					    		$($('.like-btn').text('찜하기')).prependTo($('#btn-zone'));
 					    	} else{

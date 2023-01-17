@@ -8,4 +8,6 @@ public class Point {
 	private int pointAdd;		// 사용한 포인트 음수/양수로 등록 ex) "100p 충전 시  100" / "200p 사용 시 -200"
 	private String pointDate;   // 사용한 날짜
 	private String pointStatus; // 사용내역 : 충전/사용/적립/정산  이 4가지로 통일
+	private int userNo1; // 포인트주는애
+	private int userNo2; // 포인트받는애
 }

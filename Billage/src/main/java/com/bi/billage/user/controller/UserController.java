@@ -106,7 +106,7 @@ public class UserController {
 		
 		if(userService.updateInquiry(iq) > 0) { // 성공 => 메인화면으로
 			session.setAttribute("alertMsg", "답변 완료");
-			return "main";
+			return "redirect:/update.iq";
 		} else {
 			model.addAttribute("errorMsg", "답변 오류");
 			return "common/errorPage";
@@ -142,7 +142,7 @@ public class UserController {
 		if(userService.updateUserGrade(uno) > 0) {
 			userService.updateSerialRequest(rno);
 		}
-		return "main";
+		return "redirect:/detail.sr";
 	}
 	
 	// 작품 등록폼
@@ -170,7 +170,7 @@ public class UserController {
 			
 		if(userService.insertFaq(faq) > 0) { // 성공 => 메인화면으로
 			session.setAttribute("alertMsg", "등록 완료");
-			return "main"; //
+			return "redirect:/faqList.ad";
 		} else {
 			model.addAttribute("errorMsg", "작성 실패");
 			return "common/errorPage";
@@ -183,7 +183,7 @@ public class UserController {
 		
 		if(userService.deleteFaq(faq) > 0) {
 			session.setAttribute("alertMsg", "삭제 완료");
-			return "admin/adminFaqListView";
+			return "redirect:/faqList.ad";
 		} else {
 			model.addAttribute("errorMsg", "삭제 실패");
 			return "common/errorPage";
@@ -267,8 +267,6 @@ public class UserController {
 	public ModelAndView loginUser(User u, ModelAndView mv, HttpSession session) {
 		
 		User loginUser = userService.loginUser(u);
-		
-		System.out.println(loginUser);
 		
 		if(loginUser != null && bcryptPasswordEncoder.matches(u.getUserPwd(), loginUser.getUserPwd())) {	// 로그인 성공 시
 			
@@ -374,4 +372,33 @@ public class UserController {
 		return "user/writeEmailForm";
 	}
 	
+	// 작품 후원 메소드
+	@RequestMapping("donate.nv")
+	public String donateNovel(int point, int userPoint, int userNo1, int userNo2, HttpSession session) {
+		
+		//System.out.println(userPoint);
+		//System.out.println(point);
+		if(point <= userPoint) {
+			Point p1 = new Point();
+			p1.setUserNo(userNo1);
+			p1.setPointAdd(-1 * point);
+			p1.setPointStatus("사용");
+			
+			if(pointService.addPoint(p1)> 0) {
+				Point p2 = new Point();
+				p2.setUserNo(userNo2);
+				p2.setPointAdd(point);
+				p2.setPointStatus("적립");
+				pointService.addPoint(p2);
+				session.setAttribute("alertMsg", "후원 성공!");
+				//((User)session.getAttribute("loginUser")).setPoint(pointService.selectPoint(userNo1));
+				((User)session.getAttribute("loginUser")).setPoint(userPoint - point);
+			}
+			
+				return "redirect:/list.se";
+		} else {
+			session.setAttribute("alertMsg", "보유 포인트가 부족합니다.");
+			return "redirect:/list.se";
+		}
+	}
 }
