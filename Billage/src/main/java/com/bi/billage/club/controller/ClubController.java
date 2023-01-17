@@ -193,7 +193,6 @@ public class ClubController {
 	}
 	
 	
-	@Transactional
 	@RequestMapping("message.cl")
 	public String clubMessageInsert(Model model, long clubNo, int userNo, int[] userNo2, String messageContent) {
 		// 요청을 받고 보낼 때 값에 문제가 발생해서 강제 형변환 해놓음 
@@ -212,6 +211,7 @@ public class ClubController {
 		
 		if(messageService.insertClubMessage(messageList) > 0 ) {
 			model.addAttribute("alertMsg", "메세지 전송에 성공하였습니다");
+			//forwarding 방식 prefix + " " + subfix;
 			return "redirect:clubMemAdmin.cl?clubNo=" + (int)clubNo;
 			
 		} else {
