@@ -155,6 +155,8 @@ public interface BoardService {
 	int updatePrizeUser(ADBoard b);
 	// 즉시구매
 	int insertBuyer(ADBoard b);
+	// 입찰 종료 테이블에 등록
+	int updatePrizeEnd(int boardNo);
 	
 	
 	
@@ -194,7 +196,7 @@ public interface BoardService {
 	
 	
 	// 중고게시판 => 검색 기능 select
-	ArrayList<UsedBoard> searchUsedList();
+//	ArrayList<UsedBoard> searchUsedList(String condition, String keyword);
 	
 	
 	

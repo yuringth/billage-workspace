@@ -291,6 +291,8 @@ public class DrawAuctionController {
 	@RequestMapping(value="bid.ac", produces="appliction/json; charset=UTF-8")
 	public String isnertBidUser(ADBoard b, HttpSession session) {
 		
+		b.setUserNo(((User)session.getAttribute("loginUser")).getUserNo());
+
 		if(boardService.insertBidUser(b) * boardService.updatePrizeUser(b) > 0) {
 			
 			Point p = new Point();
@@ -310,17 +312,20 @@ public class DrawAuctionController {
 				((User)session.getAttribute("loginUser")).setPoint(pointService.selectPoint(b.getUserNo()));
 			}
 			
+			
 			b = boardService.selectAuctionBoard(b.getBoardNo());
 		}
 		
 		return  new Gson().toJson(b);
 	}
 	
-	/*
+	
 	// 즉시구매
 	@ResponseBody
-	@RequestMapping(value="bid.ac", produces="appliction/json; charset=UTF-8")
+	@RequestMapping(value="buy.ac", produces="appliction/json; charset=UTF-8")
 	public String insertBuyer(ADBoard b, HttpSession session) {
+		
+		b.setUserNo(((User)session.getAttribute("loginUser")).getUserNo());
 		
 		if(boardService.insertBidUser(b) * boardService.updatePrizeUser(b) > 0) {
 			
@@ -341,10 +346,76 @@ public class DrawAuctionController {
 				pointService.addPoint(p);
 			}
 			
+			// 쪽지 보내기, 조회한 값 반환하기 위해 변수에 넣는다
+			Message m = new Message();
+			// 1. 낙찰자에게 쪽지 보내기
+			m.setUserNo(1); //보낸 사람은 관리자
+			m.setUserNo2(b.getUserNo()); //받는 사람은 구매자
+			m.setMessageContent("축하드립니다!\r\n" + 
+					" " + b.getTitle() + "의 경매에 낙찰되셨습니다.\r\n" + 
+					"주소를 확인해 주세요");
+			messageService.insertMessage(m);
+			// 2. 글 쓴 사람한테 쪽지 보내기
+			m.setUserNo2(b.getUserNo2()); //받는 사람은 게시글 작성자
+			m.setMessageContent( b.getTitle() + "의 경매가 종료되었습니다.\r\n" + 
+					"상품을 저희측으로 보내주시면 포인트 정산해서 적립해드리겠습니다. (생략)");
+			messageService.insertMessage(m);
+			
+			//글 작성자에게 낙찰포인트 적립
+			p.setPointAdd(b.getBidPrice());
+			p.setUserNo(b.getUserNo2());
+			p.setPointStatus("적립");
+			pointService.addPoint(p);
+			
 			b = boardService.selectAuctionBoard(b.getBoardNo());
 		}
 		
 		return  new Gson().toJson(b);
 	}
-	*/
+	
+	// 경매 종료
+	@ResponseBody
+	@RequestMapping(value="prize.ac", produces="appliction/json; charset=UTF-8")
+	public String prizeUser(ADBoard b) {
+		
+		if(b.getPrizeUserNo() != 0) {
+			
+			// 쪽지 보내기, 조회한 값 반환하기 위해 변수에 넣는다
+			Message m = new Message();
+			// 1. 낙찰자에게 쪽지 보내기
+			m.setUserNo(1); //보낸 사람은 관리자
+			m.setUserNo2(b.getPrizeUserNo()); //받는 사람은 낙찰자
+			m.setMessageContent("축하드립니다!\r\n" + 
+					" " + b.getTitle() + "의 경매에 낙찰되셨습니다.\r\n" + 
+					"주소를 확인해 주세요");
+			messageService.insertMessage(m);
+			// 2. 글 쓴 사람한테 쪽지 보내기
+			m.setUserNo2(b.getUserNo()); //받는 사람은 게시글 작성자
+			m.setMessageContent( b.getTitle() + "의 경매가 종료되었습니다.\r\n" + 
+					"상품을 저희측으로 보내주시면 포인트 정산해서 적립해드리겠습니다. (생략)");
+			messageService.insertMessage(m);
+			
+			//글 작성자에게 낙찰포인트 적립
+			Point p = new Point();
+			p.setPointAdd(b.getBidPrice());
+			p.setUserNo(b.getUserNo());
+			p.setPointStatus("적립");
+			pointService.addPoint(p);
+			
+		}
+		
+		if(boardService.updatePrizeEnd(b.getBoardNo()) > 0) {
+			b = boardService.selectAuctionBoard(b.getBoardNo());
+		};
+		
+		return  new Gson().toJson(b);
+	}
+	
+	// 실시간 가격 업데이트
+	@ResponseBody
+	@RequestMapping(value="priceCheck.ac", produces="appliction/json; charset=UTF-8")
+	public String checkPrice(ADBoard b) {
+		b = boardService.selectAuctionBoard(b.getBoardNo());
+		return  new Gson().toJson(b);
+	}
 }

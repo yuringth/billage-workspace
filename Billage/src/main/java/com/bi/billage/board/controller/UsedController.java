@@ -220,13 +220,18 @@ public class UsedController {
 	
 	
 	// 중고게시판 => 검색기능
-	@RequestMapping("searchForm.ud")
-	public ModelAndView searchUsedList(ModelAndView mv) {
-		
-		mv.addObject("list", boardService.searchUsedList()).setViewName("board/usedBoard/usedListView");
-		
-		return mv;
-	}
+//	@RequestMapping("searchForm.ud")
+//	public String searchUsedList(String condition, String keyword) {
+//		
+//		 UsedBoard b = boardService.searchUsedList(condition, keyword);
+//		 boardService.searchUsedList(b);
+//		 
+//		return "board/usedBoard/usedListView";
+//	}
+	
+	
+	
+	
 	
 	
 	

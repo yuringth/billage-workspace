@@ -206,29 +206,36 @@ public class FollowController {
 		
 		ArrayList<ReviewBoard> goodReview = followService.selectGoodReview(follow);
 		
+		System.out.println(goodReview);
+		
 		ArrayList<ReviewBoard> badReview = followService.selectBadReview(follow);
 		
-		
+		System.out.println(badReview);
 		
 		ReviewBoard b = new ReviewBoard();
 		
 		int rNum;
 		
-		if(badReview.size() > 10) {
-			
-			rNum =  (int)(Math.random() * badReview.size());
-			
-		}else {
-			
-				rNum = (int)(Math.random() * 10);
-				
-				while(rNum >= badReview.size()) {
-					rNum = (int)(Math.random() * 10);
-				};
-				
-		}
+		if(badReview.size() != 0) {
 		
-		b = badReview.get(rNum);
+			if(badReview.size() > 10) {
+				
+				rNum =  (int)(Math.random() * badReview.size());
+				
+			}else {
+				
+					rNum = (int)(Math.random() * 10);
+					
+					while(rNum >= badReview.size()) {
+						rNum = (int)(Math.random() * 10);
+					};
+					
+			}
+			b = badReview.get(rNum);
+		};
+		
+		
+	
 		
 		
 		

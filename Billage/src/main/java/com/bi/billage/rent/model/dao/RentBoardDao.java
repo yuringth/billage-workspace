@@ -33,4 +33,14 @@ public class RentBoardDao {
 	public RentBoard detailRentBoard(SqlSessionTemplate sqlSession, int rentNo) {
 		return sqlSession.selectOne("rentMapper.detailRentBoard", rentNo);
 	}
+	
+	/*
+	public int minusPoint(SqlSessionTemplate sqlSession, RentBoard rb) {
+		return sqlSession.update("rentMapper.minusPoint", rb);
+	}
+	
+	public int plusPoint(SqlSessionTemplate sqlSession, RentBoard rb) {
+		return sqlSession.update("rentMapper.plusPoint", rb);
+	}
+	*/
 }

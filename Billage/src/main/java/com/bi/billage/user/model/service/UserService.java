@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.bi.billage.board.model.vo.FAQ;
 import com.bi.billage.board.model.vo.Inquiry;
+import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.SerialRequest;
 import com.bi.billage.club.model.vo.Club;
 import com.bi.billage.common.model.vo.PageInfo;
@@ -43,6 +44,12 @@ public interface UserService {
 	// 모임 리스트 조회
 	ArrayList<Club> selectGroupList(PageInfo pi);
 	
+	// 작품 총 몇개인지 조회
+	int selectNovelListCount();
+	
+	// 작품 리스트 조회
+	ArrayList<Novel> selectNovelList(PageInfo pi);
+	
 	// 문의 총 개수 조회
 	int selectInqListCount();
 	
@@ -81,6 +88,7 @@ public interface UserService {
 	
 	// 회원 탈퇴
 	int deleteUser(int userNo);
+
 
 	
 

@@ -207,11 +207,10 @@ public class BoardServiceImpl implements BoardService {
 
 	
 	// 중고게시판 => 검색
-	@Override
-	public ArrayList<UsedBoard> searchUsedList(){
-		return boardDao.searchUsedList(sqlSession);
-	}
-	
+//	@Override
+//	public ArrayList<UsedBoard> searchUsedList(String condition, String keyword){
+//		return boardDao.searchUsedList(sqlSession, condition, keyword);
+//	}
 	
 	
 	
@@ -377,6 +376,12 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public ArrayList<FAQ> selectFaqList(FAQ faq) {
 		return boardDao.selectFaqList(sqlSession, faq);
+	}
+
+	// 경매 종료 등록
+	@Override
+	public int updatePrizeEnd(int boardNo) {
+		return boardDao.updatePrizeEnd(sqlSession, boardNo);
 	}
 
 

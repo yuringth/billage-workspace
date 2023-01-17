@@ -166,7 +166,9 @@ public class BoardDao {
 		return sqlSession.insert("ADBoardMapper.insertBuyer", b);
 	}
 
-
+	public int updatePrizeEnd(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.update("ADBoardMapper.updatePrizeEnd", boardNo);
+	}
 
 
 
@@ -339,9 +341,9 @@ public class BoardDao {
 	
 	
 	// 중고 게시판 => 검색
-	public ArrayList<UsedBoard> searchUsedList(SqlSessionTemplate sqlSession){
-		return (ArrayList)sqlSession.selectList("usedMapper.searchUsedList"); 
-	}
+//	public ArrayList<UsedBoard> searchUsedList(SqlSessionTemplate sqlSession){
+//		return (ArrayList)sqlSession.selectList("usedMapper.searchUsedList"); 
+//	}
 	
 	
 	
@@ -405,6 +407,9 @@ public class BoardDao {
 	public ArrayList<FAQ> selectFaqList(SqlSessionTemplate sqlSession, FAQ faq) {
 		return (ArrayList)sqlSession.selectList("faqMapper.selectFaqList", faq);
 	}
+
+
+	
 	
 
 
