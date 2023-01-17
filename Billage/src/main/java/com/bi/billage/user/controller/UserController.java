@@ -106,7 +106,7 @@ public class UserController {
 		
 		if(userService.updateInquiry(iq) > 0) { // 성공 => 메인화면으로
 			session.setAttribute("alertMsg", "답변 완료");
-			return "main";
+			return "redirect:/update.iq";
 		} else {
 			model.addAttribute("errorMsg", "답변 오류");
 			return "common/errorPage";
@@ -142,7 +142,7 @@ public class UserController {
 		if(userService.updateUserGrade(uno) > 0) {
 			userService.updateSerialRequest(rno);
 		}
-		return "main";
+		return "redirect:/detail.sr";
 	}
 	
 	// 작품 등록폼
@@ -170,7 +170,7 @@ public class UserController {
 			
 		if(userService.insertFaq(faq) > 0) { // 성공 => 메인화면으로
 			session.setAttribute("alertMsg", "등록 완료");
-			return "main"; //
+			return "redirect:/faqList.ad";
 		} else {
 			model.addAttribute("errorMsg", "작성 실패");
 			return "common/errorPage";
@@ -183,7 +183,7 @@ public class UserController {
 		
 		if(userService.deleteFaq(faq) > 0) {
 			session.setAttribute("alertMsg", "삭제 완료");
-			return "admin/adminFaqListView";
+			return "redirect:/faqList.ad";
 		} else {
 			model.addAttribute("errorMsg", "삭제 실패");
 			return "common/errorPage";
@@ -395,10 +395,10 @@ public class UserController {
 				((User)session.getAttribute("loginUser")).setPoint(userPoint - point);
 			}
 			
-				return "redirect:/";
+				return "redirect:/list.se";
 		} else {
 			session.setAttribute("alertMsg", "보유 포인트가 부족합니다.");
-			return "redirect:/";
+			return "redirect:/list.se";
 		}
 	}
 }
