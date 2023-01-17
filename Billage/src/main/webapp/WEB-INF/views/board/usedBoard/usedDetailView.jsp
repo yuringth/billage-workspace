@@ -137,6 +137,7 @@ font-size: 25px;
 		
 		<!-- USED_BOARD 테이블에 used_genre, used_pric, used_content, used_chat(?) 컬럼 추가 -->
 		<div class="writer-area">
+			<p id="stock_status" name="stockStatus">판매상태 : ${ b.stockStatus }</p>
 			<p id="used_title" name="usedTitle">게시글 제목 : ${ b.usedTitle }</p>
 			<p id="used_genre" name="usedGenre">책 장르 : ${ b.bookGenre }</p>
 			<p id="used_price" name="usedPrice">판매 가격 : ${ b.point }</p>
@@ -157,6 +158,7 @@ font-size: 25px;
 			<input type="hidden" name="usedContent" value="${b.usedContent}" />
 			<input type="hidden" name="filePath" value="${b.changeName }" />
 			<input type="hidden" name="originName" value="${b.originName }" />
+			<input type="hidden" name="stockStatus" value="${b.stockStatus }" />
 		</form>
 		
 		<div style="text-align:center;">
@@ -220,9 +222,9 @@ font-size: 25px;
    			topUsedList();
    			
    			// ***** 동적으로 만들어진 요소에 이벤트 부여방법 *****
-			$(document).on('click', '.topn-outer>#imgClick', function(){
-				location.href='detail.ud?usedNo=' + $(this).text();
-				console.log($(this).text());
+			$(document).on('click', '.one-content', function(){
+				location.href='detail.ud?usedNo=' + $(this).find('#clickNo').val();
+				//console.log($(this).find('#clickNo').val());
 			})
 			// setInterval(topBoardList, 10000000); // 몇초당 나오게 하는 것
    			
@@ -239,7 +241,7 @@ font-size: 25px;
 	   					value += '<div class="align-left-outer">'
 	   						  + '<div class="one-content">'
 	   						  + '<div class="img-area">'
-	   						  + '<input type="hidden" name="usedNo" value="${b.usedNo }"/>'
+	   						  + '<input id="clickNo" type="hidden" name="usedNo" value="' + data[i].usedNo+ '"/>'
 	   						  + '<img src="${ b.changeName }">'
 	   						  + '</div>'
 	   						  + '<div class="text-area">'

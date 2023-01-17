@@ -67,8 +67,8 @@ public class UsedController {
 	@RequestMapping("upload.ud")
 	public String insertUsedBoard(UsedBoard b, MultipartFile upfile,  HttpSession session, Model model) {
 		
-		System.out.println("중고게시판 : " + b);
-		System.out.println(upfile);
+//		System.out.println("중고게시판 : " + b);
+//		System.out.println(upfile);
 		
 		if(!upfile.getOriginalFilename().equals("")) { // => 파일이 있을 경우. //getOriginalFilename == filename필드의 값을 반환함
 			
@@ -83,7 +83,7 @@ public class UsedController {
 		// case2. 넘어온 첨부파일이 있는 경우 b : 제목, 작성자, 내용 + 파일원본명, 파일저장경로
 		if(boardService.insertUsedBoard(b) > 0) { // 성공 => 게시글 리스트 페이지
 			
-			System.out.println("성공 시 b의 리스트 : " + b);
+//			System.out.println("성공 시 b의 리스트 : " + b);
 			session.setAttribute("alertMsg", "게시글등록성공");
 			// return "reviewBoard/reviewListView"; 
 			// => 안됨. list를 가져오지 않았기때문임 => db에 들려서 list를 조회해서 가져와야함. 즉 sendRedirect사용해야함

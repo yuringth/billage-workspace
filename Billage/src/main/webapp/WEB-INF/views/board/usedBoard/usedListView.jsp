@@ -119,8 +119,7 @@
 		        <div class="one-content">
 		        	
 		        	<div>
-						<button>판매가능</button>
-						<button>판매완료</button>
+						<p>${b.stockStatus }</p>
 					</div>
 					
 					<div class="usedNo-area">

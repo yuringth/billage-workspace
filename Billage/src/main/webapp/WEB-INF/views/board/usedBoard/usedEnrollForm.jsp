@@ -90,7 +90,24 @@
                 </div>
             </div>
             
-    
+            
+            
+     		<!-- 판매상태 추가  -->
+            <div class="longdiv align-left">
+                <div class="shortdiv align-left">
+                    <div class="textdiv">
+                        <p>판매상태:</p>
+                    </div>
+                    <div class="inputdiv">
+						<select name="stockStatus">
+							<option value="판매중" select>판매중</option>
+							<option value="판매완료">판매완료</option>
+						</select>
+                    </div>
+                </div>
+            </div>
+            
+     
             
             <div class="longdiv align-left">
                 <div class="shortdiv align-left">
@@ -128,6 +145,10 @@
                         <input type="text" class="form-control" id="instantlyPrice" placeholder="책제목" name="bookTitle">
                     </div>
                 </div>
+                
+  
+            
+                
             </div>
 
             
