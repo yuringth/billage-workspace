@@ -110,6 +110,7 @@
 		       used_no = ${ usedNo } 
 	</update>
 	
+	
 	<!-- 게시글 내용을 db에서 select해서 목록 띄우기  -->
 	<select id="selectUsedBoard" resultMap="usedResultSet">
 		select
