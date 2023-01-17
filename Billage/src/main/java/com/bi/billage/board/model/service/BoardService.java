@@ -155,6 +155,8 @@ public interface BoardService {
 	int updatePrizeUser(ADBoard b);
 	// 즉시구매
 	int insertBuyer(ADBoard b);
+	// 입찰 종료 테이블에 등록
+	int updatePrizeEnd(int boardNo);
 	
 	
 	

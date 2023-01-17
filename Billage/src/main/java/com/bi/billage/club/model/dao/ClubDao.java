@@ -6,8 +6,9 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.club.model.vo.Club;
+import com.bi.billage.club.model.vo.ClubOpen;
+import com.bi.billage.common.model.vo.PageInfo;
 
 @Repository
 public class ClubDao {
@@ -64,8 +65,8 @@ public class ClubDao {
 	}
 	
 	// club club_member 회원리스트 조회
-	public ArrayList<Club> clubMemerSelectAdmin(SqlSessionTemplate sqlSession, int clubNo){
-		return (ArrayList)sqlSession.selectList("clubMapper.clubMemerSelectAdmin", clubNo);
+	public ArrayList<Club> clubMemberSelectAdmin(SqlSessionTemplate sqlSession, int clubNo){
+		return (ArrayList)sqlSession.selectList("clubMapper.clubMemberSelectAdmin", clubNo);
 	}
 	
 	// 회원 조아요 리스트 조회
@@ -83,8 +84,15 @@ public class ClubDao {
 		return sqlSession.delete("clubMapper.clubLikeDelete", club);
 	}
 	
+	// Club Count
+	public int selectClubLikeCount(SqlSessionTemplate sqlSession, Club club) {
+		return sqlSession.selectOne("clubMapper.selectClubLikeCount", club);
+	}
 	
-	
+	// ClubOpen List Select
+	public ArrayList<ClubOpen> clubOpenSelectAdmin(SqlSessionTemplate sqlSession, int clubNo){
+		return sqlSession.selectList("clubMapper.clubOpenSelectAdmin", clubNo);
+	}
 	
 	
 }

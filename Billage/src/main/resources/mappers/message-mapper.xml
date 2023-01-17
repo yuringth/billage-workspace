@@ -42,7 +42,7 @@
 				,USER_NO2
 				,MESSAGE_CONTENT
 				,MESSAGE_DATE
-				,MESSAGE_STATUS
+				,MESSAGE_STATUS	
 				)
 		VALUES
 		 		(

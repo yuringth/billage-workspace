@@ -45,35 +45,47 @@
 					<c:when test="${ !empty sessionScope.loginUser}">
 						<div>
 							<c:forEach items="${ followerList1 }" var="f1">
-								<div id="followeing${f1.userNo }" style="display:flex; flex-direction: row; justify-content: space-evenly;">
-									<div id="profile${f1.userNo }">
-										<img src="https://i.pinimg.com/originals/4c/f0/16/4cf0163a9db5f4b69499b9365be5fcda.png" width="100px;" height="100px;">
-									</div>
-									<div id="userDetail${f1.userNo }">
-										<div id="userNickName${f1.userNo }" ><a href="selectUser.fo?uno=${f1.userNo}">${ f1.nickname }</a></div>
-										<div id="reviewCount${f1.userNo }"><a href="selectReviewList.fo?uno=${f1.userNo}"></a>리뷰100</div>
-									</div>
-										<input type="hidden"  id="f1${f1.userNo }" value="${ f1.userNo }">
+								<c:if test="${ f1.userNo != sessionScope.loginUser.userNo }">
+									<div id="followeing${f1.userNo }" style="display:flex; flex-direction: row; justify-content: space-evenly;">
+										<div id="profile${f1.userNo }">
+											<img src="${f1.profileImg }" width="100px;" height="100px;">
+										</div>
+										<div id="userDetail${f1.userNo }">
+											<div id="userNickName${f1.userNo }" ><a href="selectUser.fo?uno=${f1.userNo}">${ f1.nickname }</a></div>
+										</div>
+											<input type="hidden"  id="f1${f1.userNo }" value="${ f1.userNo }">
+												
+										<c:if test="${ f1.followStatus == 1 }">
+											<button id="followingBtn${ f.userNo}" class="1" style="width:100px; height:50px;" onclick="follow(this);">팔로잉</button>
+										</c:if>
 											
-									<c:if test="${ f1.followStatus == 1 }">
-										<button id="followingBtn${ f.userNo}" class="1" style="width:100px; height:50px;" onclick="follow(this);">팔로잉</button>
-									</c:if>
-										
-									<c:if test="${ f1.followStatus == 0 }">
-										<button id="followingBtn${ f.userNo}" class="0" style="width:100px; height:50px;" onclick="follow(this);">팔로우</button>
-									</c:if>
+										<c:if test="${ f1.followStatus == 0 }">
+											<button id="followingBtn${ f.userNo}" class="0" style="width:100px; height:50px;" onclick="follow(this);">팔로우</button>
+										</c:if>
+									
+									</div>
+								</c:if>
 								
-								</div>
+									<div id="followeing${f1.userNo }" style="display:flex; flex-direction: row; justify-content: space-evenly;">
+										<div id="profile${f1.userNo }">
+											<img src="${f1.profileImg }" width="100px;" height="100px;">
+										</div>
+										<div id="userDetail${f1.userNo }">
+											<div id="userNickName${f1.userNo }" >${ f1.nickname }</div>
+										</div>
+											<input type="hidden"  id="f1${f1.userNo }" value="${ f1.userNo }">
+										</div>
+								
 							</c:forEach>
 							
 							<c:forEach items="${ followerList2 }" var="f2">
+								<c:if test="${ f2.userNo != sessionScope.loginUser.userNo }">
 								<div id="follower${f2.userNo }" style="display:flex; flex-direction: row; justify-content: space-evenly;">
 									<div id="profile${f2.userNo }">
-										<img src="https://i.pinimg.com/originals/4c/f0/16/4cf0163a9db5f4b69499b9365be5fcda.png" width="100px;" height="100px;">
+										<img src="${ f2.profileImg }" width="100px;" height="100px;">
 									</div>
 									<div id="userDetail${f2.userNo }">
 										<div id="userNickName${f2.userNo }" ><a href="selectUser.fo?uno=${f2.userNo}">${f2.nickname }</a></div>
-										<div id="reviewCount${f2.userNo }"><a href="selectReviewList.fo?uno=${f2.userNo }"></a>리뷰100</div>
 									</div>
 										<input type="hidden"  id="f2${f2.userNo }" value="${ f2.userNo }">
 										
@@ -87,6 +99,18 @@
 									
 									
 									</div>
+								</c:if>
+								
+									<div id="follower${f2.userNo }" style="display:flex; flex-direction: row; justify-content: space-evenly;">
+										<div id="profile${f2.userNo }">
+											<img src="${f2.profileImg }" width="100px;" height="100px;">
+										</div>
+										<div id="userDetail${f2.userNo }">
+											<div id="userNickName${f2.userNo }" >${f2.nickname }</div>
+										</div>
+											<input type="hidden"  id="f2${f2.userNo }" value="${ f2.userNo }">
+										</div>
+								
 							</c:forEach>
 						</div>
 					</c:when>
