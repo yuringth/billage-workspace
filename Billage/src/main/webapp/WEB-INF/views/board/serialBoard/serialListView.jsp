@@ -49,17 +49,17 @@
         </div>
             <br>
             <!-- 로그인 후 작가본인일 경우만 보여지는 글쓰기 버튼 -->
-            <%-- <c:if test="${ loginUser eq null }"> --%>
+            <c:if test="${ loginUser.userNo eq novel.userNo }">
             <form action="enrollForm.se" method="post">
             <input type="hidden" class="nno" name="novelNo" value="${ novel.novelNo }">
             <input type="submit" class="btn btn-secondary" style="float:right;" value="연재하기">
             </form>
-            <%-- </c:if> --%>
-            <!-- 로그인 후 독자일 경우만 보여지는 버튼 -->
-            <%-- <c:if test="${ loginUser eq null }"> --%>
+            </c:if>
+            <!-- 로그인 후 작가본인이 아닐 경우만 보여지는 버튼 -->
+            <c:if test="${ loginUser.userNo ne novel.userNo and loginUser.userNo ne null }">
             <a id="like-novel" class="btn btn-secondary" style="float:right;">작품추천</a>
             <a id="donate-novel" class="btn btn-secondary" style="float:right;">작품후원</a>
-            <%-- </c:if> --%>
+            </c:if>
             <br><br>
             <table id="boardList" class="table table-hover" align="center">
                 <thead>
