@@ -14,5 +14,27 @@ public class ClubOpen {
 	private int openLimit; //OPEN_LIMIT	NUMBER
 	private String openStatus; //OPEN_STATUS	VARCHAR2(1 BYTE)
 	
-	
+	private String nickname;
+	private String clubName;
 }
+
+
+/*
+ *
+ * 
+ * 				C.CLUB_NO
+		       ,C.USER_NO
+		       ,C.NICKNAME
+		       ,C.CLUB_NAME
+		       ,C.OPEN_NO
+		       ,C.OPEN_TITLE
+		       ,C.OPEN_LOCATION
+		       ,C.OPEN_DATE
+		       ,C.OPEN_TIME
+		       ,C.OPEN_LIMIT
+		       ,C.OPEN_STATUS   
+		       ,COUNT(OM.OPEN_NO) "OPEN_MEM_COUNT"
+ * 
+ * 
+ * 
+ */

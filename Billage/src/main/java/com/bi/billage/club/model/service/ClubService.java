@@ -3,6 +3,7 @@ package com.bi.billage.club.model.service;
 import java.util.ArrayList;
 
 import com.bi.billage.club.model.vo.Club;
+import com.bi.billage.club.model.vo.ClubOpen;
 import com.bi.billage.common.model.vo.PageInfo;
 
 public interface ClubService {
@@ -39,7 +40,7 @@ public interface ClubService {
 	ArrayList<Club> clubAdmin(int userNo);
 	
 	// club clubNo에 따른 회원리스트 조회 
-	ArrayList<Club> clubMemerSelectAdmin(int clubNo);
+	ArrayList<Club> clubMemberSelectAdmin(int clubNo);
 	
 	// 모임 리스트 조회 시 로그인 회원 조아요 조회 
 	ArrayList<Club> selectClubLike(int userNo);
@@ -50,7 +51,10 @@ public interface ClubService {
 	// like delete 
 	int clubLikeDelete(Club club);
 	
-
+	// like Count
+	int selectClubLikeCount(Club club); 
 	
+	// ClubOpen List Select 
+	ArrayList<ClubOpen> clubOpenSelectAdmin(int ClubNo);
 	
 }

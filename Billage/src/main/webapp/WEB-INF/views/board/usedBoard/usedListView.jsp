@@ -109,6 +109,25 @@
 			</div>
 			<div><button type="button" class="btn btn-info" onclick="location.href='insert.ud'">글쓰기</button></div>   
 		</div>
+		
+		
+		
+		
+		<div class="search-area">
+			<form id="searchForm" action="searchForm.ud" method="get" align="center">
+			    <div class="select">
+			        <select class="custom-select" name="condition">
+			            <option value="bookTitle">책제목</option>
+			            <option value="usedContent">내용</option>
+			        </select>
+			    </div>
+			    <div class="text">
+			        <input type="text" class="form-control" name="keyword">
+			    </div>
+			    <button type="submit" class="searchBtn btn btn-secondary">검색</button>
+			</form>
+		</div>
+
 
 
 			<!-- 상품 크게 감싸는 div -->

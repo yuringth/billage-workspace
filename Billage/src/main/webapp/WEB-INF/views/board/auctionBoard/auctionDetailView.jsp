@@ -100,6 +100,8 @@
 
 		<input type="hidden" id="prizeUserNo" value="${b.prizeUserNo}">
 		<input type="hidden" id="closeDate" value="${b.closeDate}">
+		<input type="hidden" id="inputNowPrice" value="${ b.nowPrice }">
+		
 		<p class="time"></p>
 		<p class="genre">${ b.genre }</p>
 		<p class="title">"${ b.title }"</p>
@@ -109,7 +111,15 @@
 				${ b.content }
 			</p>
 		</div>
-		<p class="nowPrice" id="nowPrice">현재가격 : ${ b.nowPrice }P</p>
+		
+		<c:if test="${ b.prizeUserNo != 1 }">
+			<p class="nowPrice" id="nowPrice">현재가격 : ${ b.nowPrice }P</p>
+		</c:if>
+		<c:if test="${ b.prizeUserNo == 1 }">
+			<p class="nowPrice" id="nowPrice">낙찰금액 : ${ b.nowPrice }P</p>
+		</c:if>
+		
+		
 		<c:choose>
 			<c:when test="${ not empty b.instantlyPrice }">
 				<p class="instantlyPrice">즉시구매가 : ${ b.instantlyPrice }P</p>
@@ -125,7 +135,7 @@
 			</div>
 			<div style="width:100px">
 					
-					<input type="number" id="bidPrice" value="${ b.nowPrice }" width="100px" step="${ b.bidPrice }">
+					<input type="number" id="bidPrice" value="${ b.nowPrice + b.bidPrice }" width="100px" step="${ b.bidPrice }" min="${ b.nowPrice + b.bidPrice }">
 				
 			</div>
 		</div>
@@ -224,8 +234,7 @@
 	
 		
 		function closeCount(){
-			
-			var end = new Date("$('#closeDate').val()");
+			var end = new Date($('#closeDate').val());
 			var now = new Date(); 
 			
 			var remaindTime = end - now;
@@ -246,72 +255,89 @@
 		    }
 		    if(remaindTime >= 0){
 		    	$('.time').text(day +'일 ' + hour + ':' + min + ':' + sec);
+		    	priceCheck();
 		    } else {
 		    	
 		    	clearInterval(interval); //인터벌 종료
 		    	
 		    	$('.time').text('시간 종료');
 		    	$('.btn1').attr('disabled', true).text('시간 종료');
-			    selectPrizeUser();
+		    	if($('#prizeUserNo').val() != 1){
+				    selectPrizeUser();
+		    	}
+		    	if($('#prizeUserNo').val() == 0){
+		    		selectPrizeUser();
+		    	}
 		    	
 		    }
 		}
 		
+		function priceCheck(){
+			
+			$.ajax({
+				 url : 'priceCheck.ac',
+				 data : {
+					 boardNo : ${b.boardNo},
+				 },
+				 success : function(result){
+					$('#nowPrice').text('현재가격 : ' + result.nowPrice + 'P');
+					$('#prizeUserNo').val(result.prizeUserNo);
+					$('#inputNowPrice').val(result.nowPrice);
+				 },
+				 error : function(){
+					 console.log('error');
+				 }
+			 })
+		}
 		
 		function bid(){
 			
-			if(${not empty loginUser}){
-				 
+			if(confirm('입찰하시겠습니까?')){	 
 				$.ajax({
-					 url : bid.ac,
+					 url : 'bid.ac',
 					 data : {
 						 boardNo : ${b.boardNo},
-						 userNo : ${loginUser.userNo},
 						 bidPrice : $('#bidPrice').val(),
 						 prizeUserNo : $('#prizeUserNo').val(),
-						 nowPrice : $('#nowPrice').text()
+						 nowPrice : $('#inputNowPrice').val()
 					 },
 					 success : function(result){
-						$('#nowPrice').text(result.nowPrice);
+						$('#nowPrice').text('현재가격 : ' + result.nowPrice + 'P');
 						$('#prizeUserNo').val(result.prizeUserNo);
-						$('#bidPrice').val(result.nowPrice);
-						//여기에 최소값 어쩌구 설정하기						 
+						$('#bidPrice').val(result.nowPrice + ${b.bidPrice});
+						//여기에 최소값 어쩌구 설정하기					
+						$('#bidPrice').attr('min', result.nowPrice + ${b.bidPrice})
 					 },
 					 error : function(){
 						 console.log('error');
 					 }
 				 })
-				 
 			}
-			
 		}
 		
 		
 		function buy(){
 			
-			if(${not empty loginUser}){
 				 
-				$.ajax({
-					 url : buy.ac,
-					 data : {
-						 boardNo : ${b.boardNo},
-						 userNo : ${loginUser.userNo},
-						 bidPrice : $('#bidPrice').val(),
-						 prizeUserNo : $('#prizeUserNo').val(),
-						 bidPrice : ${ b.instantlyPrice }
-					 },
-					 success : function(result){
-						$('#nowPrice').text(result.nowPrice);
-						$('#prizeUserNo').val(result.prizeUserNo);
-						$('#bidPrice').val(result.nowPrice);
-						$('#closeDate').val(result.closeDate)
-					 },
-					 error : function(){
-						 console.log('error');
-					 }
-				 })
-				 
-			}
+			$.ajax({
+				 url : 'buy.ac',
+				 data : {
+					 boardNo : ${b.boardNo},
+					 bidPrice : $('#bidPrice').val(),
+					 prizeUserNo : $('#prizeUserNo').val(),
+					 userNo2 : ${b.userNo} // 글 작성자
+				 },
+				 success : function(result){
+					$('#nowPrice').text(result.nowPrice);
+					$('#prizeUserNo').val(1);
+					$('#bidPrice').val(result.nowPrice);
+					$('#closeDate').val(result.closeDate)
+				 },
+				 error : function(){
+					 console.log('error');
+				 }
+			 })
+			 
 			
 		}
 		
@@ -322,7 +348,7 @@
 			}
 		}
 		
-		//당첨자 선정하는 함수
+		//낙찰자 선정하는 함수
 		function selectPrizeUser(){
 			
 			$.ajax({
@@ -331,10 +357,11 @@
 					boardNo : ${b.boardNo},
 					userNo : ${b.userNo},
 					title : '${b.title}',
-					prizeUserNo : $('#prizeUserNo').val()
+					prizeUserNo : $('#prizeUserNo').val(),
+					bidPrice : $('#inputNowPrice').val()
 				},
 				success : function(result){
-					
+					$('#nowprice').text('낙찰금액 : ' + result.nowPrice + 'P');
 				},error : function(){
 					console.log('오류');
 				}

@@ -196,7 +196,7 @@
 	</update>
 	
 	
-	<!--  -->
+	<!-- topN분석 쿼리문 -->
 	<select id="selectTopUsed" resultMap="usedResultSet">
 		select
 		     *
@@ -220,10 +220,14 @@
 				       count desc)
 		  where
 		        rownum between 1 and 4
-	
 	</select>
 	
 	
+	<select id="searchUsedList" resultMap="usedResultSet">
+
+	
+	
+	</select>
 	
 
 

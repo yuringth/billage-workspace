@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.rent.model.dao.RentBoardDao;
@@ -37,12 +38,21 @@ public class RentBoardServiceImpl implements RentBoardService {
 	public int insertRentBoard(RentBoard rb) {
 		return rentBoardDao.insertRentBoard(sqlSession, rb);
 	}
-
+	
+	// 대여게시판 상세조회
 	@Override
 	public RentBoard detailRentBoard(int rentNo) {
 		return rentBoardDao.detailRentBoard(sqlSession, rentNo);
 	}
-
+	
+	/*
+	// 포인트 관련 차감, 증가
+	@Transactional
+	@Override
+	public int updatePoint(RentBoard rb) {
+		return rentBoardDao.minusPoint(sqlSession, rb) * rentBoardDao.plusPoint(sqlSession, rb);
+	}
+	*/
 
 
 

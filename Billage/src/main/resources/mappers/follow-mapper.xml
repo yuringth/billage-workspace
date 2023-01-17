@@ -22,6 +22,7 @@
 			<result column="REVIEWCOUNT"         property="reviewCount"/>
 			<result column="AVGSTAR"         property="avgStar"/>
 			<result column="MAXSTAR"         property="maxStar"/>
+			<result column="PROFILE_IMG"		property="profileImg" />
 		</resultMap>
 		
 		<resultMap id="reviewResultSet2" type="review">
@@ -82,6 +83,15 @@
 					where
 					        user_no2 = #{userNo}		
 					) follower
+					,(
+					select
+					       count(*)
+					from
+					       review       
+					where
+					       user_no=#{userNo}     
+					) reviewCount
+					,profile_Img
 			from
 			       member
 			where
@@ -102,6 +112,7 @@
 					,detail_address
 					,user_grade
 					,user_no
+					,profile_Img
 				  from
 				      	member m
 				  where
@@ -112,6 +123,8 @@
 					                          		follow
 					                       where
 					                                user_no1 = #{userNo})
+					and
+					     status= 'N'                                
 		</select>
 		
 		<!-- 서로 팔로잉 한 list -->
@@ -129,6 +142,7 @@
 				    ,detail_address
 				    ,user_grade
 				    ,user_no
+				    ,profile_Img
 				  from
 				        member m
 				  where
@@ -145,6 +159,8 @@
 				                                    follow
 				                                 where
 				                                        user_no1 = #{userNo})
+				  and
+				       status = 'N'                                      
 		</select>
 		
 		<!-- 나를 팔로잉한 사람들 나는 안 함 -->
@@ -163,6 +179,7 @@
 				    ,detail_address
 				    ,user_grade
 				    ,user_no
+				    ,profile_Img
 				  from
 				        member m
 				  where
@@ -179,6 +196,8 @@
 						                                    follow
 						                                 where
 						                                        user_no1 = #{userNo})
+				and
+				     status='N'		                                        
 		</select>
 		
 		<insert id="insertFollow" parameterType="follow">
@@ -232,7 +251,9 @@
 			from
 			       review
 			where
-			        user_no = #{userNo}       
+			        user_no = #{userNo}
+			   and
+			        review_status ='Y'            
 					
 		</select>
 		
@@ -304,10 +325,13 @@
 						                                        by 
 						                                          review_star)
 						)	maxStar
+						,profile_Img
 			from
 			       member
 			where
-			       user_no = #{userNo}       		
+			       user_no = #{userNo}
+			 and
+			      status = 'N'             		
 		</select>
 		
 		<select id="selectStar" parameterType="_int" resultMap="starRsultSet">
@@ -389,6 +413,8 @@
 				          user_no =#{userNo2}
 				   and
 				         review_star = 5
+				   and
+				         review_status='Y'      
 		</select>
 		
 		<select id="selectBadReview" parameterType="follow" resultMap="reviewResultSet2">
