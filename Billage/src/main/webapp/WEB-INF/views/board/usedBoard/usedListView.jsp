@@ -119,14 +119,12 @@
 		        <div class="one-content">
 		        	
 		        	<div class="stock-status">
-		        		<c:choose>
-		        			<c:when test="${b.stockStatus eq 'N'} ">
-								<p>판매상태 : 판매중</p>
-							</c:when>
-							<c:otherwise>
-								<p>판매상태 : 판매완료</p>
-							</c:otherwise>		        		
-		        		</c:choose>
+						<c:if test="${ b.stockStatus == 'N'}">
+							<p>판매중</p>
+						</c:if>		        		
+							<c:if test="${ b.stockStatus == 'Y'}">
+							<p>판매완료</p>
+						</c:if>		
 					</div>
 					
 					<div class="usedNo-area">
@@ -135,6 +133,7 @@
 			            <div class="img-area">
 			                
 			                <img id="img-area2" src="${ b.changeName }">
+			                ${b.changeName }
 			            	<!--  onclick="location.href='detail.ud?usedNo='" + b.getUsedNo() -->
 			            	
 			            </div>
