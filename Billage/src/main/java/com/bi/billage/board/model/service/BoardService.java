@@ -194,7 +194,7 @@ public interface BoardService {
 	
 	
 	// 중고게시판 => 검색 기능 select
-	ArrayList<UsedBoard> searchUsedList();
+//	ArrayList<UsedBoard> searchUsedList(String condition, String keyword);
 	
 	
 	
