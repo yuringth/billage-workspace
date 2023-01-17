@@ -193,6 +193,11 @@ public interface BoardService {
 	ArrayList<UsedBoard> selectTopUsed();
 	
 	
+	// 중고게시판 => 검색 기능 select
+	ArrayList<UsedBoard> searchUsedList();
+	
+	
+	
 	
 	
 	// 리뷰게시판 => book테이블에서 책제목으로 isbn 문자열 select하기

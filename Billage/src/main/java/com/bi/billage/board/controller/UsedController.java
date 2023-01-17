@@ -219,5 +219,15 @@ public class UsedController {
 	}
 	
 	
+	// 중고게시판 => 검색기능
+	@RequestMapping("searchForm.ud")
+	public ModelAndView searchUsedList(ModelAndView mv) {
+		
+		mv.addObject("list", boardService.searchUsedList()).setViewName("board/usedBoard/usedListView");
+		
+		return mv;
+	}
+	
+	
 	
 }
