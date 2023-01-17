@@ -135,7 +135,7 @@
 			</div>
 			<div style="width:100px">
 					
-					<input type="number" id="bidPrice" value="${ b.nowPrice }" width="100px" step="${ b.bidPrice }" min="${ nowPrice }">
+					<input type="number" id="bidPrice" value="${ b.nowPrice + b.bidPrice }" width="100px" step="${ b.bidPrice }" min="${ b.nowPrice + b.bidPrice }">
 				
 			</div>
 		</div>
@@ -282,7 +282,6 @@
 				 success : function(result){
 					$('#nowPrice').text('현재가격 : ' + result.nowPrice + 'P');
 					$('#prizeUserNo').val(result.prizeUserNo);
-					$('#bidPrice').val(result.nowPrice);
 					$('#inputNowPrice').val(result.nowPrice);
 				 },
 				 error : function(){
@@ -305,9 +304,9 @@
 					 success : function(result){
 						$('#nowPrice').text('현재가격 : ' + result.nowPrice + 'P');
 						$('#prizeUserNo').val(result.prizeUserNo);
-						$('#bidPrice').val(result.nowPrice);
+						$('#bidPrice').val(result.nowPrice + ${b.bidPrice});
 						//여기에 최소값 어쩌구 설정하기					
-						$('#bidPrice').attr('min', result.nowPrice)
+						$('#bidPrice').attr('min', result.nowPrice + ${b.bidPrice})
 					 },
 					 error : function(){
 						 console.log('error');
