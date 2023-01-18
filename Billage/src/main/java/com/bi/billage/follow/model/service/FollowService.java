@@ -3,6 +3,7 @@ package com.bi.billage.follow.model.service;
 import java.util.ArrayList;
 
 import com.bi.billage.board.model.vo.ReviewBoard;
+import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.follow.model.vo.Follow;
 import com.bi.billage.follow.model.vo.Star;
 import com.bi.billage.user.model.vo.User;
@@ -21,7 +22,7 @@ public interface FollowService {
 	
 	int deleteFollow(Follow follow);
 	
-	ArrayList<ReviewBoard> selectReviewList(int userNo);
+	ArrayList<ReviewBoard> selectReviewList(int userNo, PageInfo pi);
 	
 	User selectUser (int userNo);
 	
@@ -30,4 +31,6 @@ public interface FollowService {
 	ArrayList<ReviewBoard> selectGoodReview (Follow follow);
 	
 	ArrayList<ReviewBoard> selectBadReview (Follow follow);
+	
+	int selectReviewCount (int userNo);
 }
