@@ -222,7 +222,7 @@ public class UsedController {
 	
 	// 중고게시판 => 검색기능
 	@RequestMapping("searchForm.ud")
-	public String searchUsedList(String condition, String keyword) {
+	public String searchUsedList(String condition, String keyword, Model model) {
 		//@RequestParam(value="currentPage", defaultValue="1") 
 
 		HashMap<String, String> map = new HashMap();
@@ -252,8 +252,16 @@ public class UsedController {
 		PageInfo pi = Pagination.getPageInfo(searchCount, currentPage, pageLimit,boardLimit);
 //		System.out.println("페이지 잘 가져오는지 확인 : " + pi);
 		
-		boardService.selectSearchCount(map);
-
+		
+		// 검색한 결과를 뿌려주는거...select해서 가져오는데 몇개있는지 모르니 arrayList로 뿌리기
+		ArrayList<UsedBoard> list = boardService.selectSearchList(map, pi);
+		
+		System.out.println("list : " + list);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+		
+		
 		return "board/usedBoard/usedListView";
 		
 		

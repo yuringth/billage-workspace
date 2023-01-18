@@ -217,7 +217,7 @@ public class BoardServiceImpl implements BoardService {
 	// 컬럼에 따라서 달라지기에 condition ..을 넣은 hashmap을 받아야함 + 추가적으로 페이징처리
 	@Override
 	public ArrayList<UsedBoard> selectSearchList(HashMap<String, String> map, PageInfo pi){
-		return null;
+		return boardDao.selectSearchList(sqlSession, map, pi);
 	}
 	
 	////////	

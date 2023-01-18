@@ -244,6 +244,43 @@
 		    like '%' || #{keyword} || '%'
 	</select>
 	
+	
+	<select id="selectSearchList" parameterType="hashmap" resultMap="usedResultSet">
+		select
+		        stock_status
+		       ,change_name
+		       ,book_title
+		       ,point
+		       ,count
+		       ,used_no
+		       ,user_no
+		  from
+		       used_board
+		  join
+		  	   member using(user_no)
+		 where
+		       used_status ='N' 
+		 <choose>
+		 	<when test="condition == 'nickname'">
+		 		and nickname
+		 	</when> 
+		 	<when test="condition == 'bookTitle'">
+		 		and book_title
+		 	</when>
+		 	<otherwise>
+		 		and used_content
+		 	</otherwise>
+		 </choose>     
+		 		like '%' || #{keyword} || '%'
+		 order
+		    by
+		       used_no desc
+		     
+	</select>
+	
+	
+	
+	
 
 
 </mapper>
