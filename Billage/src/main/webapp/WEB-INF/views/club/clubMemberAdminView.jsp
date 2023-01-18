@@ -24,51 +24,23 @@
 			
 		
 		<script>
-		$(function(){
-			/* 전체선택 버튼 눌렸을 때 활성화 됨.. 
-			//--- 본인한테는 메세지 보낼 수 없도록 checkbox 비활성화
-			let $userNo;
+			$(function(){
 			
-			$('input[name=userNo]').each(function(){
-				
-				$userNo = $(this).val();
-				
-				if($userNo == ${loginUser.userNo}){
-					$(this).prev().attr('disabled', true);
-				}
-			})
-			*/
-		
-		
-		// 전체선택 or 취소 ----------------------------------------------------------------------
-			$(document).on('change','#all-select' , function(){
-				
-				console.log(this);
-				var $all = $('#all-select').prop('checked');
-				
-				if($all){
-					$('.checked-btn').prop('checked', true); 
-				} else {
-					$('.checked-btn').prop('checked', false);
-				}
-			});
-			
-		}); //$(function(){})끝 
-		
-			//MESSAGE_NO
-			//USER_NO
-			//USER_NO2
-			//MESSAGE_CONTENT
-			//MESSAGE_DATE
-			//MESSAGE_STATUS
-			
-			//private int messageNo;
-			//private int userNo; //보낸 사람
-			//private int userNo2; //받는 사람
-			//private String messageContent;
-			//private String Date;
-			//private int messageStatus; //읽음확인여부
+				// 전체선택 or 취소 ----------------------------------------------------------------------
+				$(document).on('change','#all-select' , function(){
 					
+					console.log(this);
+					var $all = $('#all-select').prop('checked');
+					
+					if($all){
+						$('.checked-btn').prop('checked', true); 
+					} else {
+						$('.checked-btn').prop('checked', false);
+					}
+				});
+				
+			}); //$(function(){})끝 
+						
 				
 			// 쪽지 보내기----------------------------------------------------------------------
 				function sendMsg(){
@@ -99,54 +71,75 @@
 				}// 쪽지보내기 메소드 끝 
 				
 				
+				
+				
 			// 강퇴하기 ----------------------------------------------------------------------
-				function outMember(){
-					var want = confirm('정말 강퇴하시겠습니까?');
+			$(function(){
+				
+				$(document).on('click', '#delete-btn', function(){
 					
-					
-					
-					if(want == true) {
+					if( !$('.checked-btn').is(':checked')){
+						alert('회원선택 없음 ');
+						
+					} else {
+						
 						var $checkedMem = $('.checked-btn').filter(':checked');
+						var want = confirm('정말 강퇴하시겠습니까?');
 						
 						console.log($checkedMem);
 						
-						var arrUserNo = [];
-						var $clubNo = $('#getClubNo').val();
-						
-						$checkedMem.each(function(){
-							var $userNo = $(this).next().val();
+						if(want == true) {
 							
-							arrUserNo.push($userNo);
-						})
-						
-						console.log(arrUserNo[0], arrUserNo[1]);
-						
-						$.ajax({
-							url : 'ajaxDeleteClubs.cl',
-							type : 'post',
-							data : {
-								clubNo : $clubNo,
-								userNo : arrUserNo.toString()
-							},
-							success : function(result){
-								console.log(result);
-								alert("회원 강퇴에 성공하였습니다.");
-								location.reload();
-								
-								
-							},
-							error : function(){
-								console.log('비동기 통신 실패 : member 다수 강퇴 실패');
-							}
+							console.log($checkedMem);
 							
-						})//ajax통신 끝 
-						
-					} else {
-					 	console.log('취송');
-					}
+							var arrUserNo = [];
+							var $clubNo = $('#getClubNo').val();
+							
+							$checkedMem.each(function(){
+								var $userNo = $(this).next().val();
+								
+								arrUserNo.push($userNo);
+							})
+							
+							console.log(arrUserNo[0], arrUserNo[1]);
+							
+							$.ajax({
+								url : 'ajaxDeleteClubs.cl',
+								type : 'post',
+								data : {
+									clubNo : $clubNo,
+									userNo : arrUserNo.toString()
+								},
+								success : function(result){
+									console.log(result);
+									alert("회원 강퇴에 성공하였습니다.");
+									location.reload();
+									
+									
+								},
+								error : function(){
+									console.log('비동기 통신 실패 : member 다수 강퇴 실패');
+								}
+								
+							})//ajax통신 끝 
+							
+						} else {
+						 	console.log('취소');
+						 	
+							$checkedMem.each(function(){
+								$(this).prop('checked', false);
+								
+							})
+						 	
+						} // confilm true / false if문 끝 				
 					
+					} // checked true / false if문 끝 
 					
-				}
+				}); //on click메소드 끝 
+				
+			}); //$(function(){}) 끝
+			
+		
 				
 			
 		</script>
@@ -156,7 +149,7 @@
 		<br><br><br>
 		<a><input type="checkbox" id="all-select"/>전체선택 </a> |
 		<a onclick="sendMsg();">쪽지보내기</a> |
-		<a onclick="outMember();">강퇴하기</a>
+		<a id="delete-btn">강퇴하기</a>
 		<br><br><br>
 
 		<table id="#club-member-area" border="1">	
