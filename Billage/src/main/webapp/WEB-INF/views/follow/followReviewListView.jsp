@@ -15,8 +15,17 @@
 a {
 	text-decoration: none;
 }
+
+ #pagingArea {width:fit-content; margin:auto;}
+ 
 </style>
 </head>
+ <!-- jQuery 라이브러리 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- 부트스트랩에서 제공하고 있는 스타일 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- 부트스트랩에서 제공하고 있는 스크립트 -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <body>
 	<jsp:include page="../common/header.jsp" />
 
@@ -100,6 +109,32 @@ a {
 		
 		</c:choose>
 	</div>
+	
+	<div id="pagingArea">
+                <ul class="pagination">
+                	<c:choose>
+                		<c:when test="${pi.currentPage eq 1}">
+                    		<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<li class="page-item "><a class="page-link" href="selectReviewList.fo?cpage=${ pi.currentPage-1 }&uno=${list.get(0).userNo}">Previous</a></li>
+                    	</c:otherwise>
+                    </c:choose>
+                    
+                   	<c:forEach begin="${pi.startPage }" end="${ pi.endPage }" var="p">
+                    <li class="page-item"><a class="page-link" href="selectReviewList.fo?cpage=${p}&uno=${list.get(0).userNo}">${ p }</a></li>
+                    </c:forEach>
+                    
+                    <c:choose>
+                    	<c:when test="${ pi.currentPage eq pi.maxPage }">                    
+                    		<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<li class="page-item"><a class="page-link" href="selectReviewList.fo?=${ pi.currentPage + 1 }&uno=${list.get(0).userNo}">Next</a></li>
+                    	</c:otherwise>
+                    </c:choose>
+                </ul>
+            </div>
 
 	<jsp:include page="../common/footer.jsp" />
 </body>

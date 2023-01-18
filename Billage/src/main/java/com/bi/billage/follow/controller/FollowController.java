@@ -7,10 +7,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bi.billage.board.model.vo.ReviewBoard;
+import com.bi.billage.common.model.vo.PageInfo;
+import com.bi.billage.common.template.Pagination;
 import com.bi.billage.follow.model.service.FollowService;
 import com.bi.billage.follow.model.vo.Follow;
 import com.bi.billage.follow.model.vo.Star;
@@ -174,10 +177,13 @@ public class FollowController {
 	
 	// 리뷰 목록
 	@RequestMapping("selectReviewList.fo")
-	public ModelAndView selectReviewList(int uno , ModelAndView mv) {
+	public ModelAndView selectReviewList( @RequestParam(value="cpage", defaultValue="1") int currentPage, int uno , ModelAndView mv) {
 		
-		ArrayList<ReviewBoard> list = followService.selectReviewList(uno);
+		PageInfo pi = Pagination.getPageInfo(followService.selectReviewCount(uno), currentPage, 10, 5);
 		
+		ArrayList<ReviewBoard> list = followService.selectReviewList(uno , pi);
+		
+		mv.addObject("pi", pi);
 		mv.addObject("list", list).setViewName("follow/followReviewListView");
 		
 		return mv;
