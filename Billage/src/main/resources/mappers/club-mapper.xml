@@ -115,9 +115,9 @@
 				                         (SELECT TO_DATE(SYSDATE, 'YY-MM-DD') FROM DUAL)
 				                       - (SELECT TO_DATE(CLUB_CREATEDATE, 'YY-MM-DD') from dual) <![CDATA[ < ]]> 30 THEN 1
 				                     END AS "NEWCOUNT"
-	                     LEFT
 					  	 FROM
 					  	  	   CLUB C
+					  	 LEFT 	   
 				 	  	 JOIN
 				 	  	  	   MEMBER M ON (C.USER_NO = M.USER_NO)
 				  	    WHERE
