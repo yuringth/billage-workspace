@@ -207,13 +207,20 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	
-	// 중고게시판 => 검색
-//	@Override
-//	public int selectSearchCount(HashMap<String, String> map){
-//		return boardDao.selectSearchCount(sqlSession, map);
-//	}
+	// 중고게시판 검색
+	// 중고게시판 => 검색 기능 select
+	@Override
+	public int selectSearchCount(HashMap<String, String> map) {
+		return boardDao.selectSearchCount(sqlSession, map);
+	}
 	
+	// 컬럼에 따라서 달라지기에 condition ..을 넣은 hashmap을 받아야함 + 추가적으로 페이징처리
+	@Override
+	public ArrayList<UsedBoard> selectSearchList(HashMap<String, String> map, PageInfo pi){
+		return null;
+	}
 	
+	////////	
 	
 	// 리뷰 게시글의 총 개수 조회
 	@Override

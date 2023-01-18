@@ -115,7 +115,7 @@
 		
 		<div class="search-area">
 			<form id="searchForm" action="searchForm.ud" method="get" align="center">
-				<input type="hidden" name="cPage" value="1">
+				<input type="hidden" name="currentPage" value="1">
 			    <div class="select">
 			        <select class="custom-select" name="condition">
 			            <option value="userNo">작성자</option>

@@ -223,10 +223,25 @@
 	</select>
 	
 	
-	<select id="selectSearchCount" resultMap="usedResultSet">
-
-	
-	
+	<select id="selectSearchCount" parameterType="hashmap" resultType="_int">
+		select 
+		       count(*)
+		  from
+		       used_board
+		  join
+		       member using(user_no)
+		 where
+		       used_status = 'N'
+		 <if test="condition == 'userNo'">
+		 	and nickname
+		 </if>
+		 <if test="condition == 'bookTitle'">
+		    and book_title
+		 </if>
+		 <if test="condition == 'usedContent'">
+		    and used_content
+		 </if>   
+		    like '%' || #{keyword} || '%'
 	</select>
 	
 

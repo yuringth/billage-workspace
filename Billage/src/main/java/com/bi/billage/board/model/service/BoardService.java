@@ -196,11 +196,14 @@ public interface BoardService {
 	ArrayList<UsedBoard> selectTopUsed();
 	
 	
-//	// 중고게시판 => 검색 기능 select
-//	int selectSearchCount(HashMap<String, String> map);
-//	
+	// 중고게시판 검색
+	// 중고게시판 => 검색 기능 select
+	int selectSearchCount(HashMap<String, String> map);
 	
+	// 컬럼에 따라서 달라지기에 condition ..을 넣은 hashmap을 받아야함 + 추가적으로 페이징처리
+	ArrayList<UsedBoard> selectSearchList(HashMap<String, String> map, PageInfo pi);
 	
+	////////
 	
 	// 리뷰게시판 => book테이블에서 책제목으로 isbn 문자열 select하기
 	Book selectIsbn(String title);

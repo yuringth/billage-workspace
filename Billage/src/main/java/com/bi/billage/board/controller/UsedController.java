@@ -220,28 +220,36 @@ public class UsedController {
 	}
 	
 	
-//	// 중고게시판 => 검색기능
-//	@RequestMapping("searchForm.ud")
-//	public String searchUsedList(String condition, String keyword) {
-//		
-//
-//		HashMap<String, String> map = new HashMap();
-//		map.put("condition", condition); // key는 value
-//		map.put("keyword", keyword);
-//		
-//		
-		// 페이지처리
-//		int searchCount; // 현재 검색 결과에 맞는 게시글의 총 개수 => db가서 조회
+	// 중고게시판 => 검색기능
+	@RequestMapping("searchForm.ud")
+	public String searchUsedList(@RequestParam(value="currentPage", defaultValue="1") String condition, String keyword) {
+		
+
+		HashMap<String, String> map = new HashMap();
+		map.put("condition", condition); // key는 value : "nickname", "bookTitle", "usedContent"
+		map.put("keyword", keyword); // "사용자가 입력한 키워드"
+		
+		
+		// 페이징처리
+		int searchCount = boardService.selectSearchCount(map);  // 현재 검색 결과에 맞는 게시글의 총 개수 => db가서 조회
+		
+		int currentPage = 1; // 현재페이지의 값을 가져오기
+		
 //		int currentPage = RequestParam(value="cPage", defaultValue="1"); // 현재페이지의 값을 가져오기
-//		int pageLimit = 10;
-//		int boardLimit = 5;
-//		
-//		PageInfo pi = Pagination.getPageInfo(searchCount, currentPage, pageLimit,boardLimit);
-//		
-//		boardService.selectSearchCount(map);
-//
-//		return "board/usedBoard/usedListView";
-//	}
+//		int currentPage = Integer.parseInt(request.getParameter("cPage"));
+		int pageLimit = 10;
+		int boardLimit = 5;
+		
+		PageInfo pi = Pagination.getPageInfo(searchCount, currentPage, pageLimit,boardLimit);
+		
+		System.out.println("페이지 잘 가져오는지 확인 : " + pi);
+		
+		boardService.selectSearchCount(map);
+
+		return "board/usedBoard/usedListView";
+		
+		
+	}
 	
 	
 	
