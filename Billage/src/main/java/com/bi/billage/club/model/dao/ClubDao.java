@@ -94,5 +94,8 @@ public class ClubDao {
 		return (ArrayList)sqlSession.selectList("clubMapper.clubOpenSelectAdmin", clubNo);
 	}
 	
-	
+	// Ajax  
+	public int ajaxDeleteClubs(SqlSessionTemplate sqlSession, ArrayList<Club> deleteList) {
+		return sqlSession.delete("clubMapper.ajaxDeleteClubs", deleteList);
+	}
 }

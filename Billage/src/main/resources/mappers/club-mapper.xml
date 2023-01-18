@@ -77,6 +77,7 @@
 			  ,COUNT(CM.CLUB_NO) "MEMCOUNT"	
 		 FROM
 		 	  CLUB_MEMBER CM
+ 	    RIGHT
 		 JOIN 	
 				(SELECT	
 					   C.CLUB_NO
@@ -116,6 +117,7 @@
 				                     END AS "NEWCOUNT"
 					  	 FROM
 					  	  	   CLUB C
+					  	 LEFT 	   
 				 	  	 JOIN
 				 	  	  	   MEMBER M ON (C.USER_NO = M.USER_NO)
 				  	    WHERE
@@ -337,6 +339,20 @@
 	     	   CLUB_NO = #{ clubNo }
 	       AND	   
 		       USER_NO = #{ userNo }
+	</delete>
+	
+	
+	<delete id="ajaxDeleteClubs" parameterType="java.util.List">
+		   DELETE
+			 FROM  
+			       CLUB_MEMBER
+	       <where>
+			<foreach item="club" index="index" separator="OR" collection="list" open="" close="" >
+			     	   CLUB_NO = #{ club.clubNo }
+			       AND	   
+				       USER_NO = #{ club.userNo }	
+			</foreach> 
+	       </where>
 	</delete>
 	
 	
@@ -604,6 +620,9 @@
 		    BY    
 				C.OPEN_NO DESC
 	</select>
+	
+	
+
 	
 	
 </mapper>

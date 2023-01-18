@@ -100,6 +100,11 @@ public class ClubServiceImpl implements ClubService {
 		return clubDao.clubOpenSelectAdmin(sqlSession, ClubNo);
 	}
 
+	@Override
+	public int ajaxDeleteClubs(ArrayList<Club> deleteList) {
+		return clubDao.ajaxDeleteClubs(sqlSession, deleteList);
+	}
+
 	 
 
 

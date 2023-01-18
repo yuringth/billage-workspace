@@ -105,13 +105,6 @@
 						<th scope="row">*모임 요일</th>
 						<td>
 							<select name="">
-								<option name="groupDay">월</option>
-								<option name="groupDay">화</option>
-								<option name="groupDay">수</option>
-								<option name="groupDay">목</option>
-								<option name="groupDay">금</option>
-								<option name="groupDay">토</option>
-								<option name="groupDay">일</option>
 							</select>
 						</td>
 					</tr>
@@ -131,8 +124,7 @@
 					<tr>
 						<th>모임 대표 이미지</th>
 						<td>
-							 <span><img width="200" height="200" id="file-insert" src="resources/images/plus.png"></span>
-							 <input type="file" name="upfile" id="file">
+							 
 						</td>
 					</tr>
 				</tbody>
@@ -163,30 +155,7 @@
 	
 	
 	<script>
-		//첨부파일 ------------------------------------------------------
-		// 첨부파일 버튼 숨기고
-		$('#file').hide();
-		
-		// 첨부파일 이미지 클릭시 첨부파일 버튼이 눌려지는 이벤트 걸고
-		$('#file-insert').click(function(){
-			$('#file').click();
-		});
-	
-		// 첨부파일이 변경될 때 파일에 들어온 이미지로 사진 바꿔주고, 이미지 취소하면 다시 기본 이미지로 변경 
-		$('#file').change(function(){
-			var file = this;
-			var $num = this.files.length;
-			
-			if($num == 1){
-				var reader = new FileReader();
-				reader.readAsDataURL(file.files[0]);
-				reader.onload = function(e){
-					$('#file-insert').attr('src', e.target.result);
-				}
-			} else {
-				$('#file-insert').attr('src', 'resources/images/plus.png');
-			}
-		});
+
 		
 		// 버튼 비활성화 기능 ---------------------------------------------------------------------------------
 	    $('textarea[name=groupDescribe]').keyup(function(){
@@ -220,7 +189,7 @@
 	    	
 	    	
 	    	
-    		location.href = location.href;
+    		
 	    });
 	    
 		//
