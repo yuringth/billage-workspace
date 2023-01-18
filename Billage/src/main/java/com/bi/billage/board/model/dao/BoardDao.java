@@ -340,12 +340,24 @@ public class BoardDao {
 	}
 	
 	
-//	// 중고 게시판 => 검색
-//	public int selectSearchCount(SqlSessionTemplate sqlSession, HashMap<String, String> map){
-//		return sqlSession.selectOne("usedMapper.selectSearchCount", map); 
-//	}
-//	
+	// 중고게시판 검색
+	// 중고게시판 => 검색 기능 select
+	public int selectSearchCount(SqlSessionTemplate sqlSession, HashMap<String, String> map){
+		return sqlSession.selectOne("usedMapper.selectSearchCount", map); 
+	}
 	
+	
+	// 컬럼에 따라서 달라지기에 condition ..을 넣은 hashmap을 받아야함 + 추가적으로 페이징처리
+	// rowbounds가 뭘까
+	public ArrayList<UsedBoard> selectSearchList(SqlSessionTemplate sqlSession, HashMap<String, String> map, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("usedMapper.selectSearchList", map, rowBounds);
+	}
+	
+	////////		
 	
 	// 유림끝  ==========================================================
 	

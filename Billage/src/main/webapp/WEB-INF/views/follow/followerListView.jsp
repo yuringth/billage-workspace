@@ -51,7 +51,6 @@
 								</div>
 								<div id="userDetail${f1.userNo }">
 									<div id="userNickName${f1.userNo }" ><a href="selectUser.fo?uno=${f1.userNo}">${ f1.nickname }</a></div>
-									<div id="reviewCount${f1.userNo }"><a href="selectReviewList.fo?uno=${f1.userNo}"></a>리뷰${ f1.reviewCount }</div>
 								</div>
 									<input type="hidden"  id="f1${f1.userNo }" value="${ f1.userNo }">
 									<button id="followingBtn${f1.userNo }" class="1" width="50px;" height="20px;" onclick="follow(this);">팔로잉</button>

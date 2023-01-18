@@ -31,7 +31,7 @@ public class RentBoardController {
 	// 대여게시판으로 이동 화면
 	@RequestMapping("list.rt")
 	public ModelAndView rentBoardView(@RequestParam(value="cpage", defaultValue="1")int currentPage, ModelAndView mv) {
-		PageInfo pi = Pagination.getPageInfo(rentBoardService.selectRentBoardListCount(), currentPage, 10, 5);
+		PageInfo pi = Pagination.getPageInfo(rentBoardService.selectRentBoardListCount(), currentPage, 10, 8);
 		mv.addObject("pi", pi).addObject("list", rentBoardService.selectRentBoardList(pi)).setViewName("board/rentBoard/rentBoardView");
 		
 		return mv;
@@ -51,9 +51,8 @@ public class RentBoardController {
 			String changeName = SaveFile.getSaveFile(upfile, session);
 			rb.setChangeName(changeName);
 			//System.out.println(changeName);
-		
-			
 		}
+		
 		if(rentBoardService.insertRentBoard(rb) > 0) {
 			//System.out.println(rb);
 			session.setAttribute("alertMsg", "게시글 등록 성공");
@@ -89,17 +88,15 @@ public class RentBoardController {
 	// 대여 신청 서비스
 	@RequestMapping("apply.rt")
 	public String applyRent(HttpSession session, RentBoard rb) {
-		
+		User loginUser = (User)session.getAttribute("loginUser");
 		// 빌리는 사람 유저넘버
-		int renterNo = ((User)session.getAttribute("loginUser")).getUserNo();
+		int renterNo = loginUser.getUserNo();
 		
 		Point renter = new Point();	// 빌리는 사람
 		
 		renter.setUserNo(renterNo);
 		renter.setPointAdd(rb.getRentPoint() * (-1));
 		renter.setPointStatus("사용");
-		
-		pointService.addPoint(renter);
 		
 		
 		Point writer = new Point();	// 빌려주는 사람(글 작성자)
@@ -108,9 +105,18 @@ public class RentBoardController {
 		writer.setPointAdd(rb.getRentPoint());
 		writer.setPointStatus("적립");
 		
-		pointService.addPoint(writer);
+		if(loginUser.getPoint() > rb.getRentPoint()) {
+			pointService.addPoint(renter);
+			pointService.addPoint(writer);
+			return "board/rentBoard/chkApply";
+		} else {
+			session.setAttribute("alertMsg", "포인트가 충분하지 않습니다.");
+			return "redirect:detail.rt?rentNo=" + rb.getRentNo();
+		}
 		
-		return "board/rentBoard/chkApply";
+		
+		
+		
 		
 		
 		

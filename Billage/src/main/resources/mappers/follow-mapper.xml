@@ -471,5 +471,14 @@
 				   and
 				     review_star = 5)     
 		</select>
+		
+		<select id="selectReviewCount" parameterType="_int" resultType="_int">
+			select
+			        count(*)
+			 from
+			        review
+		where
+		         user_no = #{userNo}	        
+		</select>
 
 </mapper>

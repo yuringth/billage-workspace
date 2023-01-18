@@ -17,24 +17,33 @@
 	margin: 0 auto;
 }
 
-.hot {
-	display: flex;
-	margin-bottom: 50px;
-	flex-wrap: wrap;
+.rt-box :hover{
+	cursor:pointer;
 }
 
-.productbox {
-	border: 1px solid rgb(154, 154, 154);
-	height: 330px;
-	width: 255px;
-	margin-top: 10px;
-	margin-right: 30px;
+#pagingArea {
+	width:fit-content; margin:auto;
 }
-
-.productbox p {
-	margin: 0px 10px;
+#pagingArea ul > li {
+	list-style: none; float: left; padding: 6px;
 }
-#pagingArea {width:fit-content; margin:auto;}
+.w-btn {
+    position: relative;
+    border: none;
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 15px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+.w-btn-brown:hover {
+    background-color: #ce6d39;
+    color: #ffeee4;
+    cursor : pointer;
+}
 </style>
 </head>
 <body>
@@ -46,7 +55,7 @@
 		
 		<!-- 로그인 유저만 보이게 -->
 		<c:if test="${ not empty sessionScope.loginUser }">
-		<div style="display: flex; justify-content: end;"><button onclick="location.href='enrollForm.rt'">글 올리기</button></div>
+		<div style="display: flex; justify-content: end;"><button class="w-btn w-btn-brown" onclick="location.href='enrollForm.rt'">글 올리기</button></div>
 		</c:if>
 		
 		<hr>

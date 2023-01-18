@@ -63,6 +63,24 @@
     font-size: 18px;
     font-weight: 300;
 }
+
+.w-btn {
+    position: relative;
+    border: none;
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 15px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+.w-btn-brown:hover {
+    background-color: #ce6d39;
+    color: #ffeee4;
+    cursor : pointer;
+}
 </style>
 </head>
 <body>
@@ -100,8 +118,8 @@
 			<div class="m-bot15"> <strong>반납일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </strong> <span class="pro-price"> ${rb.dueDate}</span></div>
 			<br>
 			<p>
-				<button type="button" onclick="history.back()"> 뒤로가기 </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button> 대여신청하기 </button>
+				<button type="button" class="w-btn" onclick="history.back()"> 뒤로가기 </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button class="w-btn w-btn-brown"> 대여신청하기 </button>
 			</p>
 			</div>
 		</div>
