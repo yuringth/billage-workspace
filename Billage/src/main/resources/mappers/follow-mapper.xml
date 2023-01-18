@@ -307,23 +307,30 @@
 					) avgStar
 					, (
 						select
-			                    review_star
-			              from
-			                   review
-			            group
-			               by
-			                  review_star, user_no
-			            having
-			                   user_no = #{userNo}
-			              and 
-			                count(review_star) = (
-						                                      select 
-						                                            max(count(review_star)) 
-						                                       from 
-						                                           review 
-						                                     group 
-						                                        by 
-						                                          review_star)
+							       r.review_star
+							   from
+								       (select
+								              review_star
+								          from
+								               review
+								        group
+								           by
+								              review_star, user_no
+								        having
+								               user_no = #{userNo}
+								          and 
+								            count(review_star) = (
+								                                  select 
+								                                        max(count(review_star)) 
+								                                   from 
+								                                       review 
+								                                 group 
+								                                    by 
+								                                      review_star,user_no
+								                                  having
+								                                        user_no=#{userNo})) r
+							   where
+							        	rownum = 1
 						)	maxStar
 						,profile_Img
 			from

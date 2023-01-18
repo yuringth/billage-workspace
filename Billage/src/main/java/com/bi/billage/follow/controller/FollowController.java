@@ -206,11 +206,7 @@ public class FollowController {
 		
 		ArrayList<ReviewBoard> goodReview = followService.selectGoodReview(follow);
 		
-		System.out.println(goodReview);
-		
 		ArrayList<ReviewBoard> badReview = followService.selectBadReview(follow);
-		
-		System.out.println(badReview);
 		
 		ReviewBoard b = new ReviewBoard();
 		
@@ -235,7 +231,7 @@ public class FollowController {
 		};
 		
 		
-	
+		System.out.println(user);
 		
 		
 		
