@@ -31,7 +31,7 @@ public class RentBoardController {
 	// 대여게시판으로 이동 화면
 	@RequestMapping("list.rt")
 	public ModelAndView rentBoardView(@RequestParam(value="cpage", defaultValue="1")int currentPage, ModelAndView mv) {
-		PageInfo pi = Pagination.getPageInfo(rentBoardService.selectRentBoardListCount(), currentPage, 10, 5);
+		PageInfo pi = Pagination.getPageInfo(rentBoardService.selectRentBoardListCount(), currentPage, 10, 8);
 		mv.addObject("pi", pi).addObject("list", rentBoardService.selectRentBoardList(pi)).setViewName("board/rentBoard/rentBoardView");
 		
 		return mv;
@@ -51,9 +51,8 @@ public class RentBoardController {
 			String changeName = SaveFile.getSaveFile(upfile, session);
 			rb.setChangeName(changeName);
 			//System.out.println(changeName);
-		
-			
 		}
+		
 		if(rentBoardService.insertRentBoard(rb) > 0) {
 			//System.out.println(rb);
 			session.setAttribute("alertMsg", "게시글 등록 성공");
