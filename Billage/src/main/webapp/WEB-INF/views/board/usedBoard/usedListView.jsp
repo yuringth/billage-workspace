@@ -118,7 +118,7 @@
 				<input type="hidden" name="currentPage" value="1">
 			    <div class="select">
 			        <select class="custom-select" name="condition">
-			            <option value="userNo">작성자</option>
+			            <option value="nickname">작성자</option>
 			            <option value="bookTitle">책제목</option>
 			            <option value="usedContent">내용</option>
 			        </select>

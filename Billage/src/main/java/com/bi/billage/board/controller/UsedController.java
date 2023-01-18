@@ -222,27 +222,35 @@ public class UsedController {
 	
 	// 중고게시판 => 검색기능
 	@RequestMapping("searchForm.ud")
-	public String searchUsedList(@RequestParam(value="currentPage", defaultValue="1") String condition, String keyword) {
-		
+	public String searchUsedList(String condition, String keyword) {
+		//@RequestParam(value="currentPage", defaultValue="1") 
 
 		HashMap<String, String> map = new HashMap();
 		map.put("condition", condition); // key는 value : "nickname", "bookTitle", "usedContent"
 		map.put("keyword", keyword); // "사용자가 입력한 키워드"
 		
+//		System.out.println("컨디션"+condition);
+//		System.out.println("키워드"+keyword);
 		
 		// 페이징처리
 		int searchCount = boardService.selectSearchCount(map);  // 현재 검색 결과에 맞는 게시글의 총 개수 => db가서 조회
 		
+//		System.out.println("게시글 총 수:"+ searchCount);
+		
 		int currentPage = 1; // 현재페이지의 값을 가져오기
+		
+//		System.out.println("1:"+ currentPage);
 		
 //		int currentPage = RequestParam(value="cPage", defaultValue="1"); // 현재페이지의 값을 가져오기
 //		int currentPage = Integer.parseInt(request.getParameter("cPage"));
 		int pageLimit = 10;
+//		System.out.println("pageLimit"+pageLimit);
+		
 		int boardLimit = 5;
+//		System.out.println("boardLimit" +boardLimit);
 		
 		PageInfo pi = Pagination.getPageInfo(searchCount, currentPage, pageLimit,boardLimit);
-		
-		System.out.println("페이지 잘 가져오는지 확인 : " + pi);
+//		System.out.println("페이지 잘 가져오는지 확인 : " + pi);
 		
 		boardService.selectSearchCount(map);
 
