@@ -105,6 +105,11 @@ public class ClubServiceImpl implements ClubService {
 		return clubDao.ajaxDeleteClubs(sqlSession, deleteList);
 	}
 
+	@Override
+	public int insertClubOpen(ClubOpen clubOpen) {
+		return clubDao.insertClubOpen(sqlSession, clubOpen);
+	}
+
 	 
 
 

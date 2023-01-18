@@ -622,7 +622,33 @@
 	</select>
 	
 	
-
+	<!-- ClubOpen Form Insert -->
+	<insert id="insertClubOpen" parameterType="clubOpen">
+		INSERT
+		  INTO
+		  		CLUB_OPEN
+		  		(
+	  			 OPEN_NO
+				,CLUB_NO
+				,OPEN_TITLE
+				,OPEN_LOCATION
+				,OPEN_DATE
+				,OPEN_TIME
+				,OPEN_LIMIT
+				,OPEN_STATUS
+		  		)
+		VALUES
+				(
+				 SEQ_ONO.NEXTVAL
+				,#{ clubNo }
+				,#{ openTitle }
+				,#{ openLocation }
+				,#{ openDate }
+				,#{ openTime }
+				,#{ openLimit }
+				,'Y'
+				)	
+	</insert>
 	
 	
 </mapper>

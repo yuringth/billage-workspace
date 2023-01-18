@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bi.billage.club.model.service.ClubService;
 import com.bi.billage.club.model.vo.Club;
+import com.bi.billage.club.model.vo.ClubOpen;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.common.savefile.SaveFile;
 import com.bi.billage.common.template.Pagination;
@@ -315,9 +315,10 @@ public class ClubController {
 	
 	//모임 관리자 페이지에서 활동 클릭 하면 해당 클럽활동 오픈 리스트 화면 오픈 시키기
 	@RequestMapping("clubOpenAdmin.cl")
-	public ModelAndView clubOpenSelectAdmin(ModelAndView mv, int clubNo) {
+	public ModelAndView clubOpenSelectAdmin(Model model, ModelAndView mv, int clubNo) {
 		
 		mv.addObject("clubOpenList", clubService.clubOpenSelectAdmin(clubNo));
+		model.addAttribute("clubNo", clubNo);
 		mv.setViewName("club/clubOpenListAdminView");
 		
 		return mv;
@@ -333,9 +334,15 @@ public class ClubController {
 	
 	// club Open 등록폼 Insert
 	@RequestMapping("createOpen.cl")
-	public String insertClubOpen(){
+	public String insertClubOpen(int clubNo, ClubOpen clubOpen, Model model){
 		
-		return "redirect:club/clubIOpenEnrollForm";
+		if(clubService.insertClubOpen(clubOpen) > 0) {
+			return "redirect:clubOpenAdmin.cl?clubNo=" + (int)clubNo;
+		} else {
+			model.addAttribute("errorMsg", "클럽 액티비티 등록 실패");
+			return "common/errorPage";
+		}
+		
 	}
 	
 	

@@ -98,4 +98,13 @@ public class ClubDao {
 	public int ajaxDeleteClubs(SqlSessionTemplate sqlSession, ArrayList<Club> deleteList) {
 		return sqlSession.delete("clubMapper.ajaxDeleteClubs", deleteList);
 	}
+	
+	//CLubOpen Insert Form
+	public int insertClubOpen(SqlSessionTemplate sqlSession, ClubOpen clubOpen) {
+		return sqlSession.insert("clubMapper.insertClubOpen", clubOpen);
+	}
+	
+	
+	
+	
 }

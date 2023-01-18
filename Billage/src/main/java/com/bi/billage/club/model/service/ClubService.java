@@ -60,6 +60,8 @@ public interface ClubService {
 	// ClubOpen List Select 
 	ArrayList<ClubOpen> clubOpenSelectAdmin(int ClubNo);
 	
+	// ClubOpen Insert Form
+	int insertClubOpen(ClubOpen clubOpen);
 	
 	
 }

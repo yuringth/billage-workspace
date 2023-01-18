@@ -27,8 +27,8 @@
 		<%-- 모임에 대한 값이 있으면 list 없으면 참여중인 모임이 없습니다. core로 조건문 걸어서 생성하기   --%>
 		 <h1> ${ clubOpenList[0].clubName } CLUB 리스트 조회 화면</h1>
 		
-		<button onclick="location.href='general.cl'">뒤로가기</button>
-		<button onclick="location.href='clubEnroll.cl?clubNo=${ clubOpenList[0].clubNo}'">클럽 등록 폼 버튼</button> 
+		<button onclick="location.href='admin.cl'">뒤로가기</button>
+		<button onclick="location.href='clubEnroll.cl?clubNo=${clubNo}'">클럽 등록 폼 버튼</button> 
 		
 		<br><br>
 		
