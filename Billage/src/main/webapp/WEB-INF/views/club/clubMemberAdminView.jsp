@@ -24,11 +24,26 @@
 			
 		
 		<script>
-
+		$(function(){
+			/* 전체선택 버튼 눌렸을 때 활성화 됨.. 
+			//--- 본인한테는 메세지 보낼 수 없도록 checkbox 비활성화
+			let $userNo;
+			
+			$('input[name=userNo]').each(function(){
+				
+				$userNo = $(this).val();
+				
+				if($userNo == ${loginUser.userNo}){
+					$(this).prev().attr('disabled', true);
+				}
+			})
+			*/
 		
 		
 		// 전체선택 or 취소 ----------------------------------------------------------------------
 			$(document).on('change','#all-select' , function(){
+				
+				console.log(this);
 				var $all = $('#all-select').prop('checked');
 				
 				if($all){
@@ -37,6 +52,8 @@
 					$('.checked-btn').prop('checked', false);
 				}
 			});
+			
+		}); //$(function(){})끝 
 		
 			//MESSAGE_NO
 			//USER_NO
@@ -52,20 +69,20 @@
 			//private String Date;
 			//private int messageStatus; //읽음확인여부
 					
-
+				
 			// 쪽지 보내기----------------------------------------------------------------------
 				function sendMsg(){
 					
 					// console.log($('.checked-btn').filter(':checked'));
 					// .checked-btn 객체들 중에서 checked된 객체들만 선택해준다. 
 					
-					var $hidden = $('.checked-btn').filter(':checked');
+					var $checkedMem = $('.checked-btn').filter(':checked');
 					
 					var $clubNo = $('#getClubNo').val();
 					
 					var str = '<input type="hidden" name="clubNo" value="' + $clubNo + '"/>';
 					
-					$hidden.each(function(i, el){
+					$checkedMem.each(function(i, el){
 						
 						var userNo2 = $(el).next().val();
 						
@@ -84,23 +101,65 @@
 				
 			// 강퇴하기 ----------------------------------------------------------------------
 				function outMember(){
+					var want = confirm('정말 강퇴하시겠습니까?');
+					
+					
+					
+					if(want == true) {
+						var $checkedMem = $('.checked-btn').filter(':checked');
+						
+						console.log($checkedMem);
+						
+						var arrUserNo = [];
+						var $clubNo = $('#getClubNo').val();
+						
+						$checkedMem.each(function(){
+							var $userNo = $(this).next().val();
+							
+							arrUserNo.push($userNo);
+						})
+						
+						console.log(arrUserNo[0], arrUserNo[1]);
+						
+						$.ajax({
+							url : 'ajaxDeleteClubs.cl',
+							type : 'post',
+							data : {
+								clubNo : $clubNo,
+								userNo : arrUserNo.toString()
+							},
+							success : function(result){
+								console.log(result);
+								alert("회원 강퇴에 성공하였습니다.");
+								location.reload();
+								
+								
+							},
+							error : function(){
+								console.log('비동기 통신 실패 : member 다수 강퇴 실패');
+							}
+							
+						})//ajax통신 끝 
+						
+					} else {
+					 	console.log('취송');
+					}
+					
 					
 				}
-
-		
-
+				
+			
 		</script>
 		
-
 		<br><br><br>
 		<button onclick="location.href='admin.cl'">뒤로가기</button>
 		<br><br><br>
 		<a><input type="checkbox" id="all-select"/>전체선택 </a> |
-		<a onclick="sendMsg(this);">쪽지보내기</a> |
+		<a onclick="sendMsg();">쪽지보내기</a> |
 		<a onclick="outMember();">강퇴하기</a>
 		<br><br><br>
 
-		<table id="#club-member-area" border="1">
+		<table id="#club-member-area" border="1">	
 			<thead>
 				<tr>
 					<th>선택</th>
@@ -113,7 +172,17 @@
 				<c:forEach items="${ memberList }" var="m">
 					<tr>
 						<input id="getClubNo" type="hidden" name="clubNo" value="${ m.clubNo }" />
-						<td><input type="checkbox" class="checked-btn"/><input class="abc"type="hidden"name="userNo" value="${m.userNo}"/> </td>
+						<td>
+							<c:choose>
+								<c:when test="${ m.userNo ne loginUser.userNo }">
+									<input type="checkbox" class="checked-btn"/>
+								</c:when>
+								<c:otherwise>
+									<input type="checkbox" class="checked-btn-disabled" disabled/>
+								</c:otherwise>
+							</c:choose>
+							<input class="abc"type="hidden"name="userNo" value="${m.userNo}"/>
+						</td>
 						<!-- userId 담아놓았음  -->
 						<td><div class="userId"> ${ m.clubDiscript }</div></td>
 						<td><div class="nickName">${ m.nickname } </div> </td>

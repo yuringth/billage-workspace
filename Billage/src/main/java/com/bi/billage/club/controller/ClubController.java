@@ -168,6 +168,24 @@ public class ClubController {
 	}
 	
 	
+	// 클럽에 가입한 회원 다수 삭제 
+	@ResponseBody
+	@RequestMapping(value="ajaxDeleteClubs.cl", produces="application/json; charset=UTF-8")
+	public String ajaxDeleteClubs(int[] userNo, int clubNo, Model model) {
+		
+		ArrayList<Club> deleteList = new ArrayList();
+		
+		for(int i = 0; i < userNo.length; i++) {
+			Club club = new Club();
+			
+			club.setClubNo(clubNo);
+			club.setUserNo(userNo[i]);
+			
+			deleteList.add(club);
+		}
+		
+		return new Gson().toJson(clubService.ajaxDeleteClubs(deleteList));
+	}
 	
 	// 모임 마이페이지에서 <모임장> 페이지 넘어가기 
 	@RequestMapping("admin.cl")
@@ -213,7 +231,6 @@ public class ClubController {
 		}
 		
 		if(messageService.insertClubMessage(messageList) > 0 ) {
-			model.addAttribute("alertMsg", "메세지 전송에 성공하였습니다");
 			//forwarding 방식 prefix + " " + subfix;
 			return "redirect:clubMemAdmin.cl?clubNo=" + (int)clubNo;
 			
@@ -310,16 +327,15 @@ public class ClubController {
 	// club 활동 개설 화면 전환 
 	@RequestMapping("clubEnroll.cl")
 	public String clubOpenEnrollForm(int clubNo, Model model){
-		
-		return "";
+		model.addAttribute("clubNo", clubNo);
+		return "club/clubIOpenEnrollForm";
 	}
 	
 	// club Open 등록폼 Insert
 	@RequestMapping("createOpen.cl")
 	public String insertClubOpen(){
 		
-		
-		return "redirect:";
+		return "redirect:club/clubIOpenEnrollForm";
 	}
 	
 	
