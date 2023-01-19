@@ -91,37 +91,45 @@ public class RentBoardController {
 		User loginUser = (User)session.getAttribute("loginUser");
 		// 빌리는 사람 유저넘버
 		int renterNo = loginUser.getUserNo();
-		
+		rb.setRentUserNo(renterNo);
 		Point renter = new Point();	// 빌리는 사람
-		
-		renter.setUserNo(renterNo);
-		renter.setPointAdd(rb.getRentPoint() * (-1));
-		renter.setPointStatus("사용");
-		
-		
 		Point writer = new Point();	// 빌려주는 사람(글 작성자)
 		
-		writer.setUserNo(rb.getUserNo());
-		writer.setPointAdd(rb.getRentPoint());
-		writer.setPointStatus("적립");
+		if(rentBoardService.updateStatus(rb) > 0) {
 		
-		if(loginUser.getPoint() > rb.getRentPoint()) {
-			pointService.addPoint(renter);
-			pointService.addPoint(writer);
-			return "board/rentBoard/chkApply";
+			renter.setUserNo(renterNo);
+			renter.setPointAdd(rb.getRentPoint() * (-1));
+			renter.setPointStatus("사용");
+		
+			writer.setUserNo(rb.getUserNo());
+			writer.setPointAdd(rb.getRentPoint());
+			writer.setPointStatus("적립");
+			
+			if(loginUser.getPoint() > rb.getRentPoint()) {
+				pointService.addPoint(renter);
+				pointService.addPoint(writer);
+				return "board/rentBoard/chkApply";
+			} else {
+				session.setAttribute("alertMsg", "포인트가 충분하지 않습니다.");
+				return "redirect:detail.rt?rentNo=" + rb.getRentNo();
+			} 
 		} else {
-			session.setAttribute("alertMsg", "포인트가 충분하지 않습니다.");
+			session.setAttribute("alertMsg", "대여 신청에 실패했습니다.");
 			return "redirect:detail.rt?rentNo=" + rb.getRentNo();
+					
 		}
 		
-		
-		
-		
+		// 유저의 포인트가 렌트포인트보다 낮으면 버튼이 안눌림
 		
 		
 		
 		
 	}
 	
+	// 마이페이지 대여 목록
+	@RequestMapping("rentMypageList.rt")
+	public String rentMypageList() {
+		return "board/rentBoard/rentMypageList";
+	}
 	
 }

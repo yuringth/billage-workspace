@@ -78,16 +78,17 @@
 
 </style>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
+    
+    
 </head>
 <body>
 
@@ -97,6 +98,7 @@
 
     <!-- 전체를 감싸는 div -->
     <div class="outer">
+    
 		<div class="align-side margin-bottom">
 			<div class="dropdown">
 				<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
@@ -107,11 +109,14 @@
 					<a class="dropdown-item" href="#">최신 날짜 순</a>
 				</div>
 			</div>
-			<div><button type="button" class="btn btn-info" onclick="location.href='insert.ud'">글쓰기</button></div>   
-		</div>
-		
-		
-		
+			<c:if test="${ not empty loginUser }">
+				<div>
+					<button type="button" class="btn btn-info" onclick="location.href='insert.ud'">글쓰기</button>
+				</div>   
+			</c:if>
+		</div>		
+				
+				
 		
 		<div class="search-area">
 			<form id="searchForm" action="searchForm.ud" method="get" align="center">
@@ -124,12 +129,21 @@
 			        </select>
 			    </div>
 			    <div class="text">
-			        <input type="text" class="form-control" name="keyword">
+			        <input type="text" class="form-control" name="keyword" value="${ keyword }">
 			    </div>
 			    <button type="submit" class="searchBtn btn btn-secondary">검색</button>
 			</form>
 		</div>
-
+		
+		<c:if test="${ not empty condition }">
+			<script>
+				$(function(){
+					$('.search-area option[value=${ condition }]').attr('selected', true);
+					
+				})
+				
+			</script>
+		</c:if>
 
 
 			<!-- 상품 크게 감싸는 div -->
@@ -159,8 +173,8 @@
 			            	
 			            </div>
 			            <div class="text-area">
-			                <p class="title-text">${ b.bookTitle }</p>
-			                <p class="textsize">${ b.point }</p>
+			                <p class="title-text">책제목 : ${ b.bookTitle }</p>
+			                <p class="textsize">판매 금액 : ${ b.point }</p>
 			            </div>
 					</div>
 			            <div class="text-area">
@@ -188,8 +202,15 @@
 	            	</c:otherwise>
 	            </c:choose>
 	            
-	            <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
-	            	<li class="page-item"><a class="page-link" href="list.ud?cPage=${ p }">${ p }</a></li>
+	            <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p" step="1">
+					<c:choose>
+						<c:when test="${ empty condition }">            
+		            		<li class="page-item"><a class="page-link" href="list.ud?cPage=${ p }">${ p }</a></li>
+						</c:when>
+						<c:otherwise>
+			            	<li class="page-item"><a class="page-link" href="searchForm.ud?currentPage=${ p }&condition=${ condition }&keyword=${ keyword }">${ p }</a></li>
+						</c:otherwise>	
+					</c:choose>
 	            </c:forEach>
 	
 				<c:choose>

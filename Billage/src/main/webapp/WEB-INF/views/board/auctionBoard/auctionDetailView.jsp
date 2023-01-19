@@ -152,16 +152,30 @@
 						<button class="btn1 btn btn-dark" onclick="buy();">
 							즉시구매
 						</button>
-						<button class="btn1 btn btn-secondary" onclick="bid();">
-							입찰
-						</button>
+						<c:if test="${ loginUser.userNo == b.prizeUserNo }">
+							<button class="btn1 btn btn-secondary" id="bid" onclick="canNotBid();">
+								입찰
+							</button>
+						</c:if>
+						<c:if test="${ loginUser.userNo != b.prizeUserNo }">
+							<button class="btn1 btn btn-secondary" id="bid" onclick="bid();">
+								입찰
+							</button>
+						</c:if>
 						
 					</c:if>
 					<c:if test="${ loginUser.point >= b.bidPrice && empty b.instantlyPrice }">
 						
-						<button class="btn1 btn btn-secondary" onclick="bid();">
-							입찰
-						</button>
+						<c:if test="${ loginUser.userNo == b.prizeUserNo }">
+							<button class="btn1 btn btn-secondary" id="bid" onclick="canNotBid();">
+								입찰
+							</button>
+						</c:if>
+						<c:if test="${ loginUser.userNo != b.prizeUserNo }">
+							<button class="btn1 btn btn-secondary" id="bid" onclick="bid();">
+								입찰
+							</button>
+						</c:if>
 						
 					</c:if>
 					<c:if test="${ loginUser.point < b.bidPrice && not empty b.instantlyPrice }">
@@ -169,16 +183,30 @@
 						<button class="btn1 btn btn-dark" onclick="notEnoughtPoint();">
 							즉시구매
 						</button>
-						<button class="btn1 btn btn-secondary" onclick="notEnoughtPoint();">
-							입찰
-						</button>
+						<c:if test="${ loginUser.userNo == b.prizeUserNo }">
+							<button class="btn1 btn btn-secondary" id="bid" onclick="canNotBid();">
+								입찰
+							</button>
+						</c:if>
+						<c:if test="${ loginUser.userNo != b.prizeUserNo }">
+							<button class="btn1 btn btn-secondary" id="bid" onclick="bid();">
+								입찰
+							</button>
+						</c:if>
 						
 					</c:if>
 					<c:if test="${ loginUser.point < b.bidPrice && empty b.instantlyPrice }">
 						
-						<button class="btn1 btn btn-secondary" onclick="notEnoughtPoint();">
-							입찰
-						</button>
+						<c:if test="${ loginUser.userNo == b.prizeUserNo }">
+							<button class="btn1 btn btn-secondary" id="bid" onclick="canNotBid();">
+								입찰
+							</button>
+						</c:if>
+						<c:if test="${ loginUser.userNo != b.prizeUserNo }">
+							<button class="btn1 btn btn-secondary" id="bid" onclick="bid();">
+								입찰
+							</button>
+						</c:if>
 						
 					</c:if>
 				</c:when>
@@ -262,11 +290,8 @@
 		    	
 		    	$('.time').text('시간 종료');
 		    	$('.btn1').attr('disabled', true).text('시간 종료');
-		    	if($('#prizeUserNo').val() != 1){
+		    	if($('#prizeUserNo').val() != 1 || $('#prizeUserNo').val() == 0){
 				    selectPrizeUser();
-		    	}
-		    	if($('#prizeUserNo').val() == 0){
-		    		selectPrizeUser();
 		    	}
 		    	
 		    }
@@ -306,7 +331,8 @@
 						$('#prizeUserNo').val(result.prizeUserNo);
 						$('#bidPrice').val(result.nowPrice + ${b.bidPrice});
 						//여기에 최소값 어쩌구 설정하기					
-						$('#bidPrice').attr('min', result.nowPrice + ${b.bidPrice})
+						$('#bidPrice').attr('min', result.nowPrice + ${b.bidPrice});
+						$('#bid').attr('onclick', 'canNotBid();');
 					 },
 					 error : function(){
 						 console.log('error');
@@ -318,25 +344,30 @@
 		
 		function buy(){
 			
-				 
-			$.ajax({
-				 url : 'buy.ac',
-				 data : {
-					 boardNo : ${b.boardNo},
-					 bidPrice : $('#bidPrice').val(),
-					 prizeUserNo : $('#prizeUserNo').val(),
-					 userNo2 : ${b.userNo} // 글 작성자
-				 },
-				 success : function(result){
-					$('#nowPrice').text(result.nowPrice);
-					$('#prizeUserNo').val(1);
-					$('#bidPrice').val(result.nowPrice);
-					$('#closeDate').val(result.closeDate)
-				 },
-				 error : function(){
-					 console.log('error');
-				 }
-			 })
+			if(confirm('즉시구매 하시겠습니까?')){	 
+				
+				$.ajax({
+					 url : 'buy.ac',
+					 data : {
+						 boardNo : ${b.boardNo},
+						 bidPrice : ${ b.instantlyPrice },
+						 nowPrice : $('#inputNowPrice').val(),
+						 prizeUserNo : $('#prizeUserNo').val(),
+						 title : '${ b.title }',
+						 userNo2 : ${b.userNo} // 글 작성자
+					 },
+					 success : function(result){
+						$('#nowPrice').text(result.nowPrice);
+						$('#prizeUserNo').val(1);
+						$('#bidPrice').val(result.nowPrice);
+						$('#closeDate').val(result.closeDate);
+						alert('즉시구매 완료');
+					 },
+					 error : function(){
+						 console.log('error');
+					 }
+				 });
+			}
 			 
 			
 		}
@@ -370,6 +401,10 @@
 		
 		function notEnoughtPoint(){
 			confirm('포인트가 부족합니다. 충전하시겠습니까?');
+		}
+		
+		function canNotBid(){
+			alert('현재 가장 높은 가격으로 입찰하셔서 입찰할 수 없습니다.');
 		}
 		
 	</script>
