@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -175,10 +175,21 @@
     <table id="replyArea" class="table" align="center">
        <thead>
            <tr>
-               <th colspan="2">
-                   <textarea class="form-control" name="" id="reply_content" cols="55" rows="2" style="resize:none; width:100%;"></textarea>
-               </th>
-               <th style="vertical-align:middle"><button class="btn btn-secondary">등록하기</button></th>
+				<c:choose>
+					<c:when test="${ empty loginUser }">
+		               <th colspan="2">
+		                   <textarea class="form-control" name="" id="reply_content" cols="55" rows="2" style="resize:none; width:100%;">로그인 후 이용가능한 서비스입니다.</textarea>
+		               </th>
+		               <th style="vertical-align:middle"><button class="btn btn-secondary" disabled>등록하기</button></th>
+		           	</c:when>
+		           	
+		           	<c:otherwise>
+		               <th colspan="2">
+		                   <textarea class="form-control" name="" id="reply_content" cols="55" rows="2" style="resize:none; width:100%;"></textarea>
+		               </th>
+		               <th style="vertical-align:middle"><button class="btn btn-secondary">등록하기</button></th>
+           			</c:otherwise>	
+           		</c:choose>
            </tr>
            <tr>
            		<!-- 총 댓글수 나타내는건 안할 수 있음!!! 일단 쌤꺼 복사한 것 뿐 -->
@@ -187,10 +198,9 @@
        </thead>
        <tbody>
            <tr>
-               <th>user02</th>
-               <td>ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ꿀잼</td>
-               <td>2020-03-12</td>
+               
            </tr>
+           
      	</tbody>
     </table>
 	
@@ -214,7 +224,7 @@
 	
 		function selectReplyList(){
 			
-			
+				
 			$.ajax({
 				url:'rlist.re',
 				data:{
@@ -222,6 +232,35 @@
 				},
 				success:function(list){
 					
+					var result = '';
+					
+					for(var i in list){
+						// 1. 비회원 == 댓글작성자가 아닌 경우 => 삭제 / 수정 버튼 안보임
+						// 2. 로그인 유저 == 댓글작성자인 경우 => 삭제 / 수정 버튼 보임
+						
+						
+						if(${empty loginUser}){
+							
+							result += '<tr>'
+							 	   + '<th>' + list[i].userId + '</th>'
+							 	   + '<td>' + list[i].replyContent + '</td>'
+							 	   + '<td>' + list[i].createDate + '</td>'
+							 	   + '</tr>'
+							 	   
+							
+						} else if(list[i].userNo == '${loginUser.userNo}' ){
+							
+							result += '<tr>'
+							 	   + '<th>' + list[i].userId + '</th>'
+							 	   + '<td>' + list[i].replyContent + '</td>'
+							 	   + '<td>' + list[i].createDate + '</td>'
+							 	   + '<td>' + '<a>삭제</a>' + '</td>'
+							 	   + '</tr>'
+						}
+					}
+				
+					
+					$('#replyArea tbody').html(result);
 					
 					console.log(list);
 					console.log(list[0].reviewNo);
