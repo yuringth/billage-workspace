@@ -183,9 +183,14 @@ public class FollowController {
 		PageInfo pi = Pagination.getPageInfo(followService.selectReviewCount(uno), currentPage, 5, 10);
 		
 		ArrayList<ReviewBoard> list = followService.selectReviewList(uno , pi);
-		
-		mv.addObject("pi", pi);
-		mv.addObject("list", list).setViewName("follow/followReviewListView");
+		System.out.println(list);
+		System.out.println(list.size());
+		if(list.size() > 0) {
+			mv.addObject("pi", pi);
+			mv.addObject("list", list).setViewName("follow/followReviewListView");
+		} else {
+			mv.addObject("list", list).setViewName("follow/followReviewListView");
+		}
 		
 		return mv;
 		
