@@ -253,7 +253,7 @@
 			where
 			        user_no = #{userNo}
 			   and
-			        review_status ='Y'            
+			        review_status ='N'            
 					
 		</select>
 		
@@ -421,7 +421,7 @@
 				   and
 				         review_star = 5
 				   and
-				         review_status='Y'      
+				         review_status='N'      
 		</select>
 		
 		<select id="selectBadReview" parameterType="follow" resultMap="reviewResultSet2">
