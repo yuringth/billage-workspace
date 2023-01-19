@@ -108,7 +108,14 @@ public class ClubDao {
 		return sqlSession.insert("clubMapper.insertClubOpen", clubOpen);
 	}
 	
+	// ClubOpen mem Insert
+	public int ajaxInsertOpenMem(SqlSessionTemplate sqlSession, ClubOpen clubOpen) {
+		return sqlSession.insert("clubMapper.ajaxInsertOpenMem", clubOpen);
+	}
 	
-	
+	// selectOpenMemNum
+	public int selectOpenMemNum(SqlSessionTemplate sqlSession, ClubOpen clubOpen) {
+		return sqlSession.selectOne("clubMapper.selectOpenMemNum", clubOpen);
+	}
 	
 }

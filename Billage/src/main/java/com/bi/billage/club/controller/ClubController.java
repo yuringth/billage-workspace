@@ -78,12 +78,18 @@ public class ClubController {
 			//게시글 번호로 해당 글 상세 조회 
 			club = clubService.selectDetailClub(club);
 			club.setNewCount(newCount);				
-			ArrayList<ClubOpen> clubOpen = clubService.selectDetailClubOpen(club);
-			//ArrayList<Club> ClubMemberList = clubService.clubMemberSelectAdmin(clubNo);
+			ArrayList<ClubOpen> clubOpen = clubService.clubOpenSelectAdmin(clubNo);
+			ArrayList<Club> ClubMemberList = clubService.clubMemberSelectAdmin(clubNo);
 			
 			mv.addObject("club", club);
 			mv.addObject("clubOpenList", clubOpen);
-			//mv.addObject("memberList", ClubMemberList);
+			mv.addObject("memberList", ClubMemberList);
+			
+			
+			for(ClubOpen c : clubOpen) {
+				System.out.println(c);
+			}
+			
 			
 			mv.setViewName("club/clubDetailView");
 			return mv;
@@ -193,6 +199,24 @@ public class ClubController {
 		
 		return new Gson().toJson(clubService.ajaxDeleteClubs(deleteList));
 	}
+	
+	
+	//ajaxInsertClubOpen.cl
+	@ResponseBody
+	@RequestMapping("ajaxOpenInsert.cl")
+	public String ajaxInsertOpenMem(ClubOpen clubOpen) {
+		
+		//System.out.println(clubOpen.getClubNo());
+		
+		int result = 0;
+		
+		if( clubService.ajaxInsertOpenMem(clubOpen) > 0 ) {
+			result = clubService.selectOpenMemNum(clubOpen);
+		}
+		
+		return new Gson().toJson(result);
+	}
+	
 	
 	// 모임 마이페이지에서 <모임장> 페이지 넘어가기 
 	@RequestMapping("admin.cl")

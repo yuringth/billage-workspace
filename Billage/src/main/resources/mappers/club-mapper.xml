@@ -692,6 +692,36 @@
 	</insert>
 	
 	
+	<!-- ajaxInsertOpenMem -->
+	<insert id="ajaxInsertOpenMem" parameterType="clubOpen">
+		INSERT 
+		  INTO
+		  		OPEN_MEMBER
+		  		(
+		  		 USER_NO
+				,CLUB_NO
+				,OPEN_NO
+		  		)
+ 		VALUES
+ 				(
+ 				 #{ userNo }
+ 				,#{ clubNo }
+ 				,#{ openNo }
+ 				)
+	</insert>
+	
+	<!-- selectOpenMemNum -->
+	<select id="selectOpenMemNum" parameterType="clubOpen" resultType="_int">
+		SELECT 
+				COUNT(*)"OPEN_MEM_COUNT"
+		  FROM 
+		  		OPEN_MEMBER
+  		 WHERE
+				CLUB_NO = #{ clubNo }
+		   AND 
+		   		OPEN_NO = #{ openNo }
+	</select>
+	
 </mapper>
 
 
