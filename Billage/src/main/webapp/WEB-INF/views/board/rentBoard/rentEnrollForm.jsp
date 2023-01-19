@@ -86,7 +86,7 @@
                         <p>대여 시작일:</p>
                     </div>
                     <div class="inputdiv2"> <!-- 날짜 min max 추가하기 -->
-                        <input type="date" class="form-control" id="rentDate"  name="rentDate" required>
+                        <input type="date" class="form-control" id="rentDate"  name="rentDate" pattern="yyyy-mm-dd" required>
                     </div>
                 </div>
                 <div class="shortdiv align-left">

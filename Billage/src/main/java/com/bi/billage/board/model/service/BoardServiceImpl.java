@@ -14,6 +14,7 @@ import com.bi.billage.board.model.vo.FAQ;
 import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.ReportBoard;
 import com.bi.billage.board.model.vo.ReviewBoard;
+import com.bi.billage.board.model.vo.ReviewReply;
 import com.bi.billage.board.model.vo.Serial;
 import com.bi.billage.board.model.vo.SerialRequest;
 import com.bi.billage.board.model.vo.UsedBoard;
@@ -301,6 +302,13 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectIsbn(sqlSession, title);
 	}
 	
+	// 리뷰게시판 => 댓글 리스트 불러오기
+	@Override
+	public ArrayList<ReviewReply> selectReplyList(int reviewNo) {
+		
+		System.out.println("reviewNo 서비스까지"  + reviewNo);
+		return boardDao.selectReplyList(sqlSession, reviewNo);
+	}
 	
 	
 	
