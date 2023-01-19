@@ -23,6 +23,9 @@
 			enroll_date
 		from
 			faq
+		order
+		by
+			faq_no desc
 	</select>
 	
 	<insert id="insertFaq" parameterType="faq">

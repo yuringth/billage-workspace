@@ -119,7 +119,7 @@
 </style>
 <body>
    <jsp:include page="../common/header.jsp"/>
-
+	<br>
    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
     <div class="wrapper">
         <div class="sidebar">
@@ -127,6 +127,7 @@
             <ul>
                 <li><a href="userList.ad"><i class="fas fa-user"></i>회원 관리</a></li>
                 <li><a href="groupList.ad"><i class="fas fa-home"></i>모임 관리</a></li>
+                <li><a href="novelList.ad"><i class="fa fa-book"></i>&nbsp;&nbsp;&nbsp;작품 관리</a></li>
                 <li><a href="inqList.ad"><i class="fas fa-address-card"></i>1:1 문의</a></li>
                 <li><a href="faqList.ad"><i class="fas fa-project-diagram"></i>FAQ 관리</a></li>
                 <li><a href="noticeList.ad"><i class="fas fa-blog"></i>공지사항</a></li>

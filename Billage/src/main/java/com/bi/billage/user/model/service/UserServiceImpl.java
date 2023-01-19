@@ -130,10 +130,15 @@ public class UserServiceImpl implements UserService{
 	public int updateInquiry(Inquiry iq) {
 		return userDao.updateInquiry(sqlSession, iq);
 	}
+	
+	@Override
+	public int selectFaqListCount() {
+		return userDao.selectFaqListCount(sqlSession);
+	}
 
 	@Override
-	public ArrayList<FAQ> selectFaqList(FAQ faq) {
-		return userDao.selectFaqList(sqlSession, faq);
+	public ArrayList<FAQ> selectFaqList(PageInfo pi) {
+		return userDao.selectFaqList(sqlSession, pi);
 	}
 
 	@Override
@@ -159,6 +164,16 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public ArrayList<Novel> selectNovelList(PageInfo pi) {
 		return userDao.selectNovelList(sqlSession, pi);
+	}
+
+	@Override
+	public Novel selectNovel(Integer novelNo) {
+		return userDao.selectNovel(sqlSession, novelNo);
+	}
+
+	@Override
+	public int updateNovel(Novel n) {
+		return userDao.updateNovel(sqlSession, n);
 	}
 
 

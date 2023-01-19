@@ -119,9 +119,15 @@ public class UserDao {
 		
 		return sqlSession.update("userMapper.updateInquiry", iq);
 	}
+	
+	public int selectFaqListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("userMapper.selectFaqListCount");
+	}
 
-	public ArrayList<FAQ> selectFaqList(SqlSessionTemplate sqlSession, FAQ faq) {
-		return (ArrayList)sqlSession.selectList("faqMapper.selectFaqList", faq);
+	public ArrayList<FAQ> selectFaqList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage()- 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("faqMapper.selectFaqList", null, rowBounds);
 	}
 
 	public int insertFaq(SqlSessionTemplate sqlSession, FAQ faq) {
@@ -137,11 +143,21 @@ public class UserDao {
 	}
 	
 	public int selectNovelListCount(SqlSessionTemplate sqlSession) {
-		return 0;
+		return sqlSession.selectOne("userMapper.selectNovelListCount");
 	}
 
 	public ArrayList<Novel> selectNovelList(SqlSessionTemplate sqlSession, PageInfo pi) {
-		return null;
+		int offset = (pi.getCurrentPage()- 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("userMapper.selectNovelList", null, rowBounds);
+	}
+
+	public Novel selectNovel(SqlSessionTemplate sqlSession, Integer novelNo) {
+		return sqlSession.selectOne("userMapper.selectNovel", novelNo);
+	}
+
+	public int updateNovel(SqlSessionTemplate sqlSession, Novel n) {
+		return sqlSession.update("userMapper.updateNovel", n);
 	}
 
 }
