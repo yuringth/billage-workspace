@@ -49,6 +49,30 @@
 			<result column="answer"			property="answer" />
 	</resultMap>
 	
+	<resultMap type="novel" id="novelResultSet">
+		<result column="novel_no"		property="novelNo" />
+		<result column="user_no"		property="userNo" />
+		<result column="novel_title"	property="novelTitle" />
+		<result column="novel_display"	property="novelDisplay" />
+		<result column="start_date"		property="startDate" />
+		<result column="count"			property="count" />
+		<result column="heart"			property="heart" />
+		<result column="serial_status"	property="serialStatus" />
+		<result column="charge_status"	property="chargeStatus" />
+		<result column="nickname"		property="nickName" />
+		<result column="origin_name"	property="originName" />
+		<result column="change_name"	property="changeName" />
+	</resultMap>
+	
+	<resultMap type="faq" id="faqResultSet">
+		<result column="faq_no"			property="faqNo" />
+		<result column="user_no"		property="userNo" />
+		<result column="faq_type"		property="faqType" />
+		<result column="faq_title"		property="faqTitle" />
+		<result column="faq_answer"		property="faqAnswer" />
+		<result column="enroll_date"	property="enrollDate" />
+	</resultMap>
+	
 	<!-- 회원가입용 쿼리문 -->
 	<insert id="insertUser" parameterType="user">
 		INSERT
@@ -289,4 +313,97 @@
 		where
 				inq_no = #{ inqNo }
 	</update>
+	
+	<!-- FAQ 총 몇개 세기 -->
+	<select id="selectFaqListCount" resultType="_int">
+		select
+				count(*)
+		from
+				faq
+	</select>
+	
+	<!-- FAQ 리스트 조회 쿼리문 -->
+	<select id="selectFaqList" resultMap="faqResultSet">
+		select
+				faq_no,
+				faq_type,
+				faq_title,
+				faq_date,
+				faq_answer,
+				user_no,
+				enroll_date
+		from
+				faq
+	</select>
+	
+	<!-- 관리자 작품 총 몇개 세기 -->
+		<!-- 관리자 모임조회 총 몇개 세기 -->
+	<select id="selectNovelListCount" resultType="_int">
+		select
+				count(*)
+		from
+				NOVEL
+	</select>
+	
+	<!-- 관리자 작품 리스트 조회 -->
+		<select id="selectNovelList" resultMap="novelResultSet">
+		select
+				novel_no,
+				n.user_no,
+				novel_title,
+				novel_display,
+				start_date,
+				count,
+				heart,
+				serial_status,
+				charge_status,
+				nickname,
+				change_name
+		from
+				novel n
+		join
+				member m
+		on
+				n.user_no = m.user_no
+	</select>
+	
+	<!-- 작품 상세조회 쿼리문 -->
+	<select id="selectNovel" resultMap="novelResultSet">
+		select
+				novel_no,
+				n.user_no,
+				novel_title,
+				novel_display,
+				start_date,
+				count,
+				heart,
+				serial_status,
+				charge_status,
+				nickname,
+				change_name
+		from
+				novel n
+		join
+				member m
+		on
+				n.user_no = m.user_no
+		where
+				novel_no = #{ novelNo }
+	</select>
+	
+	<!-- 작품 수정 쿼리문 -->
+	<update id="updateNovel" parameterType="novel">
+		update
+				novel
+		set
+				novel_title = #{ novelTitle },
+				serial_status = #{ serialStatus },
+				charge_status = #{ chargeStatus },
+				novel_display = #{ novelDisplay },
+				origin_name = #{ originName },
+				change_name = #{ changeName }
+		where
+				novel_no = #{ novelNo }
+	</update>
+	
 </mapper>

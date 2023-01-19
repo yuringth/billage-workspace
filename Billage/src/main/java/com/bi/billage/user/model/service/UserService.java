@@ -50,6 +50,12 @@ public interface UserService {
 	// 작품 리스트 조회
 	ArrayList<Novel> selectNovelList(PageInfo pi);
 	
+	// 작품 디테일 조희
+	Novel selectNovel(Integer novelNo);
+	
+	// 작품 수정
+	int updateNovel(Novel n);
+	
 	// 문의 총 개수 조회
 	int selectInqListCount();
 	
@@ -65,8 +71,11 @@ public interface UserService {
 	// 문의 답변
 	int updateInquiry(Inquiry iq);
 	
+	// 관리자 FAQ 세기
+	int selectFaqListCount();
+	
 	// 관리자 FAQ 조회
-	ArrayList<FAQ> selectFaqList(FAQ faq);
+	ArrayList<FAQ> selectFaqList(PageInfo pi);
 	
 	// 관리자 FAQ 등록
 	int insertFaq(FAQ faq);
@@ -88,6 +97,7 @@ public interface UserService {
 	
 	// 회원 탈퇴
 	int deleteUser(int userNo);
+
 
 
 	

@@ -121,9 +121,6 @@ public class RentBoardController {
 		
 		// 유저의 포인트가 렌트포인트보다 낮으면 버튼이 안눌림
 		
-		
-		
-		
 	}
 	
 	// 마이페이지 대여 목록

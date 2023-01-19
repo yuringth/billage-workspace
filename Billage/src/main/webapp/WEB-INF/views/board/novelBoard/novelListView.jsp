@@ -225,18 +225,18 @@ div.card.show {
         <c:if test="${ loginUser.userId eq 'test01' }">
 	        <div align="center">
 	        	<a class="btn btn-secondary" href="enrollForm.nv">작품등록</a>
+	        	<a class="btn btn-secondary" href="novelList.ad">작품관리</a>
 	        </div>
         </c:if>
 		<div class="cards">
 	        <c:forEach items="${ list }" var="n">
 	        <div class="card">
 	            <div class="card__image-holder">
-	                <!-- <img class="card__image" src="https://source.unsplash.com/300x225/?wave" alt="wave" /> -->
 	                <img class="card_image" src="${ n.changeName }" width="295" height="395">
 	            </div>
 	            <div class="card-title" title="${ n.novelTitle }">
 	                <h2 style="display: block;
-     								white-space: nowrap;
+     							white-space: nowrap;
   								text-overflow: ellipsis;
   								overflow: hidden;">
 	                    ${ n.novelTitle }

@@ -33,9 +33,9 @@ a {
 
 
 		<c:choose>
-			<c:when test="${ ! empty sessionScope.loginUser }">
+			<c:when test="${ not empty sessionScope.loginUser }">
 				<c:choose>
-					<c:when test="${ !empty list }">
+					<c:when test="${ not empty list }">
 						<c:forEach items="${list}" var="list">
 							<div class="reviewBox" style="width: 70%; background-color: rgb(235, 235, 235); margin: auto;">
 								<div class="profile" style="display: flex; flex-direction: row; justify-content: flex-start; margin-left: 30px;"">
@@ -112,27 +112,29 @@ a {
 	
 	<div id="pagingArea">
                 <ul class="pagination">
-                	<c:choose>
-                		<c:when test="${pi.currentPage eq 1}">
-                    		<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                    	</c:when>
-                    	<c:otherwise>
-                    		<li class="page-item "><a class="page-link" href="selectReviewList.fo?cpage=${ pi.currentPage-1 }&uno=${list.get(0).userNo}">Previous</a></li>
-                    	</c:otherwise>
-                    </c:choose>
-                    
-                   	<c:forEach begin="${pi.startPage }" end="${ pi.endPage }" var="p">
-                    <li class="page-item"><a class="page-link" href="selectReviewList.fo?cpage=${p}&uno=${list.get(0).userNo}">${ p }</a></li>
-                    </c:forEach>
-                    
-                    <c:choose>
-                    	<c:when test="${ pi.currentPage eq pi.maxPage }">                    
-                    		<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
-                    	</c:when>
-                    	<c:otherwise>
-                    		<li class="page-item"><a class="page-link" href="selectReviewList.fo?capge=${ pi.currentPage + 1 }&uno=${list.get(0).userNo}">Next</a></li>
-                    	</c:otherwise>
-                    </c:choose>
+	                <c:if test="${ not empty list }">
+	                	<c:choose>
+	                		<c:when test="${pi.currentPage eq 1}">
+	                    		<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+	                    	</c:when>
+	                    	<c:otherwise>
+	                    		<li class="page-item "><a class="page-link" href="selectReviewList.fo?cpage=${ pi.currentPage-1 }&uno=${list.get(0).userNo}">Previous</a></li>
+	                    	</c:otherwise>
+	                    </c:choose>
+	                    
+	                   	<c:forEach begin="${pi.startPage }" end="${ pi.endPage }" var="p">
+	                    <li class="page-item"><a class="page-link" href="selectReviewList.fo?cpage=${p}&uno=${list.get(0).userNo}">${ p }</a></li>
+	                    </c:forEach>
+	                    
+	                    <c:choose>
+	                    	<c:when test="${ pi.currentPage eq pi.maxPage }">                    
+	                    		<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+	                    	</c:when>
+	                    	<c:otherwise>
+	                    		<li class="page-item"><a class="page-link" href="selectReviewList.fo?capge=${ pi.currentPage + 1 }&uno=${list.get(0).userNo}">Next</a></li>
+	                    	</c:otherwise>
+	                    </c:choose>
+	                </c:if>
                 </ul>
             </div>
 
