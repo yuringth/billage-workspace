@@ -45,14 +45,14 @@ public class RentBoardServiceImpl implements RentBoardService {
 		return rentBoardDao.detailRentBoard(sqlSession, rentNo);
 	}
 	
-	/*
-	// 포인트 관련 차감, 증가
-	@Transactional
+	// 대여서비스 
 	@Override
-	public int updatePoint(RentBoard rb) {
-		return rentBoardDao.minusPoint(sqlSession, rb) * rentBoardDao.plusPoint(sqlSession, rb);
+	public int updateStatus(RentBoard rb) {
+		return rentBoardDao.updateStatus(sqlSession, rb);
 	}
-	*/
+	
+	
+	
 	
 	
 

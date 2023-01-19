@@ -172,6 +172,7 @@
             	})
             
             </script>
+            
        		   <div id="pagingArea" class="title">
                 <ul class="pagination">
                 	<c:choose>

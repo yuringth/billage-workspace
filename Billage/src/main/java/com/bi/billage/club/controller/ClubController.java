@@ -65,24 +65,26 @@ public class ClubController {
 	@RequestMapping("detail.cl")
 	public ModelAndView selectDetailClub(Club club, String newCount, ModelAndView mv,  HttpSession session) {
 		
-		System.out.println("왜 두번 돌아?");
+		int clubNo = club.getClubNo();
 		
 		//게시글 번호 들고 가서 group_count증가 
 		int result = clubService.increaseCount(club);
 		if(result > 0) {
 			if(null != session.getAttribute("loginUser")) {
 				club.setUserNo(((User)session.getAttribute("loginUser")).getUserNo());
-				System.out.println(club);
 			} 
 		
 		
-			System.out.println(club);
 			//게시글 번호로 해당 글 상세 조회 
 			club = clubService.selectDetailClub(club);
-			System.out.println(club);
 			club.setNewCount(newCount);				
-		
+			ArrayList<ClubOpen> clubOpen = clubService.selectDetailClubOpen(club);
+			//ArrayList<Club> ClubMemberList = clubService.clubMemberSelectAdmin(clubNo);
+			
 			mv.addObject("club", club);
+			mv.addObject("clubOpenList", clubOpen);
+			//mv.addObject("memberList", ClubMemberList);
+			
 			mv.setViewName("club/clubDetailView");
 			return mv;
 			
@@ -91,7 +93,12 @@ public class ClubController {
 			return mv;
 		} 
 	}
-	
+	//selectParticipantList ajax
+	@ResponseBody
+	@RequestMapping(value="ajaxMemList.cl", produces="application/json; charset=UTF-8")
+	public String ajaxClubMemberList(int clubNo) {
+		return new Gson().toJson(clubService.clubMemberSelectAdmin(clubNo));
+	}
 	
 	// like ajax 
 	@ResponseBody
@@ -205,7 +212,6 @@ public class ClubController {
 	public ModelAndView clubMemberSelectAdmin(int clubNo, ModelAndView mv) {
 		
 		ArrayList<Club> ClubMemberList = clubService.clubMemberSelectAdmin(clubNo);
-		//System.out.println(ClubMemberList);
 		
 		mv.addObject("memberList", ClubMemberList);
 		mv.setViewName("club/clubMemberAdminView");

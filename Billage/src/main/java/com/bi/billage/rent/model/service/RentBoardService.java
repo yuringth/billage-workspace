@@ -19,5 +19,6 @@ public interface RentBoardService {
 	// 대여게시글 상세조회
 	RentBoard detailRentBoard(int rentNo);
 	
-
+	// 대여서비스
+	int updateStatus(RentBoard rb);
 }
