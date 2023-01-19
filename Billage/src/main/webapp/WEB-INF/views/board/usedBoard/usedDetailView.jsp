@@ -186,8 +186,48 @@ font-size: 25px;
 			</c:choose>
 		</div>
 	
-	<!-- 전체를 감싸는 div  -->		
+	
+	
+	
+	<!-- 댓글 div  -->
+	<br>
+    <table id="replyArea" class="table" align="center">
+       <thead>
+           <tr>
+               <th colspan="2">
+                   <textarea class="form-control" name="" id="reply_content" cols="55" rows="2" style="resize:none; width:100%;"></textarea>
+               </th>
+               <th style="vertical-align:middle"><button class="btn btn-secondary">등록하기</button></th>
+           </tr>
+           <tr>
+           		<!-- 총 댓글수 나타내는건 안할 수 있음!!! 일단 쌤꺼 복사한 것 뿐 -->
+               <td colspan="3">댓글(<span id="reply_count">3</span>)</td>
+           </tr>
+       </thead>
+       <tbody>
+           <tr>
+               <th>user02</th>
+               <td>ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ꿀잼</td>
+               <td>2020-03-12</td>
+           </tr>
+           <tr>
+               <th>user01</th>
+               <td>재밌어요</td>
+               <td>2020-03-11</td>
+           </tr>
+           <tr>
+               <th>admin</th>
+               <td>댓글입니다!!</td>
+               <td>2020-03-10</td>
+           </tr>
+     	</tbody>
+    </table>
+	
+	
+	<!-- 전체를 감싸는 div 끝  -->		
 	</div>
+	
+	
 	
 	
 	
