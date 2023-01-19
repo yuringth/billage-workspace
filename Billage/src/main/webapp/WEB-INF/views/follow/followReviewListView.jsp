@@ -130,7 +130,7 @@ a {
                     		<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
                     	</c:when>
                     	<c:otherwise>
-                    		<li class="page-item"><a class="page-link" href="selectReviewList.fo?=${ pi.currentPage + 1 }&uno=${list.get(0).userNo}">Next</a></li>
+                    		<li class="page-item"><a class="page-link" href="selectReviewList.fo?capge=${ pi.currentPage + 1 }&uno=${list.get(0).userNo}">Next</a></li>
                     	</c:otherwise>
                     </c:choose>
                 </ul>

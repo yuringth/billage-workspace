@@ -179,7 +179,7 @@ public class FollowController {
 	@RequestMapping("selectReviewList.fo")
 	public ModelAndView selectReviewList( @RequestParam(value="cpage", defaultValue="1") int currentPage, int uno , ModelAndView mv) {
 		
-		PageInfo pi = Pagination.getPageInfo(followService.selectReviewCount(uno), currentPage, 10, 5);
+		PageInfo pi = Pagination.getPageInfo(followService.selectReviewCount(uno), currentPage, 5, 10);
 		
 		ArrayList<ReviewBoard> list = followService.selectReviewList(uno , pi);
 		
