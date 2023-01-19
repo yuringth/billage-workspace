@@ -260,6 +260,8 @@ public class UsedController {
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
+		model.addAttribute("condition", condition);
+		model.addAttribute("keyword", keyword);
 		
 		
 		return "board/usedBoard/usedListView";
