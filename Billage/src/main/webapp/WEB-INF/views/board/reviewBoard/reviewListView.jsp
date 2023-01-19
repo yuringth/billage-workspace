@@ -240,7 +240,6 @@
 				location.href = 'detail.re?reviewNo=' + $(this).find('.bno').val();
 				console.log($(this).find('.bno').val()); // http://localhost:8787/billage/detail.re?reviewNo=16
 			})
-			
 		})
 	</script>
 
