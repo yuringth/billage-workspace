@@ -93,7 +93,8 @@
 				DUE_DATE,
 				RENT_BOOKTITLE,
 				CHANGE_NAME,
-				NICKNAME
+				NICKNAME,
+				RENT_STATUS
 		FROM
 				RENT_BOARD R, MEMBER M
 		WHERE
@@ -104,7 +105,15 @@
 		  		R.RENT_NO = #{rentNo}
 	</select>
 	
-	
-	
+	<!-- 대여서비스 -->
+	<update id="updateStatus" parameterType="rent">
+		UPDATE
+				RENT_BOARD
+		   SET
+		   		RENT_USERNO = #{rentUserNo},
+		   		RENT_STATUS = 'Y'
+		  WHERE
+		  		RENT_NO = #{rentNo}	
+	</update>
 	
 </mapper>

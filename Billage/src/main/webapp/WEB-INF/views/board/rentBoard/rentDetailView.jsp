@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -113,13 +114,26 @@
 				<span>${rb.rentContent}</span>
 			</div>
 			
+			<!-- input date 시간 나오는 부분 처리 대여일 -->
+			<fmt:parseDate pattern="yyyy-MM-dd" var="sdfsdf" value="${rb.rentDate }"/> <br/>
+			<fmt:formatDate  var="date2" value="${sdfsdf}" type="DATE" pattern="yyyy-MM-dd"/>
+			<!-- input date 시간 나오는 부분 처리 반납일 -->
+			<fmt:parseDate pattern="yyyy-MM-dd" var="sdfsdf2" value="${rb.dueDate }"/> <br/>
+			<fmt:formatDate  var="date3" value="${sdfsdf2}" type="DATE" pattern="yyyy-MM-dd"/>
+			
 			<div class="m-bot15"> <strong>Point : </strong> <span class="pro-price"> ${rb.rentPoint}</span></div><br>
-			<div class="m-bot15"> <strong>대여 시작일 : </strong> <span class="pro-price"> ${rb.rentDate}</span></div><br>
-			<div class="m-bot15"> <strong>반납일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </strong> <span class="pro-price"> ${rb.dueDate}</span></div>
+			<div class="m-bot15"> <strong>대여 시작일 : </strong> <span class="pro-price"> ${date2}</span></div><br>
+			<div class="m-bot15"> <strong>반납일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </strong> <span class="pro-price"> ${date3}</span></div>
 			<br>
 			<p>
 				<button type="button" class="w-btn" onclick="history.back()"> 뒤로가기 </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button class="w-btn w-btn-brown"> 대여신청하기 </button>
+				<c:if test="${ rb.rentStatus == 'Y' || empty loginUser || loginUser.userNo  == rb.userNo}">
+					<button class="w-btn w-btn-brown" disabled> 대여불가 </button>
+				</c:if>
+				<c:if test="${ rb.rentStatus == 'N' && not empty loginUser && loginUser.userNo != rb.userNo }">
+					<button class="w-btn w-btn-brown"> 대여신청하기 </button>
+				</c:if>
+				
 			</p>
 			</div>
 		</div>
