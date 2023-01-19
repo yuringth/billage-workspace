@@ -15,6 +15,7 @@ import com.bi.billage.board.model.vo.FAQ;
 import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.ReportBoard;
 import com.bi.billage.board.model.vo.ReviewBoard;
+import com.bi.billage.board.model.vo.ReviewReply;
 import com.bi.billage.board.model.vo.Serial;
 import com.bi.billage.board.model.vo.SerialRequest;
 import com.bi.billage.board.model.vo.UsedBoard;
@@ -266,7 +267,10 @@ public class BoardDao {
 	}
 	
 	
-
+	// 리뷰게시판 => 댓글 list 뿌리기
+	public ArrayList<ReviewReply> selectReplyList(SqlSessionTemplate sqlSession, int reviewNo){
+		return (ArrayList)sqlSession.selectList("reviewMapper.selectReplyList", reviewNo);
+	}
 	
 	
 	

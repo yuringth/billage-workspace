@@ -85,9 +85,9 @@
 		<h1 style="text-align:center;">리뷰 상세페이지</h1>
 		
 		<!-- 리뷰넘버 식별자로 넘기기 -->
-		<input type="hidden" neme="reviewNo" value="${ b.reviewNo }">
+		<input type="hidden" name="reviewNo" value="${ b.reviewNo }" id="review-no">
 		${ b.reviewNo }
-		<input type="hidden" neme="userNo" value="${ b.userNo }">
+		<input type="hidden" name="userNo" value="${ b.userNo }">
 		${ b.userNo }
 		
 		
@@ -191,16 +191,6 @@
                <td>ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ꿀잼</td>
                <td>2020-03-12</td>
            </tr>
-           <tr>
-               <th>user01</th>
-               <td>재밌어요</td>
-               <td>2020-03-11</td>
-           </tr>
-           <tr>
-               <th>admin</th>
-               <td>댓글입니다!!</td>
-               <td>2020-03-10</td>
-           </tr>
      	</tbody>
     </table>
 	
@@ -210,6 +200,48 @@
 	<!-- 전체 outer /div -->	
  	</div>   
  	
+ 	
+ 		
+	<!-- 댓글 Ajax -->
+	<script>
+	
+	
+		
+		$(function(){
+			
+			selectReplyList();			
+		});
+	
+		function selectReplyList(){
+			
+			
+			$.ajax({
+				url:'rlist.re',
+				data:{
+					reviewNo : ${ b.reviewNo }
+				},
+				success:function(list){
+					
+					
+					console.log(list);
+					console.log(list[0].reviewNo);
+					console.log(list[0].userId);
+					
+					
+				},
+				error:function(){
+					console.log('실패');
+				}
+		
+				
+			})
+		}
+		
+	</script>
+	
+	
+	
+	
  	
    
 	<jsp:include page="../../common/footer.jsp" />

@@ -189,6 +189,8 @@ font-size: 25px;
 	
 	
 	
+	
+	
 	<!-- 댓글 div  -->
 	<br>
     <table id="replyArea" class="table" align="center">
@@ -224,8 +226,11 @@ font-size: 25px;
     </table>
 	
 	
+	
+	
 	<!-- 전체를 감싸는 div 끝  -->		
 	</div>
+	
 	
 	
 	
