@@ -253,7 +253,7 @@
 			where
 			        user_no = #{userNo}
 			   and
-			        review_status ='Y'            
+			        review_status ='N'            
 					
 		</select>
 		
@@ -421,7 +421,7 @@
 				   and
 				         review_star = 5
 				   and
-				         review_status='Y'      
+				         review_status='N'      
 		</select>
 		
 		<select id="selectBadReview" parameterType="follow" resultMap="reviewResultSet2">
@@ -479,6 +479,18 @@
 			        review
 		where
 		         user_no = #{userNo}	        
+		</select>
+		
+		<select id="checkFollow" parameterType="follow" resultType="_int">
+			select
+			        count(*)
+			 from
+			        follow
+		    where
+		    		user_no1 = #{userNo1}
+		       and
+		            user_no2 = #{userNo2}	           
+		
 		</select>
 
 </mapper>

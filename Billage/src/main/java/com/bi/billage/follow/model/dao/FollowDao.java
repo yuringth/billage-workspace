@@ -68,5 +68,9 @@ public class FollowDao {
 	public int selectReviewCount(SqlSession sqlSession, int userNo) {
 		return (int)sqlSession.selectOne("followMapper.selectReviewCount", userNo);
 	}
+	
+	public int checkFollow(SqlSession sqlSession, Follow follow) {
+		return (int)sqlSession.selectOne("followMapper.checkFollow", follow);
+	}
 
 }

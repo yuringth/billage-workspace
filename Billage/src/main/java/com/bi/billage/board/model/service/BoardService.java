@@ -9,6 +9,7 @@ import com.bi.billage.board.model.vo.FAQ;
 import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.ReportBoard;
 import com.bi.billage.board.model.vo.ReviewBoard;
+import com.bi.billage.board.model.vo.ReviewReply;
 import com.bi.billage.board.model.vo.Serial;
 import com.bi.billage.board.model.vo.SerialRequest;
 import com.bi.billage.board.model.vo.UsedBoard;
@@ -256,7 +257,7 @@ public interface BoardService {
 	
 	// 댓글 나중에......
 	// 댓글 리스트 조회서비스(Ajax)(select)
-//	ArrayList<Reply> selectReplyList(int boardNo);
+	ArrayList<ReviewReply> selectReplyList(int reviewNo);
 	
 	// 댓글 작성 서비스(Ajax)(insert)
 //	int insertReply(Reply r);

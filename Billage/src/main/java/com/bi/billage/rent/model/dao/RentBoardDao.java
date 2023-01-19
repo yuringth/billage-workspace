@@ -34,18 +34,10 @@ public class RentBoardDao {
 		return sqlSession.selectOne("rentMapper.detailRentBoard", rentNo);
 	}
 	
-	/*
-	public int minusPoint(SqlSessionTemplate sqlSession, RentBoard rb) {
-		return sqlSession.update("rentMapper.minusPoint", rb);
+	// 대여서비스
+	public int updateStatus(SqlSessionTemplate sqlSession, RentBoard rb) {
+		return sqlSession.update("rentMapper.updateStatus", rb);
 	}
 	
-	public int plusPoint(SqlSessionTemplate sqlSession, RentBoard rb) {
-		return sqlSession.update("rentMapper.plusPoint", rb);
-	}
-	*/
 	
-	// 대여게시판 대여 신청 -> 빌려주는 사람 포인트 증가
-	public int getPoint(SqlSessionTemplate sqlSession, RentBoard rb) {
-		return sqlSession.update("rentMapper.minusPoint", rb);
-	}
 }

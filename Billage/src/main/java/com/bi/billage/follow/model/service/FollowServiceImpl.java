@@ -92,4 +92,10 @@ public class FollowServiceImpl implements FollowService{
 		return followDao.selectReviewCount(sqlSession, userNo);
 	}
 
+	@Override
+	public int checkFollow(Follow follow) {
+		
+		return followDao.checkFollow(sqlSession, follow);
+	}
+
 }

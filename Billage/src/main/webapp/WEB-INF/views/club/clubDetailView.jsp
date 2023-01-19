@@ -47,6 +47,11 @@
 	#group-info-area{ display:block; width:1200px; height:500px;}
 	
 	#group-reply-area{ display:bolck; width:1200px; height:300px;}
+	
+	#participant-area{ border:1px solid black; width:100%; height:400px; overflow:scroll;}
+	
+	.members-area{ width: 100%; height:40px;  text-align:center; }
+	.members-area>.members{width:33%; height:40px; display: inline-block; float:left; }
 </style>
 
 </head>
@@ -61,26 +66,63 @@
     	<br><br><br>
     	<button>게시글 작성하러 가기 </button>
     	<br><br><br>
+    	<script>
+	    	ajaxClubMember();
+	    	
+	    	function ajaxClubMember(){
+	    		var $clubNo =  ${ club.clubNo };
+	    		
+	    		$.ajax({
+	    			url : 'ajaxMemList.cl',
+	    			data : {
+	    				clubNo : $clubNo
+	    			},
+	    			success : function(result){
+	    				
+	    					for(i in result){
+			    				var str = '';
+		
+			    				str = '<div class="members members-area" id="'+ result[i].userNo +'">'
+		    					    + '<div class="members"><img src="'+ result[i].clubImg +'" width="40px;" height="40px;"></div>'
+									+ '<div class="members" >' + result[i].nickname +'(' + result[i].clubDiscript +')</div>'
+						            + '<div class="members" >버튼?</div>' 
+				            		+ '</div>';
+		    				
+			    				$(str).appendTo('#participant-area');
+			    				
+	    					}
+	    					
+	    					$('#member-size').text(result.length);
+	    			
+	    			},
+	    			error : function(){
+						console.log('비동기 통신 실패, 참가자 조회');    				
+	    			}
+	    			
+	    		})
+    		}
     	
+    	
+    	</script>
     	
 
     	<div id="group-title-area">
 			<span id="new-group" value="${ club.newCount }">new</span>
-			<h1>모임명   &lt;&lt; ${ club.clubName } &gt;&gt;</h1>
+			<h1>[ ${ club.clubName } ]</h1>
     	</div>
     	<div id="group-detail-area">
     		<div id="detail-left">
     			<img width="500px" height="500px" src="${ club.clubImg }">
-    			<p>찜하기 몇 명 ???<b id="like-count">${ club.likeCount }</b>명이 찜했어요!</p>
+    			<p><b id="like-count">${ club.likeCount }</b>명이 찜했어요!</p>
     		</div>
     		<div id="detail-right">
-    			<p>(${ club }) 독서 모임 </p>
-    			<div id="participant-area">참여자
-    			</div>
+    			<div>중심지역 : ${ club.clubLocation }</div>
+    			<h3>회원목록 ( <span id="member-size"></span>명 )</h3>
+    			<div id="participant-area" ></div>
     		</div>
     	</div>
     	<div id="group-info-area">
-    		<h3>모임소개 : </h3>
+    		<h3>모임소개말 : </h3>
     		<div id="info-top">
     			<pre>${ club.clubDiscript }</pre>
     		</div>
@@ -90,9 +132,34 @@
     	</div>
 		
 		<div id="open-activity-area">
-		
-		
-		
+			<table border="1">
+				<thead>
+					<tr>
+						<th>활동이름</th>
+						<th>활동장소</th>
+						<th>만남일자</th>
+						<th>만남시간</th>
+						<th>정원</th>
+						<th>신청상태</th>
+						<th>신청버튼</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${ clubOpenList }" var="c" >
+						<tr>
+							<td>${ c.openTitle }</td>
+							<td>${ c.openLocation }</td>
+							<td>${ c.openDate }</td>
+							<td>${ c.openTime }</td>
+							<td>${ c.openLimit }</td>
+							<td>${ c.openStatus }</td>
+							<td>
+								<button>신청할랭?</button>
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 		</div>
 		
 		
@@ -101,7 +168,7 @@
 		<div id="group-reply-area">
 			<div>댓글존</div>
 		</div>
-		
+	</div>
 		
 		<div id="group-btn-area">
 				<c:choose>
@@ -119,7 +186,7 @@
 					</c:otherwise>
 				</c:choose>
 		</div>
-    </div>
+	
     
     <c:choose>
 	    <c:when test="${ !empty loginUser }">
@@ -193,10 +260,22 @@
 									$('#btn-zone .parti-btn').empty();
 									$('.parti-btn').attr('id', userNo);
 									$($('.parti-btn').text('탈퇴')).appendTo($('#btn-zone'));
+									
+									ajaxClubMember();
+									
 						    	} else if ( result == 0 ){
 						    		$('#btn-zone .parti-btn').empty();
 						    		$('.parti-btn').attr('id', 0);
 						    		$($('.parti-btn').text('가입')).appendTo($('#btn-zone'));
+						    		
+									$('.members-area').each(function(){
+										if($(this).attr('id') == ${ loginUser.userNo }){
+											$(this).remove();
+										}
+									})
+						    		
+						    		ajaxClubMember();
+						    		
 						    	} else {
 						    		alert('잠시 후 다시 시도해주세요');
 						    		
@@ -226,26 +305,11 @@
     
     <script>
     	
-    	//participant();
-    	/*
-    	function participant(){
-    		$.ajax({
-    			url : "",
-    			data : {},
-    			success : function(result){
-    				
-    			},
-    			error : function(){
-					console.log('비동기 통신 실패, 참가자 조회');    				
-    			}
-    			
-    		})
-    	};
-    	*/
+
     
     
     	$(function(){
-    var count = 0;
+  
 	    	//new 상태 표시 ----------------------------------------------------------
 			$('#new-group').each(function(){
 				if($(this).attr('value') == 1){

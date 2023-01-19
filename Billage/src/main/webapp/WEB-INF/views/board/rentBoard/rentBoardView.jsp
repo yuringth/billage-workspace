@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,14 +63,18 @@
 		<div class="rt-box" style="display:flex; flex-wrap : wrap;">
 
 			<c:forEach items="${list}" var="rt">
+			<fmt:parseDate pattern="yyyy-MM-dd" var="sdfsdf" value="${rt.rentDate }"/> <br/>
+			<fmt:formatDate  var="date2" value="${sdfsdf}" type="DATE" pattern="yyyy-MM-dd"/>
 			<div class="rt-contentbox" style="padding:20px;">
 				<input type="hidden" name="rentNo" value="${ rt.rentNo }"> <img src="${ rt.changeName }"
 					width="255" height="200">
 				<p>
-					<span class="rt-title">제목 : ${ rt.rentTitle } </span><br> 대여자 닉네임 : ${ rt.nickname } <br> 포인트 : ${ rt.rentPoint }  <br> 대여시작일 : ${ rt.rentDate }
+					<span class="rt-title">제목 : ${ rt.rentTitle } </span><br> 대여자 닉네임 : ${ rt.nickname } <br> 포인트 : ${ rt.rentPoint }  <br> 대여시작일 : ${date2 }
 				</p>
 				
 			</div>
+			
+
 			</c:forEach>
 			
 		</div>

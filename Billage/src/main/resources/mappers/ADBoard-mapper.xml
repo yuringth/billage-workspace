@@ -348,7 +348,7 @@
 		UPDATE
 				AUCTION_BOARD
 		   SET
-		   		PRIZE_USER = #{prizeUser}
+		   		PRIZE_USER = #{userNo}
 		   		,NOW_PRICE = #{bidPrice}
 		 WHERE
 		 		AUCTION_NO = #{boardNo}
@@ -378,6 +378,7 @@
 				AUCTION_BOARD
 		   SET
 		   		PRIZE_USER = 1
+		   		,CLOSE_DATE = '2000-01-01 00:00:00'
 		 WHERE
 		 		AUCTION_NO = #{boardNo}
 	</update>
