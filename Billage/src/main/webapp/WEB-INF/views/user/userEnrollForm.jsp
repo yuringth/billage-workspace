@@ -279,12 +279,13 @@ body {
         var $userPwd = $('#userPwd').val();
         
         if($userPwd=="") {
-           alert('필수입력사항입니다.');
-           return false;
+           alert('필수입력사항입니다.위');
+           
 		}
+        
         if(!regExp.test($('#userPwd').val())){ 
             alert('8~15자의 영문,숫자,특수문자 중 2개 조합해주세요');
-            return false;
+        	return false;
         } 
 	});
 	
@@ -293,33 +294,16 @@ body {
         var $userPwd = $('#userPwd').val();
         var $checkPwd = $('#checkPwd').val();
 
-        if($userPwd=="") {
-        	alert('필수입력사항입니다.');
-        	return false;
+        if($checkPwd=="") {
+        	alert('필수입력사항입니다.아래');
+        	
         } 
         if(!($checkPwd==$userPwd)) {
-            alert('비밀번호가 일치하지않습니다.')
-            return false;
+            alert('비밀번호가 일치하지않습니다.');
+        	return false;
         } 
     });
 	
 </script>
-
-<!--  
-<script>
-	function checkForm(){
-		
-		$(':input').each(function(){
-			if($(this).val() == ''){
-				alert('빈칸이 있는지 확인해주세요.');
-				$('input[type=submit]').attr('disabled', true);
-				return false;
-			}
-		});
-		
-		
-	}
-</script>
--->	
-
+	
 </html>
