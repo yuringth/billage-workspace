@@ -39,8 +39,8 @@ public class UsedController {
 		// System.out.println("pi : " + pi);
 		
 		/*
-		 * ArrayList<UsedBoard> list = boardService.usedBoardList(pi); for(UsedBoard l :
-		 * list) { System.out.println("리스트 :" +l);
+		 * ArrayList<UsedBoard> list = boardService.usedBoardList(pi); 
+		 * for(UsedBoard l : list) { System.out.println("리스트 :" +l);
 		 * 
 		 * }
 		 */
@@ -260,12 +260,14 @@ public class UsedController {
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
-		
+		model.addAttribute("condition", condition);
+		model.addAttribute("keyword", keyword);
 		
 		return "board/usedBoard/usedListView";
-		
-		
 	}
+	
+	
+	
 	
 	
 	

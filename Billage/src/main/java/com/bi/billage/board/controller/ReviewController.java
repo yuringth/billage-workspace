@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,11 +20,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bi.billage.board.model.service.BoardService;
 import com.bi.billage.board.model.vo.Book;
 import com.bi.billage.board.model.vo.ReviewBoard;
+import com.bi.billage.board.model.vo.ReviewReply;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.common.template.Pagination;
 import com.bi.billage.point.model.service.PointService;
 import com.bi.billage.point.model.vo.Point;
 import com.bi.billage.user.model.vo.User;
+import com.google.gson.Gson;
 
 @Controller
 public class ReviewController {
@@ -413,6 +416,32 @@ public class ReviewController {
 	
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// 리뷰게시판 댓글
+	@ResponseBody
+	@RequestMapping(value = "rlist.re", produces = "application/json; charset=UTF-8")
+	public String selectReplyList(int reviewNo/*, Model model ajax여서 모델에 담을 필요없음*/) {
+		
+//		System.out.println("reviewNo  : " + reviewNo);
+		
+		ArrayList<ReviewReply> list = boardService.selectReplyList(reviewNo);
+		System.out.println(list);
+		//model.addAttribute("list", list);
+		//System.out.println("model :" + model);
+		
+		return new Gson().toJson(boardService.selectReplyList(reviewNo));
+
+	}
 	
 	
 	

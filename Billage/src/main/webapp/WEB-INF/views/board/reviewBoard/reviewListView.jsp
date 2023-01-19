@@ -138,7 +138,7 @@
 		        	<!-- 작성자/별 -->
 		            <div class="one-content-detail1">
 		            	<input type="hidden" value="${ b.bookAuthor }">
-		            	<input class="bno" type="hidden" value="${ b.reviewNo }">
+		            <%-- 	<input class="bno" type="hidden" value="${ b.reviewNo }"> --%>
 		                <div>유저 닉네임: ${ b.nickname }</div>                                              
 		                <div class="card-footer">
 		                 	   별점 : ${ b.reviewStar }
@@ -147,7 +147,7 @@
 					
 					<!-- 책관련 디테일 div 책사진/제목/내용  -->
 					<div class="one-content-detail2">
-					
+						<input class="bno" type="hidden" value="${ b.reviewNo }">
 						<div class="book-detail1">
 				            <div>
 				            	<img class="card-img-top" src="${ b.bookImag }" alt="책사진" style= "width:200px; height:220px;">
@@ -220,7 +220,8 @@
 
 
 
-	<!-- 게시글 상세보기 :되지만 나중에 페이징처리로 이동하기 -->
+	<!-- 게시글 상세보기 :되지만 나중에 페이징처리로 이동하기(기존) -->
+<!-- 	
 	<script>
 		$(function(){
 			$('.one-content').click(function(){
@@ -229,8 +230,17 @@
 			})
 			
 		})
-		
-		
+	</script>
+ -->
+	
+	<!-- 게시글 상세보기 :되지만 나중에 페이징처리로 이동하기 (변경)-->
+	<script>
+		$(function(){
+			$('.one-content-detail2').click(function(){
+				location.href = 'detail.re?reviewNo=' + $(this).find('.bno').val();
+				console.log($(this).find('.bno').val()); // http://localhost:8787/billage/detail.re?reviewNo=16
+			})
+		})
 	</script>
 
 

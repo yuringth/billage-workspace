@@ -171,6 +171,10 @@ public class DrawAuctionController {
 	//추첨신청
 	@RequestMapping("draw.dr")
 	public String insertDrawUser(ADBoard b, HttpSession session, ModelAndView mv){
+		
+		//로그인 한 유저의 포인트 조회
+		int point = ((User)session.getAttribute("loginUser")).getPoint();
+
 		Point p = new Point();
 		//응모포인트만큼 현재 포인트에서 차감
 		p.setUserNo(b.getUserNo());
@@ -179,7 +183,7 @@ public class DrawAuctionController {
 		
 		if(pointService.addPoint(p) * boardService.insertDrawUser(b) > 0) {
 			// 포인트 차감, 추첨 등록 성공
-			((User)session.getAttribute("loginUser")).setPoint(pointService.selectPoint(b.getUserNo()));
+			((User)session.getAttribute("loginUser")).setPoint(point - b.getTryPoint());
 //			System.out.println("응모 성공, 남은 포인트 :" + ((User)session.getAttribute("loginUser")).getPoint());
 			return "redirect:detail.dr?bno=" + b.getBoardNo();
 		} else { //뭐든 실패
@@ -192,6 +196,9 @@ public class DrawAuctionController {
 	@RequestMapping("cancel.dr")
 	public String deleteDrawUser(ADBoard b, HttpSession session, ModelAndView mv) {
 		Point p = new Point();
+		
+		int point = ((User)session.getAttribute("loginUser")).getPoint();
+		
 		//응모포인트만큼 현재 포인트에서 차감
 		p.setUserNo(b.getUserNo());
 		p.setPointAdd( b.getTryPoint());
@@ -199,7 +206,7 @@ public class DrawAuctionController {
 		
 		if(pointService.addPoint(p) * boardService.deleteDrawUser(b) > 0) {
 			// 포인트 환불, 추첨 취소 성공
-			((User)session.getAttribute("loginUser")).setPoint(pointService.selectPoint(b.getUserNo()));
+			((User)session.getAttribute("loginUser")).setPoint(point + b.getTryPoint());
 
 			return "redirect:detail.dr?bno=" + b.getBoardNo();
 		} else {//뭐든 실패
@@ -292,16 +299,11 @@ public class DrawAuctionController {
 	public String isnertBidUser(ADBoard b, HttpSession session) {
 		
 		b.setUserNo(((User)session.getAttribute("loginUser")).getUserNo());
+		int point = ((User)session.getAttribute("loginUser")).getPoint();
 
 		if(boardService.insertBidUser(b) * boardService.updatePrizeUser(b) > 0) {
-			
 			Point p = new Point();
-			p.setPointAdd(-1 * b.getBidPrice());
-			p.setUserNo(b.getUserNo());
-			p.setPointStatus("사용");
-			
-			pointService.addPoint(p);
-			
+			//기존의 입찰자 포인트 환불
 			if(b.getPrizeUserNo() != 0) {
 				p.setPointAdd(b.getNowPrice());
 				p.setUserNo(b.getPrizeUserNo());
@@ -309,8 +311,15 @@ public class DrawAuctionController {
 				
 				pointService.addPoint(p);
 				
-				((User)session.getAttribute("loginUser")).setPoint(pointService.selectPoint(b.getUserNo()));
 			}
+			// 새로운 입찰자 포인트 차감
+			p.setPointAdd(-1 * b.getBidPrice());
+			p.setUserNo(b.getUserNo());
+			p.setPointStatus("사용");
+			
+			((User)session.getAttribute("loginUser")).setPoint(point - b.getBidPrice());
+			pointService.addPoint(p);
+
 			
 			
 			b = boardService.selectAuctionBoard(b.getBoardNo());
@@ -326,18 +335,13 @@ public class DrawAuctionController {
 	public String insertBuyer(ADBoard b, HttpSession session) {
 		
 		b.setUserNo(((User)session.getAttribute("loginUser")).getUserNo());
+		int point = ((User)session.getAttribute("loginUser")).getPoint();
 		
-		if(boardService.insertBidUser(b) * boardService.updatePrizeUser(b) > 0) {
+		if(boardService.insertBidUser(b) * boardService.updatePrizeEnd(b.getBoardNo()) > 0) {
 			
 			Point p = new Point();
-			p.setPointAdd(-1 * b.getBidPrice());
-			p.setUserNo(b.getUserNo());
-			p.setPointStatus("사용");
 			
-			pointService.addPoint(p);
-			
-			((User)session.getAttribute("loginUser")).setPoint(pointService.selectPoint(b.getUserNo()));
-			
+			//기존의 입찰했던 사람 포인트 환불
 			if(b.getPrizeUserNo() != 0) {
 				p.setPointAdd(b.getNowPrice());
 				p.setUserNo(b.getPrizeUserNo());
@@ -345,6 +349,16 @@ public class DrawAuctionController {
 				
 				pointService.addPoint(p);
 			}
+			
+			// 새로운 입찰자 포인트 차감
+			p.setPointAdd(-1 * b.getBidPrice());
+			p.setUserNo(b.getUserNo());
+			p.setPointStatus("사용");
+			
+			pointService.addPoint(p);
+
+			((User)session.getAttribute("loginUser")).setPoint(point - b.getBidPrice());
+			
 			
 			// 쪽지 보내기, 조회한 값 반환하기 위해 변수에 넣는다
 			Message m = new Message();
@@ -389,6 +403,7 @@ public class DrawAuctionController {
 					" " + b.getTitle() + "의 경매에 낙찰되셨습니다.\r\n" + 
 					"주소를 확인해 주세요");
 			messageService.insertMessage(m);
+			
 			// 2. 글 쓴 사람한테 쪽지 보내기
 			m.setUserNo2(b.getUserNo()); //받는 사람은 게시글 작성자
 			m.setMessageContent( b.getTitle() + "의 경매가 종료되었습니다.\r\n" + 
