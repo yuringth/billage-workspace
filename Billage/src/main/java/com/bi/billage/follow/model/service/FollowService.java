@@ -33,4 +33,6 @@ public interface FollowService {
 	ArrayList<ReviewBoard> selectBadReview (Follow follow);
 	
 	int selectReviewCount (int userNo);
+	
+	int checkFollow (Follow follow);
 }
