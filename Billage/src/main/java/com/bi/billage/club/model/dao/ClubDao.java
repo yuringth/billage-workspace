@@ -31,6 +31,10 @@ public class ClubDao {
 		return sqlSession.selectOne("clubMapper.selectDetailClub", club);
 	}
 	
+	//ClubOpen List Select : ClubNo에 따른 
+	public ArrayList<ClubOpen> selectDetailClubOpen(SqlSessionTemplate sqlSession, Club club) {
+		return (ArrayList)sqlSession.selectList("clubMapper.selectDetailClubOpen", club);
+	} 
 	
 	// 클럽 등록 
 	public int insertClub(SqlSessionTemplate sqlSession, Club Club) {

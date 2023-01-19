@@ -16,6 +16,7 @@
 		<result column="CLUB_LOCATION" 		 property="clubLocation" />
 		<result column="CLUB_STATUS" 		 property="clubStatus" />
 		<result column="CLUB_IMG" 			 property="clubImg" />
+		<result column="PROFILE_IMG" 		 property="clubImg" />
 		<result column="NEWCOUNT"			 property="newCount" />
 		<result column="CLUB_COUNT"			 property="clubCount" />
 		<result column="LIKECOUNT"			 property="likeCount" />
@@ -211,9 +212,7 @@
 			   ,SYSDATE
 			   )	
 	</insert>
-	
-	
-	
+
 	<!-- Group List 조회수 Update -->
 	<update id="increaseCount" parameterType="club">
 		UPDATE 
@@ -280,6 +279,47 @@
 		    AND 
 				 C.CLUB_STATUS = 'Y'
 	</select>
+	
+	<!-- selectDetailClubOpen -->
+	<select id="selectDetailClubOpen" parameterType="club" resultMap="clubOpenResultSet">
+		SELECT  
+				 OPEN_NO
+		        ,CLUB_NO
+		        ,OPEN_TITLE
+		        ,OPEN_LOCATION
+		        ,OPEN_DATE
+		        ,OPEN_TIME
+		        ,OPEN_LIMIT
+		        ,OPEN_STATUS
+		  FROM 
+		  		CLUB_OPEN
+		 WHERE 
+		 		CLUB_NO = #{ clubNo }
+	</select>
+	
+		
+	<!-- SELECT clubOpen에 참여하는 회원 조회 list  
+	<select id="">
+		SELECT M.USER_NO, M.USER_ID, M.NICKNAME, CLUB_NO, OPEN_NO
+		FROM MEMBER M
+		JOIN (
+		        SELECT OM.USER_NO
+		                ,OM.CLUB_NO
+		                ,OM.OPEN_NO
+		        FROM OPEN_MEMBER OM
+		        LEFT
+		        JOIN
+		            CLUB_OPEN CO ON(OM.OPEN_NO = CO.OPEN_NO)
+		        WHERE 
+		            OM.CLUB_NO = #{ clubNo }
+		        ) C ON (C.USER_NO = M.USER_NO)
+		
+		WHERE M.STATUS = 'N'
+		AND OPEN_NO = #{ openNo };
+	</select>
+	-->
+	
+	
 	
 	
 	<!-- Club General List Select -->
@@ -487,6 +527,7 @@
 		        ,CM.USER_NO
 		        ,M.USER_ID
 		        ,M.NICKNAME
+		        ,M.PROFILE_IMG
 		        ,CM.ENROLL_DATE "enrollDate"
 		  FROM
 		        CLUB_MEMBER CM
