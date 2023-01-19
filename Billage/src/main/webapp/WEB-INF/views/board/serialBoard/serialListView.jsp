@@ -75,7 +75,8 @@
                 <tbody>
                 		<tr>
                 			<input type="hidden" class="nno" value="${ s.novelNo }">
-                			<td class="sno">${ s.rownum }</td>
+                			<input type="hidden" class="sno" value="${ s.serialNo }">
+                			<td>${ s.rownum }</td>
                 			<td>${ s.serialTitle }</td>
                 			<td>${ s.count }</td>
                 			<td>${ s.uploadDate }</td>
@@ -143,7 +144,7 @@
    			location.href = 'detail.se?nno='
    							+ $(this).children('.nno').val()
    							+ '&sno='
-   							+ $(this).children('.sno').text();
+   							+ $(this).children('.sno').val();
    		})
    	})
    

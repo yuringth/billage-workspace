@@ -11,7 +11,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <style>
-	@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
     * {
         margin: 0;
         padding: 0;
@@ -93,6 +92,7 @@
         }
     }
     /*-----------------------------------*/
+    @import url("https://fonts.googleapis.com/css?family=IBM Plex Sans:400,400i,700");
 
 	*, :before, :after {
 		box-sizing: border-box;
@@ -119,8 +119,8 @@
 </style>
 <body>
    <jsp:include page="../common/header.jsp"/>
+   <br>
    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-	<br>
     <div class="wrapper">
         <div class="sidebar">
             <h2>관리자 페이지</h2>
@@ -135,79 +135,69 @@
             </ul>
         </div>
         <div class="main_content">
+        <form id="update" method="post" action="update.nv" enctype="multipart/form-data">
+        <input type="hidden" name="novelNo" value="${ novel.novelNo }">
+        <input type="hidden" name="originName" value="${ novel.originName }">
+        <input type="hidden" name="changeName" value="${ novel.changeName }">
             <div class="title">
-				<h1 class="title-text">전체 작품 조회 및 관리</h1>
+				<h1 class="title-text">작품 정보 조회 및 수정</h1>
 			</div><br>
-				<table id="novelList" class="table table-hover" align="center">
-                <thead>
-                    <tr>
-                        <th>번호</th>
-                        <th>작품명</th>
-                        <th>작가명</th>
-                        <th>연재시작일</th>
-                        <th>추천수</th>
-                        <th>상태</th>
-                        <th>유/무료</th>
-                    </tr>
-                </thead>
-                <c:forEach items="${ list }" var="n">
-                <tbody>
-                		<tr>
-                			<td class="nno">${ n.novelNo }</td>
-                			<td title="${ n.novelTitle }"
-                			style="display: block;
-     							white-space: nowrap;
-  								text-overflow: ellipsis;
-  								overflow: hidden;
-  								max-width: 200px;">${ n.novelTitle }</td>
-                			<td>${ n.nickName }</td>
-                			<td>${ n.startDate }</td>
-                			<td>${ n.heart }</td>
-                			<td>${ n.serialStatus }</td>
-                			<td>${ n.chargeStatus }</td>
-                		</tr>
-                </tbody>
-                </c:forEach>
+			<table id="contentArea" algin="center" class="table">
+                <tr>
+                    <th width="120">작품명</th>
+                    <td colspan="3"><input type="text" name="novelTitle" style="width:900px" value="${ novel.novelTitle }"></td>
+                </tr>
+                <tr>
+                    <th width="120">작가명</th>
+                    <td colspan="3">${ novel.nickName }</td>
+                </tr>
+                <tr>
+                    <th width="120">연재시작일</th>
+                    <td colspan="3">${ novel.startDate }</td>
+                </tr>
+                <tr>
+                    <th width="120">추천수</th>
+                    <td colspan="3">${ novel.heart }</td>
+                </tr>
+                <tr>
+                    <th width="120">상태 변경</th>
+                    <td colspan="3"><select name="serialStatus" tabindex="11"> 
+	      				<option value="연재">연재</option>
+	      				<option value="휴재">휴재</option>
+	      				<option value="완결">완결</option>
+	      				<option value="중단">중단</option>
+	    			</select>&nbsp;현재 : ${ novel.serialStatus }</td>
+                </tr>
+                <tr>
+                	<th width="120">유/무료 전환</th>
+                	<td colspan="3"><select name="chargeStatus" tabindex="11"> 
+	      				<option value="유료">유료</option>
+	      				<option value="무료">무료</option>
+	    			</select>&nbsp;현재 : ${ novel.chargeStatus }</td>
+                </tr>
+                <tr>
+                    <th>작품설명</th>
+                    <td colspan="3"><input type="text" name="novelDisplay" style="width:900px" value="${ novel.novelDisplay }"></td>
+                </tr>
+                <tr>
+                    <th width="120">현재썸네일</th>
+                    <td colspan="3"><img src="${ novel.changeName }" width="295" height="395"></td>
+                </tr>
+                <tr>
+                    <th width="120">썸네일변경</th>
+                    <td colspan="3"><input type="file" id="upfile" class="form-control-file border" name="reUpfile"></td>
+                </tr>
             </table>
-           <br>
-           
-            <script>
-            
-            	$(function(){
-            		$('#novelList>tbody>tr').click(function(){
-            			location.href = 'novelDetail.ad?nno=' + $(this).children('.nno').text();
-            		})
-            	})
-            
-            </script>
-            
-              <div id="pagingArea" class="title">
-                <ul class="pagination">
-                	<c:choose>
-                		<c:when test="${ pi.currentPage eq 1 }">
-                    		<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                    	</c:when>
-                		<c:otherwise>
-                		<li class="page-item"><a class="page-link" href="userList.ad?cpage=${ pi.currentPage - 1 }">Previous</a></li>
-                		</c:otherwise>
-                	</c:choose>
-                <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-                    <li class="page-item"><a class="page-link" href="userList.ad?cpage=${p}">${ p }</a></li>
-                </c:forEach>
-                <c:choose>
-                	<c:when test="${ pi.currentPage eq pi.maxPage }">
-	                    <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
-                	</c:when>
-                	<c:otherwise>
-	                    <li class="page-item"><a class="page-link" href="userList.ad?cpage=${ pi.currentPage + 1 }">Next</a></li>
-	                </c:otherwise>
-	            </c:choose>
-                </ul>
-              </div>
+        <button type="submit" class="btn btn-secondary">수정하기</button>
+        </form>
+            <br>
         </div>
-       </div>
-       
-       
+      </div>
+      <script>
+      	function answerInq() {
+      		$('#updateForm').attr('action', 'update.nv').submit();
+      	}
+      </script>
    <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

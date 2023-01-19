@@ -1,11 +1,17 @@
 package com.bi.billage.user.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bi.billage.board.model.vo.FAQ;
 import com.bi.billage.board.model.vo.Inquiry;
+import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.common.savefile.SaveFile;
 import com.bi.billage.common.template.Pagination;
@@ -67,6 +74,88 @@ public class UserController {
 		mv.addObject("pi", pi).addObject("list", userService.selectNovelList(pi)).setViewName("admin/adminNovelListView");
 		
 		return mv;
+	}
+	
+	// 작품상세화면
+	@RequestMapping("novelDetail.ad")
+	public ModelAndView selectNovel(ModelAndView mv, Integer nno) {
+		mv.addObject("novel", userService.selectNovel(nno)).setViewName("admin/adminNovelDetailView");
+		
+		return mv;
+	}
+	
+	// 첨부파일 메소드
+	public String saveFile(MultipartFile upfile, HttpSession session) { // 실제 넘어온 파일의 이름을 변경해서 서버에 업로드
+				
+		String originName = upfile.getOriginalFilename();
+			
+		// 년월일시분초
+		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+		// 12321(5자리 랜덤값)
+		int ranNum = (int)(Math.random() * 90000 + 10000);
+		// 확장자
+		String ext = originName.substring(originName.lastIndexOf("."));
+			
+		String changeName = currentTime + ranNum + ext;
+			
+		// 업로드 시키고자하는 폴더의 물리적인 경로
+		String savePath = session.getServletContext().getRealPath("/resources/uploadFiles/");
+			
+		try {
+			upfile.transferTo(new File(savePath + changeName));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+			
+		return changeName;
+			
+	}
+	
+	// 작품 수정 메소드
+	@RequestMapping("update.nv")
+	public String updateNovel(/*Integer nno,
+							  String novelTitle,
+							  String novelDisplay,
+							  String serialStatus,
+							  String chargeStatus,
+							  String originName,
+							  String changeName,*/
+							  @ModelAttribute Novel n,
+							  HttpSession session,
+							  MultipartFile reUpfile,
+							  Model model) {
+		
+//		Novel n = new Novel();
+//		n.setNovelNo(nno);
+//		n.setNovelTitle(novelTitle);
+//		n.setNovelDisplay(novelDisplay);
+//		n.setSerialStatus(serialStatus);
+//		n.setChargeStatus(chargeStatus);
+//		n.setOriginName(originName);
+//		n.setChangeName(changeName);
+
+		// 새로운 썸네일이 넘어온 경우
+		if(!reUpfile.getOriginalFilename().equals("")) {
+			// 기존에 첨부파일이 있었을 경우 ? => 기존의 첨부파일을 삭제
+			if(n.getOriginName() != null) {
+				new File(session.getServletContext().getRealPath(n.getChangeName())).delete();
+			}
+			
+			// 새로 넘어온 첨부파일 서버 업로드 시키기
+			// saveFile() 호출해서 첨부파일을 업로드
+			String changeName = saveFile(reUpfile, session);
+			
+			n.setOriginName(reUpfile.getOriginalFilename());
+			n.setChangeName("resources/uploadFiles/" + changeName);
+		}
+
+		if(userService.updateNovel(n) > 0) { // 성공
+			session.setAttribute("alertMsg", "작품 수정 완료");
+			return "redirect:/novelList.ad";
+		} else {
+			model.addAttribute("errorMsg", "수정 실패");
+			return "common/errorPage";
+		}
 	}
 	
 	// 1:1 문의내역
@@ -162,8 +251,9 @@ public class UserController {
 	
 	// FAQ 관리화면
 	@RequestMapping("faqList.ad")
-	public ModelAndView selectfaqList(FAQ faq, ModelAndView mv) {
-		mv.addObject("faq", userService.selectFaqList(faq)).setViewName("admin/adminFaqListView");
+	public ModelAndView selectfaqList(@RequestParam(value="cpage", defaultValue="1") int currentPage, FAQ faq, ModelAndView mv) {
+		PageInfo pi = Pagination.getPageInfo(userService.selectFaqListCount(), currentPage, 10, 10);
+		mv.addObject("pi", pi).addObject("faq", userService.selectFaqList(pi)).setViewName("admin/adminFaqListView");
 		return mv;
 	}
 	

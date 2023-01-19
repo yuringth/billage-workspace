@@ -20,6 +20,9 @@ public interface ClubService {
 	// 게시글 조회수 증가 후 해당 게시글의 상세정보 조회 
 	Club selectDetailClub(Club club);
 	
+	// 게시글 조회시 ClubOpen 조회
+	ArrayList<ClubOpen> selectDetailClubOpen(Club club);
+	
 	// 모임 insert 
 	int insertClub(Club club);
 	

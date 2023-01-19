@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -182,9 +183,14 @@ public class FollowController {
 		PageInfo pi = Pagination.getPageInfo(followService.selectReviewCount(uno), currentPage, 5, 10);
 		
 		ArrayList<ReviewBoard> list = followService.selectReviewList(uno , pi);
-		
-		mv.addObject("pi", pi);
-		mv.addObject("list", list).setViewName("follow/followReviewListView");
+		System.out.println(list);
+		System.out.println(list.size());
+		if(list.size() > 0) {
+			mv.addObject("pi", pi);
+			mv.addObject("list", list).setViewName("follow/followReviewListView");
+		} else {
+			mv.addObject("list", list).setViewName("follow/followReviewListView");
+		}
 		
 		return mv;
 		
@@ -244,6 +250,17 @@ public class FollowController {
 		mv.addObject("user", user).addObject("star", star).addObject("goodReview",goodReview).addObject("badReview", b).setViewName("follow/followDetailView");
 		
 		return mv;
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="checkFollow.fo" , produces ="application/json; charset=UTF-8")
+	public String checkFollow (Follow follow) {
+		System.out.println('h');
+		int result = followService.checkFollow(follow);
+		
+		return new Gson().toJson(result);
+		
 		
 	}
 	
