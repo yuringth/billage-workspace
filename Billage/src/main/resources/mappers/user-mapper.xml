@@ -21,6 +21,13 @@
 		<result column="PROFILE_IMG"		property="profileImg" />
 		<result column="POINT"    			property="point" />
 		<result column="STATUS"				property="status" />
+		<result column="AUCTION_BOARD"		property="auctionBoard" />
+		<result column="CLUB_BOARD"				property="clubBoard" />
+		<result column="DRAW_BOARD"				property="drawBoard" />
+		<result column="RENT_BOARD"				property="rentBoard" />
+		<result column="REVIEW"				property="review" />
+		<result column="USED_BOARD"				property="usedBoard" />
+		<result column="BOARD"				property="board" />
 	</resultMap>
 
 	<resultMap type="club" id="groupResultSet">
@@ -406,4 +413,58 @@
 				novel_no = #{ novelNo }
 	</update>
 	
+	<select id="countWriteBoard" parameterType="int" resultMap="userResultSet">
+		SELECT
+		        (SELECT
+		                COUNT(*)
+		          FROM
+		                AUCTION_BOARD
+		         WHERE
+		                USER_NO = #{userNo}
+		           AND
+		                STATUS = 'N') AUCTION_BOARD,
+		        
+		        (SELECT
+		                COUNT(*)
+		          FROM
+		                DRAW_BOARD
+		         WHERE
+		                USER_NO = #{userNo}) DRAW_BOARD,
+		        (SELECT
+		                COUNT(*)
+		          FROM
+		                BOARD
+		         WHERE
+		                USER_NO = #{userNo}) BOARD,
+		        (SELECT
+		                COUNT(*)
+		          FROM
+		                CLUB_BOARD
+		         WHERE
+		                USER_NO = #{userNo}) CLUB_BOARD,
+		        (SELECT
+		                COUNT(*)
+		          FROM
+		                RENT_BOARD
+		         WHERE
+		                USER_NO = #{userNo}) RENT_BOARD,
+		        (SELECT
+		                COUNT(*)
+		          FROM
+		                REVIEW
+		         WHERE
+		                USER_NO = #{userNo}) REVIEW,
+		        (SELECT
+		                COUNT(*)
+		          FROM
+		                USED_BOARD
+		         WHERE
+		                USER_NO = #{userNo}) USED_BOARD
+		        
+		  FROM
+		        MEMBER
+		 WHERE
+		        USER_NO = #{userNo}
+				
+	</select>
 </mapper>

@@ -32,4 +32,16 @@ public class User {
 	private int point; 				// 포인트
 	
 	private int followStatus; // 팔로우 여부
+	
+	//게시판
+	private int auctionBoard;
+	private int drawBoard;
+	private int board;
+	private int clubBoard;
+	private int rentBoard;
+	private int review;
+	private int usedBoard;
+	
+	private int boardCount; //총 게시글 수
+	
 }
