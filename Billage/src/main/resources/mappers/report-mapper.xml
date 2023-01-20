@@ -12,7 +12,7 @@
 		<result column="REPORT_CONTENT" property="reportContent"/>
 		<result column="REPORT_DATE" property="reportDate"/>
 		<result column="REPORT_STATUS" property="reportStatus"/>
-		<result column="BOARD_NO" property="boardNo"/>
+		<result column="REVIEW_NO" property="reviewNo"/>
 		<result column="NICKNAME" property="nickName"/>	
 	</resultMap>
 	
@@ -27,7 +27,7 @@
 		        ,report_category
 		        ,report_content
 		        ,report_date
-		        ,board_no
+		        ,review_no
 		        )
  	 values
  	 		  (
@@ -36,7 +36,7 @@
  	 		  ,#{reportTitle}
  	 		  ,#{reportCategory}
  	 		  ,#{reportContent}
- 	 		  ,#{boardNo}
+ 	 		  ,#{reviewNo}
  	 		  )       
 		        
 	</insert>
@@ -49,7 +49,7 @@
 		        ,report_category
 		        ,report_content
 		        ,report_status
-		        ,board_no
+		        ,review_no
 		from
 		      report        
 		        
@@ -63,7 +63,7 @@
 		        ,report_category
 		        ,report_content
 		        ,report_status
-		        ,board_no
+		        ,review_no
 		        ,nickName
 		from
 		      report r
