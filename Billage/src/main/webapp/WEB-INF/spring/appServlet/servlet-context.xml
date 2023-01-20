@@ -3,7 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
+		http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
@@ -25,14 +27,32 @@
 	
 	<context:component-scan base-package="com.bi.billage" />
 	
+	<!-- Server Bean 등록  -->
+	<beans:bean id="webSocketServer" class="com.bi.billage.common.socket.WebSocketServer"></beans:bean>
 	
+	
+	<!-- Handler 등록 -->
+	
+	 <!-- 필요한 사람이 바꾸세요 -->
 	<interceptors>
        <interceptor>
-          <mapping path="/myPage.me"/>  <!-- 필요한 사람이 바꾸세요 -->
+          <mapping path="/mypage.me"/> 
           <mapping path="/enrollForm.bo"/>
+          <mapping path="/general.cl"/>
+          <mapping path="/admin.cl"/>
+          <mapping path="/enrollForm.cl"/>
+          <mapping path="/clubOpenAdmin.cl"/>
           <beans:bean class="com.bi.billage.common.interceptor.LoginInterceptor" id="loginInterceptor"></beans:bean>
        </interceptor>
     </interceptors>
+	
+	<websocket:handlers>
+		<websocket:mapping handler="webSocketServer" path="/clubChat"/>
+	    <websocket:handshake-interceptors>
+	   		<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+	    </websocket:handshake-interceptors>
+	 </websocket:handlers>
+	
 	
 	
 </beans:beans>

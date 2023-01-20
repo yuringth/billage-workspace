@@ -86,7 +86,7 @@ public interface BoardService {
 	
 	ReportBoard selectReport(int rno);
 	
-	
+	int selectReportStatus(int reveiwNo);
 	
 	
 	
@@ -136,7 +136,7 @@ public interface BoardService {
 	
 	int drawIncreaseCount (int boardNo);
 	//추첨게시글 조회
-	ArrayList<ADBoard> selectDrawBoardList();
+	ArrayList<ADBoard> selectDrawBoardList(PageInfo pi);
 	// 추첨게시글 작성
 	int insertDrawBoard(ADBoard b);
 	// 추첨게시글 상세 조회
@@ -148,7 +148,7 @@ public interface BoardService {
 	
 	int auctionIncreaseCount (int boardNo);
 	// 경매게시글 조회
-	ArrayList<ADBoard> selectAuctionBoardList();
+	ArrayList<ADBoard> selectAuctionBoardList(PageInfo pi);
 	// 경매게시글 작성
 	int insertAuctionBoard(ADBoard b);
 	// 경매게시글 상세 조회
@@ -277,7 +277,7 @@ public interface BoardService {
 	
 	// 댓글 나중에......
 	// 댓글 리스트 조회서비스(Ajax)(select)
-	ArrayList<ReviewReply> selectReplyList(int reviewNo);
+	//ArrayList<ReviewReply> selectReplyList(int reviewNo);
 
 
 	ArrayList<ReviewReply> selectReviewReplyList(int reviewNo);
@@ -287,7 +287,14 @@ public interface BoardService {
 	
 
 	// 댓글 삭제(update
-	int deleteReviewReply(int replyNo);
+//	int deleteReviewReply(int replyNo);
+	int deleteReviewReply(ReviewReply r);
+	
+	
+	// 댓글 수정(update)
+	int updateReviewReply(ReviewReply r);
+	
+	
 	
 	
 	

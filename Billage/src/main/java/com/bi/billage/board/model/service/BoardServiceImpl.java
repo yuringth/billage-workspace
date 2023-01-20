@@ -60,8 +60,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public ArrayList<ADBoard> selectDrawBoardList() {
-		return boardDao.selectDrawBoardList(sqlSession);
+	public ArrayList<ADBoard> selectDrawBoardList(PageInfo pi) {
+		return boardDao.selectDrawBoardList(sqlSession, pi);
 	}
 
 	@Override
@@ -86,8 +86,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public ArrayList<ADBoard> selectAuctionBoardList() {
-		return boardDao.selectAuctionBoardList(sqlSession);
+	public ArrayList<ADBoard> selectAuctionBoardList(PageInfo pi) {
+		return boardDao.selectAuctionBoardList(sqlSession, pi);
 	}
 
 	@Override
@@ -139,6 +139,8 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectSerialDetail(sqlSession, novelNo, serialNo);
 	}
 	
+	
+	// 유림시작
 	//중고게시판 => 글작성 시 insert
 	@Override
 	public int insertUsedBoard(UsedBoard b) {
@@ -311,10 +313,31 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	// 댓글 삭제(update
+//	@Override
+//	public int deleteReviewReply(int replyNo) {
+//		return boardDao.deleteReviewReply(sqlSession, replyNo);
+//	}
 	@Override
-	public int deleteReviewReply(int replyNo) {
-		return boardDao.deleteReviewReply(sqlSession, replyNo);
+	public int deleteReviewReply(ReviewReply r) {
+		return boardDao.deleteReviewReply(sqlSession, r);
 	}
+	
+	// 댓글 수정(update)
+	@Override
+	public int updateReviewReply(ReviewReply r) {
+		return boardDao.updateReviewReply(sqlSession, r);
+	}
+	
+	
+	
+	
+	
+	
+	
+	///////////유림 끝
+	
+	
+	
 	
 	
 	@Override
@@ -426,12 +449,6 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public ArrayList<ReviewReply> selectReplyList(int reviewNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public int novelLike(Novel nv) {
 		return boardDao.novelLike(sqlSession, nv);
 	}
@@ -439,6 +456,10 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int novelCancel(Novel nv) {
 		return boardDao.novelCancel(sqlSession, nv);
+		
+	public int selectReportStatus(int reveiwNo) {
+		
+		return boardDao.selectReportStatus(sqlSession, reveiwNo);
 	}
 
 

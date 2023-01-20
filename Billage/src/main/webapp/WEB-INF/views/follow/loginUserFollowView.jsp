@@ -23,7 +23,7 @@
 
 	<div class="outer">
 		<div class="userProfile">
-			<div id="profile"><img src="https://i.pinimg.com/originals/4c/f0/16/4cf0163a9db5f4b69499b9365be5fcda.png" width="100px;" height="100px;"></div>
+			<div id="profile"><img src="${user.profileImg }" width="100px;" height="100px;"></div>
 			<div id="nickName"><a href="selectLoginUser.fo">${ user.nickname }</a></div>
 			<div class="detailList" style="display:flex; flex-direction: row;">
 				<div id="review"><a href="selectReviewList.fo?uno=${ user.userNo }">리뷰${ user.reviewCount } &nbsp;</a></div>

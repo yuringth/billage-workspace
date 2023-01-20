@@ -53,8 +53,8 @@ public class RentBoardServiceImpl implements RentBoardService {
 	
 	// 마이페이지 대여 목록 조회
 	@Override
-	public ArrayList<RentBoard> selectRentMypageList() {
-		return rentBoardDao.selectRentMypageList(sqlSession);
+	public ArrayList<RentBoard> selectRentMypageList(int userNo) {
+		return rentBoardDao.selectRentMypageList(sqlSession, userNo);
 	}
 	
 	

@@ -162,6 +162,12 @@
 				,CLOSE_DATE
 				,COUNT
 				,CHANGE_NAME
+				(SELECT
+				        COUNT(*)
+				  FROM
+				        AUCTION
+				  WHERE
+				        AUCTION_NO = AUCTION_NO) BID_COUNT
 		  FROM
 		  		AUCTION_BOARD
 		 WHERE

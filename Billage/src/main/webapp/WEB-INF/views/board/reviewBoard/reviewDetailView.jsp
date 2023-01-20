@@ -232,12 +232,14 @@
 				},
 				success:function(list){
 					
+					console.log(list);
+					
 					var result = '';
 					
 					for(var i in list){
 						// 1. 비회원 == 댓글작성자가 아닌 경우 => 삭제 / 수정 버튼 안보임
 						// 2. 로그인 유저 == 댓글작성자인 경우 => 삭제 / 수정 버튼 보임
-						
+						// 3. 로그인 유저 != 댓글작성자가 아닌경우 => 삭제 / 수정 버튼 안보임
 						
 						if(${empty loginUser}){
 							
@@ -250,23 +252,27 @@
 							
 						} else if(list[i].userNo == '${loginUser.userNo}' ){
 							
-							var btn = '<button onclick="deleteReply(' + list[i].replyNo + ')">댓글삭제</button>';
+							var btn = '<button class="btn btn-secondary" onclick="deleteReply(' + list[i].replyNo +','+ list[i].reviewNo + ')">댓글삭제</button>';
+							var btn2 = '<button class="btn btn-secondary" onclick="ReviewReplyForm(this)">댓글수정</button>';
 							
 							result += '<tr>'
 							 	   + '<th>' + list[i].userId + '</th>'
 							 	   + '<td>' + list[i].replyContent + '</td>'
 							 	   + '<td>' + list[i].createDate + '</td>'
-	   							  // + '<td><button onclick=' + '"location.href=rdelete.re?replyNo=' + list[i].replyNo + '">댓글삭제</button></td>'  => 이거 복잡해서 <button> 위에 변수로 빼서 사용햇음
 	   							   + '<td>' + btn + '</td>'
+	   							   + '<td>' + btn2 + '</td>'
+							 	   + '</tr>'
+						} else if(list[i].userNo != '${loginUser.userNo}' ){
+							
+							result += '<tr>'
+							 	   + '<th>' + list[i].userId + '</th>'
+							 	   + '<td>' + list[i].replyContent + '</td>'
+							 	   + '<td>' + list[i].createDate + '</td>'
 							 	   + '</tr>'
 						}
+						
 					}
 					$('#replyArea tbody').html(result);
-					
-					console.log(list);
-					console.log(list[0].reviewNo);
-					console.log(list[0].userId);
-					
 					
 				},
 				error:function(){
@@ -277,13 +283,34 @@
 			})
 		};
 		
-		function deleteReply(num){
-			location.href='rdelete.re?replyNo=' + num;
+		
+		
+		/* 댓글 삭제 함수 */
+		function deleteReply(num1, num2){
+			
+			var result = confirm("댓글을 삭제하시겠습니까?");
+			
+			if(result == true){
+				location.href='rdelete.re?replyNo=' + num1 + '&reviewNo=' + num2;
+				alert("삭제되었습니다.");
+			} else{
+				alert("취소하였습니다.");
+			}
 		};
 		
-		
-		</script>
 	
+		// 댓글 수정 폼화면
+		function ReviewReplyForm(e){
+			
+			
+			// console.log($(e).parents().eq(1).children().eq(1).text()); // 댓글 뽑아옴
+			var content = $(e).parents().eq(1).children().eq(1).text();
+			$(e).parents().eq(1).children().eq(1).text('');
+			$(e).parents().eq(1).children().eq(1).append('<textarea></textarea>');
+			$(e).parents().eq(1).children().eq(1).children().val(content);
+			
+		};
+		</script>
 	
 	
 	

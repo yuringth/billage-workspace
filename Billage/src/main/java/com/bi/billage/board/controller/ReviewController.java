@@ -25,6 +25,7 @@ import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.common.template.Pagination;
 import com.bi.billage.point.model.service.PointService;
 import com.bi.billage.point.model.vo.Point;
+import com.bi.billage.user.model.service.UserService;
 import com.bi.billage.user.model.vo.User;
 import com.google.gson.Gson;
 
@@ -36,6 +37,10 @@ public class ReviewController {
 
 	@Autowired
 	private PointService pointService;
+	
+	@Autowired
+	private UserService userService;
+	
 	
 	
 	// api 오픈 키 => 나중에 알라딘 api 발급받아서 serviceKey에 업데이트 하세용
@@ -147,13 +152,69 @@ public class ReviewController {
 				// 포인트 적립, 리뷰 등록 성공
 				((User)session.getAttribute("loginUser")).setPoint(pointService.selectPoint(b.getUserNo()));
 		//		System.out.println("응모 성공, 남은 포인트 :" + ((User)session.getAttribute("loginUser")).getPoint());
+				
+				
+				
+				
+				// 등급추가 => 했지만 어디서 확인함??
+				
+				//1. 작성한 글 세션에 +1 하기
+		         ((User)session.getAttribute("loginUser"))
+		         .setBoardCount(((User)session.getAttribute("loginUser")).getBoardCount() + 1);
+		         
+		         //2. 등급 별로 조건 넘어가면 등급 +1 하기
+		         
+		         //등급이 3일때
+		         if(((User)session.getAttribute("loginUser")).getUserGrade() == 3) {
+		            
+		            if(((User)session.getAttribute("loginUser")).getBoardCount() == 10){
+		               
+		               //등급 +1 하는 메소드
+		               userService.updateGrade(((User)session.getAttribute("loginUser")).getUserNo());
+		               
+		               //등급 +1 하고 세션에 업데이트 된 등급 넣기
+		               ((User)session.getAttribute("loginUser"))
+		               .setUserGrade(((User)session.getAttribute("loginUser")).getUserGrade() + 1);
+		               
+		               
+		               // 여기에 alertMessage 축하합니다 등급이 ~등급으로 올랐습니다 세션 하실분 하세요
+		               return "redirect:list.re";
+		            }
+		         }
+		         
+		         //등급이 4일때
+		         if(((User)session.getAttribute("loginUser")).getUserGrade() == 4) {
+		            
+		            if(((User)session.getAttribute("loginUser")).getBoardCount() == 30){
+		               
+		               //등급 +1 하는 메소드
+		               userService.updateGrade(((User)session.getAttribute("loginUser")).getUserNo());
+		               
+		               //등급 +1 하고 세션에 업데이트 된 등급 넣기
+		               ((User)session.getAttribute("loginUser"))
+		               .setUserGrade(((User)session.getAttribute("loginUser")).getUserGrade() + 1);
+		               
+		               
+		               // 여기에 alertMessage 축하합니다 등급이 ~등급으로 올랐습니다 세션 하실분 하세요
+		               return "redirect:list.re";
+		            }
+		         }
+		         
 				return "redirect:list.re";
+				
+				
 			} else { //뭐든 실패
-				mv.addObject("errorMsg", "게시글 작성 실패");
+			
+				//session.setAttribute("alertMsg", "동일한 책은 작성할 수 없습니다");
+				
+				mv.addObject("errorMsg", "동일한 도서 게시글 작성 실패1");
 				return "common/errorPage";
+				//return "redirect:enrollForm.re?reviewNo=" + b.getReviewNo();
 			}
 		} else {
-			model.addAttribute("errorMsg","게시글 작성 실패");
+			//session.setAttribute("alertMsg", "동일한 책은 작성할 수 없습니다");
+			
+			model.addAttribute("errorMsg","동일한 도서 게시글 작성 실패2");
 			return "common/errorPage";
 		}
 	}
@@ -432,12 +493,14 @@ public class ReviewController {
 	@RequestMapping(value = "rlist.re", produces = "application/json; charset=UTF-8")
 	public String selectReviewReplyList(int reviewNo/*, Model model ajax여서 모델에 담을 필요없음*/) {
 		
-//		System.out.println("reviewNo  : " + reviewNo);
+		System.out.println("reviewNo  : " + reviewNo);
 		
 		ArrayList<ReviewReply> list = boardService.selectReviewReplyList(reviewNo);
+		
 		System.out.println(list);
-		//model.addAttribute("list", list);
-		//System.out.println("model :" + model);
+
+//		model.addAttribute("list", list);
+//		System.out.println("model :" + model);
 		
 		return new Gson().toJson(boardService.selectReviewReplyList(reviewNo));
 
@@ -446,18 +509,62 @@ public class ReviewController {
 	
 	// 리뷰게시판 댓글 삭제
 	@RequestMapping("rdelete.re")
-	public String deleteReply(int replyNo, Model model) {
+	public String deleteReply(int replyNo, int reviewNo, Model model) {
 		
-		if(boardService.deleteReviewReply(replyNo) > 0) {
+		// 삭제를 눌러야지 값이 뜬다. 
+		System.out.println("replyNo : " +replyNo);
+		System.out.println("reviewNo : " +reviewNo);
+		
+		ReviewReply r = new ReviewReply();
+
+		r.setReplyNo(replyNo);
+		r.setReviewNo(reviewNo);
+		System.out.println("r : "+ r);
+		
+		if(boardService.deleteReviewReply(r) > 0) {
 			
-			return "redirect:list.re";
+			return "redirect:detail.re?reviewNo=" + reviewNo;
+			
 		} else {
 			// 에러페이지
 			model.addAttribute("errorMsg", "댓글삭제실패");
 			return "common/errorPage";
 		}
-		
 	}
+	
+	
+	
+	// 안만들었음
+	@ResponseBody
+	@RequestMapping(value = "rUpdate.re", produces = "application/json; charset=UTF-8")
+	public String updateReviewReply(int reviewNo, int replyNo, HttpSession session) {
+		
+		System.out.println("reviewNo  : " + reviewNo);
+		System.out.println("replyNo  : " + replyNo);
+		
+		
+		ReviewReply r = new ReviewReply();
+		r.setReviewNo(reviewNo);
+		r.setReplyNo(replyNo);
+		
+		System.out.println("수정r : " + r);
+		
+		
+		if(boardService.updateReviewReply(r) > 0 ) {
+			return new Gson().toJson(boardService.updateReviewReply(r));
+			
+		} else {
+			
+			session.setAttribute("alertMsg", "댓글 수정할 수 없습니다");
+			return "redirect:detail.re?reviewNo=" + reviewNo;
+		}
+		
+		
+
+	}	
+
+	
+	
 	
 	
 	
