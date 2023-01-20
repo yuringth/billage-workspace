@@ -192,7 +192,7 @@ public class DrawAuctionController {
 					
 					
 					// 여기에 alertMessage 축하합니다 등급이 ~등급으로 올랐습니다 세션 하실분 하세요
-					return "redirect:list.dr";
+					return "redirect:list.ac";
 				}
 			}
 			
@@ -210,7 +210,7 @@ public class DrawAuctionController {
 					
 					
 					// 여기에 alertMessage 축하합니다 등급이 ~등급으로 올랐습니다 세션 하실분 하세요
-					return "redirect:list.dr";
+					return "redirect:list.ac";
 				}
 			}
 			
