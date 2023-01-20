@@ -114,7 +114,7 @@
                 <li><a href="groupList.ad"><i class="fas fa-home"></i>모임 관리</a></li>
                 <li><a href="inqList.ad"><i class="fas fa-address-card"></i>1:1 문의</a></li>
                 <li><a href="faqList.ad"><i class="fas fa-project-diagram"></i>FAQ 관리</a></li>
-                <li><a href="noticeList.ad"><i class="fas fa-blog"></i>공지사항</a></li>
+                <li><a href="list.ro"><i class="fas fa-blog"></i>신고 관리</a></li>
                 <li><a href="list.sr"><i class="fas fa-address-book"></i>연재 요청</a></li>
             </ul>
         </div>
