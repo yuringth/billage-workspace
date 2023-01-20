@@ -116,4 +116,27 @@
 		  		RENT_NO = #{rentNo}	
 	</update>
 	
+	<!-- 마이페이지 대여 목록 리스트 조회 -->
+	<select id="selectRentMypageList" resultMap="RentBoardResultSet">
+		SELECT
+				RENT_NO,
+				R.USER_NO,
+				RENT_USERNO,
+				RENT_DATE,
+				DUE_DATE,
+				RENT_BOOKTITLE,
+				NICKNAME,
+				R.STATUS
+		FROM
+				RENT_BOARD R, MEMBER M
+		WHERE
+				R.USER_NO = M.USER_NO
+		AND
+				R.USER_NO = #{userNo}
+		AND
+				RENT_USERNO IS NOT NULL
+				
+			
+	</select>
+	
 </mapper>

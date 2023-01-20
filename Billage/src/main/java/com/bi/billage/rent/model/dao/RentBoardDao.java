@@ -39,5 +39,9 @@ public class RentBoardDao {
 		return sqlSession.update("rentMapper.updateStatus", rb);
 	}
 	
+	// 마이페이지 대여 목록 조회
+	public ArrayList<RentBoard> selectRentMypageList(SqlSessionTemplate sqlSession, int userNo){
+		return (ArrayList)sqlSession.selectList("rentMapper.selectRentMypageList", userNo);
+	}
 	
 }

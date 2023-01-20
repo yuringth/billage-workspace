@@ -41,6 +41,9 @@ public class ClubController {
 	@Autowired
 	private MessageService messageService;
 	
+	//WebSocket
+	
+	
 	//등록된 모임 리스트를 가지고 와야 함 , 페이징 처리 필요
 	@RequestMapping("list.cl")
 	public ModelAndView selectGroup(@RequestParam(value="cpage", defaultValue="1")int currentPage

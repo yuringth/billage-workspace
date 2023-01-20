@@ -26,6 +26,7 @@
             <h2>제목 : ${novel.novelTitle}</h2>
             <h4>작가명 : ${novel.nickName}</h4>
             <h6>설명 : ${novel.novelDisplay }</h6>
+            <h6>추천수 : ${novel.heart }</h6>
         </div>
             <br>
             <!-- 로그인 후 작가본인이 아닐 경우만 보여지는 버튼 -->

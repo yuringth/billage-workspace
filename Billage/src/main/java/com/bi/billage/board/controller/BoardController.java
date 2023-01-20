@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -23,8 +24,10 @@ import com.bi.billage.board.model.vo.FAQ;
 import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.Serial;
 import com.bi.billage.board.model.vo.SerialRequest;
+import com.bi.billage.club.model.vo.Club;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.common.template.Pagination;
+import com.google.gson.Gson;
 
 @Controller
 public class BoardController {
@@ -135,6 +138,27 @@ public class BoardController {
 				return "common/errorPage";
 			}
 		}
+	
+	// like ajax 
+	@ResponseBody
+	@RequestMapping(value="novelLike.nv", produces = "application/json; charset=UTF-8")
+	public String novelLike(Novel novel, int likeStatus) {
+		
+		// 0보다 크면 추천 취소  | 0이면 추천
+		
+		int[] result = new int[2];
+		
+		// 작품추천 삭제 여부 
+		if(likeStatus > 0) {
+			result[0] = (boardService.novelLikeDelete(novel) > 0 )? 0 : -1;
+		} else {
+			result[0] = (boardService.novelLikeInsert(novel) > 0 )? 1 : -1;
+		} 
+		
+		result[1] = boardService.selectNovelLikeCount(novel);
+
+		return new Gson().toJson(result);
+	}
 	
 	// 첨부파일 메소드
 	public String saveFile(MultipartFile upfile, HttpSession session) { // 실제 넘어온 파일의 이름을 변경해서 서버에 업로드
