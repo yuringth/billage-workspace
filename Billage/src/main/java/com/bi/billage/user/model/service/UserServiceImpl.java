@@ -176,5 +176,15 @@ public class UserServiceImpl implements UserService{
 		return userDao.updateNovel(sqlSession, n);
 	}
 
+	@Override
+	public User countWriteBoard(int userNo) {
+		return userDao.countWriteBoard(sqlSession, userNo);
+	}
+
+	@Override
+	public int updateGrade(int userNo) {
+		return userDao.updateGrade(sqlSession, userNo);
+	}
+
 
 }

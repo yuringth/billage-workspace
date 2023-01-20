@@ -21,4 +21,7 @@ public interface RentBoardService {
 	
 	// 대여서비스
 	int updateStatus(RentBoard rb);
+	
+	// 마이페이지 대여목록 게시판 조회
+	ArrayList<RentBoard> selectRentMypageList();
 }
