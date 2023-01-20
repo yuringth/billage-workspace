@@ -181,7 +181,7 @@ public class DrawAuctionController {
 			//등급이 3일때
 			if(((User)session.getAttribute("loginUser")).getUserGrade() == 3) {
 				
-				if(((User)session.getAttribute("loginUser")).getBoardCount() >= 10){
+				if(((User)session.getAttribute("loginUser")).getBoardCount() == 10){
 					
 					//등급 +1 하는 메소드
 					userService.updateGrade(((User)session.getAttribute("loginUser")).getUserNo());
@@ -199,7 +199,7 @@ public class DrawAuctionController {
 			//등급이 4일때
 			if(((User)session.getAttribute("loginUser")).getUserGrade() == 4) {
 				
-				if(((User)session.getAttribute("loginUser")).getBoardCount() >= 30){
+				if(((User)session.getAttribute("loginUser")).getBoardCount() == 30){
 					
 					//등급 +1 하는 메소드
 					userService.updateGrade(((User)session.getAttribute("loginUser")).getUserNo());
