@@ -40,8 +40,8 @@ public class RentBoardDao {
 	}
 	
 	// 마이페이지 대여 목록 조회
-	public ArrayList<RentBoard> selectRentMypageList(SqlSessionTemplate sqlSession){
-		return sqlSession.selectOne("rentMapper.selectRentMypageList");
+	public ArrayList<RentBoard> selectRentMypageList(SqlSessionTemplate sqlSession, int userNo){
+		return (ArrayList)sqlSession.selectList("rentMapper.selectRentMypageList", userNo);
 	}
 	
 }

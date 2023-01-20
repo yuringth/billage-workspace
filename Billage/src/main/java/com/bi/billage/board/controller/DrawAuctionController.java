@@ -10,13 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bi.billage.board.model.service.BoardService;
 import com.bi.billage.board.model.vo.ADBoard;
+import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.common.savefile.SaveFile;
+import com.bi.billage.common.template.Pagination;
 import com.bi.billage.message.model.service.MessageService;
 import com.bi.billage.message.model.vo.Message;
 import com.bi.billage.point.model.service.PointService;
@@ -42,16 +45,37 @@ public class DrawAuctionController {
 	
 	//추첨글목록
 	@RequestMapping("list.dr")
-	public ModelAndView drawBoardList(ModelAndView mv) throws ParseException {
-		mv.addObject("list", boardService.selectDrawBoardList()).setViewName("board/drawBoard/drawBoardListView");
+	public ModelAndView drawBoardList(@RequestParam(value="cPage", defaultValue="1") int currentPage, ModelAndView mv){
+		PageInfo pi = Pagination.getPageInfo(boardService.selectListCount(), currentPage, 10, 6);
+		mv.addObject("pi", pi)
+		.addObject("list", boardService.selectDrawBoardList(pi))
+		.setViewName("board/drawBoard/drawBoardListView");
 		return mv;
+	}
+	
+	//추첨글목록 추가
+	@ResponseBody
+	@RequestMapping(value="newlist.dr", produces="appliction/json; charset=UTF-8")
+	public String ajaxDrawBoardList(@RequestParam(value="cPage", defaultValue="1") int currentPage,  ModelAndView mv) {
+		PageInfo pi = Pagination.getPageInfo(boardService.selectListCount(), currentPage, 10, 6);
+		return new Gson().toJson(boardService.selectDrawBoardList(pi));
 	}
 	
 	//경매글목록
 	@RequestMapping("list.ac")
-	public ModelAndView auctionBoardList(ModelAndView mv) {
-		mv.addObject("list", boardService.selectAuctionBoardList()).setViewName("board/auctionBoard/auctionBoardListView");
+	public ModelAndView auctionBoardList(@RequestParam(value="cPage", defaultValue="1") int currentPage,  ModelAndView mv) {
+		PageInfo pi = Pagination.getPageInfo(boardService.selectListCount(), currentPage, 10, 6);
+		mv.addObject("pi", pi)
+		.addObject("list", boardService.selectAuctionBoardList(pi))
+		.setViewName("board/auctionBoard/auctionBoardListView");
 		return mv;
+	}
+	//경매글목록 추가
+	@ResponseBody
+	@RequestMapping(value="newlist.ac", produces="appliction/json; charset=UTF-8")
+	public String ajaxAuctionBoardList(@RequestParam(value="cPage", defaultValue="1") int currentPage,  ModelAndView mv) {
+		PageInfo pi = Pagination.getPageInfo(boardService.selectListCount(), currentPage, 10, 6);
+		return new Gson().toJson(boardService.selectAuctionBoardList(pi));
 	}
 	
 	//추첨글작성폼

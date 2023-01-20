@@ -60,8 +60,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public ArrayList<ADBoard> selectDrawBoardList() {
-		return boardDao.selectDrawBoardList(sqlSession);
+	public ArrayList<ADBoard> selectDrawBoardList(PageInfo pi) {
+		return boardDao.selectDrawBoardList(sqlSession, pi);
 	}
 
 	@Override
@@ -86,8 +86,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public ArrayList<ADBoard> selectAuctionBoardList() {
-		return boardDao.selectAuctionBoardList(sqlSession);
+	public ArrayList<ADBoard> selectAuctionBoardList(PageInfo pi) {
+		return boardDao.selectAuctionBoardList(sqlSession, pi);
 	}
 
 	@Override
@@ -139,6 +139,8 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectSerialDetail(sqlSession, novelNo, serialNo);
 	}
 	
+	
+	// 유림시작
 	//중고게시판 => 글작성 시 insert
 	@Override
 	public int insertUsedBoard(UsedBoard b) {
@@ -321,6 +323,19 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	///////////유림 끝
+	
+	
+	
+	
+	
 	@Override
 	public int increaseCount(int boardNo) {
 		return 0;
@@ -422,6 +437,12 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int selectNovelLikeCount(Novel novel) {
 		return boardDao.selectNovelLikeCount(sqlSession, novel);
+	}
+
+	@Override
+	public int selectReportStatus(int reveiwNo) {
+		
+		return boardDao.selectReportStatus(sqlSession, reveiwNo);
 	}
 
 
