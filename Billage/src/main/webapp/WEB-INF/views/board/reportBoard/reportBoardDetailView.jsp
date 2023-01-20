@@ -36,23 +36,23 @@
 
 		<div class="outer">
 			<div id="boardDetailTitle" style="display:flex; flex-direction: row; justify-content: space-between;">
-				<div><h2>자유게시판</h2></div>
+				<div><h2>신고게시판</h2></div>
 				<div><button ><a href="list.ro"">신고게시판 목록</a></button></div>
 			</div>
 			<br>
 			
 			<div id="boardTitle"><h3>${r.reportTitle}</h3></div>
-			<div id="nickName">${r.nickName }</div>
+			<div id="nickName">신고자 : ${r.nickName }</div>
 			<div id="boardAct" style="display:flex; flex-direction: row; justify-content: flex-end; ">
 				<div id="boardDate">${r.reportDate}&nbsp;</div>
-				<div id="boardStatus" style="margin-right:10px;">미처리</div>
+				<div id="boardStatus" style="margin-right:10px;"></div>
 				<div id="boardUpdateBtn"><button id="boardDeleteBtn">V</button></div>
 			</div>
 			<br>
 			
 			<hr>
 			<div id="boardContent">
-				<pre>${r.reportContent}</pre>
+				<pre style="font-size:35px;">${r.reportContent}</pre>
 			</div>
 			<br>
 			
@@ -67,6 +67,7 @@
 							data : { reviewNo : ${r.reviewNo} },
 							success : function(result){
 								if(result>0) {
+									alert('처리완료');
 									$('#boardStatus').html('처리완료');
 								}
 							}
