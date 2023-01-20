@@ -139,6 +139,8 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectSerialDetail(sqlSession, novelNo, serialNo);
 	}
 	
+	
+	// 유림시작
 	//중고게시판 => 글작성 시 insert
 	@Override
 	public int insertUsedBoard(UsedBoard b) {
@@ -319,6 +321,19 @@ public class BoardServiceImpl implements BoardService {
 	public int deleteReviewReply(ReviewReply r) {
 		return boardDao.deleteReviewReply(sqlSession, r);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	///////////유림 끝
+	
+	
+	
 	
 	
 	@Override

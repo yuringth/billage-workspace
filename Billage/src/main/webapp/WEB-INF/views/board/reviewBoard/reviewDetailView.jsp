@@ -252,15 +252,14 @@
 							
 						} else if(list[i].userNo == '${loginUser.userNo}' ){
 							
-							var btn = '<button class="btn btn-secondary onclick="deleteReply(' + list[i].replyNo +','+ list[i].reviewNo + ')">댓글삭제</button>';
-							var btn2 = '<button class="btn btn-secondary onclick="deleteReply(' + list[i].replyNo +','+ list[i].reviewNo + ')">댓글수정</button>';
+							var btn = '<button class="btn btn-secondary" onclick="deleteReply(' + list[i].replyNo +','+ list[i].reviewNo + ')">댓글삭제</button>';
+							var btn = '<button class="btn btn-secondary" onclick="changeReviewReply()">댓글수정</button>';
 							
 							result += '<tr>'
 							 	   + '<th>' + list[i].userId + '</th>'
 							 	   + '<td>' + list[i].replyContent + '</td>'
 							 	   + '<td>' + list[i].createDate + '</td>'
 	   							   + '<td>' + btn + '</td>'
-	   							   + '<td>' + btn2 + '</td>'
 							 	   + '</tr>'
 						}
 					}
@@ -275,6 +274,9 @@
 			})
 		};
 		
+		
+		
+		/* 댓글 삭제 함수 */
 		function deleteReply(num1, num2){
 			
 			var result = confirm("댓글을 삭제하시겠습니까?");
@@ -286,9 +288,32 @@
 				alert("취소하였습니다.");
 			}
 		};
+		
+		 
 		</script>
 	
 	
+<%-- 		
+	
+		function changeReviewReply(){
+			
+			$.ajax({
+				url: 'rChange.re',
+				data: {
+					reviewNo : ${b.reviewNo},
+					replyNo : ${b.replyNo}
+				},
+				success:function(){
+					
+				},
+				error:function(){
+					console.log('실패');
+				}
+			})
+			
+			
+			
+		} --%>
 	
 	
 	
