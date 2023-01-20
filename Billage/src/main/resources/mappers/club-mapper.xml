@@ -43,7 +43,14 @@
 		<result column="OPEN_MEM_COUNT" 	property="openMemCount" />
 	</resultMap>
 	
-
+	<resultMap type="socket" id="socketResultSet">
+		<result column="SOCKET_NO"			 property="socketNo" />
+		<result column="USER_NO"			 property="userNo" />
+		<result column="CLUB_NO"			 property="clubNo" />
+		<result column="MESSAGE"			 property="message" />
+		<result column="SOCKET_DATE"		 property="socketDate" />
+		<result column="SOCKET_STATUS"		 property="socketStatus" />
+	</resultMap>
 	<!-- 
 	<resultMap type="club" id="clubLikeResultSet">
 		<result column="CLUB_NAME" property="userName" />
@@ -722,6 +729,31 @@
 		   		OPEN_NO = #{ openNo }
 	</select>
 	
+	
+	<!-- insert Chat -->
+	<insert id="insertChat" parameterType="java.util.HashMap" >
+		INSERT
+		  INTO
+		  		SOCKET
+		  		(
+		  		 SOCKET_NO
+				,USER_NO
+				,CLUB_NO
+				,MESSAGE
+				,SOCKET_DATE
+				,SOCKET_STATUS
+		  		)
+		VALUES 
+				(
+				 SEQ_SOCNO.NEXTVAL
+				,#{ userNo }
+				,#{ clubNo }
+				,#{ message }
+				,SYSDATE
+				,'N'
+				)
+	</insert>
+
 </mapper>
 
 

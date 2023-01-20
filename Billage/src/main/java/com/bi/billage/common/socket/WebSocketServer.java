@@ -1,5 +1,6 @@
 package com.bi.billage.common.socket;
 
+import java.util.HashMap;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
@@ -39,13 +40,24 @@ public class WebSocketServer extends TextWebSocketHandler {
 		TextMessage newMessage = new TextMessage(message.getPayload());
 		//session.sendMessage(newMessage);
 		
+		
+		
 		int userNo = ((User)session.getAttributes().get("loginUser")).getUserNo();
 		int clubNo = ((User)session.getAttributes().get("loginUser")).getClubNo();
 		
-		
 		System.out.println(userNo);
 		System.out.println(clubNo);
-		//clubService.insertChat(userNo, message);
+		
+		
+		HashMap<String, String> map = new HashMap();
+		
+		map.put("userNo", String.valueOf(userNo));
+		map.put("clubNo", String.valueOf(clubNo));
+		map.put("message", newMessage.getPayload());
+		
+		int result = clubService.insertChat(map);
+		System.out.println(result);
+		
 		for(WebSocketSession ws : users) {
 			ws.sendMessage(newMessage);
 		}

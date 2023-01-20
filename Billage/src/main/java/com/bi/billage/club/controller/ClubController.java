@@ -75,7 +75,7 @@ public class ClubController {
 		if(result > 0) {
 			if(null != session.getAttribute("loginUser")) {
 				club.setUserNo(((User)session.getAttribute("loginUser")).getUserNo());
-				club.setClubNo(clubNo);
+				((User)session.getAttribute("loginUser")).setClubNo(clubNo);
 			} 
 		
 		

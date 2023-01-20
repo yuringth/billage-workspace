@@ -240,6 +240,7 @@
 			
 			
 			function chatSend(){
+				
 				var text = $('#text-input').val();
 				
 				if(!text){
@@ -252,9 +253,15 @@
 			}
 		
 			
-			function chatOut(){
-				socket.close();
-				$('#chat-text-area').text('${loginUser.userId}!! 퇴장하셨씁니다');
+			function chatOut(e){
+				
+				if(e === 1){
+					alert('로그인 유저만 이용 가능합니다. ');	
+					
+				} else{
+					socket.close();
+					$('#chat-text-area').text('${loginUser.userId}!! 퇴장하셨씁니다');
+				}
 			}
 		
 		</script>

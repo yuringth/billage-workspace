@@ -1,6 +1,7 @@
 package com.bi.billage.club.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.bi.billage.club.model.vo.Club;
 import com.bi.billage.club.model.vo.ClubOpen;
@@ -73,6 +74,6 @@ public interface ClubService {
 	int selectOpenMemNum(ClubOpen clubOpen);
 	
 	// INSERT SOCKET 
-	
+	int insertChat(HashMap<String, String> map);
 	
 }

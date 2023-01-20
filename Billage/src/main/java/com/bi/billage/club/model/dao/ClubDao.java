@@ -1,6 +1,7 @@
 package com.bi.billage.club.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -116,6 +117,11 @@ public class ClubDao {
 	// selectOpenMemNum
 	public int selectOpenMemNum(SqlSessionTemplate sqlSession, ClubOpen clubOpen) {
 		return sqlSession.selectOne("clubMapper.selectOpenMemNum", clubOpen);
+	}
+	
+	//insertChat
+	public int insertChat(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		return sqlSession.insert("clubMapper.insertChat", map);
 	}
 	
 }

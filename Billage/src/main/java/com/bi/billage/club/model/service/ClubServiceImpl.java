@@ -1,6 +1,7 @@
 package com.bi.billage.club.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -123,6 +124,11 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public int selectOpenMemNum(ClubOpen clubOpen) {
 		return clubDao.selectOpenMemNum(sqlSession, clubOpen);
+	}
+
+	@Override
+	public int insertChat(HashMap<String, String> map) {
+		return clubDao.insertChat(sqlSession, map);
 	}
 
 	

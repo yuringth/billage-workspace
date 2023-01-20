@@ -15,6 +15,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.bi.billage.reply.model.vo.Reply" 			alias="reply" />
 		<typeAlias type="com.bi.billage.club.model.vo.Club" 			alias="club" />
 		<typeAlias type="com.bi.billage.club.model.vo.ClubOpen" 		alias="clubOpen" />
+		<typeAlias type="com.bi.billage.club.model.vo.Socket" 			alias="socket" />
 		<typeAlias type="com.bi.billage.board.model.vo.Novel" 			alias="novel" />
 		<typeAlias type="com.bi.billage.board.model.vo.Serial" 			alias="serial" />
 		<typeAlias type="com.bi.billage.board.model.vo.SerialRequest"	alias="serialRequest" />
