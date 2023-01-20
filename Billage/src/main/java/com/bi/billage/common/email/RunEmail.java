@@ -16,8 +16,8 @@ public class RunEmail {
 		// - 메일을 보내는 계정을 설정
 		impl.setHost("smtp.gmail.com");
 		impl.setPort(587);
-		impl.setUsername("toandboy@gmail.com");		// 보내는 이메일 주소
-		impl.setPassword("animukgwvmiziiil");		// 메일 패스워드
+		//impl.setUsername();		// 보내는 이메일 주소
+		//impl.setPassword();		// 메일 패스워드
 		
 		// 옵션 설정
 		Properties prop = new Properties();

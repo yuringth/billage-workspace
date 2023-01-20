@@ -18,6 +18,7 @@
 		<result column="origin_name"	property="originName" />
 		<result column="change_name"	property="changeName" />
 		<result column="LIKEUSER"		property="likeUser" />
+		<result column="LIKESTATUS"		property="likeStatus" />
 	</resultMap>
 	
 	<select id="selectNovelListCount" resultType="_int">
@@ -77,9 +78,52 @@
 				)
 	</insert>
 	
-	<select id="selectNovelinfo" resultMap="novelResultSet">
+	<select id="selectNovelinfo" parameterType="novel" resultMap="novelResultSet">
+<!-- 		select -->
+<!-- 			n.novel_no, -->
+<!-- 			n.user_no, -->
+<!-- 			novel_title, -->
+<!-- 			nickname, -->
+<!-- 			novel_display, -->
+<!-- 			start_date, -->
+<!-- 			serial_status, -->
+<!-- 			charge_status, -->
+<!-- 			origin_name, -->
+<!-- 			change_name, -->
+<!-- 			nl.user_no "LIKEUSER" -->
+<!-- 		from -->
+<!-- 			novel n -->
+<!-- 		join -->
+<!-- 			member m -->
+<!-- 		on -->
+<!-- 			n.user_no = m.user_no -->
+<!-- 		LEFT -->
+<!-- 		JOIN    -->
+<!--         ( -->
+<!--           SELECT  -->
+<!--           		  NL.USER_NO  -->
+<!--         		    FROM  -->
+<!--         		    	  NOVEL_LIKE NL -->
+<!--         		   WHERE -->
+<!--       	             	NL.USER_NO = #{ userNo }  -->
+<!--       	             	AND NL.NOVEL_NO = #{ novelNo }  -->
+<!-- 				   								) NL ON(N.NOVEL_NO = NOVEL_NO) -->
+<!-- 		where -->
+<!-- 			novel_no = #{novelNo}
+
+
+
+(select
+                    count(*)
+            from
+                    NOVEL_LIKE NL
+            WHERE
+                    NL.NOVEL_NO = #{ novelNo }
+              AND
+              		USER_NO = ${ userNo }) LIKESTATUS
+              		 -->
 		select
-			novel_no,
+			n.novel_no,
 			n.user_no,
 			novel_title,
 			nickname,
@@ -88,15 +132,22 @@
 			serial_status,
 			charge_status,
 			origin_name,
-			change_name
+			change_name,
+			(select
+                    count(*)
+            from
+                    NOVEL_LIKE NL
+            WHERE
+                    NL.NOVEL_NO = #{ novelNo }) LIKEUSER
+			
 		from
 			novel n
 		join
 			member m
 		on
-				n.user_no = m.user_no
+			n.user_no = m.user_no
 		where
-			novel_no = #{novelNo}
+			novel_no = #{ novelNo }
 	</select>
 	
 	<!-- Novel Like Insert -->
@@ -137,5 +188,42 @@
 		  WHERE
 				NOVEL_NO = #{ novelNo }
 	</select>
+	
+	<select id="chnageLikeBtnNovel" parameterType="novel" resultType="_int">
+		SELECT
+				COUNT(*)
+		  FROM
+		  		NOVEL_LIKE
+		 WHERE
+		 		USER_NO = #{userNo}
+		   AND
+		   		NOVEL_NO = #{novelNo}
+		  		
+	</select>
+	
+	<insert id="novelLike" parameterType="novel">
+		INSERT
+		  INTO
+		  		NOVEL_LIKE
+		  		(
+		  		USER_NO,
+		  		NOVEL_NO
+		  		)
+		 VALUES
+		 		(
+		 		#{userNo},
+		 		#{novelNo}
+		 		)
+	</insert>
+	
+	<delete id="novelCancel" parameterType="novel">
+		DELETE
+		  FROM
+		  		NOVEL_LIKE
+		 WHERE
+		 		USER_NO = #{userNo}
+		    AND
+		 		NOVEL_NO = #{novelNo}
+	</delete>
 
 </mapper>

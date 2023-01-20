@@ -65,6 +65,14 @@ public interface BoardService {
 	// FAQ 리스트 조회
 	ArrayList<FAQ> selectFaqList(FAQ faq);
 	
+	//좋아요 버튼 변경
+	int chnageLikeBtnNovel(Novel nv);
+	
+	//좋아요
+	int novelLike(Novel nv);
+	//취소
+	int novelCancel(Novel nv);
+	
 	//광진 구역끝
 	
 	
