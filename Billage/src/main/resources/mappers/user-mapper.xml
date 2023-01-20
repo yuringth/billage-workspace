@@ -22,10 +22,10 @@
 		<result column="POINT"    			property="point" />
 		<result column="STATUS"				property="status" />
 		<result column="AUCTION_BOARD"		property="auctionBoard" />
-		<result column="CLUB_BOARD"				property="clunBoard" />
+		<result column="CLUB_BOARD"				property="clubBoard" />
 		<result column="DRAW_BOARD"				property="drawBoard" />
 		<result column="RENT_BOARD"				property="rentBoard" />
-		<result column="REVIEW"				property="reviewBoard" />
+		<result column="REVIEW"				property="review" />
 		<result column="USED_BOARD"				property="usedBoard" />
 		<result column="BOARD"				property="board" />
 	</resultMap>
