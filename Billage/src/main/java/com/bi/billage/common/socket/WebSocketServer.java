@@ -9,13 +9,13 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-import com.bi.billage.user.model.service.UserService;
+import com.bi.billage.club.model.service.ClubService;
 import com.bi.billage.user.model.vo.User;
 
 public class WebSocketServer extends TextWebSocketHandler {
 	
 	@Autowired
-	UserService memberService;
+	ClubService clubService;
 	/*
 	 * 사용자 기억하기 위한 저장소
 	 * - 중복 불가 / 
@@ -39,10 +39,10 @@ public class WebSocketServer extends TextWebSocketHandler {
 		TextMessage newMessage = new TextMessage(message.getPayload());
 		//session.sendMessage(newMessage);
 		
-		String userId = ((User)session.getAttributes().get("loginUser")).getUserId();
+		int userNo = ((User)session.getAttributes().get("loginUser")).getUserNo();
 		
-		System.out.println(userId);
-		memberService.insertChat(userId, message, chatNo);
+		System.out.println(userNo);
+		//clubService.insertChat(userNo, message);
 		for(WebSocketSession ws : users) {
 			ws.sendMessage(newMessage);
 		}
