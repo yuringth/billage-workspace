@@ -60,8 +60,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public ArrayList<ADBoard> selectDrawBoardList() {
-		return boardDao.selectDrawBoardList(sqlSession);
+	public ArrayList<ADBoard> selectDrawBoardList(PageInfo pi) {
+		return boardDao.selectDrawBoardList(sqlSession, pi);
 	}
 
 	@Override
@@ -86,8 +86,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public ArrayList<ADBoard> selectAuctionBoardList() {
-		return boardDao.selectAuctionBoardList(sqlSession);
+	public ArrayList<ADBoard> selectAuctionBoardList(PageInfo pi) {
+		return boardDao.selectAuctionBoardList(sqlSession, pi);
 	}
 
 	@Override
