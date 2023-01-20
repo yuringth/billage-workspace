@@ -41,4 +41,7 @@ public class User {
 	private int rentBoard;
 	private int review;
 	private int usedBoard;
+	
+	private int boardCount; //총 게시글 수
+	
 }
