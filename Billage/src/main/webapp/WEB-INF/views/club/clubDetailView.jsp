@@ -46,8 +46,9 @@
 	
 	#group-info-area{ display:block; width:1200px; height:500px;}
 	
-	#group-reply-area{ display:bolck; width:1200px; height:300px;}
-	
+	#group-reply-area{ display:block; width:1200px; height:300px;}
+	#group-chat-area{display:block; width:1200px; height:300px; border:1px solid black; overflow:scroll;}
+	#group-chat-area > .chat-zone{}
 	#participant-area{ border:1px solid black; width:100%; height:400px; overflow:scroll;}
 	
 	.members-area{ width: 100%; height:40px;  text-align:center; }
@@ -181,6 +182,50 @@
 		<div id="group-reply-area">
 			<div>댓글존</div>
 		</div>
+		
+		
+		<button onclick="chatIn();"> chat입장 </button>
+		<button onclick="chatOut();"> chat퇴장 </button>
+		<div id="group-chat-area" class="chat chat-area">
+			<div id="chat-zone" class="chat">
+
+			</div>
+			<div id="chat-text-area" class="chat">
+					
+			</div>
+		</div>
+		<div id="chat-input-area" class="chat">
+			<input type="text" style="width:500px; height:40px;"/>
+			<button onclick="send();">전송</button>
+		</div>
+		
+		
+		<script>
+			var socket;
+		
+			function chatIn(){
+				
+				var uri = 'ws://localhost:8787/billage/clubChat'
+				socket = new WebSocket(uri); 
+				
+				
+				socket.onopen = function(){
+					console.log('서버랑 연결됐님?');
+					$('#chat-text-area').text('${loginUser.userId}!! 이 몸 등장 ㅋ');
+					alert('달인겉절이칼국수샤브');
+				}
+				
+				
+			}
+			
+		
+		
+		
+		
+		</script>
+		
+		
+		
 	</div>
 		
 		<div id="group-btn-area">

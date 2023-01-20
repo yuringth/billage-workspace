@@ -46,6 +46,7 @@
             <h2>제목 : ${novel.novelTitle}</h2>
             <h4>작가명 : ${novel.nickName}</h4>
             <h6>설명 : ${novel.novelDisplay }</h6>
+            <h6 id="like-count">추천수 : ${novel.heart }</h6>
         </div>
             <br>
             <!-- 로그인 후 작가본인일 경우만 보여지는 글쓰기 버튼 -->
@@ -55,11 +56,67 @@
             <input type="submit" class="btn btn-secondary" style="float:right;" value="연재하기">
             </form>
             </c:if>
+            
             <!-- 로그인 후 작가본인이 아닐 경우만 보여지는 버튼 -->
             <c:if test="${ loginUser.userNo ne novel.userNo and loginUser.userNo ne null }">
-            <a id="like-novel" class="btn btn-secondary" style="float:right;">작품추천</a>
-            <a id="donate-novel" class="btn btn-secondary" style="float:right;">작품후원</a>
-            </c:if>
+            <button id="donate-novel" style="float:left;">작품후원</button>
+            <button id="${ novel.likeUser }" class="like-novel" style="float:left;"></button>
+            </c:if><br>
+            
+        <c:choose>
+	    <c:when test="${ loginUser.userNo ne novel.userNo and loginUser.userNo ne null }">
+	    	<script>
+				//추천하기 / 추천취소 
+				const userNo  = ${ loginUser.userNo };  
+				const novelNo = ${ novel.novelNo };
+				
+				//------------
+				$('.like-novel').click(function(){
+					
+					var $likeStatus = $(this).attr('id');
+
+					$.ajax({
+						url : 'novelLike.nv',
+						data : {
+							likeStatus : $likeStatus,
+							userNo : userNo,
+							novelNo : novelNo
+						},
+						success : function( result ){
+							console.log(result[0]);
+							if(result[0] > 0){
+								$('.like-novel').empty();
+								$('#like-count').empty();
+								$('#like-count').text(result[1]);
+								$('.like-novel').attr('id', userNo);
+					    		$($('.like-novel').text('추천취소'));
+					    	} else if (result[0] == 0) {
+					    		$('.like-novel').empty();
+					    		$('#like-count').empty();
+								$('#like-count').text(result[1]);
+					    		$('.like-novel').attr('id', 0);
+					    		$($('.like-novel').text('추천하기'));
+					    	} else{
+					    		alert('잠시 후 다시 시도해주세요 ');
+					    	}
+						},
+						error : function(){
+							console.log('추천 비동기 실패');
+						}
+						
+					}) // like ajax
+				}); //like 버튼 클릭 
+	    	</script>
+	    </c:when>
+	    <c:otherwise>
+	    	<script>
+	    		$('#btn-zone button[type=button]').click(function(){
+					alert("로그인유저만 가능합니다.");
+	    		})
+	    	</script>
+	    </c:otherwise>
+    </c:choose>
+            
             <br><br>
             <table id="boardList" class="table table-hover" align="center">
                 <thead>

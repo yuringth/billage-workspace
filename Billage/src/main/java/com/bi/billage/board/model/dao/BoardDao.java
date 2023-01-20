@@ -407,11 +407,9 @@ public class BoardDao {
 		return sqlSession.insert("serialMapper.insertSerialRequest", sr);
 	}
 
-
 	public int insertNovel(SqlSessionTemplate sqlSession, Novel n) {
 		return sqlSession.insert("novelMapper.insertNovel", n);
 	}
-
 
 	public int insertSerial(SqlSessionTemplate sqlSession, Serial se, Integer novelNo) {
 		Map<String, Object> map = new HashMap<>();
@@ -420,14 +418,24 @@ public class BoardDao {
 		return sqlSession.insert("serialMapper.insertSerial", map);
 	}
 
-
 	public Novel selectNovelInfo(SqlSessionTemplate sqlSession, int novelNo) {
 		return sqlSession.selectOne("novelMapper.selectNovelinfo", novelNo);
 	}
 
-
 	public ArrayList<FAQ> selectFaqList(SqlSessionTemplate sqlSession, FAQ faq) {
 		return (ArrayList)sqlSession.selectList("faqMapper.selectFaqList", faq);
+	}
+
+	public int novelLikeDelete(SqlSessionTemplate sqlSession, Novel novel) {
+		return sqlSession.delete("novelMapper.novelLikeDelete", novel);
+	}
+
+	public int novelLikeInsert(SqlSessionTemplate sqlSession, Novel novel) {
+		return sqlSession.insert("novelMapper.novelLikeInsert", novel);
+	}
+
+	public int selectNovelLikeCount(SqlSessionTemplate sqlSession, Novel novel) {
+		return sqlSession.selectOne("novelMapper.selectNovelLikeCount", novel);
 	}
 
 
