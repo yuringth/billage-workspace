@@ -75,6 +75,7 @@ public class ClubController {
 		if(result > 0) {
 			if(null != session.getAttribute("loginUser")) {
 				club.setUserNo(((User)session.getAttribute("loginUser")).getUserNo());
+				club.setClubNo(clubNo);
 			} 
 		
 		
@@ -87,11 +88,6 @@ public class ClubController {
 			mv.addObject("club", club);
 			mv.addObject("clubOpenList", clubOpen);
 			mv.addObject("memberList", ClubMemberList);
-			
-			
-			for(ClubOpen c : clubOpen) {
-				System.out.println(c);
-			}
 			
 			
 			mv.setViewName("club/clubDetailView");

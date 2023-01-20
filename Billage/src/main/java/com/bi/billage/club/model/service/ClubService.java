@@ -71,4 +71,8 @@ public interface ClubService {
 	
 	// ClubOpen Select mem Num
 	int selectOpenMemNum(ClubOpen clubOpen);
+	
+	// INSERT SOCKET 
+	
+	
 }

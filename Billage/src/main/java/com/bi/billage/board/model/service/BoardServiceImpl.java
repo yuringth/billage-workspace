@@ -456,7 +456,8 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int novelCancel(Novel nv) {
 		return boardDao.novelCancel(sqlSession, nv);
-		
+	}
+	
 	public int selectReportStatus(int reveiwNo) {
 		
 		return boardDao.selectReportStatus(sqlSession, reveiwNo);

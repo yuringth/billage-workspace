@@ -183,9 +183,16 @@
 			<div>댓글존</div>
 		</div>
 		
-		
-		<button onclick="chatIn();"> chat입장 </button>
-		<button onclick="chatOut();"> chat퇴장 </button>
+		<c:choose>
+			<c:when test="${ !empty loginUser }" >
+				<button onclick="chatIn();"> chat입장 </button>
+				<button onclick="chatOut();"> chat퇴장 </button>
+			</c:when>
+			<c:otherwise>
+				<button onclick="chatIn(1);"> chat입장 </button>
+				<button onclick="chatOut(1);"> chat퇴장 </button>
+			</c:otherwise>
+		</c:choose>
 		<div id="group-chat-area" class="chat chat-area">
 			<div id="chat-zone" class="chat">
 
@@ -203,23 +210,30 @@
 		<script>
 			var socket;
 		
-			function chatIn(){
+			function chatIn(e){
 				
-				var uri = 'ws://localhost:8787/billage/clubChat'
-				socket = new WebSocket(uri); 
-				// 생성자 함수 
-				
-				socket.onopen = function(){
-					console.log('서버랑 연결됐님?');
-					$('#chat-text-area').text('${loginUser.userId}!! 이 몸 등장 ㅋ');
-				}
-				
-				socket.onmessage = function(e){
-					console.log('메시지가 도착했씁니다');
+				if(e === 1){
+					alert('로그인 유저만 이용 가능합니다. ');
+				} else {
 					
-					var str = $('<p></p>');
-					str.text(e.data);
-					$('#chat-text-area').append(str);
+					
+					var uri = 'ws://localhost:8787/billage/clubChat'
+					socket = new WebSocket(uri); 
+					// 생성자 함수 
+					
+					socket.onopen = function(){
+						console.log('서버랑 연결됐님?');
+						$('#chat-text-area').text('${loginUser.userId}!! 이 몸 등장 ㅋ');
+					}
+					
+					socket.onmessage = function(e){
+						console.log('메시지가 도착했씁니다');
+						
+						var str = $('<p></p>');
+						str.text(e.data);
+						$('#chat-text-area').append(str);
+					}
+					
 				}
 				
 			}

@@ -40,8 +40,11 @@ public class WebSocketServer extends TextWebSocketHandler {
 		//session.sendMessage(newMessage);
 		
 		int userNo = ((User)session.getAttributes().get("loginUser")).getUserNo();
+		int clubNo = ((User)session.getAttributes().get("loginUser")).getClubNo();
+		
 		
 		System.out.println(userNo);
+		System.out.println(clubNo);
 		//clubService.insertChat(userNo, message);
 		for(WebSocketSession ws : users) {
 			ws.sendMessage(newMessage);
