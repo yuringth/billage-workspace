@@ -439,6 +439,12 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectNovelLikeCount(sqlSession, novel);
 	}
 
+	@Override
+	public int selectReportStatus(int reveiwNo) {
+		
+		return boardDao.selectReportStatus(sqlSession, reveiwNo);
+	}
+
 
 	
 	
