@@ -318,7 +318,7 @@
 	
 	
 	<!-- 댓글 등록 -->
-	<insert id="insertReviewReply">
+	<insert id="insertReviewReply" parameterType="ReviewReply">
 		INSERT 
 		  INTO 
 		       REVIEW_REPLY

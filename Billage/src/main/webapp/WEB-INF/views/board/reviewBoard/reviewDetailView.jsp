@@ -323,12 +323,47 @@
 				url:'rInsert.re',
 				data:{
 					reviewNo : ${b.reviewNo},
+					userNo : ${b.userNo},
 					replyContent : $('#reply_content').val()
 				},
-				success:function(){
+				success:function(list){
+					console.log(list);
+					
+					var result = '';
+					
+					// 1. 댓작성자 == 로그인 유저 => 댓글삭제/수정 버튼 보이게
+					// 2. 댓작성자 != 로그인 유저 => 버튼 안보이게
+					// 3. 비회원 => 버튼 안보이게
+					for(var i in list){
+						
+						if(list[i].userNo == '${loginUser.userNo}' /* ${b.userNo} == loginUser.getUserNo*/){
+							var btn = '<button class="btn btn-secondary" onclick="deleteReply(' + list[i].replyNo +','+ list[i].reviewNo + ')">댓글삭제</button>';
+							var btn2 = '<button class="btn btn-secondary" onclick="ReviewReplyForm(this)">댓글수정</button>';
+							
+							result += '<tr>'
+							 	   + '<th>' + list[i].userId + '</th>'
+							 	   + '<td>' + list[i].replyContent + '</td>'
+							 	   + '<td>' + list[i].createDate + '</td>'
+	   							   + '<td>' + btn + '</td>'
+	   							   + '<td>' + btn2 + '</td>'
+							 	   + '</tr>'
+						} else if(list[i].userNo != '${loginUser.userNo}'  /*${b.userNo} != loginUser.getUserNo*/){
+							result += '<tr>'
+							 	   + '<th>' + list[i].userId + '</th>'
+							 	   + '<td>' + list[i].replyContent + '</td>'
+							 	   + '<td>' + list[i].createDate + '</td>'
+							 	   + '</tr>'
+						} else if(${empty loginUser}){
+							result += '<tr>'
+							 	   + '<th>' + list[i].userId + '</th>'
+							 	   + '<td>' + list[i].replyContent + '</td>'
+							 	   + '<td>' + list[i].createDate + '</td>'
+							 	   + '</tr>'
+						}
+					}
+					$('#replyArea tbody').html(result);
 					
 				},
-				
 				error:function(){
 					console.log('실패');
 				}
