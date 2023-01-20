@@ -427,21 +427,38 @@ public class ReviewController {
 	
 	
 	
-	// 리뷰게시판 댓글
+	// 리뷰게시판 댓글 list 띄워주기
 	@ResponseBody
 	@RequestMapping(value = "rlist.re", produces = "application/json; charset=UTF-8")
-	public String selectReplyList(int reviewNo/*, Model model ajax여서 모델에 담을 필요없음*/) {
+	public String selectReviewReplyList(int reviewNo/*, Model model ajax여서 모델에 담을 필요없음*/) {
 		
 //		System.out.println("reviewNo  : " + reviewNo);
 		
-		ArrayList<ReviewReply> list = boardService.selectReplyList(reviewNo);
+		ArrayList<ReviewReply> list = boardService.selectReviewReplyList(reviewNo);
 		System.out.println(list);
 		//model.addAttribute("list", list);
 		//System.out.println("model :" + model);
 		
-		return new Gson().toJson(boardService.selectReplyList(reviewNo));
+		return new Gson().toJson(boardService.selectReviewReplyList(reviewNo));
 
 	}
+	
+	
+	// 리뷰게시판 댓글 삭제
+	@RequestMapping("rdelete.re")
+	public String deleteReply(int replyNo, Model model) {
+		
+		if(boardService.deleteReviewReply(replyNo) > 0) {
+			
+			return "redirect:list.re";
+		} else {
+			// 에러페이지
+			model.addAttribute("errorMsg", "댓글삭제실패");
+			return "common/errorPage";
+		}
+		
+	}
+	
 	
 	
 	

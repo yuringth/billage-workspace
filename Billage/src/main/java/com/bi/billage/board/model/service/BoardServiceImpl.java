@@ -304,12 +304,17 @@ public class BoardServiceImpl implements BoardService {
 	
 	// 리뷰게시판 => 댓글 리스트 불러오기
 	@Override
-	public ArrayList<ReviewReply> selectReplyList(int reviewNo) {
+	public ArrayList<ReviewReply> selectReviewReplyList(int reviewNo) {
 		
 		System.out.println("reviewNo 서비스까지"  + reviewNo);
-		return boardDao.selectReplyList(sqlSession, reviewNo);
+		return boardDao.selectReviewReplyList(sqlSession, reviewNo);
 	}
 	
+	// 댓글 삭제(update
+	@Override
+	public int deleteReviewReply(int replyNo) {
+		return boardDao.deleteReviewReply(sqlSession, replyNo);
+	}
 	
 	
 	@Override

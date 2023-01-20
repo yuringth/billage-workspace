@@ -257,12 +257,15 @@ public interface BoardService {
 	
 	// 댓글 나중에......
 	// 댓글 리스트 조회서비스(Ajax)(select)
-	ArrayList<ReviewReply> selectReplyList(int reviewNo);
+	ArrayList<ReviewReply> selectReviewReplyList(int reviewNo);
 	
 	// 댓글 작성 서비스(Ajax)(insert)
 //	int insertReply(Reply r);
 	
 
+	// 댓글 삭제(update
+	int deleteReviewReply(int replyNo);
+	
 	
 	
 	// 유림 끝

@@ -268,11 +268,14 @@ public class BoardDao {
 	
 	
 	// 리뷰게시판 => 댓글 list 뿌리기
-	public ArrayList<ReviewReply> selectReplyList(SqlSessionTemplate sqlSession, int reviewNo){
-		return (ArrayList)sqlSession.selectList("reviewMapper.selectReplyList", reviewNo);
+	public ArrayList<ReviewReply> selectReviewReplyList(SqlSessionTemplate sqlSession, int reviewNo){
+		return (ArrayList)sqlSession.selectList("reviewMapper.selectReviewReplyList", reviewNo);
 	}
 	
-	
+	// 리뷰게시판 => 댓글 삭제
+	public int deleteReviewReply(SqlSessionTemplate sqlSession, int replyNo) {
+		return sqlSession.update("reviewMapper.deleteReviewReply", replyNo);
+	}
 	
 	
 	
