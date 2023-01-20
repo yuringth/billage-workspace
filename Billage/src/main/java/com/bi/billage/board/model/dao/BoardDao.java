@@ -96,8 +96,10 @@ public class BoardDao {
 		return sqlSession.insert("ADBoardMapper.insertDrawBoard", b);
 	}
 
-	public ArrayList<ADBoard> selectDrawBoardList(SqlSessionTemplate sqlSession) {
-		return (ArrayList)sqlSession.selectList("ADBoardMapper.selectDrawBoardList");
+	public ArrayList<ADBoard> selectDrawBoardList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("ADBoardMapper.selectDrawBoardList", null, rowBounds);
 	}
 
 	public int drawIncreaseCount(SqlSessionTemplate sqlSession, int boardNo) {
@@ -112,8 +114,10 @@ public class BoardDao {
 		return sqlSession.update("ADBoardMapper.deleteDrawBoard", boardNo);
 	}
 
-	public ArrayList<ADBoard> selectAuctionBoardList(SqlSessionTemplate sqlSession) {
-		return (ArrayList)sqlSession.selectList("ADBoardMapper.selectAcutionBoardList");
+	public ArrayList<ADBoard> selectAuctionBoardList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("ADBoardMapper.selectAcutionBoardList", null, rowBounds);
 	}
 
 	public int insertAuctionBoard(SqlSessionTemplate sqlSession, ADBoard b) {

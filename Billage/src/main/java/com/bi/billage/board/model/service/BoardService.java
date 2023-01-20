@@ -128,7 +128,7 @@ public interface BoardService {
 	
 	int drawIncreaseCount (int boardNo);
 	//추첨게시글 조회
-	ArrayList<ADBoard> selectDrawBoardList();
+	ArrayList<ADBoard> selectDrawBoardList(PageInfo pi);
 	// 추첨게시글 작성
 	int insertDrawBoard(ADBoard b);
 	// 추첨게시글 상세 조회
@@ -140,7 +140,7 @@ public interface BoardService {
 	
 	int auctionIncreaseCount (int boardNo);
 	// 경매게시글 조회
-	ArrayList<ADBoard> selectAuctionBoardList();
+	ArrayList<ADBoard> selectAuctionBoardList(PageInfo pi);
 	// 경매게시글 작성
 	int insertAuctionBoard(ADBoard b);
 	// 경매게시글 상세 조회
