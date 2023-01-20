@@ -304,12 +304,21 @@ public class BoardServiceImpl implements BoardService {
 	
 	// 리뷰게시판 => 댓글 리스트 불러오기
 	@Override
-	public ArrayList<ReviewReply> selectReplyList(int reviewNo) {
+	public ArrayList<ReviewReply> selectReviewReplyList(int reviewNo) {
 		
 		System.out.println("reviewNo 서비스까지"  + reviewNo);
-		return boardDao.selectReplyList(sqlSession, reviewNo);
+		return boardDao.selectReviewReplyList(sqlSession, reviewNo);
 	}
 	
+	// 댓글 삭제(update
+//	@Override
+//	public int deleteReviewReply(int replyNo) {
+//		return boardDao.deleteReviewReply(sqlSession, replyNo);
+//	}
+	@Override
+	public int deleteReviewReply(ReviewReply r) {
+		return boardDao.deleteReviewReply(sqlSession, r);
+	}
 	
 	
 	@Override
@@ -398,6 +407,21 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int updatePrizeEnd(int boardNo) {
 		return boardDao.updatePrizeEnd(sqlSession, boardNo);
+	}
+
+	@Override
+	public int novelLikeDelete(Novel novel) {
+		return boardDao.novelLikeDelete(sqlSession, novel);
+	}
+
+	@Override
+	public int novelLikeInsert(Novel novel) {
+		return boardDao.novelLikeInsert(sqlSession, novel);
+	}
+
+	@Override
+	public int selectNovelLikeCount(Novel novel) {
+		return boardDao.selectNovelLikeCount(sqlSession, novel);
 	}
 
 

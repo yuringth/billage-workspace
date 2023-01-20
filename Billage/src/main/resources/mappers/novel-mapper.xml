@@ -17,6 +17,7 @@
 		<result column="nickname"		property="nickName" />
 		<result column="origin_name"	property="originName" />
 		<result column="change_name"	property="changeName" />
+		<result column="LIKEUSER"		property="likeUser" />
 	</resultMap>
 	
 	<select id="selectNovelListCount" resultType="_int">
@@ -96,6 +97,45 @@
 				n.user_no = m.user_no
 		where
 			novel_no = #{novelNo}
+	</select>
+	
+	<!-- Novel Like Insert -->
+	<insert id="novelLikeInsert" parameterType="novel">
+		INSERT 
+		  INTO
+		       NOVEL_LIKE
+		       (
+		        NOVEL_NO
+		       ,USER_NO
+		       )
+        VALUES
+        	   (
+        	   #{novelNo}
+        	  ,#{userNo}
+        	   )
+	</insert>
+	
+	
+	<!-- Novel Like delete -->
+	<delete id="novelLikeDelete" parameterType="novel">
+		DELETE
+		  FROM  
+		       NOVEL_LIKE
+	     WHERE
+	     	   NOVEL_NO = #{ novelNo }
+	       AND	   
+		       USER_NO = #{ userNo }
+	</delete>
+	
+	
+	<!-- Novel Like Count -->
+	<select id="selectNovelLikeCount" parameterType="novel" resultType="_int">
+		SELECT 
+				COUNT(*) "LIKECOUNT"
+		  FROM
+				NOVEL_LIKE
+		  WHERE
+				NOVEL_NO = #{ novelNo }
 	</select>
 
 </mapper>

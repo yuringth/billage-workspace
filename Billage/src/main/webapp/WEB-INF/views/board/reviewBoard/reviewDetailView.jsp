@@ -219,10 +219,10 @@
 		
 		$(function(){
 			
-			selectReplyList();			
+			selectReviewReplyList();			
 		});
 	
-		function selectReplyList(){
+		function selectReviewReplyList(){
 			
 				
 			$.ajax({
@@ -231,6 +231,8 @@
 					reviewNo : ${ b.reviewNo }
 				},
 				success:function(list){
+					
+					console.log(list);
 					
 					var result = '';
 					
@@ -250,22 +252,19 @@
 							
 						} else if(list[i].userNo == '${loginUser.userNo}' ){
 							
+							var btn = '<button class="btn btn-secondary onclick="deleteReply(' + list[i].replyNo +','+ list[i].reviewNo + ')">댓글삭제</button>';
+							var btn2 = '<button class="btn btn-secondary onclick="deleteReply(' + list[i].replyNo +','+ list[i].reviewNo + ')">댓글수정</button>';
+							
 							result += '<tr>'
 							 	   + '<th>' + list[i].userId + '</th>'
 							 	   + '<td>' + list[i].replyContent + '</td>'
 							 	   + '<td>' + list[i].createDate + '</td>'
-							 	   + '<td>' + '<a>삭제</a>' + '</td>'
+	   							   + '<td>' + btn + '</td>'
+	   							   + '<td>' + btn2 + '</td>'
 							 	   + '</tr>'
 						}
 					}
-				
-					
 					$('#replyArea tbody').html(result);
-					
-					console.log(list);
-					console.log(list[0].reviewNo);
-					console.log(list[0].userId);
-					
 					
 				},
 				error:function(){
@@ -274,9 +273,22 @@
 		
 				
 			})
-		}
+		};
 		
-	</script>
+		function deleteReply(num1, num2){
+			
+			var result = confirm("댓글을 삭제하시겠습니까?");
+			
+			if(result == true){
+				location.href='rdelete.re?replyNo=' + num1 + '&reviewNo=' + num2;
+				alert("삭제되었습니다.");
+			} else{
+				alert("취소하였습니다.");
+			}
+		};
+		</script>
+	
+	
 	
 	
 	
