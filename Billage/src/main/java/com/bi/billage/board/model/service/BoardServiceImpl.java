@@ -311,9 +311,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	// 댓글 삭제(update
+//	@Override
+//	public int deleteReviewReply(int replyNo) {
+//		return boardDao.deleteReviewReply(sqlSession, replyNo);
+//	}
 	@Override
-	public int deleteReviewReply(int replyNo) {
-		return boardDao.deleteReviewReply(sqlSession, replyNo);
+	public int deleteReviewReply(ReviewReply r) {
+		return boardDao.deleteReviewReply(sqlSession, r);
 	}
 	
 	
