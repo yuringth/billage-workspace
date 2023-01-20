@@ -281,7 +281,10 @@ public class BoardDao {
 	}
 	
 	
-	
+	// 댓글 수정
+	public int updateReviewReply(SqlSessionTemplate sqlSession, ReviewReply r) {
+		return sqlSession.update("reviewMapper.updateReviewReply", r);
+	}
 	
 	
 	

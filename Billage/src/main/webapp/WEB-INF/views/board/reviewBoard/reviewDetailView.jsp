@@ -239,7 +239,7 @@
 					for(var i in list){
 						// 1. 비회원 == 댓글작성자가 아닌 경우 => 삭제 / 수정 버튼 안보임
 						// 2. 로그인 유저 == 댓글작성자인 경우 => 삭제 / 수정 버튼 보임
-						
+						// 3. 로그인 유저 != 댓글작성자가 아닌경우 => 삭제 / 수정 버튼 안보임
 						
 						if(${empty loginUser}){
 							
@@ -253,15 +253,24 @@
 						} else if(list[i].userNo == '${loginUser.userNo}' ){
 							
 							var btn = '<button class="btn btn-secondary" onclick="deleteReply(' + list[i].replyNo +','+ list[i].reviewNo + ')">댓글삭제</button>';
-							var btn = '<button class="btn btn-secondary" onclick="changeReviewReply()">댓글수정</button>';
+							var btn2 = '<button class="btn btn-secondary" onclick="ReviewReplyForm(this)">댓글수정</button>';
 							
 							result += '<tr>'
 							 	   + '<th>' + list[i].userId + '</th>'
 							 	   + '<td>' + list[i].replyContent + '</td>'
 							 	   + '<td>' + list[i].createDate + '</td>'
 	   							   + '<td>' + btn + '</td>'
+	   							   + '<td>' + btn2 + '</td>'
+							 	   + '</tr>'
+						} else if(list[i].userNo != '${loginUser.userNo}' ){
+							
+							result += '<tr>'
+							 	   + '<th>' + list[i].userId + '</th>'
+							 	   + '<td>' + list[i].replyContent + '</td>'
+							 	   + '<td>' + list[i].createDate + '</td>'
 							 	   + '</tr>'
 						}
+						
 					}
 					$('#replyArea tbody').html(result);
 					
@@ -289,31 +298,20 @@
 			}
 		};
 		
-		 
+	
+		// 댓글 수정 폼화면
+		function ReviewReplyForm(e){
+			
+			
+			// console.log($(e).parents().eq(1).children().eq(1).text()); // 댓글 뽑아옴
+			var content = $(e).parents().eq(1).children().eq(1).text();
+			$(e).parents().eq(1).children().eq(1).text('');
+			$(e).parents().eq(1).children().eq(1).append('<textarea></textarea>');
+			$(e).parents().eq(1).children().eq(1).children().val(content);
+			
+		};
 		</script>
 	
-	
-<%-- 		
-	
-		function changeReviewReply(){
-			
-			$.ajax({
-				url: 'rChange.re',
-				data: {
-					reviewNo : ${b.reviewNo},
-					replyNo : ${b.replyNo}
-				},
-				success:function(){
-					
-				},
-				error:function(){
-					console.log('실패');
-				}
-			})
-			
-			
-			
-		} --%>
 	
 	
 	

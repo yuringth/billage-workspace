@@ -292,7 +292,7 @@
 	</select>
 	
 	
-	
+	<!-- 댓글 삭제  -->
 	<update id="deleteReviewReply"  parameterType="ReviewReply">
 		update
 		       review_reply
@@ -300,6 +300,20 @@
 		       delete_status = 'Y'
 	     where
 	           reply_no = #{ replyNo }
+	</update>
+	
+	
+	
+	<!--  댓글 수정 -->
+	<update id="updateReviewReply" parameterType="ReviewReply">
+		update
+		       reviewReply
+		   set
+		       reply_content = #{ replyContent }
+		 where
+		       delete_status = 'N'
+		   and
+		       reply_no = #{ replyNo } 
 	</update>
 	
 	
