@@ -32,6 +32,12 @@ public class WebSocketServer extends TextWebSocketHandler {
 		// 메시지를 모든 사용자에게 전송 (사용자의 수만큼 반복해서 전송)
 		// payLoad 필드에 있는 사용자가 실제로 보낸 내용 (본문) 
 		TextMessage newMessage = new TextMessage(message.getPayload());
+		//session.sendMessage(newMessage);
+		
+		for(WebSocketSession ws : users) {
+			ws.sendMessage(newMessage);
+		}
+		
 	}
 
 	@Override
