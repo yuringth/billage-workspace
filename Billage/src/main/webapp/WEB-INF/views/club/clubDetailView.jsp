@@ -70,6 +70,9 @@
 	    	ajaxClubMember();
 	    	
 	    	function ajaxClubMember(){
+	    		
+	    		$('.members').remove();
+	    		
 	    		var $clubNo =  ${ club.clubNo };
 	    		
 	    		$.ajax({
@@ -196,6 +199,15 @@
 					</c:otherwise>
 				</c:choose>
 		</div>
+	<!-- -----------------  modal  -------------------- -->
+	<div class="mem-modal-area">
+		<div >
+			<div>
+			
+			</div>
+		
+		</div>
+	</div>
 	
     
     <c:choose>

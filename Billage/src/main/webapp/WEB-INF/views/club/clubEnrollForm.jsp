@@ -256,7 +256,7 @@
 					for(let i in uniqueArr.reverse()){			
 						value += '<p class="enter-addr">' + uniqueArr[i] + '</p>';				
 					}
-					value += '</5>';
+					value += '</div>';
 					$('#result-area').html(value);
 					
 				},
