@@ -273,7 +273,7 @@
 	
 	
 	<!-- 댓글 list 불러오는 쿼리문 -->
-	<select id="selectReplyList" parameterType="_int" resultMap="reviewReplyResultset">
+	<select id="selectReviewReplyList" parameterType="_int" resultMap="reviewReplyResultset">
 		select
 				review_no
 		       ,reply_no
@@ -289,8 +289,18 @@
 		        review_no = #{ reviewNo }
 		   and
 		        delete_status = 'N'
-	
 	</select>
+	
+	
+	
+	<update id="deleteReviewReply"  parameterType="_int">
+		update
+		       review_reply
+		   set
+		       delete_status = 'Y'
+	     where
+	           reply_no = #{ replyNo }
+	</update>
 	
 	
 </mapper>

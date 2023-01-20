@@ -219,10 +219,10 @@
 		
 		$(function(){
 			
-			selectReplyList();			
+			selectReviewReplyList();			
 		});
 	
-		function selectReplyList(){
+		function selectReviewReplyList(){
 			
 				
 			$.ajax({
@@ -250,16 +250,17 @@
 							
 						} else if(list[i].userNo == '${loginUser.userNo}' ){
 							
+							var btn = '<button onclick="deleteReply(' + list[i].replyNo + ')">댓글삭제</button>';
+							
 							result += '<tr>'
 							 	   + '<th>' + list[i].userId + '</th>'
 							 	   + '<td>' + list[i].replyContent + '</td>'
 							 	   + '<td>' + list[i].createDate + '</td>'
-							 	   + '<td>' + '<a>삭제</a>' + '</td>'
+	   							  // + '<td><button onclick=' + '"location.href=rdelete.re?replyNo=' + list[i].replyNo + '">댓글삭제</button></td>'  => 이거 복잡해서 <button> 위에 변수로 빼서 사용햇음
+	   							   + '<td>' + btn + '</td>'
 							 	   + '</tr>'
 						}
 					}
-				
-					
 					$('#replyArea tbody').html(result);
 					
 					console.log(list);
@@ -274,9 +275,16 @@
 		
 				
 			})
-		}
+		};
 		
-	</script>
+		function deleteReply(num){
+			location.href='rdelete.re?replyNo=' + num;
+		};
+		
+		
+		</script>
+	
+	
 	
 	
 	

@@ -268,11 +268,14 @@ public class BoardDao {
 	
 	
 	// 리뷰게시판 => 댓글 list 뿌리기
-	public ArrayList<ReviewReply> selectReplyList(SqlSessionTemplate sqlSession, int reviewNo){
-		return (ArrayList)sqlSession.selectList("reviewMapper.selectReplyList", reviewNo);
+	public ArrayList<ReviewReply> selectReviewReplyList(SqlSessionTemplate sqlSession, int reviewNo){
+		return (ArrayList)sqlSession.selectList("reviewMapper.selectReviewReplyList", reviewNo);
 	}
 	
-	
+	// 리뷰게시판 => 댓글 삭제
+	public int deleteReviewReply(SqlSessionTemplate sqlSession, int replyNo) {
+		return sqlSession.update("reviewMapper.deleteReviewReply", replyNo);
+	}
 	
 	
 	
@@ -401,11 +404,9 @@ public class BoardDao {
 		return sqlSession.insert("serialMapper.insertSerialRequest", sr);
 	}
 
-
 	public int insertNovel(SqlSessionTemplate sqlSession, Novel n) {
 		return sqlSession.insert("novelMapper.insertNovel", n);
 	}
-
 
 	public int insertSerial(SqlSessionTemplate sqlSession, Serial se, Integer novelNo) {
 		Map<String, Object> map = new HashMap<>();
@@ -414,14 +415,24 @@ public class BoardDao {
 		return sqlSession.insert("serialMapper.insertSerial", map);
 	}
 
-
 	public Novel selectNovelInfo(SqlSessionTemplate sqlSession, int novelNo) {
 		return sqlSession.selectOne("novelMapper.selectNovelinfo", novelNo);
 	}
 
-
 	public ArrayList<FAQ> selectFaqList(SqlSessionTemplate sqlSession, FAQ faq) {
 		return (ArrayList)sqlSession.selectList("faqMapper.selectFaqList", faq);
+	}
+
+	public int novelLikeDelete(SqlSessionTemplate sqlSession, Novel novel) {
+		return sqlSession.delete("novelMapper.novelLikeDelete", novel);
+	}
+
+	public int novelLikeInsert(SqlSessionTemplate sqlSession, Novel novel) {
+		return sqlSession.insert("novelMapper.novelLikeInsert", novel);
+	}
+
+	public int selectNovelLikeCount(SqlSessionTemplate sqlSession, Novel novel) {
+		return sqlSession.selectOne("novelMapper.selectNovelLikeCount", novel);
 	}
 
 
