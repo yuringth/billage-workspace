@@ -436,6 +436,19 @@ public class BoardDao {
 	}
 
 
+	public int chnageLikeBtnNovel(SqlSessionTemplate sqlSession, Novel nv) {
+		return sqlSession.selectOne("novelMapper.chnageLikeBtnNovel", nv);
+	}
+
+	public int novelLike(SqlSessionTemplate sqlSession, Novel nv) {
+		return sqlSession.insert("novelMapper.novelLike", nv);
+	}
+
+	public int novelCancel(SqlSessionTemplate sqlSession, Novel nv) {
+		return sqlSession.delete("novelMapper.novelCancel", nv);
+	}
+
+
 	
 	
 

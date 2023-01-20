@@ -19,5 +19,6 @@ public class Novel {
 	private String nickName;//
 	private String originName;
 	private String changeName;
-	private int likeUser; // 좋아요 구분
+	private int likeUser; // 좋아요 수
+	private int likeStatus; //좋아요 여부
 }

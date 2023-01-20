@@ -122,7 +122,7 @@
     	<div id="group-detail-area">
     		<div id="detail-left">
     			<img width="500px" height="500px" src="${ club.clubImg }">
-    			<p><b id="like-count">${ club.likeCount }</b>명이 찜했어요!</p>
+    			<p><b id="like-count">${ club.likeCount }</b>명이 찜했어요!${ club.likeUser }</p>
     		</div>
     		<div id="detail-right">
     			<div>중심지역 : ${ club.clubLocation }</div>

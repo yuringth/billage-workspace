@@ -16,7 +16,6 @@
 </head>
 <body oncontextmenu="return false" ondragstart="return false" onselectstart="return false">
 	<jsp:include page="../../common/header.jsp"/>
-	   <br><br>
 	   <div class="content">
         <div class="innerOuter" style="padding:5% 10%;">
         <div class="novelCover" style="float:left;">
@@ -26,14 +25,7 @@
             <h2>제목 : ${novel.novelTitle}</h2>
             <h4>작가명 : ${novel.nickName}</h4>
             <h6>설명 : ${novel.novelDisplay }</h6>
-            <h6>추천수 : ${novel.heart }</h6>
         </div>
-            <br>
-            <!-- 로그인 후 작가본인이 아닐 경우만 보여지는 버튼 -->
-            <c:if test="${ loginUser.userNo ne novel.userNo and loginUser.userNo ne null }">
-            <a id="like-novel" class="btn btn-secondary" style="float:right;">작품추천</a>
-            <a id="donate-novel" class="btn btn-secondary" style="float:right;">작품후원</a>
-            </c:if>
             <table id="contentArea" algin="center" class="table" >
                 <tr>
                     <th width="100">제목</th>

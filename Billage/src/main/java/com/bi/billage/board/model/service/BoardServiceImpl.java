@@ -420,6 +420,27 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectNovelLikeCount(sqlSession, novel);
 	}
 
+	@Override
+	public int chnageLikeBtnNovel(Novel nv) {
+		return boardDao.chnageLikeBtnNovel(sqlSession, nv);
+	}
+
+	@Override
+	public ArrayList<ReviewReply> selectReplyList(int reviewNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int novelLike(Novel nv) {
+		return boardDao.novelLike(sqlSession, nv);
+	}
+
+	@Override
+	public int novelCancel(Novel nv) {
+		return boardDao.novelCancel(sqlSession, nv);
+	}
+
 
 	
 	
