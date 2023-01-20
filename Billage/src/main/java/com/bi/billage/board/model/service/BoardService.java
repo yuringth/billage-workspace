@@ -264,7 +264,8 @@ public interface BoardService {
 	
 
 	// 댓글 삭제(update
-	int deleteReviewReply(int replyNo);
+//	int deleteReviewReply(int replyNo);
+	int deleteReviewReply(ReviewReply r);
 	
 	
 	

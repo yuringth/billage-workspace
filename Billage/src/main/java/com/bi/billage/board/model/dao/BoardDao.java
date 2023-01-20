@@ -273,8 +273,11 @@ public class BoardDao {
 	}
 	
 	// 리뷰게시판 => 댓글 삭제
-	public int deleteReviewReply(SqlSessionTemplate sqlSession, int replyNo) {
-		return sqlSession.update("reviewMapper.deleteReviewReply", replyNo);
+//	public int deleteReviewReply(SqlSessionTemplate sqlSession, int replyNo) {
+//		return sqlSession.update("reviewMapper.deleteReviewReply", replyNo);
+//	}
+	public int deleteReviewReply(SqlSessionTemplate sqlSession, ReviewReply r) {
+		return sqlSession.update("reviewMapper.deleteReviewReply", r);
 	}
 	
 	
