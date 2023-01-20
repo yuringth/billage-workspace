@@ -98,8 +98,12 @@ public interface UserService {
 	// 회원 탈퇴
 	int deleteUser(int userNo);
 
+	// 게시글 갯수 조회
+	User countWriteBoard(int userNo);
 
-
+	
+	
+	
 	
 
 

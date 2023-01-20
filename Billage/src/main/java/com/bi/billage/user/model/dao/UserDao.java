@@ -160,4 +160,8 @@ public class UserDao {
 		return sqlSession.update("userMapper.updateNovel", n);
 	}
 
+	public User countWriteBoard(SqlSessionTemplate sqlSession, int userNo) {
+		return sqlSession.selectOne("userMapper.countWriteBoard", userNo);
+	}
+
 }
