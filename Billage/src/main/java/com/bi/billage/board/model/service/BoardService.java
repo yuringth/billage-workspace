@@ -78,7 +78,7 @@ public interface BoardService {
 	
 	ReportBoard selectReport(int rno);
 	
-	
+	int selectReportStatus(int reveiwNo);
 	
 	
 	
@@ -269,7 +269,7 @@ public interface BoardService {
 	
 	// 댓글 나중에......
 	// 댓글 리스트 조회서비스(Ajax)(select)
-	ArrayList<ReviewReply> selectReplyList(int reviewNo);
+	//ArrayList<ReviewReply> selectReplyList(int reviewNo);
 
 
 	ArrayList<ReviewReply> selectReviewReplyList(int reviewNo);
@@ -283,7 +283,8 @@ public interface BoardService {
 	int deleteReviewReply(ReviewReply r);
 	
 	
-	
+	// 댓글 수정(update)
+	int updateReviewReply(ReviewReply r);
 	
 	
 	
