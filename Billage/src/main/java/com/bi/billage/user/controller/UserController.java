@@ -372,6 +372,13 @@ public class UserController {
 			//로그인 하고 포인트 조회해서 point필드에 넣어줌
 			//loginUser.setPoint(pointService.selectPoint(loginUser.getUserNo()));
 			
+			//전체 작성 게시글 수 합하기
+			int sum = (loginUser.getAuctionBoard() + loginUser.getBoard() +
+						loginUser.getClubBoard() + loginUser.getDrawBoard() +
+						loginUser.getReview() + loginUser.getRentBoard() + loginUser.getUsedBoard());
+			
+			loginUser.setBoardCount(sum);
+			
 			session.setAttribute("loginUser", loginUser);
 			mv.setViewName("redirect:/");
 		} else {	// 로그인 실패 시
