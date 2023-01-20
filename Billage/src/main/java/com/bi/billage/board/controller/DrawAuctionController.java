@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,6 +21,7 @@ import com.bi.billage.message.model.service.MessageService;
 import com.bi.billage.message.model.vo.Message;
 import com.bi.billage.point.model.service.PointService;
 import com.bi.billage.point.model.vo.Point;
+import com.bi.billage.user.model.service.UserService;
 import com.bi.billage.user.model.vo.User;
 import com.google.gson.Gson;
 
@@ -33,6 +33,9 @@ public class DrawAuctionController {
 	
 	@Autowired
 	private PointService pointService;
+	
+	@Autowired
+	private UserService userService;
 	
 	@Autowired
 	private MessageService messageService;
@@ -104,8 +107,52 @@ public class DrawAuctionController {
 		// 넘어온 첨부파일이 있는 경우 b : 제목, 작성자, 내용 + 파일 원본명, 파일 저장경로
 
 		if(boardService.insertDrawBoard(b) > 0) { //성공 => 게시글 리스트 페이지
-			//포워딩 => boardListView.jsp => 리스트를 안불러와서 리다이렉트를 해야함
-			return "redirect:list.dr";
+			
+			//1. 작성한 글 세션에 +1 하기
+			((User)session.getAttribute("loginUser"))
+			.setBoardCount(((User)session.getAttribute("loginUser")).getBoardCount() + 1);
+			
+			//2. 등급 별로 조건 넘어가면 등급 +1 하기
+			
+			//등급이 3일때
+			if(((User)session.getAttribute("loginUser")).getUserGrade() == 3) {
+				
+				if(((User)session.getAttribute("loginUser")).getBoardCount() >= 10){
+					
+					//등급 +1 하는 메소드
+					userService.updateGrade(((User)session.getAttribute("loginUser")).getUserNo());
+					
+					//등급 +1 하고 세션에 업데이트 된 등급 넣기
+					((User)session.getAttribute("loginUser"))
+					.setUserGrade(((User)session.getAttribute("loginUser")).getUserGrade() + 1);
+					
+					
+					// 여기에 alertMessage 축하합니다 등급이 ~등급으로 올랐습니다 세션 하실분 하세요
+					return "redirect:list.dr";
+				}
+				
+			}
+			//등급이 4일때
+			if(((User)session.getAttribute("loginUser")).getUserGrade() == 4) {
+				
+				if(((User)session.getAttribute("loginUser")).getBoardCount() >= 30){
+					
+					//등급 +1 하는 메소드
+					userService.updateGrade(((User)session.getAttribute("loginUser")).getUserNo());
+					
+					//등급 +1 하고 세션에 업데이트 된 등급 넣기
+					((User)session.getAttribute("loginUser"))
+					.setUserGrade(((User)session.getAttribute("loginUser")).getUserGrade() + 1);
+					
+					
+					// 여기에 alertMessage 축하합니다 등급이 ~등급으로 올랐습니다 세션 하실분 하세요
+					return "redirect:list.dr";
+				}
+				
+			}
+				//포워딩 => boardListView.jsp => 리스트를 안불러와서 리다이렉트를 해야함
+				return "redirect:list.dr";
+			
 		} else {
 			model.addAttribute("errorMsg", "게시글 작성에 실패했어용 ㅠ");
 			return "common/errorPage";
@@ -124,7 +171,51 @@ public class DrawAuctionController {
 		} 
 		
 		if(boardService.insertAuctionBoard(b) > 0) {
+			
+			//1. 작성한 글 세션에 +1 하기
+			((User)session.getAttribute("loginUser"))
+			.setBoardCount(((User)session.getAttribute("loginUser")).getBoardCount() + 1);
+			
+			//2. 등급 별로 조건 넘어가면 등급 +1 하기
+			
+			//등급이 3일때
+			if(((User)session.getAttribute("loginUser")).getUserGrade() == 3) {
+				
+				if(((User)session.getAttribute("loginUser")).getBoardCount() == 10){
+					
+					//등급 +1 하는 메소드
+					userService.updateGrade(((User)session.getAttribute("loginUser")).getUserNo());
+					
+					//등급 +1 하고 세션에 업데이트 된 등급 넣기
+					((User)session.getAttribute("loginUser"))
+					.setUserGrade(((User)session.getAttribute("loginUser")).getUserGrade() + 1);
+					
+					
+					// 여기에 alertMessage 축하합니다 등급이 ~등급으로 올랐습니다 세션 하실분 하세요
+					return "redirect:list.ac";
+				}
+			}
+			
+			//등급이 4일때
+			if(((User)session.getAttribute("loginUser")).getUserGrade() == 4) {
+				
+				if(((User)session.getAttribute("loginUser")).getBoardCount() == 30){
+					
+					//등급 +1 하는 메소드
+					userService.updateGrade(((User)session.getAttribute("loginUser")).getUserNo());
+					
+					//등급 +1 하고 세션에 업데이트 된 등급 넣기
+					((User)session.getAttribute("loginUser"))
+					.setUserGrade(((User)session.getAttribute("loginUser")).getUserGrade() + 1);
+					
+					
+					// 여기에 alertMessage 축하합니다 등급이 ~등급으로 올랐습니다 세션 하실분 하세요
+					return "redirect:list.ac";
+				}
+			}
+			
 			return "redirect:list.ac";
+			
 		} else {
 			model.addAttribute("errorMsg", "게시글 작성에 실패했어용 ㅠ");
 			return "common/errorPage";

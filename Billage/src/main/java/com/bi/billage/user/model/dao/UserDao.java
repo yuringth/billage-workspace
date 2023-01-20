@@ -164,4 +164,8 @@ public class UserDao {
 		return sqlSession.selectOne("userMapper.countWriteBoard", userNo);
 	}
 
+	public int updateGrade(SqlSessionTemplate sqlSession, int userNo) {
+		return sqlSession.update("userMapper.updateGrade", userNo);
+	}
+
 }

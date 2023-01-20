@@ -285,10 +285,7 @@
 				location.href = 'detail.re?reviewNo=' + $(this).find('.bno').val();
 				console.log($(this).find('.bno').val()); // http://localhost:8787/billage/detail.re?reviewNo=16
 						
-						
-			
-						
-		})
+		});
 
 			
 			
@@ -302,7 +299,7 @@
 					$.ajax({
 						url:'checkFollow.fo',
 						method:'post',
-						data : {userNo1 : ${sessionScope.loginUser.userNo},
+						data : {userNo1 : '${sessionScope.loginUser.userNo}',
 									userNo2 : $(this).find('.fuserNo').val()},
 						success : function(result){
 							if(result > 0){  
@@ -318,7 +315,9 @@
 				})
 			}
 			else{
-				alert('로그인을 해주세요');
+				$('.one-content-detail1').click(function(){
+					alert('로그인을 해주세요');
+				})
 			}
 			//모달창 띄우기 끝
 		});

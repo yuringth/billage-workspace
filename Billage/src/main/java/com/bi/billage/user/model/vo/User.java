@@ -18,7 +18,7 @@ public class User {
 	private String detailAddress;	// 회원상세주소 
 	private String email;			// 회원이메일 
 	private Date enrollDate;		// 회원가입날짜 
-	private String userGrade;		// 회원등급 (1.관리자/ 2.작가/ 3,4,5 일반회원)
+	private int userGrade;		// 회원등급 (1.관리자/ 2.작가/ 3,4,5 일반회원)
 	private String profileImg;		// 회원프로필사진(없을 시 기본이미지)
 	private String birthDate;		// 회원생년월일 
 	private String gender;			// 회원성별

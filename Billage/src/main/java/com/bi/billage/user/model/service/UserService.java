@@ -100,7 +100,10 @@ public interface UserService {
 
 	// 게시글 갯수 조회
 	User countWriteBoard(int userNo);
-
+	
+	// 등급 올려주는 그거
+	int updateGrade(int userNo);
+	
 	
 	
 	
