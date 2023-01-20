@@ -1,5 +1,7 @@
 package com.bi.billage.rent.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import com.bi.billage.point.model.service.PointService;
 import com.bi.billage.point.model.vo.Point;
 import com.bi.billage.rent.model.service.RentBoardService;
 import com.bi.billage.rent.model.vo.RentBoard;
+import com.bi.billage.user.model.service.UserService;
 import com.bi.billage.user.model.vo.User;
 
 @Controller
@@ -24,6 +27,8 @@ public class RentBoardController {
 	
 	@Autowired
 	private RentBoardService rentBoardService;
+	@Autowired
+	private UserService userService;
 	
 	@Autowired
 	private PointService pointService;
@@ -54,7 +59,50 @@ public class RentBoardController {
 		}
 		
 		if(rentBoardService.insertRentBoard(rb) > 0) {
-			//System.out.println(rb);
+			
+			//1. 작성한 글 세션에 +1 하기
+	         ((User)session.getAttribute("loginUser"))
+	         .setBoardCount(((User)session.getAttribute("loginUser")).getBoardCount() + 1);
+	         
+	         //2. 등급 별로 조건 넘어가면 등급 +1 하기
+	         
+	         //등급이 3일때
+	         if(((User)session.getAttribute("loginUser")).getUserGrade() == 3) {
+	            
+	            if(((User)session.getAttribute("loginUser")).getBoardCount() == 10){
+	               
+	               //등급 +1 하는 메소드
+	               userService.updateGrade(((User)session.getAttribute("loginUser")).getUserNo());
+	               
+	               //등급 +1 하고 세션에 업데이트 된 등급 넣기
+	               ((User)session.getAttribute("loginUser"))
+	               .setUserGrade(((User)session.getAttribute("loginUser")).getUserGrade() + 1);
+	               
+	               session.setAttribute("alertMsg", "게시글 등록 완료! 축하합니다 등급이 상승되었습니다");
+	               // 여기에 alertMessage 축하합니다 등급이 ~등급으로 올랐습니다 세션 하실분 하세요
+	               return "redirect:list.rt";
+	            }
+	         }
+	         
+	         //등급이 4일때
+	         if(((User)session.getAttribute("loginUser")).getUserGrade() == 4) {
+	            
+	            if(((User)session.getAttribute("loginUser")).getBoardCount() == 30){
+	               
+	               //등급 +1 하는 메소드
+	               userService.updateGrade(((User)session.getAttribute("loginUser")).getUserNo());
+	               
+	               //등급 +1 하고 세션에 업데이트 된 등급 넣기
+	               ((User)session.getAttribute("loginUser"))
+	               .setUserGrade(((User)session.getAttribute("loginUser")).getUserGrade() + 1);
+	               
+	               
+	               // 여기에 alertMessage 축하합니다 등급이 ~등급으로 올랐습니다 세션 하실분 하세요
+	               session.setAttribute("alertMsg", "게시글 등록 완료! 축하합니다 등급이 상승되었습니다");
+	               return "redirect:list.rt";
+	            }
+	         }
+	         
 			session.setAttribute("alertMsg", "게시글 등록 성공");
 			return "redirect:list.rt";
 		} else {
@@ -125,8 +173,15 @@ public class RentBoardController {
 	
 	// 마이페이지 대여 목록
 	@RequestMapping("rentMypageList.rt")
-	public String rentMypageList() {
-		return "board/rentBoard/rentMypageList";
+	public ModelAndView rentMypageList(HttpSession session, ModelAndView mv) {
+		int userNo = ((User)session.getAttribute("loginUser")).getUserNo();
+		
+		ArrayList<RentBoard> list = rentBoardService.selectRentMypageList(userNo);
+		mv.addObject("list", list);
+		mv.setViewName("board/rentBoard/rentMypageList");
+		
+		return mv;
+		
 	}
 	
 }

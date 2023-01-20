@@ -181,7 +181,7 @@ public class DrawAuctionController {
 			//등급이 3일때
 			if(((User)session.getAttribute("loginUser")).getUserGrade() == 3) {
 				
-				if(((User)session.getAttribute("loginUser")).getBoardCount() >= 10){
+				if(((User)session.getAttribute("loginUser")).getBoardCount() == 10){
 					
 					//등급 +1 하는 메소드
 					userService.updateGrade(((User)session.getAttribute("loginUser")).getUserNo());
@@ -192,14 +192,14 @@ public class DrawAuctionController {
 					
 					
 					// 여기에 alertMessage 축하합니다 등급이 ~등급으로 올랐습니다 세션 하실분 하세요
-					return "redirect:list.dr";
+					return "redirect:list.ac";
 				}
 			}
 			
 			//등급이 4일때
 			if(((User)session.getAttribute("loginUser")).getUserGrade() == 4) {
 				
-				if(((User)session.getAttribute("loginUser")).getBoardCount() >= 30){
+				if(((User)session.getAttribute("loginUser")).getBoardCount() == 30){
 					
 					//등급 +1 하는 메소드
 					userService.updateGrade(((User)session.getAttribute("loginUser")).getUserNo());
@@ -210,7 +210,7 @@ public class DrawAuctionController {
 					
 					
 					// 여기에 alertMessage 축하합니다 등급이 ~등급으로 올랐습니다 세션 하실분 하세요
-					return "redirect:list.dr";
+					return "redirect:list.ac";
 				}
 			}
 			

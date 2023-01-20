@@ -50,6 +50,15 @@ public interface BoardService {
 	// 작품등록 서비스(insert)
 	int insertNovel(Novel n);
 	
+	// 작품 추천 delete
+	int novelLikeDelete(Novel novel);
+
+	// 작품 추천 insert
+	int novelLikeInsert(Novel novel);
+
+	// 작품 추천 count
+	int selectNovelLikeCount(Novel novel);
+	
 	// 연재 등록 서비스(insert)
 	int insertSerial(Serial se, Integer novelNo);
 	
@@ -57,6 +66,9 @@ public interface BoardService {
 	ArrayList<FAQ> selectFaqList(FAQ faq);
 	
 	//광진 구역끝
+	
+	
+	
 	
 	//휘수 구역
 	//report
@@ -258,11 +270,23 @@ public interface BoardService {
 	// 댓글 나중에......
 	// 댓글 리스트 조회서비스(Ajax)(select)
 	ArrayList<ReviewReply> selectReplyList(int reviewNo);
+
+
+	ArrayList<ReviewReply> selectReviewReplyList(int reviewNo);
 	
 	// 댓글 작성 서비스(Ajax)(insert)
 //	int insertReply(Reply r);
 	
 
+	// 댓글 삭제(update
+//	int deleteReviewReply(int replyNo);
+	int deleteReviewReply(ReviewReply r);
+	
+	
+	
+	
+	
+	
 	
 	
 	// 유림 끝
