@@ -3,14 +3,19 @@ package com.bi.billage.common.socket;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.bi.billage.user.model.service.UserService;
+import com.bi.billage.user.model.vo.User;
+
 public class WebSocketServer extends TextWebSocketHandler {
 	
-	
+	@Autowired
+	UserService memberService;
 	/*
 	 * 사용자 기억하기 위한 저장소
 	 * - 중복 불가 / 
@@ -34,6 +39,10 @@ public class WebSocketServer extends TextWebSocketHandler {
 		TextMessage newMessage = new TextMessage(message.getPayload());
 		//session.sendMessage(newMessage);
 		
+		String userId = ((User)session.getAttributes().get("loginUser")).getUserId();
+		
+		System.out.println(userId);
+		memberService.insertChat(userId, message, chatNo);
 		for(WebSocketSession ws : users) {
 			ws.sendMessage(newMessage);
 		}

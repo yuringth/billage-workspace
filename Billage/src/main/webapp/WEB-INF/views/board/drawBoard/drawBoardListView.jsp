@@ -94,6 +94,7 @@
 
 
 
+		<input type="hidden" value="${ pi.currentPage }" id="currentPage">
 
 		<div class="align-left-outer" id="contentArea">
 	        <c:forEach items="${ list }" var="b">
@@ -113,6 +114,8 @@
 		        </div>
 			</c:forEach>
 		</div>
+		
+		<div class=outOutter></div>
 
     </div>	
 
@@ -164,6 +167,62 @@
     	}
     	
     </script>
+    
+    <script>
+	    $(function(){
+	    	$(window).scroll(function() {
+    			if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+					newlist();
+    		   	}
+   			});
+	    })
+	    
+	    //전역변수(반복실행 멈추기 위해)
+    	var cNo = '';
+	    
+	    function newlist(){
+	    	
+	    	if(cNo != -1){
+	    	
+		        let cNo = $("#currentPage").val();
+		        
+		        $.ajax({
+		            url:"newlist.dr?cPage=" + (Number(cNo) + 1),
+		            success: function(list){
+		                
+		                value = '<div class="align-left-outer">';
+		                for(var i in list){
+		                	value += '<div class="one-content">'
+				    		       +	'<input type="hidden" value="' + list[i].boardNo + '" class="boardNo">'
+				    		       + 	'<input type="hidden" value="' + list[i].closeDate + '" class="closeDate">'
+				    		       +     '<div class="img-area">'
+				    		       +         '<img src="' + list[i].changeName + '">'
+				    		       +     '</div>'
+				    		       +     '<div class="text-area">'
+				    		       +         '<p class="title-text">' +  list[i].title + '</p>'
+				    		       +         '<p class="textsize">현재 가격 : ' + list[i].tryPoint + 'P</p>'
+				    		       +         '<p class="textsize time"></p>'
+				    		       +         '<p class="countnum">조회 : ' + list[i].count + '</p>'
+				    		       +     '</div>'
+				    		       + '</div>'
+		                }
+		                value += '</div>';
+		                
+						$('#currentPage').val(Number(cNo) + 1);
+		                
+		                //리스트 크기가 6보다 작으면 정지
+	               		if(list.length < 6){
+		                	cNo = -1;
+		                }
+		                
+		    		   	$('.outOutter').html($('.outOutter').html() + value);
+		            }
+	        	});
+
+	    	}
+    }
+
+    </script>   
     
     
 
