@@ -534,7 +534,7 @@ public class ReviewController {
 	
 	
 	
-	// 안만들었음
+	// 안만들었음 => 수정버튼 클릭시 돌아가는거
 	@ResponseBody
 	@RequestMapping(value = "rUpdate.re", produces = "application/json; charset=UTF-8")
 	public String updateReviewReply(int reviewNo, int replyNo, HttpSession session) {
@@ -558,12 +558,32 @@ public class ReviewController {
 			session.setAttribute("alertMsg", "댓글 수정할 수 없습니다");
 			return "redirect:detail.re?reviewNo=" + reviewNo;
 		}
-		
-		
-
 	}	
 
 	
+	
+	@ResponseBody
+	@RequestMapping(value = "rInsert.re", produces = "application/json; charset=UTF-8")
+	public String insertReviewReply(int reviewNo, String replyContent, HttpSession session) {
+		
+//		System.out.println(reviewNo);
+//		System.out.println(replyContent);
+		
+		ReviewReply r = new ReviewReply();
+		r.setReviewNo(reviewNo);
+		r.setReplyContent(replyContent);
+		
+		if(boardService.insertReviewReply(r) > 0) {
+			return "redirect:detail.re?reviewNo=" + reviewNo;
+		} else {
+			session.setAttribute("alertMsg", "댓글 작성할 수 없습니다");
+			return "redirect:detail.re?reviewNo=" + reviewNo;
+		}
+		
+		
+		
+		
+	}
 	
 	
 	

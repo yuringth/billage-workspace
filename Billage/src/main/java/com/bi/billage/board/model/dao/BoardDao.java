@@ -292,6 +292,11 @@ public class BoardDao {
 	}
 	
 	
+	// 댓글 등록
+	public int insertReviewReply(SqlSessionTemplate sqlSession, ReviewReply r) {
+		return sqlSession.insert("reviewMapper.insertReviewReply", r);
+	}
+	
 	
 	// 중고게시판 => 글작성
 	public int insertUsedBoard(SqlSessionTemplate sqlSession, UsedBoard b) {

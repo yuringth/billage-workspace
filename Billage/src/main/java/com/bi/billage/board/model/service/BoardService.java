@@ -295,6 +295,10 @@ public interface BoardService {
 	int updateReviewReply(ReviewReply r);
 	
 	
+	// 댓글 등록(insert)
+	int insertReviewReply(ReviewReply r);
+	
+	
 	
 	
 	

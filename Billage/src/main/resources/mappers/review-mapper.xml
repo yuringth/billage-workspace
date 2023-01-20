@@ -317,4 +317,26 @@
 	</update>
 	
 	
+	<!-- 댓글 등록 -->
+	<insert id="insertReviewReply">
+		INSERT 
+		  INTO 
+		       REVIEW_REPLY
+		       (
+		        REPLY_NO
+		       ,USER_NO
+		       ,REVIEW_NO
+		       ,CREATE_DATE
+		       ,REPLY_CONTENT
+		       )
+		values
+		       (
+		        SEQ_RRENO.NEXTVAL
+		       ,#{userNo}
+		       ,#{reviewNo}
+		       ,SYSDATE
+		       ,#{replyContent}
+		       )
+	</insert>
+	
 </mapper>

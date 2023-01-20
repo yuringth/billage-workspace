@@ -328,7 +328,11 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.updateReviewReply(sqlSession, r);
 	}
 	
-	
+	// 댓글 등록(insert)
+	@Override
+	public int insertReviewReply(ReviewReply r) {
+		return boardDao.insertReviewReply(sqlSession, r);
+	}
 	
 	
 	
@@ -457,7 +461,7 @@ public class BoardServiceImpl implements BoardService {
 	public int novelCancel(Novel nv) {
 		return boardDao.novelCancel(sqlSession, nv);
 	}
-	
+
 	public int selectReportStatus(int reveiwNo) {
 		
 		return boardDao.selectReportStatus(sqlSession, reveiwNo);
