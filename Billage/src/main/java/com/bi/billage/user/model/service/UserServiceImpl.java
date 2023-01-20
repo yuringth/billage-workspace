@@ -181,5 +181,10 @@ public class UserServiceImpl implements UserService{
 		return userDao.countWriteBoard(sqlSession, userNo);
 	}
 
+	@Override
+	public int updateGrade(int userNo) {
+		return userDao.updateGrade(sqlSession, userNo);
+	}
+
 
 }

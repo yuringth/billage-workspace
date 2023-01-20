@@ -135,7 +135,52 @@
 					 FROM POINT 
 					 JOIN MEMBER M USING(USER_NO)
 					 WHERE  M.USER_ID = #{ userId } ) "POINT",
-				STATUS
+				STATUS,
+				(SELECT
+		                COUNT(*)
+		          FROM
+		                AUCTION_BOARD
+		         WHERE
+		                USER_ID = #{userId}
+		           AND
+		                STATUS = 'N') AUCTION_BOARD,
+		        
+		        (SELECT
+		                COUNT(*)
+		          FROM
+		                DRAW_BOARD
+		         WHERE
+		                USER_ID = #{userId}) DRAW_BOARD,
+		        (SELECT
+		                COUNT(*)
+		          FROM
+		                BOARD
+		         WHERE
+		                USER_ID = #{userId}) BOARD,
+		        (SELECT
+		                COUNT(*)
+		          FROM
+		                CLUB_BOARD
+		         WHERE
+		                USER_ID = #{userId}) CLUB_BOARD,
+		        (SELECT
+		                COUNT(*)
+		          FROM
+		                RENT_BOARD
+		         WHERE
+		                USER_ID = #{userId}) RENT_BOARD,
+		        (SELECT
+		                COUNT(*)
+		          FROM
+		                REVIEW
+		         WHERE
+		                USER_ID = #{userId}) REVIEW,
+		        (SELECT
+		                COUNT(*)
+		          FROM
+		                USED_BOARD
+		         WHERE
+		                USER_ID = #{userId}) USED_BOARD
 
 		FROM
 				MEMBER
@@ -467,4 +512,13 @@
 		        USER_NO = #{userNo}
 				
 	</select>
+	
+	<update id="updateGrade" parameterType="_int">
+		UPDATE
+				MEMBER
+		   SET
+		   		USER_GRADE = USER_GRADE + 1
+		 WHERE
+		 		USER_NO = ${userNo}
+	</update>
 </mapper>
