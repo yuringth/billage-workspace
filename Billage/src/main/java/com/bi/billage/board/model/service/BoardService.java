@@ -284,6 +284,11 @@ public interface BoardService {
 	
 	
 	
+	
+	
+	
+	
+	
 	// 유림 끝
 	
 	
