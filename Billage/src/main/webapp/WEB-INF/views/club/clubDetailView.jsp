@@ -195,8 +195,8 @@
 			</div>
 		</div>
 		<div id="chat-input-area" class="chat">
-			<input type="text" style="width:500px; height:40px;"/>
-			<button onclick="send();">전송</button>
+			<input id="text-input" type="text" style="width:500px; height:40px;"/>
+			<button onclick="chatSend();">전송</button>
 		</div>
 		
 		
@@ -207,20 +207,41 @@
 				
 				var uri = 'ws://localhost:8787/billage/clubChat'
 				socket = new WebSocket(uri); 
-				
+				// 생성자 함수 
 				
 				socket.onopen = function(){
 					console.log('서버랑 연결됐님?');
 					$('#chat-text-area').text('${loginUser.userId}!! 이 몸 등장 ㅋ');
-					alert('달인겉절이칼국수샤브');
 				}
 				
+				socket.onmessage = function(e){
+					console.log('메시지가 도착했씁니다');
+					
+					var str = $('<p></p>');
+					str.text(e.data);
+					$('#chat-text-area').append(str);
+				}
 				
 			}
 			
+			
+			function chatSend(){
+				var text = $('#text-input').val();
+				
+				if(!text){
+					return;
+				}
+				
+				socket.send(text);
+				
+				$('#text-input').val('');
+			}
 		
-		
-		
+			
+			function chatOut(){
+				socket.close();
+				$('#chat-text-area').text('${loginUser.userId}!! 퇴장하셨씁니다');
+			}
 		
 		</script>
 		
