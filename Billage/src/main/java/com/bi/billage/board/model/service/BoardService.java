@@ -65,6 +65,14 @@ public interface BoardService {
 	// FAQ 리스트 조회
 	ArrayList<FAQ> selectFaqList(FAQ faq);
 	
+	//좋아요 버튼 변경
+	int chnageLikeBtnNovel(Novel nv);
+	
+	//좋아요
+	int novelLike(Novel nv);
+	//취소
+	int novelCancel(Novel nv);
+	
 	//광진 구역끝
 	
 	
@@ -269,7 +277,7 @@ public interface BoardService {
 	
 	// 댓글 나중에......
 	// 댓글 리스트 조회서비스(Ajax)(select)
-	ArrayList<ReviewReply> selectReplyList(int reviewNo);
+	//ArrayList<ReviewReply> selectReplyList(int reviewNo);
 
 
 	ArrayList<ReviewReply> selectReviewReplyList(int reviewNo);
@@ -283,7 +291,8 @@ public interface BoardService {
 	int deleteReviewReply(ReviewReply r);
 	
 	
-	
+	// 댓글 수정(update)
+	int updateReviewReply(ReviewReply r);
 	
 	
 	

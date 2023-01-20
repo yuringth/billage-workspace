@@ -46,7 +46,7 @@
             <h2>제목 : ${novel.novelTitle}</h2>
             <h4>작가명 : ${novel.nickName}</h4>
             <h6>설명 : ${novel.novelDisplay }</h6>
-            <h6 id="like-count">추천수 : ${novel.heart }</h6>
+            <p><b id="like-count">${ novel.likeUser }</b>명이 추천합니다!</p>
         </div>
             <br>
             <!-- 로그인 후 작가본인일 경우만 보여지는 글쓰기 버튼 -->
@@ -60,11 +60,76 @@
             <!-- 로그인 후 작가본인이 아닐 경우만 보여지는 버튼 -->
             <c:if test="${ loginUser.userNo ne novel.userNo and loginUser.userNo ne null }">
             <button id="donate-novel" style="float:left;">작품후원</button>
-            <button id="${ novel.likeUser }" class="like-novel" style="float:left;"></button>
-            </c:if><br>
+            <!-- <button id="${ novel.likeUser }" class="like-novel" style="float:left;"></button> -->
+            <div id="likeBtnArea">	
+            </div>
+            </c:if><br><br>
             
-        <c:choose>
-	    <c:when test="${ loginUser.userNo ne novel.userNo and loginUser.userNo ne null }">
+            <script>
+            	$(function(){
+            		btnchange();
+            	})
+            	
+            	function btnchange(){
+            		$.ajax({
+						url : 'changeBtn.nv',
+						data : {
+							novelNo : '${ novel.novelNo }'
+						},
+						success : function(result){
+							if(result > 0){
+								$('#likeBtnArea').html('<button class="like-novel" style="float:left;" onclick="novelCancel();">취소</button>');
+							}else{
+								$('#likeBtnArea').html('<button class="like-novel" style="float:left;" onclick="novelLike();">추천</button>');
+							}
+						}
+						
+            		})
+            	}
+            	
+            	function novelCancel(){
+            		$.ajax({
+						url : 'novelCancel.nv',
+						data : {
+							novelNo : '${ novel.novelNo }'
+						},
+						success :function(result){
+							console.log(result)
+							if(result[0] > 0){
+								$('#likeBtnArea').html('<button class="like-novel" style="float:left;" onclick="novelLike();">추천</button>');
+								$('#like-count').text(result[1]);
+							}else{
+								$('#likeBtnArea').html('<button class="like-novel" style="float:left;" onclick="novelCancel();">취소</button>');
+								$('#like-count').text(result[1]);
+							
+							}
+						}
+            		})
+            	}
+            	
+            	function novelLike(){
+            		$.ajax({
+						url : 'novelLike.nv',
+						data : {
+							novelNo : '${ novel.novelNo }'
+						},success : function(result){
+								console.log(result);
+							if(result[0] > 0){
+								$('#likeBtnArea').html('<button class="like-novel" style="float:left;" onclick="novelCancel();">취소</button>');
+								$('#like-count').text(result[1]);
+							}else{
+								$('#likeBtnArea').html('<button class="like-novel" style="float:left;" onclick="novelLike();">추천</button>');
+								$('#like-count').text(result[1]);
+							}
+						}
+						
+            		});
+            	}
+            	
+            </script>
+        <!--     
+	    <c:if test="${ loginUser.userNo ne novel.userNo and loginUser.userNo ne null }">
+	    
 	    	<script>
 				//추천하기 / 추천취소 
 				const userNo  = ${ loginUser.userNo };  
@@ -97,26 +162,28 @@
 					    		$('.like-novel').attr('id', 0);
 					    		$($('.like-novel').text('추천하기'));
 					    	} else{
-					    		alert('잠시 후 다시 시도해주세요 ');
+					    		alert('오류 발생');
 					    	}
 						},
 						error : function(){
 							console.log('추천 비동기 실패');
 						}
 						
-					}) // like ajax
-				}); //like 버튼 클릭 
+					})
+				});
+				
+				
+		    	$(function(){
+				
+			    	if($('.like-novel').attr('id') > 0){
+			    		$('.like-novel').text('추천취소');
+			    	} else {
+			    		$('.like-novel').text('추천하기');
+			    	}
+		    	});
 	    	</script>
-	    </c:when>
-	    <c:otherwise>
-	    	<script>
-	    		$('#btn-zone button[type=button]').click(function(){
-					alert("로그인유저만 가능합니다.");
-	    		})
-	    	</script>
-	    </c:otherwise>
-    </c:choose>
-            
+	    </c:if>
+         -->    
             <br><br>
             <table id="boardList" class="table table-hover" align="center">
                 <thead>

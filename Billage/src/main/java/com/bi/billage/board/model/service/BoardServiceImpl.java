@@ -322,7 +322,11 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.deleteReviewReply(sqlSession, r);
 	}
 	
-	
+	// 댓글 수정(update)
+	@Override
+	public int updateReviewReply(ReviewReply r) {
+		return boardDao.updateReviewReply(sqlSession, r);
+	}
 	
 	
 	
@@ -440,6 +444,19 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
+	public int chnageLikeBtnNovel(Novel nv) {
+		return boardDao.chnageLikeBtnNovel(sqlSession, nv);
+	}
+
+	@Override
+	public int novelLike(Novel nv) {
+		return boardDao.novelLike(sqlSession, nv);
+	}
+
+	@Override
+	public int novelCancel(Novel nv) {
+		return boardDao.novelCancel(sqlSession, nv);
+		
 	public int selectReportStatus(int reveiwNo) {
 		
 		return boardDao.selectReportStatus(sqlSession, reveiwNo);

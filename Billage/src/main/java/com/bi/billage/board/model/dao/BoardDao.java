@@ -286,7 +286,10 @@ public class BoardDao {
 	}
 	
 	
-	
+	// 댓글 수정
+	public int updateReviewReply(SqlSessionTemplate sqlSession, ReviewReply r) {
+		return sqlSession.update("reviewMapper.updateReviewReply", r);
+	}
 	
 	
 	
@@ -441,6 +444,19 @@ public class BoardDao {
 
 	public int selectNovelLikeCount(SqlSessionTemplate sqlSession, Novel novel) {
 		return sqlSession.selectOne("novelMapper.selectNovelLikeCount", novel);
+	}
+
+
+	public int chnageLikeBtnNovel(SqlSessionTemplate sqlSession, Novel nv) {
+		return sqlSession.selectOne("novelMapper.chnageLikeBtnNovel", nv);
+	}
+
+	public int novelLike(SqlSessionTemplate sqlSession, Novel nv) {
+		return sqlSession.insert("novelMapper.novelLike", nv);
+	}
+
+	public int novelCancel(SqlSessionTemplate sqlSession, Novel nv) {
+		return sqlSession.delete("novelMapper.novelCancel", nv);
 	}
 
 

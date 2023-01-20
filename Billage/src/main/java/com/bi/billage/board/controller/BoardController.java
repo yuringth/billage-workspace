@@ -12,7 +12,6 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,9 +23,9 @@ import com.bi.billage.board.model.vo.FAQ;
 import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.Serial;
 import com.bi.billage.board.model.vo.SerialRequest;
-import com.bi.billage.club.model.vo.Club;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.common.template.Pagination;
+import com.bi.billage.user.model.vo.User;
 import com.google.gson.Gson;
 
 @Controller
@@ -138,13 +137,10 @@ public class BoardController {
 				return "common/errorPage";
 			}
 		}
-	
-	// like ajax 
+	/*
 	@ResponseBody
 	@RequestMapping(value="novelLike.nv", produces = "application/json; charset=UTF-8")
 	public String novelLike(Novel novel, int likeStatus) {
-		
-		// 0보다 크면 추천 취소  | 0이면 추천
 		
 		int[] result = new int[2];
 		
@@ -159,7 +155,7 @@ public class BoardController {
 
 		return new Gson().toJson(result);
 	}
-	
+	*/
 	// 첨부파일 메소드
 	public String saveFile(MultipartFile upfile, HttpSession session) { // 실제 넘어온 파일의 이름을 변경해서 서버에 업로드
 				
@@ -192,6 +188,45 @@ public class BoardController {
 	public ModelAndView selectfaqList(FAQ faq, ModelAndView mv) {
 		mv.addObject("faq", boardService.selectFaqList(faq)).setViewName("board/faqBoard/faqListView");
 		return mv;
+	}
+	
+	//ajax 로 버튼 만드는 곳
+	@ResponseBody
+	@RequestMapping(value="changeBtn.nv", produces = "application/json; charset=UTF-8")
+	public String chnageLikeBtnNovel(Novel nv, HttpSession session) {
+		if((User)session.getAttribute("loginUser") != null) {
+			nv.setUserNo(((User)session.getAttribute("loginUser")).getUserNo());
+		} else {
+			nv.setUserNo(1);
+		}
+		
+		
+		return new Gson().toJson(boardService.chnageLikeBtnNovel(nv));
+	}
+	
+	//좋아요
+	@ResponseBody
+	@RequestMapping(value="novelLike.nv", produces = "application/json; charset=UTF-8")
+	public String novelLike(Novel nv, HttpSession session) {
+		nv.setUserNo(((User)session.getAttribute("loginUser")).getUserNo());
+		
+		int[] result = new int[2];
+		result[0] = boardService.novelLike(nv);
+		result[1] = boardService.selectNovelLikeCount(nv);
+		
+		return new Gson().toJson(result);
+	}
+	//취소
+	@ResponseBody
+	@RequestMapping(value="novelCancel.nv", produces = "application/json; charset=UTF-8")
+	public String novelCancel(Novel nv, HttpSession session) {
+		nv.setUserNo(((User)session.getAttribute("loginUser")).getUserNo());
+		
+		int[] result = new int[2];
+		result[0] = boardService.novelCancel(nv);
+		result[1] = boardService.selectNovelLikeCount(nv);
+		
+		return new Gson().toJson(result);
 	}
 	
 	// 광진영역 끝
