@@ -140,7 +140,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	
-	// 유림시작
+	// 유림시작 ==================================================================================
 	//중고게시판 => 글작성 시 insert
 	@Override
 	public int insertUsedBoard(UsedBoard b) {
@@ -158,7 +158,6 @@ public class BoardServiceImpl implements BoardService {
 	// 중고게시판 => 목록조회
 	@Override
 	public ArrayList<UsedBoard> usedBoardList(PageInfo pi) {
-		System.out.println("pi : imple " + pi);
 		return boardDao.usedBoardList(sqlSession, pi);
 	}
 
@@ -196,7 +195,6 @@ public class BoardServiceImpl implements BoardService {
 	// 중고게시판 글 수정하기 버튼 클릭시 => 수정되어 update됨
 	@Override
 	public int usedUpdate(UsedBoard b) {
-		System.out.println("여긴 서비스" + b);
 		return boardDao.usedUpdate(sqlSession, b);
 	}
 	
@@ -282,7 +280,6 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.deleteReviewBoard(sqlSession, b);
 	}
 
-	
 
 	// 리뷰게시판 글수정 => 1) 책 중복되는지 확인(리뷰넘버로 책제목조회)
 	@Override
@@ -300,15 +297,12 @@ public class BoardServiceImpl implements BoardService {
 	// 리뷰게시판 => book테이블에서 책제목으로 isbn 문자열 select하기
 	@Override
 	public Book selectIsbn(String title) {
-		
 		return boardDao.selectIsbn(sqlSession, title);
 	}
 	
 	// 리뷰게시판 => 댓글 리스트 불러오기
 	@Override
 	public ArrayList<ReviewReply> selectReviewReplyList(int reviewNo) {
-		
-		System.out.println("reviewNo 서비스까지"  + reviewNo);
 		return boardDao.selectReviewReplyList(sqlSession, reviewNo);
 	}
 	
@@ -338,7 +332,7 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	
-	///////////유림 끝
+	// 유림끝==================================================================================
 	
 	
 	
