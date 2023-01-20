@@ -1,5 +1,7 @@
 package com.bi.billage.rent.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -171,8 +173,15 @@ public class RentBoardController {
 	
 	// 마이페이지 대여 목록
 	@RequestMapping("rentMypageList.rt")
-	public String rentMypageList() {
-		return "board/rentBoard/rentMypageList";
+	public ModelAndView rentMypageList(HttpSession session, ModelAndView mv) {
+		int userNo = ((User)session.getAttribute("loginUser")).getUserNo();
+		
+		ArrayList<RentBoard> list = rentBoardService.selectRentMypageList(userNo);
+		mv.addObject("list", list);
+		mv.setViewName("board/rentBoard/rentMypageList");
+		
+		return mv;
+		
 	}
 	
 }

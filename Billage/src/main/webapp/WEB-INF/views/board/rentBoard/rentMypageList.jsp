@@ -89,7 +89,6 @@ section.notice {
               <div class="container">
                   <table class="board-table">
                       <thead>
-                      
                       <tr>
                           <th scope="col" class="th-date">상대 닉네임</th>
                           <th scope="col" class="th-title">책 제목</th>
@@ -97,17 +96,18 @@ section.notice {
                           <th scope="col" class="th-date">반납일</th>
                           <th scope="col" class="th-title">반납 여부</th>
                       </tr>
-                      
                       </thead>
                       <tbody>
-
+					
+					<c:forEach items="${ list }" var="rb">
                       <tr>
-                      	  <td>닉네임</td>
-                          <td>1</td>    
-                          <td>대여일</td>    
-                          <td>반납일</td>
-                          <td>반납 여부</td>   
+                      	  <td>${ rb.nickname }</td>
+                          <td>${ rb.rentBookTitle }</td>    
+                          <td>${ rb.rentDate }</td>    
+                          <td>${ rb.dueDate }</td>
+                          <td>${ rb.status }</td>   
                       </tr>
+					</c:forEach>
 
                       </tbody>
                   </table>

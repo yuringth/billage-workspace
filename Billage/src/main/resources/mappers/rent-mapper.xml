@@ -126,11 +126,15 @@
 				DUE_DATE,
 				RENT_BOOKTITLE,
 				NICKNAME,
-				RENT_STATUS
+				R.STATUS
 		FROM
 				RENT_BOARD R, MEMBER M
 		WHERE
 				R.USER_NO = M.USER_NO
+		AND
+				R.USER_NO = #{userNo}
+		AND
+				RENT_USERNO IS NOT NULL
 				
 			
 	</select>
