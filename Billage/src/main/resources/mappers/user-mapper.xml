@@ -413,7 +413,7 @@
 				novel_no = #{ novelNo }
 	</update>
 	
-	<select id="countWriteBoard" parameterType="int" resultMap="user">
+	<select id="countWriteBoard" parameterType="int" resultMap="userResultSet">
 		SELECT
 		        (SELECT
 		                COUNT(*)
