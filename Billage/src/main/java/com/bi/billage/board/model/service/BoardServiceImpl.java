@@ -328,7 +328,11 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.updateReviewReply(sqlSession, r);
 	}
 	
-	
+	// 댓글 등록(insert)
+	@Override
+	public int insertReviewReply(ReviewReply r) {
+		return boardDao.insertReviewReply(sqlSession, r);
+	}
 	
 	
 	

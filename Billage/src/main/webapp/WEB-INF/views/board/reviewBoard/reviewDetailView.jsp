@@ -185,9 +185,9 @@
 		           	
 		           	<c:otherwise>
 		               <th colspan="2">
-		                   <textarea class="form-control" name="" id="reply_content" cols="55" rows="2" style="resize:none; width:100%;"></textarea>
+		                   <textarea class="form-control" name="reply_content2" id="reply_content" cols="55" rows="2" style="resize:none; width:100%;"></textarea>
 		               </th>
-		               <th style="vertical-align:middle"><button class="btn btn-secondary">등록하기</button></th>
+		               <th style="vertical-align:middle"><button type="submit" class="btn btn-secondary" onclick="insertReply();">등록하기</button></th>
            			</c:otherwise>	
            		</c:choose>
            </tr>
@@ -214,14 +214,13 @@
  		
 	<!-- 댓글 Ajax -->
 	<script>
-	
-	
-		
+		/* 실행되면 => 우선적으로 댓글 목록 띄우기 */
 		$(function(){
 			
 			selectReviewReplyList();			
 		});
 	
+		/* 댓글 목록 띄워주기 */
 		function selectReviewReplyList(){
 			
 				
@@ -299,17 +298,43 @@
 		};
 		
 	
+		
+		
+		
 		// 댓글 수정 폼화면
 		function ReviewReplyForm(e){
-			
 			
 			// console.log($(e).parents().eq(1).children().eq(1).text()); // 댓글 뽑아옴
 			var content = $(e).parents().eq(1).children().eq(1).text();
 			$(e).parents().eq(1).children().eq(1).text('');
-			$(e).parents().eq(1).children().eq(1).append('<textarea></textarea>');
-			$(e).parents().eq(1).children().eq(1).children().val(content);
-			
+			$(e).parents().eq(1).children().eq(1).append('<textarea></textarea><button>수정</button>');
+			$(e).parents().eq(1).children().eq(1).children().val(content); // 댓글창에 기존 댓글이 들어감
 		};
+		
+		
+		
+		
+		
+		/* 댓글 작성 */
+		function insertReply(){
+			console.log($('#reply_content').val());
+			
+			$.ajax({
+				url:'rInsert.re',
+				data:{
+					reviewNo : ${b.reviewNo},
+					replyContent : $('#reply_content').val()
+				},
+				success:function(){
+					
+				},
+				
+				error:function(){
+					console.log('실패');
+				}
+			})
+			
+		}
 		</script>
 	
 	
