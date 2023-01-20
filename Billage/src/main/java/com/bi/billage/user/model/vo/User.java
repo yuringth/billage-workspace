@@ -44,4 +44,5 @@ public class User {
 	
 	private int boardCount; //총 게시글 수
 	
+	private int clubNo; //  socket을 위한 No;
 }

@@ -27,11 +27,18 @@
 	
 	<context:component-scan base-package="com.bi.billage" />
 	
-	<!-- Server Bean 등록  -->
+	<!-- Server Bean 등록	 -->  
 	<beans:bean id="webSocketServer" class="com.bi.billage.common.socket.WebSocketServer"></beans:bean>
-	
+
 	
 	<!-- Handler 등록 -->
+	<websocket:handlers>
+		<websocket:mapping handler="webSocketServer" path="/clubChat"/>
+		<websocket:handshake-interceptors>
+			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+		</websocket:handshake-interceptors>
+	</websocket:handlers>
+
 	
 	 <!-- 필요한 사람이 바꾸세요 -->
 	<interceptors>
@@ -45,14 +52,6 @@
           <beans:bean class="com.bi.billage.common.interceptor.LoginInterceptor" id="loginInterceptor"></beans:bean>
        </interceptor>
     </interceptors>
-	
-	<websocket:handlers>
-		<websocket:mapping handler="webSocketServer" path="/clubChat"/>
-	    <websocket:handshake-interceptors>
-	   		<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
-	    </websocket:handshake-interceptors>
-	 </websocket:handlers>
-	
 	
 	
 </beans:beans>
