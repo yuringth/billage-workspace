@@ -400,6 +400,21 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.updatePrizeEnd(sqlSession, boardNo);
 	}
 
+	@Override
+	public int novelLikeDelete(Novel novel) {
+		return boardDao.novelLikeDelete(sqlSession, novel);
+	}
+
+	@Override
+	public int novelLikeInsert(Novel novel) {
+		return boardDao.novelLikeInsert(sqlSession, novel);
+	}
+
+	@Override
+	public int selectNovelLikeCount(Novel novel) {
+		return boardDao.selectNovelLikeCount(sqlSession, novel);
+	}
+
 
 	
 	
