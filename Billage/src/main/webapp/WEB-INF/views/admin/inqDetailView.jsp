@@ -132,6 +132,7 @@
                 <li><a href="faqList.ad"><i class="fas fa-project-diagram"></i>FAQ 관리</a></li>
                 <li><a href="noticeList.ad"><i class="fas fa-blog"></i>공지사항</a></li>
                 <li><a href="list.sr"><i class="fas fa-address-book"></i>연재 요청</a></li>
+                <li><a href="list.ro"><i class="fas fa-address-book"></i>신고 관리</a></li>
             </ul>
         </div>
         <div class="main_content">
