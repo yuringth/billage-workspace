@@ -23,6 +23,9 @@ public interface ClubService {
 	// 게시글 조회시 ClubOpen 조회
 	ArrayList<ClubOpen> selectDetailClubOpen(Club club);
 	
+	// clubOpen 신청하기(Insert)
+	int ajaxInsertOpenMem(ClubOpen clubOpen);
+	
 	// 모임 insert 
 	int insertClub(Club club);
 	
@@ -66,5 +69,6 @@ public interface ClubService {
 	// ClubOpen Insert Form
 	int insertClubOpen(ClubOpen clubOpen);
 	
-	
+	// ClubOpen Select mem Num
+	int selectOpenMemNum(ClubOpen clubOpen);
 }

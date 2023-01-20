@@ -115,7 +115,17 @@ public class ClubServiceImpl implements ClubService {
 		return clubDao.insertClubOpen(sqlSession, clubOpen);
 	}
 
+	@Override
+	public int ajaxInsertOpenMem(ClubOpen clubOpen) {
+		return clubDao.ajaxInsertOpenMem(sqlSession, clubOpen);
+	}
 
+	@Override
+	public int selectOpenMemNum(ClubOpen clubOpen) {
+		return clubDao.selectOpenMemNum(sqlSession, clubOpen);
+	}
+
+	
 
 	 
 

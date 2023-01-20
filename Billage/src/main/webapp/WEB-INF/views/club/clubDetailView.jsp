@@ -78,12 +78,18 @@
 	    				clubNo : $clubNo
 	    			},
 	    			success : function(result){
+	    				var img = '';
 	    				
 	    					for(i in result){
-			    				var str = '';
-		
+	    						
+	    						if( result[i].clubImg == null ){
+	    							img = 'resources/images/no_image.jpg';
+	    						} else {
+	    							img = result[i].clubImg;
+	    						}
+	    						
 			    				str = '<div class="members members-area" id="'+ result[i].userNo +'">'
-		    					    + '<div class="members"><img src="'+ result[i].clubImg +'" width="40px;" height="40px;"></div>'
+		    					    + '<div class="members"><img src="'+ img +'" width="40px;" height="40px;"></div>'
 									+ '<div class="members" >' + result[i].nickname +'(' + result[i].clubDiscript +')</div>'
 						            + '<div class="members" >버튼?</div>' 
 				            		+ '</div>';
@@ -140,6 +146,7 @@
 						<th>만남일자</th>
 						<th>만남시간</th>
 						<th>정원</th>
+						<th>신청자 수</th>
 						<th>신청상태</th>
 						<th>신청버튼</th>
 					</tr>
@@ -147,14 +154,17 @@
 				<tbody>
 					<c:forEach items="${ clubOpenList }" var="c" >
 						<tr>
+							
 							<td>${ c.openTitle }</td>
 							<td>${ c.openLocation }</td>
 							<td>${ c.openDate }</td>
 							<td>${ c.openTime }</td>
-							<td>${ c.openLimit }</td>
+							<td id="open-mem-limit">${ c.openLimit }</td>
+							<td id="open-mem-count">${ c.openMemCount }</td>
 							<td>${ c.openStatus }</td>
 							<td>
-								<button>신청할랭?</button>
+								<button id="clubOpen-btn">신청할랭?</button>
+								<input type="hidden" name="openNo" value="${ c.openNo }" />
 							</td>
 						</tr>
 					</c:forEach>
@@ -304,10 +314,6 @@
     </c:choose>
     
     <script>
-    	
-
-    
-    
     	$(function(){
   
 	    	//new 상태 표시 ----------------------------------------------------------
@@ -327,29 +333,76 @@
 	    	
 	    	if($('#btn-zone .parti-btn').attr('id') > 0){
 	    		$('#btn-zone .parti-btn').text('탈퇴');
-	    		count++;
 	    	} else {
 	    		$('#btn-zone .parti-btn').text('가입');
 	    	}
 	    	
+	    	
 	    	// 문서 로딩될 때 버튼 상태2 ---------------------------------------------------
 	    	// 클럽제한수가 클럽멤버 총 수 보다 크면 가입버튼 비활성화 !! 
-	    	if(${ club.clubLimit > club.memCount } || $('#btn-zone .parti-btn').attr('id') > 0){
+	    	if(${ club.clubLimit > club.memCount } || $('#btn-zone .parti-btn').attr('id') < 0){
 	    		$('#btn-zone .parti-btn').attr('disabled', false);
 	    	} else {
 	    		$('#btn-zone .parti-btn').attr('disabled', true);
 	    	}
 	    	
 	    	
+
+	    		
+	    		
+	    	
+	    	
     	}); //$(function()) 닫음
     	
-    	
-    	
-    	
-
-    
+     
     </script>
     
+
+
+
+	<c:if test="${ !empty loginUser.userNo }">
+		<script>
+		
+    		// clubOpen 신청버튼
+    		$(document).on('click', '#clubOpen-btn', function(){
+    		var $openNo = $(this).siblings('input[name=openNo]').val();
+    		
+    		
+
+    			
+	    		$.ajax({
+	    			url : 'ajaxOpenInsert.cl',
+	    			data : {
+	    				openNo : $openNo,
+	    				userNo : ${ loginUser.userNo },
+	    				clubNo : ${ club.clubNo }
+	    			},
+	    			success : function(result){
+	    				console.log(result);
+	    				$('#open-mem-count').text(result);
+	    				
+	    			},
+	    			error : function(){
+	    				console.log('비동기 통신 실패 : clubOpen Insert fail');
+	    			}
+	    		});
+	    		
+
+    		
+    		});
+		
+		</script>
+	</c:if>
+
+
+
+
+
+
+
+
+
+
 
     <jsp:include page="../common/footer.jsp" />
 </body>

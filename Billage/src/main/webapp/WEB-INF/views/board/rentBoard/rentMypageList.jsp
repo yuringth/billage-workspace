@@ -91,18 +91,20 @@ section.notice {
                       <thead>
                       
                       <tr>
-                          <th scope="col" class="th-num">번호</th>
-                          <th scope="col" class="th-title">제목</th>
-                          <th scope="col" class="th-date">등록일</th>
+                          <th scope="col" class="th-date">상대 닉네임</th>
+                          <th scope="col" class="th-title">책 제목</th>
+                          <th scope="col" class="th-date">대여일</th>
+                          <th scope="col" class="th-date">반납일</th>
                       </tr>
                       
                       </thead>
                       <tbody>
 
                       <tr>
+                      	  <td>닉네임</td>
                           <td>1</td>    
-                          <td>공지공지공지공지</td>    
-                          <td>2022.11.25</td>   
+                          <td>대여일</td>    
+                          <td>반납일</td>   
                       </tr>
 
                       </tbody>

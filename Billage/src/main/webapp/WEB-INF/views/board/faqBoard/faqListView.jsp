@@ -446,6 +446,7 @@
 </head>
 <body>
 	<jsp:include page="../../common/header.jsp"/>
+	<!-- 로그인 후 관리자일 경우만 보여지는 글쓰기 버튼 -->
 	<section class="cd-faq">
 	  <ul class="cd-faq-categories">
 	  	<li><a>FAQ(자주묻는질문)</a></li>
