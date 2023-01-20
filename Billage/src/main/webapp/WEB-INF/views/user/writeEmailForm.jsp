@@ -75,7 +75,7 @@
     	
         	<div class="find-password-div">등록하신 <span>E-Mail</span> 주소를 입력하세요.</div>
         	
-        <div><input type="text" name="txtEmail" placeholder="E-Mail"></div>
+        <div><input type="text" name="email" placeholder="E-Mail" value=""></div>
     	</div>
     	
     	<div class="find-password-button"><button id="passwordRequest">확인</button></div>

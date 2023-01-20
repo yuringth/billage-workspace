@@ -507,4 +507,7 @@ public class UserController {
 			return "redirect:/list.se";
 		}
 	}
+	
+	// 메일 인증
+	
 }
