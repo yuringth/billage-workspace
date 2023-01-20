@@ -534,13 +534,37 @@ public class ReviewController {
 	
 	
 	
-//	@ResponseBody
-//	@RequestMapping("rChange.re")
-//	public String changeReviewReply() {
-//		
-//		return "redirect:detail.re?reviewNo=" + reviewNo;
-//	}
-//	
+	// 안만들었음
+	@ResponseBody
+	@RequestMapping(value = "rUpdate.re", produces = "application/json; charset=UTF-8")
+	public String updateReviewReply(int reviewNo, int replyNo, HttpSession session) {
+		
+		System.out.println("reviewNo  : " + reviewNo);
+		System.out.println("replyNo  : " + replyNo);
+		
+		
+		ReviewReply r = new ReviewReply();
+		r.setReviewNo(reviewNo);
+		r.setReplyNo(replyNo);
+		
+		System.out.println("수정r : " + r);
+		
+		
+		if(boardService.updateReviewReply(r) > 0 ) {
+			return new Gson().toJson(boardService.updateReviewReply(r));
+			
+		} else {
+			
+			session.setAttribute("alertMsg", "댓글 수정할 수 없습니다");
+			return "redirect:detail.re?reviewNo=" + reviewNo;
+		}
+		
+		
+
+	}	
+
+	
+	
 	
 	
 	

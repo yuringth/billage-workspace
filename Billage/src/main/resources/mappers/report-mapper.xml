@@ -73,4 +73,13 @@
 		      report_no = #{rno}      
 				
 	</select>
+	
+	<update id="selectReportStatus" parameterType="_int">
+		update
+		         report
+		    set
+		         report_status = 'Y'
+		where
+		         review_no = #{reviewNo}          
+	</update>
 </mapper>

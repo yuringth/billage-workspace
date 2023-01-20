@@ -21,5 +21,6 @@ public class ReviewBoard {
 	private int bookNo; //BOOK_NO	NUMBER
 	private String bookPublisher; // 출판사
 	private String nickname; // 닉네임 member하고 join
+	private int replyNo; // 닉네임 member하고 join
 	
 }

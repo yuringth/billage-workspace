@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bi.billage.board.model.service.BoardService;
 import com.bi.billage.board.model.vo.ReportBoard;
 import com.bi.billage.user.model.vo.User;
+import com.google.gson.Gson;
 
 @Controller
 public class ReportController {
@@ -75,15 +77,20 @@ public class ReportController {
 	@RequestMapping("detail.ro")
 	public ModelAndView selectReportDetail(int rno, ModelAndView mv) {
 		
-		System.out.println(rno);
 		ReportBoard r = boardService.selectReport(rno);
-		
-		System.out.println(r);
-		
+				
 		mv.addObject("r",r).setViewName("board/reportBoard/reportBoardDetailView");
 		
 		return mv;
 	}
 	
-	
+	@ResponseBody
+	@RequestMapping(value="update.ro" ,produces ="application/json; charset=UTF-8" )
+	public String updateReportStatus(int reviewNo) {
+		
+		int result = boardService.selectReportStatus(reviewNo);
+		
+		return new Gson().toJson(result);
+		
+	}
 }
