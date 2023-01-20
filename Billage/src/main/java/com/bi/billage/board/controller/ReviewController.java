@@ -204,11 +204,17 @@ public class ReviewController {
 				
 				
 			} else { //뭐든 실패
-				mv.addObject("errorMsg", "게시글 작성 실패");
+			
+				//session.setAttribute("alertMsg", "동일한 책은 작성할 수 없습니다");
+				
+				mv.addObject("errorMsg", "동일한 도서 게시글 작성 실패1");
 				return "common/errorPage";
+				//return "redirect:enrollForm.re?reviewNo=" + b.getReviewNo();
 			}
 		} else {
-			model.addAttribute("errorMsg","게시글 작성 실패");
+			//session.setAttribute("alertMsg", "동일한 책은 작성할 수 없습니다");
+			
+			model.addAttribute("errorMsg","동일한 도서 게시글 작성 실패2");
 			return "common/errorPage";
 		}
 	}
@@ -506,14 +512,14 @@ public class ReviewController {
 	public String deleteReply(int replyNo, int reviewNo, Model model) {
 		
 		// 삭제를 눌러야지 값이 뜬다. 
-		//System.out.println("replyNo : " +replyNo);
-		//System.out.println("reviewNo : " +reviewNo);
+		System.out.println("replyNo : " +replyNo);
+		System.out.println("reviewNo : " +reviewNo);
 		
 		ReviewReply r = new ReviewReply();
 
 		r.setReplyNo(replyNo);
 		r.setReviewNo(reviewNo);
-		//System.out.println("r : "+ r);
+		System.out.println("r : "+ r);
 		
 		if(boardService.deleteReviewReply(r) > 0) {
 			
@@ -525,6 +531,16 @@ public class ReviewController {
 			return "common/errorPage";
 		}
 	}
+	
+	
+	
+//	@ResponseBody
+//	@RequestMapping("rChange.re")
+//	public String changeReviewReply() {
+//		
+//		return "redirect:detail.re?reviewNo=" + reviewNo;
+//	}
+//	
 	
 	
 	
