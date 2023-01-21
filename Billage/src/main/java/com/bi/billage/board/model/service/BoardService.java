@@ -298,7 +298,7 @@ public interface BoardService {
 	// 댓글 등록(insert)
 	int insertReviewReply(ReviewReply r);
 	
-	
+	// 댓글 수정
 	
 	
 	

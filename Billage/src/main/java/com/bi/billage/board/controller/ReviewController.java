@@ -478,13 +478,12 @@ public class ReviewController {
 		
 //		System.out.println("reviewNo  : " + reviewNo);
 		
-		ArrayList<ReviewReply> list = boardService.selectReviewReplyList(reviewNo);
+	//	ArrayList<ReviewReply> list = boardService.selectReviewReplyList(reviewNo);
 		
-//		System.out.println(list);
-
 //		model.addAttribute("list", list); 필요없음
 //		System.out.println("model :" + model); 필요없음
 		
+		// 자바에서 쓰는 객체를 자바스크립트에서 사용하려면 
 		return new Gson().toJson(boardService.selectReviewReplyList(reviewNo));
 
 	}
@@ -516,7 +515,7 @@ public class ReviewController {
 	}
 	
 	
-	
+
 	// 안만들었음 => 수정버튼 클릭시 돌아가는거
 	@ResponseBody
 	@RequestMapping(value = "rUpdate.re", produces = "application/json; charset=UTF-8")
@@ -544,21 +543,40 @@ public class ReviewController {
 	}	
 
 	
+	
+	@ResponseBody
+	@RequestMapping(value = "formReply.re", produces = "application/json; charset=UTF-8")
+	public String reviewFormReply(ReviewReply r, HttpSession session) {
+		// 스프링이 알아서 값을 가져와서 setㅎㅐ줌
+		
+		
+		
+		return null;
+	}
+	
+	
+	
+	
+	// "text/html; charset=UTF-8"
+	// "application/json; charset=UTF-8"
 	// 댓글작성
 	@ResponseBody
-	@RequestMapping(value = "rInsert.re", produces = "application/json; charset=UTF-8")
-	public String insertReviewReply(int reviewNo, int userNo, String replyContent, HttpSession session) {
+	@RequestMapping(value = "rInsert.re", produces = "text/html; charset=UTF-8")
+	public String insertReviewReply(int reviewNo, String replyContent, HttpSession session) {
+		
 		
 		ReviewReply r = new ReviewReply();
 		r.setReviewNo(reviewNo);
 		r.setReplyContent(replyContent);
-		r.setUserNo(userNo);
+		//r.setUserNo(userNo);
+		r.setUserNo(((User)session.getAttribute("loginUser")).getUserNo());
 		
 		System.out.println("r의정보 :" + r);
 		
 		
 		if(boardService.insertReviewReply(r) > 0) {
-			return new Gson().toJson(boardService.insertReviewReply(r));
+			return "1";
+			//응답데이터가 많을 때 gson/json을 쓴다=>나는 1만 보내주면 되니까 이렇게 작성하면 된다
 		} else {
 			session.setAttribute("alertMsg", "댓글 작성할 수 없습니다");
 			return "redirect:detail.re?reviewNo=" + reviewNo;
