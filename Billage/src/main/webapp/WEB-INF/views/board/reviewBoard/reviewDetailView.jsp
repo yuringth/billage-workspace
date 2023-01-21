@@ -323,45 +323,17 @@
 				url:'rInsert.re',
 				data:{
 					reviewNo : ${b.reviewNo},
-					userNo : ${b.userNo},
+					userNo : ${loginUser.userNo},
 					replyContent : $('#reply_content').val()
 				},
-				success:function(list){
-					console.log(list);
+				success:function(result){
+					//console.log('결과 1 : ' + result);
 					
-					var result = '';
-					
-					// 1. 댓작성자 == 로그인 유저 => 댓글삭제/수정 버튼 보이게
-					// 2. 댓작성자 != 로그인 유저 => 버튼 안보이게
-					// 3. 비회원 => 버튼 안보이게
-					for(var i in list){
-						
-						if(list[i].userNo == '${loginUser.userNo}' /* ${b.userNo} == loginUser.getUserNo*/){
-							var btn = '<button class="btn btn-secondary" onclick="deleteReply(' + list[i].replyNo +','+ list[i].reviewNo + ')">댓글삭제</button>';
-							var btn2 = '<button class="btn btn-secondary" onclick="ReviewReplyForm(this)">댓글수정</button>';
-							
-							result += '<tr>'
-							 	   + '<th>' + list[i].userId + '</th>'
-							 	   + '<td>' + list[i].replyContent + '</td>'
-							 	   + '<td>' + list[i].createDate + '</td>'
-	   							   + '<td>' + btn + '</td>'
-	   							   + '<td>' + btn2 + '</td>'
-							 	   + '</tr>'
-						} else if(list[i].userNo != '${loginUser.userNo}'  /*${b.userNo} != loginUser.getUserNo*/){
-							result += '<tr>'
-							 	   + '<th>' + list[i].userId + '</th>'
-							 	   + '<td>' + list[i].replyContent + '</td>'
-							 	   + '<td>' + list[i].createDate + '</td>'
-							 	   + '</tr>'
-						} else if(${empty loginUser}){
-							result += '<tr>'
-							 	   + '<th>' + list[i].userId + '</th>'
-							 	   + '<td>' + list[i].replyContent + '</td>'
-							 	   + '<td>' + list[i].createDate + '</td>'
-							 	   + '</tr>'
-						}
+					if(result > 0){
+						alert('댓글작성에 성공했습니다');
+	   					$('#reply_content').val(''); // 빈문자열을 넣으면 textarea가 비워짐
+   						selectReviewReplyList();
 					}
-					$('#replyArea tbody').html(result);
 					
 				},
 				error:function(){

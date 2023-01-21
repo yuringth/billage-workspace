@@ -544,22 +544,21 @@ public class ReviewController {
 	}	
 
 	
-	
+	// 댓글작성
 	@ResponseBody
 	@RequestMapping(value = "rInsert.re", produces = "application/json; charset=UTF-8")
-	public String insertReviewReply(int reviewNo, String replyContent, int userNo, HttpSession session) {
-		
-//		System.out.println(reviewNo);
-//		System.out.println(replyContent);
-//		System.out.println(userNo);
+	public String insertReviewReply(int reviewNo, int userNo, String replyContent, HttpSession session) {
 		
 		ReviewReply r = new ReviewReply();
 		r.setReviewNo(reviewNo);
 		r.setReplyContent(replyContent);
 		r.setUserNo(userNo);
 		
+		System.out.println("r의정보 :" + r);
+		
+		
 		if(boardService.insertReviewReply(r) > 0) {
-			return "redirect:detail.re?reviewNo=" + reviewNo;
+			return new Gson().toJson(boardService.insertReviewReply(r));
 		} else {
 			session.setAttribute("alertMsg", "댓글 작성할 수 없습니다");
 			return "redirect:detail.re?reviewNo=" + reviewNo;
