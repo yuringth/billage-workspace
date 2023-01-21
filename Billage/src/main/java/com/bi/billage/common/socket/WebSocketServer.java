@@ -40,7 +40,7 @@ public class WebSocketServer extends TextWebSocketHandler {
 		
 		
 		for(int i = 0 ; i < afterConnectionList.size() ; i++) {
-			afterConnectionText += "[ 닉네임" 
+			afterConnectionText += "[ " 
 								+ afterConnectionList.get(i).getNickname()
 								+ " ] : " 
 								+ afterConnectionList.get(i).getMessage()
@@ -66,13 +66,11 @@ public class WebSocketServer extends TextWebSocketHandler {
 		TextMessage newMessage = new TextMessage(message.getPayload());
 		//session.sendMessage(newMessage);
 		
-		
 		int userNo = ((User)session.getAttributes().get("loginUser")).getUserNo();
 		int clubNo = ((User)session.getAttributes().get("loginUser")).getClubNo();
-		
+		String nickname = ((User)session.getAttributes().get("loginUser")).getNickname();
 		//System.out.println(userNo);
 		//System.out.println(clubNo);
-		
 		
 		HashMap<String, String> map = new HashMap();
 		
@@ -84,8 +82,10 @@ public class WebSocketServer extends TextWebSocketHandler {
 		//System.out.println(result);
 		
 		
+		String sendMessage = "[ "+ nickname + " ] : " + message.getPayload();
+		
 		for(WebSocketSession ws : users) {
-			ws.sendMessage(newMessage);
+			ws.sendMessage(new TextMessage(sendMessage));
 		}
 		
 	}

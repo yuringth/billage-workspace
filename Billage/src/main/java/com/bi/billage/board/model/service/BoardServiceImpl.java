@@ -456,14 +456,20 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.novelCancel(sqlSession, nv);
 	}
 
-	public int selectReportStatus(int reveiwNo) {
+	public int updateReportStatus(int reveiwNo) {
 		
-		return boardDao.selectReportStatus(sqlSession, reveiwNo);
+		return boardDao.updateReportStatus(sqlSession, reveiwNo);
+	}
+
+	@Override
+	public int updateReviewStatus(int reviewNo) {
+		
+		return boardDao.updateReviewStatus(sqlSession, reviewNo);
 	}
 
 
 	
-	
+
 	
 
 

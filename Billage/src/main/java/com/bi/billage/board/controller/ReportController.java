@@ -44,13 +44,10 @@ public class ReportController {
 	
 	//reportBoard 작성 페이지
 	@RequestMapping("insertForm.ro")
-	public String insertReportForm(/*int boardNo ,*/HttpSession session) {
+	public String insertReportForm(int reviewNo, HttpSession session) {
 		
-		
-		 int userNo = ((User)session.getAttribute("loginUser")).getUserNo();
-		 System.out.println(userNo);
-		 session.setAttribute("boardNo", 6);
-		 session.setAttribute("userNo", userNo);
+		 session.setAttribute("reviewNo", reviewNo);
+		 session.setAttribute("userNo", ((User)session.getAttribute("loginUser")).getUserNo());
 		
 		return"board/reportBoard/reportEnrollForm";
 	}
@@ -88,7 +85,12 @@ public class ReportController {
 	@RequestMapping(value="update.ro" ,produces ="application/json; charset=UTF-8" )
 	public String updateReportStatus(int reviewNo) {
 		
-		int result = boardService.selectReportStatus(reviewNo);
+		int result =0;
+		
+		if(boardService.updateReviewStatus(reviewNo) > 0) {
+			result = boardService.updateReportStatus(reviewNo);			
+		}
+		
 		
 		return new Gson().toJson(result);
 		

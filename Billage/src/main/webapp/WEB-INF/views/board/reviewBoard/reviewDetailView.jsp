@@ -141,6 +141,7 @@
 					</c:when>
 					<c:otherwise>	
 						<button>뒤로가기</button>
+						<button onclick="location.href='insertForm.ro?reviewNo=${b.reviewNo}'">신고하기</button>
 					</c:otherwise>
 				</c:choose>
 			</div>
