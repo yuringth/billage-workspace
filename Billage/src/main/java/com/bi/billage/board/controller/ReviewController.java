@@ -544,7 +544,7 @@ public class ReviewController {
 	}	
 
 	
-	// 댓글 작성
+	
 	@ResponseBody
 	@RequestMapping(value = "rInsert.re", produces = "application/json; charset=UTF-8")
 	public String insertReviewReply(int reviewNo, String replyContent, int userNo, HttpSession session) {
@@ -558,22 +558,8 @@ public class ReviewController {
 		r.setReplyContent(replyContent);
 		r.setUserNo(userNo);
 		
-		
-		
-		/*
-		// Gson, Json => 넘겨야할 값이 여러개일때 묶을때(vo, 객체배열, 등등)
-		// => result는 0 아님 1임 => text/html 사용
-		response.setContentType("text/html; charset=UTF-8");
-		response.getWriter().print(result);
-		*/
-		
-		
 		if(boardService.insertReviewReply(r) > 0) {
-			
-			return new Gson().toJson(boardService.insertReviewReply(r));
-			
-			
-		//	return "redirect:detail.re?reviewNo=" + reviewNo;
+			return "redirect:detail.re?reviewNo=" + reviewNo;
 		} else {
 			session.setAttribute("alertMsg", "댓글 작성할 수 없습니다");
 			return "redirect:detail.re?reviewNo=" + reviewNo;
