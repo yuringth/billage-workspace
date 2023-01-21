@@ -26,7 +26,6 @@
 		        ,report_title
 		        ,report_category
 		        ,report_content
-		        ,report_date
 		        ,review_no
 		        )
  	 values
@@ -51,7 +50,10 @@
 		        ,report_status
 		        ,review_no
 		from
-		      report        
+		      report
+		order
+		    by
+		       report_no desc              
 		        
 	</select>
 	

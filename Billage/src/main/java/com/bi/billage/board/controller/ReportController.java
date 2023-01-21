@@ -44,13 +44,10 @@ public class ReportController {
 	
 	//reportBoard 작성 페이지
 	@RequestMapping("insertForm.ro")
-	public String insertReportForm(/*int boardNo ,*/HttpSession session) {
+	public String insertReportForm(int reviewNo, HttpSession session) {
 		
-		
-		 int userNo = ((User)session.getAttribute("loginUser")).getUserNo();
-		 System.out.println(userNo);
-		 session.setAttribute("boardNo", 6);
-		 session.setAttribute("userNo", userNo);
+		 session.setAttribute("reviewNo", reviewNo);
+		 session.setAttribute("userNo", ((User)session.getAttribute("loginUser")).getUserNo());
 		
 		return"board/reportBoard/reportEnrollForm";
 	}
