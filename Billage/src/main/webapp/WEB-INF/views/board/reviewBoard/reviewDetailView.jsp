@@ -312,6 +312,9 @@
 			console.log('성공');
 			console.log($('#reply_content').val());
 			
+			
+			
+			
 			$.ajax({
 				
 				url:'formReply.re',
@@ -322,6 +325,7 @@
 					
 				},
 				success:function(){
+
 					
 				},
 				error:function(){
