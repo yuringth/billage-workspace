@@ -7,10 +7,11 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.club.model.dao.ClubDao;
 import com.bi.billage.club.model.vo.Club;
 import com.bi.billage.club.model.vo.ClubOpen;
+import com.bi.billage.club.model.vo.Socket;
+import com.bi.billage.common.model.vo.PageInfo;
 
 @Service
 public class ClubServiceImpl implements ClubService {
@@ -129,6 +130,11 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public int insertChat(HashMap<String, String> map) {
 		return clubDao.insertChat(sqlSession, map);
+	}
+
+	@Override
+	public ArrayList<Socket> selectChat(int clubNo) {
+		return clubDao.selectChat(sqlSession, clubNo);
 	}
 
 	

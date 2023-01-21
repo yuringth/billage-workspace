@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bi.billage.club.model.vo.Club;
 import com.bi.billage.club.model.vo.ClubOpen;
+import com.bi.billage.club.model.vo.Socket;
 import com.bi.billage.common.model.vo.PageInfo;
 
 @Repository
@@ -122,6 +123,11 @@ public class ClubDao {
 	//insertChat
 	public int insertChat(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
 		return sqlSession.insert("clubMapper.insertChat", map);
+	}
+	
+	//selectChat
+	public ArrayList<Socket> selectChat(SqlSessionTemplate sqlSession, int clubNo) {
+		return (ArrayList)sqlSession.selectList("clubMapper.selectChat", clubNo);
 	}
 	
 }
