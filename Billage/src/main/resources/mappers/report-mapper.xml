@@ -74,12 +74,21 @@
 				
 	</select>
 	
-	<update id="selectReportStatus" parameterType="_int">
+	<update id="updateReportStatus" parameterType="_int">
 		update
 		         report
 		    set
 		         report_status = 'Y'
 		where
 		         review_no = #{reviewNo}          
+	</update>
+	
+	<update id="updateReviewStatus" parameterType="_int">
+		update
+				review
+			set
+				review_status = 'Y'
+		where
+				review_no = #{reviewNo}		
 	</update>
 </mapper>

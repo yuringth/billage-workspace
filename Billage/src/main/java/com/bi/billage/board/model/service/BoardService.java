@@ -86,9 +86,9 @@ public interface BoardService {
 	
 	ReportBoard selectReport(int rno);
 	
-	int selectReportStatus(int reveiwNo);
+	int updateReportStatus(int reveiwNo);
 	
-	
+	int updateReviewStatus(int reviewNo);
 	
 	
 	
