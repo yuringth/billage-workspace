@@ -260,7 +260,6 @@ public class BoardDao {
 	
 	// 리뷰게시판 글수정 => 1) 책 중복되는지 확인(리뷰넘버로 책제목조회)
 	public ReviewBoard selectBookTitle2(SqlSessionTemplate sqlSession, ReviewBoard b) {
-		System.out.println(b);
 		return sqlSession.selectOne("reviewMapper.selectBookTitle2", b);
 	}
 	
@@ -307,6 +306,10 @@ public class BoardDao {
 
 
 	
+	
+	
+	
+	
 	// 중고 게시글의 총 개수 조회
 	public int selectListUsedCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("usedMapper.selectListUsedCount");
@@ -319,8 +322,6 @@ public class BoardDao {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		
-		System.out.println("rowBounds dao: " + rowBounds);
 		
 		return (ArrayList)sqlSession.selectList("usedMapper.usedBoardList", null, rowBounds);
 		
@@ -375,16 +376,15 @@ public class BoardDao {
 	public ArrayList<UsedBoard> selectSearchList(SqlSessionTemplate sqlSession, HashMap<String, String> map, PageInfo pi){
 		
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
 		return (ArrayList)sqlSession.selectList("usedMapper.selectSearchList", map, rowBounds);
 	}
 	
-	////////		
 	
-	// 유림끝  ==========================================================
+	// 유림끝  ===============================================================================
 	
-	/////////////////////////////////////////////
 	
 	// 광진구역 시작
 	

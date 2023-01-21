@@ -7,29 +7,35 @@
 <meta charset="UTF-8">
 <title>리뷰게시판 목록 조회</title>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-<!-- modal bootstrap -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-  
 <style>
-
     .reviewList-area{
         border:1px solid red;
         width:1200px;
         margin:auto;
 
     }
-    
+ 
+/*     
     .reviewOption{
         border:1px solid red;
     	width:1200px;
     	height:30px;
+    }
+    
+ */ 
+ 
+    #reviewOption2{
+        border:1px solid red;
+    	width:1200px;
+    	height:70px;
+    }
+    
+    
+    .list-outer{
+   		width:1200px;
+   		margin:auto;
+   		display:flex; 
+   		flex-wrap: wrap;
     }
     
     .one-content{
@@ -37,13 +43,6 @@
     	width:500px;
     	height:400px;
     	margin:25px;
-    }
-    
-    
-    .list-outer{
-   		display:flex;
-   		width:1100px;
-   		margin:auto;
     }
     
     
@@ -107,7 +106,22 @@
 	
 </style>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+<!-- modal bootstrap -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+<!-- 옵션 부트스트랩 -->  
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    
 </head>
 <body>
 
@@ -124,6 +138,7 @@
     <div class="reviewList-area">
 
         <!-- 옵션div -->
+  <!--       
         <div>
             <div class="reviewOption">
                 <select name="" id="">
@@ -132,12 +147,25 @@
                 </select>
             </div>
         </div>
+         -->
+         
+		<div class="align-side margin-bottom">
+			<div class="dropdown" id="reviewOption2">
+				<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+				정렬
+				</button>
+				<div class="dropdown-menu"> 
+					<a class="dropdown-item" href="#">책 제목순</a>
+					<a class="dropdown-item" href="#">최신 날짜 순</a>
+				</div>
+			</div>
+		</div>	
 
 
-
-   	<c:forEach items="${ list }" var="b">
 		<div class="list-outer">
-	        <!-- 리뷰 하나를 감싸는 div -->
+  			<c:forEach items="${ list }" var="b">
+   	
+        		<!-- 리뷰 하나를 감싸는 div -->
 		        <div class="one-content">
 		        <!-- <div class="one-content" onclick="reviewDetail()"> -->
 		        
@@ -169,7 +197,6 @@
 			  	  	       		<div style="height:140px;">${ b.reviewContent }</div>
 			    	        </div>
 						</div>
-					
 						<br>
 					</div>
 		
@@ -179,11 +206,9 @@
 		            	<div>${ b.createDate }</div>
 		            </div>
 		        </div>
+		        
+			</c:forEach>
 		</div>
-	</c:forEach>
-
-
-
 
 
 
@@ -278,17 +303,17 @@
 	</script>
  -->
 	
-	<!-- 게시글 상세보기 :되지만 나중에 페이징처리로 이동하기 (변경)-->
 	<script>
+		/* (유림)게시글 상세보기 :되지만 나중에 페이징처리로 이동하기 (변경) */
 		$(function(){
 			$('.one-content-detail2').click(function(){
 				location.href = 'detail.re?reviewNo=' + $(this).find('.bno').val();
 				console.log($(this).find('.bno').val()); // http://localhost:8787/billage/detail.re?reviewNo=16
-						
-		});
+		})
 
-			
-			
+		
+		
+		// 휘수시작 =======================================================================================================	
 			
 		//유저 닉네임 클릭시 모달창 생성
 			if(${ !empty loginUser}){

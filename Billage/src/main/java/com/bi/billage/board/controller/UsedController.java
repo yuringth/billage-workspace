@@ -169,8 +169,8 @@ public class UsedController {
 	@RequestMapping("update.ud")
 	public String usedUpdate(UsedBoard b, MultipartFile reUpfile, HttpSession session, Model model) {
 		
-		System.out.println("db갔다오지 않은 b의 값 : " + b);
-		System.out.println("reUpfile : " + reUpfile);
+//		System.out.println("db갔다오지 않은 b의 값 : " + b);
+//		System.out.println("reUpfile : " + reUpfile);
 		
 		// 2. 새로 첨부된 파일x, 기존 첨부파일 o  내용만 수정 => origin : 기존 첨부파일 이름, change : 기존첨부파일 경로
 		// 3. 새로 첨부된 파일o, 기존 첨부파일 x 파일첨부 변경 시 => origin : 새로 첨부파일 이름, change : 새로 첨부파일 경로
@@ -256,7 +256,7 @@ public class UsedController {
 		// 검색한 결과를 뿌려주는거...select해서 가져오는데 몇개있는지 모르니 arrayList로 뿌리기
 		ArrayList<UsedBoard> list = boardService.selectSearchList(map, pi);
 		
-		System.out.println("list : " + list);
+//		System.out.println("list : " + list);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);

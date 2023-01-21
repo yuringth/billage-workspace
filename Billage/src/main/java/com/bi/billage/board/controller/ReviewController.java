@@ -122,7 +122,6 @@ public class ReviewController {
 		
 		mv.addObject("pi", pi).addObject("list", boardService.reviewBoardList(pi)).setViewName("board/reviewBoard/reviewListView");
 		// ModelAndView는 메소드체인이 가능해서 코드의 길이가 짧아진다 => 그래서 String으로 사용했을 때 보다 좋다
-		System.out.println(mv);
 		return mv;
 		
 	}
@@ -134,8 +133,8 @@ public class ReviewController {
 	public String insertReviewBoard(ReviewBoard b,  Model model, HttpSession session, ModelAndView mv) {
 		// 내가 넘긴 b의 정보를 담은 것 
 		
-		System.out.println("리뷰보드 : " + b);
-		System.out.println("model : " + model);
+//		System.out.println("리뷰보드 : " + b);
+//		System.out.println("model : " + model);
 		
 		// 1) 책 중복되는지 확인 select
 		if(boardService.selectBookTitle(b) == null) {
@@ -155,8 +154,7 @@ public class ReviewController {
 				
 				
 				
-				
-				// 등급추가 => 했지만 어디서 확인함??
+				// 등급추가 => 했지만 어디서 확인함???????????????????????????????????/
 				
 				//1. 작성한 글 세션에 +1 하기
 		         ((User)session.getAttribute("loginUser"))
@@ -199,29 +197,29 @@ public class ReviewController {
 		               return "redirect:list.re";
 		            }
 		         }
-		         
+		        
+		        session.setAttribute("alertMsg", "10포인트 적립 되었습니다");
 				return "redirect:list.re";
 				
 				
 			} else { //뭐든 실패
-			
 				//session.setAttribute("alertMsg", "동일한 책은 작성할 수 없습니다");
-				
-				mv.addObject("errorMsg", "동일한 도서 게시글 작성 실패1");
-				return "common/errorPage";
 				//return "redirect:enrollForm.re?reviewNo=" + b.getReviewNo();
+				mv.addObject("errorMsg", "무슨에러인진모름");
+				return "common/errorPage";
 			}
-		} else {
-			//session.setAttribute("alertMsg", "동일한 책은 작성할 수 없습니다");
 			
-			model.addAttribute("errorMsg","동일한 도서 게시글 작성 실패2");
-			return "common/errorPage";
+		} else {
+			session.setAttribute("alertMsg", "동일한 도서는 작성할 수 없습니다");
+			return "redirect:list.re";
+//			model.addAttribute("errorMsg","동일한 도서 게시글 작성 실패2");
+//			return "common/errorPage";
 		}
 	}
 
 			
 /*			
- * 	너무 길어서 짧게 줄임
+ * 	포인트 적립 너무 길어서 짧게 줄임
 			// 2) 중복 된 책 없으면 insert
 			//boardService.insertReviewBoard(b);
 			if(boardService.insertReviewBoard(b) > 0) {
@@ -254,12 +252,6 @@ public class ReviewController {
 			model.addAttribute("errorMsg","게시글 상세조회 실패");
 			return "common/errorPage";
 		}
-		
-	
-
-
-
-		
 	}
 			
  */
@@ -342,8 +334,8 @@ public class ReviewController {
 	@RequestMapping("delete.re")
 	public String deleteReviewBoard(ReviewBoard b, Model model,  HttpSession session) {
 		
-		System.out.println(b);
-		System.out.println(model);
+//		System.out.println(b);
+//		System.out.println(model);
 		
 		// 포인트 insert
 		Point p = new Point();
@@ -373,10 +365,10 @@ public class ReviewController {
 	// 리뷰게시판 -> 글수정 누를 시 -> 수정폼 화면 나옴
 	@RequestMapping("enrollForm.re")
 	public ModelAndView reviewEnrollForm(int reviewNo, ModelAndView mv) {
-		mv.addObject("b", boardService.selectReviewBoard(reviewNo)).setViewName("board/reviewBoard/reviewUploadForm");
-		System.out.println("글 수정 누를 시 mv 정보 : " + mv);
-		System.out.println("글 수정 게시글 번호 : " + reviewNo);
 		
+		mv.addObject("b", boardService.selectReviewBoard(reviewNo)).setViewName("board/reviewBoard/reviewUploadForm");
+//		System.out.println("글 수정 누를 시 mv 정보 : " + mv);
+//		System.out.println("글 수정 게시글 번호 : " + reviewNo);
 		return mv;
 	}
 	
@@ -385,8 +377,7 @@ public class ReviewController {
 	@RequestMapping("updateReview.re")
 	public String updateReviewBoard(ReviewBoard b, Model model, HttpSession session) {
 	
-		
-		System.out.println("수정한 뒤 책정보 " + b);
+//		System.out.println("수정한 뒤 책정보 " + b);
 		
 		
 		// 1) 리뷰넘버로 책제목조회
@@ -395,7 +386,7 @@ public class ReviewController {
 		// 똑같은 책이면 UPDATE => 
 		// 1_책 정보는 그대로 두되 내용만 수정하고싶을 경우
 		ReviewBoard reviewBoard = boardService.selectBookTitle2(b);
-		System.out.println("책 중복되는지 확인(리뷰넘버로 책제목조회) "+ reviewBoard);
+//		System.out.println("책 중복되는지 확인(리뷰넘버로 책제목조회) "+ reviewBoard);
 		
 	
 		if(b.getBookTitle().equals(reviewBoard.getBookTitle())) { 
@@ -403,7 +394,7 @@ public class ReviewController {
 			// select 해온 책 제목 == 수정할 책제목과 일치하면 update 가능 => 내용만 수정가능
 			
 			boardService.updateReviewBoard(b);
-			System.out.println("내용만 수정 : " + b);
+//			System.out.println("내용만 수정 : " + b);
 			
 			return "redirect:detail.re?reviewNo=" + b.getReviewNo();
 
@@ -411,7 +402,7 @@ public class ReviewController {
 			// 근데 똑같은 책이 아닐경우
 			
 			boardService.updateReviewBoard(b);
-			System.out.println("책/내용 변경 후 : " + b);
+//			System.out.println("책/내용 변경 후 : " + b);
 			
 			return "redirect:detail.re?reviewNo=" + b.getReviewNo();
 		} else {
@@ -480,27 +471,19 @@ public class ReviewController {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
 	// 리뷰게시판 댓글 list 띄워주기
 	@ResponseBody
 	@RequestMapping(value = "rlist.re", produces = "application/json; charset=UTF-8")
 	public String selectReviewReplyList(int reviewNo/*, Model model ajax여서 모델에 담을 필요없음*/) {
 		
-		System.out.println("reviewNo  : " + reviewNo);
+//		System.out.println("reviewNo  : " + reviewNo);
 		
 		ArrayList<ReviewReply> list = boardService.selectReviewReplyList(reviewNo);
 		
-		System.out.println(list);
+//		System.out.println(list);
 
-//		model.addAttribute("list", list);
-//		System.out.println("model :" + model);
+//		model.addAttribute("list", list); 필요없음
+//		System.out.println("model :" + model); 필요없음
 		
 		return new Gson().toJson(boardService.selectReviewReplyList(reviewNo));
 
@@ -512,14 +495,14 @@ public class ReviewController {
 	public String deleteReply(int replyNo, int reviewNo, Model model) {
 		
 		// 삭제를 눌러야지 값이 뜬다. 
-		System.out.println("replyNo : " +replyNo);
-		System.out.println("reviewNo : " +reviewNo);
+//		System.out.println("replyNo : " +replyNo);
+//		System.out.println("reviewNo : " +reviewNo);
 		
 		ReviewReply r = new ReviewReply();
 
 		r.setReplyNo(replyNo);
 		r.setReviewNo(reviewNo);
-		System.out.println("r : "+ r);
+//		System.out.println("r : "+ r);
 		
 		if(boardService.deleteReviewReply(r) > 0) {
 			
@@ -539,15 +522,15 @@ public class ReviewController {
 	@RequestMapping(value = "rUpdate.re", produces = "application/json; charset=UTF-8")
 	public String updateReviewReply(int reviewNo, int replyNo, HttpSession session) {
 		
-		System.out.println("reviewNo  : " + reviewNo);
-		System.out.println("replyNo  : " + replyNo);
+//		System.out.println("reviewNo  : " + reviewNo);
+//		System.out.println("replyNo  : " + replyNo);
 		
 		
 		ReviewReply r = new ReviewReply();
 		r.setReviewNo(reviewNo);
 		r.setReplyNo(replyNo);
 		
-		System.out.println("수정r : " + r);
+//		System.out.println("수정r : " + r);
 		
 		
 		if(boardService.updateReviewReply(r) > 0 ) {
@@ -561,31 +544,28 @@ public class ReviewController {
 	}	
 
 	
-	
+	// 댓글작성
 	@ResponseBody
 	@RequestMapping(value = "rInsert.re", produces = "application/json; charset=UTF-8")
-	public String insertReviewReply(int reviewNo, String replyContent, HttpSession session) {
-		
-//		System.out.println(reviewNo);
-//		System.out.println(replyContent);
+	public String insertReviewReply(int reviewNo, int userNo, String replyContent, HttpSession session) {
 		
 		ReviewReply r = new ReviewReply();
 		r.setReviewNo(reviewNo);
 		r.setReplyContent(replyContent);
+		r.setUserNo(userNo);
+		
+		System.out.println("r의정보 :" + r);
+		
 		
 		if(boardService.insertReviewReply(r) > 0) {
-			return "redirect:detail.re?reviewNo=" + reviewNo;
+			return new Gson().toJson(boardService.insertReviewReply(r));
 		} else {
 			session.setAttribute("alertMsg", "댓글 작성할 수 없습니다");
 			return "redirect:detail.re?reviewNo=" + reviewNo;
 		}
 		
 		
-		
-		
 	}
-	
-	
 	
 	
 	

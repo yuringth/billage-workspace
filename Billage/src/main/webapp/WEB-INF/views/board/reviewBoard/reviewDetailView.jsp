@@ -323,12 +323,19 @@
 				url:'rInsert.re',
 				data:{
 					reviewNo : ${b.reviewNo},
+					userNo : ${loginUser.userNo},
 					replyContent : $('#reply_content').val()
 				},
-				success:function(){
+				success:function(result){
+					//console.log('결과 1 : ' + result);
+					
+					if(result > 0){
+						alert('댓글작성에 성공했습니다');
+	   					$('#reply_content').val(''); // 빈문자열을 넣으면 textarea가 비워짐
+   						selectReviewReplyList();
+					}
 					
 				},
-				
 				error:function(){
 					console.log('실패');
 				}
@@ -338,8 +345,10 @@
 		</script>
 	
 	
+	<!--  ////////////////////////// 휘수 구역 /////////////////////////// -->
+	<script>
 	
-	
+	</script>
 	
  	
    
