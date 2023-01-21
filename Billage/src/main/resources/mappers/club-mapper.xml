@@ -766,7 +766,7 @@
 		        CLUB_NO = #{ clubNo }
 		 ORDER
 		    BY
-		        SOCKET_DATE DESC
+		        SOCKET_DATE
 	</select>
 	
 	

@@ -209,7 +209,7 @@
 		
 		<script>
 			var socket;
-		
+			//const nickname = '${loginUser.nickname}';
 			function chatIn(e){
 				
 				if(e === 1){
@@ -238,8 +238,9 @@
 							
 						} else {
 							var str = $('<p></p>');
+							
 							console.log('else : ' +  e);
-							str.text('[${loginUser.nickname}] : ' + e.data);
+							str.text(e.data);
 							$('#chat-text-area').append(str);
 							
 						}
