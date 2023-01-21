@@ -88,7 +88,12 @@ public class ReportController {
 	@RequestMapping(value="update.ro" ,produces ="application/json; charset=UTF-8" )
 	public String updateReportStatus(int reviewNo) {
 		
-		int result = boardService.selectReportStatus(reviewNo);
+		int result =0;
+		
+		if(boardService.updateReviewStatus(reviewNo) > 0) {
+			result = boardService.updateReportStatus(reviewNo);			
+		}
+		
 		
 		return new Gson().toJson(result);
 		

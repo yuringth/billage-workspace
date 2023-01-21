@@ -42,14 +42,14 @@ public class BoardDao {
 		return (ReportBoard)sqlSession.selectOne("reportMapper.selectReport", rno);
 	}
 	
-	public int selectReportStatus(SqlSession sqlSession, int reviewNo) {
+	public int updateReportStatus(SqlSession sqlSession, int reviewNo) {
 		
-		return (int)sqlSession.update("reportMapper.selectReportStatus", reviewNo);
+		return (int)sqlSession.update("reportMapper.updateReportStatus", reviewNo);
 	}
 	
-	
-	
-	
+	public int updateReviewStatus(SqlSession sqlSession, int reviewNo) {
+		return (int)sqlSession.update("reportMapper.updateReviewStatus",reviewNo);
+	}
 	
 	
 	
