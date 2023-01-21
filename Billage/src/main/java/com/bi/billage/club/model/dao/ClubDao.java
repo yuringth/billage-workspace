@@ -19,10 +19,20 @@ public class ClubDao {
 		return sqlSession.selectOne("clubMapper.selectListCount");
 	}
 	
-	public ArrayList<Club> selectList(SqlSessionTemplate sqlSession, PageInfo pi){
+	public ArrayList<Club> selectList(SqlSessionTemplate sqlSession, PageInfo pi, String condition){
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		return (ArrayList)sqlSession.selectList("clubMapper.selectList", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("clubMapper.selectList", condition, rowBounds);
+	}
+	
+	public int searchCount(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		return sqlSession.selectOne("clubMapper.searchCount", map);
+	}
+	
+	public ArrayList<Club> selectSearchList(SqlSessionTemplate sqlSession, PageInfo pi, HashMap<String,String> map){
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("clubMapper.selectSearchList", map, rowBounds);
 	}
 	
 	public int increaseCount(SqlSessionTemplate sqlSession, Club club) {
@@ -47,7 +57,6 @@ public class ClubDao {
 	public int insertClubAdmin(SqlSessionTemplate sqlSession, Club club) {
 		return sqlSession.insert("clubMapper.insertClubAdmin", club);
 	}
-	
 	
 	// 클럽 일반회원 리스트 조회
 	public ArrayList<Club> clubGeneral(SqlSessionTemplate sqlSession, int userNo){

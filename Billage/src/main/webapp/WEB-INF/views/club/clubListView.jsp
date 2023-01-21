@@ -16,11 +16,11 @@
 <style>
 	p { padding:0px; margin:0px; }
 	
-	#thum-text-area, #thum-like-area { text-align:left; }
+	#thum-text-area, #thum-like-area { text-align:center; font-weight:600; color:gray; }
 	#outer-area{
 		width : 1200px;
 		margin: auto;
-		background-color: rgba(136, 180, 164, 0.435);
+		/*background-color: rgba(136, 180, 164, 0.435);*/
 	}
 	
 	.list-area{
@@ -46,7 +46,7 @@
 		width: 350px;
 		display: inline-block;
 		margin: 15px;
-		background-color: rgba(211, 201, 180, 0.83);
+		background-color: rgba(211, 201, 180, 0.30);
 	}
 
 	.thumbnail:hover{
@@ -54,13 +54,15 @@
 		opacity: 0.7;
 	}
 	
-	#thum-area{
-		position:
+	#thum-area h3{
+		color : black;
 	}
 
 	#new-club{
 		position: absolute;
-		border: 2px solid black;
+		color: white;
+		background-color:red;
+		border: 2px solid red;
 		border-radius: 50px;
 		margin-top: 10px;
 		margin-left: 10px;
@@ -68,7 +70,11 @@
 		width:40px;
 		display:none;
 		z-index:900;
+		font-weight:600;
 	}
+	
+
+	
 	
         #pagingArea {width:fit-content; margin:auto;}
         
@@ -90,34 +96,44 @@
             
 	<div id="outer-area">
 		<div>
-			<a>최신순</a>
-			<a>인기순</a>
+			<a href="list.cl?condition=recently">최신순</a>
+			<a href="list.cl?condition=popularity">인기순</a>
 		</div>
 		
-		<%-- 
+		
 		<div align="center">
-			<form action="" method="">
-				<select name="search">
-					<option name="search">모임명</option>			
-					<option name="search">요일</option>			
-					<option name="search">??</option>			
+			<form action="search.cl" method="get">
+				<input type="hidden" name="cpage" value="1" />
+				<select name="condition">
+					<option value="clubName">모임명</option>			
+					<option value="location">지역</option>			
+					<option value="createMem">닉네임</option>			
 				</select>
-				<input id="" type="text" name=""/>		
-				<button name="" >검색</button>
+				<input id="keyword" type="text" name="keyword"/>		
+				<button type="submit" >검색</button>
 			</form>
 		</div>
-		--%>
+		
+		<br><br><br>
 		
 		<div id="list-area">
 			<c:forEach items="${ clubList }" var="c" varStatus="status" >
 			<div id="thum-area" class="thumbnail" align="center">
 				<input type="hidden" name="clubNo" value="${ c.clubNo }" />
 				<div id="new-club" value="${ c.newCount }">new</div>
-				<img src="${ c.clubImg }" alt="">
+				<c:choose>
+					<c:when test="${ !empty c.clubImg }">
+						<img src="${ c.clubImg }" alt="">
+					</c:when>
+					<c:otherwise>
+						<img src="resources/images/no_image.jpg" alt="">
+					</c:otherwise>				
+				</c:choose>
 				<h3>${ c.clubName }</h3> 
 				<div id="thum-text-area">
-					<span>중심지역 : ${ c.clubLocation }</span></br>
-					<span>멤버수  : ${ c.memCount } / ${ c.clubLimit } | 조회수 : ${ c.clubCount }</span></br>
+					<span>중심지역 : ${ c.clubLocation }</span><br>
+					<span>멤버수  : ${ c.memCount } / ${ c.clubLimit }</span><br>
+					<span>조회수 : ${ c.clubCount }</span>
 				</div>
 				<div id="thum-like-area">
 						<span>좋아요 : ${ c.likeCount }명</span>
@@ -126,36 +142,16 @@
 			</c:forEach>
 		</div> <!-- list-area끝  -->
 		
-		<%--
-							<c:choose>
-								<c:when test="${ c.clubNo eq i.clubNo }" >
-									<span>찜취소(찜중)<img src=""></span>
-								</c:when>
-								<c:otherwise>
-									<span>찜하기(찜아님)</span>					
-								</c:otherwise>
-							</c:choose>	
-							
-											<%-- 
-						<c:forEach items="${ likeList }" var="i" begin="${ status.index }" >
-								<c:if test="${ c.clubNo eq i.clubNo }" >
-									<span>찜취소(찜중)<img src=""></span>
-								</c:if>
-									<span>찜하기(찜아님)</span>										
-						</c:forEach>
-				 --%>
-							
+		
+		<%-- 
 		<c:forEach items="${ likeList }" var="l">
 			<script>
 
 			</script>
 			
 		</c:forEach>		
-		
-		
-		
-		
-		
+		*/
+		--%>
 		
 		
 		

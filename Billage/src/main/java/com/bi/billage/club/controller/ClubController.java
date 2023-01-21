@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -32,7 +33,7 @@ import com.google.gson.Gson;
 @Controller
 public class ClubController {
 	
-	// API serviceKey
+	//API serviceKey
 	private static final String serviceKey = "B15BD225-F8CB-34E6-9DC3-A77C2FE5F5A9";
 	
 	@Autowired
@@ -41,19 +42,83 @@ public class ClubController {
 	@Autowired
 	private MessageService messageService;
 	
-	//WebSocket
 	
+	// 지역을 찾는 API을 구현 함 
+	@ResponseBody
+	@RequestMapping(value="searchAddr.cl", produces = "application/json; charset=UTF-8")
+	public String ajaxSearchAddr(String keyword) throws IOException {
+		
+		String url = "http://api.vworld.kr/req/search";
+			  url += "?key=" + serviceKey;
+			  url += "&query=" + keyword;
+			  url += "&type=address";
+			  url += "&category=road";
+			  url += "&request=search";
+			  url += "&size=100";
+			  
+		URL requestUrl = new URL(url);
+		HttpURLConnection urlConnection = (HttpURLConnection)requestUrl.openConnection();
+		urlConnection.setRequestMethod("GET"); 
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader (urlConnection.getInputStream()));
+		
+		String responseText = "";
+		String line; 
+		
+		while((line = br.readLine()) != null ) {
+			responseText += line; 
+		}
+			  
+		br.close();
+		urlConnection.disconnect();
+		
+		return responseText;
+	}
+
 	
 	//등록된 모임 리스트를 가지고 와야 함 , 페이징 처리 필요
 	@RequestMapping("list.cl")
 	public ModelAndView selectGroup(@RequestParam(value="cpage", defaultValue="1")int currentPage
-								   , ModelAndView mv, HttpSession session ) {
-		
+								   ,String condition, ModelAndView mv, HttpSession session ) {
+
 		PageInfo pi = Pagination.getPageInfo(clubService.selectListCount(), currentPage, 10, 9);
+		mv.addObject("pi", pi);
+
+		mv.addObject("clubList", clubService.selectList(pi, condition));
+		System.out.println(condition);
+	
+		if(null != session.getAttribute("loginUser")) {
+			mv.addObject("likeList", clubService.selectClubLike(((User)session.getAttribute("loginUser")).getUserNo()));
+		}
+		
+		mv.setViewName("club/clubListView");
+		return mv;
+	}
+	
+	
+	//keyword and condition에 따른 검색 
+	@RequestMapping("search.cl")
+	public ModelAndView selectSearch(ModelAndView mv, @RequestParam(value="cpage", defaultValue="1") int currentPage,
+									 String condition, String keyword, HttpSession session){
+		
+		System.out.println(condition);
+		System.out.println(keyword);
+		
+		HashMap<String, String> map = new HashMap();
+		map.put("condition", condition);
+		map.put("keyword", keyword);
+		
+		
+		PageInfo pi = Pagination.getPageInfo(clubService.searchCount(map), currentPage, 10, 9);
+		System.out.println(clubService.searchCount(map));
 		
 		mv.addObject("pi", pi);
-		mv.addObject("clubList", clubService.selectList(pi));
-	
+		ArrayList<Club> list = clubService.selectSearchList(pi, map);
+		mv.addObject("clubList", clubService.selectSearchList(pi, map));
+		
+		for(Club c : list) {
+			System.out.println(c);
+		}
 		
 		if(null != session.getAttribute("loginUser")) {
 			mv.addObject("likeList", clubService.selectClubLike(((User)session.getAttribute("loginUser")).getUserNo()));
@@ -78,7 +143,6 @@ public class ClubController {
 				((User)session.getAttribute("loginUser")).setClubNo(clubNo);
 			} 
 		
-		
 			//게시글 번호로 해당 글 상세 조회 
 			club = clubService.selectDetailClub(club);
 			club.setNewCount(newCount);				
@@ -98,12 +162,15 @@ public class ClubController {
 			return mv;
 		} 
 	}
+	
+	
 	//selectParticipantList ajax
 	@ResponseBody
 	@RequestMapping(value="ajaxMemList.cl", produces="application/json; charset=UTF-8")
 	public String ajaxClubMemberList(int clubNo) {
 		return new Gson().toJson(clubService.clubMemberSelectAdmin(clubNo));
 	}
+	
 	
 	// like ajax 
 	@ResponseBody
@@ -126,6 +193,7 @@ public class ClubController {
 		return new Gson().toJson(result);
 	}
 		
+	
 	// parti ajax
 	@ResponseBody
 	@RequestMapping(value="clubMember.cl", produces = "application/json; charset=UTF-8")
@@ -143,8 +211,6 @@ public class ClubController {
 		//System.out.println(result);
 		return new Gson().toJson(result);
 	}			
-			
-			
 			
 	
 	// 모임 마이페이지에서 <일반 >
@@ -272,46 +338,6 @@ public class ClubController {
 	}
 	
 	
-	
-	
-	
-	
-	// 지역을 찾는 API을 구현 함 
-	@ResponseBody
-	@RequestMapping(value="searchAddr.cl", produces = "application/json; charset=UTF-8")
-	public String ajaxSearchAddr(String keyword) throws IOException {
-		
-		String url = "http://api.vworld.kr/req/search";
-			  url += "?key=" + serviceKey;
-			  url += "&query=" + keyword;
-			  url += "&type=address";
-			  url += "&category=road";
-			  url += "&request=search";
-			  url += "&size=100";
-			  
-		URL requestUrl = new URL(url);
-		HttpURLConnection urlConnection = (HttpURLConnection)requestUrl.openConnection();
-		urlConnection.setRequestMethod("GET"); 
-		
-		BufferedReader br = new BufferedReader(new InputStreamReader (urlConnection.getInputStream()));
-		
-		String responseText = "";
-		String line; 
-		
-		while((line = br.readLine()) != null ) {
-			responseText += line; 
-		}
-			  
-		br.close();
-		urlConnection.disconnect();
-		
-		return responseText;
-	}
-	
-	
-	
-	
-	
 	// 마이페이지에서 모임 개설하기 클릭시 실행되는 메소드  -- 모임등록폼 작성 페이지 
 	@RequestMapping("enrollForm.cl")
 	public String enrollGroup() {
@@ -342,7 +368,8 @@ public class ClubController {
 		}
 	}
 	
-	//모임 관리자 페이지에서 활동 클릭 하면 해당 클럽활동 오픈 리스트 화면 오픈 시키기
+	
+	//모임 관리자 페이지에서 활동 클릭 하면 해당 클럽활동 오픈 리스트 화면으로 로딩 시키기
 	@RequestMapping("clubOpenAdmin.cl")
 	public ModelAndView clubOpenSelectAdmin(Model model, ModelAndView mv, int clubNo) {
 		
@@ -360,6 +387,7 @@ public class ClubController {
 		model.addAttribute("clubNo", clubNo);
 		return "club/clubIOpenEnrollForm";
 	}
+	
 	
 	// club Open 등록폼 Insert
 	@RequestMapping("createOpen.cl")

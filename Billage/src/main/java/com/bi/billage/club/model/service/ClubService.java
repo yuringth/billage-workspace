@@ -10,11 +10,17 @@ import com.bi.billage.common.model.vo.PageInfo;
 
 public interface ClubService {
 	
-	// Group 게시글의 List 총 개수 조회
+	// club 게시글의 List 총 개수 조회
 	int selectListCount();
 	
 	// 페이징 처리
-	ArrayList<Club> selectList(PageInfo pi);
+	ArrayList<Club> selectList(PageInfo pi, String condition);
+	
+	//keyword 검색 count
+	int searchCount(HashMap<String, String> map);
+	
+	//keyword 검색 List 
+	ArrayList<Club> selectSearchList(PageInfo pi, HashMap<String, String> map);
 	
 	// 게시글 클릭 시 조회수 증가
 	int increaseCount(Club club);

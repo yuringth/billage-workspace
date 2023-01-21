@@ -31,14 +31,12 @@ public class WebSocketServer extends TextWebSocketHandler {
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		
 		users.add(session);
-		//System.out.println("사용자 접속 : " + users.size() + "명");
+
 		int clubNo = ((User)session.getAttributes().get("loginUser")).getClubNo();
 		
 		ArrayList<Socket> afterConnectionList = clubService.selectChat(clubNo);
 		
 		String afterConnectionText = "----<br>";
-		
-		
 		for(int i = 0 ; i < afterConnectionList.size() ; i++) {
 			afterConnectionText += "[ " 
 								+ afterConnectionList.get(i).getNickname()
@@ -49,38 +47,32 @@ public class WebSocketServer extends TextWebSocketHandler {
 		}
 		afterConnectionText += "----<br>";
 		
-		
 		TextMessage message = new TextMessage(afterConnectionText);
 	
 		for(WebSocketSession ws : users) {
 			ws.sendMessage(message);
 		}
-
 	}
-
 	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		// 메시지를 모든 사용자에게 전송 (사용자의 수만큼 반복해서 전송)
 		// payLoad 필드에 있는 사용자가 실제로 보낸 내용 (본문) 
-		TextMessage newMessage = new TextMessage(message.getPayload());
+		//TextMessage newMessage = new TextMessage(message.getPayload());
 		//session.sendMessage(newMessage);
 		
 		int userNo = ((User)session.getAttributes().get("loginUser")).getUserNo();
 		int clubNo = ((User)session.getAttributes().get("loginUser")).getClubNo();
 		String nickname = ((User)session.getAttributes().get("loginUser")).getNickname();
-		//System.out.println(userNo);
-		//System.out.println(clubNo);
 		
+		//VO만들어서 vo에 담아도 되는데 그냥 map을 한 번 써보고 싶어서 사용함 
 		HashMap<String, String> map = new HashMap();
 		
 		map.put("userNo", String.valueOf(userNo));
 		map.put("clubNo", String.valueOf(clubNo));
-		map.put("message", newMessage.getPayload());
+		map.put("message", message.getPayload());
 		
 		int result = clubService.insertChat(map);
-		//System.out.println(result);
-		
 		
 		String sendMessage = "[ "+ nickname + " ] : " + message.getPayload();
 		

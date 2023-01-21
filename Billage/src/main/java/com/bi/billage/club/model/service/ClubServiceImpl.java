@@ -28,10 +28,21 @@ public class ClubServiceImpl implements ClubService {
 	}
 	
 	@Override
-	public ArrayList<Club> selectList(PageInfo pi) {
-		return clubDao.selectList(sqlSession, pi);
+	public ArrayList<Club> selectList(PageInfo pi, String condition) {
+		return clubDao.selectList(sqlSession, pi, condition);
 	}
 		
+	@Override
+	public int searchCount(HashMap<String, String> map) {
+		return clubDao.searchCount(sqlSession, map);
+	}
+
+	@Override
+	public ArrayList<Club> selectSearchList(PageInfo pi, HashMap<String, String> map) {
+		return clubDao.selectSearchList(sqlSession, pi, map);
+	}
+
+	
 	@Override
 	public int increaseCount(Club club) {
 		return clubDao.increaseCount(sqlSession, club);
@@ -136,6 +147,9 @@ public class ClubServiceImpl implements ClubService {
 	public ArrayList<Socket> selectChat(int clubNo) {
 		return clubDao.selectChat(sqlSession, clubNo);
 	}
+
+
+
 
 	
 
