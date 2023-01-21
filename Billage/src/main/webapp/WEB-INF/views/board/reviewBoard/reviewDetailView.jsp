@@ -188,7 +188,7 @@
 		               <th colspan="2">
 		                   <textarea class="form-control" name="reply_content2" id="reply_content" cols="55" rows="2" style="resize:none; width:100%;"></textarea>
 		               </th>
-		               <th style="vertical-align:middle"><button type="submit" class="btn btn-secondary" onclick="insertReply();">등록하기</button></th>
+		               <th style="vertical-align:middle"><button type="button" class="btn btn-secondary" onclick="insertReply();">등록하기</button></th>
            			</c:otherwise>	
            		</c:choose>
            </tr>
@@ -354,7 +354,7 @@
 	   					$('#reply_content').val(''); // 빈문자열을 넣으면 textarea가 비워짐
    						selectReviewReplyList();
 					}
-					
+				//응답데이터가 많을 때 gson/json을 쓴다	
 				},
 				error:function(){
 					console.log('실패');

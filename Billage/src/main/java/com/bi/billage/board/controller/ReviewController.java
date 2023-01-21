@@ -485,6 +485,7 @@ public class ReviewController {
 //		model.addAttribute("list", list); 필요없음
 //		System.out.println("model :" + model); 필요없음
 		
+		// 자바에서 쓰는 객체를 자바스크립트에서 사용하려면 
 		return new Gson().toJson(boardService.selectReviewReplyList(reviewNo));
 
 	}
@@ -549,7 +550,7 @@ public class ReviewController {
 	// "application/json; charset=UTF-8"
 	// 댓글작성
 	@ResponseBody
-	@RequestMapping(value = "rInsert.re", produces = "application/json; charset=UTF-8")
+	@RequestMapping(value = "rInsert.re", produces = "text/html; charset=UTF-8")
 	public String insertReviewReply(int reviewNo, int userNo, String replyContent, HttpSession session) {
 		
 		ReviewReply r = new ReviewReply();
@@ -561,7 +562,8 @@ public class ReviewController {
 		
 		
 		if(boardService.insertReviewReply(r) > 0) {
-			return new Gson().toJson(boardService.insertReviewReply(r));
+			return "1";
+			//응답데이터가 많을 때 gson/json을 쓴다=>나는 1만 보내주면 되니까 이렇게 작성하면 된다
 		} else {
 			session.setAttribute("alertMsg", "댓글 작성할 수 없습니다");
 			return "redirect:detail.re?reviewNo=" + reviewNo;
