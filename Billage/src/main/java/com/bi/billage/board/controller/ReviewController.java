@@ -480,8 +480,6 @@ public class ReviewController {
 		
 		ArrayList<ReviewReply> list = boardService.selectReviewReplyList(reviewNo);
 		
-//		System.out.println(list);
-
 //		model.addAttribute("list", list); 필요없음
 //		System.out.println("model :" + model); 필요없음
 		
@@ -551,12 +549,13 @@ public class ReviewController {
 	// 댓글작성
 	@ResponseBody
 	@RequestMapping(value = "rInsert.re", produces = "text/html; charset=UTF-8")
-	public String insertReviewReply(int reviewNo, int userNo, String replyContent, HttpSession session) {
+	public String insertReviewReply(int reviewNo, String replyContent, HttpSession session) {
+		
 		
 		ReviewReply r = new ReviewReply();
 		r.setReviewNo(reviewNo);
 		r.setReplyContent(replyContent);
-		r.setUserNo(userNo);
+		r.setUserNo(((User)session.getAttribute("loginUser")).getUserNo());
 		
 		System.out.println("r의정보 :" + r);
 		

@@ -224,7 +224,6 @@
 		/* 댓글 목록 띄워주기 */
 		function selectReviewReplyList(){
 			
-				
 			$.ajax({
 				url:'rlist.re',
 				data:{
@@ -232,7 +231,7 @@
 				},
 				success:function(list){
 					
-					console.log(list);
+				console.log(list);
 					
 					var result = '';
 					
@@ -240,7 +239,15 @@
 						// 1. 비회원 == 댓글작성자가 아닌 경우 => 삭제 / 수정 버튼 안보임
 						// 2. 로그인 유저 == 댓글작성자인 경우 => 삭제 / 수정 버튼 보임
 						// 3. 로그인 유저 != 댓글작성자가 아닌경우 => 삭제 / 수정 버튼 안보임
-						if(${not empty loginUser}){
+						
+						console.log(${loginUser.userNo});
+						console.log(${not empty loginUser});
+				
+						
+						
+						
+		 				
+						if(${not empty loginUser}){ // 회원일때
 							if(list[i].userNo == ${loginUser.userNo}){
 								var btn = '<button class="btn btn-secondary" onclick="deleteReply(' + list[i].replyNo +','+ list[i].reviewNo + ')">댓글삭제</button>';
 								var btn2 = '<button class="btn btn-secondary" onclick="ReviewReplyForm(this)">댓글수정</button>';
@@ -253,7 +260,7 @@
 		   							   + '<td>' + btn + '</td>'
 		   							   + '<td>' + btn2 + '</td>'
 								 	   + '</tr>'
-							} else{
+							} else {
 								result += '<tr>'
 								 	   + '<th>' + list[i].userId + '</th>'
 								 	   + '<td id="replyContent">' + list[i].replyContent + '</td>'
@@ -261,16 +268,25 @@
 								 	   + '</tr>'
 							}
 							
-						} else {
+						} else { // 비회원일때
 							result += '<tr>'
 							 	   + '<th>' + list[i].userId + '</th>'
 							 	   + '<td>' + list[i].replyContent + '</td>'
 							 	   + '<td>' + list[i].createDate + '</td>'
 							 	   + '</tr>'
 						}
+						  
+						
 					}
+					
+					console.log(result);
 					$('#replyArea tbody').html(result);
-				},
+				}, 
+				
+				
+		
+				
+				
 				error:function(){
 					console.log('실패');
 				}
@@ -334,7 +350,7 @@
 
 
 
-		
+		/* 	userNo : ${loginUser.userNo}, */
 		/* 댓글 작성 */
 		function insertReply(){
 			console.log($('#reply_content').val());
@@ -343,7 +359,7 @@
 				url:'rInsert.re',
 				data:{
 					reviewNo : ${b.reviewNo},
-					userNo : ${loginUser.userNo},
+			
 					replyContent : $('#reply_content').val()
 				},
 				success:function(result){
@@ -354,7 +370,6 @@
 	   					$('#reply_content').val(''); // 빈문자열을 넣으면 textarea가 비워짐
    						selectReviewReplyList();
 					}
-				//응답데이터가 많을 때 gson/json을 쓴다	
 				},
 				error:function(){
 					console.log('실패');
