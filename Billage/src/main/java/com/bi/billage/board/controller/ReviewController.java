@@ -544,6 +544,19 @@ public class ReviewController {
 
 	
 	
+	@ResponseBody
+	@RequestMapping(value = "formReply.re", produces = "application/json; charset=UTF-8")
+	public String reviewFormReply(ReviewReply r, HttpSession session) {
+		// 스프링이 알아서 값을 가져와서 setㅎㅐ줌
+		
+		
+		
+		return null;
+	}
+	
+	
+	
+	
 	// "text/html; charset=UTF-8"
 	// "application/json; charset=UTF-8"
 	// 댓글작성

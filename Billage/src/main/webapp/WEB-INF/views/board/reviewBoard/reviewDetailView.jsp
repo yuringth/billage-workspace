@@ -247,8 +247,8 @@
 						if(${not empty loginUser}){ // 회원일때
 							if(list[i].userNo == '${loginUser.userNo}'){
 								var btn = '<button class="btn btn-secondary" onclick="deleteReply(' + list[i].replyNo +','+ list[i].reviewNo + ')">댓글삭제</button>';
-								var btn2 = '<button class="btn btn-secondary" onclick="ReviewReplyForm(this)">댓글수정</button>';
-						//		var btn2 = '<button class="btn btn-secondary" onclick="formReply()">댓글수정</button>';
+						//		var btn2 = '<button class="btn btn-secondary" onclick="ReviewReplyForm(this)">댓글수정</button>';
+								var btn2 = '<button class="btn btn-secondary" onclick="formReply()">댓글수정</button>';
 					
 								result += '<tr>'
 								 	   + '<th>' + list[i].userId + '</th>'
@@ -306,9 +306,8 @@
 		};
 		
 		
-/* 	
+ 	
 		function formReply(){
-			
 			
 			console.log('성공');
 			console.log($('#reply_content').val());
@@ -318,7 +317,7 @@
 				url:'formReply.re',
 				data:{
 					reviewNo : ${b.reviewNo},
-					userNo : ${loginUser.userNo},
+					userNo : '${loginUser.userNo}',
 					replyContent : $('#reply_content').val()
 					
 				},
@@ -331,9 +330,11 @@
 			})
 			
 		}
-		 */
+		 
 		
 		// 댓글 수정 폼화면
+		
+/* 		
  	 	function ReviewReplyForm(e){
 			
 			// console.log($(e).parents().eq(1).children().eq(1).text()); // 댓글 뽑아옴
@@ -343,11 +344,11 @@
 			$(e).parents().eq(1).children().eq(1).children().val(content); // 댓글창에 기존 댓글이 들어감
 		};
 	 
-		
+		 */
 
 
 
-		/* 	userNo : ${loginUser.userNo}, */
+		/* 	userNo : '${loginUser.userNo}', */
 		/* 댓글 작성 */
 		function insertReply(){
 			console.log($('#reply_content').val());
@@ -356,7 +357,6 @@
 				url:'rInsert.re',
 				data:{
 					reviewNo : ${b.reviewNo},
-					userNo : '${loginUser.userNo}',
 					replyContent : $('#reply_content').val()
 				},
 				success:function(result){
