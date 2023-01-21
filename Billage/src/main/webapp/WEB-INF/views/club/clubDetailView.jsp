@@ -123,7 +123,7 @@
     	<div id="group-detail-area">
     		<div id="detail-left">
     			<img width="500px" height="500px" src="${ club.clubImg }">
-    			<p><b id="like-count">${ club.likeCount }</b>명이 찜했어요!${ club.likeUser }</p>
+    			<p><b id="like-count">${ club.likeCount }</b>명이 찜했어요!</p>
     		</div>
     		<div id="detail-right">
     			<div>중심지역 : ${ club.clubLocation }</div>
@@ -223,15 +223,27 @@
 					
 					socket.onopen = function(){
 						console.log('서버랑 연결됐님?');
-						$('#chat-text-area').text('${loginUser.userId}!! 이 몸 등장 ㅋ');
+						$('#chat-text-area').text('${loginUser.nickname}!! 이 몸 등장 ㅋ');
 					}
 					
 					socket.onmessage = function(e){
+						console.log('onmessage');
+						console.log('e : ' + e);
 						console.log('메시지가 도착했씁니다');
 						
-						var str = $('<p></p>');
-						str.text(e.data);
-						$('#chat-text-area').append(str);
+						if(e.data.substr(0,4) == '----'){
+							console.log('여긴 이프문이얌');
+							console.log('if e:' + e.data);
+							$('#chat-text-area').html(e.data);
+							
+						} else {
+							var str = $('<p></p>');
+							console.log('else : ' +  e);
+							str.text('[${loginUser.nickname}] : ' + e.data);
+							$('#chat-text-area').append(str);
+							
+						}
+						
 					}
 					
 				}

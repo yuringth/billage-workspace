@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import com.bi.billage.club.model.vo.Club;
 import com.bi.billage.club.model.vo.ClubOpen;
+import com.bi.billage.club.model.vo.Socket;
 import com.bi.billage.common.model.vo.PageInfo;
 
 public interface ClubService {
@@ -75,5 +76,8 @@ public interface ClubService {
 	
 	// INSERT SOCKET 
 	int insertChat(HashMap<String, String> map);
+	
+	// SELECT SOCKET
+	ArrayList<Socket> selectChat(int clubNo);
 	
 }
