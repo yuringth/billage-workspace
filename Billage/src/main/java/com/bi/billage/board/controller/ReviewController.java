@@ -516,7 +516,7 @@ public class ReviewController {
 	}
 	
 	
-	
+
 	// 안만들었음 => 수정버튼 클릭시 돌아가는거
 	@ResponseBody
 	@RequestMapping(value = "rUpdate.re", produces = "application/json; charset=UTF-8")
@@ -544,6 +544,9 @@ public class ReviewController {
 	}	
 
 	
+	
+	// "text/html; charset=UTF-8"
+	// "application/json; charset=UTF-8"
 	// 댓글작성
 	@ResponseBody
 	@RequestMapping(value = "rInsert.re", produces = "application/json; charset=UTF-8")
