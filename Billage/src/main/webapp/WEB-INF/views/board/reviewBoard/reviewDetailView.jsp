@@ -231,7 +231,7 @@
 				},
 				success:function(list){
 					
-				console.log(list);
+				//console.log(list);
 					
 					var result = '';
 					
@@ -243,12 +243,9 @@
 						console.log(${loginUser.userNo});
 						console.log(${not empty loginUser});
 				
-						
-						
-						
 		 				
 						if(${not empty loginUser}){ // 회원일때
-							if(list[i].userNo == ${loginUser.userNo}){
+							if(list[i].userNo == '${loginUser.userNo}'){
 								var btn = '<button class="btn btn-secondary" onclick="deleteReply(' + list[i].replyNo +','+ list[i].reviewNo + ')">댓글삭제</button>';
 								var btn2 = '<button class="btn btn-secondary" onclick="ReviewReplyForm(this)">댓글수정</button>';
 						//		var btn2 = '<button class="btn btn-secondary" onclick="formReply()">댓글수정</button>';
@@ -359,7 +356,7 @@
 				url:'rInsert.re',
 				data:{
 					reviewNo : ${b.reviewNo},
-			
+					userNo : '${loginUser.userNo}',
 					replyContent : $('#reply_content').val()
 				},
 				success:function(result){

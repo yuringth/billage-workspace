@@ -478,7 +478,7 @@ public class ReviewController {
 		
 //		System.out.println("reviewNo  : " + reviewNo);
 		
-		ArrayList<ReviewReply> list = boardService.selectReviewReplyList(reviewNo);
+	//	ArrayList<ReviewReply> list = boardService.selectReviewReplyList(reviewNo);
 		
 //		model.addAttribute("list", list); 필요없음
 //		System.out.println("model :" + model); 필요없음
@@ -555,6 +555,7 @@ public class ReviewController {
 		ReviewReply r = new ReviewReply();
 		r.setReviewNo(reviewNo);
 		r.setReplyContent(replyContent);
+		//r.setUserNo(userNo);
 		r.setUserNo(((User)session.getAttribute("loginUser")).getUserNo());
 		
 		System.out.println("r의정보 :" + r);
