@@ -14,4 +14,7 @@ public class Socket {
 	private Date socketDate; // SOCKET_DATE	DATE
 	private String socketStatus; //SOCKET_STATUS	VARCHAR2(1 BYTE)
 	
+	private String userId;
+	private String nickname;
+	
 }

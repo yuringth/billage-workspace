@@ -1,5 +1,6 @@
 package com.bi.billage.common.socket;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -11,6 +12,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.bi.billage.club.model.service.ClubService;
+import com.bi.billage.club.model.vo.Socket;
 import com.bi.billage.user.model.vo.User;
 
 public class WebSocketServer extends TextWebSocketHandler {
@@ -29,10 +31,34 @@ public class WebSocketServer extends TextWebSocketHandler {
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		
 		users.add(session);
-		System.out.println("사용자 접속 : " + users.size() + "명");
+		//System.out.println("사용자 접속 : " + users.size() + "명");
+		int clubNo = ((User)session.getAttributes().get("loginUser")).getClubNo();
 		
+		ArrayList<Socket> afterConnectionList = clubService.selectChat(clubNo);
+		
+		String afterConnectionText = "----<br>";
+		
+		
+		for(int i = 0 ; i < afterConnectionList.size() ; i++) {
+			afterConnectionText += "[ 닉네임" 
+								+ afterConnectionList.get(i).getNickname()
+								+ " ] : " 
+								+ afterConnectionList.get(i).getMessage()
+								+ "<br>";
+			
+		}
+		afterConnectionText += "----<br>";
+		
+		
+		TextMessage message = new TextMessage(afterConnectionText);
+	
+		for(WebSocketSession ws : users) {
+			ws.sendMessage(message);
+		}
+
 	}
 
+	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		// 메시지를 모든 사용자에게 전송 (사용자의 수만큼 반복해서 전송)
@@ -41,12 +67,11 @@ public class WebSocketServer extends TextWebSocketHandler {
 		//session.sendMessage(newMessage);
 		
 		
-		
 		int userNo = ((User)session.getAttributes().get("loginUser")).getUserNo();
 		int clubNo = ((User)session.getAttributes().get("loginUser")).getClubNo();
 		
-		System.out.println(userNo);
-		System.out.println(clubNo);
+		//System.out.println(userNo);
+		//System.out.println(clubNo);
 		
 		
 		HashMap<String, String> map = new HashMap();
@@ -56,7 +81,8 @@ public class WebSocketServer extends TextWebSocketHandler {
 		map.put("message", newMessage.getPayload());
 		
 		int result = clubService.insertChat(map);
-		System.out.println(result);
+		//System.out.println(result);
+		
 		
 		for(WebSocketSession ws : users) {
 			ws.sendMessage(newMessage);

@@ -4,7 +4,6 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="clubMapper">
 	
-	
 	<resultMap type="club" id="clubResultSet">
 		<result column="CLUB_NO"			 property="clubNo" />
 		<result column="USER_NO"		 	 property="userNo" />
@@ -50,13 +49,11 @@
 		<result column="MESSAGE"			 property="message" />
 		<result column="SOCKET_DATE"		 property="socketDate" />
 		<result column="SOCKET_STATUS"		 property="socketStatus" />
+		<result column="USER_ID"			 property="userId" />
+		<result column="NICKNAME" 			 property="nickname" />
 	</resultMap>
-	<!-- 
-	<resultMap type="club" id="clubLikeResultSet">
-		<result column="CLUB_NAME" property="userName" />
-		<result column=
-	</resultMap>
-	 -->
+
+
 	<!-- 모임 페이지 리스트 종 갯수 조회  -->
 	<select id="selectListCount" resultType="_int">
 		SELECT 
@@ -754,6 +751,26 @@
 				)
 	</insert>
 
+
+	<select id="selectChat" parameterType="_int" resultMap="socketResultSet">
+		SELECT  
+				 S.USER_NO
+				,M.USER_ID
+				,M.NICKNAME
+				,MESSAGE
+		  FROM
+		        SOCKET S
+		  JOIN
+		        MEMBER M ON(S.USER_NO = M.USER_NO)
+		 WHERE 
+		        CLUB_NO = #{ clubNo }
+		 ORDER
+		    BY
+		        SOCKET_DATE DESC
+	</select>
+	
+	
+	
 </mapper>
 
 
