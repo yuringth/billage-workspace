@@ -56,9 +56,14 @@ public class FollowController {
 				};
 			};
 			
-			mv.addObject("lgFollowingLlist", lgFollowingLlist).setViewName("follow/followingListView2");			
+			mv.addObject("followingList", followingList).setViewName("follow/followingListView");			
 			
 		}else {
+			
+			for(int i = 0; i < followingList.size(); i++ ) {
+				followingList.get(i).setFollowStatus(1);
+			}
+			
 			mv.setViewName("follow/followingListView");
 		}
 		
