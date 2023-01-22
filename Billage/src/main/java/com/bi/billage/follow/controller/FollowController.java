@@ -97,6 +97,8 @@ public class FollowController {
 					if(lg1No == followerList1.get(j).getUserNo()) {
 						
 						followerList1.get(j).setFollowStatus(1);
+					}else {
+						followerList1.get(j).setFollowStatus(0);
 					}
 				}
 				
@@ -112,12 +114,23 @@ public class FollowController {
 					if(lg2No == followerList2.get(n).getUserNo()) {
 						
 						followerList2.get(n).setFollowStatus(1);
+					}else {
+						followerList2.get(n).setFollowStatus(0);
 					}
+					
 				}
 			}
-			
-			mv.setViewName("follow/followerListView2");
+			mv.setViewName("follow/followerListView");
 		}else {
+			
+			for(int i = 0; i<followerList1.size(); i++) {
+				followerList1.get(i).setFollowStatus(1);
+			};
+			
+			for(int i = 0; i<followerList2.size(); i++) {
+				followerList2.get(i).setFollowStatus(0);
+			};
+				
 			mv.setViewName("follow/followerListView");
 		}
 			
