@@ -165,7 +165,7 @@ public class ClubController {
 	}
 
 	
-	//Request
+	//clubBoardForm
 	@RequestMapping("board.cl")
 	public String clubBoardForm(int clubNo, Model model) {
 		model.addAttribute("clubNo", clubNo);
@@ -311,6 +311,7 @@ public class ClubController {
 		
 		ArrayList<Club> ClubMemberList = clubService.clubMemberSelectAdmin(clubNo);
 		
+		mv.addObject("clubNo", clubNo);
 		mv.addObject("memberList", ClubMemberList);
 		mv.setViewName("club/clubMemberAdminView");
 		
@@ -319,9 +320,10 @@ public class ClubController {
 	
 	
 	@RequestMapping("message.cl")
-	public String clubMessageInsert(Model model, long clubNo, int userNo, int[] userNo2, String messageContent) {
+	public String clubMessageInsert(Model model, int userNo, int[] userNo2, String messageContent, long clubNo) {
 		// 요청을 받고 보낼 때 값에 문제가 발생해서 강제 형변환 해놓음 
-		//clubNo = (int)clubNo;
+		//@RequestParam(value="clubNo", defaultValue="0")
+		clubNo = (int)clubNo;
 		
 		ArrayList<Message> messageList = new ArrayList();
 		

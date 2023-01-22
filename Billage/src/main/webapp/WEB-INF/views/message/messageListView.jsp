@@ -34,19 +34,46 @@
 				<thead class="thead-light">
 					<tr>
 						<th width="150px">보낸 사람</th>
-						<th width="850px">내용</th>
+						<th width="650px">내용</th>
+						<th width="200px">확인여부</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>유림쿤</td>
-						<td>私は韓国が嫌いです。</td>
-					</tr>
+					<c:forEach items="${ msgList }" var="m" >
+						<tr>
+							<td>${ m.nickname }</td>
+							<td>${ m.messageContent }</td>
+							<td>
+								<c:choose>
+									<c:when test="${ m.messageStatus eq 1 }">
+										<button id="${ m.messageStatus }">읽음</button>
+									</c:when>
+									<c:otherwise>
+										<button id="${ m.messageStatus }" onclick="msgRead();" >안읽음 </button>
+									</c:otherwise>
+								</c:choose>
+							</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
-		
 	</div>
+	
+	
+	<script>
+		function msgRead(){
+			
+			$.ajax({
+				
+				url : 'read.ms',
+				
+				
+			});
+			
+		}
+	</script>
+	
 	<jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

@@ -19,5 +19,10 @@ public class MessageDao {
 	public int insertClubMessage(SqlSessionTemplate sqlSession, ArrayList<Message> message) {
 		return sqlSession.insert("messageMapper.insertClubMessage", message);
 	}
-
+	
+	//MessageList Select 
+	public ArrayList<Message> selectMessageList(SqlSessionTemplate sqlSession, int userNo){
+		return (ArrayList)sqlSession.selectList("messageMapper.selectMessageList", userNo);
+	}
+	
 }

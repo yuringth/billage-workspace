@@ -24,6 +24,7 @@
 			
 		
 		<script>
+
 			$(function(){
 			
 				// 전체선택 or 취소 ----------------------------------------------------------------------
@@ -47,7 +48,7 @@
 					
 					// console.log($('.checked-btn').filter(':checked'));
 					// .checked-btn 객체들 중에서 checked된 객체들만 선택해준다. 
-					
+	
 					var $checkedMem = $('.checked-btn').filter(':checked');
 					
 					var $clubNo = $('#getClubNo').val();
@@ -139,9 +140,36 @@
 				
 			}); //$(function(){}) 끝
 			
-		
-				
 			
+			/*
+			function receiveCheck(){
+
+				var $receiver = $('#receiveUser').children().length;
+				
+				if($receiver == 0){
+					alert('받는 사람이 지정되지 않았습니다.');
+					return false;
+				}				
+			}
+		
+			
+			function receiveCheck(){
+					
+				$(document).each($('#receiveUser').children(), function(){
+					
+					console.log($(this));
+					
+					if($(this).length == 0){
+						alert('받는 사람이 지정되지 않았습니다.');
+						return false;
+					}
+					
+				})
+				
+				return true;
+				
+			}
+			*/
 		</script>
 		
 		<br><br><br>
@@ -188,7 +216,8 @@
 		
 		<br><br><br>
 		
-		<form action="message.cl" method="post">
+		<form action="message.cl" method="post" onsubmit="return test();">
+			<%--<input type="hidden" name="clubNo" value="${ clubNo }" /> --%>
 			<div id="message-area">
 				<h3> 🧡 메시지 보내기🧡 </h3> 
 				<div class="send-area">
@@ -206,13 +235,72 @@
 					<textarea name="messageContent" style="width:400px; height:240px; resize:none;"></textarea>
 				</div>
 				
-				<button type="submit">전송하기</button>
+				<button id="submit-btn" type="submit">전송하기</button>
 				<button type="reset">다시쓰기</button>
 			</div>
 		</form> <!-- message보내기 form태그  -->
 	
 	
 	</div>
+	
+	<script>
+
+		function test(){
+			if($('textarea[name=messageContent]').val() == ''){
+				alert('텍스트가 작성되지 않았습니다.');
+				$('textarea[name=messageContent]').focus();
+				return false;
+			}
+			
+			if($('#receiveUser').children().length == 0){
+				var result = test2();
+				console.log(result);
+				return false;
+			}
+			
+		}
+		
+		
+		function test2(){
+			
+			$(document).on('click', '#submit-btn', function(){
+				
+				$('input[name=userNo2]').each(function(){
+					console.log($(this));
+					
+					if($(this).length > 0){
+						return false;	
+					} else {
+						return true;	
+					}
+					
+					
+
+				}) // 요소에 각각 접근
+			}) // 동적으로 만들어진 요소 접근 
+		} //test2() 끝
+		
+	
+	/*
+		$(document).on('click', '#submit-btn', function(){
+			
+			$('input[name=userNo2]').each(function(){
+				console.log($(this));
+				
+				if($(this).length > 0){
+					return false;	
+				} else {
+					return true;	
+				}
+				
+				
+
+			})
+			
+		})
+		*/
+	
+	</script>
 	
 	
 	
