@@ -517,42 +517,46 @@ public class ReviewController {
 	
 
 	// 안만들었음 => 수정버튼 클릭시 돌아가는거
-	@ResponseBody
-	@RequestMapping(value = "rUpdate.re", produces = "application/json; charset=UTF-8")
-	public String updateReviewReply(int reviewNo, int replyNo, HttpSession session) {
-		
+//	@ResponseBody
+//	@RequestMapping(value = "rUpdate.re", produces = "application/json; charset=UTF-8")
+//	public String updateReviewReply(int reviewNo, int replyNo, HttpSession session) {
+//		
 //		System.out.println("reviewNo  : " + reviewNo);
 //		System.out.println("replyNo  : " + replyNo);
-		
-		
-		ReviewReply r = new ReviewReply();
-		r.setReviewNo(reviewNo);
-		r.setReplyNo(replyNo);
-		
+//		
+//		
+//		ReviewReply r = new ReviewReply();
+//		r.setReviewNo(reviewNo);
+//		r.setReplyNo(replyNo);
+//		
 //		System.out.println("수정r : " + r);
-		
-		
-		if(boardService.updateReviewReply(r) > 0 ) {
-			return new Gson().toJson(boardService.updateReviewReply(r));
-			
-		} else {
-			
-			session.setAttribute("alertMsg", "댓글 수정할 수 없습니다");
-			return "redirect:detail.re?reviewNo=" + reviewNo;
-		}
-	}	
+//		
+//		
+//		if(boardService.updateReviewReply(r) > 0 ) {
+//			return new Gson().toJson(boardService.updateReviewReply(r));
+//			
+//		} else {
+//			
+//			session.setAttribute("alertMsg", "댓글 수정할 수 없습니다");
+//			return "redirect:detail.re?reviewNo=" + reviewNo;
+//		}
+//	}	
 
 	
+	// 댓글 수정 (사용안함 지우자)
+//	@ResponseBody
+//	@RequestMapping(value = "formReply.re", produces = "application/json; charset=UTF-8")
+//	public String reviewFormReply(ReviewReply r, HttpSession session) {
+//		// 스프링이 알아서 값을 가져와서 setㅎㅐ줌
+//		
+//		
+//		
+//		return null;
+//	}
 	
-	@ResponseBody
-	@RequestMapping(value = "formReply.re", produces = "application/json; charset=UTF-8")
-	public String reviewFormReply(ReviewReply r, HttpSession session) {
-		// 스프링이 알아서 값을 가져와서 setㅎㅐ줌
-		
-		
-		
-		return null;
-	}
+	
+	// 댓글 찐 수정
+	
 	
 	
 	

@@ -240,20 +240,21 @@
 						// 2. 로그인 유저 == 댓글작성자인 경우 => 삭제 / 수정 버튼 보임
 						// 3. 로그인 유저 != 댓글작성자가 아닌경우 => 삭제 / 수정 버튼 안보임
 						
-						console.log(${loginUser.userNo});
-						console.log(${not empty loginUser});
+					//	console.log(${loginUser.userNo});
+					//	console.log(${not empty loginUser});
 				
 		 				
 						if(${not empty loginUser}){ // 회원일때
 							if(list[i].userNo == '${loginUser.userNo}'){
 								var btn = '<button class="btn btn-secondary" onclick="deleteReply(' + list[i].replyNo +','+ list[i].reviewNo + ')">댓글삭제</button>';
-						//		var btn2 = '<button class="btn btn-secondary" onclick="ReviewReplyForm(this)">댓글수정</button>';
-								var btn2 = '<button class="btn btn-secondary" onclick="formReply()">댓글수정</button>';
+								var btn2 = '<button class="btn btn-secondary" onclick="ReviewReplyForm(this)">댓글수정</button>';
+						//		var btn2 = '<button class="btn btn-secondary" onclick="formReply()">댓글수정</button>';
 					
 								result += '<tr>'
-								 	   + '<th>' + list[i].userId + '</th>'
+									   + '<input id="reviewReply" type="hidden" value="' + list[i].replyNo + '">'
+								 	   + '<th id="reviewUserId">' + list[i].userId + '</th>'
 								 	   + '<td>' + list[i].replyContent + '</td>'
-								 	   + '<td>' + list[i].createDate + '</td>'
+								 	   + '<td id="reviewCreateDate">' + list[i].createDate + '</td>'
 		   							   + '<td>' + btn + '</td>'
 		   							   + '<td>' + btn2 + '</td>'
 								 	   + '</tr>'
@@ -276,7 +277,7 @@
 						
 					}
 					
-					console.log(result);
+					//console.log(result);
 					$('#replyArea tbody').html(result);
 				}, 
 				
@@ -306,8 +307,9 @@
 		};
 		
 		
- 	
-		function formReply(){
+ 		
+		// 댓글 수정
+	/* 	function formReply(){
 			
 			console.log('성공');
 			console.log($('#reply_content').val());
@@ -333,21 +335,63 @@
 				}
 			})
 			
-		}
+		} */
 		 
 		
 		// 댓글 수정 폼화면
-		
-/* 		
  	 	function ReviewReplyForm(e){
 			
-			// console.log($(e).parents().eq(1).children().eq(1).text()); // 댓글 뽑아옴
-			var content = $(e).parents().eq(1).children().eq(1).text();
-			$(e).parents().eq(1).children().eq(1).text('');
-			$(e).parents().eq(1).children().eq(1).append('<textarea></textarea><button>수정</button>');
-			$(e).parents().eq(1).children().eq(1).children().val(content); // 댓글창에 기존 댓글이 들어감
+		//	console.log($(e).parents().eq(1).children().eq(2).text()); // 댓글 뽑아옴
+		//	console.log($(e).parents().eq(1).children('#reviewReply').val()); // 댓글 번호 뽑아옴
+		//	console.log($(e).parents().children('#reviewReply').val()); // 댓글 번호 뽑아옴 (위와동일)
+		//	console.log($(e).parents().children('#reviewUserId').text()); // 유저아이디
+		//	console.log($(e).parents().children('#reviewCreateDate').text()); // 작성일자
+		
+			var content = $(e).parents().eq(1).children().eq(2).text(); // 댓글
+			var rno = $(e).parents().children('#reviewReply').val(); // 댓글번호
+			var userId = $(e).parents().children('#reviewUserId').text(); // 유저아이디
+			var date = $(e).parents().children('#reviewCreateDate').text(); // 작성일자
+			
+			
+			console.log($(e).parent().parent().children());
+			
+			$(e).parent().parent().children().html('<tr><input type="hidden" id="reviewReply" value="' + rno + '>"'
+														+ '<th>' + userId + '</th>'
+														+ '<td><textarea>' + content + '</textarea></td>'
+														+ '<td>' + date + '</td>'
+														+ '<button id="updateReviewReply">수정</button>'
+														+ '<button id="">취소</button></tr>');
+			
+			
+		// 썜	
+		//	$(e).parents().eq(1).children().eq(2).text('');
+		//	$(e).parents().eq(1).children().eq(2).append('<textarea></textarea><button id="updateReviewReply">수정</button>');
+		//	$(e).parents().eq(1).children().eq(2).children().val(content); // 댓글창에 기존 댓글이 들어감
+			
 		};
-	 
+		
+		
+		
+
+		// 댓글 찐 수정
+/* 		$(document).on('click', '#updateReviewReply', function(){
+			
+			$.ajax({
+				url:'rUpdate.re',
+				data:{
+					rno:
+					
+				},
+				type:'post',
+				success:function(){
+					
+				},
+				error:function(){
+					console.log('실패');
+				}
+			})
+			
+		});
 		 */
 
 
@@ -355,7 +399,7 @@
 		/* 	userNo : '${loginUser.userNo}', */
 		/* 댓글 작성 */
 		function insertReply(){
-			console.log($('#reply_content').val());
+			// console.log($('#reply_content').val());
 			
 			$.ajax({
 				url:'rInsert.re',
