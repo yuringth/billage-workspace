@@ -140,8 +140,8 @@
 				<button onclick="chatOut();"> chat퇴장 </button>
 			</c:when>
 			<c:otherwise>
-				<button onclick="chatIn();"> chat입장 </button>
-				<button onclick="chatOut();"> chat퇴장 </button>
+				<button onclick="chatIn(1);"> chat입장 </button>
+				<button onclick="chatOut(1);"> chat퇴장 </button>
 			</c:otherwise>
 		</c:choose>
 		<div id="group-chat-area" class="chat chat-area">
