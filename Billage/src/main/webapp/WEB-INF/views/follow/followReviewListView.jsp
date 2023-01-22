@@ -72,7 +72,7 @@ a {
 											<h3>${ list.reviewTitle }</h3>
 										</div>
 										<br>
-										<div id="reviewContent${ list.reviewNo }">${ list.reviewContent }</div>
+										<div id="reviewContent${ list.reviewNo }" onclick="location.href='detail.re?reviewNo=${list.reviewNo}'">${ list.reviewContent }</div>
 									</div>
 								</div>
 								<br> <br>

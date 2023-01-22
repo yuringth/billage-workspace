@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>followingListView</title>
 <style>
 	
 	.outer{
@@ -42,19 +42,45 @@
 			<c:choose>
 				<c:when test="${ !empty sessionScope.loginUser }">
 					<c:forEach items="${ followingList }" var="f">
-						<div id="following${ f.userNo}" style="display:flex; flex-direction: row; justify-content: space-evenly;">
-							<div id="profile${ f.userNo}">
-								<img src="${ f.profileImg }" width="100px;" height="100px;">
-							</div>
-							<div id="userDetail${ f.userNo}">
-								<div id="userNickName"${ f.userNo} ><a href="selectUser.fo?uno=${f.userNo }">${ f.nickname }</a></div>
-							</div>
-							<input type="hidden" id="${f.userNo }" value="${ f.userNo }">
-							<button id="followingBtn" class="1" style="width:100px; height:50px;" onclick="follow(this);">팔로잉</button>
-						</div> 
-						<br><br>
+						<c:choose>
+							
+							<c:when test="${ f.userNo != sessionScope.loginUser.userNo }">
+								<div id="following${ f.userNo}" style="display:flex; flex-direction: row; justify-content: space-evenly;">
+									<div id="profile${ f.userNo}">
+										<img src="${f.profileImg }" width="100px;" height="100px;">
+									</div>
+									<div id="userDetail${ f.userNo}">
+										<div id="userNickName"${ f.userNo} ><a href="selectUser.fo?uno=${f.userNo }">${ f.nickname }</a></div>
+									</div>
+									<input type="hidden" id="${f.userNo }" value="${ f.userNo }">
+									
+									<c:if test="${ f.followStatus == 1 }">
+										<button id="followingBtn${ f.userNo}" class="1" style="width:100px; height:50px;" onclick="follow(this);">팔로잉</button>
+									</c:if>
+										
+									<c:if test="${ f.followStatus == 0 }">
+										<button id="followingBtn${ f.userNo}" class="0" style="width:100px; height:50px;" onclick="follow(this);">팔로우</button>
+									</c:if>
+								</div> 
+								<br><br>
+							</c:when>
+							
+							<c:otherwise>
+								<div id="follower${f.userNo }" style="display:flex; flex-direction: row; justify-content: space-evenly;">
+									<div id="profile${f.userNo }">
+										<img src="${f.profileImg }" width="100px;" height="100px;">
+									</div>
+									<div id="userDetail${f.userNo }">
+										<div id="userNickName${f.userNo }" >${f.nickname }</div>
+									</div>
+										<input type="hidden"  id="f2${f.userNo }" value="${ f.userNo }">
+								</div>
+							</c:otherwise>
+							
+						</c:choose>
 					</c:forEach>
 				</c:when>
+				
 				<c:otherwise>
 					<h1>로그인 해주세요</h1>
 				</c:otherwise>
