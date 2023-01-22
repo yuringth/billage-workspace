@@ -74,15 +74,6 @@
 						</c:choose>
 					</tr>
 					</c:forEach>
-					
-				<!-- 더미쓰 
-				<tr>
-					<td>2</td>
-					<td><a href="">바다를 볼 수 있을까</a></td>
-					<td>토</td>
-					<td>회원</td>
-					<td></td>
-				</tr> -->
 			</tbody>
 		</table>
 		
@@ -91,10 +82,7 @@
 	
 	<script>
 		function goDetail(clubNo, newCount){
-			// 일반페이지 상세보기 갈 때 clubNo와 newCount 필요한데.. 
-			// 계속 들고 다니기 귀찮은데...? 
 			location.href = 'detail.cl?clubNo=' + clubNo + '&newCount=' + newCount ;
-			
 		}
 	
 	
@@ -126,9 +114,6 @@
 			}
 			
 		};
-		
-		
-		
 	</script>
 	
 	
