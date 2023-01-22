@@ -20,11 +20,9 @@
 	#outer-area{
 		width : 1200px;
 		margin: auto;
-		/*background-color: rgba(136, 180, 164, 0.435);*/
 	}
 	
 	.list-area{
-		/*text-align: center;*/
 		border: 1px solid gray;
 		display:block;
 	}
@@ -32,7 +30,6 @@
 	.thumbnail {
 		width:320px;
 		height:450px;
-
 	}
 	
 	.thumbnail > img {
@@ -73,22 +70,13 @@
 		font-weight:600;
 	}
 	
-
-	
-	
-        #pagingArea {width:fit-content; margin:auto;}
+	#pagingArea {width:fit-content; margin:auto;}
+	#searchForm { width:80%; margin:auto; }
+	#searchForm>* { float:left; margin:5px; }
+	.select { width:20%; }
+	.text { width:53%; }
+	.searchBtn { width:20%;}
         
-        #searchForm {
-            width:80%;
-            margin:auto;
-        }
-        #searchForm>* {
-            float:left;
-            margin:5px;
-        }
-        .select {width:20%;}
-        .text {width:53%;}
-        .searchBtn {width:20%;}
 </style>
 </head>
 <body>
@@ -142,19 +130,6 @@
 			</c:forEach>
 		</div> <!-- list-area끝  -->
 		
-		
-		<%-- 
-		<c:forEach items="${ likeList }" var="l">
-			<script>
-
-			</script>
-			
-		</c:forEach>		
-		*/
-		--%>
-		
-		
-		
          <div id="pagingArea">
                <ul class="pagination">
                	<c:choose>
@@ -186,9 +161,6 @@
 		<script>
 			$(function(){
 				
-				/* 이거 구현할 때 모임생성날짜 계산해서 1이랑 0이랑 구분할 수 있게 값을 들고오고 싶은데 어떻게 하징? 
-						DB에서 조건문 걸어서 가지고 와야 하나?
-								어떠카지!!!!!!!!? ㅠㅠ */
 				$('#list-area #new-club').each(function(){
 					if($(this).attr('value') == 1){
 						$(this).show();
@@ -199,17 +171,8 @@
 				$('#list-area > #thum-area').on('click', function(){
 					location.href = "detail.cl?clubNo=" + $(this).children().eq(0).val()
 											 +"&newCount=" + $(this).find('#new-club').attr('value');
-					//글번호 들고 가야 돼
 				});
 			});
-	
-			
-
-				
-				
-				
-
-	
 		</script>
 		
 	<jsp:include page="../common/footer.jsp" />

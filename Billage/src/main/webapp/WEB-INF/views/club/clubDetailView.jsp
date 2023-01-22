@@ -65,56 +65,10 @@
     <div id="all-detail">
 
     	<br><br><br>
-    	<button>게시글 작성하러 가기 </button>
+
+		<button id="${ club.memUser }" onclick="insertBoard(this);">게시글 작성하러 가기 </button>
+
     	<br><br><br>
-    	<script>
-	    	ajaxClubMember();
-	    	
-	    	function ajaxClubMember(){
-	    		
-	    		$('.members').remove();
-	    		
-	    		var $clubNo =  ${ club.clubNo };
-	    		
-	    		$.ajax({
-	    			url : 'ajaxMemList.cl',
-	    			data : {
-	    				clubNo : $clubNo
-	    			},
-	    			success : function(result){
-	    				var img = '';
-	    				
-	    					for(i in result){
-	    						
-	    						if( result[i].clubImg == null ){
-	    							img = 'resources/images/no_image.jpg';
-	    						} else {
-	    							img = result[i].clubImg;
-	    						}
-	    						
-			    				str = '<div class="members members-area" id="'+ result[i].userNo +'">'
-		    					    + '<div class="members"><img src="'+ img +'" width="40px;" height="40px;"></div>'
-									+ '<div class="members" >' + result[i].nickname +'(' + result[i].clubDiscript +')</div>'
-						            + '<div class="members" >버튼?</div>' 
-				            		+ '</div>';
-		    				
-			    				$(str).appendTo('#participant-area');
-			    				
-	    					}
-	    					
-	    					$('#member-size').text(result.length);
-	    			
-	    			},
-	    			error : function(){
-						console.log('비동기 통신 실패, 참가자 조회');    				
-	    			}
-	    			
-	    		})
-    		}
-    	
-    	
-    	</script>
-    	
 
     	<div id="group-title-area">
 			<span id="new-group" value="${ club.newCount }">new</span>
@@ -169,15 +123,12 @@
 							<td>
 								<button id="clubOpen-btn">신청할랭?</button>
 								<input type="hidden" name="openNo" value="${ c.openNo }" />
-							</td>
+							</td>      
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
-		
-		
-		
 		
 		<div id="group-reply-area">
 			<div>댓글존</div>
@@ -189,8 +140,8 @@
 				<button onclick="chatOut();"> chat퇴장 </button>
 			</c:when>
 			<c:otherwise>
-				<button onclick="chatIn(1);"> chat입장 </button>
-				<button onclick="chatOut(1);"> chat퇴장 </button>
+				<button onclick="chatIn();"> chat입장 </button>
+				<button onclick="chatOut();"> chat퇴장 </button>
 			</c:otherwise>
 		</c:choose>
 		<div id="group-chat-area" class="chat chat-area">
@@ -204,101 +155,25 @@
 		<div id="chat-input-area" class="chat">
 			<input id="text-input" type="text" style="width:500px; height:40px;"/>
 			<button onclick="chatSend();">전송</button>
-		</div>
+		</div>		
+	</div> <!-- all-detail 끝 -->
 		
-		
-		<script>
-			var socket;
-			//const nickname = '${loginUser.nickname}';
-			function chatIn(e){
-				
-				if(e === 1){
-					alert('로그인 유저만 이용 가능합니다. ');
-				} else {
-					
-					
-					var uri = 'ws://localhost:8787/billage/clubChat'
-					socket = new WebSocket(uri); 
-					// 생성자 함수 
-					
-					socket.onopen = function(){
-						console.log('서버랑 연결됐님?');
-						$('#chat-text-area').text('${loginUser.nickname}!! 이 몸 등장 ㅋ');
-					}
-					
-					socket.onmessage = function(e){
-						console.log('onmessage');
-						console.log('e : ' + e);
-						console.log('메시지가 도착했씁니다');
-						
-						if(e.data.substr(0,4) == '----'){
-							console.log('여긴 이프문이얌');
-							console.log('if e:' + e.data);
-							$('#chat-text-area').html(e.data);
-							
-						} else {
-							var str = $('<p></p>');
-							
-							console.log('else : ' +  e);
-							str.text(e.data);
-							$('#chat-text-area').append(str);
-							
-						}
-						
-					}
-					
-				}
-				
-			}
-			
-			
-			function chatSend(){
-				
-				var text = $('#text-input').val();
-				
-				if(!text){
-					return;
-				}
-				
-				socket.send(text);
-				
-				$('#text-input').val('');
-			}
-		
-			
-			function chatOut(e){
-				
-				if(e === 1){
-					alert('로그인 유저만 이용 가능합니다. ');	
-					
-				} else{
-					socket.close();
-					$('#chat-text-area').text('${loginUser.userId}!! 퇴장하셨씁니다');
-				}
-			}
-		
-		</script>
-		
-		
-		
+	<div id="group-btn-area">
+			<c:choose>
+				<c:when test="${ loginUser.userNo eq club.userNo }">
+					<div id="btn-zone">
+						<button type="button" class="like-btn" id="${ club.likeUser }"></button>
+						<button type="button" onclick="location.href='admin.cl'">관리하기</button>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div id="btn-zone">
+						<button type="button" class="like-btn" id="${ club.likeUser }"></button>
+						<button type="button" class="parti-btn" id="${ club.memUser }"></button>
+					</div>
+				</c:otherwise>
+			</c:choose>
 	</div>
-		
-		<div id="group-btn-area">
-				<c:choose>
-					<c:when test="${ loginUser.userNo eq club.userNo }">
-						<div id="btn-zone">
-							<button type="button" class="like-btn" id="${ club.likeUser }"></button>
-							<button type="button" onclick="location.href='admin.cl'">관리하기</button>
-						</div>
-					</c:when>
-					<c:otherwise>
-						<div id="btn-zone">
-							<button type="button" class="like-btn" id="${ club.likeUser }"></button>
-							<button type="button" class="parti-btn" id="${ club.memUser }"></button>
-						</div>
-					</c:otherwise>
-				</c:choose>
-		</div>
 	<!-- -----------------  modal  -------------------- -->
 	<div class="mem-modal-area">
 		<div >
@@ -310,6 +185,7 @@
 	</div>
 	
     
+    <!-- ------------------------ 찜하기 / 가입하기 버튼 구현 ------------------------------- -->
     <c:choose>
 	    <c:when test="${ !empty loginUser }">
 	    	<script>
@@ -426,9 +302,71 @@
     </c:choose>
     
     <script>
+    	// insertBoard() --------------------------------------------------
+		function insertBoard(memUser){
+    		console.log($(memUser).attr('id'));
+    		
+    		var $memUser = $(memUser).attr('id');
+    		
+    		if(  ${loginUser.userNo * 1} != $memUser ){
+    			alert('Club 회원만 이용이 가능합니다.');
+    		} else if ( $memUser == 0){
+    			alert('Billage 회원만 이용이 가능합니다.');
+    		} else {
+    			location.href = 'board.cl?clubNo=' + ${club.clubNo};
+    		}
+    		
+    		
+    	}
+    
+  		// clubMember list 뿌리기 --------------------------------------- 
+   		ajaxClubMember();
+   		
+   		function ajaxClubMember(){
+   			
+   			$('.members').remove();
+   			
+   			var $clubNo =  ${ club.clubNo };
+   			
+   			$.ajax({
+   				url : 'ajaxMemList.cl',
+   				data : {
+   					clubNo : $clubNo
+   				},
+   				success : function(result){
+   					var img = '';
+   					
+   						for(i in result){
+   							
+   							if( result[i].clubImg == null ){
+   								img = 'resources/images/no_image.jpg';
+   							} else {
+   								img = result[i].clubImg;
+   							}
+   							
+   		    				str = '<div class="members members-area" id="'+ result[i].userNo +'">'
+   	    					    + '<div class="members"><img src="'+ img +'" width="40px;" height="40px;"></div>'
+   								+ '<div class="members" >' + result[i].nickname +'(' + result[i].clubDiscript +')</div>'
+   					            + '<div class="members" >버튼?</div>' 
+   			            		+ '</div>';
+   	    				
+   		    				$(str).appendTo('#participant-area');
+   		    				
+   						}
+   						
+   						$('#member-size').text(result.length);
+   				
+   				},
+   				error : function(){
+   					console.log('비동기 통신 실패, 참가자 조회');    				
+   				}
+   				
+   			})
+   		} // clubMember()메소드 끝 
+   		
+   		
     	$(function(){
-  
-	    	//new 상태 표시 ----------------------------------------------------------
+    		//new 상태 표시 ----------------------------------------------------------
 			$('#new-group').each(function(){
 				if($(this).attr('value') == 1){
 					$(this).show();
@@ -445,32 +383,100 @@
 	    	
 	    	if($('#btn-zone .parti-btn').attr('id') > 0){
 	    		$('#btn-zone .parti-btn').text('탈퇴');
-	    	} else {
+	    	} else if(${ club.clubLimit == club.memCount }){
+	    		$('#btn-zone .parti-btn').text('모집완료')
+	    	}
+	    	else {
 	    		$('#btn-zone .parti-btn').text('가입');
 	    	}
 	    	
 	    	
 	    	// 문서 로딩될 때 버튼 상태2 ---------------------------------------------------
 	    	// 클럽제한수가 클럽멤버 총 수 보다 크면 가입버튼 비활성화 !! 
-	    	if(${ club.clubLimit > club.memCount } || $('#btn-zone .parti-btn').attr('id') < 0){
+	    	if(${ club.clubLimit > club.memCount } ||
+	    	   $('#btn-zone .parti-btn').attr('id') > 0 ){
 	    		$('#btn-zone .parti-btn').attr('disabled', false);
 	    	} else {
 	    		$('#btn-zone .parti-btn').attr('disabled', true);
 	    	}
 	    	
 	    	
-
-	    		
-	    		
-	    	
-	    	
     	}); //$(function()) 닫음
     	
-     
+    	
+    	// 채팅하기 구현( Web Socket ) ---------------------------------------------------------------------
+    	let socket;
+
+		function chatIn(memCheck){
+
+			if(memCheck === 1){
+				alert('로그인 유저만 이용 가능합니다. ');
+			} else {
+				
+				
+				var uri = 'ws://localhost:8787/billage/clubChat'
+				socket = new WebSocket(uri); 
+				// 생성자 함수 
+				
+				socket.onopen = function(){
+					console.log('서버랑 연결됐님?');
+					$('#chat-text-area').text('${loginUser.nickname}!! 이 몸 등장 ㅋ');
+				}
+				
+				socket.onmessage = function(e){
+					console.log('onmessage');
+					console.log('e : ' + e);
+					console.log('메시지가 도착했씁니다');
+					
+					if(e.data.substr(0,4) == '----'){
+						console.log('여긴 이프문이얌');
+						console.log('if e:' + e.data);
+						$('#chat-text-area').html(e.data);
+						
+					} else {
+						var str = $('<p></p>');
+						
+						console.log('else : ' +  e);
+						str.text(e.data);
+						$('#chat-text-area').append(str);
+						
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+		
+		function chatSend(){
+			
+			var text = $('#text-input').val();
+			
+			if(!text){
+				return;
+			}
+			
+			socket.send(text);
+			
+			$('#text-input').val('');
+		}
+	
+		
+		function chatOut(e){
+			
+			if(e === 1){
+				alert('로그인 유저만 이용 가능합니다. ');	
+				
+			} else{
+				socket.close();
+				$('#chat-text-area').text('${loginUser.userId}!! 퇴장하셨씁니다');
+			}
+		}
+	
+    	
     </script>
     
-
-
 
 	<c:if test="${ !empty loginUser.userNo }">
 		<script>
@@ -478,9 +484,6 @@
     		// clubOpen 신청버튼
     		$(document).on('click', '#clubOpen-btn', function(){
     		var $openNo = $(this).siblings('input[name=openNo]').val();
-    		
-    		
-
     			
 	    		$.ajax({
 	    			url : 'ajaxOpenInsert.cl',
@@ -498,22 +501,11 @@
 	    				console.log('비동기 통신 실패 : clubOpen Insert fail');
 	    			}
 	    		});
-	    		
-
     		
     		});
 		
 		</script>
 	</c:if>
-
-
-
-
-
-
-
-
-
 
 
     <jsp:include page="../common/footer.jsp" />

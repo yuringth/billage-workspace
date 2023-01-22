@@ -373,7 +373,6 @@
 	
 	<!-- Club List Detail Select -->
 	<select id="selectDetailClub" parameterType="club" resultMap="clubResultSet" >
-  
 		SELECT  
 				 C.CLUB_NO
 		        ,C.USER_NO

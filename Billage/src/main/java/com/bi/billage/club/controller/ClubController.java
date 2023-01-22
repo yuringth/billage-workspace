@@ -137,6 +137,7 @@ public class ClubController {
 		
 		//게시글 번호 들고 가서 group_count증가 
 		int result = clubService.increaseCount(club);
+		
 		if(result > 0) {
 			if(null != session.getAttribute("loginUser")) {
 				club.setUserNo(((User)session.getAttribute("loginUser")).getUserNo());
@@ -161,6 +162,14 @@ public class ClubController {
 			mv.addObject("errorMsg", "club게시글 조회에 실패했습니다").setViewName("common/errorPage");
 			return mv;
 		} 
+	}
+
+	
+	//Request
+	@RequestMapping("board.cl")
+	public String clubBoardForm(int clubNo, Model model) {
+		model.addAttribute("clubNo", clubNo);
+		return "club/clubBoardEnrollForm";
 	}
 	
 	
