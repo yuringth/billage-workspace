@@ -334,13 +334,13 @@
  		 */
   		 function reviewLikeIncrease(){
   			//console.log($('#reviewlikeNo').val());
-  			//console.log($('.fuserNo').val());
+  			console.log('${loginUser.userNo}');
   			
  			$.ajax({
  				url:'insertReviewLike.re',
  				data:{
  					reviewNo : $('#reviewlikeNo').val(),
- 					userNo : $('.fuserNo').val()
+ 					userNo : '${loginUser.userNo}'
  				},
  				success:function(result){
  					console.log(result)

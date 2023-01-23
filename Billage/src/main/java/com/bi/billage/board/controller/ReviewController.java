@@ -544,14 +544,14 @@ public class ReviewController {
 	@ResponseBody
 	@RequestMapping(value = "insertReviewLike.re", produces = "application/json; charset=UTF-8")
 	public String insertReviewLike(int reviewNo, int userNo, HttpSession session, Model model) {
-//		System.out.println("reviewNo : " + reviewNo); => 잘 들고옴
-//		System.out.println("유저넘버: " + userNo); => 잘 들고옴
+//		System.out.println("reviewNo : " + reviewNo); //=> 잘 들고옴
+//		System.out.println("유저넘버: " + userNo); //=> 잘 들고옴
 			
 		ReviewLike r = new ReviewLike();
 		r.setReviewNo(reviewNo);
 		r.setUserNo(userNo);
-
-		//r.setUserNo(((User)session.getAttribute("loginUser")).getUserNo()); => 왜 이렇게 userNo안뽑히지?
+//		System.out.println(r);
+//		r.setUserNo(((User)session.getAttribute("loginUser")).getUserNo()); // => 왜 이렇게 userNo안뽑히지?
 
 		if(boardService.insertReviewLike(r) > 0) {
 			return "1";
