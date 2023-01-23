@@ -44,11 +44,11 @@ public class UserDao {
 		return sqlSession.selectOne("serialMapper.selectSerialRequest", requestNo);
 	}
 
-	public int updateUserGrade(SqlSessionTemplate sqlSession, int userNo) {
+	public int updateUserGrade(SqlSessionTemplate sqlSession, Integer userNo) {
 		return sqlSession.update("userMapper.updateUserGrade", userNo);
 	}
 
-	public int updateSerialRequest(SqlSessionTemplate sqlSession, int requestNo) {
+	public int updateSerialRequest(SqlSessionTemplate sqlSession, Integer requestNo) {
 		return sqlSession.update("serialMapper.updateSerialRequest", requestNo);
 	}
 

@@ -77,9 +77,6 @@ public class BoardController {
 	@RequestMapping("enrollForm.se")
 	public String serialEnroll(Integer novelNo, Model model) {
 		model.addAttribute("novelNo", novelNo);
-		//System.out.println(nno);
-		//System.out.println(novel);
-		//System.out.println(model);
 		return "board/serialBoard/serialEnrollForm";
 	}
 	
