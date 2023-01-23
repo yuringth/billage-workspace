@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
 
@@ -23,6 +22,7 @@ import com.bi.billage.board.model.vo.ReviewBoard;
 import com.bi.billage.board.model.vo.ReviewReply;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.common.template.Pagination;
+import com.bi.billage.heart.model.vo.ReviewLike;
 import com.bi.billage.point.model.service.PointService;
 import com.bi.billage.point.model.vo.Point;
 import com.bi.billage.user.model.service.UserService;
@@ -537,6 +537,32 @@ public class ReviewController {
 	}
 	
 	
+	
+	
+	
+	///////// 좋아요 ///////////
+	@ResponseBody
+	@RequestMapping(value = "insertReviewLike.re", produces = "application/json; charset=UTF-8")
+	public String insertReviewLike(int reviewNo, int userNo, HttpSession session, Model model) {
+//		System.out.println("reviewNo : " + reviewNo); => 잘 들고옴
+//		System.out.println("유저넘버: " + userNo); => 잘 들고옴
+			
+		ReviewLike r = new ReviewLike();
+		r.setReviewNo(reviewNo);
+		r.setUserNo(userNo);
+
+		//r.setUserNo(((User)session.getAttribute("loginUser")).getUserNo()); => 왜 이렇게 userNo안뽑히지?
+
+		if(boardService.insertReviewLike(r) > 0) {
+			return "1";
+		} else {
+			// 에러페이지
+			model.addAttribute("errorMsg", "좋아요 실패");
+			return "common/errorPage";
+		}
+		
+				
+	}
 	
 	
 }

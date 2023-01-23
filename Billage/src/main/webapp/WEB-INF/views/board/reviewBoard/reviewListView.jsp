@@ -202,8 +202,9 @@
 					</div>
 		
 		            <div class="one-content-detail3">
-		            	<input class="bno" type="hidden" value="${ b.reviewNo }">
-		            	<button onclick="reviewLike()">♡ 찜갯수(5)</button>
+		            	<input class="bno" type="hidden" id="reviewlikeNo" value="${ b.reviewNo }">
+		            	<button id="reviewLikeBtn" onclick="reviewLikeIncrease();">♡ </button>
+		            	<span>좋아요수</span>
 	            		<div> 댓글(3) 리뷰등록수(3) 조회수${ b.count }</div>
 		            	<div>${ b.createDate }</div>
 		            </div>
@@ -310,23 +311,48 @@
  	
  	<!-- 종아요부분  -->
  	<script>
- 		function reviewLike(){
- 			${ b.reviewNo }
+ /* 	
+ 		$(function(){
+			
+ 			$(document).on('click', '#reviewLikeBtn', function(){
+ 				//console.log($('#reviewlikeNo').val());
+ 				$.ajax({
+ 	 				url:'reviewLike.re',
+ 	 				data:{
+ 	 					reviewNo : $('#reviewlikeNo').val()
+ 	 				},
+ 	 				success:function(){
+ 	 					
+ 	 				},
+ 	 				error:function(){
+ 	 					
+ 	 				}
+ 				})
+ 			
+ 			})
+ 		})
+ 		 */
+  		 function reviewLikeIncrease(){
+  			//console.log($('#reviewlikeNo').val());
+  			//console.log($('.fuserNo').val());
+  			
  			$.ajax({
- 				url:'reviewLike.re',
+ 				url:'insertReviewLike.re',
  				data:{
- 					reviewNo : ${ b.reviewNo }
+ 					reviewNo : $('#reviewlikeNo').val(),
+ 					userNo : $('.fuserNo').val()
  				},
- 				success:function(){
- 					
+ 				success:function(result){
+ 					console.log(result)
  				},
  				error:function(){
  					
  				}
  			})
- 		}
+ 		} 
  	</script>
- 
+ 		
+  
 	
 	<script>
 		/* (유림)게시글 상세보기 :되지만 나중에 페이징처리로 이동하기 (변경) */
