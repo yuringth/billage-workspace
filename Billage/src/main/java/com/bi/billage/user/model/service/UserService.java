@@ -108,6 +108,9 @@ public interface UserService {
 	// 인증 메일 보내기
 	void sendMail(CertVo certVo);
 	
+	// 인증 확인
+	boolean validate(CertVo certVo);
+	
 	
 	
 	

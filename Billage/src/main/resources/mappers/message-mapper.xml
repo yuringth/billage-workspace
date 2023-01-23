@@ -15,6 +15,7 @@
 		<result column="USER_ID"			 property="userId" />
 		<result column="NICKNAME2"			 property="nickname2" />
 		<result column="USER_ID2"			 property="userId2" />
+		<result column="TITLE"			 	 property="title" />
 	</resultMap>
 	
 	<!-- 쪽지 전송 -->
@@ -68,6 +69,9 @@
 		        ,ME.USER_NO2
 		        ,MM.USER_ID "USER_ID2"
 		        ,MM.NICKNAME "NICKNAME2"
+                ,CASE WHEN LENGTH(ME.MESSAGE_CONTENT) <![CDATA[<]]> 10 THEN SUBSTR(ME.MESSAGE_CONTENT,0,10) 
+                      WHEN LENGTH(ME.MESSAGE_CONTENT) <![CDATA[>]]> 10 THEN CONCAT(SUBSTR(ME.MESSAGE_CONTENT,0,10),'...')   
+                 END AS "TITLE"
 		        ,ME.MESSAGE_CONTENT
 		        ,MESSAGE_DATE
 		        ,MESSAGE_STATUS

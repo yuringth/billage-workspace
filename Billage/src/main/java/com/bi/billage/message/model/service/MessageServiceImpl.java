@@ -29,17 +29,19 @@ public class MessageServiceImpl implements MessageService{
 	public ArrayList<Message> selectMessageList(int userNo) {
 		return messageDao.selectMessageList(sqlSession, userNo);
 	}
-	
-	// 쪽지 상세조회
-	@Override
-	public Message selectMessage(int messageNo) {
-		return null;
-	}
 
 	// (club)회원한테 쪽지 발송 
 	@Override
 	public int insertClubMessage(ArrayList<Message> message) {
 		return messageDao.insertClubMessage(sqlSession, message);
 	}
+
+	// 단일 쪽지 읽음 처리 
+	@Override
+	public int updateMessage(Message message) {
+		return messageDao.updateMessage(sqlSession, message);
+	}
+
+
 
 }
