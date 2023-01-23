@@ -192,6 +192,12 @@ public class UserServiceImpl implements UserService{
 	public void sendMail(CertVo certVo) {
 		userDao.insertSecret(sqlSession, certVo);
 	}
+	
+	// 인증 확인
+	@Override
+	public boolean validate(CertVo certVo) {
+		return userDao.validate(sqlSession, certVo);
+	}
 
 
 }

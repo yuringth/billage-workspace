@@ -174,4 +174,14 @@ public class UserDao {
 		sqlSession.insert("userMapper.insertSecret", certVo);
 	}
 
+	public boolean validate(SqlSessionTemplate sqlSession, CertVo certVo) {
+		
+		CertVo result =  sqlSession.selectOne("userMapper.validate", certVo);
+		if(result != null) {
+			sqlSession.delete("userMapper.remove", certVo);
+		}
+		
+		return result != null;
+	}
+
 }
