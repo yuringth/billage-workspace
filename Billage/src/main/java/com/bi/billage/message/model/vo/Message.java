@@ -17,4 +17,5 @@ public class Message {
 	private String userId2;
 	private String nickname2;
 	
+	private String title;
 }
