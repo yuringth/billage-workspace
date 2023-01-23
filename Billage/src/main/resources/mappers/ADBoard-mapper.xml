@@ -44,6 +44,7 @@
 		<result column="NOW_PRICE" property="nowPrice"/>
 		<result column="PRIZE_USER" property="prizeUser"/>
 		<result column="PRIZE_USER_NO" property="prizeUserNo"/>
+		<result column="BID_COUNT" property="bidCount"/>
 	</resultMap>	
 		
 	<!-- 추첨 글 작성 -->
@@ -78,7 +79,7 @@
 				)
 	</insert>
 	
-	<!-- 추첨글 전체 조회  -->
+	<!-- 추첨글 리스트 조회  -->
 	<select id="selectDrawBoardList" resultMap="drawBoardResultSet">
 		SELECT
 				DRAW_NO
@@ -152,7 +153,6 @@
 	
 	
 	<!-- 경매글 리스트 조회 -->
-				<!-- 여기에 입찰자 수 하기  -->
 	<select id="selectAcutionBoardList" resultMap="auctionBoardResultSet">
 		SELECT
 				AUCTION_NO
@@ -313,7 +313,7 @@
 		 		DRAW_NO = #{ boardNo }
 	</select>
 	
-	<!-- 추첨자 등록 -->
+	<!-- 당첨자 등록 -->
 	<update id="insertPrizeUser" parameterType="_int">
 		UPDATE
 				DRAW_BOARD
@@ -333,6 +333,7 @@
 		 		DRAW_NO = #{boardNo}
 	</select>
 	
+	<!-- 입찰자 등록 -->
 	<insert id="insertBidUser" parameterType="adboard">
 		INSERT
 		  INTO
@@ -350,6 +351,7 @@
 				)
 	</insert>
 	
+	<!-- 현재 입찰자 게시글에 등록 -->
 	<update id="updatePrizeUser" parameterType="adboard">
 		UPDATE
 				AUCTION_BOARD
@@ -360,6 +362,7 @@
 		 		AUCTION_NO = #{boardNo}
 	</update>
 	
+	<!-- 즉시구매자 등록 -->
 	<insert id="insertBuyer" parameterType="adboard">
 		INSERT
 		  INTO
@@ -379,6 +382,7 @@
 				)
 	</insert>
 	
+	<!-- 경매 종료를 위해 유저번호1, 시간은 00년 01월 01일로 -->
 	<update id="updatePrizeEnd" parameterType="_int">
 		UPDATE
 				AUCTION_BOARD

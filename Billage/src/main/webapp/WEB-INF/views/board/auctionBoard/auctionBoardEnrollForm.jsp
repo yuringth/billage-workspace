@@ -115,7 +115,7 @@
                         <p>즉시구매가:</p>
                     </div>
                     <div class="inputdiv">
-                        <input type="number" class="form-control" id="instantlyPrice" placeholder="미입력시 즉시구매 불가" name="instantlyPrice">
+                        <input type="number" class="form-control" id="instantlyPrice" value="0" name="instantlyPrice">
                     </div>
                 </div>
             </div>
@@ -157,7 +157,7 @@
                 <button class="btnleft btn btn-dark">
                     <p class="btntitle">등록</p>
                 </button>
-                <button class="btnright btn btn-secondary">
+                <button class="btnright btn btn-secondary" type="reset">
                     <p class="btntitle ">취소</p>
                 </button>
             </div>

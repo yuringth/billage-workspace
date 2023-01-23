@@ -77,19 +77,7 @@ a {
 								</div>
 								<br> <br>
 
-								<div class="likeReplyCount" style="display: flex; flex-direction: row; justify-content: flex-start;">
-									<div id="likeCount">좋아요 갯수 &nbsp;</div>
-									<div id="replyCount">댓글 갯수</div>
-								</div>
-								<br>
-
 								<hr>
-
-								<div class="likeReplyPlus" style="display: flex; flex-direction: row; justify-content: flex-start;">
-									<div id="likeBtn">♡ &nbsp;</div>
-									<div id="replyBtn">댓글</div>
-								</div>
-								<br>
 
 							</div>
 

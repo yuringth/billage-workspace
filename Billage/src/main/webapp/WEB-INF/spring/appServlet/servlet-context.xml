@@ -48,6 +48,8 @@
           <mapping path="/general.cl"/>
           <mapping path="/admin.cl"/>
           <mapping path="/enrollForm.cl"/>
+          <mapping path="/enrollForm.ac"/>
+          <mapping path="/enrollForm.dr"/>
           <mapping path="/clubOpenAdmin.cl"/>
           <beans:bean class="com.bi.billage.common.interceptor.LoginInterceptor" id="loginInterceptor"></beans:bean>
        </interceptor>

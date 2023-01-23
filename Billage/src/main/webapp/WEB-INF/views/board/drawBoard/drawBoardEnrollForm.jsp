@@ -103,7 +103,7 @@
                     <div class="textdiv">
                         <p>마감일:</p>
                     </div>
-                    <div class="inputdiv2"> <!-- 날짜 min max 추가하기 -->
+                    <div class="inputdiv2">
                         <input type="date" class="form-control" id="closeDate"  name="closeDate" required>
                     </div>
                     <div class="inputdiv2">

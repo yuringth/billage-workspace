@@ -53,7 +53,7 @@ public class DrawAuctionController {
 		return mv;
 	}
 	
-	//추첨글목록 추가
+	//추첨글목록 AJAX
 	@ResponseBody
 	@RequestMapping(value="newlist.dr", produces="appliction/json; charset=UTF-8")
 	public String ajaxDrawBoardList(@RequestParam(value="cPage", defaultValue="1") int currentPage,  ModelAndView mv) {
@@ -70,7 +70,7 @@ public class DrawAuctionController {
 		.setViewName("board/auctionBoard/auctionBoardListView");
 		return mv;
 	}
-	//경매글목록 추가
+	//경매글목록 AJAX
 	@ResponseBody
 	@RequestMapping(value="newlist.ac", produces="appliction/json; charset=UTF-8")
 	public String ajaxAuctionBoardList(@RequestParam(value="cPage", defaultValue="1") int currentPage,  ModelAndView mv) {
@@ -299,15 +299,15 @@ public class DrawAuctionController {
 		if(pointService.addPoint(p) * boardService.insertDrawUser(b) > 0) {
 			// 포인트 차감, 추첨 등록 성공
 			((User)session.getAttribute("loginUser")).setPoint(point - b.getTryPoint());
-//			System.out.println("응모 성공, 남은 포인트 :" + ((User)session.getAttribute("loginUser")).getPoint());
 			return "redirect:detail.dr?bno=" + b.getBoardNo();
-		} else { //뭐든 실패
+		} else { //실패
 			mv.addObject("errorMsg", "응모 실패");
 			return "common/errorPage";
 		}
 		
 	}
 	
+	//추첨 취소
 	@RequestMapping("cancel.dr")
 	public String deleteDrawUser(ADBoard b, HttpSession session, ModelAndView mv) {
 		Point p = new Point();
@@ -324,20 +324,21 @@ public class DrawAuctionController {
 			((User)session.getAttribute("loginUser")).setPoint(point + b.getTryPoint());
 
 			return "redirect:detail.dr?bno=" + b.getBoardNo();
-		} else {//뭐든 실패
+		} else {// 실패
 			mv.addObject("errorMsg", "취소 실패");
 			return "common/errorPage";
 		}
 	}
 	
-	// 추첨신청여부에 따라서 버튼 바꾸는 녀석
+	// 추첨신청여부에 따라서 버튼 바꾸기
 	@ResponseBody
 	@RequestMapping(value="checkDraw.dr", produces="appliction/json; charset=UTF-8")
 	public String checkDraw(ADBoard b, HttpSession session){
 		b.setUserNo(((User)session.getAttribute("loginUser")).getUserNo());
 		return new Gson().toJson(boardService.checkDraw(b));
 	}
-	//당첨자 
+	
+	//당첨자 추첨
 	@ResponseBody
 	@RequestMapping(value="prize.dr", produces="appliction/json; charset=UTF-8")
 	public String selectPrizeUser(ADBoard a, HttpSession session){
@@ -358,11 +359,9 @@ public class DrawAuctionController {
 			} else { // 10보다 작으면 계속 0이 나오기 때문에 0~10까지 구한 후에 list.size()보다 큰 값이 나오면 작은 값이 나올때까지 반복한다
 				
 				int rNo = (int)(Math.random() * 10);
-				
 				while(rNo >= list.size()) {
 					rNo = (int)(Math.random() * 10);
 				};
-				
 				userNo = list.get(rNo);
 			};
 			
@@ -371,36 +370,30 @@ public class DrawAuctionController {
 			// 보드테이블의 당첨자 컬럼에  당첨자 회원번호 입력 
 			boardService.insertPrizeUser(b);
 			
-			
 			b = boardService.selectDrawBoard(a.getBoardNo());
 			
-			// 쪽지 보내기, 조회한 값 반환하기 위해 변수에 넣는다
+			// 당첨자, 글 작성자에게 쪽지 보내기
 			Message m = new Message();
+			
 			// 1. 당첨자에게 쪽지 보내기
 			m.setUserNo(1); //보낸 사람은 관리자
 			m.setUserNo2(b.getPrizeUserNo()); //받는 사람은 당첨자
-			m.setMessageContent("축하드립니다!\r\n" + 
-					" " + a.getTitle() + "의 추첨 결과 당첨되셨습니다.\r\n" + 
-					"주소를 확인해 주세요");
+			m.setMessageContent("축하드립니다! " + a.getTitle() + "의 추첨 결과 당첨되셨습니다. 주소를 확인해 주세요");
 			messageService.insertMessage(m);
 			// 2. 글 쓴 사람한테 쪽지 보내기
 			m.setUserNo2(a.getUserNo()); //받는 사람은 게시글 작성자
-			m.setMessageContent( a.getTitle() + "의 추첨 결과가 발표되었습니다.\r\n" + 
-					"상품을 저희측으로 보내주시면 포인트 정산해서 적립해드리겠습니다. (생략)");
+			m.setMessageContent( a.getTitle() + "의 추첨 결과가 발표되었습니다. 상품을 저희측으로 보내주시면 포인트 정산해서 적립해드리겠습니다. (생략)");
 			messageService.insertMessage(m);
 			
-			
-			// 적립된 포인트를 조회해와서 글 쓴 사람한테 insert
+			// 총 적립된 포인트를 글 작성자에게 적립
 			if(a.getTryPoint() != 0) { //무료추첨이 아닌 경우에만 실행
-				
+
 				// 총 적립된 포인트 조회해와서 포인트 적립하기
 				Point p = new Point();
 				p.setPointAdd(boardService.selectDrawPoint(a.getBoardNo()));
 				p.setUserNo(a.getUserNo());
 				p.setPointStatus("적립");
 				pointService.addPoint(p);
-				
-				
 			}
 		}
 		

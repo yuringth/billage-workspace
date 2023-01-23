@@ -140,36 +140,6 @@
 				
 			}); //$(function(){}) 끝
 			
-			
-			/*
-			function receiveCheck(){
-
-				var $receiver = $('#receiveUser').children().length;
-				
-				if($receiver == 0){
-					alert('받는 사람이 지정되지 않았습니다.');
-					return false;
-				}				
-			}
-		
-			
-			function receiveCheck(){
-					
-				$(document).each($('#receiveUser').children(), function(){
-					
-					console.log($(this));
-					
-					if($(this).length == 0){
-						alert('받는 사람이 지정되지 않았습니다.');
-						return false;
-					}
-					
-				})
-				
-				return true;
-				
-			}
-			*/
 		</script>
 		
 		<br><br><br>
@@ -216,7 +186,7 @@
 		
 		<br><br><br>
 		
-		<form action="message.cl" method="post" onsubmit="return test();">
+		<form action="message.cl" method="post" >
 			<%--<input type="hidden" name="clubNo" value="${ clubNo }" /> --%>
 			<div id="message-area">
 				<h3> 🧡 메시지 보내기🧡 </h3> 
@@ -235,7 +205,7 @@
 					<textarea name="messageContent" style="width:400px; height:240px; resize:none;"></textarea>
 				</div>
 				
-				<button id="submit-btn" type="submit">전송하기</button>
+				<button type="submit" id="submit-btn" >전송하기</button>
 				<button type="reset">다시쓰기</button>
 			</div>
 		</form> <!-- message보내기 form태그  -->
@@ -244,61 +214,33 @@
 	</div>
 	
 	<script>
-
-		function test(){
+		
+		$(document).on('click', '#submit-btn', function(){
+			//고생해서 만든 조건식... 후 
 			if($('textarea[name=messageContent]').val() == ''){
 				alert('텍스트가 작성되지 않았습니다.');
 				$('textarea[name=messageContent]').focus();
 				return false;
 			}
 			
-			if($('#receiveUser').children().length == 0){
-				var result = test2();
-				console.log(result);
-				return false;
-			}
+			let $userNum;
+			let count = 0;
 			
-		}
-		
-		
-		function test2(){
+			$userNum = $(this).siblings('.receive-area').find('input[name="userNo2"]');
 			
-			$(document).on('click', '#submit-btn', function(){
-				
-				$('input[name=userNo2]').each(function(){
-					console.log($(this));
-					
-					if($(this).length > 0){
-						return false;	
-					} else {
-						return true;	
-					}
-					
-					
-
-				}) // 요소에 각각 접근
-			}) // 동적으로 만들어진 요소 접근 
-		} //test2() 끝
-		
-	
-	/*
-		$(document).on('click', '#submit-btn', function(){
-			
-			$('input[name=userNo2]').each(function(){
-				console.log($(this));
-				
-				if($(this).length > 0){
-					return false;	
-				} else {
-					return true;	
-				}
-				
-				
-
+			$userNum.each(function(){
+				count++;
 			})
 			
+			if(count == 0){	
+				alert('수신자가 지정되지 않았습니다.');
+				return false;
+			} else{
+				return true;
+			}
+			
 		})
-		*/
+
 	
 	</script>
 	

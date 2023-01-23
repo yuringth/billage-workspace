@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>followerListView2</title>
+<title>followerListView</title>
 <style>
 	
 	.outer{
@@ -106,7 +106,7 @@
 									</c:when>
 									
 										<c:otherwise>
-											<div id="follower${f2.userNo }" style="display:flex; flex-direction: row; justify-content: space-evenly;">
+											<div id="follower${f2.userNo }" style="display:flex; flex-direction: row; justify-content: space-evenly; margin-right:50px;">
 												<div id="profile${f2.userNo }">
 													<img src="${f2.profileImg }" width="100px;" height="100px;">
 												</div>

@@ -115,6 +115,7 @@
 			<c:if test="${ not empty b.prizeUser }">
 				<p id="prizeUser">당첨자 : ${ b.prizeUser }</p>
 			</c:if>
+				<!-- 당첨자가 실시간으로 업데이트 되면 입력될 div -->
 				<p id="prizeUser"></p>
 		
 		<c:choose>
@@ -165,14 +166,11 @@
 		//전역변수 선언
 		var interval;
 		
-		
 		$(function(){
 			tryBtnChange();
 			interval = setInterval(closeCount, 500);
 			
 		})
-		
-	
 		
 		function closeCount(){
 			
@@ -233,27 +231,25 @@
 		}
 		
 		function notEnoughtPoint(){
-			confirm('포인트가 부족합니다. 충전하시겠습니까?');
+			alert('포인트가 부족합니다.');
 		}
 		
 		//추점신청한 사람 버튼 바꿔주는 함수
 		function tryBtnChange(){
-			if(${not empty loginUser}){
-				$.ajax({
-					url : 'checkDraw.dr',
-					data : {
-						boardNo : ${b.boardNo},
-					},
-					success : function(result){
-						if(result > 0){
-							$('#drawBtn').attr('onclick', 'postFormSubmit(3)').text('응모취소');
-						}
-					},
-					error : function(){
-						console.log('실패 ㅠ');
+			$.ajax({
+				url : 'checkDraw.dr',
+				data : {
+					boardNo : ${b.boardNo},
+				},
+				success : function(result){
+					if(result > 0){
+						$('#drawBtn').attr('onclick', 'postFormSubmit(3)').text('응모취소');
 					}
-				});
-			}
+				},
+				error : function(){
+					console.log('실패 ㅠ');
+				}
+			});
 		}
 		
 		//당첨자 선정하는 함수

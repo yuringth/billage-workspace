@@ -33,5 +33,6 @@ public class ADBoard {
 	private String nickname;
 	private int	prizeUserNo;
 	private int userNo2;
+	private int bidCount;
 
 }

@@ -73,6 +73,7 @@
     <jsp:include page="../../common/header.jsp"/>
     <!-- 전체를 감싸는 div -->
     <div class="outer">
+    
 		<div class="align-side margin-bottom">
 			<div class="dropdown">
 				<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
@@ -85,15 +86,15 @@
 					<a class="dropdown-item" href="#">남은시간 순</a>
 				</div>
 			</div>
+			
+			<!-- 로그인이 되어 있을 경우에만 글쓰기 -->
 			<c:if test="${ not empty loginUser }">
 				<div><button type="button" class="btn btn-info" onclick="location.href='enrollForm.dr'">글쓰기</button></div>
 			</c:if>
 		</div>
 
 
-
-
-
+		<!-- 무한 스크롤을 하기 위한 페이지 번호 -->
 		<input type="hidden" value="${ pi.currentPage }" id="currentPage">
 
 		<div class="align-left-outer" id="contentArea">
@@ -115,6 +116,7 @@
 			</c:forEach>
 		</div>
 		
+		<!-- 스크롤이 하단에 도착했을 경우 새로 가져온 목록을 담을 div -->
 		<div class=outOutter></div>
 
     </div>	
@@ -131,7 +133,6 @@
     		closeCount();
 			setInterval(closeCount, 500);
     	})
-    	
     	
     	function closeCount(){
     		$('.one-content').each(function(){
@@ -162,65 +163,59 @@
 			    	$(this).find('.time').text('응모 시간 종료');
 			    }
     			
-    			
     		});
     	}
     	
     </script>
     
     <script>
-	    $(function(){
-	    	$(window).scroll(function() {
-    			if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-					newlist();
-    		   	}
-   			});
-	    })
-	    
-	    //전역변수(반복실행 멈추기 위해)
+	    //전역변수 선언 / cNo가 -1이면 정지
     	var cNo = '';
-	    
+    	if(cNo != -1){
+		    $(function(){
+		    	$(window).scroll(function() {
+	    			if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+						newlist();
+	    		   	}
+	   			});
+		    })
+    	}
 	    function newlist(){
 	    	
-	    	if(cNo != -1){
-	    	
-		        let cNo = $("#currentPage").val();
-		        
-		        $.ajax({
-		            url:"newlist.dr?cPage=" + (Number(cNo) + 1),
-		            success: function(list){
-		                
-		                value = '<div class="align-left-outer">';
-		                for(var i in list){
-		                	value += '<div class="one-content">'
-				    		       +	'<input type="hidden" value="' + list[i].boardNo + '" class="boardNo">'
-				    		       + 	'<input type="hidden" value="' + list[i].closeDate + '" class="closeDate">'
-				    		       +     '<div class="img-area">'
-				    		       +         '<img src="' + list[i].changeName + '">'
-				    		       +     '</div>'
-				    		       +     '<div class="text-area">'
-				    		       +         '<p class="title-text">' +  list[i].title + '</p>'
-				    		       +         '<p class="textsize">현재 가격 : ' + list[i].tryPoint + 'P</p>'
-				    		       +         '<p class="textsize time"></p>'
-				    		       +         '<p class="countnum">조회 : ' + list[i].count + '</p>'
-				    		       +     '</div>'
-				    		       + '</div>'
-		                }
-		                value += '</div>';
-		                
-						$('#currentPage').val(Number(cNo) + 1);
-		                
-		                //리스트 크기가 6보다 작으면 정지
-	               		if(list.length < 6){
-		                	cNo = -1;
-		                }
-		                
-		    		   	$('.outOutter').html($('.outOutter').html() + value);
-		            }
-	        	});
-
-	    	}
-    }
+	        cNo = $("#currentPage").val();
+	        
+	        $.ajax({
+	            url:"newlist.dr?cPage=" + (Number(cNo) + 1),
+	            success: function(list){
+	                
+	                value = '<div class="align-left-outer">';
+	                for(var i in list){
+	                	value += '<div class="one-content">'
+			    		       +	'<input type="hidden" value="' + list[i].boardNo + '" class="boardNo">'
+			    		       + 	'<input type="hidden" value="' + list[i].closeDate + '" class="closeDate">'
+			    		       +     '<div class="img-area">'
+			    		       +         '<img src="' + list[i].changeName + '">'
+			    		       +     '</div>'
+			    		       +     '<div class="text-area">'
+			    		       +         '<p class="title-text">' +  list[i].title + '</p>'
+			    		       +         '<p class="textsize">현재 가격 : ' + list[i].tryPoint + 'P</p>'
+			    		       +         '<p class="textsize time"></p>'
+			    		       +         '<p class="countnum">조회 : ' + list[i].count + '</p>'
+			    		       +     '</div>'
+			    		       + '</div>'
+	                }
+	                value += '</div>';
+	                
+					$('#currentPage').val(Number(cNo) + 1);
+	                
+	                //리스트 크기가 6보다 작으면 cNo의 값을 -1로 변경(정지)
+               		if(list.length < 6){
+	                	cNo = -1;
+	                }
+	    		   	$('.outOutter').html($('.outOutter').html() + value);
+	            }
+        	});
+    	}
 
     </script>   
     
