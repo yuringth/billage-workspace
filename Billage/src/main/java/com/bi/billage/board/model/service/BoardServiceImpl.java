@@ -233,7 +233,8 @@ public class BoardServiceImpl implements BoardService {
 	// 리뷰 게시글 리스트 조회
 	@Override
 	public ArrayList<ReviewBoard> reviewBoardList(PageInfo pi){
-		return boardDao.selectList(sqlSession, pi);
+		// 여기 수정함*** selectList->reviewBoardList
+		return boardDao.reviewBoardList(sqlSession, pi);
 	}
 	
 	

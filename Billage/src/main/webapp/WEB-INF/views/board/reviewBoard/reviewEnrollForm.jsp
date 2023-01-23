@@ -310,9 +310,9 @@
 			<div id="search-area">
 				<div id="search-text"> 
 					<div class="text-div">
-						<button onclick="search(1);">1페이지 이동</button>
+					<!-- 	<button onclick="search(1);">1페이지 이동</button> -->
 			    		<input type="text" id="title" placeholder="책이름을 작성해주세요">
-			    		<button onclick="search(2);">이동</button>
+			    		<button onclick="search();">이동</button>
 					</div>   
 				</div>
 				<div id="result-area">
@@ -368,14 +368,18 @@
 				success : function(result){
 					
 					const item = result.item[0];
+					//const count = Object.keys(result).size; => 어케 구하냐
 					
 					console.log(item);
+					//console.log(count);
 					
 					let value ='';
 						
 					let thumb = item.cover;
 					
-					value += '<div class="content-area1">'
+					value += '<div><p>"검색이름"로 1개의 검색 결과가 있습니다.</p></div>'
+						  
+						  + '<div class="content-area1">'
 						  + '<p>' + 1 + '</p>'
 						  + '</div>'
 						  + '<div class="content-area2">'
@@ -412,14 +416,6 @@
 	    
 		 $(function(){
 			 $(document).on('click', '#modal-result-btn', function(){
-				 
-				 
-				 console.log($('#md_book_title').text());
-				 console.log($('#md_book_author').text());
-				 console.log($('#md_book_date').text());
-				 console.log($('#md_book_publisher').text());
-				 console.log($('#md_img').attr('src')); // https://image.aladin.co.kr/product/7608/30/coversum/8994492038_1.jpg
-				 
 				 
 				 $('#book_title').val($('#md_book_title').text());
 				 $('#book_author').val($('#md_book_author').text());

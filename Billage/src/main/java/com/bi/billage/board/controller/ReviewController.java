@@ -319,13 +319,9 @@ public class ReviewController {
 	// 리뷰게시판 => 글삭제
 	@RequestMapping("delete.re")
 	public String deleteReviewBoard(int reviewNo) {
-		
 		if(boardService.deleteReviewBoard(reviewNo) > 0) {
-			
 			return "redirect:list.re";
-			
 		}
-		
 		// 왜 포워딩으로 보내면 안되는거지?? db에 들려서 status를 'Y'로 고쳐서 그런가??	
 	}
 	*/
@@ -354,7 +350,7 @@ public class ReviewController {
 		
 		else {
 			
-			model.addAttribute("errorMsg","게시글 상세조회 실패");
+			model.addAttribute("errorMsg","게시글 삭제 실패");
 			return "common/errorPage";
 		}
 		// 왜 포워딩으로 보내면 안되는거지?? db에 들려서 status를 'Y'로 고쳐서 그런가??	
@@ -417,55 +413,6 @@ public class ReviewController {
 			// => 안됨. list를 가져오지 않았기때문임 => db에 들려서 list를 조회해서 가져와야함. 즉 sendRedirect사용해야함
 			return "redirect:enrollForm.re?reviewNo=" + b.getReviewNo();
 		}
-			
-			
-			/*
-			// 근데 똑같은 책이 아닐경우
-			if(boardService.selectBookTitle(b) == null) {
-			
-				// 2) 중복 된 책 없으면 insert
-				boardService.insertReviewBoard(b);
-				
-				//return "board/reviewBoard/reviewListView";
-				return "redirect:list.re";
-			} else {
-				// 근데 똑같은 책 일경우 => 책정보를 바꿨을 때 수정 불가
-				model.addAttribute("errorMsg","게시글 상세조회 실패");
-				return "common/errorPage";
-			}
-			*/
-		
-		
-		
-		
-		/*
-		
-		if(reviewBoard == null) { // 책 중복이면
-		
-			
-			
-		} else if(b.getBookTitle().equals(reviewBoard.getBookTitle())){
-			
-			// 2) 중복 된 책 없으면 update
-			boardService.updateReviewBoard(b);
-			
-			return "redirect:detail.re?reviewNo=" + b.getReviewNo();
-			
-		} 
-		model.addAttribute("errorMsg","게시글 상세조회 실패");
-		return "common/errorPage";
-		
-		*/
-		
-		/* 글만 수정 가능
-		if(boardService.updateReviewBoard(b) > 0 ) { // 수정 성공 시
-			return "redirect:detail.re?reviewNo=" + b.getReviewNo();
-		} else {
-			model.addAttribute("errorMsg", "게시글 수정 실패");
-			return "common/errorPage";
-		}
-		*/
-	
 	}
 	
 	
