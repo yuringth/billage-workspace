@@ -202,7 +202,8 @@
 					</div>
 		
 		            <div class="one-content-detail3">
-		            	<button>♡</button>찜갯수(5)
+		            	<input class="bno" type="hidden" value="${ b.reviewNo }">
+		            	<button onclick="reviewLike()">♡ 찜갯수(5)</button>
 	            		<div> 댓글(3) 리뷰등록수(3) 조회수${ b.count }</div>
 		            	<div>${ b.createDate }</div>
 		            </div>
@@ -303,6 +304,29 @@
 		})
 	</script>
  -->
+ 	
+ 	
+ 	
+ 	
+ 	<!-- 종아요부분  -->
+ 	<script>
+ 		function reviewLike(){
+ 			${ b.reviewNo }
+ 			$.ajax({
+ 				url:'reviewLike.re',
+ 				data:{
+ 					reviewNo : ${ b.reviewNo }
+ 				},
+ 				success:function(){
+ 					
+ 				},
+ 				error:function(){
+ 					
+ 				}
+ 			})
+ 		}
+ 	</script>
+ 
 	
 	<script>
 		/* (유림)게시글 상세보기 :되지만 나중에 페이징처리로 이동하기 (변경) */
