@@ -38,6 +38,7 @@ import com.bi.billage.point.model.service.PointService;
 import com.bi.billage.point.model.vo.Point;
 import com.bi.billage.user.model.service.UserService;
 import com.bi.billage.user.model.vo.User;
+import com.google.gson.Gson;
 
 @Controller
 public class UserController {
@@ -555,5 +556,33 @@ public class UserController {
 		
 		return secret;
 	}
+	
+	// 인증 번호 일치하는지?
+	@ResponseBody
+	@PostMapping(value="chkSecret.me", produces="application/json; charset=UTF-8;")
+	public String checkSecret(String secret, HttpServletRequest request) {
+		
+		CertVo certVo = CertVo.builder()
+						.who(request.getRemoteAddr())
+						.secret(secret).build();
+		
+		boolean result = userService.validate(certVo);
+		System.out.println(result);
+		
+		
+		
+		String ajaxResult = "";
+		
+		if(result == true) {
+			ajaxResult = "success";
+		} else {
+			ajaxResult = "fail";
+		}
+		
+		return new Gson().toJson(ajaxResult);
+	}
+	
+	
+	
 	
 }
