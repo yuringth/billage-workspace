@@ -540,5 +540,28 @@
 				)
 	</insert>
 	
+	<!-- 인증 번호 일치 -->
+	<select id="validate" resultType="cert" parameterType="cert">
+		SELECT
+				*
+		  FROM
+		  		CERT
+		  WHERE
+		  		WHO = #{who}
+		    AND
+		    	SECRET = #{secret}
+		    AND
+		    	WHEN BETWEEN SYSDATE - 3/24/60 AND SYSDATE
+	</select>
+	
+	<!-- 인증 번호가 일치됐다면 내역 삭제 -->
+	<delete id="remove" parameterType="cert">
+		DELETE 
+				CERT 
+		WHERE 
+				WHO = #{who} 
+		AND 
+				SECRET = #{secret}
+	</delete>
 	
 </mapper>

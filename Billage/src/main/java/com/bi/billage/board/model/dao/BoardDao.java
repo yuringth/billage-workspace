@@ -211,13 +211,14 @@ public class BoardDao {
 	}
 	
 	// 리뷰 게시글 리스트 조회
-	public ArrayList<ReviewBoard> selectList(SqlSessionTemplate sqlSession, PageInfo pi){
+	// 여기 수정*** selectList -> reviewBoardList
+	public ArrayList<ReviewBoard> reviewBoardList(SqlSessionTemplate sqlSession, PageInfo pi){
 		
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("reviewMapper.selectList", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("reviewMapper.reviewBoardList", null, rowBounds);
 	} 
 	
 	

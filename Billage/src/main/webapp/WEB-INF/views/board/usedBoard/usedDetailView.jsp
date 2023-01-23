@@ -126,7 +126,8 @@ font-size: 25px;
 
 	<div class="outer">
 		<div class="photo-area">
-			<img src="${ b.changeName }" onclick="location.href='detail.ud'" style="height:400px; width:1000px;">
+			<!-- onclick="location.href='detail.ud'" img태그에 이 속성을 왜 줬었지? 일단 주석 -->
+			<img src="${ b.changeName }" style="height:400px; width:1000px;">
 		</div>
 		
 		<div class="user-area">
@@ -187,47 +188,6 @@ font-size: 25px;
 		</div>
 	
 	
-	
-	
-	
-	
-	<!-- 댓글 div  -->
-	<br>
-    <table id="replyArea" class="table" align="center">
-       <thead>
-           <tr>
-               <th colspan="2">
-                   <textarea class="form-control" name="" id="reply_content" cols="55" rows="2" style="resize:none; width:100%;"></textarea>
-               </th>
-               <th style="vertical-align:middle"><button class="btn btn-secondary">등록하기</button></th>
-           </tr>
-           <tr>
-           		<!-- 총 댓글수 나타내는건 안할 수 있음!!! 일단 쌤꺼 복사한 것 뿐 -->
-               <td colspan="3">댓글(<span id="reply_count">3</span>)</td>
-           </tr>
-       </thead>
-       <tbody>
-           <tr>
-               <th>user02</th>
-               <td>ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ꿀잼</td>
-               <td>2020-03-12</td>
-           </tr>
-           <tr>
-               <th>user01</th>
-               <td>재밌어요</td>
-               <td>2020-03-11</td>
-           </tr>
-           <tr>
-               <th>admin</th>
-               <td>댓글입니다!!</td>
-               <td>2020-03-10</td>
-           </tr>
-     	</tbody>
-    </table>
-	
-	
-	
-	
 	<!-- 전체를 감싸는 div 끝  -->		
 	</div>
 	
@@ -249,24 +209,8 @@ font-size: 25px;
 	
 		<div class="topn-outer">
 		
-			<!-- 상품 하나를 감싸는 div -->
-<!-- 		
-			<div class="align-left-outer">
-		        <div class="one-content">
-		            <div class="img-area">
-		            	<input type="hidden" name="usedNo" value="${b.usedNo }"/>
-		                <img src="https://img.sbs.co.kr/newimg/news/20160122/200906797_700.jpg">
-		            </div>
-		            <div class="text-area">
-		                <p class="title-text">${b.bookTitle }</p>
-		                <p class="textsize">${b.point }</p>
-		                <p class="textsize">♡</p>
-		                <p class="countnum">조회 : ${b.count }</p>
-		            </div>
-		        </div>
-			</div>
-			
-			 -->
+			<!-- topn 리스트 뿌리는 곳 -->
+
 		</div>
 
 
@@ -302,8 +246,8 @@ font-size: 25px;
 	   						  + '<img src="' + data[i].changeName + '">'
 	   						  + '</div>'
 	   						  + '<div class="text-area">'
-	   						  + '<p class="title-text">' + data[i].bookTitle + '</p>'
-	   						  + '<p class="textsize">' + data[i].point + '</p>'
+	   						  + '<p class="title-text">책제목 : ' + data[i].bookTitle + '</p>'
+	   						  + '<p class="textsize">판매 금액 : ' + data[i].point + '</p>'
 	   						  + '<p class="textsize">' + '♡'  + '</p>'
 	   						  + '<p class="countnum">' + '조회 :' + data[i].count + '</p>'
 	   						  + '</div>'

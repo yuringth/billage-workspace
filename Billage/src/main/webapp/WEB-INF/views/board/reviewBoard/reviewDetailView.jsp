@@ -137,10 +137,10 @@
 					<c:when test="${loginUser.userNo eq b.userNo}">
 						<button onclick="postFormSubmit()">글수정</button>
 						<button onclick="location.href='delete.re?reviewNo=${ b.reviewNo }&userNo=${ b.userNo }'">글삭제</button>
-						<button>뒤로가기</button>
+						<button onclick="back();">뒤로가기</button>
 					</c:when>
 					<c:otherwise>	
-						<button>뒤로가기</button>
+						<button onclick="back();">뒤로가기</button>
 						<button onclick="location.href='insertForm.ro?reviewNo=${b.reviewNo}'">신고하기</button>
 					</c:otherwise>
 				</c:choose>
@@ -205,11 +205,10 @@
      	</tbody>
     </table>
 	
-                    
-     
-
-	<!-- 전체 outer /div -->	
+	<!-- 전체 outer끝 /div -->	
  	</div>   
+ 	
+ 	
  	
  	
  		
@@ -280,11 +279,6 @@
 					//console.log(result);
 					$('#replyArea tbody').html(result);
 				}, 
-				
-				
-		
-				
-				
 				error:function(){
 					console.log('실패');
 				}
@@ -306,38 +300,35 @@
 			}
 		};
 		
-		
- 		
-		// 댓글 수정
-	/* 	function formReply(){
-			
-			console.log('성공');
-			console.log($('#reply_content').val());
-			
-			
-			
+
+
+		/* 	userNo : '${loginUser.userNo}', */
+		/* 댓글 작성 */
+		function insertReply(){
+			// console.log($('#reply_content').val());
 			
 			$.ajax({
-				
-				url:'formReply.re',
+				url:'rInsert.re',
 				data:{
 					reviewNo : ${b.reviewNo},
-					userNo : '${loginUser.userNo}',
 					replyContent : $('#reply_content').val()
-					
 				},
-				success:function(){
-
+				success:function(result){
+					//console.log('결과 1 : ' + result);
 					
+					if(result > 0){
+						alert('댓글작성에 성공했습니다');
+	   					$('#reply_content').val(''); // 빈문자열을 넣으면 textarea가 비워짐
+   						selectReviewReplyList();
+					}
 				},
 				error:function(){
-					
+					console.log('실패');
 				}
 			})
 			
-		} */
-		 
-		
+		};
+ 		
 		// 댓글 수정 폼화면
  	 	function ReviewReplyForm(e){
 			
@@ -370,9 +361,32 @@
 			
 		};
 		
-		
-		
+		// 댓글 수정
+	/* 	function formReply(){
+			
+			console.log('성공');
+			console.log($('#reply_content').val());
+			
+			$.ajax({
+				
+				url:'formReply.re',
+				data:{
+					reviewNo : ${b.reviewNo},
+					userNo : '${loginUser.userNo}',
+					replyContent : $('#reply_content').val()
+					
+				},
+				success:function(){
 
+					
+				},
+				error:function(){
+					
+				}
+			})
+			
+		} */
+		 
 		// 댓글 찐 수정
 /* 		$(document).on('click', '#updateReviewReply', function(){
 			
@@ -395,35 +409,14 @@
 		 */
 
 
-
-		/* 	userNo : '${loginUser.userNo}', */
-		/* 댓글 작성 */
-		function insertReply(){
-			// console.log($('#reply_content').val());
-			
-			$.ajax({
-				url:'rInsert.re',
-				data:{
-					reviewNo : ${b.reviewNo},
-					replyContent : $('#reply_content').val()
-				},
-				success:function(result){
-					//console.log('결과 1 : ' + result);
-					
-					if(result > 0){
-						alert('댓글작성에 성공했습니다');
-	   					$('#reply_content').val(''); // 빈문자열을 넣으면 textarea가 비워짐
-   						selectReviewReplyList();
-					}
-				},
-				error:function(){
-					console.log('실패');
-				}
-			})
-			
-		};
 		</script>
 	
+		<!-- 뒤로가기 함수  -->
+		<script>
+			function back(){
+				location.href = 'list.re';
+			}
+		</script>
 	
 	<!--  ////////////////////////// 휘수 구역 /////////////////////////// -->
 	<script>
