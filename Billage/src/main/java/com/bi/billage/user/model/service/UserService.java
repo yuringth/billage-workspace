@@ -7,6 +7,7 @@ import com.bi.billage.board.model.vo.Inquiry;
 import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.SerialRequest;
 import com.bi.billage.club.model.vo.Club;
+import com.bi.billage.common.entity.CertVo;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.user.model.vo.User;
 
@@ -103,6 +104,9 @@ public interface UserService {
 	
 	// 등급 올려주는 그거
 	int updateGrade(int userNo);
+	
+	// 인증 메일 보내기
+	void sendMail(CertVo certVo);
 	
 	
 	

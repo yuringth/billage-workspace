@@ -12,6 +12,7 @@ import com.bi.billage.board.model.vo.FAQ;
 import com.bi.billage.board.model.vo.Inquiry;
 import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.SerialRequest;
+import com.bi.billage.common.entity.CertVo;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.club.model.vo.Club;
 import com.bi.billage.user.model.vo.User;
@@ -166,6 +167,11 @@ public class UserDao {
 
 	public int updateGrade(SqlSessionTemplate sqlSession, int userNo) {
 		return sqlSession.update("userMapper.updateGrade", userNo);
+	}
+	
+	// 인증 메일 보내기
+	public void insertSecret(SqlSessionTemplate sqlSession, CertVo certVo) {
+		sqlSession.insert("userMapper.insertSecret", certVo);
 	}
 
 }

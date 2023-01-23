@@ -521,4 +521,24 @@
 		 WHERE
 		 		USER_NO = ${userNo}
 	</update>
+	
+	<!-- 인증 메일 관련  -->
+	<insert id="insertSecret" parameterType="cert">
+		INSERT
+		  INTO
+		  		CERT
+		  		(
+		  		WHO,
+		  		SECRET,
+		  		WHEN
+		  		)
+		VALUES
+				(
+				#{who},
+				#{secret},
+				SYSDATE
+				)
+	</insert>
+	
+	
 </mapper>

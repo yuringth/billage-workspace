@@ -67,20 +67,25 @@
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
+	
 	<div class="find-password-page">
 	
     	<div class="find-password-header">비밀번호 찾기</div>
     	
-    	<div class="find-password-content">
+        <form action="inputEmail" method="post">
+        
+    		<div class="find-password-content">
     	
-        	<div class="find-password-div">등록하신 <span>E-Mail</span> 주소를 입력하세요.</div>
-        	
-        <div><input type="text" name="email" placeholder="E-Mail" value=""></div>
-    	</div>
+        		<div class="find-password-div">등록하신 <span>E-Mail</span> 주소를 입력하세요.</div>
+	        	<div><input type="text" name="email" placeholder="가입할 때 썼던 E-Mail 주소를 쓰세요."></div>
+	        	
+	    	</div>
+	    	
+	    		<div class="find-password-button"><button id="passwordRequest">확인</button></div>
+    	</form>
     	
-    	<div class="find-password-button"><button id="passwordRequest">확인</button></div>
-    
 	</div>
+	
 	<jsp:include page="../common/footer.jsp" />
 </body>
 </html>

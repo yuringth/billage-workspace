@@ -11,6 +11,7 @@ import com.bi.billage.board.model.vo.Inquiry;
 import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.SerialRequest;
 import com.bi.billage.club.model.vo.Club;
+import com.bi.billage.common.entity.CertVo;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.user.model.dao.UserDao;
 import com.bi.billage.user.model.vo.User;
@@ -184,6 +185,12 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public int updateGrade(int userNo) {
 		return userDao.updateGrade(sqlSession, userNo);
+	}
+	
+	// 인증 메일 보내기
+	@Override
+	public void sendMail(CertVo certVo) {
+		userDao.insertSecret(sqlSession, certVo);
 	}
 
 

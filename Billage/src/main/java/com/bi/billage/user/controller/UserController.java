@@ -2,17 +2,25 @@ package com.bi.billage.user.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bi.billage.board.model.vo.FAQ;
 import com.bi.billage.board.model.vo.Inquiry;
 import com.bi.billage.board.model.vo.Novel;
+import com.bi.billage.common.entity.CertVo;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.common.savefile.SaveFile;
 import com.bi.billage.common.template.Pagination;
@@ -513,5 +522,38 @@ public class UserController {
 	}
 	
 	// 메일 인증
+	@PostMapping("inputEmail")
+	public String inputEmail(String email, HttpServletRequest request) throws MessagingException{
+		
+		MimeMessage message = sender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+		
+		String ip = request.getRemoteAddr();
+		String secret = generateSecret();
+		CertVo certVo = CertVo.builder()
+						.who(ip)
+						.secret(secret)
+						.build();
+		
+		userService.sendMail(certVo);
+		
+		helper.setTo(email);
+		helper.setSubject("Billage 인증 요청입니다.");
+		helper.setText("인증번호는 : " + secret + " 입니다.");
+		sender.send(message);
+		
+		return "user/writeCertForm";
+	}
+	
+	// 메일 인증 번호 생성
+	public String generateSecret() {
+		
+		Random r = new Random();
+		int n = r.nextInt(100000);
+		Format f = new DecimalFormat("000000");
+		String secret = f.format(n);
+		
+		return secret;
+	}
 	
 }

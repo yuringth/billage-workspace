@@ -7,6 +7,6 @@ import lombok.Data;
 @Data @Builder @AllArgsConstructor
 public class CertVo {
 	private String who;
-	private String seceret;
+	private String secret;
 	private String when;
 }
