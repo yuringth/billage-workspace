@@ -413,66 +413,52 @@
 				alert('로그인 유저만 이용 가능합니다. ');
 			} else {
 				
-				
 				var uri = 'ws://localhost:8787/billage/clubChat'
 				socket = new WebSocket(uri); 
-				// 생성자 함수 
 				
 				socket.onopen = function(){
-					console.log('서버랑 연결됐님?');
+					
 					$('#chat-text-area').text('${loginUser.nickname}!! 이 몸 등장 ㅋ');
-				}
+					
+				}//onopen종료
 				
 				socket.onmessage = function(e){
-					console.log('onmessage');
-					console.log('e : ' + e);
-					console.log('메시지가 도착했씁니다');
 					
 					if(e.data.substr(0,4) == '----'){
-						console.log('여긴 이프문이얌');
-						console.log('if e:' + e.data);
 						$('#chat-text-area').html(e.data);
-						
 					} else {
-						var str = $('<p></p>');
 						
-						console.log('else : ' +  e);
+						var str = $('<p></p>');
 						str.text(e.data);
 						$('#chat-text-area').append(str);
 						
 					}
-					
-				}
-				
-			}
-			
-		}
+				} // onmessage 종료
+			} // 1번째 if문 종료
+		} // chatIn()끝
 		
 		
 		function chatSend(){
 			
 			var text = $('#text-input').val();
 			
-			if(!text){
-				return;
-			}
+			if(!text){ return; }
 			
 			socket.send(text);
 			
 			$('#text-input').val('');
-		}
+		} //chatSend()끝 
 	
 		
-		function chatOut(e){
+		function chatOut(memCheck){
 			
-			if(e === 1){
+			if(memCheck === 1){
 				alert('로그인 유저만 이용 가능합니다. ');	
-				
 			} else{
 				socket.close();
 				$('#chat-text-area').text('${loginUser.userId}!! 퇴장하셨씁니다');
 			}
-		}
+		} //chatOut()끝 
 	
     	
     </script>
