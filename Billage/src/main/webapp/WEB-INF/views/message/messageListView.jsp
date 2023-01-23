@@ -54,10 +54,24 @@
 								</c:choose>
 							</td>
 						</tr>
+						<tr>
+							<td>상세내용</td>
+							<td colspan="2">
+								${ m.messageContent }
+							</td>
+						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
+	</div>
+	
+	
+	
+	<div>
+	
+	
+	
 	</div>
 	
 	
