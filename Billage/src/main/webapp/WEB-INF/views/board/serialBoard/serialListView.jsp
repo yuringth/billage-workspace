@@ -101,12 +101,10 @@
 							}else{
 								$('#likeBtnArea').html('<button class="like-novel" style="float:left;" onclick="novelCancel();">취소</button>');
 								$('#like-count').text(result[1]);
-							
 							}
 						}
             		})
             	}
-            	
             	function novelLike(){
             		$.ajax({
 						url : 'novelLike.nv',
@@ -122,10 +120,8 @@
 								$('#like-count').text(result[1]);
 							}
 						}
-						
             		});
             	}
-            	
             </script>
         <!--     
 	    <c:if test="${ loginUser.userNo ne novel.userNo and loginUser.userNo ne null }">
@@ -192,7 +188,6 @@
                         <th>제목</th>
                         <th>조회수</th>
                         <th>작성일</th>
-                        <th>별점</th>
                     </tr>
                 </thead>
                 <c:forEach items="${ list }" var="s">
@@ -204,7 +199,6 @@
                 			<td>${ s.serialTitle }</td>
                 			<td>${ s.count }</td>
                 			<td>${ s.uploadDate }</td>
-                			<td>${ s.starRating }</td>
                 		</tr>
                 </tbody>
                 </c:forEach>

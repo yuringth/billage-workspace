@@ -127,27 +127,12 @@ public class UserController {
 	
 	// 작품 수정 메소드
 	@RequestMapping("update.nv")
-	public String updateNovel(/*Integer nno,
-							  String novelTitle,
-							  String novelDisplay,
-							  String serialStatus,
-							  String chargeStatus,
-							  String originName,
-							  String changeName,*/
+	public String updateNovel(
 							  @ModelAttribute Novel n,
 							  HttpSession session,
 							  MultipartFile reUpfile,
 							  Model model) {
 		
-//		Novel n = new Novel();
-//		n.setNovelNo(nno);
-//		n.setNovelTitle(novelTitle);
-//		n.setNovelDisplay(novelDisplay);
-//		n.setSerialStatus(serialStatus);
-//		n.setChargeStatus(chargeStatus);
-//		n.setOriginName(originName);
-//		n.setChangeName(changeName);
-
 		// 새로운 썸네일이 넘어온 경우
 		if(!reUpfile.getOriginalFilename().equals("")) {
 			// 기존에 첨부파일이 있었을 경우 ? => 기존의 첨부파일을 삭제
@@ -218,7 +203,7 @@ public class UserController {
 		
 		if(userService.updateInquiry(iq) > 0) { // 성공 => 메인화면으로
 			session.setAttribute("alertMsg", "답변 완료");
-			return "redirect:/update.iq";
+			return "redirect:/inqList.ad";
 		} else {
 			model.addAttribute("errorMsg", "답변 오류");
 			return "common/errorPage";
@@ -248,13 +233,16 @@ public class UserController {
 		return "admin/serialRequestForm";
 	}
 	
-	// 연재 요청 승락후 변화 - 회원등급변경 / 승락상태로변경 / 메일전송
+	// 연재 요청 승락후 변화 - 회원등급변경 / 승락상태로변경
 	@RequestMapping("update.re")
-	public String updateSerialRequest(int rno, int uno) {
+	public String updateSerialRequest(Integer rno, Integer uno, HttpSession session) {
 		if(userService.updateUserGrade(uno) > 0) {
 			userService.updateSerialRequest(rno);
+			session.setAttribute("alertMsg", "수락 완료");
 		}
-		return "redirect:/detail.sr";
+		return "redirect:/list.sr";
+		
+
 	}
 	
 	// 작품 등록폼
@@ -496,8 +484,6 @@ public class UserController {
 	@RequestMapping("donate.nv")
 	public String donateNovel(int point, int userPoint, int userNo1, int userNo2, HttpSession session) {
 		
-		//System.out.println(userPoint);
-		//System.out.println(point);
 		if(point <= userPoint) {
 			Point p1 = new Point();
 			p1.setUserNo(userNo1);
@@ -515,10 +501,10 @@ public class UserController {
 				((User)session.getAttribute("loginUser")).setPoint(userPoint - point);
 			}
 			
-				return "redirect:/list.se";
+				return "main";
 		} else {
 			session.setAttribute("alertMsg", "보유 포인트가 부족합니다.");
-			return "redirect:/list.se";
+			return "main";
 		}
 	}
 	

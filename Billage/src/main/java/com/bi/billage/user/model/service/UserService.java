@@ -30,8 +30,8 @@ public interface UserService {
 	SerialRequest selectSerialRequest(int requestNo);
 
 	// 연재 요청 승락후 회원등급변경/연재요청상태변경
-	int updateUserGrade(int userNo);
-	int updateSerialRequest(int requestNo);
+	int updateUserGrade(Integer userNo);
+	int updateSerialRequest(Integer requestNo);
 	
 	// 회원 총 몇명인지 조회
 	int selectUserListCount();

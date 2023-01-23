@@ -59,12 +59,12 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public int updateUserGrade(int userNo) {
+	public int updateUserGrade(Integer userNo) {
 		return userDao.updateUserGrade(sqlSession, userNo);
 	}
 
 	@Override
-	public int updateSerialRequest(int requestNo) {
+	public int updateSerialRequest(Integer requestNo) {
 		return userDao.updateSerialRequest(sqlSession, requestNo);
 	}
 

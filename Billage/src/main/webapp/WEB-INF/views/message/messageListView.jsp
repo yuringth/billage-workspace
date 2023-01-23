@@ -10,6 +10,16 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <title>쪽지함</title>
+<style>
+
+	#blind-area{
+		display:none;
+	}
+
+
+</style>
+
+
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"/>
@@ -34,30 +44,34 @@
 				<thead class="thead-light">
 					<tr>
 						<th width="150px">보낸 사람</th>
-						<th width="650px">내용</th>
+						<th width="650px">제목</th>
 						<th width="200px">확인여부</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${ msgList }" var="m" >
-						<tr>
+						<tr id="click-area">
 							<td>${ m.nickname }</td>
-							<td>${ m.messageContent }</td>
+							<td class="click-title">${ m.title }</td>
 							<td>
+								<input type="hidden" name="userNo" value="${ m.userNo }"/>
 								<c:choose>
 									<c:when test="${ m.messageStatus eq 1 }">
-										<button id="${ m.messageStatus }">읽음</button>
+										<a class="msgStatus-btn" id="${ m.messageStatus }">읽음</a>
 									</c:when>
 									<c:otherwise>
-										<button id="${ m.messageStatus }" onclick="msgRead();" >안읽음 </button>
+										<a class="msgStatus-btn" id="${ m.messageStatus }" >안읽음 </a>
 									</c:otherwise>
 								</c:choose>
 							</td>
 						</tr>
-						<tr>
+						<tr id="blind-area">
 							<td>상세내용</td>
-							<td colspan="2">
+							<td>
 								${ m.messageContent }
+							</td>
+							<td class="click-msgDate">
+								${ m.messageDate }
 							</td>
 						</tr>
 					</c:forEach>
@@ -76,16 +90,53 @@
 	
 	
 	<script>
-		function msgRead(){
+
 			
-			$.ajax({
-				
-				url : 'read.ms',
-				
-				
-			});
+		$(document).on('click', '.click-title', function(){
 			
-		}
+			var $this = $(this).parents('#click-area').next();
+			var $msgStatus = $(this).next().children().attr('id');
+			//console.log($msgStatus);
+			var $msgDate = $(this).parents('#click-area').next().find('.click-msgDate').text();
+			var $userNo = $(this).next().children('input[name="userNo"]').val();
+			//console.log($msgDate);
+			//console.log($userNo);
+			
+			if($this.css('display') == 'none'){
+				
+				$this.siblings('#blind-area').slideUp(100);
+				
+				$this.slideDown(500);
+				
+			} else {
+				$this.slideUp(100);
+			}
+			
+			// 읽음 처리 하기 
+			if($msgStatus == 0){
+				
+				$.ajax({
+					url : 'read.ms',
+					data : {
+						userNo : $userNo ,
+						userNo2 : ${ loginUser.userNo } ,
+						messageDate : $msgDate
+					},
+					success : function(result){
+						console.log(result);
+					},
+					error : function(){
+						
+					}
+					
+				});
+			}
+			
+			
+
+		})
+
+	
 	</script>
 	
 	<jsp:include page="../common/footer.jsp"/>
