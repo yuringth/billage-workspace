@@ -103,7 +103,7 @@
 		                <p class="title-text">${ b.title }</p>
 		                <p class="textsize">현재 가격 : ${ b.nowPrice }P</p>
 		                <p class="textsize time"></p>
-		                <p class="countnum">입찰 : <!-- 카운트해서 --> 조회 : ${ b.count }</p>
+		                <p class="countnum">입찰 : ${ b.bidCount}  조회 : ${ b.count }</p>
 		            </div>
 		        </div>
 		        
