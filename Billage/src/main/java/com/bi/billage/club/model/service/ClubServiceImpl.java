@@ -1,15 +1,17 @@
 package com.bi.billage.club.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.club.model.dao.ClubDao;
 import com.bi.billage.club.model.vo.Club;
 import com.bi.billage.club.model.vo.ClubOpen;
+import com.bi.billage.club.model.vo.Socket;
+import com.bi.billage.common.model.vo.PageInfo;
 
 @Service
 public class ClubServiceImpl implements ClubService {
@@ -26,10 +28,21 @@ public class ClubServiceImpl implements ClubService {
 	}
 	
 	@Override
-	public ArrayList<Club> selectList(PageInfo pi) {
-		return clubDao.selectList(sqlSession, pi);
+	public ArrayList<Club> selectList(PageInfo pi, String condition) {
+		return clubDao.selectList(sqlSession, pi, condition);
 	}
 		
+	@Override
+	public int searchCount(HashMap<String, String> map) {
+		return clubDao.searchCount(sqlSession, map);
+	}
+
+	@Override
+	public ArrayList<Club> selectSearchList(PageInfo pi, HashMap<String, String> map) {
+		return clubDao.selectSearchList(sqlSession, pi, map);
+	}
+
+	
 	@Override
 	public int increaseCount(Club club) {
 		return clubDao.increaseCount(sqlSession, club);
@@ -124,6 +137,19 @@ public class ClubServiceImpl implements ClubService {
 	public int selectOpenMemNum(ClubOpen clubOpen) {
 		return clubDao.selectOpenMemNum(sqlSession, clubOpen);
 	}
+
+	@Override
+	public int insertChat(HashMap<String, String> map) {
+		return clubDao.insertChat(sqlSession, map);
+	}
+
+	@Override
+	public ArrayList<Socket> selectChat(int clubNo) {
+		return clubDao.selectChat(sqlSession, clubNo);
+	}
+
+
+
 
 	
 

@@ -6,11 +6,15 @@
 	
 	
 	<resultMap type="message" id="messageResultSet">
-		<result column="USER_NO" property="userNo" />
-		<result column="USER_NO2" property="userNo2" />
-		<result column="MESSAGE_CONTENT" property="messageContent" />
-		<result column="MESSAGE_DATE" property="messageDate" />
-		<result column="MESSAGE_STATUS" property="messageStatus" />
+		<result column="USER_NO"			 property="userNo" />
+		<result column="USER_NO2"			 property="userNo2" />
+		<result column="MESSAGE_CONTENT"	 property="messageContent" />
+		<result column="MESSAGE_DATE"		 property="messageDate" />
+		<result column="MESSAGE_STATUS"		 property="messageStatus" />
+		<result column="NICKNAME"			 property="nickname" />
+		<result column="USER_ID"			 property="userId" />
+		<result column="NICKNAME2"			 property="nickname2" />
+		<result column="USER_ID2"			 property="userId2" />
 	</resultMap>
 	
 	<!-- 쪽지 전송 -->
@@ -54,6 +58,31 @@
 		 		) 
 		</foreach>
 	</insert>
+	
+	<!-- User Message List Select -->
+	<select id="selectMessageList" parameterType="_int" resultMap="messageResultSet">
+        SELECT 
+		         ME.USER_NO
+		        ,M.USER_ID
+		        ,M.NICKNAME
+		        ,ME.USER_NO2
+		        ,MM.USER_ID "USER_ID2"
+		        ,MM.NICKNAME "NICKNAME2"
+		        ,ME.MESSAGE_CONTENT
+		        ,MESSAGE_DATE
+		        ,MESSAGE_STATUS
+          FROM 
+        		MESSAGE ME
+          JOIN 
+          		MEMBER M ON(ME.USER_NO = M.USER_NO)
+          JOIN 
+          		MEMBER MM ON(ME.USER_NO2 = MM.USER_NO)
+         WHERE 
+         		ME.USER_NO2 = #{ userNo }
+         ORDER 
+         	BY 
+         		MESSAGE_DATE DESC
+	</select>
 	
 	
 </mapper>

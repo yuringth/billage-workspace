@@ -72,24 +72,12 @@ a {
 											<h3>${ list.reviewTitle }</h3>
 										</div>
 										<br>
-										<div id="reviewContent${ list.reviewNo }">${ list.reviewContent }</div>
+										<div id="reviewContent${ list.reviewNo }" onclick="location.href='detail.re?reviewNo=${list.reviewNo}'">${ list.reviewContent }</div>
 									</div>
 								</div>
 								<br> <br>
 
-								<div class="likeReplyCount" style="display: flex; flex-direction: row; justify-content: flex-start;">
-									<div id="likeCount">좋아요 갯수 &nbsp;</div>
-									<div id="replyCount">댓글 갯수</div>
-								</div>
-								<br>
-
 								<hr>
-
-								<div class="likeReplyPlus" style="display: flex; flex-direction: row; justify-content: flex-start;">
-									<div id="likeBtn">♡ &nbsp;</div>
-									<div id="replyBtn">댓글</div>
-								</div>
-								<br>
 
 							</div>
 

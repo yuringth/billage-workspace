@@ -1,6 +1,7 @@
 package com.bi.billage.club.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bi.billage.club.model.vo.Club;
 import com.bi.billage.club.model.vo.ClubOpen;
+import com.bi.billage.club.model.vo.Socket;
 import com.bi.billage.common.model.vo.PageInfo;
 
 @Repository
@@ -17,10 +19,20 @@ public class ClubDao {
 		return sqlSession.selectOne("clubMapper.selectListCount");
 	}
 	
-	public ArrayList<Club> selectList(SqlSessionTemplate sqlSession, PageInfo pi){
+	public ArrayList<Club> selectList(SqlSessionTemplate sqlSession, PageInfo pi, String condition){
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		return (ArrayList)sqlSession.selectList("clubMapper.selectList", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("clubMapper.selectList", condition, rowBounds);
+	}
+	
+	public int searchCount(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		return sqlSession.selectOne("clubMapper.searchCount", map);
+	}
+	
+	public ArrayList<Club> selectSearchList(SqlSessionTemplate sqlSession, PageInfo pi, HashMap<String,String> map){
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("clubMapper.selectSearchList", map, rowBounds);
 	}
 	
 	public int increaseCount(SqlSessionTemplate sqlSession, Club club) {
@@ -45,7 +57,6 @@ public class ClubDao {
 	public int insertClubAdmin(SqlSessionTemplate sqlSession, Club club) {
 		return sqlSession.insert("clubMapper.insertClubAdmin", club);
 	}
-	
 	
 	// 클럽 일반회원 리스트 조회
 	public ArrayList<Club> clubGeneral(SqlSessionTemplate sqlSession, int userNo){
@@ -116,6 +127,16 @@ public class ClubDao {
 	// selectOpenMemNum
 	public int selectOpenMemNum(SqlSessionTemplate sqlSession, ClubOpen clubOpen) {
 		return sqlSession.selectOne("clubMapper.selectOpenMemNum", clubOpen);
+	}
+	
+	//insertChat
+	public int insertChat(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		return sqlSession.insert("clubMapper.insertChat", map);
+	}
+	
+	//selectChat
+	public ArrayList<Socket> selectChat(SqlSessionTemplate sqlSession, int clubNo) {
+		return (ArrayList)sqlSession.selectList("clubMapper.selectChat", clubNo);
 	}
 	
 }

@@ -86,9 +86,9 @@ public interface BoardService {
 	
 	ReportBoard selectReport(int rno);
 	
-	int selectReportStatus(int reveiwNo);
+	int updateReportStatus(int reveiwNo);
 	
-	
+	int updateReviewStatus(int reviewNo);
 	
 	
 	
@@ -298,7 +298,7 @@ public interface BoardService {
 	// 댓글 등록(insert)
 	int insertReviewReply(ReviewReply r);
 	
-	
+	// 댓글 수정
 	
 	
 	

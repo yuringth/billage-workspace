@@ -52,7 +52,9 @@
 						<c:forEach items="${ clubList }" var="c" varStatus="status">
 							<tr>
 								<input type="hidden" name="clubNo" value="${c.clubNo }"/>
-								<td>${ status.index + 1 }</td>
+								<td>
+									${ status.index + 1 }
+								</td>
 								<c:choose>
 									<c:when test="${ !empty c.clubImg  }">
 										<td><img width="150px" height="150px" src="${ c.clubImg }"></td>
@@ -61,7 +63,7 @@
 										<td><img width="150px" height="150px" src="resources/images/plus.png"></td>
 									</c:otherwise>
 								</c:choose>
-								<td><a onclick="goDetail();">${ c.clubName }</a></td>
+								<td><a onclick="goDetail($(this));">${ c.clubName }</a></td>
 								<td>${ c.clubLimit }</td>
 								<td id="createDate">${ c.clubCreatedate }</td>
 								<td>${ c.clubLocation }</td>
@@ -95,15 +97,15 @@
 	<script>
 		
 	
-		function goDetail(){
+		function goDetail(e){
 			
-			var clubNo = $('#admin-list-area input[type=hidden]').val();
-			var createDate = $('#createDate').text();
+			var clubNo = $(e).parents('tr').children('input[name=clubNo]').val();
+			var createDate = $(e).parents('td').siblings('#createDate').text();
 			var cdArr = createDate.split('/');
 			
 			//등록일로부터 한달 후 계산한 날짜
-			let cd = new Date(cdArr[0], cdArr[1], cdArr[2]);
-			let today = new Date(); 
+			var cd = new Date(cdArr[0], cdArr[1], cdArr[2]);
+			var today = new Date(); 
 			
 			var newCount = 0;
 		
@@ -113,7 +115,7 @@
 			} else {
 				newCount = 0;
 			}
-
+			
 			location.href = 'detail.cl?clubNo=' + clubNo + '&newCount=' + newCount ;
 		}
 	

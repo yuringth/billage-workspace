@@ -74,15 +74,15 @@
 		</div>
 		<hr>
 		<h2>둘 다 재미있게 본 책</h2>
-		<c:forEach items="${ goodReview }" var="g">
 		<div class="funBook" style="display:flex; flex-direction: row; justify-content: space-evenly;">
+		<c:forEach items="${ goodReview }" var="g">
 			<div class="book1">
-				<div id="funbookimg"><img src="${ g.bookImag }" width="150px;" height="250px;"></div>
+				<div class="funbookimg"><img src="${ g.bookImag }" width="150px;" height="250px;"></div>
 				<br>
-				<div id="funBookTitle">${ g.bookTitle }</div>
+				<div class="funBookTitle">${ g.bookTitle }</div>
 			</div>
-		</div>
 		</c:forEach>
+		</div>
 	
 		<br><br><br>
 	

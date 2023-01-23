@@ -24,6 +24,7 @@
 			
 		
 		<script>
+
 			$(function(){
 			
 				// 전체선택 or 취소 ----------------------------------------------------------------------
@@ -47,7 +48,7 @@
 					
 					// console.log($('.checked-btn').filter(':checked'));
 					// .checked-btn 객체들 중에서 checked된 객체들만 선택해준다. 
-					
+	
 					var $checkedMem = $('.checked-btn').filter(':checked');
 					
 					var $clubNo = $('#getClubNo').val();
@@ -139,9 +140,6 @@
 				
 			}); //$(function(){}) 끝
 			
-		
-				
-			
 		</script>
 		
 		<br><br><br>
@@ -188,7 +186,8 @@
 		
 		<br><br><br>
 		
-		<form action="message.cl" method="post">
+		<form action="message.cl" method="post" >
+			<%--<input type="hidden" name="clubNo" value="${ clubNo }" /> --%>
 			<div id="message-area">
 				<h3> 🧡 메시지 보내기🧡 </h3> 
 				<div class="send-area">
@@ -206,13 +205,44 @@
 					<textarea name="messageContent" style="width:400px; height:240px; resize:none;"></textarea>
 				</div>
 				
-				<button type="submit">전송하기</button>
+				<button type="submit" id="submit-btn" >전송하기</button>
 				<button type="reset">다시쓰기</button>
 			</div>
 		</form> <!-- message보내기 form태그  -->
 	
 	
 	</div>
+	
+	<script>
+		
+		$(document).on('click', '#submit-btn', function(){
+			//고생해서 만든 조건식... 후 
+			if($('textarea[name=messageContent]').val() == ''){
+				alert('텍스트가 작성되지 않았습니다.');
+				$('textarea[name=messageContent]').focus();
+				return false;
+			}
+			
+			let $userNum;
+			let count = 0;
+			
+			$userNum = $(this).siblings('.receive-area').find('input[name="userNo2"]');
+			
+			$userNum.each(function(){
+				count++;
+			})
+			
+			if(count == 0){	
+				alert('수신자가 지정되지 않았습니다.');
+				return false;
+			} else{
+				return true;
+			}
+			
+		})
+
+	
+	</script>
 	
 	
 	

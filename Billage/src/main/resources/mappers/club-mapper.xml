@@ -4,7 +4,6 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="clubMapper">
 	
-	
 	<resultMap type="club" id="clubResultSet">
 		<result column="CLUB_NO"			 property="clubNo" />
 		<result column="USER_NO"		 	 property="userNo" />
@@ -28,7 +27,6 @@
 		<result column="MEMUSER"			 property="memUser" />
 	</resultMap>
 	
-	
 	<resultMap type="clubOpen" id="clubOpenResultSet">
 		<result column="OPEN_NO" 			property="openNo" />
 		<result column="CLUB_NO" 			property="clubNo" />
@@ -43,13 +41,18 @@
 		<result column="OPEN_MEM_COUNT" 	property="openMemCount" />
 	</resultMap>
 	
-
-	<!-- 
-	<resultMap type="club" id="clubLikeResultSet">
-		<result column="CLUB_NAME" property="userName" />
-		<result column=
+	<resultMap type="socket" id="socketResultSet">
+		<result column="SOCKET_NO"			 property="socketNo" />
+		<result column="USER_NO"			 property="userNo" />
+		<result column="CLUB_NO"			 property="clubNo" />
+		<result column="MESSAGE"			 property="message" />
+		<result column="SOCKET_DATE"		 property="socketDate" />
+		<result column="SOCKET_STATUS"		 property="socketStatus" />
+		<result column="USER_ID"			 property="userId" />
+		<result column="NICKNAME" 			 property="nickname" />
 	</resultMap>
-	 -->
+
+
 	<!-- 모임 페이지 리스트 종 갯수 조회  -->
 	<select id="selectListCount" resultType="_int">
 		SELECT 
@@ -60,8 +63,140 @@
   		 		CLUB_STATUS = 'Y'
 	</select>
 	
+	
+	<!-- keyword / condition에 맞는 list 총 갯수 조회  -->
+	<select id="searchCount" parameterType="java.util.HashMap" resultType="_int">
+		SELECT 
+				COUNT(*)
+		  FROM
+				CLUB C
+		  JOIN
+				MEMBER M ON(C.USER_NO = M.USER_NO)
+	  	 WHERE
+				CLUB_STATUS = 'Y'
+		<if test="condition == 'clubName'">
+			AND	CLUB_NAME
+		</if>
+		<if test="condition == 'location'">
+			AND CLUB_LOCATION
+		</if>
+		<if test="condition == 'createMem'">
+			AND NICKNAME
+		</if>
+			LIKE '%' || #{ keyword } || '%'
+	</select>
+	
+	
+	<!-- keyword / condition에 맞는 list 조회 -->
+	<select id="selectSearchList" parameterType="java.util.HashMap" resultMap="clubResultSet">
+		SELECT	
+			   C.CLUB_NO
+			  ,C.USER_NO
+			  ,C.NICKNAME
+		 	  ,C.CLUB_NAME
+			  ,C.CLUB_LIMIT
+			  ,C.CLUB_CREATEDATE
+			  ,C.CLUB_DISCRIPT
+			  ,C.CLUB_IMG
+			  ,C.CLUB_LOCATION
+			  ,C.CLUB_COUNT
+			  ,C.NEWCOUNT
+			  ,C.LIKECOUNT
+			  ,COUNT(CM.CLUB_NO) "MEMCOUNT"	
+		 FROM
+		 	  CLUB_MEMBER CM
+ 	    RIGHT
+		 JOIN 	
+				(SELECT	
+					   C.CLUB_NO
+					  ,C.USER_NO
+					  ,C.NICKNAME
+				 	  ,C.CLUB_NAME
+					  ,C.CLUB_LIMIT
+					  ,C.CLUB_CREATEDATE
+					  ,C.CLUB_DISCRIPT
+					  ,C.CLUB_IMG
+					  ,C.CLUB_LOCATION
+					  ,C.CLUB_COUNT
+					  ,C.NEWCOUNT
+					  ,COUNT(CL.CLUB_NO) "LIKECOUNT"
+				 FROM
+				 	  CLUB_LIKE CL 	
+				 RIGHT
+				  JOIN
+					  (
+					   SELECT 
+							   CLUB_NO
+							  ,C.USER_NO
+							  ,M.NICKNAME
+						 	  ,CLUB_NAME
+							  ,CLUB_LIMIT
+							  ,CLUB_CREATEDATE
+							  ,CLUB_DISCRIPT
+							  ,CLUB_IMG
+							  ,CLUB_LOCATION
+							  ,CLUB_COUNT
+				              ,CASE WHEN
+				                         (SELECT TO_DATE(SYSDATE, 'YY-MM-DD') FROM DUAL) 
+				                       - (SELECT TO_DATE(CLUB_CREATEDATE, 'YY-MM-DD') FROM DUAL) <![CDATA[ > ]]> 30 THEN 0
+				                    WHEN
+				                         (SELECT TO_DATE(SYSDATE, 'YY-MM-DD') FROM DUAL)
+				                       - (SELECT TO_DATE(CLUB_CREATEDATE, 'YY-MM-DD') from dual) <![CDATA[ < ]]> 30 THEN 1
+				                     END AS "NEWCOUNT"
+					  	 FROM
+					  	  	   CLUB C
+					  	 LEFT 	   
+				 	  	 JOIN
+				 	  	  	   MEMBER M ON (C.USER_NO = M.USER_NO)
+				  	    WHERE
+				  	  	 	   CLUB_STATUS = 'Y'
+		  	  	 	   <choose>
+							<when test="condition == 'clubName'">
+								AND	CLUB_NAME
+							</when>
+							<when test="condition == 'location'">
+								AND CLUB_LOCATION
+							</when>
+							<otherwise>
+								AND NICKNAME
+							</otherwise>
+		  	  	 	   </choose>
+							LIKE '%' || #{ keyword } || '%'
+						 ) C ON (C.CLUB_NO = CL.CLUB_NO)
+				 GROUP
+				    BY
+					    C.CLUB_NO
+					   ,C.USER_NO
+					   ,C.NICKNAME
+					   ,C.CLUB_NAME
+					   ,C.CLUB_LIMIT
+					   ,C.CLUB_CREATEDATE
+					   ,C.CLUB_DISCRIPT
+					   ,C.CLUB_IMG
+					   ,C.CLUB_LOCATION
+					   ,C.CLUB_COUNT	  	 	   
+				  	   ,C.NEWCOUNT) C ON (C.CLUB_NO = CM.CLUB_NO)
+		 GROUP
+		    BY
+		       C.CLUB_NO
+			  ,C.USER_NO
+			  ,C.NICKNAME
+		 	  ,C.CLUB_NAME
+			  ,C.CLUB_LIMIT
+			  ,C.CLUB_CREATEDATE
+			  ,C.CLUB_DISCRIPT
+			  ,C.CLUB_IMG
+			  ,C.CLUB_LOCATION
+			  ,C.CLUB_COUNT
+			  ,C.NEWCOUNT
+			  ,C.LIKECOUNT	 	   
+		 ORDER
+		    BY
+		       C.CLUB_NO DESC
+	</select>
+	
 	<!-- 모임 리스트 페이지에 뿌려줄 정보  조회 -->
-	<select id="selectList" resultMap="clubResultSet">
+	<select id="selectList" parameterType="String" resultMap="clubResultSet">
 		SELECT	
 			   C.CLUB_NO
 			  ,C.USER_NO
@@ -152,7 +287,17 @@
 			  ,C.LIKECOUNT	 	   
 		 ORDER
 		    BY
-		       C.CLUB_NO DESC
+		    <choose>
+		      	<when test="condition == 'recently'">
+		      	   C.CLUB_CREATEDATE DESC
+		      	</when>
+		      	<when test="condition == 'popularity'">
+		      	   C.LIKECOUNT DESC
+		      	</when>
+			    <otherwise>
+			       C.CLUB_NO DESC
+			    </otherwise>
+		    </choose>
 	</select>
 
 	
@@ -188,9 +333,8 @@
 			  ,#{clubLocation}
 			  ,'Y'
 			   )
-
-			   
 	</insert>
+	
 	
 	<!-- 모임 INSERT가 잘 되었다면 모임 개설자 CLUB_MEMBER에 INSET해주기 -->
 	<insert id="insertClubAdmin" parameterType="club">
@@ -213,6 +357,7 @@
 			   )	
 	</insert>
 
+
 	<!-- Group List 조회수 Update -->
 	<update id="increaseCount" parameterType="club">
 		UPDATE 
@@ -225,9 +370,9 @@
 		   		CLUB_STATUS = 'Y'				
 	</update>
 	
+	
 	<!-- Club List Detail Select -->
 	<select id="selectDetailClub" parameterType="club" resultMap="clubResultSet" >
-  
 		SELECT  
 				 C.CLUB_NO
 		        ,C.USER_NO
@@ -280,6 +425,7 @@
 				 C.CLUB_STATUS = 'Y'
 	</select>
 	
+	
 	<!-- selectDetailClubOpen -->
 	<select id="selectDetailClubOpen" parameterType="club" resultMap="clubOpenResultSet">
 		SELECT  
@@ -319,9 +465,7 @@
 	</select>
 	-->
 	
-	
-	
-	
+
 	<!-- Club General List Select -->
 	<select id="clubGeneral" parameterType="_int" resultMap="clubResultSet">
 		SELECT 
@@ -370,6 +514,7 @@
 	        	C.ENROLL_DATE DESC
 	</select>
 	
+	
 	<!--  update / delete resultType 필요없음  -->
 	<delete id="ajaxDeleteClub" parameterType="club">
 		DELETE
@@ -413,7 +558,6 @@
 			   ,SYSDATE
 			   )
 	</insert>
-	
 	
 	
 	<!-- 모임 관리자 모임 정보 SELECT 쿼리  -->
@@ -520,6 +664,7 @@
 		   	   C.CLUB_NO DESC
 	</select>	
 	
+	
 	<!-- Club_Member List Select -->
 	<select id="clubMemberSelectAdmin" parameterType="_int" resultMap="clubResultSet">
 		 SELECT 
@@ -592,7 +737,6 @@
 		  WHERE
 				CLUB_NO = #{ clubNo }
 	</select>
-	
 	
 	
 	<!--  ClubOpen Table Select List : Admin -->
@@ -710,6 +854,7 @@
  				)
 	</insert>
 	
+	
 	<!-- selectOpenMemNum -->
 	<select id="selectOpenMemNum" parameterType="clubOpen" resultType="_int">
 		SELECT 
@@ -721,6 +866,51 @@
 		   AND 
 		   		OPEN_NO = #{ openNo }
 	</select>
+	
+	
+	<!-- insert Chat -->
+	<insert id="insertChat" parameterType="java.util.HashMap" >
+		INSERT
+		  INTO
+		  		SOCKET
+		  		(
+		  		 SOCKET_NO
+				,USER_NO
+				,CLUB_NO
+				,MESSAGE
+				,SOCKET_DATE
+				,SOCKET_STATUS
+		  		)
+		VALUES 
+				(
+				 SEQ_SOCNO.NEXTVAL
+				,#{ userNo }
+				,#{ clubNo }
+				,#{ message }
+				,SYSDATE
+				,'N'
+				)
+	</insert>
+
+
+	<select id="selectChat" parameterType="_int" resultMap="socketResultSet">
+		SELECT  
+				 S.USER_NO
+				,M.USER_ID
+				,M.NICKNAME
+				,MESSAGE
+		  FROM
+		        SOCKET S
+		  JOIN
+		        MEMBER M ON(S.USER_NO = M.USER_NO)
+		 WHERE 
+		        CLUB_NO = #{ clubNo }
+		 ORDER
+		    BY
+		        SOCKET_DATE
+	</select>
+	
+	
 	
 </mapper>
 

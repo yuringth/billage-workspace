@@ -289,6 +289,9 @@
 		        review_no = #{ reviewNo }
 		   and
 		        delete_status = 'N'
+		 order
+		    by
+		       create_date desc
 	</select>
 	
 	
@@ -318,7 +321,7 @@
 	
 	
 	<!-- 댓글 등록 -->
-	<insert id="insertReviewReply">
+	<insert id="insertReviewReply" parameterType="ReviewReply">
 		INSERT 
 		  INTO 
 		       REVIEW_REPLY

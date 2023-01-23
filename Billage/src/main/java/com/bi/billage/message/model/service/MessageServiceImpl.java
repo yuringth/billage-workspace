@@ -26,8 +26,8 @@ public class MessageServiceImpl implements MessageService{
 	
 	//쪽지 리스트 조회
 	@Override
-	public ArrayList<Message> selectMessgageList(int userNo) {
-		return null;
+	public ArrayList<Message> selectMessageList(int userNo) {
+		return messageDao.selectMessageList(sqlSession, userNo);
 	}
 	
 	// 쪽지 상세조회

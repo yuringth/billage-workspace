@@ -10,7 +10,7 @@ public interface MessageService {
 	int insertMessage(Message m);
 	
 	// 쪽지 리스트 조회
-	ArrayList<Message> selectMessgageList(int userNo);
+	ArrayList<Message> selectMessageList(int userNo);
 	
 	// 쪽지 상세 조회
 	Message selectMessage(int messageNo);
