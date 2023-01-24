@@ -14,6 +14,7 @@ import com.bi.billage.board.model.vo.Serial;
 import com.bi.billage.board.model.vo.SerialRequest;
 import com.bi.billage.board.model.vo.UsedBoard;
 import com.bi.billage.common.model.vo.PageInfo;
+import com.bi.billage.heart.model.vo.ReviewLike;
 
 
 public interface BoardService {
@@ -267,7 +268,8 @@ public interface BoardService {
 	int deleteReviewBoard(ReviewBoard b);
 
 	
-	
+	// 리뷰게시판 좋아요 누르면 insert
+	int insertReviewLike(ReviewLike r);
 
 
 	

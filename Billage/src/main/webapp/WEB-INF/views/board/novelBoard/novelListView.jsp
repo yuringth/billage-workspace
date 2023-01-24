@@ -244,7 +244,7 @@ div.card.show {
 	            </div>
 	            <div class="card-flap flap1">
 	                <div class="card-description">
-	                    작가명 : ${ n.nickName }<br>최신화 : <br>추천수 : ${ n.heart } <br>
+	                    작가명 : ${ n.nickName }<br>추천수 : ${ n.heart } <br>
 	                    연재상태 : ${ n.serialStatus }            
 	                </div>
 	                <div class="card-flap flap2">
