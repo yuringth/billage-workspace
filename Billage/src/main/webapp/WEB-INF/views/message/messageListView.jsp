@@ -132,7 +132,6 @@
 						if( result > 0 ){
 							
 							$this2.each(function(){
-								
 								if($(this).val() == $messageNo){
 									$(this).siblings('.msgStatus-btn2').attr('id', '1');
 									$(this).siblings('.msgStatus-btn2').children().text('읽음');
