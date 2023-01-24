@@ -43,25 +43,6 @@ public class MessageController {
 	@ResponseBody
 	@RequestMapping(value="read.ms", produces="application/json; charset=UTF-8;")
 	public String updateMessage(Message message) {
-		 System.out.println(message);
-		 
-		 String date = message.getMessageDate();
-		 System.out.println(date);
-		 
-		 
-		 SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy/MM/dd");
-		 Date reDate2;
-		try {
-			reDate2 = simpleDate.parse(date);
-			System.out.println(reDate2);
-			String reDate = simpleDate.format(reDate2);
-			message.setMessageDate(reDate);
-			
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		 
-		 
 		return new Gson().toJson(messageService.updateMessage(message));
 	}
 	
