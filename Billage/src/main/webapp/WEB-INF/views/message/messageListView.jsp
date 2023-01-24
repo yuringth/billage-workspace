@@ -57,17 +57,17 @@
 								<input type="hidden" name="userNo" value="${ m.userNo }"/>
 								<c:choose>
 									<c:when test="${ m.messageStatus eq 1 }">
-										<a class="msgStatus-btn" id="${ m.messageStatus }">읽음</a>
+										<a class="msgStatus-btn1" id="${ m.messageStatus }">읽음</a>
 									</c:when>
 									<c:otherwise>
-										<a class="msgStatus-btn" id="${ m.messageStatus }" >안읽음 </a>
+										<a class="msgStatus-btn2" id="${ m.messageStatus }" >안읽음 </a>
 									</c:otherwise>
 								</c:choose>
 							</td>
 						</tr>
 						<tr id="blind-area">
 							<td>상세내용</td>
-							<td>
+							<td class="click-msgCon">
 								${ m.messageContent }
 							</td>
 							<td class="click-msgDate">
@@ -93,11 +93,12 @@
 
 			
 		$(document).on('click', '.click-title', function(){
-			
+			var userNo2 = ${loginUser.userNo};
 			var $this = $(this).parents('#click-area').next();
-			var $msgStatus = $(this).next().children().attr('id');
-			//console.log($msgStatus);
-			var $msgDate = $(this).parents('#click-area').next().find('.click-msgDate').text();
+			var $msgStatus = $(this).next().children().eq(1).attr('id');
+			var $msgDate = $(this).parents('#click-area').next().find('.click-msgDate').text().trim();
+			
+			console.log($msgDate);
 			var $userNo = $(this).next().children('input[name="userNo"]').val();
 			//console.log($msgDate);
 			//console.log($userNo);
@@ -119,14 +120,18 @@
 					url : 'read.ms',
 					data : {
 						userNo : $userNo ,
-						userNo2 : ${ loginUser.userNo } ,
+						userNo2 : userNo2,
 						messageDate : $msgDate
 					},
 					success : function(result){
 						console.log(result);
+						if( result > 0 ){
+							$('.msgStatus-btn1').attr('id', '1');
+							$('.msgStatus-btn1').text('읽음');
+						}
 					},
 					error : function(){
-						
+						console.log('읽음처리 비동기 오류');
 					}
 					
 				});
@@ -134,7 +139,7 @@
 			
 			
 
-		})
+		}) 	
 
 	
 	</script>

@@ -51,6 +51,7 @@
           <mapping path="/enrollForm.ac"/>
           <mapping path="/enrollForm.dr"/>
           <mapping path="/clubOpenAdmin.cl"/>
+          <mapping path="/list.ms"/>
           <beans:bean class="com.bi.billage.common.interceptor.LoginInterceptor" id="loginInterceptor"></beans:bean>
        </interceptor>
     </interceptors>

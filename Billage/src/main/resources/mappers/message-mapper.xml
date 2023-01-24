@@ -24,13 +24,15 @@
 		  INTO
 		  		MESSAGE
 		  		(
-		  		 USER_NO
+		  		 MESSAGE_NO
+		  		,USER_NO
 		  		,USER_NO2
 		  		,MESSAGE_CONTENT
 		  		)
 		VALUES
 		 		(
-		 		 #{userNo}
+		 		 SEQ_MNO.NEXTVAL
+		 		,#{userNo}
 		 		,#{userNo2}
 		 		,#{messageContent}
 		 		)
@@ -39,25 +41,28 @@
 	
 	<!-- (Club Message Insert) 단체 쪽지 전송  -->
 	<insert id="insertClubMessage" parameterType="java.util.List">
-		<foreach item="message" index="index" separator=" " collection="list" open="INSERT ALL" close="SELECT * FROM DUAL" >
+		INSERT 
 		  INTO
 				MESSAGE
 				(
-				 USER_NO
+				 MESSAGE_NO
+				,USER_NO
 				,USER_NO2
 				,MESSAGE_CONTENT
 				,MESSAGE_DATE
 				,MESSAGE_STATUS	
 				)
-		VALUES
-		 		(
-		 		 #{ message.userNo }
-		 		,#{ message.userNo2 }
-		 		,#{ message.messageContent }
-		 		,SYSDATE
-		 		,0
-		 		) 
-		</foreach>
+				(SELECT SEQ_MNO.NEXTVAL, A. * FROM
+		(<foreach item="message" index="index" separator="UNION ALL" collection="list" >
+	    SELECT
+		 		 #{ message.userNo } AS USER_NO
+		 		,#{ message.userNo2 } AS USER_NO2
+		 		,#{ message.messageContent } AS MESSAGE_CONTENT
+		 		,SYSDATE AS MESSAGE_DATE
+		 		,0 AS MESSAGE_STATUS
+ 		  FROM
+ 		  		DUAL
+		</foreach>) A) 
 	</insert>
 	
 	<!-- User Message List Select -->
@@ -89,4 +94,18 @@
 	</select>
 	
 	
+	<!-- Update -->
+	<update id="updateMessage" parameterType="message">
+		UPDATE 
+				MESSAGE
+		   SET
+		  		MESSAGE_STATUS = 1
+  		 WHERE 
+  		 		USER_NO = #{ userNo }
+ 		   AND 
+ 		   		USER_NO2 = #{ userNo2 }
+  		   AND 
+				MESSAGE_CONTENT = TRIM(#{ messageContent })
+	</update>
+
 </mapper>

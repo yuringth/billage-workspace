@@ -186,7 +186,7 @@
 		
 		<br><br><br>
 		
-		<form action="message.cl" method="post" >
+		<form action="message.cl" method="post">
 			<%--<input type="hidden" name="clubNo" value="${ clubNo }" /> --%>
 			<div id="message-area">
 				<h3> 🧡 메시지 보내기🧡 </h3> 

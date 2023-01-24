@@ -1,6 +1,9 @@
 package com.bi.billage.message.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -40,10 +43,26 @@ public class MessageController {
 	@ResponseBody
 	@RequestMapping(value="read.ms", produces="application/json; charset=UTF-8;")
 	public String updateMessage(Message message) {
-		
-		int result = messageService.updateMessage(message) > 0 ? 1 : 0 ;
-		
-		return new Gson().toJson(result);
+		 System.out.println(message);
+		 
+		 String date = message.getMessageDate();
+		 System.out.println(date);
+		 
+		 
+		 SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy/MM/dd");
+		 Date reDate2;
+		try {
+			reDate2 = simpleDate.parse(date);
+			System.out.println(reDate2);
+			String reDate = simpleDate.format(reDate2);
+			message.setMessageDate(reDate);
+			
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		 
+		 
+		return new Gson().toJson(messageService.updateMessage(message));
 	}
 	
 	

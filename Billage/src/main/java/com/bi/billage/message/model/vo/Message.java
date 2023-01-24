@@ -1,5 +1,7 @@
 package com.bi.billage.message.model.vo;
 
+import java.sql.Date;
+
 import lombok.Data;
 
 @Data
