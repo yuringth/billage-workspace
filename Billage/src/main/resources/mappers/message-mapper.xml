@@ -6,6 +6,7 @@
 	
 	
 	<resultMap type="message" id="messageResultSet">
+		<result column="MESSAGE_NO"			 property="messageNo" />
 		<result column="USER_NO"			 property="userNo" />
 		<result column="USER_NO2"			 property="userNo2" />
 		<result column="MESSAGE_CONTENT"	 property="messageContent" />
@@ -67,8 +68,9 @@
 	
 	<!-- User Message List Select -->
 	<select id="selectMessageList" parameterType="_int" resultMap="messageResultSet">
-        SELECT 
-		         ME.USER_NO
+         SELECT 
+		         ME.MESSAGE_NO
+		        ,ME.USER_NO 
 		        ,M.USER_ID
 		        ,M.NICKNAME
 		        ,ME.USER_NO2
@@ -101,11 +103,11 @@
 		   SET
 		  		MESSAGE_STATUS = 1
   		 WHERE 
-  		 		USER_NO = #{ userNo }
+  		 		MESSAGE_NO = #{ messageNo } 
  		   AND 
  		   		USER_NO2 = #{ userNo2 }
   		   AND 
-				MESSAGE_CONTENT = TRIM(#{ messageContent })
+				USER_NO = #{ userNo }
 	</update>
 
 </mapper>

@@ -43,7 +43,7 @@ public class WebSocketServer extends TextWebSocketHandler {
 								+ " ] : " 
 								+ afterConnectionList.get(i).getMessage()
 								+ "<br>";
-			
+								
 		}
 		afterConnectionText += "----<br>";
 		
