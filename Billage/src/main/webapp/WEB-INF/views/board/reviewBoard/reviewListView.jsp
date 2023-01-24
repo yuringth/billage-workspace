@@ -367,7 +367,7 @@
 		// 휘수시작 =======================================================================================================	
 			
 		//유저 닉네임 클릭시 모달창 생성
-			if(${ !empty loginUser}){
+			if(${ !empty loginUser && loginUser.userNo != b.userNo}){
 				$('.one-content-detail1').click(function(){
 					
 					var userNo2 = $(this).find('.fuserNo').val();
