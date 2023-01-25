@@ -249,10 +249,10 @@
 								var btn2 = '<button class="btn btn-secondary" onclick="ReviewReplyForm(this)">댓글수정</button>';
 						//		var btn2 = '<button class="btn btn-secondary" onclick="formReply()">댓글수정</button>';
 					
-								result += '<tr>'
+								result += '<tr id="re-zone">'
 									   + '<input id="reviewReply" type="hidden" value="' + list[i].replyNo + '">'
 								 	   + '<th id="reviewUserId">' + list[i].userId + '</th>'
-								 	   + '<td>' + list[i].replyContent + '</td>'
+								 	   + '<td id="con-area">' + list[i].replyContent + '</td>'
 								 	   + '<td id="reviewCreateDate">' + list[i].createDate + '</td>'
 		   							   + '<td>' + btn + '</td>'
 		   							   + '<td>' + btn2 + '</td>'
@@ -347,14 +347,23 @@
 			console.log($(e).parent().parent().children());
 			console.log($(e).parent().parent().children());
 			
-			
+			//매란 테스트
+			console.log('매란');
+			console.log($(e));
+			$(e).parents('#re-zone').html('<input type="hidden" id="reviewReply" value="' + rno + '>"'
+					+ '<th>' + userId + '</th>'
+					+ '<td><textarea>' + content + '</textarea></td>'
+					+ '<td>' + date + '</td>'
+					+ '<button id="updateReviewReply">수정</button>'
+					+ '<button id="">취소</button>');
+			/*유림이꺼
 			$(e).parent().parent().children().html('<tr><input type="hidden" id="reviewReply" value="' + rno + '>"'
 														+ '<th>' + userId + '</th>'
 														+ '<td><textarea>' + content + '</textarea></td>'
 														+ '<td>' + date + '</td>'
 														+ '<button id="updateReviewReply">수정</button>'
 														+ '<button id="">취소</button></tr>');
-			
+			*/
 			
 		// 썜	
 		//	$(e).parents().eq(1).children().eq(2).text('');
