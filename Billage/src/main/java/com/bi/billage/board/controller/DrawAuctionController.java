@@ -125,7 +125,6 @@ public class DrawAuctionController {
 			String changeName = SaveFile.getSaveFile(upFile, session);
 			b.setOriginName(upFile.getOriginalFilename()); //원본명
 			b.setChangeName(changeName);
-			
 		} 
 		// 넘어온 첨부파일이 없을 경우 b : 제목, 작성자, 내용
 		// 넘어온 첨부파일이 있는 경우 b : 제목, 작성자, 내용 + 파일 원본명, 파일 저장경로
