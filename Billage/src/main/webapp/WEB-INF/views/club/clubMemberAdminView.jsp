@@ -10,27 +10,23 @@
 	#all-clubMem-admin{ width:1000px; margin:auto; }
 	#club-member-area th,td{text-align : center;}
 	#message-area{ width:500px; border:1px solid black; text-align : center;}
-
+	#cancel-btn:hover{ cursor:pointer;}
 </style>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
 	<jsp:include page="../user/myPageBar.jsp" />
 	
-	
-	
 	<div id="all-clubMem-admin">
 		<h1> 모임 회원 관리 페이지 입니당 </h1>
-			
 		
 		<script>
 
 			$(function(){
 			
 				// 전체선택 or 취소 ----------------------------------------------------------------------
-				$(document).on('change','#all-select' , function(){
+				$(document).on('change','' , function(){
 					
-					console.log(this);
 					var $all = $('#all-select').prop('checked');
 					
 					if($all){
@@ -42,36 +38,72 @@
 				
 			}); //$(function(){})끝 
 						
+			var userCheck = [];
+			var usercheck = {};
 				
 			// 쪽지 보내기----------------------------------------------------------------------
 				function sendMsg(){
 					
 					// console.log($('.checked-btn').filter(':checked'));
 					// .checked-btn 객체들 중에서 checked된 객체들만 선택해준다. 
-	
+					
 					var $checkedMem = $('.checked-btn').filter(':checked');
 					
 					var $clubNo = $('#getClubNo').val();
 					
+					
+					if(Object.entries(userCheck).length === 0){
+						console.log('비어있음');
+					} else {
+						userCheck.forEach(function(i, el){
+							
+						})
+					}
+					
 					var str = '<input type="hidden" name="clubNo" value="' + $clubNo + '"/>';
-					
+						str += '<div id="crean-area">';
 					$checkedMem.each(function(i, el){
-						
 						var userNo2 = $(el).next().val();
+						var userId = $(el).parent().next().children().text();
+						var nickname = $(el).parent().next().next().children().text();
 						
-						 str += '<input type="hidden" name="userNo2" value=" '+ userNo2 + '"/>';
-						 str += '<span>' + userNo2 + '</span> <br>'; 
+						 str += '<p><input type="hidden" name="userNo2" value=" '+ userNo2 + '"/>';
+						 str +=  nickname + ' ( ' + userId + ' ) <a id="cancel-btn"> x </a></p>'; 
+						 
+						 usercheck = {
+								'userId' : userId,
+								'nickname' : nickname
+						 }
 						
+						 userCheck.push(usercheck);
 					}); 
-					
-					console.log(str);
+						str += '</div>';
+						
+					//console.log(str);
+					console.log(userCheck);
 					
 					// 해당 스트링을 #receiveUser div에 넣어준다. 
 					$(str).insertAfter('#receiveUser');
-				
+					
+					$('.checked-btn').prop('checked', false);
+					$('#all-select').prop('checked', false);
+					
+
 				}// 쪽지보내기 메소드 끝 
+			//---------------------------------------------------------------------------------------
+			
+			$(document).on('click', '#cancel-btn', function(){
+				$(this).parent().remove();
+			});	
 				
-				
+			
+			function creanArea(){
+				var ans = confirm('다시 쓰시겠습니깡?');
+				console.log(ans);
+				if(ans == true){
+					$('#crean-area').remove();
+				}
+			};
 				
 				
 			// 강퇴하기 ----------------------------------------------------------------------
@@ -115,7 +147,6 @@
 									console.log(result);
 									alert("회원 강퇴에 성공하였습니다.");
 									location.reload();
-									
 									
 								},
 								error : function(){
@@ -186,14 +217,14 @@
 		
 		<br><br><br>
 		
-		<form action="message.cl" method="post" >
+		<form action="message.cl" method="post">
 			<%--<input type="hidden" name="clubNo" value="${ clubNo }" /> --%>
 			<div id="message-area">
 				<h3> 🧡 메시지 보내기🧡 </h3> 
 				<div class="send-area">
-					<h4> &lt; 보내는 사람 &gt; </h4>
+					<h4> &lt; 보내는 사람  &gt; </h4>
 					<div id="sendUser">
-						${ loginUser.userId }
+						${ loginUser.nickname }(${ loginUser.userId })
 						<input type="hidden" name="userNo" value="${ loginUser.userNo }" />
 					</div>			
 				</div>
@@ -206,7 +237,7 @@
 				</div>
 				
 				<button type="submit" id="submit-btn" >전송하기</button>
-				<button type="reset">다시쓰기</button>
+				<button type="reset" onclick="creanArea();">다시쓰기</button>
 			</div>
 		</form> <!-- message보내기 form태그  -->
 	
@@ -240,7 +271,7 @@
 			}
 			
 		})
-
+		
 	
 	</script>
 	

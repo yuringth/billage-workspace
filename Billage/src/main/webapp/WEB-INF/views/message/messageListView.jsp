@@ -15,7 +15,9 @@
 	#blind-area{
 		display:none;
 	}
-
+	
+	
+	#click-area, #click-area * { background-color:darkgray; color:white; } 
 
 </style>
 
@@ -55,19 +57,20 @@
 							<td class="click-title">${ m.title }</td>
 							<td>
 								<input type="hidden" name="userNo" value="${ m.userNo }"/>
+								<input type="hidden" name="messageNo" value="${ m.messageNo }" />
 								<c:choose>
 									<c:when test="${ m.messageStatus eq 1 }">
-										<a class="msgStatus-btn" id="${ m.messageStatus }">읽음</a>
+										<a class="msgStatus-btn1" id="${ m.messageStatus }">읽음</a>
 									</c:when>
 									<c:otherwise>
-										<a class="msgStatus-btn" id="${ m.messageStatus }" >안읽음 </a>
+										<a class="msgStatus-btn2" id="${ m.messageStatus }" ><span id="read-che">안읽음</span></a>
 									</c:otherwise>
 								</c:choose>
 							</td>
 						</tr>
 						<tr id="blind-area">
 							<td>상세내용</td>
-							<td>
+							<td class="click-msgCon">
 								${ m.messageContent }
 							</td>
 							<td class="click-msgDate">
@@ -94,13 +97,15 @@
 			
 		$(document).on('click', '.click-title', function(){
 			
+			//slide $this
 			var $this = $(this).parents('#click-area').next();
-			var $msgStatus = $(this).next().children().attr('id');
-			//console.log($msgStatus);
-			var $msgDate = $(this).parents('#click-area').next().find('.click-msgDate').text();
-			var $userNo = $(this).next().children('input[name="userNo"]').val();
-			//console.log($msgDate);
-			//console.log($userNo);
+			
+			var $this2 = $(this).next().children().eq(1)
+			var $msgStatus = $(this).next().children().eq(2).attr('id');
+
+			let $userNo = $(this).next().children('input[name="userNo"]').val();
+			let userNo2 = ${loginUser.userNo};
+			let $messageNo = $(this).next().children('input[name="messageNo"]').val();
 			
 			if($this.css('display') == 'none'){
 				
@@ -119,22 +124,31 @@
 					url : 'read.ms',
 					data : {
 						userNo : $userNo ,
-						userNo2 : ${ loginUser.userNo } ,
-						messageDate : $msgDate
+						userNo2 : userNo2,
+						messageNo : $messageNo
 					},
 					success : function(result){
-						console.log(result);
+
+						if( result > 0 ){
+							
+							$this2.each(function(){
+								if($(this).val() == $messageNo){
+									$(this).siblings('.msgStatus-btn2').attr('id', '1');
+									$(this).siblings('.msgStatus-btn2').children().text('읽음');
+								}
+							})
+							
+						}
 					},
 					error : function(){
-						
+						console.log('읽음처리 비동기 오류');
 					}
 					
 				});
 			}
 			
-			
 
-		})
+		}) 	
 
 	
 	</script>

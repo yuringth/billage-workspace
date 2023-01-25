@@ -385,8 +385,7 @@
 	    		$('#btn-zone .parti-btn').text('탈퇴');
 	    	} else if(${ club.clubLimit == club.memCount }){
 	    		$('#btn-zone .parti-btn').text('모집완료')
-	    	}
-	    	else {
+	    	} else {
 	    		$('#btn-zone .parti-btn').text('가입');
 	    	}
 	    	

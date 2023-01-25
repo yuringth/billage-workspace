@@ -546,17 +546,17 @@ public class UserController {
 	// 인증 번호 일치하는지?
 	@ResponseBody
 	@PostMapping(value="chkSecret.me", produces="application/json; charset=UTF-8;")
-	public String checkSecret(String secret, HttpServletRequest request) {
+	public boolean checkSecret(String secret, HttpServletRequest request) {
 		
 		CertVo certVo = CertVo.builder()
 						.who(request.getRemoteAddr())
 						.secret(secret).build();
 		
 		boolean result = userService.validate(certVo);
-		System.out.println(result);
+		return result;
 		
-		
-		
+		/*
+		String형태로 해결해보려고 한 흔적
 		String ajaxResult = "";
 		
 		if(result == true) {
@@ -566,6 +566,7 @@ public class UserController {
 		}
 		
 		return new Gson().toJson(ajaxResult);
+		*/
 	}
 	
 	

@@ -6,6 +6,7 @@
 	
 	
 	<resultMap type="message" id="messageResultSet">
+		<result column="MESSAGE_NO"			 property="messageNo" />
 		<result column="USER_NO"			 property="userNo" />
 		<result column="USER_NO2"			 property="userNo2" />
 		<result column="MESSAGE_CONTENT"	 property="messageContent" />
@@ -24,13 +25,15 @@
 		  INTO
 		  		MESSAGE
 		  		(
-		  		 USER_NO
+		  		 MESSAGE_NO
+		  		,USER_NO
 		  		,USER_NO2
 		  		,MESSAGE_CONTENT
 		  		)
 		VALUES
 		 		(
-		 		 #{userNo}
+		 		 SEQ_MNO.NEXTVAL
+		 		,#{userNo}
 		 		,#{userNo2}
 		 		,#{messageContent}
 		 		)
@@ -39,31 +42,35 @@
 	
 	<!-- (Club Message Insert) 단체 쪽지 전송  -->
 	<insert id="insertClubMessage" parameterType="java.util.List">
-		<foreach item="message" index="index" separator=" " collection="list" open="INSERT ALL" close="SELECT * FROM DUAL" >
+		INSERT 
 		  INTO
 				MESSAGE
 				(
-				 USER_NO
+				 MESSAGE_NO
+				,USER_NO
 				,USER_NO2
 				,MESSAGE_CONTENT
 				,MESSAGE_DATE
 				,MESSAGE_STATUS	
 				)
-		VALUES
-		 		(
-		 		 #{ message.userNo }
-		 		,#{ message.userNo2 }
-		 		,#{ message.messageContent }
-		 		,SYSDATE
-		 		,0
-		 		) 
-		</foreach>
+				(SELECT SEQ_MNO.NEXTVAL, A. * FROM
+		(<foreach item="message" index="index" separator="UNION ALL" collection="list" >
+	    SELECT
+		 		 #{ message.userNo } AS USER_NO
+		 		,#{ message.userNo2 } AS USER_NO2
+		 		,#{ message.messageContent } AS MESSAGE_CONTENT
+		 		,SYSDATE AS MESSAGE_DATE
+		 		,0 AS MESSAGE_STATUS
+ 		  FROM
+ 		  		DUAL
+		</foreach>) A) 
 	</insert>
 	
 	<!-- User Message List Select -->
 	<select id="selectMessageList" parameterType="_int" resultMap="messageResultSet">
-        SELECT 
-		         ME.USER_NO
+         SELECT 
+		         ME.MESSAGE_NO
+		        ,ME.USER_NO 
 		        ,M.USER_ID
 		        ,M.NICKNAME
 		        ,ME.USER_NO2
@@ -89,4 +96,18 @@
 	</select>
 	
 	
+	<!-- Update -->
+	<update id="updateMessage" parameterType="message">
+		UPDATE 
+				MESSAGE
+		   SET
+		  		MESSAGE_STATUS = 1
+  		 WHERE 
+  		 		MESSAGE_NO = #{ messageNo } 
+ 		   AND 
+ 		   		USER_NO2 = #{ userNo2 }
+  		   AND 
+				USER_NO = #{ userNo }
+	</update>
+
 </mapper>

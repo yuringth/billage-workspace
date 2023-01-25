@@ -1,6 +1,9 @@
 package com.bi.billage.message.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -40,10 +43,7 @@ public class MessageController {
 	@ResponseBody
 	@RequestMapping(value="read.ms", produces="application/json; charset=UTF-8;")
 	public String updateMessage(Message message) {
-		
-		int result = messageService.updateMessage(message) > 0 ? 1 : 0 ;
-		
-		return new Gson().toJson(result);
+		return new Gson().toJson(messageService.updateMessage(message));
 	}
 	
 	
