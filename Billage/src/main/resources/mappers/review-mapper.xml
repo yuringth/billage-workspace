@@ -33,20 +33,25 @@
 
 		
 	<resultMap type="point" id="pointResultset">
-		<result column="USER_NO" property="userNo"/>
-		<result column="POINT_ADD" property="pointAdd"/>
-		<result column="POINT_DATE" property="pointDate"/>
+		<result column="USER_NO"      property="userNo"/>
+		<result column="POINT_ADD"    property="pointAdd"/>
+		<result column="POINT_DATE"   property="pointDate"/>
 		<result column="POINT_STATUS" property="pointStatus"/>
 	</resultMap>
 	
 	<resultMap type="reviewReply" id="reviewReplyResultset">
-		<result column="REPLY_NO" property="replyNo"/>
-		<result column="USER_NO" property="userNo"/>
-		<result column="REVIEW_NO" property="reviewNo"/>
-		<result column="CREATE_DATE" property="createDate"/>
+		<result column="REPLY_NO"      property="replyNo"/>
+		<result column="USER_NO"       property="userNo"/>
+		<result column="REVIEW_NO"     property="reviewNo"/>
+		<result column="CREATE_DATE"   property="createDate"/>
 		<result column="REPLY_CONTENT" property="replyContent"/>
 		<result column="DELETE_STATUS" property="deleteStatus"/>
-		<result column="USER_ID" property="userId"/>
+		<result column="USER_ID"       property="userId"/>
+	</resultMap>
+	
+	<resultMap type="reviewLike" id="reviewLikeResultset">
+		<result column="REVIEW_NO" property="reviewNo"/>
+		<result column="USER_NO"   property="userNo"/>
 	</resultMap>
 	
 	
@@ -73,8 +78,8 @@
 		       review_status = 'N'  
 	</select>
 	
-	<!-- 게시글 리스트 조회 쿼리문 -->
-	<select id="selectList" resultMap="reviewResultSet">
+	<!-- 게시글 리스트 조회 쿼리문 	// 여기 수정*** selectList -> reviewBoardList -->
+	<select id="reviewBoardList" resultMap="reviewResultSet">
 		select
 		        review_no
 		       ,nickname
@@ -341,5 +346,25 @@
 		       ,#{replyContent}
 		       )
 	</insert>
+	
+	
+	
+	
+	<!-- 좋아요 누르면 insert  -->
+	<insert id="insertReviewLike" parameterType="ReviewLike">
+		insert
+		  into
+		       review_like
+		       (
+		        review_no
+		       ,user_no
+		       )
+		values
+		      (
+		       #{reviewNo}
+		      ,#{userNo}
+		      )		   
+	</insert>
+	
 	
 </mapper>

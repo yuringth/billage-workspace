@@ -294,7 +294,9 @@
 					from
 					       review       
 					where
-					       user_no=#{userNo}     
+					       user_no=#{userNo}
+					  and
+				          review_status='N'          
 					) reviewCount
 					,
 					(
@@ -304,6 +306,8 @@
 					      review
 					where
 					     user_no = #{ userNo}
+					  and
+				         review_status='N'     
 					) avgStar
 					, (
 						select
@@ -351,7 +355,9 @@
 					    where
 					         user_no=#{user_no}
 					      and
-					          review_star = 1       
+					          review_star = 1
+					      and
+				         		review_status='N'            
 					) star1
 					,(
 					select
@@ -361,7 +367,9 @@
 					    where
 					         user_no=#{user_no}
 					      and
-					          review_star = 2       
+					          review_star = 2
+					      and
+				         		review_status='N'            
 					) star2
 					,(
 					select
@@ -371,7 +379,9 @@
 					    where
 					         user_no=#{user_no}
 					      and
-					          review_star = 3       
+					          review_star = 3
+					      and
+				         		review_status='N'             
 					) star3
 					,(
 					select
@@ -381,7 +391,9 @@
 					    where
 					         user_no=#{user_no}
 					      and
-					          review_star = 4      
+					          review_star = 4
+					      and
+				         		review_status='N'           
 					) star4
 					,(
 					select
@@ -391,7 +403,9 @@
 					    where
 					         user_no=#{user_no}
 					      and
-					          review_star = 5       
+					          review_star = 5
+					      and
+				         	   review_status='N'            
 					) star5
 					from
 					       review
@@ -410,6 +424,8 @@
 				       user_no = #{userNo1}
 				and
 				      review_star = 5
+				 and
+				         review_status='N'       
 				INTERSECT
 				select
 					      book_title
@@ -433,7 +449,9 @@
 				  where
 				      user_no = #{userNo1}
 				  and
-				      review_star = 5 
+				      review_star = 5
+				   and
+				         review_status='N'      
 				      
 				intersect
 				
@@ -445,7 +463,9 @@
 				  where
 				      user_no = #{userNo2}
 				   and
-				     review_star = 1)
+				     review_star = 1
+				   and
+				         review_status='N' )
 				     
 				union     
 				
@@ -458,6 +478,8 @@
 				      user_no = #{userNo1}
 				  and
 				      review_star = 1 
+				   and
+				         review_status='N'     
 				      
 				intersect
 				
@@ -469,7 +491,9 @@
 				  where
 				      user_no = #{userNo2}
 				   and
-				     review_star = 5)     
+				     review_star = 5
+				   and
+				         review_status='N'  )     
 		</select>
 		
 		<select id="selectReviewCount" parameterType="_int" resultType="_int">
@@ -478,7 +502,9 @@
 			 from
 			        review
 		where
-		         user_no = #{userNo}	        
+		         user_no = #{userNo}
+		      and
+				         review_status='N'     	        
 		</select>
 		
 		<select id="checkFollow" parameterType="follow" resultType="_int">

@@ -43,7 +43,7 @@ public class WebSocketServer extends TextWebSocketHandler {
 								+ " ] : " 
 								+ afterConnectionList.get(i).getMessage()
 								+ "<br>";
-			
+								
 		}
 		afterConnectionText += "----<br>";
 		
@@ -65,7 +65,6 @@ public class WebSocketServer extends TextWebSocketHandler {
 		int clubNo = ((User)session.getAttributes().get("loginUser")).getClubNo();
 		String nickname = ((User)session.getAttributes().get("loginUser")).getNickname();
 		
-		//VO만들어서 vo에 담아도 되는데 그냥 map을 한 번 써보고 싶어서 사용함 
 		HashMap<String, String> map = new HashMap();
 		
 		map.put("userNo", String.valueOf(userNo));

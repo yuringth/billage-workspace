@@ -298,9 +298,9 @@
 			<div id="search-area">
 				<div id="search-text"> 
 					<div class="text-div">
-						<button onclick="search(1);">1페이지 이동</button>
+						<!-- <button onclick="search(1);">1페이지 이동</button> -->
 			    		<input type="text" id="title" placeholder="책이름을 작성해주세요">
-			    		<button onclick="search(2);">이동</button>
+			    		<button onclick="search();">이동</button>
 					</div>   
 				</div>
 				<div id="result-area">

@@ -358,7 +358,7 @@
 	</insert>
 
 
-	<!-- Group List 조회수 Update -->
+	<!-- Group List 조회수  -->
 	<update id="increaseCount" parameterType="club">
 		UPDATE 
 				CLUB

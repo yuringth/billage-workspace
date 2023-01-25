@@ -337,7 +337,7 @@
 				)
 	</insert>
 	
-	<!-- 1:1문의 상세조회 쿼리문(일단은 관리자입장) -->
+	<!-- 1:1문의 상세조회 쿼리문 -->
 	<select id="selectInquiry" resultMap="inqResultSet">
 		select
 				inq_no,
@@ -389,7 +389,6 @@
 	</select>
 	
 	<!-- 관리자 작품 총 몇개 세기 -->
-		<!-- 관리자 모임조회 총 몇개 세기 -->
 	<select id="selectNovelListCount" resultType="_int">
 		select
 				count(*)
@@ -521,4 +520,47 @@
 		 WHERE
 		 		USER_NO = ${userNo}
 	</update>
+	
+	<!-- 인증 메일 관련  -->
+	<insert id="insertSecret" parameterType="cert">
+		INSERT
+		  INTO
+		  		CERT
+		  		(
+		  		WHO,
+		  		SECRET,
+		  		WHEN
+		  		)
+		VALUES
+				(
+				#{who},
+				#{secret},
+				SYSDATE
+				)
+	</insert>
+	
+	<!-- 인증 번호 일치 -->
+	<select id="validate" resultType="cert" parameterType="cert">
+		SELECT
+				*
+		  FROM
+		  		CERT
+		  WHERE
+		  		WHO = #{who}
+		    AND
+		    	SECRET = #{secret}
+		    AND
+		    	WHEN BETWEEN SYSDATE - 3/24/60 AND SYSDATE
+	</select>
+	
+	<!-- 인증 번호가 일치됐다면 내역 삭제 -->
+	<delete id="remove" parameterType="cert">
+		DELETE 
+				CERT 
+		WHERE 
+				WHO = #{who} 
+		AND 
+				SECRET = #{secret}
+	</delete>
+	
 </mapper>

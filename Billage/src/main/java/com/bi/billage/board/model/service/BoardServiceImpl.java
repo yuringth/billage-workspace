@@ -19,6 +19,7 @@ import com.bi.billage.board.model.vo.Serial;
 import com.bi.billage.board.model.vo.SerialRequest;
 import com.bi.billage.board.model.vo.UsedBoard;
 import com.bi.billage.common.model.vo.PageInfo;
+import com.bi.billage.heart.model.vo.ReviewLike;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -233,7 +234,8 @@ public class BoardServiceImpl implements BoardService {
 	// 리뷰 게시글 리스트 조회
 	@Override
 	public ArrayList<ReviewBoard> reviewBoardList(PageInfo pi){
-		return boardDao.selectList(sqlSession, pi);
+		// 여기 수정함*** selectList->reviewBoardList
+		return boardDao.reviewBoardList(sqlSession, pi);
 	}
 	
 	
@@ -306,7 +308,7 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectReviewReplyList(sqlSession, reviewNo);
 	}
 	
-	// 댓글 삭제(update
+	// 리뷰게시판 => 댓글 삭제(update
 //	@Override
 //	public int deleteReviewReply(int replyNo) {
 //		return boardDao.deleteReviewReply(sqlSession, replyNo);
@@ -316,16 +318,22 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.deleteReviewReply(sqlSession, r);
 	}
 	
-	// 댓글 수정(update)
+	// 리뷰게시판 => 댓글 수정(update)
 	@Override
 	public int updateReviewReply(ReviewReply r) {
 		return boardDao.updateReviewReply(sqlSession, r);
 	}
 	
-	// 댓글 등록(insert)
+	// 리뷰게시판 => 댓글 등록(insert)
 	@Override
 	public int insertReviewReply(ReviewReply r) {
 		return boardDao.insertReviewReply(sqlSession, r);
+	}
+	
+	// 리뷰게시판 좋아요 누르면 insert
+	@Override
+	public int insertReviewLike(ReviewLike r) {
+		return boardDao.insertReviewLike(sqlSession, r);
 	}
 	
 	

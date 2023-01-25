@@ -85,12 +85,12 @@ public class ClubController {
 		mv.addObject("pi", pi);
 
 		mv.addObject("clubList", clubService.selectList(pi, condition));
-		System.out.println(condition);
 	
 		if(null != session.getAttribute("loginUser")) {
 			mv.addObject("likeList", clubService.selectClubLike(((User)session.getAttribute("loginUser")).getUserNo()));
 		}
 		
+		mv.addObject("condition", condition);
 		mv.setViewName("club/clubListView");
 		return mv;
 	}
@@ -116,14 +116,12 @@ public class ClubController {
 		ArrayList<Club> list = clubService.selectSearchList(pi, map);
 		mv.addObject("clubList", clubService.selectSearchList(pi, map));
 		
-		for(Club c : list) {
-			System.out.println(c);
-		}
-		
 		if(null != session.getAttribute("loginUser")) {
 			mv.addObject("likeList", clubService.selectClubLike(((User)session.getAttribute("loginUser")).getUserNo()));
 		}
 		
+		mv.addObject("condition", condition);
+		mv.addObject("keyword", keyword);
 		mv.setViewName("club/clubListView");
 		return mv;
 	}

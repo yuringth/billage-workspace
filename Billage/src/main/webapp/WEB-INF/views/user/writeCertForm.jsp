@@ -72,17 +72,52 @@
 	
     	<div class="find-password-header">인증번호 입력</div>
     	
-    	<div class="find-password-content">
+    	<form action="checkSecret" method="post">
     	
-        	<div class="find-password-div">받으신  <span>인증번호</span> 를 입력하세요.</div>
-        	
-        <div><input type="text" name="txtCert" placeholder="인증번호를 입력하세요."></div>
-    	</div>
-    	
-    	<div class="find-password-button"><button id="passwordRequest">확인</button></div>
-    
+    		<div class="find-password-content">
+        		<div class="find-password-div">받으신  <span>인증번호 6자리</span> 를 입력하세요.</div>
+        		<div>
+        			<input type="text" name="secret" placeholder="인증번호를 입력하세요." id="secret">
+       			</div>
+    		</div>
+    		
+    		<div class="find-password-button"><button type="button" id="chkCert" >인증 확인</button></div>
+    		<div class="find-password-button"><button id="passwordRequest" disabled>비밀번호 재설정</button></div>
+    		
+    	</form>
 	</div>
 	<jsp:include page="../common/footer.jsp" />
 
 </body>
+
+<script>
+	// 메일로 도착한 인증번호와 입력한 것이 일치하는지 ajax
+	$(document).on('click', '#chkCert', function(){
+		
+		var $num = $(this).parents().siblings('.find-password-content').find('input[name=secret]').val();
+
+		$.ajax({
+			url : 'chkSecret.me',
+			type : 'POST', 
+			data :{ secret : $num },
+			success : function(result){
+				console.log(result);
+				if(result){
+					$('#passwordRequest').removeAttr('disabled');
+					alert("확인됐습니다. 비밀번호 재설정 버튼을 눌러주세요");
+				}
+				else{
+					alert("인증번호를 다시 확인하세요.");
+				}
+			}
+		})
+	})
+
+
+
+
+
+</script>
+
+
 </html>

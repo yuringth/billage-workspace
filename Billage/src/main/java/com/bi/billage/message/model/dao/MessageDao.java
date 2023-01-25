@@ -25,4 +25,9 @@ public class MessageDao {
 		return (ArrayList)sqlSession.selectList("messageMapper.selectMessageList", userNo);
 	}
 	
+	//Update  
+	public int updateMessage(SqlSessionTemplate sqlSession, Message message) {
+		return sqlSession.update("messageMapper.updateMessage", message);
+	}
+	
 }

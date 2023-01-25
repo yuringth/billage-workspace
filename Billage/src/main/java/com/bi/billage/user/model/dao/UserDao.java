@@ -12,6 +12,7 @@ import com.bi.billage.board.model.vo.FAQ;
 import com.bi.billage.board.model.vo.Inquiry;
 import com.bi.billage.board.model.vo.Novel;
 import com.bi.billage.board.model.vo.SerialRequest;
+import com.bi.billage.common.entity.CertVo;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.club.model.vo.Club;
 import com.bi.billage.user.model.vo.User;
@@ -43,11 +44,11 @@ public class UserDao {
 		return sqlSession.selectOne("serialMapper.selectSerialRequest", requestNo);
 	}
 
-	public int updateUserGrade(SqlSessionTemplate sqlSession, int userNo) {
+	public int updateUserGrade(SqlSessionTemplate sqlSession, Integer userNo) {
 		return sqlSession.update("userMapper.updateUserGrade", userNo);
 	}
 
-	public int updateSerialRequest(SqlSessionTemplate sqlSession, int requestNo) {
+	public int updateSerialRequest(SqlSessionTemplate sqlSession, Integer requestNo) {
 		return sqlSession.update("serialMapper.updateSerialRequest", requestNo);
 	}
 
@@ -166,6 +167,21 @@ public class UserDao {
 
 	public int updateGrade(SqlSessionTemplate sqlSession, int userNo) {
 		return sqlSession.update("userMapper.updateGrade", userNo);
+	}
+	
+	// 인증 메일 보내기
+	public void insertSecret(SqlSessionTemplate sqlSession, CertVo certVo) {
+		sqlSession.insert("userMapper.insertSecret", certVo);
+	}
+
+	public boolean validate(SqlSessionTemplate sqlSession, CertVo certVo) {
+		
+		CertVo result =  sqlSession.selectOne("userMapper.validate", certVo);
+		if(result != null) {
+			sqlSession.delete("userMapper.remove", certVo);
+		}
+		
+		return result != null;
 	}
 
 }

@@ -31,15 +31,17 @@ public class FollowController {
 	@RequestMapping("selectFollowing.fo")
 	public ModelAndView selectFollowingList(int uno, ModelAndView mv,HttpSession session) {
 		
-		//상대방의 팔로잉 리스트
+		
 		ArrayList<User> followingList = followService.selectFollowingList(uno);
 
 		
 		mv.addObject("followingList",followingList);
 		
+		//다른 유저의 팔로잉 목록을 클릭 했을 경우
 		if(((User)session.getAttribute("loginUser")).getUserNo() != uno) {
 			
-			//로그인 유저의 팔로잉 리스트
+			//로그인 유저의 팔로잉 리스트 
+			//-> 로그인 유저의 팔로잉 리스트와 상대방의 팔로잉 리스트를 비교하여 같은 사람을 팔로잉 하고 있을 경우에는 status를 1로 바꿔준다.
 			ArrayList<User> lgFollowingLlist = followService.selectFollowingList(((User)session.getAttribute("loginUser")).getUserNo());
 			
 			for(int i = 0; i < lgFollowingLlist.size(); i++) {
@@ -51,7 +53,11 @@ public class FollowController {
 					if (luserNo == followingList.get(j).getUserNo()) {
 						
 						followingList.get(j).setFollowStatus(1);
-					
+
+					} else {
+						
+						followingList.get(j).setFollowStatus(0);
+						
 					};
 				};
 			};
@@ -59,7 +65,7 @@ public class FollowController {
 			mv.addObject("followingList", followingList).setViewName("follow/followingListView");			
 			
 		}else {
-			
+			//로그인 유저가 자신의 팔로잉 목록을 보는 경우
 			for(int i = 0; i < followingList.size(); i++ ) {
 				followingList.get(i).setFollowStatus(1);
 			}
@@ -81,7 +87,7 @@ public class FollowController {
 		mv.addObject("followerList1",followerList1)
 		.addObject("followerList2", followerList2);
 			
-		//uno == loginUser.userNo 면 followerListView, 아니라면 folloewrListView2
+		
 		if(((User)session.getAttribute("loginUser")).getUserNo() != uno){
 			
 			ArrayList<User> lgFollowerList1 = followService.selectFollowerList1(((User)session.getAttribute("loginUser")).getUserNo());//loginUser맞팔리스트
@@ -122,7 +128,7 @@ public class FollowController {
 			}
 			mv.setViewName("follow/followerListView");
 		}else {
-			
+			//로그인한 유저가 자기 자신의 팔로워 목록을 볼 경우
 			for(int i = 0; i<followerList1.size(); i++) {
 				followerList1.get(i).setFollowStatus(1);
 			};
@@ -242,6 +248,7 @@ public class FollowController {
 		
 		int rNum;
 		
+		//상대방과 나와 엇갈린 리뷰의 경우 랜덤 메소드 실행
 		if(badReview.size() != 0) {
 		
 			if(badReview.size() > 10) {
@@ -274,7 +281,7 @@ public class FollowController {
 	@ResponseBody
 	@RequestMapping(value="checkFollow.fo" , produces ="application/json; charset=UTF-8")
 	public String checkFollow (Follow follow) {
-		System.out.println('h');
+		
 		int result = followService.checkFollow(follow);
 		
 		return new Gson().toJson(result);

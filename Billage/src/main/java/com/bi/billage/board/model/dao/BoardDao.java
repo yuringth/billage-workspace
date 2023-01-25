@@ -20,6 +20,7 @@ import com.bi.billage.board.model.vo.Serial;
 import com.bi.billage.board.model.vo.SerialRequest;
 import com.bi.billage.board.model.vo.UsedBoard;
 import com.bi.billage.common.model.vo.PageInfo;
+import com.bi.billage.heart.model.vo.ReviewLike;
 
 @Repository
 public class BoardDao {
@@ -211,13 +212,14 @@ public class BoardDao {
 	}
 	
 	// 리뷰 게시글 리스트 조회
-	public ArrayList<ReviewBoard> selectList(SqlSessionTemplate sqlSession, PageInfo pi){
+	// 여기 수정*** selectList -> reviewBoardList
+	public ArrayList<ReviewBoard> reviewBoardList(SqlSessionTemplate sqlSession, PageInfo pi){
 		
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("reviewMapper.selectList", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("reviewMapper.reviewBoardList", null, rowBounds);
 	} 
 	
 	
@@ -285,15 +287,21 @@ public class BoardDao {
 	}
 	
 	
-	// 댓글 수정
+	// 리뷰게시판 => 댓글 수정
 	public int updateReviewReply(SqlSessionTemplate sqlSession, ReviewReply r) {
 		return sqlSession.update("reviewMapper.updateReviewReply", r);
 	}
 	
 	
-	// 댓글 등록
+	// 리뷰게시판 => 댓글 등록
 	public int insertReviewReply(SqlSessionTemplate sqlSession, ReviewReply r) {
 		return sqlSession.insert("reviewMapper.insertReviewReply", r);
+	}
+	
+	
+	// 리뷰게시판 => 좋아요 누르면 insert
+	public int insertReviewLike(SqlSessionTemplate sqlSession, ReviewLike r) {
+		return sqlSession.insert("reviewMapper.insertReviewLike", r);
 	}
 	
 	

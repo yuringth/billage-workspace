@@ -77,18 +77,6 @@
 	<div id="all-enrollFrom" >
 		<h1>모임 개설하기</h1>
 
-	<!-- 
-			모임번호 :  시퀀스로 생김 ( SEQ_CNO.nextval ) 
-				회원번호 : loginUser.userNo
-				모임명 : input 
-				모임정원 : input 
-			모임생성일자 : default  sysdate 
-				모임상세설명 : input 
-				모임이미지 : input / null 가능 
-				모임중심지역 : input 
-			모임상태값 : default  'y' 
-			
-	 -->
 		<!--모임 개설 : 모임이름, 모임요일, 모임 설명, 모임 지역, 모임 참여 인원 받아야 함 -->
 		
 		<br><br>
@@ -216,7 +204,7 @@
 			
 			var $text = $('#search').val();
 			
-			if($text.replace(/\s| /gi, "").length != 0){
+			if($text.replace(/\s/gi, "").length != 0){
 			
 			$.ajax({
 				url : "searchAddr.cl",
@@ -225,7 +213,7 @@
 					
 					// 변수에 API로 가져온 주소 items[] 객체 배열을 담는다. 
 					const itemsArr = result.response.result.items;
-					
+					console.log(itemsArr);
 					// 객체배열 요소 하나를 출력해서 필요한 값으로 가공한 문자열을 담는다.
 					const valueArr = [];
 					// 중복없는 배열 요소만 담을 객체 생성
@@ -233,27 +221,27 @@
 					// 출력할 요소에 대한 문자열을 담을 변수 선언 
 					let value = ''; 
 					
-					for(let i in itemsArr){
+					for(var i in itemsArr){
 						let item  = itemsArr[i];
 						
 						let fullAdd = item.address.road;
-						var splitAdd = fullAdd.split(" ");		
+						let splitAdd = fullAdd.split(" ");		
+						
 						valueArr.push(splitAdd[2] + " (" + splitAdd[0] + " " + splitAdd[1]+")");
 
 					}
 					
 					// valueArr에 담긴 주소문자열 배열을 
 					valueArr.forEach(function(el) {
-						//el =>
 						uniqueObj[el] = true; // { 동(시 구) : true, 동 (시 구) : true, ... } 해당 형태로 uniqueObj 객체에 담음  (중복제거 됨) 
 					});
 					
 					// 객체 키만 모아서 배열로 반환 
 					const uniqueArr = Object.keys(uniqueObj);
 					
-					// 반환된 배열 uniqueArr 요소 하나씩 돌면서 value에 문자열 형태로 담는다.
+					// 반환된 배열 uniqueArr 요소 하나씩 돌면서 result에 문자열 형태로 담는다.
 					value += '<div id="enter-addr-in">';
-					for(let i in uniqueArr.reverse()){			
+					for(var i in uniqueArr.reverse()){			
 						value += '<p class="enter-addr">' + uniqueArr[i] + '</p>';				
 					}
 					value += '</div>';
@@ -284,12 +272,6 @@
 			
 		});
 		
-		
-		//const result = arr2.reduce((acc, v) => {
-		//    return acc.find(x => x.name === v.name) ? acc : [...acc, v];
-		//}, []);
-
-		// [ {name: "레드"}, {name: "그린"}, {name: "블루"} ]
 		
 	</script>
 	

@@ -2,17 +2,25 @@ package com.bi.billage.user.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bi.billage.board.model.vo.FAQ;
 import com.bi.billage.board.model.vo.Inquiry;
 import com.bi.billage.board.model.vo.Novel;
+import com.bi.billage.common.entity.CertVo;
 import com.bi.billage.common.model.vo.PageInfo;
 import com.bi.billage.common.savefile.SaveFile;
 import com.bi.billage.common.template.Pagination;
@@ -29,6 +38,7 @@ import com.bi.billage.point.model.service.PointService;
 import com.bi.billage.point.model.vo.Point;
 import com.bi.billage.user.model.service.UserService;
 import com.bi.billage.user.model.vo.User;
+import com.google.gson.Gson;
 
 @Controller
 public class UserController {
@@ -117,27 +127,12 @@ public class UserController {
 	
 	// 작품 수정 메소드
 	@RequestMapping("update.nv")
-	public String updateNovel(/*Integer nno,
-							  String novelTitle,
-							  String novelDisplay,
-							  String serialStatus,
-							  String chargeStatus,
-							  String originName,
-							  String changeName,*/
+	public String updateNovel(
 							  @ModelAttribute Novel n,
 							  HttpSession session,
 							  MultipartFile reUpfile,
 							  Model model) {
 		
-//		Novel n = new Novel();
-//		n.setNovelNo(nno);
-//		n.setNovelTitle(novelTitle);
-//		n.setNovelDisplay(novelDisplay);
-//		n.setSerialStatus(serialStatus);
-//		n.setChargeStatus(chargeStatus);
-//		n.setOriginName(originName);
-//		n.setChangeName(changeName);
-
 		// 새로운 썸네일이 넘어온 경우
 		if(!reUpfile.getOriginalFilename().equals("")) {
 			// 기존에 첨부파일이 있었을 경우 ? => 기존의 첨부파일을 삭제
@@ -208,7 +203,7 @@ public class UserController {
 		
 		if(userService.updateInquiry(iq) > 0) { // 성공 => 메인화면으로
 			session.setAttribute("alertMsg", "답변 완료");
-			return "redirect:/update.iq";
+			return "redirect:/inqList.ad";
 		} else {
 			model.addAttribute("errorMsg", "답변 오류");
 			return "common/errorPage";
@@ -238,13 +233,16 @@ public class UserController {
 		return "admin/serialRequestForm";
 	}
 	
-	// 연재 요청 승락후 변화 - 회원등급변경 / 승락상태로변경 / 메일전송
+	// 연재 요청 승락후 변화 - 회원등급변경 / 승락상태로변경
 	@RequestMapping("update.re")
-	public String updateSerialRequest(int rno, int uno) {
+	public String updateSerialRequest(Integer rno, Integer uno, HttpSession session) {
 		if(userService.updateUserGrade(uno) > 0) {
 			userService.updateSerialRequest(rno);
+			session.setAttribute("alertMsg", "수락 완료");
 		}
-		return "redirect:/detail.sr";
+		return "redirect:/list.sr";
+		
+
 	}
 	
 	// 작품 등록폼
@@ -486,8 +484,6 @@ public class UserController {
 	@RequestMapping("donate.nv")
 	public String donateNovel(int point, int userPoint, int userNo1, int userNo2, HttpSession session) {
 		
-		//System.out.println(userPoint);
-		//System.out.println(point);
 		if(point <= userPoint) {
 			Point p1 = new Point();
 			p1.setUserNo(userNo1);
@@ -505,13 +501,75 @@ public class UserController {
 				((User)session.getAttribute("loginUser")).setPoint(userPoint - point);
 			}
 			
-				return "redirect:/list.se";
+				return "main";
 		} else {
 			session.setAttribute("alertMsg", "보유 포인트가 부족합니다.");
-			return "redirect:/list.se";
+			return "main";
 		}
 	}
 	
 	// 메일 인증
+	@PostMapping("inputEmail")
+	public String inputEmail(String email, HttpServletRequest request) throws MessagingException{
+		
+		MimeMessage message = sender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+		
+		String ip = request.getRemoteAddr();
+		String secret = generateSecret();
+		CertVo certVo = CertVo.builder()
+						.who(ip)
+						.secret(secret)
+						.build();
+		
+		userService.sendMail(certVo);
+		
+		helper.setTo(email);
+		helper.setSubject("Billage 인증 요청입니다.");
+		helper.setText("인증번호는 : " + secret + " 입니다.");
+		sender.send(message);
+		
+		return "user/writeCertForm";
+	}
+	
+	// 메일 인증 번호 생성
+	public String generateSecret() {
+		
+		Random r = new Random();
+		int n = r.nextInt(100000);
+		Format f = new DecimalFormat("000000");
+		String secret = f.format(n);
+		
+		return secret;
+	}
+	
+	// 인증 번호 일치하는지?
+	@ResponseBody
+	@PostMapping(value="chkSecret.me", produces="application/json; charset=UTF-8;")
+	public boolean checkSecret(String secret, HttpServletRequest request) {
+		
+		CertVo certVo = CertVo.builder()
+						.who(request.getRemoteAddr())
+						.secret(secret).build();
+		
+		boolean result = userService.validate(certVo);
+		return result;
+		
+		/*
+		String형태로 해결해보려고 한 흔적
+		String ajaxResult = "";
+		
+		if(result == true) {
+			ajaxResult = "success";
+		} else {
+			ajaxResult = "fail";
+		}
+		
+		return new Gson().toJson(ajaxResult);
+		*/
+	}
+	
+	
+	
 	
 }
