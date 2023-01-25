@@ -332,11 +332,11 @@
 		// 댓글 수정 폼화면
  	 	function ReviewReplyForm(e){
 			
-		//	console.log($(e).parents().eq(1).children().eq(2).text()); // 댓글 뽑아옴
-		//	console.log($(e).parents().eq(1).children('#reviewReply').val()); // 댓글 번호 뽑아옴
-		//	console.log($(e).parents().children('#reviewReply').val()); // 댓글 번호 뽑아옴 (위와동일)
-		//	console.log($(e).parents().children('#reviewUserId').text()); // 유저아이디
-		//	console.log($(e).parents().children('#reviewCreateDate').text()); // 작성일자
+			console.log($(e).parents().eq(1).children().eq(2).text()); // 댓글 뽑아옴
+			console.log($(e).parents().eq(1).children('#reviewReply').val()); // 댓글 번호 뽑아옴
+			console.log($(e).parents().children('#reviewReply').val()); // 댓글 번호 뽑아옴 (위와동일)
+			console.log($(e).parents().children('#reviewUserId').text()); // 유저아이디
+			console.log($(e).parents().children('#reviewCreateDate').text()); // 작성일자
 		
 			var content = $(e).parents().eq(1).children().eq(2).text(); // 댓글
 			var rno = $(e).parents().children('#reviewReply').val(); // 댓글번호
@@ -345,6 +345,8 @@
 			
 			
 			console.log($(e).parent().parent().children());
+			console.log($(e).parent().parent().children());
+			
 			
 			$(e).parent().parent().children().html('<tr><input type="hidden" id="reviewReply" value="' + rno + '>"'
 														+ '<th>' + userId + '</th>'
