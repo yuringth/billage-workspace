@@ -127,7 +127,7 @@ font-size: 25px;
 	<div class="outer">
 		<div class="photo-area">
 			<!-- onclick="location.href='detail.ud'" img태그에 이 속성을 왜 줬었지? 일단 주석 -->
-			<img src="${ b.changeName }" style="height:400px; width:1000px;">
+			<img src="${ b.changeName }" style="height:400px; width:500px;">
 		</div>
 		
 		<div class="user-area">

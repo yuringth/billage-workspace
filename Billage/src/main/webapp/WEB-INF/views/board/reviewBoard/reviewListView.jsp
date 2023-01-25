@@ -9,7 +9,7 @@
 
 <style>
     .reviewList-area{
-        border:1px solid red;
+       /*  border:1px solid red; */
         width:1200px;
         margin:auto;
 
@@ -25,7 +25,7 @@
  */ 
  
     #reviewOption2{
-        border:1px solid red;
+        /* border:1px solid red; */
     	width:1200px;
     	height:70px;
     }

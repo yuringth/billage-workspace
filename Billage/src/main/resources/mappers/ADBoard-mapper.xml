@@ -155,21 +155,21 @@
 	<!-- 경매글 리스트 조회 -->
 	<select id="selectAcutionBoardList" resultMap="auctionBoardResultSet">
 		SELECT
-				AUCTION_NO
+				A.AUCTION_NO
 				,TITLE
 				,GENRE
 				,NOW_PRICE
 				,CLOSE_DATE
 				,COUNT
 				,CHANGE_NAME
-				(SELECT
+				,(SELECT
 				        COUNT(*)
 				  FROM
-				        AUCTION
+				        AUCTION B
 				  WHERE
-				        AUCTION_NO = AUCTION_NO) BID_COUNT
+				        B.AUCTION_NO = A.AUCTION_NO) BID_COUNT
 		  FROM
-		  		AUCTION_BOARD
+		  		AUCTION_BOARD A
 		 WHERE
 		 		STATUS = 'N'
 		 ORDER

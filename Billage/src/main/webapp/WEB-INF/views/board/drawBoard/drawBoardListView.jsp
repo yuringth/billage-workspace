@@ -126,8 +126,8 @@
     <script>
     
     	$(function(){
-    		$('.one-content').click(function(){
-    			location.href='detail.dr?bno='+ $(this).find('.boardNo').val();
+    		$(document).on('click', '.one-content', function(){
+    			location.href='detail.ac?bno='+ $(this).find('.boardNo').val();
     		})
     		
     		closeCount();

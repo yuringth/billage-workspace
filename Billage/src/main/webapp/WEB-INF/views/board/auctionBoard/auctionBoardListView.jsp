@@ -120,8 +120,7 @@
     
     <script>
     	$(function(){
-    		
-    		$('.one-content').click(function(){
+    		$(document).on('click', '.one-content', function(){
     			location.href='detail.ac?bno='+ $(this).find('.boardNo').val();
     		})
     		
@@ -203,7 +202,7 @@
 				    		       +         '<p class="title-text">' +  list[i].title + '</p>'
 				    		       +         '<p class="textsize">현재 가격 : ' + list[i].nowPrice + 'P</p>'
 				    		       +         '<p class="textsize time"></p>'
-				    		       +         '<p class="countnum">입찰 : <!-- 카운트해서 --> 조회 : ' + list[i].count + '</p>'
+				    		       +         '<p class="countnum">입찰 : ' + list[i].bidCount + ' 조회 : ' + list[i].count + '</p>'
 				    		       +     '</div>'
 				    		       + '</div>'
 		                }
