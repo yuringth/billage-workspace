@@ -127,7 +127,7 @@
     
     	$(function(){
     		$(document).on('click', '.one-content', function(){
-    			location.href='detail.ac?bno='+ $(this).find('.boardNo').val();
+    			location.href='detail.dr?bno='+ $(this).find('.boardNo').val();
     		})
     		
     		closeCount();

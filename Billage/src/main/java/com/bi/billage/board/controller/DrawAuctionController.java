@@ -520,7 +520,7 @@ public class DrawAuctionController {
 			//글 작성자에게 낙찰포인트 적립
 			Point p = new Point();
 			p.setPointAdd(b.getBidPrice());
-			p.setUserNo(b.getUserNo());
+			p.setUserNo(b.getUserNo()); 
 			p.setPointStatus("적립");
 			pointService.addPoint(p);
 			

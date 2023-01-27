@@ -158,69 +158,56 @@
 			    } else {
 			    	$(this).find('.time').text('응모 시간 종료');
 			    }
-    			
-    			
     		});
-    		
     	}
     	
     </script>
     
     <!-- 무한 스크롤 구현 영역  -->
     <script>
-	    
-	    $(function(){
-	    	$(window).scroll(function() {
-    			if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-					newlist();
-    		   	}
-   			});
-	    })
-	    
-	    var cNo = '';
-	    
+    	var cNo = '';
+    	if(cNo != -1){
+		    $(function(){
+		    	$(window).scroll(function() {
+	    			if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+						newlist();
+	    		   	}
+	   			});
+		    })
+    	}
 	    function newlist(){
-	    	
-	    	if(cNo != -1){
-	    		
-		    	cNo = $("#currentPage").val();
-		    	
-		        $.ajax({
-		            url:"newlist.ac?cPage=" + (Number(cNo) + 1),
-		            success: function(list){
+	    	cNo = $("#currentPage").val();
+	        $.ajax({
+	            url:"newlist.ac?cPage=" + (Number(cNo) + 1),
+	            success: function(list){
 
-		            	value = '<div class="align-left-outer">';
-		               
-		            	for(var i in list){
-		                	value += '<div class="one-content">'
-				    		       +	'<input type="hidden" value="' + list[i].boardNo + '" class="boardNo">'
-				    		       + 	'<input type="hidden" value="' + list[i].closeDate + '" class="closeDate">'
-				    		       +     '<div class="img-area">'
-				    		       +         '<img src="' + list[i].changeName + '">'
-				    		       +     '</div>'
-				    		       +     '<div class="text-area">'
-				    		       +         '<p class="title-text">' +  list[i].title + '</p>'
-				    		       +         '<p class="textsize">현재 가격 : ' + list[i].nowPrice + 'P</p>'
-				    		       +         '<p class="textsize time"></p>'
-				    		       +         '<p class="countnum">입찰 : ' + list[i].bidCount + ' 조회 : ' + list[i].count + '</p>'
-				    		       +     '</div>'
-				    		       + '</div>'
-		                }
-		                value += '</div>';
-	               		
-		                $('#currentPage').val(Number(cNo) + 1);
-		                
-		                //리스트 크기가 6보다 작으면 정지
-	               		if(list.length < 6){
-		                	cNo = -1;
-		                }
-		                
-		    		   	$('.outOutter').html($('.outOutter').html() + value);
-		         	}
-		        });
-	    	}
-    }
-
+	            	value = '<div class="align-left-outer">';
+	            	for(var i in list){
+	                	value += '<div class="one-content">'
+			    		       +	'<input type="hidden" value="' + list[i].boardNo + '" class="boardNo">'
+			    		       + 	'<input type="hidden" value="' + list[i].closeDate + '" class="closeDate">'
+			    		       +     '<div class="img-area">'
+			    		       +         '<img src="' + list[i].changeName + '">'
+			    		       +     '</div>'
+			    		       +     '<div class="text-area">'
+			    		       +         '<p class="title-text">' +  list[i].title + '</p>'
+			    		       +         '<p class="textsize">현재 가격 : ' + list[i].nowPrice + 'P</p>'
+			    		       +         '<p class="textsize time"></p>'
+			    		       +         '<p class="countnum">입찰 : ' + list[i].bidCount + ' 조회 : ' + list[i].count + '</p>'
+			    		       +     '</div>'
+			    		       + '</div>'
+	                }
+	                value += '</div>';
+	                $('#currentPage').val(Number(cNo) + 1);
+	                
+	                //리스트 크기가 6보다 작으면 정지
+               		if(list.length < 6){
+	                	cNo = -1;
+	                }
+	    		   	$('.outOutter').html($('.outOutter').html() + value);
+	         	}
+	        });
+    	}
     </script>
     
 
