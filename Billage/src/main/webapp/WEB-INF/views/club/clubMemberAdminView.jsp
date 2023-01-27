@@ -25,7 +25,7 @@
 			$(function(){
 			
 				// 전체선택 or 취소 ----------------------------------------------------------------------
-				$(document).on('change','' , function(){
+				$(document).on('change','#all-select' , function(){
 					
 					var $all = $('#all-select').prop('checked');
 					
@@ -51,14 +51,15 @@
 					
 					var $clubNo = $('#getClubNo').val();
 					
-					
+					/*
 					if(Object.entries(userCheck).length === 0){
-						console.log('비어있음');
+						//console.log('비어있음');
 					} else {
 						userCheck.forEach(function(i, el){
 							
 						})
 					}
+					*/
 					
 					var str = '<input type="hidden" name="clubNo" value="' + $clubNo + '"/>';
 						str += '<div id="crean-area">';
@@ -69,18 +70,20 @@
 						
 						 str += '<p><input type="hidden" name="userNo2" value=" '+ userNo2 + '"/>';
 						 str +=  nickname + ' ( ' + userId + ' ) <a id="cancel-btn"> x </a></p>'; 
-						 
+						
+						 /*
 						 usercheck = {
 								'userId' : userId,
 								'nickname' : nickname
 						 }
 						
 						 userCheck.push(usercheck);
+						 */
 					}); 
 						str += '</div>';
 						
 					//console.log(str);
-					console.log(userCheck);
+					//console.log(userCheck);
 					
 					// 해당 스트링을 #receiveUser div에 넣어준다. 
 					$(str).insertAfter('#receiveUser');
@@ -247,7 +250,7 @@
 	<script>
 		
 		$(document).on('click', '#submit-btn', function(){
-			//고생해서 만든 조건식... 후 
+
 			if($('textarea[name=messageContent]').val() == ''){
 				alert('텍스트가 작성되지 않았습니다.');
 				$('textarea[name=messageContent]').focus();
