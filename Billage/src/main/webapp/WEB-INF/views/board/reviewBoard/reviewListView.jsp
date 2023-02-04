@@ -39,16 +39,18 @@
     }
     
     .one-content{
-   		border:1px solid forestgreen;
+   		border:1px solid black; 
+   		border-radius:1rem;
     	width:500px;
-    	height:400px;
+    	height:430px;
     	margin:25px;
+    	padding:2px;
     }
     
     
 
     .one-content-detail1{
-        border:1px solid blue;
+       /*  border:1px solid blue; */
 		width:500px;
 		height:50px;
         display:flex;
@@ -56,7 +58,7 @@
 
 
   	.one-content-detail2{
-  		border:1px solid red;
+  		/* border:1px solid red; */
   		width:500px;
 		height:250px;
   		display:flex;
@@ -66,7 +68,7 @@
  
   	
 	.book-detail1{
-		border:1px solid pink;
+		/* border:1px solid pink; */
 		width:200px; 
 		height:220px;
 		margin-top:10px;
@@ -75,7 +77,7 @@
 
   	
 	.book-detail2{
-		border:1px solid pink;
+		/* border:1px solid pink; */
 		width:300px;
 		height:220px;
 		margin-top:10px;
@@ -87,11 +89,10 @@
 	
 	/* 이거 뭔데 div안에 안들어가냐??! 찜갯수 ㅠ */
 	.one-content-detail3{
-		border:1px solid black;
+	/* 	border:1px solid black; */
 		width:500px;
 		height:100px;
 	}
-
 
 	* {
 	  margin: 0;
@@ -248,7 +249,7 @@
 	<!-- 로그인 한 유저만 버튼 보임 -->
 	<c:if test="${ not empty loginUser }">
 		<div class="pagingArea">
-			<button class="btn btn-secondary" onclick="location.href='insert.re'">글작성</button>
+			<button class="btn btn-outline-primary" onclick="location.href='insert.re'">글작성</button>
 		</div>
 	</c:if>
 	<!-- 페이지 처리 끝  -->

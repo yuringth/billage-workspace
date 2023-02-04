@@ -26,7 +26,7 @@
 
 
 .book-detail-outer{
-	border : 1px solid blue; 
+	/* border : 1px solid blue;  */
 	width:620px;
 	height:200px;
 	margin:auto;
@@ -199,7 +199,13 @@
 
 		<hr>
 		<div>
-			<button class="modal-up-btn">상품모달검색</button>
+		
+			<button class="modal-up-btn btn btn-primary">
+    			<span class="spinner-border spinner-border-sm"></span>
+    			상품검색
+  			</button>
+  			
+			<!-- <button class="modal-up-btn">상품모달검색</button> -->
 		</div>
 		
 		<!-- api끌고오는건데 enctype으로 해야하는게 맞을까?? -->
@@ -293,8 +299,8 @@
 				<hr>
 					
 				<div style="text-align:center;">
-					<button type="submit">글작성</button>
-					<button type="reset">취소</button>
+					<button type="submit" class="btn btn-outline-primary">글작성</button>
+					<button type="reset" class="btn btn-outline-secondary">취소</button>
 				</div>
 			</div>
 			

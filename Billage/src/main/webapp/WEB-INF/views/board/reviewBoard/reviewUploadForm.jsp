@@ -26,7 +26,7 @@
 
 
 .book-detail-outer{
-	border : 1px solid blue;
+	/* border : 1px solid blue; */
 	width:620px;
 	height:200px;
 	margin:auto;
@@ -34,7 +34,7 @@
 
 
 .book-detail-area{
-	border : 1px solid black;
+	/* border : 1px solid black; */
 	width:620px;
 	height:200px; 
 	display:flex;
@@ -43,7 +43,7 @@
 
 /* 사진  */
 .content-photo-detail{
-	border:1px solid red;
+	/* border:1px solid red; */
 	width:200px;
 	height:200px;
 	margin-right:20px;
@@ -56,13 +56,13 @@
 
 /* 책 정보 */
 .content-book-detail{
-	border:1px solid pink;
+	/* border:1px solid pink; */
 	width:400px;
 	height:200px;
 }
 
 #book_title, #book_author, #book_publisher, #book_data{
-	border:1px solid pink;
+	/* border:1px solid pink; */
 	height:50px;
 }
 
@@ -128,34 +128,34 @@
     
     
     .content-area1{
-    	border:1px solid black;
+    	/* border:1px solid black; */
     	width:75px;
     }
 
 
     .content-area2{
-    	border:1px solid black;
+    	/* border:1px solid black; */
     	width:550px;
     	display:flex;
     }
     .content-detail1{
-    	border:1px solid red;
+    	/* border:1px solid red; */
     	width:100px;
     }
     .content-detail2{
-    	border:1px solid blue;
+    	/* border:1px solid blue; */
     	width:450px;
     	height:120px;
     }
     #md_book_title, #md_book_author, #md_book_date, #md_book_publisher{
-    	border: 1px solid black;
+    	/* border: 1px solid black; */
     	height:50px;
     	margin:0px;
     }
     
     
     .content-area3{
-    	border:1px solid black;
+    	/* border:1px solid black; */
     	width:75px;
     }    
     
@@ -199,7 +199,13 @@
 
 		<hr>
 		<div>
-			<button class="modal-up-btn">상품모달검색</button>
+			
+			<button class="modal-up-btn btn btn-primary">
+    			<span class="spinner-border spinner-border-sm"></span>
+    			상품검색
+  			</button>
+			
+			<!-- <button class="modal-up-btn">상품검색</button> -->
 		</div>
 		
 		<!-- api끌고오는건데 enctype으로 해야하는게 맞을까?? -->
@@ -281,8 +287,8 @@
 				<hr>
 					
 				<div style="text-align:center;">
-					<button type="submit">글수정</button>
-					<button type="reset">취소</button>
+					<button type="submit" class="btn btn-outline-primary">글수정</button>
+					<button type="reset" class="btn btn-outline-secondary">취소</button>
 				</div>
 			</div>
 			
@@ -300,7 +306,7 @@
 					<div class="text-div">
 						<!-- <button onclick="search(1);">1페이지 이동</button> -->
 			    		<input type="text" id="title" placeholder="책이름을 작성해주세요">
-			    		<button onclick="search();">이동</button>
+			    		<button onclick="search();">검색</button>
 					</div>   
 				</div>
 				<div id="result-area">
@@ -380,7 +386,7 @@
 						  + '</div>'
 						  + '</div>'
 						  + '<div  class="content-area3">'
-						  + '<button id="modal-result-btn">선택</button>'
+						  + '<button id="modal-result-btn" class="btn btn-outline-secondary">선택</button>'
 						  + '</div>';
 						  
 							  

@@ -131,9 +131,11 @@
 			    <div class="text">
 			        <input type="text" class="form-control" name="keyword" value="${ keyword }">
 			    </div>
-			    <button type="submit" class="searchBtn btn btn-secondary">검색</button>
+			    <button type="submit" class="searchBtn btn btn-secondary">키워드 검색</button>
 			</form>
 		</div>
+		
+		<br><br>
 		
 		<c:if test="${ not empty condition }">
 			<script>
@@ -155,10 +157,10 @@
 		        	
 		        	<div class="stock-status">
 						<c:if test="${ b.stockStatus == 'N'}">
-							<p>판매중</p>
+							<p class="btn btn-outline-secondary">판매중</p>
 						</c:if>		        		
 							<c:if test="${ b.stockStatus == 'Y'}">
-							<p>판매완료</p>
+							<p class="btn btn-outline-secondary">판매완료</p>
 						</c:if>		
 					</div>
 					
