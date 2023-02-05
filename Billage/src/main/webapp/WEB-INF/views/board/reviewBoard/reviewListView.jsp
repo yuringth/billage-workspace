@@ -204,9 +204,10 @@
 		
 		            <div class="one-content-detail3">
 		            	<input class="bno" type="hidden" id="reviewlikeNo" value="${ b.reviewNo }">
-		            	<button id="reviewLikeBtn" onclick="reviewLikeIncrease();">♡ </button>
-		            	<span>좋아요수</span>
-	            		<div> 댓글(3) 리뷰등록수(3) 조회수${ b.count }</div>
+		            	<br><br>
+		            	<!-- <button id="reviewLikeBtn" onclick="reviewLikeIncrease();">♡ </button>
+		            	<span>좋아요수</span> -->
+	            		<div> 댓글(3) 조회수${ b.count }</div>
 		            	<div>${ b.createDate }</div>
 		            </div>
 		        </div>

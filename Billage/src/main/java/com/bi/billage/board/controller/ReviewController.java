@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.servlet.http.HttpSession;
@@ -40,21 +41,19 @@ public class ReviewController {
 	
 	@Autowired
 	private UserService userService;
+
 	
 	
-	
-	// api 오픈 키 => 나중에 알라딘 api 발급받아서 serviceKey에 업데이트 하세용
+	// api-1 오픈 키 => 나중에 알라딘 api 발급받아서 serviceKey에 업데이트 하세용
 	private static final String serviceKey="ttbiuui12341246001";
+
 	
 	// api도전
 	@ResponseBody
 	@RequestMapping(value="search.bk", produces="application/json; charset=UTF-8")
 	public String reviewApi (String title) throws IOException {
 		
-		
 		Book isbn = boardService.selectIsbn(title);
-		
-		//System.out.println(isbn);
 		
 		// url은 손으로 한땀한땀 작성하는게 좋다
 		// 인증서 => 브라우저에 있음 => 우리는 http로 작성할것임! https안됨!!
@@ -65,9 +64,6 @@ public class ReviewController {
 		url += "&output=js";
 		url += "&Version=20131101";
 		url += "&OptResult=ebookList,usedList,reviewList";
-		
-		
-		//System.out.println(url);
 		
 		URL requestUrl = new URL(url); // 부모클래스(?)
 		HttpURLConnection urlConnection = (HttpURLConnection)requestUrl.openConnection(); // 부모가 자식한테 어케 들어가 하고 다운캐스팉 해주기
@@ -82,6 +78,52 @@ public class ReviewController {
 		
 		return responseText; // 응답데이터임!! 	@ResponseBody
 	}
+	
+	
+	
+	
+	
+	// 추가 api -2
+	@ResponseBody
+	@RequestMapping(value="searchBook.bk", produces="application/json; charset=UTF-8")
+	public String reviewBookApi (String keyword) throws IOException {
+		
+		//System.out.println(keyword);
+		// url은 손으로 한땀한땀 작성하는게 좋다
+		// 인증서 => 브라우저에 있음 => 우리는 http로 작성할것임! https안됨!!
+		String url2 ="http://www.aladin.co.kr/ttb/api/ItemLookUp.aspx";
+		url2 += "?ttbkey=" + serviceKey; // 부여받은 TTBKey값
+		url2 += "&itemIdType=ISBN"; 
+		url2 += "&ItemId=" + keyword; // 출력방법 => json이니까 produces추가해야함!!
+		url2 += "&output=js";
+		url2 += "&Version=20131101";
+		url2 += "&OptResult=ebookList,usedList,reviewList";
+		
+		
+		//System.out.println(url2);
+		
+		URL requestUrl2 = new URL(url2); 
+		HttpURLConnection urlConnection2 = (HttpURLConnection)requestUrl2.openConnection(); 
+		urlConnection2.setRequestMethod("GET");
+		
+		BufferedReader br2 = new BufferedReader(new InputStreamReader(urlConnection2.getInputStream()));
+		
+		String responseText = br2.readLine();
+		
+		br2.close();//버퍼더리더 반납
+		urlConnection2.disconnect(); 
+		
+		return responseText; 
+	}
+	
+	
+	
+		
+	
+	
+	
+	
+	
 	
 	
 	// 리뷰게시판 -> 상품 검색 api 페이지 나옴 => 삭제함

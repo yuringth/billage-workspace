@@ -132,7 +132,7 @@ font-size: 25px;
 		
 		<div class="user-area">
 			<div class="user-div">
-				<p id="user_no" name="userNo">유저 : ${ b.nickname }</p>
+				<p id="user_no" name="userNo">판매자 : ${ b.nickname }</p>
 				<button>채팅하기</button>
 			</div>
 		</div>
@@ -154,9 +154,9 @@ font-size: 25px;
 			<p id="used_price" name="usedPrice">판매 가격 : ${ b.point }</p>
 			<p id="used_content" name="usedContent">게시글 내용 : ${ b.usedContent }</p>
 			
-			<p id="count" name="count">조회수</p>
-			<p id="count" name="count">관심수</p>
-			<p id="count" name="count">채팅수</p>
+			<p id="count" name="count">조회수 : ${ b.count }</p>
+			<!-- <p id="count" name="count">관심수</p>
+			<p id="count" name="count">채팅수</p> -->
 		</div>
 		
 		
@@ -236,7 +236,7 @@ font-size: 25px;
 	   			url:'topList.ud',
 	   			success:function(data){
 	   				console.log(data);
-	   				
+	   				console.log(data[0].count);
 	   				let value = '';
 	   				for(let i in data){
 	   					value += '<div class="align-left-outer">'
@@ -248,7 +248,7 @@ font-size: 25px;
 	   						  + '<div class="text-area">'
 	   						  + '<p class="title-text">책제목 : ' + data[i].bookTitle + '</p>'
 	   						  + '<p class="textsize">판매 금액 : ' + data[i].point + '</p>'
-	   						  + '<p class="textsize">' + '♡'  + '</p>'
+	   						 /*  + '<p class="textsize">' + '♡'  + '</p>' */
 	   						  + '<p class="countnum">' + '조회 :' + data[i].count + '</p>'
 	   						  + '</div>'
 	   						  + '</div>'
