@@ -105,6 +105,22 @@
 		justify-content: center;
 	}
 	
+	
+	
+	
+	.ContentRow{
+		height:170px;
+		width:270px;
+		overflow:hidden;
+		text-overflow:ellipsis;
+		/* white-space:nowrap; */
+		display:block;
+		
+		white-space: normal;
+        line-height: 1.2;
+		
+	}
+	
 </style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -176,7 +192,7 @@
 		            	<input type="hidden" value="${ b.bookAuthor }">
 		            	<input type="hidden"  class ="fuserNo" value="${b.userNo }">
 		            <%-- 	<input class="bno" type="hidden" value="${ b.reviewNo }"> --%>
-		                <div>유저 닉네임: ${ b.nickname }</div>                                              
+		                <div>작성자: ${ b.nickname }</div>                                              
 		                <div class="card-footer">
 		                 	   별점 : ${ b.reviewStar }
 		                </div>
@@ -193,10 +209,10 @@
 						
 						<div class="book-detail2">	            
 				            <div>
-				            	<div style="height:80px; font-weight:bold;" >${ b.bookTitle }</div>
+				            	<div style="height:50px; font-weight:bold;" >${ b.bookTitle }</div>
 				            </div>
 			    	        <div>
-			  	  	       		<div style="height:140px;">${ b.reviewContent }</div>
+			  	  	       		<div class="ContentRow">${ b.reviewContent }</div>
 			    	        </div>
 						</div>
 						<br>
