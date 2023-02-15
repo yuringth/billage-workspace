@@ -228,7 +228,7 @@ public class FollowController {
 		 * follow에 담아서 전달
 		 * user -> 클릭한 유저에 관한 정보를 user 객체에 담아온다
 		 * star -> 클릭한 유저가 준 리뷰 별점을 담아온다.
-		 * goodReview => 클릭한 유저와 로그인한 유저가 준 별점5점 책들 중에 동일한 책만 ArrayList로 가져온ㄷ
+		 * goodReview => 클릭한 유저와 로그인한 유저가 준 별점5점 책들 중에 동일한 책만 ArrayList로 가져온다.
 		 * 
 		 */
 		
