@@ -196,7 +196,7 @@
 			</div>
 			
 		<!-- 더보기 누를 시 상품 6개가 뜨게 되는 div -->
-		<div><button type="button" class="btn btn-info" style="width:1200px; height:80px;">더보기</button></div>  
+		<!-- <div><button type="button" class="btn btn-info" style="width:1200px; height:80px;">더보기</button></div>   -->
 	
                     
 	    <!-- 페이지처리하는 영역-->

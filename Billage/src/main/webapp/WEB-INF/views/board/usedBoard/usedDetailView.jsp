@@ -45,7 +45,7 @@
 
 .writer-area{
 	/* border:1px solid blue; */
-	height:660px;
+	height:400px;
 	margin:0px;
 }
 #used_title, #used_genre, #used_price, #count{
@@ -56,7 +56,7 @@
 }
 #used_content{
 	/* border:1px solid skyblue; */
-	height: 300px;
+	height: 150px;
 	margin:0px;
 	text-align:center;
 }

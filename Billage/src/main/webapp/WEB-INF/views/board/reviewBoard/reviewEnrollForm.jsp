@@ -414,7 +414,7 @@
 				</div>
 				<div id="result-area">
 			   		<div class="text-div">
-						<p>"검색이름"로 1개의 검색 결과가 있습니다.</p>
+						<!-- <p>"검색이름"로 1개의 검색 결과가 있습니다.</p> -->
 					</div>
 					
 					<hr>
@@ -445,7 +445,7 @@
 				</div>
 				<div id="result-area2">
 			   		<div class="text-div">
-						<p>"검색이름"로 1개의 검색 결과가 있습니다.</p>
+						<!-- <p>"검색이름"로 1개의 검색 결과가 있습니다.</p> -->
 					</div>
 					
 					<hr>
