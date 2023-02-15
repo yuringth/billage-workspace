@@ -8,14 +8,11 @@
 <title>리뷰게시판 글 작성 폼</title>
 
 
-
 <style>
 .outer{
 	width:1200px;
 	margin: auto;
 }
-
-
 
 .book-detail-outer{
 	/* border : 1px solid blue; */
@@ -24,14 +21,12 @@
 	margin:auto;
 }
 
-
 .book-detail-area{
 	/* border : 1px solid black; */
 	width:620px;
 	height:200px; 
 	display:flex;
 }
-
 
 /* 사진  */
 .content-photo-detail{
@@ -53,24 +48,16 @@
 	height:50px;
 }
 
-
-
-
 .review-content-outer{
 	text-align:center;
 }
-
-
 </style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
-
 
 </head>
 <body>
@@ -78,20 +65,18 @@
 	<jsp:include page="../../common/header.jsp" />
     
     
-    
  	<!-- 전체를 감싸는 div  -->
  	<div class="outer">
 
 		<h1 style="text-align:center;">리뷰 상세페이지</h1>
 		
-		<!-- 리뷰넘버 식별자로 넘기기 -->
+		<!-- 리뷰번호 식별자로 넘기기 -->
 		<input type="hidden" name="reviewNo" value="${ b.reviewNo }" id="review-no">
 		<input type="hidden" name="userNo" value="${ b.userNo }">
 		
 		<hr>
 		
-		<!-- 	<div id="book_imag" name="bookImag">${ b.bookImag }</div> -->
-		<!-- api 책정보 끌어오기 -->
+		<!-- API 책정보 끌어오기 -->
 		<div class="book-detail-outer">
 			<div class="book-detail-area">
 				<div class="content-photo-detail">

@@ -141,204 +141,170 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	
-	// 유림시작 ==================================================================================
-	//중고게시판 => 글작성 시 insert
+	// ============= 유림시작 ================
+	
+	// 중고게시판
+	
+	// 글작성
 	@Override
 	public int insertUsedBoard(UsedBoard b) {
-
 		return boardDao.insertUsedBoard(sqlSession, b);
 	}
 	
-	
-	// 중고게시판 => 조회수 셀랙
+	// 게시글의 총 개수 조회
 	@Override
 	public int selectListUsedCount() {
 		return boardDao.selectListUsedCount(sqlSession);
 	}
 
-	// 중고게시판 => 목록조회
+	// 게시판 list 조회
 	@Override
 	public ArrayList<UsedBoard> usedBoardList(PageInfo pi) {
 		return boardDao.usedBoardList(sqlSession, pi);
 	}
 
-
-	
-	
-	// 중고게시판 조회수 증가 (update)
+	// 조회수 증가
 	@Override
 	public int increaseUsedCount(int usedNo) {
 		return boardDao.increaseUsedCount(sqlSession, usedNo);
 	}
 
-	//중고게시판 상세 조회 (select) => db에서 정보 들고 와서 뿌려주기
+	// 게시글 상세 조회 => DB에서 정보 가져 오기	
 	@Override
 	public UsedBoard selectUsedBoard(int usedNo) {
 		return boardDao.selectUsedBoard(sqlSession, usedNo);
 	}
-	
 
-	//중고게시판 => 게시글 삭제 
+	// 게시글 삭제 
 	@Override
 	public int deleteUsedBoard(int usedNo) {
 		return boardDao.deleteUsedBoard(sqlSession, usedNo);
 	}
 
-	// 중고게시판 => 게시판 번호를 식별자로 DB에서 select해옴
+	// 게시글 수정버튼 클릭 시 => 게시판 번호를 식별자로 DB에서 게시글 정보 select해서 가져오기
 	@Override
 	public UsedBoard selectUpdateUsedBoard(int usedNo) {
 		return boardDao.selectUpdateUsedBoard(sqlSession, usedNo);
 	}
 	
-	
-
-	
-	// 중고게시판 글 수정하기 버튼 클릭시 => 수정되어 update됨
+	// 글수정
 	@Override
 	public int usedUpdate(UsedBoard b) {
 		return boardDao.usedUpdate(sqlSession, b);
 	}
 	
-	
-	
-	// 중고게시판 => topn분석
-	//중고게시판
+	// Top-N 분석
 	@Override
 	public ArrayList<UsedBoard> selectTopUsed() {
 		return boardDao.selectTopUsed(sqlSession);
 	}
 
-	
-	// 중고게시판 검색
-	// 중고게시판 => 검색 기능 select
+	// 검색 기능 select
 	@Override
 	public int selectSearchCount(HashMap<String, String> map) {
 		return boardDao.selectSearchCount(sqlSession, map);
 	}
-	
+
+	// 검색 기능
 	// 컬럼에 따라서 달라지기에 condition ..을 넣은 hashmap을 받아야함 + 추가적으로 페이징처리
 	@Override
 	public ArrayList<UsedBoard> selectSearchList(HashMap<String, String> map, PageInfo pi){
 		return boardDao.selectSearchList(sqlSession, map, pi);
 	}
 	
-	////////	
 	
-	// 리뷰 게시글의 총 개수 조회
+	
+	// 리뷰게시판	
+	
+	// 게시글의 총 개수 조회
 	@Override
-	public int selectListCount() {
-		// 자꾸 selectNovelListCount 이걸로 변동되네.. 나중에 이름 바꾸기
-		// 일단 selectListCount 이거임
+	public int selectListCount() { // 가끔 selectNovelListCount 이걸로 변동됨. selectListCount 이것이 맞음
 		return boardDao.selectListCount(sqlSession);
 	}
-	// 리뷰 게시글 리스트 조회
+	
+	// 게시글 list 조회
 	@Override
 	public ArrayList<ReviewBoard> reviewBoardList(PageInfo pi){
-		// 여기 수정함*** selectList->reviewBoardList
 		return boardDao.reviewBoardList(sqlSession, pi);
 	}
 	
-	
-	
-	
-	// 리뷰게시판 => 1) 책 중복되는지 확인 select : bookTitle로 조회 => 한 행이 있는지 없는지
+	// 글작성 => 1) 중복되는 책 있는지 확인 select : bookTitle로 조회 => 한 행이 있는지 없는지
 	@Override
 	public ReviewBoard selectBookTitle(ReviewBoard b) {
 		return boardDao.selectBookTitle(sqlSession, b);
 	}
-	// 리뷰게시판 => 2) 중복 된 책 없으면 insert : 글작성
+
+	// 글작성 => 2) 중복 된 책 없으면 insert : 글작성
 	@Override
 	public int insertReviewBoard(ReviewBoard b) {
 		return boardDao.insertReviewBoard(sqlSession, b);
 	}
 	
-
-	
-
-	// 리뷰게시판 => 조회수 증가
+	// 조회수 증가
 	@Override
 	public int increaseReviewCount(int reviewNo) {
 		return boardDao.increaseReviewCount(sqlSession, reviewNo);
 	}
 	
-
-	// 리뷰게시판. 조회 성공 시 => db에서 데이터를 가져와야한다.
+	// 조회 성공 시 => DB에서 데이터를 가져옴
 	@Override
 	public ReviewBoard selectReviewBoard(int reviewNo) {
-		
 		return boardDao.selectReviewBoard(sqlSession, reviewNo);
 	}
-
 	
-	
-	// 리뷰게시판 => 게시글 삭제
-//	@Override
-//	public int deleteReviewBoard(int reviewNo) {
-//		return boardDao.deleteReviewBoard(sqlSession, reviewNo);
-//	}
-	
+	// 게시글 삭제
 	@Override
 	public int deleteReviewBoard(ReviewBoard b) {
 		return boardDao.deleteReviewBoard(sqlSession, b);
 	}
 
-
-	// 리뷰게시판 글수정 => 1) 책 중복되는지 확인(리뷰넘버로 책제목조회)
+	// 글수정 => 1) 중복되는 책 있는지 확인(리뷰넘버로 책제목조회)
 	@Override
 	public ReviewBoard selectBookTitle2(ReviewBoard b) {
 		return boardDao.selectBookTitle2(sqlSession, b);
 	}	
 
-	// 리뷰게시판 => 글수정
+	// 게시글 수정
 	@Override
 	public int updateReviewBoard(ReviewBoard b) {
 		return boardDao.updateReviewBoard(sqlSession, b);
 	}
-
 	
-	// 리뷰게시판 => BOOK테이블에서 책제목과 일치하는 ISBN select
+	// BOOK테이블에서 책제목과 일치하는 ISBN select
 	@Override
 	public Book selectIsbn(String title) {
 		return boardDao.selectIsbn(sqlSession, title);
 	}
 	
-	// 리뷰게시판 => 댓글 리스트 불러오기
+	// 댓글 list 조회
 	@Override
 	public ArrayList<ReviewReply> selectReviewReplyList(int reviewNo) {
 		return boardDao.selectReviewReplyList(sqlSession, reviewNo);
 	}
 	
-	// 리뷰게시판 => 댓글 삭제(update
-//	@Override
-//	public int deleteReviewReply(int replyNo) {
-//		return boardDao.deleteReviewReply(sqlSession, replyNo);
-//	}
-	@Override
-	public int deleteReviewReply(ReviewReply r) {
-		return boardDao.deleteReviewReply(sqlSession, r);
-	}
-	
-	// 리뷰게시판 => 댓글 수정(update)
-	@Override
-	public int updateReviewReply(ReviewReply r) {
-		return boardDao.updateReviewReply(sqlSession, r);
-	}
-	
-	// 리뷰게시판 => 댓글 등록(insert)
+	// 댓글 등록
 	@Override
 	public int insertReviewReply(ReviewReply r) {
 		return boardDao.insertReviewReply(sqlSession, r);
 	}
 	
-	// 리뷰게시판 좋아요 누르면 insert
+	// 댓글 삭제
+	@Override
+	public int deleteReviewReply(ReviewReply r) {
+		return boardDao.deleteReviewReply(sqlSession, r);
+	}
+	
+	// 댓글 수정
+	@Override
+	public int updateReviewReply(ReviewReply r) {
+		return boardDao.updateReviewReply(sqlSession, r);
+	}
+	
+	// 좋아요 누르면 insert
 	@Override
 	public int insertReviewLike(ReviewLike r) {
 		return boardDao.insertReviewLike(sqlSession, r);
 	}
-	
-	
-	
-	
 	
 	// 유림끝==================================================================================
 	

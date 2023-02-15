@@ -123,19 +123,14 @@ public class ReviewController {
 	}
 	
 	
-	
 	// 리뷰게시판 -> 글작성 
 	@RequestMapping("insertBoard.re")
 	public String insertReviewBoard(ReviewBoard b,  Model model, HttpSession session, ModelAndView mv) {
 		// 내가 넘긴 b의 정보를 담은 것 
 		
-//		System.out.println("리뷰보드 : " + b);
-//		System.out.println("model : " + model);
-		
 		// 1) 책 중복되는지 확인 select
 		if(boardService.selectBookTitle(b) == null) {
 			
-		
 			Point p = new Point();
 			//응모포인트만큼 현재 포인트에서 차감
 			p.setUserNo(b.getUserNo());
@@ -147,10 +142,6 @@ public class ReviewController {
 				// 포인트 적립, 리뷰 등록 성공
 				((User)session.getAttribute("loginUser")).setPoint(pointService.selectPoint(b.getUserNo()));
 		//		System.out.println("응모 성공, 남은 포인트 :" + ((User)session.getAttribute("loginUser")).getPoint());
-				
-				
-				
-				// 등급추가 => 했지만 어디서 확인함???????????????????????????????????/
 				
 				//1. 작성한 글 세션에 +1 하기
 		         ((User)session.getAttribute("loginUser"))
@@ -170,7 +161,6 @@ public class ReviewController {
 		               ((User)session.getAttribute("loginUser"))
 		               .setUserGrade(((User)session.getAttribute("loginUser")).getUserGrade() + 1);
 		               
-		               
 		               // 여기에 alertMessage 축하합니다 등급이 ~등급으로 올랐습니다 세션 하실분 하세요
 		               return "redirect:list.re";
 		            }
@@ -188,7 +178,6 @@ public class ReviewController {
 		               ((User)session.getAttribute("loginUser"))
 		               .setUserGrade(((User)session.getAttribute("loginUser")).getUserGrade() + 1);
 		               
-		               
 		               // 여기에 alertMessage 축하합니다 등급이 ~등급으로 올랐습니다 세션 하실분 하세요
 		               return "redirect:list.re";
 		            }
@@ -197,14 +186,12 @@ public class ReviewController {
 		        session.setAttribute("alertMsg", "10포인트 적립 되었습니다");
 				return "redirect:list.re";
 				
-				
-			} else { //뭐든 실패
+			} else { // 뭐든 실패
 				//session.setAttribute("alertMsg", "동일한 책은 작성할 수 없습니다");
 				//return "redirect:enrollForm.re?reviewNo=" + b.getReviewNo();
 				mv.addObject("errorMsg", "무슨에러인진모름");
 				return "common/errorPage";
 			}
-			
 		} else {
 			session.setAttribute("alertMsg", "동일한 도서는 작성할 수 없습니다");
 			return "redirect:list.re";
@@ -277,14 +264,14 @@ public class ReviewController {
 	
 	
 	
-	// 리뷰게시판 -> 글쓰기버튼 클릭 시 -> 리뷰게시판 글작성 폼화면으로 이동
+	// 글쓰기버튼 클릭 시 -> 리뷰게시판 글작성 폼화면으로 이동
 	@RequestMapping("insert.re")
 	public String reviewInsertForm() {
 		return "board/reviewBoard/reviewEnrollForm";
 	}
 	
 	
-	// 리뷰게시판 -> 게시글 상세보기 : boardNo를 식별값으로 사용할것이기에 가져와야함
+	// 게시글 상세보기 : boardNo를 식별값으로 사용할것이기에 가져와야함
 	@RequestMapping("detail.re")
 	public String reviewDetail(int reviewNo, Model model) {
 		
@@ -322,7 +309,7 @@ public class ReviewController {
 	}
 	*/
 	
-	// 리뷰게시판 => 글삭제
+	// 글삭제
 	@RequestMapping("delete.re")
 	public String deleteReviewBoard(ReviewBoard b, Model model,  HttpSession session) {
 		
@@ -354,7 +341,7 @@ public class ReviewController {
 	
 	
 	
-	// 리뷰게시판 -> 글수정 누를 시 -> 수정폼 화면 나옴
+	// 글수정 누를 시 -> 수정폼 화면 나옴
 	@RequestMapping("enrollForm.re")
 	public ModelAndView reviewEnrollForm(int reviewNo, ModelAndView mv) {
 		
@@ -365,7 +352,7 @@ public class ReviewController {
 	}
 	
 	
-	// 리뷰게시판 => 글 수정
+	// 글 수정
 	@RequestMapping("updateReview.re")
 	public String updateReviewBoard(ReviewBoard b, Model model, HttpSession session) {
 	

@@ -125,19 +125,7 @@
     <!-- 전체를 감싸는 div -->
     <div class="reviewList-area">
 
-        <!-- 옵션div -->
-		
-		<!--       
-        <div>
-            <div class="reviewOption">
-                <select name="" id="">
-                    <option value="book" selected>책 제목순</option>
-                    <option value="date">날짜 정렬 순</option>
-                </select>
-            </div>
-        </div>
-         -->
-         
+        <!-- 정렬 div -->
 		<div class="align-side margin-bottom">
 			<div class="dropdown" id="reviewOption2">
 				<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
@@ -150,26 +138,26 @@
 			</div>
 		</div>	
 
-
+		
 		<div class="list-outer">
   			<c:forEach items="${ list }" var="b">
    	
         		<!-- 리뷰 하나를 감싸는 div -->
 		        <div class="one-content">
-		        <!-- <div class="one-content" onclick="reviewDetail()"> -->
-		        
-		        	<!-- 작성자/별 -->
+
+		        	<!-- 작성자/별점 div -->
 		            <div class="one-content-detail1">
 		            	<input type="hidden" value="${ b.bookAuthor }">
-		            	<input type="hidden"  class ="fuserNo" value="${b.userNo }">
-		            <%-- 	<input class="bno" type="hidden" value="${ b.reviewNo }"> --%>
+		            	<input type="hidden"  class ="fuserNo" value="${ b.userNo }">
+
 		                <div>작성자: ${ b.nickname }</div>                                              
+
 		                <div class="card-footer">
 		                 	   별점 : ${ b.reviewStar }
 		                </div>
 		            </div>
 					
-					<!-- 책관련 디테일 div 책사진/제목/내용  -->
+					<!-- 책관련 디테일 div (책사진, 제목, 내용) -->
 					<div class="one-content-detail2">
 						<input class="bno" type="hidden" value="${ b.reviewNo }">
 						<div class="book-detail1">
@@ -189,11 +177,12 @@
 						<br>
 					</div>
 		
+					<!-- 조회수, 작성일 div -->					
 		            <div class="one-content-detail3">
 		            	<input class="bno" type="hidden" id="reviewlikeNo" value="${ b.reviewNo }">
+
 		            	<br><br>
-		            	<!-- <button id="reviewLikeBtn" onclick="reviewLikeIncrease();">♡ </button>
-		            	<span>좋아요수</span> -->
+
 	            		<div> 댓글(3) 조회수${ b.count }</div>
 		            	<div>${ b.createDate }</div>
 		            </div>
@@ -201,7 +190,6 @@
 		        
 			</c:forEach>
 		</div>
-
 
 
                     
@@ -240,8 +228,6 @@
 			<button class="btn btn-outline-primary" onclick="location.href='insert.re'">글작성</button>
 		</div>
 	</c:if>
-	<!-- 페이지 처리 끝  -->
-	
 	
 	
 	
@@ -280,80 +266,21 @@
 	
 	<!-- follow modal창 끝 -->
 
-
-
-	<!-- 게시글 상세보기 :되지만 나중에 페이징처리로 이동하기(기존) -->
-<!-- 	
-	<script>
-		$(function(){
-			$('.one-content').click(function(){
-				location.href = 'detail.re?reviewNo=' + $(this).find('.bno').val();
-				console.log($(this).find('.bno').val()); // http://localhost:8787/billage/detail.re?reviewNo=16
-			})
-			
-		})
-	</script>
- -->
  	
- 	
- 	
- 	
- 	<!-- 종아요부분  -->
- 	<script>
- /* 	
- 		$(function(){
-			
- 			$(document).on('click', '#reviewLikeBtn', function(){
- 				//console.log($('#reviewlikeNo').val());
- 				$.ajax({
- 	 				url:'reviewLike.re',
- 	 				data:{
- 	 					reviewNo : $('#reviewlikeNo').val()
- 	 				},
- 	 				success:function(){
- 	 					
- 	 				},
- 	 				error:function(){
- 	 					
- 	 				}
- 				})
- 			
- 			})
- 		})
- 		 */
-  		 function reviewLikeIncrease(){
-  			//console.log($('#reviewlikeNo').val());
-  			console.log('${loginUser.userNo}');
-  			
- 			$.ajax({
- 				url:'insertReviewLike.re',
- 				data:{
- 					reviewNo : $('#reviewlikeNo').val(),
- 					userNo : '${loginUser.userNo}'
- 				},
- 				success:function(result){
- 					console.log(result)
- 				},
- 				error:function(){
- 					
- 				}
- 			})
- 		} 
- 	</script>
- 		
-  
 	
 	<script>
-		/* (유림)게시글 상세보기 :되지만 나중에 페이징처리로 이동하기 (변경) */
-		$(function(){
+		// 유림시작
+		
+		// 리뷰게시글 상세보기 
+ 		$(function(){
 			$('.one-content-detail2').click(function(){
 				location.href = 'detail.re?reviewNo=' + $(this).find('.bno').val();
-				console.log($(this).find('.bno').val()); // http://localhost:8787/billage/detail.re?reviewNo=16
-		})
+				console.log($(this).find('.bno').val());
+		});
 
 		
 		
-		// 휘수시작 =======================================================================================================	
+		// 휘수시작
 			
 		//유저 닉네임 클릭시 모달창 생성
 			if(${ !empty loginUser && loginUser.userNo != b.userNo}){
@@ -428,6 +355,71 @@
 		})
 		
 	</script>
+
+
+	
+
+	<!-- 게시글 상세보기 (기존) -->
+	<!-- 	
+	<script>
+		$(function(){
+			$('.one-content').click(function(){
+				location.href = 'detail.re?reviewNo=' + $(this).find('.bno').val();
+				console.log($(this).find('.bno').val()); // http://localhost:8787/billage/detail.re?reviewNo=16
+			})
+			
+		})
+	</script>
+ 	-->
+ 	
+
+ 	
+ 	<!-- 종아요부분  -->
+ 	<script>
+ /* 	
+ 		$(function(){
+			
+ 			$(document).on('click', '#reviewLikeBtn', function(){
+ 				//console.log($('#reviewlikeNo').val());
+ 				$.ajax({
+ 	 				url:'reviewLike.re',
+ 	 				data:{
+ 	 					reviewNo : $('#reviewlikeNo').val()
+ 	 				},
+ 	 				success:function(){
+ 	 					
+ 	 				},
+ 	 				error:function(){
+ 	 					
+ 	 				}
+ 				})
+ 			
+ 			})
+ 		})
+ 		 */
+ 		 
+ 		 
+  		 function reviewLikeIncrease(){
+  			//console.log($('#reviewlikeNo').val());
+  			console.log('${loginUser.userNo}');
+  			
+ 			$.ajax({
+ 				url:'insertReviewLike.re',
+ 				data:{
+ 					reviewNo : $('#reviewlikeNo').val(),
+ 					userNo : '${loginUser.userNo}'
+ 				},
+ 				success:function(result){
+ 					console.log(result)
+ 				},
+ 				error:function(){
+ 					
+ 				}
+ 			})
+ 		} 
+ 	</script>
+ 		
+  
 
   </div>
   
