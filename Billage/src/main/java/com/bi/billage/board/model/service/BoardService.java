@@ -235,7 +235,7 @@ public interface BoardService {
 	// 글작성 => 1) 중복되는 책 있는지 확인 select : bookTitle로 조회 => 한 행이 있는지 없는지
 	ReviewBoard selectBookTitle(ReviewBoard b);
 	
-	// 글작성 => 2) 중복 된 책 없으면 insert : 글작성
+	// 글작성 => 2) 중복 된 책 없으면 insert
 	int insertReviewBoard(ReviewBoard b);
 
 	// 글수정 => 1) 중복되는 책 있는지 확인(리뷰넘버로 책제목조회)
