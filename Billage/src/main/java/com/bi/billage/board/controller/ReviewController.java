@@ -43,62 +43,56 @@ public class ReviewController {
 	private UserService userService;
 
 	
-	
-	// api-1 오픈 키 => 나중에 알라딘 api 발급받아서 serviceKey에 업데이트 하세용
+	// API 오픈 키 => 나중에 알라딘 API 오픈키 발급받아서 serviceKey에 업데이트 하기
 	private static final String serviceKey="ttbiuui12341246001";
 
 	
-	// api도전
+	
+	// API(책이름 검색)
 	@ResponseBody
 	@RequestMapping(value="search.bk", produces="application/json; charset=UTF-8")
 	public String reviewApi (String title) throws IOException {
 		
+		// BOOK테이블에서 책제목과 일치하는 ISBN을 select 한 후 isbn변수로 지정
 		Book isbn = boardService.selectIsbn(title);
 		
-		// url은 손으로 한땀한땀 작성하는게 좋다
-		// 인증서 => 브라우저에 있음 => 우리는 http로 작성할것임! https안됨!!
 		String url ="http://www.aladin.co.kr/ttb/api/ItemLookUp.aspx";
 		url += "?ttbkey=" + serviceKey; // 부여받은 TTBKey값
 		url += "&itemIdType=ISBN"; 
-		url += "&ItemId=" + isbn.getIsbn(); // 출력방법 => json이니까 produces추가해야함!!
+		url += "&ItemId=" + isbn.getIsbn(); // 출력방법 => json이니까 produces추가
 		url += "&output=js";
 		url += "&Version=20131101";
 		url += "&OptResult=ebookList,usedList,reviewList";
 		
-		URL requestUrl = new URL(url); // 부모클래스(?)
-		HttpURLConnection urlConnection = (HttpURLConnection)requestUrl.openConnection(); // 부모가 자식한테 어케 들어가 하고 다운캐스팉 해주기
+		URL requestUrl = new URL(url); 
+		HttpURLConnection urlConnection = (HttpURLConnection)requestUrl.openConnection(); 
 		urlConnection.setRequestMethod("GET");
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 		
 		String responseText = br.readLine();
 		
-		br.close();//버퍼더리더 반납
-		urlConnection.disconnect(); // 뭐지?
+		br.close();
+		urlConnection.disconnect(); 
 		
-		return responseText; // 응답데이터임!! 	@ResponseBody
+		return responseText; // 응답데이터 	@ResponseBody
 	}
 	
 	
 	
-	
-	
-	// 추가 api -2
+	// API(ISBN 검색)
 	@ResponseBody
 	@RequestMapping(value="searchBook.bk", produces="application/json; charset=UTF-8")
 	public String reviewBookApi (String keyword) throws IOException {
 		
-		//System.out.println(keyword);
-		// url은 손으로 한땀한땀 작성하는게 좋다
-		// 인증서 => 브라우저에 있음 => 우리는 http로 작성할것임! https안됨!!
+		// System.out.println(keyword);
 		String url2 ="http://www.aladin.co.kr/ttb/api/ItemLookUp.aspx";
-		url2 += "?ttbkey=" + serviceKey; // 부여받은 TTBKey값
+		url2 += "?ttbkey=" + serviceKey; 
 		url2 += "&itemIdType=ISBN"; 
-		url2 += "&ItemId=" + keyword; // 출력방법 => json이니까 produces추가해야함!!
+		url2 += "&ItemId=" + keyword; 
 		url2 += "&output=js";
 		url2 += "&Version=20131101";
 		url2 += "&OptResult=ebookList,usedList,reviewList";
-		
 		
 		//System.out.println(url2);
 		
@@ -110,7 +104,7 @@ public class ReviewController {
 		
 		String responseText = br2.readLine();
 		
-		br2.close();//버퍼더리더 반납
+		br2.close();
 		urlConnection2.disconnect(); 
 		
 		return responseText; 
@@ -118,54 +112,14 @@ public class ReviewController {
 	
 	
 	
-		
-	
-	
-	
-	
-	
-	
-	
-	// 리뷰게시판 -> 상품 검색 api 페이지 나옴 => 삭제함
-	/*
-	@RequestMapping("search.re")
-	public String reviewSearchForm() {
-		return "board/reviewBoard/reviewSearchView";
-	}
-	 */
-	
-	
-	// 리뷰게시판 목록 조회 화면 => 몰라 안됨 ㅡㅡ
-	/*
-	@RequestMapping("list.re")
-	public String reviewBoardList(@RequestParam(value="cPage", defaultValue="1") int currentPage, Model model) {
-		
-		System.out.println(currentPage);
-		System.out.println(model);
-		
-		// int listCount, int currentPage, int pageLimit, int boardLimit
-		PageInfo pi = Pagination.getPageInfo(boardService.selectListCount(), currentPage, 10, 4);
-		
-		// (페이징 pi를 가지고)게시글 리스트 조회
-		// ArrayList<ReviewBoard> list = boardService.selectList(pi);
-		model.addAttribute("list", boardService.selectList(pi)); // Model은 단지 담는 용도
-		model.addAttribute("pi", pi);
-		
-		// model에 담았으니까 포워딩해주기(/WEB-INF/views/		board/reviewBoard/reviewListView	.jsp
-		return "board/reviewBoard/reviewListView";
-	}
-	*/
-	
-	// ModelAndView로 바꿔보기 => 리뷰게시판 목록 조회 화면
+	//  리뷰게시판 목록 조회 화면 => ModelAndView 사용 => 메소드체인이 가능해서 코드의 길이가 짧아진다
 	@RequestMapping("list.re")
 	public ModelAndView reviewBoardList(@RequestParam(value="cPage", defaultValue="1") int currentPage, ModelAndView mv) {
 		
 		PageInfo pi = Pagination.getPageInfo(boardService.selectListCount(), currentPage, 10, 4);
 		
 		mv.addObject("pi", pi).addObject("list", boardService.reviewBoardList(pi)).setViewName("board/reviewBoard/reviewListView");
-		// ModelAndView는 메소드체인이 가능해서 코드의 길이가 짧아진다 => 그래서 String으로 사용했을 때 보다 좋다
 		return mv;
-		
 	}
 	
 	

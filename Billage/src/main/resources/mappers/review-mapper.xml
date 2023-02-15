@@ -57,14 +57,14 @@
 	
 
 
-	<!-- isbn 조회 쿼리문 -->
+	<!-- ISBN 조회 -->
 	<select id="selectIsbn" parameterType="book" resultMap="bookResultSet">
-		select
-		       isbn
-		  from 
-		       book
-		 where
-		       book_name = #{bookName}
+		SELECT
+		      ISBN
+		  FROM 
+		      BOOK
+		 WHERE
+		      BOOK_NAME = #{bookName}
 	</select>
 	
 	

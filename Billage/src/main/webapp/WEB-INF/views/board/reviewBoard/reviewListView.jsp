@@ -15,21 +15,11 @@
 
     }
  
-/*     
-    .reviewOption{
-        border:1px solid red;
-    	width:1200px;
-    	height:30px;
-    }
-    
- */ 
- 
     #reviewOption2{
         /* border:1px solid red; */
     	width:1200px;
     	height:70px;
     }
-    
     
     .list-outer{
    		width:1200px;
@@ -46,8 +36,6 @@
     	margin:25px;
     	padding:2px;
     }
-    
-    
 
     .one-content-detail1{
        /*  border:1px solid blue; */
@@ -55,7 +43,6 @@
 		height:50px;
         display:flex;
     }
-
 
   	.one-content-detail2{
   		/* border:1px solid red; */
@@ -65,8 +52,6 @@
   		margin:auto;
   	}
   	
- 
-  	
 	.book-detail1{
 		/* border:1px solid pink; */
 		width:200px; 
@@ -75,7 +60,6 @@
 		margin-left:10px;
 	}
 
-  	
 	.book-detail2{
 		/* border:1px solid pink; */
 		width:300px;
@@ -83,11 +67,7 @@
 		margin-top:10px;
 		margin-left:10px;
 	}
-	
-	
 
-	
-	/* 이거 뭔데 div안에 안들어가냐??! 찜갯수 ㅠ */
 	.one-content-detail3{
 	/* 	border:1px solid black; */
 		width:500px;
@@ -105,9 +85,6 @@
 		justify-content: center;
 	}
 	
-	
-	
-	
 	.ContentRow{
 		height:170px;
 		width:270px;
@@ -118,7 +95,6 @@
 		
 		white-space: normal;
         line-height: 1.2;
-		
 	}
 	
 </style>
@@ -144,12 +120,7 @@
 
 	<!-- 메뉴바 -->
 	<jsp:include page="../../common/header.jsp" />
-    
-    
 
-
-
-	<h1>리뷰게시판</h1>
 	
     <!-- 전체를 감싸는 div -->
     <div class="reviewList-area">

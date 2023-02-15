@@ -200,7 +200,7 @@ public class BoardDao {
 	
 	// 유림시작 ==========================================================
 	
-	// 리뷰게시판 => book테이블에서 책제목으로 isbn 문자열 select하기
+	// 리뷰게시판 => BOOK테이블에서 책제목과 일치하는 ISBN select
 	public Book selectIsbn(SqlSessionTemplate sqlSession, String title) {
 		return sqlSession.selectOne("reviewMapper.selectIsbn", title);
 				
