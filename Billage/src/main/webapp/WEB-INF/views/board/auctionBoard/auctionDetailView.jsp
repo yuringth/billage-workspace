@@ -135,7 +135,8 @@
 			</div>
 			<div style="width:100px">
 					
-					<input type="number" id="bidPrice" value="${ b.nowPrice + b.bidPrice }" width="100px" step="${ b.bidPrice }" min="${ b.nowPrice + b.bidPrice }">
+					<input type="number" id="bidPrice" value="${ b.nowPrice + b.bidPrice }" 
+					width="100px" step="${ b.bidPrice }" min="${ b.nowPrice + b.bidPrice }">
 				
 			</div>
 		</div>
@@ -148,7 +149,6 @@
 				<c:choose>
 				<c:when test="${ loginUser.userNo != b.userNo }">
 					<c:if test="${ loginUser.point >= b.bidPrice && not empty b.instantlyPrice }">
-						
 						<button class="btn1 btn btn-dark" onclick="buy();">
 							즉시구매
 						</button>
@@ -162,10 +162,8 @@
 								입찰
 							</button>
 						</c:if>
-						
 					</c:if>
 					<c:if test="${ loginUser.point >= b.bidPrice && empty b.instantlyPrice }">
-						
 						<c:if test="${ loginUser.userNo == b.prizeUserNo }">
 							<button class="btn1 btn btn-secondary" id="bid" onclick="canNotBid();">
 								입찰
@@ -176,10 +174,8 @@
 								입찰
 							</button>
 						</c:if>
-						
 					</c:if>
 					<c:if test="${ loginUser.point < b.bidPrice && not empty b.instantlyPrice }">
-						
 						<button class="btn1 btn btn-dark" onclick="notEnoughtPoint();">
 							즉시구매
 						</button>
@@ -193,10 +189,8 @@
 								입찰
 							</button>
 						</c:if>
-						
 					</c:if>
 					<c:if test="${ loginUser.point < b.bidPrice && empty b.instantlyPrice }">
-						
 						<c:if test="${ loginUser.userNo == b.prizeUserNo }">
 							<button class="btn1 btn btn-secondary" id="bid" onclick="canNotBid();">
 								입찰
@@ -207,24 +201,19 @@
 								입찰
 							</button>
 						</c:if>
-						
 					</c:if>
 				</c:when>
 				<c:otherwise>
-				
 					<button class="btn1 btn btn-secondary" disabled>
 						작성자입니다.
 					</button>
-					
 				</c:otherwise>
 				</c:choose>
 			</c:when>
 			<c:otherwise>
-			
 					<button class="btn1 btn btn-secondary" disabled>
 						로그인을 해주세요
 					</button>
-				
 			</c:otherwise>
 			</c:choose>
 			
@@ -276,17 +265,15 @@
 		    	$('.time').text(day +'일 ' + hour + ':' + min + ':' + sec);
 		    	priceCheck();
 		    } else {
-		    	
 		    	clearInterval(interval); //인터벌 종료
-		    	
 		    	$('.time').text('시간 종료');
 		    	$('.btn1').attr('disabled', true).text('시간 종료');
 		    	if($('#prizeUserNo').val() != 1 || $('#prizeUserNo').val() == 0){
 				    selectPrizeUser();
 		    	}
-		    	
 		    }
 		}
+		
 		
 		function priceCheck(){
 			
@@ -299,15 +286,11 @@
 					$('#nowPrice').text('현재가격 : ' + result.nowPrice + 'P');
 					$('#prizeUserNo').val(result.prizeUserNo);
 					$('#inputNowPrice').val(result.nowPrice);
-				 },
-				 error : function(){
-					 console.log('error');
 				 }
 			 })
 		}
 		
 		function bid(){
-			
 			if(confirm('입찰하시겠습니까?')){	 
 				$.ajax({
 					 url : 'bid.ac',
@@ -323,17 +306,12 @@
 						$('#bidPrice').val(result.nowPrice + ${b.bidPrice});
 						$('#bidPrice').attr('min', result.nowPrice + ${b.bidPrice});
 						$('#bid').attr('onclick', 'canNotBid();');
-					 },
-					 error : function(){
-						 console.log('error');
 					 }
 				 })
 			}
 		}
 		
-		
 		function buy(){
-			
 			if(confirm('즉시구매 하시겠습니까?')){	 
 				
 				$.ajax({
@@ -352,14 +330,11 @@
 						$('#bidPrice').val(result.nowPrice);
 						$('#closeDate').val(result.closeDate);
 						alert('즉시구매 완료');
-					 },
-					 error : function(){
-						 console.log('error');
 					 }
 				 });
 			}
-			
 		}
+		
 		
 		
 		function postFormSubmit(){
@@ -382,8 +357,6 @@
 				},
 				success : function(result){
 					$('#nowprice').text('낙찰금액 : ' + result.nowPrice + 'P');
-				},error : function(){
-					console.log('오류');
 				}
 			});
 		}

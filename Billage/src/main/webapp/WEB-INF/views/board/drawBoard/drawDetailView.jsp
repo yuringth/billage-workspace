@@ -169,7 +169,6 @@
 		$(function(){
 			tryBtnChange();
 			interval = setInterval(closeCount, 500);
-			
 		})
 		
 		function closeCount(){
@@ -196,7 +195,6 @@
 		    if(remaindTime >= 0){
 		    	$('.time').text(day +'일 ' + hour + ':' + min + ':' + sec);
 		    } else {
-		    	
 		    	clearInterval(interval); //인터벌 종료
 		    	
 		    	$('.time').text('응모 시간 종료');

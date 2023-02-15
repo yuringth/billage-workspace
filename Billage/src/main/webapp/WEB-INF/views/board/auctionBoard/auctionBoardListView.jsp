@@ -97,7 +97,7 @@
 		       		<input type="hidden" value="${ b.boardNo }" class="boardNo">
 		        	<input type="hidden" value="${ b.closeDate }" class="closeDate">
 		            <div class="img-area">
-		                <img src="${ b.changeName }">
+		                <img src="${ b.changeName }" style="width: 100%; height : 100%">
 		            </div>
 		            <div class="text-area">
 		                <p class="title-text">${ b.title }</p>
@@ -106,14 +106,10 @@
 		                <p class="countnum">입찰 : ${ b.bidCount}  조회 : ${ b.count }</p>
 		            </div>
 		        </div>
-		        
 			</c:forEach>
-		
 		</div>
 		
-		<div class=outOutter></div>
-		
-		
+		<div class=outOutter></div> <!-- 새로 불러온 페이지 담을 div -->
     </div>	
 
     <jsp:include page="../../common/footer.jsp"/>
@@ -187,11 +183,11 @@
 			    		       +	'<input type="hidden" value="' + list[i].boardNo + '" class="boardNo">'
 			    		       + 	'<input type="hidden" value="' + list[i].closeDate + '" class="closeDate">'
 			    		       +     '<div class="img-area">'
-			    		       +         '<img src="' + list[i].changeName + '">'
+			    		       +         '<img src="' + list[i].changeName + '" style="width: 100%; height : 100%">'
 			    		       +     '</div>'
 			    		       +     '<div class="text-area">'
 			    		       +         '<p class="title-text">' +  list[i].title + '</p>'
-			    		       +         '<p class="textsize">현재 가격 : ' + list[i].nowPrice + 'P</p>'
+			    		       +         '<p class="textsize">현재 가격 : ' + list[i].nowPrice + 'P</p>' 
 			    		       +         '<p class="textsize time"></p>'
 			    		       +         '<p class="countnum">입찰 : ' + list[i].bidCount + ' 조회 : ' + list[i].count + '</p>'
 			    		       +     '</div>'

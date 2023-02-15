@@ -322,7 +322,7 @@
 		 WHERE
 		 		DRAW_NO = #{boardNo}
 	</update>
-	
+		
 	<!-- 총 적립된 추첨 포인트 조회 -->
 	<select id="selectDrawPoint" parameterType="_int" resultType="_int">
 		SELECT
