@@ -230,11 +230,6 @@
 			
 		</div>
 		
-		
-		
-		
-		
-		
 		<c:if test="${ loginUser.userNo ==  b.userNo}">
 			<button onclick="postFormSubmit();" >삭제하기</button>
 		</c:if>
@@ -245,21 +240,17 @@
 			<input type="hidden" name="boardNo" value="${b.boardNo}">
 		</form>
 		
-		
 	</div>
 	
 	
-	<script>
+	<script> 
 		//전역변수 선언
 		var interval;
-		
 		
 		$(function(){
 			interval = setInterval(closeCount, 500);
 			
 		})
-		
-	
 		
 		function closeCount(){
 			var end = new Date($('#closeDate').val());
@@ -330,7 +321,6 @@
 						$('#nowPrice').text('현재가격 : ' + result.nowPrice + 'P');
 						$('#prizeUserNo').val(result.prizeUserNo);
 						$('#bidPrice').val(result.nowPrice + ${b.bidPrice});
-						//여기에 최소값 어쩌구 설정하기					
 						$('#bidPrice').attr('min', result.nowPrice + ${b.bidPrice});
 						$('#bid').attr('onclick', 'canNotBid();');
 					 },
@@ -368,7 +358,6 @@
 					 }
 				 });
 			}
-			 
 			
 		}
 		

@@ -18,7 +18,7 @@
 
 
 .book-detail-outer{
-	border : 1px solid blue;
+	/* border : 1px solid blue; */
 	width:620px;
 	height:200px;
 	margin:auto;
@@ -26,7 +26,7 @@
 
 
 .book-detail-area{
-	border : 1px solid black;
+	/* border : 1px solid black; */
 	width:620px;
 	height:200px; 
 	display:flex;
@@ -35,7 +35,7 @@
 
 /* 사진  */
 .content-photo-detail{
-	border:1px solid red;
+	/* border:1px solid red; */
 	width:200px;
 	height:200px;
 	margin-right:20px;
@@ -43,13 +43,13 @@
 
 /* 책 정보 */
 .content-book-detail{
-	border:1px solid pink;
+	/* border:1px solid pink; */
 	width:400px;
 	height:200px;
 }
 
 #book_content, #book_title, #book_author, #book_publisher, #book_data{
-	border:1px solid pink;
+	/* border:1px solid pink; */
 	height:50px;
 }
 
@@ -86,10 +86,7 @@
 		
 		<!-- 리뷰넘버 식별자로 넘기기 -->
 		<input type="hidden" name="reviewNo" value="${ b.reviewNo }" id="review-no">
-		${ b.reviewNo }
 		<input type="hidden" name="userNo" value="${ b.userNo }">
-		${ b.userNo }
-		
 		
 		<hr>
 		
@@ -100,9 +97,7 @@
 				<div class="content-photo-detail">
 					<!-- api에서 끌고 오는거니까 첨부파일로 안해도 되는게 맞겠지? <input type="file" name="upfile"> 이런식으로.. -->
 					<img id="book_imag" class="card-img-top" src="${ b.bookImag }" alt="책사진" style= "width:200px; height:200px;">
-					
 				</div>
-				
 				<!-- review 테이블 : book_content, book_publisher, book_date 컬럼 추가  -->
 				<div class="content-book-detail">
 					<div id="book_title" name="bookTitle">${ b.bookTitle }</div>
@@ -113,12 +108,10 @@
 			</div>
 		</div>
 		
-		
 		<hr>
 
-		<!-- 매란언니한테 알려달라하기 -->
 		<div style="text-align:center;">
-			별점 : ${ b.reviewStar } 
+			별점 : ${ b.reviewStar } 점
 		</div>
 
 		<br>
@@ -126,22 +119,20 @@
 		<div class="review-content-outer">
 			<textarea id="review_content" name="reviewContent" rows="20" cols="100" style="resize:none" maxlength="1000" required readonly>${ b.reviewContent }</textarea>
 			
-			<hr>
-			
-			<!-- 좋아요기능 -->
+			<!-- 좋아요기능(뺄거임~) -->
 			<div><button>♡</button></div>
 			
 			<!-- 유저넘버 == 글작성자한테 보이게 하기 -->	
 			<div style="text-align:center;">
 				<c:choose>
 					<c:when test="${loginUser.userNo eq b.userNo}">
-						<button onclick="postFormSubmit()">글수정</button>
-						<button onclick="location.href='delete.re?reviewNo=${ b.reviewNo }&userNo=${ b.userNo }'">글삭제</button>
-						<button onclick="back();">뒤로가기</button>
+						<button onclick="postFormSubmit()" class="btn btn-outline-primary">글수정</button>
+						<button onclick="location.href='delete.re?reviewNo=${ b.reviewNo }&userNo=${ b.userNo }'" class="btn btn-outline-primary">글삭제</button>
+						<button onclick="back();" class="btn btn-outline-secondary">뒤로가기</button>
 					</c:when>
 					<c:otherwise>	
-						<button onclick="back();">뒤로가기</button>
-						<button onclick="location.href='insertForm.ro?reviewNo=${b.reviewNo}'">신고하기</button>
+						<button onclick="back();" class="btn btn-outline-secondary">뒤로가기</button>
+						<button onclick="location.href='insertForm.ro?reviewNo=${b.reviewNo}'" class="btn btn-outline-dark">신고하기</button>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -216,10 +207,10 @@
 	<script>
 		/* 실행되면 => 우선적으로 댓글 목록 띄우기 */
 		$(function(){
-			
 			selectReviewReplyList();			
 		});
 	
+		
 		/* 댓글 목록 띄워주기 */
 		function selectReviewReplyList(){
 			

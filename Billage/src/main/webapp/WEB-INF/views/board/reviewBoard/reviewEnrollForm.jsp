@@ -26,7 +26,7 @@
 
 
 .book-detail-outer{
-	border : 1px solid blue; 
+	/* border : 1px solid blue;  */
 	width:620px;
 	height:200px;
 	margin:auto;
@@ -66,14 +66,9 @@
 	height:50px;
 }
 
-
-
-
 .review-content-outer{
 	text-align:center;
 }
-
-
 
 
 /*모달관련 스타일*/
@@ -113,6 +108,8 @@
    }
 
 
+
+
 /* 모달 content 스타일  */
     .text-div{
     	text-align:center;
@@ -126,38 +123,125 @@
     	align:center;
     }
     
-    
+ 
     .content-area1{
-    	border:1px solid black;
-    	width:75px;
+    /* 	border:1px solid black; */
+    	width:600px;
+    	display:flex; 
     }
-
-
-    .content-area2{
-    	border:1px solid black;
-    	width:550px;
-    	display:flex;
-    }
+    
     .content-detail1{
-    	border:1px solid red;
-    	width:100px;
+    	/* border:1px solid red; */
+    	width:150px;
+    	height:200px;
     }
     .content-detail2{
-    	border:1px solid blue;
+    	/* border:1px solid blue; */
     	width:450px;
-    	height:120px;
+    	height:200px;
     }
+    
     #md_book_title, #md_book_author, #md_book_date, #md_book_publisher{
-    	border: 1px solid black;
+    	/* border: 1px solid red; */
     	height:50px;
     	margin:0px;
     }
     
-    
-    .content-area3{
-    	border:1px solid black;
-    	width:75px;
+    .content-area2{
+    	/* border:1px solid black; */
+    	width:100px;
+    	height:200px;
     }    
+    
+    #md_img{
+    	width:150px;
+    	height:200px;
+    }
+    
+ 
+ 
+
+/* 모달관련스타일2 */
+   #modal-book-search2{
+      position: fixed;
+        width: 1000px;
+        height:800px;
+        background-color: skyblue;
+        border-radius: 20px;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        top: 50%;
+        z-index: 1005;
+        text-align: center;
+        display: none;
+   }
+   
+   #modal-close-btn2 {
+      font-size: 25px;
+        background-color:skyblue;
+        border: 1px solid rgba(245, 245, 220, 0);
+        cursor: pointer;
+        color:rgb(0, 0, 0);
+        padding-left: 955px;
+   }   
+
+   
+   #result-area2{
+      margin : auto;
+      width : 980px;
+      height : 700px;
+   }
+   
+   #enter-addr-in2{
+      width : 980px;
+      height : 700px;
+      overflow : scroll;      
+   }
+   
+    /* 모달 content 스타일2 */
+    .text-div{
+    	text-align:center;
+    }
+    
+    .book-outer2{
+    	display:flex;
+    	margin:auto;
+    	width:700px;
+    	height:200px;
+    	align:center;
+    }
+
+    .content-area-1{
+    	/* border:1px solid pink; */
+    	width:600px;
+    	display:flex;
+    }
+    
+    .content-detail-1{
+  /*   	border:1px solid pink; */
+    	width:150px;
+    	height:200px;
+    }
+    
+    .content-detail-2{
+    	/* border:1px solid pink; */
+    	width:450px;
+    	height:200px;
+    }
+    
+    #md_book_title, #md_book_author, #md_book_date, #md_book_publisher{
+    /* 	border: 1px solid pink; */
+    	height:50px;
+    	margin:0px;
+    }
+    
+    .content-area-2{
+    	/* border:1px solid black; */
+    	width:100px;
+    	height:200px;
+    }    
+    
+    
     
     
     
@@ -199,7 +283,20 @@
 
 		<hr>
 		<div>
-			<button class="modal-up-btn">상품모달검색</button>
+		
+			<button class="modal-up-btn btn btn-primary">
+    			<span class="spinner-border spinner-border-sm"></span>
+    			제목검색
+  			</button>
+  			
+  					
+			<button class="modal-up-btn2 btn btn-primary">
+    			<span class="spinner-border spinner-border-sm"></span>
+    			ISBN검색
+  			</button>
+  			
+  			
+			<!-- <button class="modal-up-btn">상품모달검색</button> -->
 		</div>
 		
 		<!-- api끌고오는건데 enctype으로 해야하는게 맞을까?? -->
@@ -293,8 +390,8 @@
 				<hr>
 					
 				<div style="text-align:center;">
-					<button type="submit">글작성</button>
-					<button type="reset">취소</button>
+					<button type="submit" class="btn btn-outline-primary">글작성</button>
+					<button type="reset" class="btn btn-outline-secondary">취소</button>
 				</div>
 			</div>
 			
@@ -303,7 +400,7 @@
  
  
  
-		<!-- api 모달창 시작 -->
+		<!-- api 모달창 뜨는 화면1 -->
 		<div id="modal-book-search">
 			<button type="button" id="modal-close-btn">&times;</button>
 			
@@ -331,7 +428,38 @@
 				</div>
 			</div>
 		</div>
-		<!-- api 모달창 끝 -->
+		<!-- api 모달창 뜨는 화면 끝 -->
+		
+		
+		
+		<!-- api 모달창 뜨는 화면2 -->
+		<div id="modal-book-search2">
+			<button type="button" id="modal-close-btn2">&times;</button>
+			
+			<div id="search-area">
+				<div id="search-text"> 
+					<div class="text-div">
+			    		<input type="text" id="keyword" placeholder="도서 ISBN을 작성해주세요">
+			    		<button onclick="search2();">이동</button>
+					</div>   
+				</div>
+				<div id="result-area2">
+			   		<div class="text-div">
+						<p>"검색이름"로 1개의 검색 결과가 있습니다.</p>
+					</div>
+					
+					<hr>
+							
+			        <!-- 책상품 하나의div  -->
+			        <div class="book-outer2">
+			        	
+			        	<!--  ajax해서 가져온 책 정보를 띄워줌  -->
+			        	
+			        </div>
+				</div>
+			</div>
+		</div>
+		<!-- api 모달창 뜨는 화면 끝 -->
 
 
 	<!-- 전체 outer /div -->	
@@ -340,7 +468,7 @@
  	
  
 	
- 	<!-- api 모달창 -->
+ 	<!-- api 모달창1 -->
 	<script>
 	    $(function(){
 	        $('.modal-up-btn').click(function(){
@@ -359,6 +487,7 @@
 	    
 	    
 		 function search(){
+				console.log("잘들어옴?" + $('#title').val());
 			 $.ajax({
 				url:'search.bk',
 				data:{ // 요청시 전달 값
@@ -366,6 +495,8 @@
 				},
 				
 				success : function(result){
+					
+					console.log(result);
 					
 					const item = result.item[0];
 					//const count = Object.keys(result).size; => 어케 구하냐
@@ -377,37 +508,24 @@
 						
 					let thumb = item.cover;
 					
-					value += '<div><p>"검색이름"로 1개의 검색 결과가 있습니다.</p></div>'
-						  
-						  + '<div class="content-area1">'
-						  + '<p>' + 1 + '</p>'
-						  + '</div>'
-						  + '<div class="content-area2">'
+					value += '<div class="content-area1">'
 						  + '<div class="content-detail1">'
 						  + '<div><img id="md_img" src="' + thumb + '"></div>'
 						  + '</div>'
 						  + '<div class="content-detail2">'
-						  
 						  + '<p id="md_book_title" name="mdbookTitle">' + item.title + '</p>'
 						  + '<p id="md_book_author" name="mdbookAuthor">' + item.author + '</p>'
 						  + '<p id="md_book_date" name="mdbookDate">' + item.pubDate + '</p>'
 						  + '<p id="md_book_publisher" name="bookPublisher">' + item.publisher + '</p>'
-						  
 						  + '</div>'
 						  + '</div>'
-						  + '<div  class="content-area3">'
+						  + '<div  class="content-area2">'
 						  + '<button id="modal-result-btn">선택</button>'
 						  + '</div>';
-						  
-							  
 					$('.book-outer').html(value);
 					$('#title').val(title);
-					
 					$("#title").val('');
-					
-					
 				},
-				
 				error: function(){
 					console.log('실패');
 				}
@@ -424,11 +542,90 @@
 				 $('#book_src').attr('src', $('#md_img').attr('src')); //https://image.aladin.co.kr/product/7608/30/coversum/8994492038_1.jpg
 				 $('#bookImag').val($('#md_img').attr('src')); //https://image.aladin.co.kr/product/7608/30/coversum/8994492038_1.jpg
 				 
-				 
 				 $('#modal-book-search').hide();
 			 })
 		 });
 	</script>
+
+
+
+ 	<!-- api 모달창2 -->
+	<script>
+	    $(function(){
+	        $('.modal-up-btn2').click(function(){
+	           $('#modal-book-search2').show();
+	        });
+	        
+	        $('#modal-close-btn2').click(function(){
+	           $('#modal-book-search2').hide();
+	           
+	        });
+	     });
+	    
+	    
+		 function search2(){
+			console.log("잘들어옴?" + $('#keyword').val());
+			 $.ajax({
+				url:'searchBook.bk',
+				data:{ 
+					keyword : $('#keyword').val()
+				},
+				success : function(result){
+					console.log(result);
+					
+					const item = result.item[0];
+					//const count = Object.keys(result).size; => 어케 구하냐
+					
+					console.log(item);
+					//console.log(count);
+					
+					let value ='';
+						
+					let thumb = item.cover;
+					
+					value += '<div class="content-area-1">'
+						  + 	'<div class="content-detail-1">'
+						  + 		'<div><img id="md_img" src="' + thumb + '"></div>'
+						  +		'</div>'
+						  + 	'<div class="content-detail-2">'
+						  + 		'<p id="md_book_title" name="mdbookTitle">' + item.title + '</p>'
+						  + 		'<p id="md_book_author" name="mdbookAuthor">' + item.author + '</p>'
+						  + 		'<p id="md_book_date" name="mdbookDate">' + item.pubDate + '</p>'
+						  + 		'<p id="md_book_publisher" name="bookPublisher">' + item.publisher + '</p>'
+						  + 	'</div>'
+						  + '</div>'
+						  + '<div  class="content-area-2">'
+						  + 	'<button id="modal-result-btn2">선택</button>'
+						  + '</div>';
+					$('.book-outer2').html(value);
+					$('#keyword').val(keyword);
+					
+					$("#keyword").val('');
+						
+				},
+				error: function(){
+					console.log('실패');
+				}
+			 });
+		 };
+	    
+		 $(function(){
+			 $(document).on('click', '#modal-result-btn2', function(){
+				 
+				 $('#book_title').val($('#md_book_title').text());
+				 $('#book_author').val($('#md_book_author').text());
+				 $('#book_publisher').val($('#md_book_publisher').text());
+				 $('#book_date').val($('#md_book_date').text());
+				 $('#book_src').attr('src', $('#md_img').attr('src')); //https://image.aladin.co.kr/product/7608/30/coversum/8994492038_1.jpg
+				 $('#bookImag').val($('#md_img').attr('src')); //https://image.aladin.co.kr/product/7608/30/coversum/8994492038_1.jpg
+				 
+				 
+				 $('#modal-book-search2').hide();
+			 })
+		 });
+	</script>
+
+
 
 	 
 	 

@@ -16,7 +16,7 @@
 }
 
 .photo-area{
-	border:1px solid red;
+	/* border:1px solid red; */
 	height:400px;
     width:100%;
    	text-align:center;
@@ -28,7 +28,7 @@
 
 /* 이것도 왜 버튼 flex잘 안되냐고~~~!  */
 .user-area{
-	border:1px solid pink;
+/* 	border:1px solid pink; */
 	height:100px;
 	display:flex;
 }
@@ -44,18 +44,18 @@
 
 
 .writer-area{
-	border:1px solid blue;
+	/* border:1px solid blue; */
 	height:660px;
 	margin:0px;
 }
 #used_title, #used_genre, #used_price, #count{
-	border:1px solid skyblue;
+	/* border:1px solid skyblue; */
 	height: 50px;
 	margin:0px;
 	text-align:center;
 }
 #used_content{
-	border:1px solid skyblue;
+	/* border:1px solid skyblue; */
 	height: 300px;
 	margin:0px;
 	text-align:center;
@@ -80,15 +80,15 @@
   .align-left-outer{
       display: flex;
       flex-wrap: wrap;
-      width : 400px;
+      width : 490px;
       height: 534px;
   }
   .one-content{
-      width : 400px;
+      width : 450px;
       height: 534px;
       padding-left: 8px;
       padding-right: 8px;
-      padding-bottom: 16px;
+      padding-bottom: 16px; 
   }
   .img-area{
       width : 100%;
@@ -132,7 +132,7 @@ font-size: 25px;
 		
 		<div class="user-area">
 			<div class="user-div">
-				<p id="user_no" name="userNo">유저 : ${ b.nickname }</p>
+				<p id="user_no" name="userNo">판매자 : ${ b.nickname }</p>
 				<button>채팅하기</button>
 			</div>
 		</div>
@@ -154,9 +154,9 @@ font-size: 25px;
 			<p id="used_price" name="usedPrice">판매 가격 : ${ b.point }</p>
 			<p id="used_content" name="usedContent">게시글 내용 : ${ b.usedContent }</p>
 			
-			<p id="count" name="count">조회수</p>
-			<p id="count" name="count">관심수</p>
-			<p id="count" name="count">채팅수</p>
+			<p id="count" name="count">조회수 : ${ b.count }</p>
+			<!-- <p id="count" name="count">관심수</p>
+			<p id="count" name="count">채팅수</p> -->
 		</div>
 		
 		
@@ -203,10 +203,10 @@ font-size: 25px;
 		}
 	</script>
 
-
+		<br>
 		<!-- 인기 topN분석 -->
 		<h1 class="topn-text">Billage의 인기중고</h1>
-	
+		<br>
 		<div class="topn-outer">
 		
 			<!-- topn 리스트 뿌리는 곳 -->
@@ -236,26 +236,25 @@ font-size: 25px;
 	   			url:'topList.ud',
 	   			success:function(data){
 	   				console.log(data);
-	   				
+	   				console.log(data[0].count);
 	   				let value = '';
 	   				for(let i in data){
 	   					value += '<div class="align-left-outer">'
 	   						  + '<div class="one-content">'
 	   						  + '<div class="img-area">'
 	   						  + '<input id="clickNo" type="hidden" name="usedNo" value="' + data[i].usedNo + '"/>'
-	   						  + '<img src="' + data[i].changeName + '">'
+	   						  + '<img src="' + data[i].changeName + '" style="height:400px; width:400px;">'
 	   						  + '</div>'
 	   						  + '<div class="text-area">'
 	   						  + '<p class="title-text">책제목 : ' + data[i].bookTitle + '</p>'
 	   						  + '<p class="textsize">판매 금액 : ' + data[i].point + '</p>'
-	   						  + '<p class="textsize">' + '♡'  + '</p>'
+	   						 /*  + '<p class="textsize">' + '♡'  + '</p>' */
 	   						  + '<p class="countnum">' + '조회 :' + data[i].count + '</p>'
 	   						  + '</div>'
 	   						  + '</div>'
 	   						  + '</div>';
 	   				}
 	   				$('.topn-outer').html(value);
-	   				
 	   				
 	   			},
 	   			error:function(){
