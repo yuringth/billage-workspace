@@ -82,11 +82,18 @@
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    
+    <!-- 동일 추가(추가안하면 정렬 두번 안눌림;;;;) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     
     
 </head>
@@ -131,9 +138,11 @@
 			    <div class="text">
 			        <input type="text" class="form-control" name="keyword" value="${ keyword }">
 			    </div>
-			    <button type="submit" class="searchBtn btn btn-secondary">검색</button>
+			    <button type="submit" class="searchBtn btn btn-secondary">키워드 검색</button>
 			</form>
 		</div>
+		
+		<br><br>
 		
 		<c:if test="${ not empty condition }">
 			<script>
@@ -155,10 +164,10 @@
 		        	
 		        	<div class="stock-status">
 						<c:if test="${ b.stockStatus == 'N'}">
-							<p>판매중</p>
+							<p class="btn btn-outline-secondary">판매중</p>
 						</c:if>		        		
 							<c:if test="${ b.stockStatus == 'Y'}">
-							<p>판매완료</p>
+							<p class="btn btn-outline-secondary">판매완료</p>
 						</c:if>		
 					</div>
 					
@@ -178,7 +187,7 @@
 			            </div>
 					</div>
 			            <div class="text-area">
-			                <p class="textsize">♡</p>
+			                <!-- <p class="textsize">♡</p> -->
 			                <p class="countnum">조회 : ${ b.count }</p>
 			            </div>
 					

@@ -35,20 +35,7 @@
 		<hr>
 		<br>
 		<div><h2>취향분석</h2></div>
-		<!-- 
-		<div class="star">
-			<div id="0.5"><span></span></div>
-			<div id="1"><span prfix="1"></span></div>
-			<div id="1.5"><span></span></div>
-			<div id="2"><span prfix="2"></span></div>
-			<div id="2.5"><span></span></div>
-			<div id="3"><span prfix="3"></span></div>
-			<div id="3.5"><span></span></div>
-			<div id="4"><span prfix="4"></span></div>
-			<div id="4.5"><span></span></div>
-			<div id="5"><span prfix="5"></span></div>
-		</div>
-		 -->
+		
 		 <div>
 		  <canvas id="myChart"></canvas>
 		</div>

@@ -293,7 +293,7 @@
 					       count(*)
 					from
 					       review       
-					where
+					where	
 					       user_no=#{userNo}
 					  and
 				          review_status='N'          

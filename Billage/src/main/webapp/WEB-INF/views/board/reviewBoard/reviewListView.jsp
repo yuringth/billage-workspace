@@ -39,16 +39,18 @@
     }
     
     .one-content{
-   		border:1px solid forestgreen;
+   		border:1px solid black; 
+   		border-radius:1rem;
     	width:500px;
-    	height:400px;
+    	height:430px;
     	margin:25px;
+    	padding:2px;
     }
     
     
 
     .one-content-detail1{
-        border:1px solid blue;
+       /*  border:1px solid blue; */
 		width:500px;
 		height:50px;
         display:flex;
@@ -56,7 +58,7 @@
 
 
   	.one-content-detail2{
-  		border:1px solid red;
+  		/* border:1px solid red; */
   		width:500px;
 		height:250px;
   		display:flex;
@@ -66,7 +68,7 @@
  
   	
 	.book-detail1{
-		border:1px solid pink;
+		/* border:1px solid pink; */
 		width:200px; 
 		height:220px;
 		margin-top:10px;
@@ -75,7 +77,7 @@
 
   	
 	.book-detail2{
-		border:1px solid pink;
+		/* border:1px solid pink; */
 		width:300px;
 		height:220px;
 		margin-top:10px;
@@ -87,11 +89,10 @@
 	
 	/* 이거 뭔데 div안에 안들어가냐??! 찜갯수 ㅠ */
 	.one-content-detail3{
-		border:1px solid black;
+	/* 	border:1px solid black; */
 		width:500px;
 		height:100px;
 	}
-
 
 	* {
 	  margin: 0;
@@ -102,6 +103,22 @@
 	.pagingArea{
 		display : flex;
 		justify-content: center;
+	}
+	
+	
+	
+	
+	.ContentRow{
+		height:170px;
+		width:270px;
+		overflow:hidden;
+		text-overflow:ellipsis;
+		/* white-space:nowrap; */
+		display:block;
+		
+		white-space: normal;
+        line-height: 1.2;
+		
 	}
 	
 </style>
@@ -175,7 +192,7 @@
 		            	<input type="hidden" value="${ b.bookAuthor }">
 		            	<input type="hidden"  class ="fuserNo" value="${b.userNo }">
 		            <%-- 	<input class="bno" type="hidden" value="${ b.reviewNo }"> --%>
-		                <div>유저 닉네임: ${ b.nickname }</div>                                              
+		                <div>작성자: ${ b.nickname }</div>                                              
 		                <div class="card-footer">
 		                 	   별점 : ${ b.reviewStar }
 		                </div>
@@ -192,10 +209,10 @@
 						
 						<div class="book-detail2">	            
 				            <div>
-				            	<div style="height:80px; font-weight:bold;" >${ b.bookTitle }</div>
+				            	<div style="height:50px; font-weight:bold;" >${ b.bookTitle }</div>
 				            </div>
 			    	        <div>
-			  	  	       		<div style="height:140px;">${ b.reviewContent }</div>
+			  	  	       		<div class="ContentRow">${ b.reviewContent }</div>
 			    	        </div>
 						</div>
 						<br>
@@ -203,9 +220,10 @@
 		
 		            <div class="one-content-detail3">
 		            	<input class="bno" type="hidden" id="reviewlikeNo" value="${ b.reviewNo }">
-		            	<button id="reviewLikeBtn" onclick="reviewLikeIncrease();">♡ </button>
-		            	<span>좋아요수</span>
-	            		<div> 댓글(3) 리뷰등록수(3) 조회수${ b.count }</div>
+		            	<br><br>
+		            	<!-- <button id="reviewLikeBtn" onclick="reviewLikeIncrease();">♡ </button>
+		            	<span>좋아요수</span> -->
+	            		<div> 댓글(3) 조회수${ b.count }</div>
 		            	<div>${ b.createDate }</div>
 		            </div>
 		        </div>
@@ -248,7 +266,7 @@
 	<!-- 로그인 한 유저만 버튼 보임 -->
 	<c:if test="${ not empty loginUser }">
 		<div class="pagingArea">
-			<button class="btn btn-secondary" onclick="location.href='insert.re'">글작성</button>
+			<button class="btn btn-outline-primary" onclick="location.href='insert.re'">글작성</button>
 		</div>
 	</c:if>
 	<!-- 페이지 처리 끝  -->
