@@ -124,7 +124,7 @@
 		</div>		
 				
 				
-		
+		<!-- 검색 기능  -->
 		<div class="search-area">
 			<form id="searchForm" action="searchForm.ud" method="get">
 				<input type="hidden" name="currentPage" value="1">

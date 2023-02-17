@@ -81,7 +81,7 @@
       display: flex;
       flex-wrap: wrap;
       width : 490px;
-      height: 534px;
+      height: 544px;
   }
   .one-content{
       width : 450px;
@@ -204,12 +204,13 @@ font-size: 25px;
 	</script>
 
 		<br>
+		
 		<!-- 인기 topN분석 -->
 		<h1 class="topn-text">Billage의 인기중고</h1>
 		<br>
 		<div class="topn-outer">
 		
-			<!-- topn 리스트 뿌리는 곳 -->
+			<!-- Top-N 리스트 가져오는 곳 -->
 
 		</div>
 
@@ -217,19 +218,17 @@ font-size: 25px;
    	
    	
    	
-   	<!-- topn분석 -->
+   	<!-- Top-N 분석 -->
    	<script>
    		$(function(){
-   			topUsedList();
-   			
-   			// ***** 동적으로 만들어진 요소에 이벤트 부여방법 *****
+   			topUsedList(); 
+   			// 동적으로 만들어진 요소에 이벤트 부여
+   			// Top-N 분석으로 생성 된 게시글 클릭 시 게시글 상세페이지로 이동
 			$(document).on('click', '.one-content', function(){
 				location.href='detail.ud?usedNo=' + $(this).find('#clickNo').val();
-				//console.log($(this).find('#clickNo').val());
 			})
-			// setInterval(topBoardList, 10000000); // 몇초당 나오게 하는 것
-   			
-   		})
+			setInterval(topBoardList, 5000); // 일정 시간 간격으로 함수가 주기적으로 실행
+   		});
    	
 	   	function topUsedList(){
 	   		$.ajax({
@@ -248,28 +247,20 @@ font-size: 25px;
 	   						  + '<div class="text-area">'
 	   						  + '<p class="title-text">책제목 : ' + data[i].bookTitle + '</p>'
 	   						  + '<p class="textsize">판매 금액 : ' + data[i].point + '</p>'
-	   						 /*  + '<p class="textsize">' + '♡'  + '</p>' */
 	   						  + '<p class="countnum">' + '조회 :' + data[i].count + '</p>'
 	   						  + '</div>'
 	   						  + '</div>'
 	   						  + '</div>';
 	   				}
 	   				$('.topn-outer').html(value);
-	   				
 	   			},
 	   			error:function(){
 	   				console.log('실패');
 	   			}
 	   		})
-	   	}
-   	
-   	
+	   	};
    	</script>
  
-   	
-   	
-   	
-	
 	
 	
     <jsp:include page="../../common/footer.jsp"/>	
