@@ -106,7 +106,7 @@
 	
 	
 	
-	<!-- 글작성 => 1) 중복되는 책 있는지 select하여 확인 (bookTitle로 조회 => 한 행이 있는지 없는지) -->
+	<!-- 글작성 => 1) 기존에 작성한 리뷰의 책 제목이 있는지 select하여 확인 (bookTitle로 조회 => 한 행이 있는지 없는지) -->
 	<select id="selectBookTitle" parameterType="review" resultMap="reviewResultSet">
        select
               book_title
@@ -163,7 +163,7 @@
 		   set
 		       count = count + 1
 		 where
-		       review_no = #{ reviewNo }
+		       review_no = #{reviewNo}
 		   and
 		       review_status = 'N'
 	</update>
@@ -189,7 +189,7 @@
 		 where
 		 	   review_status = 'N'
 		   and
-		       review_no = #{ reviewNo }
+		       review_no = #{reviewNo}
 	</select>	
 	
 	
@@ -201,12 +201,11 @@
 		   set
 		       review_status = 'Y'
 		where
-		       review_no = #{ reviewNo }
+		       review_no = #{reviewNo}
 	</update>
 	
-	
-	
-	<!-- 글수정 => 1) 중복되는 책 있는지 확인(리뷰넘버로 책제목조회) -->
+
+	<!-- 게시글 수정 => 기존에 작성한 리뷰에서 책제목과 리뷰넘버 조회 -->
 	<select id="selectBookTitle2" parameterType="review" resultMap="reviewResultSet">
        select
               book_title
@@ -222,20 +221,19 @@
 	</select>	
 	
 	
-	
-	<!-- 게시글 수정 -->
+	<!-- 게시글 수정 => update -->
 	<update id="updateReviewBoard" parameterType="review">
 		update
 		       review
 		   set
-		        book_title = #{ bookTitle }
-               ,book_author = #{ bookAuthor }
-               ,book_publisher = #{ bookPublisher }
-               ,book_imag = #{ bookImag }
-               ,review_star = #{ reviewStar }
-               ,review_content = #{ reviewContent }
+		        book_title = #{bookTitle}
+               ,book_author = #{bookAuthor}
+               ,book_publisher = #{bookPublisher}
+               ,book_imag = #{bookImag}
+               ,review_star = #{reviewStar}
+               ,review_content = #{reviewContent}
 		  where
-		        review_no = #{ reviewNo }
+		        review_no = #{reviewNo}
 	</update>
 	
 	
@@ -255,7 +253,7 @@
 		  join
 		        member using(user_no)
 		 where
-		        review_no = #{ reviewNo }
+		        review_no = #{reviewNo}
 		   and
 		        delete_status = 'N'
 		 order
@@ -293,7 +291,7 @@
 		   set
 		       delete_status = 'Y'
 	     where
-	           reply_no = #{ replyNo }
+	           reply_no = #{replyNo}
 	</update>
 	
 	
@@ -303,11 +301,11 @@
 		update
 		       reviewReply
 		   set
-		       reply_content = #{ replyContent }
+		       reply_content = #{replyContent}
 		 where
 		       delete_status = 'N'
 		   and
-		       reply_no = #{ replyNo } 
+		       reply_no = #{replyNo} 
 	</update>
 	
 	

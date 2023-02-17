@@ -47,8 +47,12 @@ public class ReviewController {
 	private static final String serviceKey="ttbiuui12341246001";
 
 	
+	// 샘플코드 참고
 	
 	// API(책이름 검색)
+	/**
+	 * @param title : 입력한 책 제목
+	 */
 	@ResponseBody
 	@RequestMapping(value="search.bk", produces="application/json; charset=UTF-8")
 	public String reviewApi (String title) throws IOException {
@@ -59,19 +63,27 @@ public class ReviewController {
 		String url ="http://www.aladin.co.kr/ttb/api/ItemLookUp.aspx";
 		url += "?ttbkey=" + serviceKey; // 부여받은 TTBKey값
 		url += "&itemIdType=ISBN"; 
-		url += "&ItemId=" + isbn.getIsbn(); // 출력방법 => json이니까 produces추가
-		url += "&output=js";
+		url += "&ItemId=" + isbn.getIsbn();
+		url += "&output=js"; // 출력방법 => json이니까 produces추가
 		url += "&Version=20131101";
 		url += "&OptResult=ebookList,usedList,reviewList";
 		
+		// 요청하고자 하는 url을 전달하면서 java.net.URL객체 생성 
 		URL requestUrl = new URL(url); 
+		
+		// 생성된 URL객체로 HttpURLConnection 객체 생성
 		HttpURLConnection urlConnection = (HttpURLConnection)requestUrl.openConnection(); 
+		
+		// 요청에 필요한 Header 설정
 		urlConnection.setRequestMethod("GET");
 		
+		// 해당 OpenAPI 서버로 요청 후 스트림을 통해서 응답데이터 읽어오기
 		BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 		
+		// 응답데이터 읽어오기
 		String responseText = br.readLine();
 		
+		// 자원반납 및 연결 해제
 		br.close();
 		urlConnection.disconnect(); 
 		
@@ -79,13 +91,14 @@ public class ReviewController {
 	}
 	
 	
-	
 	// API(ISBN 검색)
+	/**
+	 * @param keyword : 입력한 ISBN
+	 */
 	@ResponseBody
 	@RequestMapping(value="searchBook.bk", produces="application/json; charset=UTF-8")
 	public String reviewBookApi (String keyword) throws IOException {
 		
-		// System.out.println(keyword);
 		String url2 ="http://www.aladin.co.kr/ttb/api/ItemLookUp.aspx";
 		url2 += "?ttbkey=" + serviceKey; 
 		url2 += "&itemIdType=ISBN"; 
@@ -94,14 +107,13 @@ public class ReviewController {
 		url2 += "&Version=20131101";
 		url2 += "&OptResult=ebookList,usedList,reviewList";
 		
-		//System.out.println(url2);
-		
 		URL requestUrl2 = new URL(url2); 
+		
 		HttpURLConnection urlConnection2 = (HttpURLConnection)requestUrl2.openConnection(); 
+		
 		urlConnection2.setRequestMethod("GET");
 		
 		BufferedReader br2 = new BufferedReader(new InputStreamReader(urlConnection2.getInputStream()));
-		
 		String responseText = br2.readLine();
 		
 		br2.close();
@@ -256,41 +268,30 @@ public class ReviewController {
 	
 	
 	
-	// 글 수정
+	// 게시글 수정
+	/**
+	 * @param b : 수정한 뒤 책 정보
+	 */
 	@RequestMapping("updateReview.re")
 	public String updateReviewBoard(ReviewBoard b, Model model, HttpSession session) {
 	
-//		System.out.println("수정한 뒤 책정보 " + b);
+		// 기존에 작성한 리뷰에서 책제목과 리뷰넘버 조회
+		ReviewBoard reviewBoard = boardService.selectBookTitle2(b); 
 		
-		// 1) 리뷰넘버로 책제목조회
-		// 수정 책 제목 == 기존 db의 책 타이틀
-		// 수정할 책제목과 비교
-		// 똑같은 책이면 UPDATE 
-		// 1_책 정보는 그대로 두되 내용만 수정하고싶을 경우
-		ReviewBoard reviewBoard = boardService.selectBookTitle2(b);
-//		System.out.println("책 중복되는지 확인(리뷰넘버로 책제목조회) "+ reviewBoard);
-	
+		// 조건문1) 변경할 책제목 == 기존에 작성한 리뷰의 책제목 => 똑같은 책 + 내용만 update
 		if(b.getBookTitle().equals(reviewBoard.getBookTitle())) { 
-			// 1_ 책 정보는 그대로 두되 내용만 수정하고싶을 경우
-			// select 해온 책 제목 == 수정할 책제목과 일치하면 update 가능 => 내용만 수정가능
-			
 			boardService.updateReviewBoard(b);
-//			System.out.println("내용만 수정 : " + b);
-			
 			return "redirect:detail.re?reviewNo=" + b.getReviewNo();
 
-		} else if(boardService.selectBookTitle(b) == null) {
-			// 근데 똑같은 책이 아닐경우
-			
+		// 조건문2) 기존에 작성한 리뷰의 책 제목이 없는 경우(해당 책 리뷰 안했다는 의미) => 변경된 책 + 내용 update
+		} else if(boardService.selectBookTitle(b) == null) { 
 			boardService.updateReviewBoard(b);
-//			System.out.println("책/내용 변경 후 : " + b);
 			return "redirect:detail.re?reviewNo=" + b.getReviewNo();
-			
-		} else { // 이미 작성한 책정보가 있을 경우 => 수정 불가
+
+		// 조건문3) 이미 작성한 책 정보가 있는 경우 => 수정 불가
+		} else {
 			session.setAttribute("alertMsg", "동일한 책은 작성할 수 없습니다");
 			return "redirect:enrollForm.re?reviewNo=" + b.getReviewNo();
-			// return "reviewBoard/reviewListView"; 
-			// => 안됨. list를 가져오지 않았기때문임 => db에 들려서 list를 조회해서 가져와야함. 즉 sendRedirect사용해야함
 		}
 	}
 	
@@ -346,7 +347,10 @@ public class ReviewController {
 	
 	
 	
-	// 댓글 수정 (구현 못함)
+	
+	
+	
+	// 댓글 수정 (미완성)
 	@RequestMapping("rUpdate.re")
 	public String updateReviewReply(int rno, String content) {
 		
@@ -358,7 +362,7 @@ public class ReviewController {
 	
 	
 	
-	// 댓글수정 (구현 못함)
+	// 댓글수정 (미완성)
 //	@ResponseBody
 //	@RequestMapping(value = "rUpdate.re", produces = "application/json; charset=UTF-8")
 //	public String updateReviewReply(int reviewNo, int replyNo, HttpSession session) {

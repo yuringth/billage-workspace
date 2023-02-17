@@ -205,17 +205,13 @@ font-size: 25px;
 
 		<br>
 		
-		<!-- 인기 topN분석 -->
+		<!-- 인기 Top-N분석 -->
 		<h1 class="topn-text">Billage의 인기중고</h1>
 		<br>
 		<div class="topn-outer">
-		
-			<!-- Top-N 리스트 가져오는 곳 -->
-
+			<!-- Top-N 리스트 배포하는 곳 -->
 		</div>
 
-
-   	
    	
    	
    	<!-- Top-N 분석 -->
@@ -223,19 +219,19 @@ font-size: 25px;
    		$(function(){
    			topUsedList(); 
    			// 동적으로 만들어진 요소에 이벤트 부여
-   			// Top-N 분석으로 생성 된 게시글 클릭 시 게시글 상세페이지로 이동
+   			// Top-N 분석으로 생성 된 게시글 클릭 시, 해당 게시글 상세페이지로 이동
 			$(document).on('click', '.one-content', function(){
 				location.href='detail.ud?usedNo=' + $(this).find('#clickNo').val();
 			})
-			setInterval(topBoardList, 5000); // 일정 시간 간격으로 함수가 주기적으로 실행
    		});
    	
+   		// 조회수가 높은 게시글 보여주는 함수
 	   	function topUsedList(){
 	   		$.ajax({
 	   			url:'topList.ud',
 	   			success:function(data){
-	   				console.log(data);
-	   				console.log(data[0].count);
+	   				 console.log(data);
+	   				// console.log(data[0].count);
 	   				let value = '';
 	   				for(let i in data){
 	   					value += '<div class="align-left-outer">'

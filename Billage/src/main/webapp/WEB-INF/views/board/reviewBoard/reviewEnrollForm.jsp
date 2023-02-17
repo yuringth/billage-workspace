@@ -436,27 +436,19 @@
 	        });
 	     });
 	    
-	    
+	     // 책 이름 검색 시, 해당 책의 정보를 Open API이용하여 가져오는 함수
 		 function search(){
-			 
-			/* console.log("잘들어옴?" + $('#title').val()); */
-			
+	    	 
 			$.ajax({
 				url:'search.bk',
 				data:{ 
-					title : $('#title').val()
-					// 요청시 전달 값 => 책 제목
+					title : $('#title').val() // 요청시 전달 값 => 책 제목
 				},
-				
 				success : function(result){
-					
-					// console.log(result);
-					
+
 					const item = result.item[0];
-					//const count = Object.keys(result).size; 
-					
-					console.log(item);
-					//console.log(count);
+					// console.log(item);
+					// console.log(item.title);
 					
 					let value ='';
 						
@@ -486,8 +478,8 @@
 			 })
 		 };
 	    
+		 // API에서 가져온 책 정보를 선택 할 시, 데이터 값을 가져오고 모달창 숨김
 		 $(function(){
-			 /*  API에서 가져온 책 정보를 선택 할 시, 데이터의 값을 가져오고 모달창 숨겨짐 */
 			 $(document).on('click', '#modal-result-btn', function(){
 				 
 				 $('#book_title').val($('#md_book_title').text());
@@ -518,47 +510,38 @@
 	        });
 	     });
 	    
-	    
+	     // 책 ISBN 검색 시, 해당 책의 정보를 Open API이용하여 가져오는 함수
 		 function search2(){
-			// console.log("잘들어옴?" + $('#keyword').val());
 			 $.ajax({
 				url:'searchBook.bk',
 				data:{ 
-					keyword : $('#keyword').val()
-					// 요청 시 전달 값 => ISBN
+					keyword : $('#keyword').val() // 요청 시 전달 값 => ISBN
 				},
 				success : function(result){
-					console.log(result);
 					
 					const item = result.item[0];
-					//const count = Object.keys(result).size; => 어케 구하냐
-					
-					console.log(item);
-					//console.log(count);
 					
 					let value ='';
 						
 					let thumb = item.cover;
 					
 					value += '<div class="content-area-1">'
-						  + 	'<div class="content-detail-1">'
-						  + 		'<div><img id="md_img" src="' + thumb + '"></div>'
-						  +		'</div>'
-						  + 	'<div class="content-detail-2">'
-						  + 		'<p id="md_book_title" name="mdbookTitle">' + item.title + '</p>'
-						  + 		'<p id="md_book_author" name="mdbookAuthor">' + item.author + '</p>'
-						  + 		'<p id="md_book_date" name="mdbookDate">' + item.pubDate + '</p>'
-						  + 		'<p id="md_book_publisher" name="bookPublisher">' + item.publisher + '</p>'
-						  + 	'</div>'
-						  + '</div>'
-						  + '<div  class="content-area-2">'
-						  + 	'<button id="modal-result-btn2">선택</button>'
-						  + '</div>';
+						  +  '<div class="content-detail-1">'
+						  +  '<div><img id="md_img" src="' + thumb + '"></div>'
+						  +	 '</div>'
+						  +  '<div class="content-detail-2">'
+						  +  '<p id="md_book_title" name="mdbookTitle">' + item.title + '</p>'
+						  +  '<p id="md_book_author" name="mdbookAuthor">' + item.author + '</p>'
+						  +  '<p id="md_book_date" name="mdbookDate">' + item.pubDate + '</p>'
+						  +  '<p id="md_book_publisher" name="bookPublisher">' + item.publisher + '</p>'
+						  +  '</div>'
+						  +  '</div>'
+						  +  '<div  class="content-area-2">'
+						  +  '<button id="modal-result-btn2">선택</button>'
+						  +  '</div>';
 					$('.book-outer2').html(value);
 					$('#keyword').val(keyword);
-					
 					$("#keyword").val('');
-						
 				},
 				error: function(){
 					console.log('실패');
@@ -566,6 +549,7 @@
 			 });
 		 };
 	    
+		 // API에서 가져온 책 정보를 선택 할 시, 데이터 값을 가져오고 모달창 숨김
 		 $(function(){
 			 $(document).on('click', '#modal-result-btn2', function(){
 				 
@@ -575,7 +559,6 @@
 				 $('#book_date').val($('#md_book_date').text());
 				 $('#book_src').attr('src', $('#md_img').attr('src')); //https://image.aladin.co.kr/product/7608/30/coversum/8994492038_1.jpg
 				 $('#bookImag').val($('#md_img').attr('src')); //https://image.aladin.co.kr/product/7608/30/coversum/8994492038_1.jpg
-				 
 				 
 				 $('#modal-book-search2').hide();
 			 })

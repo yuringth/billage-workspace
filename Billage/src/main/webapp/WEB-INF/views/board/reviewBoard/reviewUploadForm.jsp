@@ -7,14 +7,11 @@
 <meta charset="UTF-8">
 <title>리뷰게시판 글 수정 폼</title>
 
-
-
 <style>
 .outer{
 	width:1200px;
 	margin: auto;
 }
-
 
 /* 상품검색 버튼 고쳐야함 */
 .search-div{ 
@@ -24,7 +21,6 @@
 	height:50px;
 }
 
-
 .book-detail-outer{
 	/* border : 1px solid blue; */
 	width:620px;
@@ -32,14 +28,12 @@
 	margin:auto;
 }
 
-
 .book-detail-area{
 	/* border : 1px solid black; */
 	width:620px;
 	height:200px; 
 	display:flex;
 }
-
 
 /* 사진  */
 .content-photo-detail{
@@ -66,15 +60,9 @@
 	height:50px;
 }
 
-
-
-
 .review-content-outer{
 	text-align:center;
 }
-
-
-
 
 /*모달관련 스타일*/
    #modal-book-search{
@@ -125,7 +113,6 @@
     	height:200px;
     }
     
-    
     .content-area1{
     /* 	border:1px solid black; */
     	width:600px;
@@ -159,7 +146,6 @@
     	width:150px;
     	height:200px;
     }
-    
     
 /* 모달관련스타일2 */
    #modal-book-search2{
@@ -237,11 +223,6 @@
     	height:200px;
     }    
     
-
-
-    
-    
-    
     /* 별관련 스타일 */
     #star-area img{
         margin: 0 25px;
@@ -258,20 +239,14 @@
 </style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
-
 
 </head>
 <body>
 
 	<jsp:include page="../../common/header.jsp" />
-    
-    
     
  	<!-- 전체를 감싸는 div  -->
  	<div class="outer">
@@ -280,45 +255,37 @@
 
 		<hr>
 		<div>
-			
+			<!-- 책 제목으로 검색 모달창 -->
 			<button class="modal-up-btn btn btn-primary">
     			<span class="spinner-border spinner-border-sm"></span>
     			제목검색
   			</button>
 			
+			<!-- 책 ISBN으로 검색 모달창  -->
 			<button class="modal-up-btn2 btn btn-primary">
     			<span class="spinner-border spinner-border-sm"></span>
     			ISBN검색
   			</button>
-  			
-  			
-			<!-- <button class="modal-up-btn">상품검색</button> -->
 		</div>
 		
-		<!-- api끌고오는건데 enctype으로 해야하는게 맞을까?? -->
-		<!-- 페이지 포워딩 -->
-		<!-- <form id="reviewEnrollForm" action="search.re" method="post" enctype="multipart/form-data"> 기존것-->
-		
+		<!-- 글수정 form 태그 -->
 		<form id="updateReviewBoard" action="updateReview.re" method="post" enctype="multipart/form-data">
 		
-			<!-- 작성자 식별자로 넘기기 -->
+			<!-- 작성자, 리뷰번호 식별자로 넘기기 -->
 			<input type="hidden" name="userNo" value="${ loginUser.userNo }">
 			<input type="hidden" name="reviewNo" value="${ b.reviewNo }">
 			
-			<!-- api에서 가져온 책 정보 -->
+			<!-- API에서 가져온 책 정보 -->
 			<div class="book-detail-outer">
 				<div class="book-detail-area">
 					<div class="content-photo-detail">
-						<!-- api에서 끌고 오는거니까 첨부파일로 안해도 되는게 맞겠지? <input type="file" name="upfile"> 이런식으로.. -->
 						<div id="book_imag">
-								<input src="${ b.bookImag }" type="image" id="book_src"  required value=""> 
-								<input type="hidden" id="bookImag" name="bookImag" value="${ b.bookImag }">
+							<input src="${ b.bookImag }" type="image" id="book_src"  required value=""> 
+							<input type="hidden" id="bookImag" name="bookImag" value="${ b.bookImag }">
 						</div>
 					</div>
 					
-					<!-- review 테이블 : book_content, book_publisher, book_date 컬럼 추가  -->
 					<div class="content-book-detail">
-						<!-- input에 넣어야 데이터가 넘어간다. div안에 넣으면 안넘어간다  -->
 						<div><input type="hidden" id="book_point" name="bookPoint" value="${ b.bookPoint }"></div>
 						<div><input type="hidden" id="count" name="count" value="${ b.count }"></div>
 						<div><input type="hidden" id="review_no" name="reviewNo"  required value="${ b.reviewNo }"></div>
@@ -333,7 +300,7 @@
 			
 			<hr>
 	
-			<!-- 별점 : 매란언니한테 알려달라하기 -->
+			<!-- 별점관련 부분  -->
 			<div id="star-area" align="center" >
                <label for="rate1">
                    <input type="radio" name="reviewStar" value="1" id="rate1" checked>
@@ -363,59 +330,46 @@
 
 			<br>
 	
-			<!-- 리뷰 작성 란 -->
+			<!-- 리뷰 작성 부분 -->
 			<div class="review-content-outer">
 				<textarea id="review_content" name="reviewContent" placeholder="리뷰 작성 해주세요" rows="20" cols="100" style="resize:none" maxlength="1000" required>${ b.reviewContent }</textarea>
-				
 				<hr>
-				
-				<spank id="count">0</spank> / 1000
-
+				<span id="count">0</span> / 1000
 				<hr>
-					
 				<div style="text-align:center;">
 					<button type="submit" class="btn btn-outline-primary">글수정</button>
 					<button type="reset" class="btn btn-outline-secondary">취소</button>
 				</div>
 			</div>
-			
-			
 		</form>
  
  
- 
-		<!-- api 모달창 시작 -->
+		<!-- API 모달창(책이름 검색) -->
 		<div id="modal-book-search">
 			<button type="button" id="modal-close-btn">&times;</button>
 			
 			<div id="search-area">
 				<div id="search-text"> 
 					<div class="text-div">
-						<!-- <button onclick="search(1);">1페이지 이동</button> -->
 			    		<input type="text" id="title" placeholder="책이름을 작성해주세요">
 			    		<button onclick="search();">검색</button>
 					</div>   
 				</div>
 				<div id="result-area">
-			   		<div class="text-div">
-						<p></p>
-					</div>
-					
 					<hr>
-							
 			        <!-- 책상품 하나의div  -->
 			        <div class="book-outer">
 			        	
-			        	<!--  ajax해서 가져온 책 정보를 띄워줌  -->
+			        	<!--  ajax로 가져온 책 정보를 띄워주는 영역  -->
 			        	
 			        </div>
 				</div>
 			</div>
 		</div>
-		<!-- api 모달창 끝 -->
+		<!-- API 모달창(책이름 검색) 끝 -->
 
 
-		<!-- api 모달창 뜨는 화면2 -->
+		<!-- API 모달창(ISBN 검색) -->
 		<div id="modal-book-search2">
 			<button type="button" id="modal-close-btn2">&times;</button>
 			
@@ -427,13 +381,7 @@
 					</div>   
 				</div>
 				<div id="result-area2">
-			   		<div class="text-div">
-						 <p></p>
-					</div>
-					
 					<hr>
-							
-			        <!-- 책상품 하나의div  -->
 			        <div class="book-outer2">
 			        	
 			        	<!--  ajax해서 가져온 책 정보를 띄워줌  -->
@@ -442,40 +390,36 @@
 				</div>
 			</div>
 		</div>
-		<!-- api 모달창 뜨는 화면 끝 -->
+		<!-- API 모달창(ISBN 검색) 끝 -->
 
-
-
-
-	<!-- 전체 outer /div -->	
+	<!-- 전체 outer -->	
  	</div>   
  	
  	
  
 	
- 	<!-- api 모달창 -->
+ 	<!-- API(책이름 검색) script -->
 	<script>
 	    $(function(){
+	    	/* 모달 버튼 클릭 시, 모달창 띄워줌 */
+
 	        $('.modal-up-btn').click(function(){
 	           //$('input[name=groupLocation]').val('');
 	           $('#modal-book-search').show();
 	        });
 	        
-	        
+	        /* 모달 취소 버튼 클릭 시, 모달창 숨겨줌 */
 	        $('#modal-close-btn').click(function(){
 	           $('#modal-book-search').hide();
-	          // $('#search').val('');
-	          // $('#enter-addr-in').empty();
-	           
 	        });
 	     });
 	    
-	    
+	     // 책 이름 검색 시, 해당 책의 정보를 Open API이용하여 가져오는 함수
 		 function search(){
 			 $.ajax({
 				url:'search.bk',
-				data:{ // 요청시 전달 값
-					title : $('#title').val()
+				data:{ 
+					title : $('#title').val() // 요청시 전달 값 => 책 제목
 				},
 				
 				success : function(result){
@@ -502,31 +446,25 @@
 						  + '<div  class="content-area2">'
 						  + '<button id="modal-result-btn">선택</button>'
 						  + '</div>';
-							  
 					$('.book-outer').html(value);
 					$('#title').val(title);
-					
 					$("#title").val('');
-					
-					
 				},
-				
 				error: function(){
 					console.log('실패');
 				}
 			 })
 		 };
 	    
+		 // API에서 가져온 책 정보를 선택 할 시, 데이터 값을 가져오고 모달창 숨김
 		 $(function(){
 			 $(document).on('click', '#modal-result-btn', function(){
 				 
-				 
-				 console.log($('#md_book_title').text());
-				 console.log($('#md_book_author').text());
-				 console.log($('#md_book_date').text());
-				 console.log($('#md_book_publisher').text());
-				 console.log($('#md_img').attr('src')); // https://image.aladin.co.kr/product/7608/30/coversum/8994492038_1.jpg
-				 
+				 //console.log($('#md_book_title').text());
+				 //console.log($('#md_book_author').text());
+				 //console.log($('#md_book_date').text());
+				 //console.log($('#md_book_publisher').text());
+				 //console.log($('#md_img').attr('src')); // https://image.aladin.co.kr/product/7608/30/coversum/8994492038_1.jpg
 				 
 				 $('#book_title').val($('#md_book_title').text());
 				 $('#book_author').val($('#md_book_author').text());
@@ -535,13 +473,12 @@
 				 $('#book_src').attr('src', $('#md_img').attr('src')); //https://image.aladin.co.kr/product/7608/30/coversum/8994492038_1.jpg
 				 $('#bookImag').val($('#md_img').attr('src')); //https://image.aladin.co.kr/product/7608/30/coversum/8994492038_1.jpg
 				 
-				 
 				 $('#modal-book-search').hide();
 			 })
 		 });
 	</script>
 
-	<!-- api 모달창2 -->
+ 	<!-- API(ISBN 검색) script -->
 	<script>
 	    $(function(){
 	        $('.modal-up-btn2').click(function(){
@@ -550,26 +487,19 @@
 	        
 	        $('#modal-close-btn2').click(function(){
 	           $('#modal-book-search2').hide();
-	           
 	        });
 	     });
 	    
-	    
+	     // 책 ISBN 검색 시, 해당 책의 정보를 Open API이용하여 가져오는 함수
 		 function search2(){
-			console.log("잘들어옴?" + $('#keyword').val());
 			 $.ajax({
 				url:'searchBook.bk',
 				data:{ 
 					keyword : $('#keyword').val()
 				},
 				success : function(result){
-					console.log(result);
 					
 					const item = result.item[0];
-					//const count = Object.keys(result).size; => 어케 구하냐
-					
-					console.log(item);
-					//console.log(count);
 					
 					let value ='';
 						
@@ -591,9 +521,7 @@
 						  + '</div>';
 					$('.book-outer2').html(value);
 					$('#keyword').val(keyword);
-					
 					$("#keyword").val('');
-						
 				},
 				error: function(){
 					console.log('실패');
@@ -601,6 +529,7 @@
 			 });
 		 };
 	    
+		 // API에서 가져온 책 정보를 선택 할 시, 데이터 값을 가져오고 모달창 숨김
 		 $(function(){
 			 $(document).on('click', '#modal-result-btn2', function(){
 				 
@@ -610,7 +539,6 @@
 				 $('#book_date').val($('#md_book_date').text());
 				 $('#book_src').attr('src', $('#md_img').attr('src')); //https://image.aladin.co.kr/product/7608/30/coversum/8994492038_1.jpg
 				 $('#bookImag').val($('#md_img').attr('src')); //https://image.aladin.co.kr/product/7608/30/coversum/8994492038_1.jpg
-				 
 				 
 				 $('#modal-book-search2').hide();
 			 })
@@ -648,16 +576,8 @@
     });
    	</script>
  
-   	
-   	
-   	
-   	
-   	
-   	
    
 	<jsp:include page="../../common/footer.jsp" />
- 
- 
  
  
  
