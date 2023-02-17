@@ -233,7 +233,7 @@
 	
 	
 	
-	<!-- 검색 기능 select -->
+	<!-- 검색 기능 : 검색 결과에 맞는 게시글의 총 개수-->
 	<select id="selectSearchCount" parameterType="hashmap" resultType="_int">
 		select 
 		       count(*)
@@ -257,7 +257,7 @@
 	
 	
 	
-	<!-- 검색 기능  -->
+	<!-- 검색 기능 : 검색 결과에 맞는 게시글 데이터 -->
 	<select id="selectSearchList" parameterType="hashmap" resultMap="usedResultSet">
 		select
 		        stock_status

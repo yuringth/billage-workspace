@@ -346,8 +346,19 @@ public class ReviewController {
 	
 	
 	
+	// 댓글 수정 (구현 못함)
+	@RequestMapping("rUpdate.re")
+	public String updateReviewReply(int rno, String content) {
+		
+		System.out.println("댓글넘버" + rno);
+		System.out.println("댓글 내용" + content);
+		
+		return null;
+	}
 	
-	// 안만들었음 => 수정버튼 클릭시 돌아가는거
+	
+	
+	// 댓글수정 (구현 못함)
 //	@ResponseBody
 //	@RequestMapping(value = "rUpdate.re", produces = "application/json; charset=UTF-8")
 //	public String updateReviewReply(int reviewNo, int replyNo, HttpSession session) {
@@ -374,46 +385,6 @@ public class ReviewController {
 //	}	
 
 	
-	
-	
-	
-	// 댓글 수정 (사용안함 지우자)
-//	@ResponseBody
-//	@RequestMapping(value = "formReply.re", produces = "application/json; charset=UTF-8")
-//	public String reviewFormReply(ReviewReply r, HttpSession session) {
-//		// 스프링이 알아서 값을 가져와서 setㅎㅐ줌
-//		
-//		
-//		
-//		return null;
-//	}
-	
-	
-	
-	
-	///////// 좋아요 ///////////
-	@ResponseBody
-	@RequestMapping(value = "insertReviewLike.re", produces = "application/json; charset=UTF-8")
-	public String insertReviewLike(int reviewNo, int userNo, HttpSession session, Model model) {
-//		System.out.println("reviewNo : " + reviewNo); //=> 잘 들고옴
-//		System.out.println("유저넘버: " + userNo); //=> 잘 들고옴
-			
-		ReviewLike r = new ReviewLike();
-		r.setReviewNo(reviewNo);
-		r.setUserNo(userNo);
-//		System.out.println(r);
-//		r.setUserNo(((User)session.getAttribute("loginUser")).getUserNo()); // => 왜 이렇게 userNo안뽑히지?
-
-		if(boardService.insertReviewLike(r) > 0) {
-			return "1";
-		} else {
-			// 에러페이지
-			model.addAttribute("errorMsg", "좋아요 실패");
-			return "common/errorPage";
-		}
-		
-				
-	}
 	
 	
 }

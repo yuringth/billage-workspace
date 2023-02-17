@@ -88,7 +88,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
     
-    <!-- 동일 추가(추가안하면 정렬 두번 안눌림;;;;) -->
+    <!-- 동일 추가(추가안하면 정렬 두번 안눌림) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -126,7 +126,7 @@
 				
 		
 		<div class="search-area">
-			<form id="searchForm" action="searchForm.ud" method="get" align="center">
+			<form id="searchForm" action="searchForm.ud" method="get">
 				<input type="hidden" name="currentPage" value="1">
 			    <div class="select">
 			        <select class="custom-select" name="condition">
@@ -148,9 +148,7 @@
 			<script>
 				$(function(){
 					$('.search-area option[value=${ condition }]').attr('selected', true);
-					
 				})
-				
 			</script>
 		</c:if>
 
@@ -158,10 +156,11 @@
 			<!-- 상품 크게 감싸는 div -->
 			<div class="align-left-outer">
 			  
+			  	<!-- JSTL의 forEach문을 사용하여 DB에서 가져온 데이터를 반복문으로 나타냄 -->
 			  	<c:forEach items="${ list }" var="b">
+			  	
 			  	<!-- 상품 하나를 감싸는 div  -->
 		        <div class="one-content">
-		        	
 		        	<div class="stock-status">
 						<c:if test="${ b.stockStatus == 'N'}">
 							<p class="btn btn-outline-secondary">판매중</p>
@@ -170,34 +169,26 @@
 							<p class="btn btn-outline-secondary">판매완료</p>
 						</c:if>		
 					</div>
-					
 					<div class="usedNo-area">
 						<input class="bno" type="hidden" value="${ b.usedNo }">
-						
 			            <div class="img-area">
-			                
 			                <img id="img-area2" src="${ b.changeName }">
-			                ${b.changeName }
-			            	<!--  onclick="location.href='detail.ud?usedNo='" + b.getUsedNo() -->
-			            	
+			                ${ b.changeName }
 			            </div>
 			            <div class="text-area">
 			                <p class="title-text">책제목 : ${ b.bookTitle }</p>
 			                <p class="textsize">판매 금액 : ${ b.point }</p>
 			            </div>
 					</div>
-			            <div class="text-area">
-			                <!-- <p class="textsize">♡</p> -->
-			                <p class="countnum">조회 : ${ b.count }</p>
-			            </div>
-					
+		            <div class="text-area">
+		                <p class="countnum">조회 : ${ b.count }</p>
+		            </div>
 	     	    </div>
 		        </c:forEach>
 			</div>
 			
 		<!-- 더보기 누를 시 상품 6개가 뜨게 되는 div -->
 		<!-- <div><button type="button" class="btn btn-info" style="width:1200px; height:80px;">더보기</button></div>   -->
-	
                     
 	    <!-- 페이지처리하는 영역-->
 	    <div class="pagingArea">

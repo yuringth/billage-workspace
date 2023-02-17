@@ -29,7 +29,7 @@ public class UsedController {
 	private BoardService boardService; // 1. 의존성 주입
 	
 
-	// 중고게시판 목록 조회 화면
+	// 목록 조회 화면
 	@RequestMapping("list.ud") 
 	public ModelAndView usedBoardList(@RequestParam(value="cPage", defaultValue="1") int currentPage, ModelAndView mv) {
 		
@@ -65,14 +65,14 @@ public class UsedController {
 	}
 	*/
 	
-	// 중고게시판 -> 글쓰기버튼 클릭 시 -> 중고게시판 글작성 폼화면으로 이동
+	// 글쓰기버튼 클릭 시 -> 중고게시판 글작성 폼화면으로 이동
 	@RequestMapping("insert.ud")
 	public String usedInsertForm() {
 		return "board/usedBoard/usedEnrollForm";
 	}
 	
 	
-	// 중고게시판 => 글작성
+	// 글작성
 	@RequestMapping("upload.ud")
 	public String insertUsedBoard(UsedBoard b, MultipartFile upfile,  HttpSession session, Model model) {
 		
@@ -110,7 +110,7 @@ public class UsedController {
 	
 	
 	
-	// 중고게시판 -> 글 상세정보 조회 
+	// 글 상세정보 조회 
 	@RequestMapping("detail.ud")
 	public String usedDetailView(int usedNo, Model model) {
 		// 식별값으로 usedNo가져옴
@@ -135,7 +135,7 @@ public class UsedController {
 	}
 	
 	
-	//중고게시판 => 게시글 삭제 
+	// 게시글 삭제 
 	@RequestMapping("delete.ud")
 	public String deleteUsedBoard(int usedNo, Model model) {
 		
@@ -149,7 +149,7 @@ public class UsedController {
 	
 	
 	
-	// 중고게시판 -> 글수정 버튼 클릭시 -> 수정폼 화면뜨면서 기존 데이터 가져오기
+	// 글수정 버튼 클릭시 -> 수정폼 화면뜨면서 기존 데이터 가져오기
 	@RequestMapping("enrollUsedForm.ud")
 	public ModelAndView selectUpdateUsedBoard(int usedNo, ModelAndView mv) {
 		
@@ -165,7 +165,7 @@ public class UsedController {
 	}
 	
 	
-	// 중고게시판 -> 글수정 버튼 눌렀을때
+	// 글수정 버튼 눌렀을때
 	@RequestMapping("update.ud")
 	public String usedUpdate(UsedBoard b, MultipartFile reUpfile, HttpSession session, Model model) {
 		
@@ -174,29 +174,6 @@ public class UsedController {
 		
 		// 2. 새로 첨부된 파일x, 기존 첨부파일 o  내용만 수정 => origin : 기존 첨부파일 이름, change : 기존첨부파일 경로
 		// 3. 새로 첨부된 파일o, 기존 첨부파일 x 파일첨부 변경 시 => origin : 새로 첨부파일 이름, change : 새로 첨부파일 경로
-
-		
-		
-/* 배우지않았다!!!!!!!!!!!!!!!!!1
-		// 새로 첨부파일이 넘어온 경우 
-		if(!reUpfile.getOriginalFilename().equals("")) {
-			// 기존에 첨부파일이 있었을 경우 => 기존의 첨부파일을 삭제
-			
-			// 히든으로 오리진네임을 넘겼으니까 board에 setter 주입되서 들어가있을것임
-			if(b.getOriginName() != null) {
-				new File(session.getServletContext().getRealPath(b.getChangeName())).delete();
-			}
-			
-			// 새로 넘어온 첨부파일 서버에 업로드 시키기
-			// saveFile() 호출해서 첨부파일 업로드
-			String changeName = saveFile(reUpfile, session);
-			
-			// 첨부파일에 새로 업로드를 했으니, b라는 Board객체에 새로운정보(원본명, 저장경로) 담기
-			b.setOriginName(reUpfile.getOriginalFilename());
-			b.setChangeName("resources/uploadFiles/" + changeName);
-		}
-*/
-		
 		
 		if(boardService.usedUpdate(b) > 0) {
 			System.out.println("sql다녀와서 컨트롤러" + b);
@@ -212,7 +189,7 @@ public class UsedController {
 	
 	
 	
-	// 중고게시판 => topn분석
+	// Top-N 분석
 	@ResponseBody
 	@RequestMapping(value = "topList.ud", produces = "application/json; charset=UTF-8")
 	public String ajaxTopUsedList() {
@@ -220,44 +197,32 @@ public class UsedController {
 	}
 	
 	
-	// 중고게시판 => 검색기능
+	
+	
+	/**
+	 * @param condition : option태그의 value 속성값 (nickname, bookTitle, usedContent)
+	 * @param keyword : 사용자가 입력한 키워드
+	 */
+	// 검색기능
 	@RequestMapping("searchForm.ud")
 	public String searchUsedList(String condition, String keyword, Model model) {
-		//@RequestParam(value="currentPage", defaultValue="1") 
 
 		HashMap<String, String> map = new HashMap();
-		map.put("condition", condition); // key는 value : "nickname", "bookTitle", "usedContent"
-		map.put("keyword", keyword); // "사용자가 입력한 키워드"
-		
-//		System.out.println("컨디션"+condition);
-//		System.out.println("키워드"+keyword);
+		map.put("condition", condition); 
+		map.put("keyword", keyword); 
 		
 		// 페이징처리
-		int searchCount = boardService.selectSearchCount(map);  // 현재 검색 결과에 맞는 게시글의 총 개수 => db가서 조회
-		
-//		System.out.println("게시글 총 수:"+ searchCount);
-		
-		int currentPage = 1; // 현재페이지의 값을 가져오기
-		
-//		System.out.println("1:"+ currentPage);
-		
-//		int currentPage = RequestParam(value="cPage", defaultValue="1"); // 현재페이지의 값을 가져오기
-//		int currentPage = Integer.parseInt(request.getParameter("cPage"));
-		int pageLimit = 10;
-//		System.out.println("pageLimit"+pageLimit);
-		
-		int boardLimit = 5;
-//		System.out.println("boardLimit" +boardLimit);
+		int searchCount = boardService.selectSearchCount(map); // 검색 결과에 맞는 게시글의 총 개수=>DB에서 조회
+		int currentPage = 1; // 현재 페이지
+		int pageLimit = 10; // 페이지 하단에 보여질 페이징바의 최대 개수
+		int boardLimit = 5; // 한 화면에 보여질 게시물 개수
 		
 		PageInfo pi = Pagination.getPageInfo(searchCount, currentPage, pageLimit,boardLimit);
-//		System.out.println("페이지 잘 가져오는지 확인 : " + pi);
 		
-		
-		// 검색한 결과를 뿌려주는거...select해서 가져오는데 몇개있는지 모르니 arrayList로 뿌리기
+		// select하여 가져올 검색결과 데이터가 몇개 있을지 미지수기에 ArrayList 클래스 사용 
 		ArrayList<UsedBoard> list = boardService.selectSearchList(map, pi);
 		
-//		System.out.println("list : " + list);
-		
+		// model 객체에 key-value 형태로 담음
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 		model.addAttribute("condition", condition);
@@ -265,12 +230,6 @@ public class UsedController {
 		
 		return "board/usedBoard/usedListView";
 	}
-	
-	
-	
-	
-	
-	
 	
 	
 	
