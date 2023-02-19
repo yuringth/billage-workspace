@@ -44,20 +44,14 @@
 <br>
 
 
-## :mag: 3) Advanced Feature
-
-
-<br>
-
-
-## 🤔 4) Improvement
+## 🤔 3) Improvement
 + 각 팀원이 맡은 기능이 서로 영향을 주지 않아 기능 설계를 하기엔 편했지만, 조화를 이루지 못해 DB를 구성할 때 복잡했다.
 + 각자의 기능에 집중하다보니 전체적인 UI가 통일되지 못한 느낌을 준다. 
 + 복합적인 책 커뮤니티 사이트를 지향하는 의미에서 출발하였지만, 회원 입장에서는 각 게시판에서 필요한 기능만을 이용할 수 있다(통합 소통 부재)
 <br>
 
 
-## :pencil2: 5) 참고 사이트
+## :pencil2: 4) 참고 사이트
 ### ERD 클라우드
 https://www.erdcloud.com/d/dPwWePXPyftquHCP8
 
