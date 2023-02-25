@@ -21,8 +21,6 @@
 	<div id="all-group-general">
 		<h1>${ loginUser.nickname }의 참여모임 리스트입니다. </h1>
 		<%-- 모임에 대한 값이 있으면 list 없으면 참여중인 모임이 없습니다. core로 조건문 걸어서 생성하기   --%>
-		
-		나중에 로그인회원 등급에 따라서 보일 수 있게 수정 
 		<br>
 		<!-- 
 		<c:if test="${ loginUser.userGrade ge 4 }">

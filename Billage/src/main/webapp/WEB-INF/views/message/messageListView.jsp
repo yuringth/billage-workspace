@@ -97,29 +97,24 @@
 			
 		$(document).on('click', '.click-title', function(){
 			
-			//slide $this
-			var $this = $(this).parents('#click-area').next();
-			
-			var $this2 = $(this).next().children().eq(1)
+			// slide 설정 선택자
+			var $slide = $(this).parents('#click-area').next();
 			var $msgStatus = $(this).next().children().eq(2).attr('id');
-
+			// 읽음표시 ajax호출 시 필요한 변수 세팅 
+			var $selectedMsg = $(this).next().children().eq(1);
 			let $userNo = $(this).next().children('input[name="userNo"]').val();
 			let userNo2 = ${loginUser.userNo};
 			let $messageNo = $(this).next().children('input[name="messageNo"]').val();
 			
-			if($this.css('display') == 'none'){
-				
-				$this.siblings('#blind-area').slideUp(100);
-				
-				$this.slideDown(500);
+			if($slide.css('display') == 'none'){
+				$slide.siblings('#blind-area').slideUp(100);
+				$slide.slideDown(500);
 				
 			} else {
-				$this.slideUp(100);
+				$slide.slideUp(100);
 			}
 			
-			// 읽음 처리 하기 
 			if($msgStatus == 0){
-				
 				$.ajax({
 					url : 'read.ms',
 					data : {
@@ -131,23 +126,20 @@
 
 						if( result > 0 ){
 							
-							$this2.each(function(){
+							$selectedMsg.each(function(){
 								if($(this).val() == $messageNo){
 									$(this).siblings('.msgStatus-btn2').attr('id', '1');
 									$(this).siblings('.msgStatus-btn2').children().text('읽음');
 								}
 							})
-							
-						}
+						} //if문(비동기요청성공시조건) 종료
 					},
 					error : function(){
 						console.log('읽음처리 비동기 오류');
 					}
-					
 				});
-			}
+			} //if문(ajax실행 조건) 종료
 			
-
 		}) 	
 
 	

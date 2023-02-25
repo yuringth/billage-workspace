@@ -33,15 +33,15 @@ import com.google.gson.Gson;
 @Controller
 public class ClubController {
 	
-	//API serviceKey
-	private static final String serviceKey = "B15BD225-F8CB-34E6-9DC3-A77C2FE5F5A9";
-	
 	@Autowired
 	private ClubService clubService;
 	
 	@Autowired
 	private MessageService messageService;
 	
+	
+	//API serviceKey
+	private static final String serviceKey = "B15BD225-F8CB-34E6-9DC3-A77C2FE5F5A9";
 	
 	// 지역을 찾는 API을 구현 함 
 	@ResponseBody
@@ -316,12 +316,12 @@ public class ClubController {
 		return mv;
 	}
 	
+	// 요청을 받고 보낼 때 값에 문제가 발생해서 강제 형변환 해놓음 
+	//@RequestParam(value="clubNo", defaultValue="0")
+	//clubNo = (int)clubNo;
 	
 	@RequestMapping("message.cl")
 	public String clubMessageInsert(Model model, int userNo, int[] userNo2, String messageContent, long clubNo) {
-		// 요청을 받고 보낼 때 값에 문제가 발생해서 강제 형변환 해놓음 
-		//@RequestParam(value="clubNo", defaultValue="0")
-		clubNo = (int)clubNo;
 		
 		ArrayList<Message> messageList = new ArrayList();
 		
@@ -335,7 +335,6 @@ public class ClubController {
 		}
 		
 		if(messageService.insertClubMessage(messageList) > 0 ) {
-			//forwarding 방식 prefix + " " + subfix;
 			return "redirect:clubMemAdmin.cl?clubNo=" + (int)clubNo;
 			
 		} else {

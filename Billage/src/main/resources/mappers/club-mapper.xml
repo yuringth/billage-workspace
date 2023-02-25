@@ -87,6 +87,70 @@
 	</select>
 	
 	
+	
+	
+		
+	<!-- keyword / condition에 맞는 list 조회 
+	<select id="selectSearchList" parameterType="java.util.HashMap" resultMap="clubResultSet">
+		SELECT	
+			   C.CLUB_NO, C.USER_NO, C.NICKNAME, C.CLUB_NAME, C.CLUB_LIMIT, C.CLUB_CREATEDATE, C.CLUB_DISCRIPT, C.CLUB_IMG, 
+               C.CLUB_LOCATION, C.CLUB_COUNT, C.NEWCOUNT, C.LIKECOUNT, COUNT(CM.CLUB_NO) "MEMCOUNT"	
+		 FROM
+		 	   CLUB_MEMBER CM
+ 	    RIGHT
+		 JOIN 	
+				(SELECT	
+					    C.CLUB_NO, C.USER_NO, C.NICKNAME, C.CLUB_NAME, C.CLUB_LIMIT, C.CLUB_CREATEDATE, C.CLUB_DISCRIPT, C.CLUB_IMG, 
+					    C.CLUB_LOCATION, C.CLUB_COUNT, C.NEWCOUNT, COUNT(CL.CLUB_NO) "LIKECOUNT"
+				 FROM
+				 	    CLUB_LIKE CL 	
+				 RIGHT
+				  JOIN
+					  (
+					   SELECT 
+							   CLUB_NO ,C.USER_NO ,M.NICKNAME  ,CLUB_NAME  ,CLUB_LIMIT
+							  ,CLUB_CREATEDATE ,CLUB_DISCRIPT ,CLUB_IMG  ,CLUB_LOCATION ,CLUB_COUNT
+				              ,CASE WHEN
+				                         (SELECT TO_DATE(SYSDATE, 'YY-MM-DD') FROM DUAL) 
+				                       - (SELECT TO_DATE(CLUB_CREATEDATE, 'YY-MM-DD') FROM DUAL) <![CDATA[ > ]]> 30 THEN 0
+				                    WHEN
+				                         (SELECT TO_DATE(SYSDATE, 'YY-MM-DD') FROM DUAL)
+				                       - (SELECT TO_DATE(CLUB_CREATEDATE, 'YY-MM-DD') from dual) <![CDATA[ < ]]> 30 THEN 1
+				                     END AS "NEWCOUNT"
+					  	 FROM
+					  	  	   CLUB C
+					  	 LEFT 	   
+				 	  	 JOIN
+				 	  	  	   MEMBER M ON (C.USER_NO = M.USER_NO)
+				  	    WHERE
+				  	  	 	   CLUB_STATUS = 'Y'
+		  	  	 	   <choose>
+							<when test="condition == 'clubName'">
+								AND	CLUB_NAME
+							</when>
+							<when test="condition == 'location'">
+								AND CLUB_LOCATION
+							</when>
+							<otherwise>
+								AND NICKNAME
+							</otherwise>
+		  	  	 	   </choose>
+							LIKE '%' || #{ keyword } || '%'
+						 ) C ON (C.CLUB_NO = CL.CLUB_NO)
+				 GROUP
+				    BY
+					    C.CLUB_NO ,C.USER_NO  ,C.NICKNAME ,C.CLUB_NAME ,C.CLUB_LIMIT
+					   ,C.CLUB_CREATEDATE ,C.CLUB_DISCRIPT ,C.CLUB_IMG ,C.CLUB_LOCATION
+					   ,C.CLUB_COUNT ,C.NEWCOUNT) C ON (C.CLUB_NO = CM.CLUB_NO)
+		 GROUP
+		    BY
+		       C.CLUB_NO, C.USER_NO, C.NICKNAME, C.CLUB_NAME, C.CLUB_LIMIT, C.CLUB_CREATEDATE
+               ,C.CLUB_DISCRIPT, C.CLUB_IMG, C.CLUB_LOCATION, C.CLUB_COUNT, C.NEWCOUNT, C.LIKECOUNT	 	   
+		 ORDER
+		    BY
+		       C.CLUB_NO DESC;
+	</select>-->
+	
 	<!-- keyword / condition에 맞는 list 조회 -->
 	<select id="selectSearchList" parameterType="java.util.HashMap" resultMap="clubResultSet">
 		SELECT	
@@ -784,8 +848,8 @@
 						  		CLUB C 
 		                  JOIN 
 		                  		MEMBER M ON (C.USER_NO = M.USER_NO)) C
-		                  		ON( C.CLUB_NO = CO.CLUB_NO)) C 
-								ON(C.OPEN_NO = OM.OPEN_NO)
+		                ON( C.CLUB_NO = CO.CLUB_NO)) C 
+				ON(C.OPEN_NO = OM.OPEN_NO)
 		 GROUP
 		    BY      
 		    	C.CLUB_NO

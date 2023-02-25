@@ -102,7 +102,10 @@
 					</tr>
 					<tr>
 						<th>*모임 중심 지역</th>
-						<td><input type="button" id="addr-btn" value="찾기" /><div><input type="text" name="clubLocation" required readonly></div></td>
+						<td>
+						<input type="button" id="addr-btn" value="찾기" />
+							<div><input type="text" name="clubLocation" required readonly></div>
+						</td>
 					</tr>
 					<tr>
 						<th>*모임 정원</th>
@@ -250,7 +253,7 @@
 				},
 				error : function(){
 					console.log('비동기통신실패');
-				}
+				} 	
 			});
 			} else {
 				$('#result-area').html('<p> 해당하는 지역이 없습니다. </p>');
@@ -268,7 +271,6 @@
 				$('#search').val('');
 				$('#enter-addr-in').empty();
 			});
-			
 			
 		});
 		

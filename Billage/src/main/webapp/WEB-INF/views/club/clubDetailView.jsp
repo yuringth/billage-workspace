@@ -347,7 +347,7 @@
    		    				str = '<div class="members members-area" id="'+ result[i].userNo +'">'
    	    					    + '<div class="members"><img src="'+ img +'" width="40px;" height="40px;"></div>'
    								+ '<div class="members" >' + result[i].nickname +'(' + result[i].clubDiscript +')</div>'
-   					            + '<div class="members" >버튼?</div>' 
+   					            + '<div class="members" >버튼</div>' 
    			            		+ '</div>';
    	    				
    		    				$(str).appendTo('#participant-area');
@@ -400,7 +400,7 @@
 	    	}
 	    	
 	    	
-    	}); //$(function()) 닫음
+    	}); //$(function()) 닫음=
     	
     	
     	// 채팅하기 구현( Web Socket ) ---------------------------------------------------------------------
