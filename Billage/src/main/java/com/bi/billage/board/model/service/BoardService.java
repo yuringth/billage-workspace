@@ -185,122 +185,90 @@ public interface BoardService {
 	
 	
 	
-	// 유림 시작
+	// 유림 시작 
 	
-	
-	// 중고 게시글의 총 개수 조회
+	// 중고게시판
+	// 게시글의 총 개수 조회
 	int selectListUsedCount();
 	
-	// 중고게시판 목록 조회
+	// 게시판 list 조회
 	ArrayList<UsedBoard> usedBoardList(PageInfo pi);
 	
-	// 중고게시판 작성 (insert) 
+	// 글작성
 	int insertUsedBoard(UsedBoard b);
 	
-	
-	// 중고게시글 조회수 증가 (update)
+	// 조회수 증가
 	int increaseUsedCount(int usedNo);
-	// 중고게시판 상세 조회 (select)
-	// select해서 가져온 값을 UsedBoard VO에 담아줘야해서 자료형은 UsedBoard로 사용
+	
+	// 게시글 상세 조회 => DB에서 정보 가져 오기	
 	UsedBoard selectUsedBoard(int usedNo);
 	
-	
-	// 중고게시판 삭제 (update) 
+	// 게시글 삭제 
 	int deleteUsedBoard(int usedNo);
 	
-	// 중고게시판 => 게시판 번호를 식별자로 DB에서 select해옴
+	// 게시글 수정버튼 클릭 시 => 게시판 번호를 식별자로 DB에서 게시글 정보 select해서 가져오기
 	UsedBoard selectUpdateUsedBoard(int usedNo);
 	
-	// 중고게시글 수정 서비스(update) =>글수정 버튼 눌렀을때
+	// 글수정
 	int usedUpdate(UsedBoard b);
 	
-	// 중고게시판 TOP-N 분석(조회수 높은 순으로 띄우기)(select)
+	// Top-N 분석
 	ArrayList<UsedBoard> selectTopUsed();
 	
-	
-	// 중고게시판 검색
-	// 중고게시판 => 검색 기능 select
+	// 검색 기능 select
 	int selectSearchCount(HashMap<String, String> map);
 	
-	// 컬럼에 따라서 달라지기에 condition ..을 넣은 hashmap을 받아야함 + 추가적으로 페이징처리
+	// 검색 기능
 	ArrayList<UsedBoard> selectSearchList(HashMap<String, String> map, PageInfo pi);
 	
-	////////
 	
-	// 리뷰게시판 => book테이블에서 책제목으로 isbn 문자열 select하기
+	// 리뷰게시판
+	// BOOK테이블에서 책제목과 일치하는 ISBN select
 	Book selectIsbn(String title);
 	
-	
-	// 리뷰 게시글의 총 개수 조회
+	// 게시글의 총 개수 조회
 	int selectListCount();
 	
-	// 리뷰 게시글 리스트 조회
+	// 게시글 list 조회
 	ArrayList<ReviewBoard> reviewBoardList(PageInfo pi);
 	
-	
-	
-	// 리뷰게시판 글작성 => 1) 책 중복되는지 확인 select : bookTitle로 조회 => 한 행이 있는지 없는지
+	// 글작성 => 1) 중복되는 책 있는지 확인 select : bookTitle로 조회 => 한 행이 있는지 없는지
 	ReviewBoard selectBookTitle(ReviewBoard b);
-	// 리뷰게시판 글작성=> 2) 중복 된 책 없으면 insert : 글작성
+	
+	// 글작성 => 2) 중복 된 책 없으면 insert
 	int insertReviewBoard(ReviewBoard b);
 
-	
-	
-	// 리뷰게시글 수정 서비스(select) => 1) 책 중복되는지 확인(리뷰넘버로 책제목조회)
+	// 글수정 => 1) 중복되는 책 있는지 확인(리뷰넘버로 책제목조회)
 	ReviewBoard selectBookTitle2(ReviewBoard b);
-	// 리뷰게시글 수정 서비스(update) => 2) 책 중복되는지 확인(리뷰넘버로 책제목조회)
+	
+	// 게시글 수정
 	int updateReviewBoard(ReviewBoard b);
 	
-	
-	
-	
-	// 리뷰게시글 조회수 증가 (update)
+	// 조회수 증가
 	int increaseReviewCount(int reviewNo);
 	
-	// 리뷰게시판 상세 조회 (select) & 리뷰게시판 수정시 폼화면 띄울때도 사용
+	// 조회 성공 시 => DB에서 데이터를 가져옴
 	ReviewBoard selectReviewBoard(int reviewNo);
 	
-	
-	
-	
-	// 리뷰게시판 삭제 (update)
-	// int deleteReviewBoard(int reviewNo);
+	// 게시글 삭제
 	int deleteReviewBoard(ReviewBoard b);
-
 	
-	// 리뷰게시판 좋아요 누르면 insert
+	// 좋아요 누르면 insert
 	int insertReviewLike(ReviewLike r);
 
-
 	
-
-
-
-	
-	// 댓글 나중에......
-	// 댓글 리스트 조회서비스(Ajax)(select)
-	//ArrayList<ReviewReply> selectReplyList(int reviewNo);
-
-
+	// 댓글 list 조회
 	ArrayList<ReviewReply> selectReviewReplyList(int reviewNo);
-	
-	// 댓글 작성 서비스(Ajax)(insert)
-//	int insertReply(Reply r);
-	
-
-	// 댓글 삭제(update
-//	int deleteReviewReply(int replyNo);
-	int deleteReviewReply(ReviewReply r);
-	
-	
-	// 댓글 수정(update)
-	int updateReviewReply(ReviewReply r);
-	
 	
 	// 댓글 등록(insert)
 	int insertReviewReply(ReviewReply r);
 	
+	
+	// 댓글 삭제
+	int deleteReviewReply(ReviewReply r);
+	
 	// 댓글 수정
+	int updateReviewReply(ReviewReply r);
 	
 	
 	

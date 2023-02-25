@@ -16,7 +16,7 @@
 }
 
 
-/* 상품검색 버튼 고쳐야함 */
+/* 상품검색 버튼 */
 .search-div{ 
 	display: flex; 
 	justify-content: center;
@@ -26,7 +26,7 @@
 
 
 .book-detail-outer{
-	border : 1px solid blue; 
+	/* border : 1px solid blue;  */
 	width:620px;
 	height:200px;
 	margin:auto;
@@ -66,14 +66,9 @@
 	height:50px;
 }
 
-
-
-
 .review-content-outer{
 	text-align:center;
 }
-
-
 
 
 /*모달관련 스타일*/
@@ -113,6 +108,8 @@
    }
 
 
+
+
 /* 모달 content 스타일  */
     .text-div{
     	text-align:center;
@@ -126,39 +123,123 @@
     	align:center;
     }
     
-    
+ 
     .content-area1{
-    	border:1px solid black;
-    	width:75px;
+    /* 	border:1px solid black; */
+    	width:600px;
+    	display:flex; 
     }
-
-
-    .content-area2{
-    	border:1px solid black;
-    	width:550px;
-    	display:flex;
-    }
+    
     .content-detail1{
-    	border:1px solid red;
-    	width:100px;
+    	/* border:1px solid red; */
+    	width:150px;
+    	height:200px;
     }
     .content-detail2{
-    	border:1px solid blue;
+    	/* border:1px solid blue; */
     	width:450px;
-    	height:120px;
+    	height:200px;
     }
+    
     #md_book_title, #md_book_author, #md_book_date, #md_book_publisher{
-    	border: 1px solid black;
+    	/* border: 1px solid red; */
     	height:50px;
     	margin:0px;
     }
     
-    
-    .content-area3{
-    	border:1px solid black;
-    	width:75px;
+    .content-area2{
+    	/* border:1px solid black; */
+    	width:100px;
+    	height:200px;
     }    
     
+    #md_img{
+    	width:150px;
+    	height:200px;
+    }
+    
+ 
+ 
+
+/* 모달관련스타일2 */
+   #modal-book-search2{
+      position: fixed;
+        width: 1000px;
+        height:800px;
+        background-color: skyblue;
+        border-radius: 20px;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        top: 50%;
+        z-index: 1005;
+        text-align: center;
+        display: none;
+   }
+   
+   #modal-close-btn2 {
+      font-size: 25px;
+        background-color:skyblue;
+        border: 1px solid rgba(245, 245, 220, 0);
+        cursor: pointer;
+        color:rgb(0, 0, 0);
+        padding-left: 955px;
+   }   
+
+   
+   #result-area2{
+      margin : auto;
+      width : 980px;
+      height : 700px;
+   }
+   
+   #enter-addr-in2{
+      width : 980px;
+      height : 700px;
+      overflow : scroll;      
+   }
+   
+    /* 모달 content 스타일2 */
+    .text-div{
+    	text-align:center;
+    }
+    
+    .book-outer2{
+    	display:flex;
+    	margin:auto;
+    	width:700px;
+    	height:200px;
+    	align:center;
+    }
+
+    .content-area-1{
+    	/* border:1px solid pink; */
+    	width:600px;
+    	display:flex;
+    }
+    
+    .content-detail-1{
+  /*   	border:1px solid pink; */
+    	width:150px;
+    	height:200px;
+    }
+    
+    .content-detail-2{
+    	/* border:1px solid pink; */
+    	width:450px;
+    	height:200px;
+    }
+    
+    #md_book_title, #md_book_author, #md_book_date, #md_book_publisher{
+    /* 	border: 1px solid pink; */
+    	height:50px;
+    	margin:0px;
+    }
+    
+    .content-area-2{
+    	/* border:1px solid black; */
+    	width:100px;
+    	height:200px;
+    }    
     
     
     /* 별관련 스타일 */
@@ -190,232 +271,287 @@
 
 	<jsp:include page="../../common/header.jsp" />
     
-    
-    
  	<!-- 전체를 감싸는 div  -->
  	<div class="outer">
 
 		<h1 style="text-align:center;">리뷰작성</h1>
 
 		<hr>
+		
 		<div>
-			<button class="modal-up-btn">상품모달검색</button>
+			<!-- 책 제목으로 검색 모달창 -->
+			<button class="modal-up-btn btn btn-primary">
+    			<span class="spinner-border spinner-border-sm"></span>
+    			제목검색
+  			</button>
+  					
+  			<!-- 책 ISBN으로 검색 모달창  -->
+			<button class="modal-up-btn2 btn btn-primary">
+    			<span class="spinner-border spinner-border-sm"></span>
+    			ISBN검색
+  			</button>
 		</div>
 		
-		<!-- api끌고오는건데 enctype으로 해야하는게 맞을까?? -->
-		<!-- 페이지 포워딩 -->
-		<!-- <form id="reviewEnrollForm" action="search.re" method="post" enctype="multipart/form-data"> 기존것-->
-		
+		<!-- 글작성 form 태그 -->
 		<form id="reviewEnrollForm" action="insertBoard.re" method="post" enctype="multipart/form-data">
 		
 			<!-- 작성자 식별자로 넘기기 -->
 			<input type="hidden" name="userNo" value="${ loginUser.userNo }">
 			
-			<!-- api에서 가져온 책 정보 -->
+			<!-- API에서 선택해서 가져온 책 정보 (이미지, 제목, 작가, 출판사, 발행일자) 넘기기 -->
 			<div class="book-detail-outer">
 				<div class="book-detail-area">
 					<div class="content-photo-detail">
-						<!-- api에서 끌고 오는거니까 첨부파일로 안해도 되는게 맞겠지? <input type="file" name="upfile"> 이런식으로.. -->
 						<div id="book_imag">
-						<!-- 	<img src="" id="book_src" name="bookImg"> -->
 							<input src="resources/images/no_image.jpg" type="image" id="book_src"  required value="사진"> 
-							<input type="hidden" id="bookImag" name="bookImag" value=""> 
-							
+							<input type="hidden" id="bookImag" name="bookImag"> 
 						</div>
 					</div>
 					
-					<!-- review 테이블 : book_content, book_publisher, book_date 컬럼 추가  -->
 					<div class="content-book-detail">
-						<!-- input에 넣어야 데이터가 넘어간다. div안에 넣으면 안넘어간다  -->
-						<div><input type="text" id="book_title" name="bookTitle"  required value=""></div>
-						<div><input type="text" id="book_author" name="bookAuthor" required value=""></div>
-						<div><input type="text" id="book_publisher" name="bookPublisher" required value=""></div>
-						<div><input type="text" id="book_date" name="bookDate" required value=""></div>
-
-					<!-- 	<div id="book_title" name="bookTitle">제목</div>
-						<div id="book_author" name="bookAuthor">작가</div>
-						<div id="book_publisher" name="bookPublisher">츨판사</div>
-						<div id="book_date" name="bookDate">발행일자</div> -->
+						<div><input type="text" id="book_title" name="bookTitle"  required></div>
+						<div><input type="text" id="book_author" name="bookAuthor" required></div>
+						<div><input type="text" id="book_publisher" name="bookPublisher" required></div>
+						<div><input type="text" id="book_date" name="bookDate" required></div>
 					</div>
 				</div>
 			</div>
 			
-			
 			<hr>
 	
-			<!-- 별점 : 매란언니한테 알려달라하기 -->
+			<!-- 별점관련 부분 -->
 			<div id="star-area" align="center" >
                <label for="rate1">
                    <input type="radio" name="reviewStar" value="1" id="rate1" checked>
-                   <img src="resources/images/star1.png" width="50" height="50" alt="">
+                   <img src="resources/images/star1.png" width="50" height="50">
                </label>
 
                <label for="rate2">
                    <input type="radio" name="reviewStar" value="2" id="rate2">
-                   <img src="resources/images/star2.png" width="50" height="50" alt="">
+                   <img src="resources/images/star2.png" width="50" height="50">
                </label>
 
                <label for="rate3">
                    <input type="radio" name="reviewStar" value="3" id="rate3">
-                   <img src="resources/images/star2.png" width="50" height="50" alt="">
+                   <img src="resources/images/star2.png" width="50" height="50">
                </label>
 
                <label for="rate4">
                    <input type="radio" name="reviewStar" value="4" id="rate4">
-                   <img src="resources/images/star2.png" width="50" height="50" alt="">
+                   <img src="resources/images/star2.png" width="50" height="50">
                </label>
                
                <label for="rate5">
                    <input type="radio" name="reviewStar" value="5" id="rate5">
-                   <img src="resources/images/star2.png" width="50" height="50" alt="">
+                   <img src="resources/images/star2.png" width="50" height="50">
                </label>
             </div>
 
 			<br>
 	
-	
-	
-			<!-- 리뷰 작성 란 -->
+			<!-- 리뷰 작성 부분 -->
 			<div class="review-content-outer">
 				<textarea id="review_content" name="reviewContent" placeholder="리뷰 작성 해주세요" rows="20" cols="100" style="resize:none" maxlength="1000" required></textarea>
-				
 				<hr>
-				
-				<spank id="count">0</spank> / 1000
-
+				<span id="count">0</span> / 1000
 				<hr>
-	
 				<p style="text-align:center;">
 					포인트 지급 안내 <br>
 					리뷰 작성 시 : 10point 지급
 				</p>
-	
 				<hr>
-					
 				<div style="text-align:center;">
-					<button type="submit">글작성</button>
-					<button type="reset">취소</button>
+					<button type="submit" class="btn btn-outline-primary">글작성</button>
+					<button type="reset" class="btn btn-outline-secondary">취소</button>
 				</div>
 			</div>
-			
-			
 		</form>
  
  
  
-		<!-- api 모달창 시작 -->
+		<!-- API 모달창(책이름 검색) -->
 		<div id="modal-book-search">
 			<button type="button" id="modal-close-btn">&times;</button>
 			
 			<div id="search-area">
 				<div id="search-text"> 
 					<div class="text-div">
-					<!-- 	<button onclick="search(1);">1페이지 이동</button> -->
 			    		<input type="text" id="title" placeholder="책이름을 작성해주세요">
 			    		<button onclick="search();">이동</button>
 					</div>   
 				</div>
 				<div id="result-area">
-			   		<div class="text-div">
-						<p>"검색이름"로 1개의 검색 결과가 있습니다.</p>
-					</div>
-					
 					<hr>
-							
-			        <!-- 책상품 하나의div  -->
 			        <div class="book-outer">
 			        	
-			        	<!--  ajax해서 가져온 책 정보를 띄워줌  -->
+			        	<!--  ajax로 가져온 책 정보를 띄워주는 영역  -->
 			        	
 			        </div>
 				</div>
 			</div>
 		</div>
-		<!-- api 모달창 끝 -->
+		<!-- API 모달창(책이름 검색) 끝 -->
+		
+		
+		
+		<!-- API 모달창(ISBN 검색) -->
+		<div id="modal-book-search2">
+			<button type="button" id="modal-close-btn2">&times;</button>
+			
+			<div id="search-area">
+				<div id="search-text"> 
+					<div class="text-div">
+			    		<input type="text" id="keyword" placeholder="도서 ISBN을 작성해주세요">
+			    		<button onclick="search2();">이동</button>
+					</div>   
+				</div>
+				<div id="result-area2">
+					<hr>
+			        <div class="book-outer2">
+			        	
+			        	<!--  ajax로 가져온 책 정보를 띄워주는 영역  -->
+			        	
+			        </div>
+				</div>
+			</div>
+		</div>
+		<!-- API 모달창(ISBN 검색) 끝 -->
 
-
-	<!-- 전체 outer /div -->	
+	<!-- 전체 outer -->	
  	</div>   
  	
- 	
- 
-	
- 	<!-- api 모달창 -->
+
+
+ 	<!-- API(책이름 검색) script -->
 	<script>
 	    $(function(){
+	    	/* 모달 버튼 클릭 시, 모달창 띄워줌 */
 	        $('.modal-up-btn').click(function(){
-	           //$('input[name=groupLocation]').val('');
 	           $('#modal-book-search').show();
 	        });
 	        
-	        
+	        /* 모달 취소 버튼 클릭 시, 모달창 숨겨줌 */
 	        $('#modal-close-btn').click(function(){
 	           $('#modal-book-search').hide();
-	          // $('#search').val('');
-	          // $('#enter-addr-in').empty();
-	           
 	        });
 	     });
 	    
-	    
+	     // 책 이름 검색 시, 해당 책의 정보를 Open API이용하여 가져오는 함수
 		 function search(){
-			 $.ajax({
+	    	 
+			$.ajax({
 				url:'search.bk',
-				data:{ // 요청시 전달 값
-					title : $('#title').val()
+				data:{ 
+					title : $('#title').val() // 요청시 전달 값 => 책 제목
 				},
-				
 				success : function(result){
-					
+
 					const item = result.item[0];
-					//const count = Object.keys(result).size; => 어케 구하냐
-					
-					console.log(item);
-					//console.log(count);
+					// console.log(item);
+					// console.log(item.title);
 					
 					let value ='';
 						
 					let thumb = item.cover;
 					
-					value += '<div><p>"검색이름"로 1개의 검색 결과가 있습니다.</p></div>'
-						  
-						  + '<div class="content-area1">'
-						  + '<p>' + 1 + '</p>'
-						  + '</div>'
-						  + '<div class="content-area2">'
+					value += '<div class="content-area1">'
 						  + '<div class="content-detail1">'
 						  + '<div><img id="md_img" src="' + thumb + '"></div>'
 						  + '</div>'
 						  + '<div class="content-detail2">'
-						  
 						  + '<p id="md_book_title" name="mdbookTitle">' + item.title + '</p>'
 						  + '<p id="md_book_author" name="mdbookAuthor">' + item.author + '</p>'
 						  + '<p id="md_book_date" name="mdbookDate">' + item.pubDate + '</p>'
 						  + '<p id="md_book_publisher" name="bookPublisher">' + item.publisher + '</p>'
-						  
 						  + '</div>'
 						  + '</div>'
-						  + '<div  class="content-area3">'
+						  + '<div  class="content-area2">'
 						  + '<button id="modal-result-btn">선택</button>'
 						  + '</div>';
-						  
-							  
 					$('.book-outer').html(value);
 					$('#title').val(title);
-					
 					$("#title").val('');
-					
-					
 				},
-				
 				error: function(){
 					console.log('실패');
 				}
 			 })
 		 };
 	    
+		 // API에서 가져온 책 정보를 선택 할 시, 데이터 값을 가져오고 모달창 숨김
 		 $(function(){
 			 $(document).on('click', '#modal-result-btn', function(){
+				 
+				 $('#book_title').val($('#md_book_title').text());
+				 $('#book_author').val($('#md_book_author').text());
+				 $('#book_publisher').val($('#md_book_publisher').text());
+				 $('#book_date').val($('#md_book_date').text());
+				 $('#book_src').attr('src', $('#md_img').attr('src')); 
+				 $('#bookImag').val($('#md_img').attr('src'));  
+				 
+				 $('#modal-book-search').hide();
+			 })
+		 });
+	</script>
+
+
+
+ 	<!-- API(ISBN 검색) script -->
+	<script>
+	    $(function(){
+	    	/* 모달 버튼 클릭 시, 모달창 띄워줌 */
+	        $('.modal-up-btn2').click(function(){
+	           $('#modal-book-search2').show();
+	        });
+	        
+	        /* 모달 취소 버튼 클릭 시, 모달창 숨겨줌 */
+	        $('#modal-close-btn2').click(function(){
+	           $('#modal-book-search2').hide();
+	        });
+	     });
+	    
+	     // 책 ISBN 검색 시, 해당 책의 정보를 Open API이용하여 가져오는 함수
+		 function search2(){
+			 $.ajax({
+				url:'searchBook.bk',
+				data:{ 
+					keyword : $('#keyword').val() // 요청 시 전달 값 => ISBN
+				},
+				success : function(result){
+					
+					const item = result.item[0];
+					
+					let value ='';
+						
+					let thumb = item.cover;
+					
+					value += '<div class="content-area-1">'
+						  +  '<div class="content-detail-1">'
+						  +  '<div><img id="md_img" src="' + thumb + '"></div>'
+						  +	 '</div>'
+						  +  '<div class="content-detail-2">'
+						  +  '<p id="md_book_title" name="mdbookTitle">' + item.title + '</p>'
+						  +  '<p id="md_book_author" name="mdbookAuthor">' + item.author + '</p>'
+						  +  '<p id="md_book_date" name="mdbookDate">' + item.pubDate + '</p>'
+						  +  '<p id="md_book_publisher" name="bookPublisher">' + item.publisher + '</p>'
+						  +  '</div>'
+						  +  '</div>'
+						  +  '<div  class="content-area-2">'
+						  +  '<button id="modal-result-btn2">선택</button>'
+						  +  '</div>';
+					$('.book-outer2').html(value);
+					$('#keyword').val(keyword);
+					$("#keyword").val('');
+				},
+				error: function(){
+					console.log('실패');
+				}
+			 });
+		 };
+	    
+		 // API에서 가져온 책 정보를 선택 할 시, 데이터 값을 가져오고 모달창 숨김
+		 $(function(){
+			 $(document).on('click', '#modal-result-btn2', function(){
 				 
 				 $('#book_title').val($('#md_book_title').text());
 				 $('#book_author').val($('#md_book_author').text());
@@ -424,23 +560,18 @@
 				 $('#book_src').attr('src', $('#md_img').attr('src')); //https://image.aladin.co.kr/product/7608/30/coversum/8994492038_1.jpg
 				 $('#bookImag').val($('#md_img').attr('src')); //https://image.aladin.co.kr/product/7608/30/coversum/8994492038_1.jpg
 				 
-				 
-				 $('#modal-book-search').hide();
+				 $('#modal-book-search2').hide();
 			 })
 		 });
 	</script>
 
-	 
-	 
  
  
- 
-	<!-- 글입력 갯수 세기 스크립트-->
+	<!-- 글입력 갯수 세는 script -->
 	<script>
        $(function(){
            $('.review-content-outer #review_content').keyup(function(){
                $('#count').text($(this).val().length);
-               
            });
        });
    	</script>
@@ -448,7 +579,7 @@
    	
    	
    	
-   	<!-- 평점 관련 스크립트  -->
+   	<!-- 평점 관련 script  -->
    	<script>
     $('input[name=reviewStar]').click(function(){
 
@@ -466,16 +597,7 @@
    	</script>
  
    	
-   	
-   	
-   	
-   	
-   	
-   
 	<jsp:include page="../../common/footer.jsp" />
- 
- 
- 
  
  
 </body>

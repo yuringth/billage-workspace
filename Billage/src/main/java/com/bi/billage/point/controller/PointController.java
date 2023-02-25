@@ -21,7 +21,7 @@ public class PointController {
 			if(pointService.addPoint(p) > 0) {// 성공 
 				return "main";
 			} else { // 실패
-				mv.addObject("errorMsg", "게시글 삭제에 실패했어용 ㅠ");
+				mv.addObject("errorMsg", "포인트 등록 실패했어용 ㅠ");
 				return "common/errorPage";
 			}
 		} 

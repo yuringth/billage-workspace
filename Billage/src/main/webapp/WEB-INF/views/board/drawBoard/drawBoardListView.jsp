@@ -103,7 +103,7 @@
 	        		<input type="hidden" value="${ b.boardNo }" class="boardNo">
 		        	<input type="hidden" value="${ b.closeDate }" class="closeDate">
 		            <div class="img-area">
-		                <img src="${ b.changeName }">
+		                <img src="${ b.changeName }" style="width: 100%; height : 100%">
 		            </div>
 		            <div class="text-area">
 		            	<!-- <p class="genre">${ b.genre }</p> -->
@@ -127,7 +127,7 @@
     
     	$(function(){
     		$(document).on('click', '.one-content', function(){
-    			location.href='detail.ac?bno='+ $(this).find('.boardNo').val();
+    			location.href='detail.dr?bno='+ $(this).find('.boardNo').val();
     		})
     		
     		closeCount();
@@ -194,7 +194,7 @@
 			    		       +	'<input type="hidden" value="' + list[i].boardNo + '" class="boardNo">'
 			    		       + 	'<input type="hidden" value="' + list[i].closeDate + '" class="closeDate">'
 			    		       +     '<div class="img-area">'
-			    		       +         '<img src="' + list[i].changeName + '">'
+			    		       +         '<img src="' + list[i].changeName + '" style="width: 100%; height : 100%">'
 			    		       +     '</div>'
 			    		       +     '<div class="text-area">'
 			    		       +         '<p class="title-text">' +  list[i].title + '</p>'

@@ -57,15 +57,16 @@
 	
 
 
-	<!-- isbn 조회 쿼리문 -->
+	<!-- ISBN 조회 -->
 	<select id="selectIsbn" parameterType="book" resultMap="bookResultSet">
 		select
-		       isbn
+		      isbn
 		  from 
-		       book
+		      book
 		 where
-		       book_name = #{bookName}
+		      book_name = #{bookName}
 	</select>
+	
 	
 	
 	<!-- 리뷰 게시글의 총 개수 조회(모든 행 조회) -->
@@ -77,6 +78,8 @@
 		 where
 		       review_status = 'N'  
 	</select>
+	
+	
 	
 	<!-- 게시글 리스트 조회 쿼리문 	// 여기 수정*** selectList -> reviewBoardList -->
 	<select id="reviewBoardList" resultMap="reviewResultSet">
@@ -103,8 +106,7 @@
 	
 	
 	
-	
-	<!-- 글작성 쿼리문. 1) 책 중복되는지 확인 select : bookTitle로 조회 => 한 행이 있는지 없는지 -->
+	<!-- 글작성 => 1) 기존에 작성한 리뷰의 책 제목이 있는지 select하여 확인 (bookTitle로 조회 => 한 행이 있는지 없는지) -->
 	<select id="selectBookTitle" parameterType="review" resultMap="reviewResultSet">
        select
               book_title
@@ -119,66 +121,23 @@
 	</select>
 	
 		
-	<!-- 글작성 쿼리문. 2) 중복 된 책 없으면 insert : 글작성 -->
+		
+	<!-- 글작성 => 2) 중복 된 책 없으면 insert -->
 	<insert id="insertReviewBoard" parameterType="review">
-	<!-- point랑 어케 연결 못하나 못해서 따로 감
-	INSERT ALL
-		  INTO
-		      review(
-		              REVIEW_NO
-		             ,USER_NO
-		             ,REVIEW_STAR
-		             ,REVIEW_CONTENT
-		             ,REVIEW_STATUS
-		             ,BOOK_TITLE
-		             ,BOOK_IMAG
-		             ,BOOK_POINT
-		             ,BOOK_PUBLISHER
-		             ,BOOK_AUTHOR
-		             )
-		      VALUES(
-			          SEQ_RNO.NEXTVAL
-			         ,#{userNo}
-			         ,#{reviewStar}
-			         ,#{reviewContent}
-			         ,'N'
-			         ,#{bookTitle}
-			         ,#{bookImag} 
-			         ,10
-			         ,#{bookPublisher}
-			         ,#{bookAuthor}
-		             )
-		  INTO 
-		       point(
-		              user_no
-		              ,POINT_ADD
-		              ,POINT_STATUS
-		              )
-			  VALUES(
-			          ,#{userNo}
-			          ,10
-			          ,'적립'
-			          )
-		select *
-		  from 
-		       dual
-	-->
-	
-		INSERT 
-		  INTO 
-		       REVIEW
+		insert
+		  into 
+		       review
 		       (
-		        REVIEW_NO
-		       ,USER_NO
-		       ,REVIEW_STAR
-		       ,REVIEW_CONTENT
-		       ,REVIEW_STATUS
-		       ,BOOK_TITLE
-		       ,BOOK_IMAG
-		       ,BOOK_POINT
-		       ,BOOK_PUBLISHER
-		       ,BOOK_AUTHOR
-		       
+		        review_no
+		       ,user_no
+		       ,review_star
+		       ,review_content
+		       ,review_status
+		       ,book_title
+		       ,book_imag
+		       ,book_point
+		       ,book_publisher
+		       ,book_author
 		       )
 		values
 		       (
@@ -196,20 +155,22 @@
 	</insert>
 	
 	
-	<!-- 글 조회시, 조회수 증가 쿼리문 -->
+	
+	<!-- 조회수 증가 -->
 	<update id="increaseReviewCount" parameterType="_int">
 		update
 		       review
 		   set
 		       count = count + 1
 		 where
-		       review_no = #{ reviewNo }
+		       review_no = #{reviewNo}
 		   and
 		       review_status = 'N'
 	</update>
 		
+		
 	
-	<!--  리뷰게시판. 조회 성공 시 => db에서 데이터를 가져와야한다. -->
+	<!--  조회 성공 시 => DB에서 데이터를 가져옴 -->
 	<select id="selectReviewBoard" resultType="review" resultMap="reviewResultSet">
 		select
 			    review_no
@@ -228,23 +189,23 @@
 		 where
 		 	   review_status = 'N'
 		   and
-		       review_no = #{ reviewNo }
+		       review_no = #{reviewNo}
 	</select>	
 	
 	
-	<!-- 리뷰 삭제 쿼리문 / 원래 reviewNo로 받았을 떈 parameterType는 _int를 받았음-->
+	
+	<!-- 게시글 삭제 -->
 	<update id="deleteReviewBoard" parameterType="review">
 		update
 		       review
 		   set
 		       review_status = 'Y'
 		where
-		       review_no = #{ reviewNo }
+		       review_no = #{reviewNo}
 	</update>
 	
-	
-	
-	<!-- 글 수정 쿼리문. 1) 책 중복되는지 확인(리뷰넘버로 책제목조회) -->
+
+	<!-- 게시글 수정 => 기존에 작성한 리뷰에서 책제목과 리뷰넘버 조회 -->
 	<select id="selectBookTitle2" parameterType="review" resultMap="reviewResultSet">
        select
               book_title
@@ -260,24 +221,25 @@
 	</select>	
 	
 	
-	<!-- 글 수정 쿼리문 -->
+	<!-- 게시글 수정 => update -->
 	<update id="updateReviewBoard" parameterType="review">
 		update
 		       review
 		   set
-		        book_title = #{ bookTitle }
-               ,book_author = #{ bookAuthor }
-               ,book_publisher = #{ bookPublisher }
-               ,book_imag = #{ bookImag }
-               ,review_star = #{ reviewStar }
-               ,review_content = #{ reviewContent }
+		        book_title = #{bookTitle}
+               ,book_author = #{bookAuthor}
+               ,book_publisher = #{bookPublisher}
+               ,book_imag = #{bookImag}
+               ,review_star = #{reviewStar}
+               ,review_content = #{reviewContent}
 		  where
-		        review_no = #{ reviewNo }
+		        review_no = #{reviewNo}
 	</update>
 	
 	
 	
-	<!-- 댓글 list 불러오는 쿼리문 -->
+	
+	<!-- 댓글 list 조회 -->
 	<select id="selectReviewReplyList" parameterType="_int" resultMap="reviewReplyResultset">
 		select
 				review_no
@@ -291,39 +253,13 @@
 		  join
 		        member using(user_no)
 		 where
-		        review_no = #{ reviewNo }
+		        review_no = #{reviewNo}
 		   and
 		        delete_status = 'N'
 		 order
 		    by
 		       create_date desc
 	</select>
-	
-	
-	<!-- 댓글 삭제  -->
-	<update id="deleteReviewReply"  parameterType="ReviewReply">
-		update
-		       review_reply
-		   set
-		       delete_status = 'Y'
-	     where
-	           reply_no = #{ replyNo }
-	</update>
-	
-	
-	
-	<!--  댓글 수정 -->
-	<update id="updateReviewReply" parameterType="ReviewReply">
-		update
-		       reviewReply
-		   set
-		       reply_content = #{ replyContent }
-		 where
-		       delete_status = 'N'
-		   and
-		       reply_no = #{ replyNo } 
-	</update>
-	
 	
 	<!-- 댓글 등록 -->
 	<insert id="insertReviewReply" parameterType="ReviewReply">
@@ -346,6 +282,31 @@
 		       ,#{replyContent}
 		       )
 	</insert>
+	
+	
+	<!-- 댓글 삭제  -->
+	<update id="deleteReviewReply"  parameterType="ReviewReply">
+		update
+		       review_reply
+		   set
+		       delete_status = 'Y'
+	     where
+	           reply_no = #{replyNo}
+	</update>
+	
+	
+	
+	<!--  댓글 수정 -->
+	<update id="updateReviewReply" parameterType="ReviewReply">
+		update
+		       reviewReply
+		   set
+		       reply_content = #{replyContent}
+		 where
+		       delete_status = 'N'
+		   and
+		       reply_no = #{replyNo} 
+	</update>
 	
 	
 	

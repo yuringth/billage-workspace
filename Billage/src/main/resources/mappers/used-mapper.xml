@@ -24,7 +24,8 @@
 	</resultMap>
 
 
-	<!-- 글작성 쿼리문 -->
+
+	<!-- 글작성 -->
 	<insert id="insertUsedBoard" parameterType="used">
 		insert
 		  into
@@ -57,9 +58,10 @@
 			  ,#{stockStatus} <!-- 기본값 N -->
 			   )
 	</insert>
+	
 
 	
-	<!-- 중고 게시글의 총 개수 조회(모든 행 조회) -->
+	<!-- 게시글의 총 개수 조회(모든 행 조회) -->
 	<select id="selectListUsedCount" resultType="_int">
 		select
 		       count(*)
@@ -70,7 +72,8 @@
 	</select>
 		
 		
-	<!-- 게시글 리스트 조회 쿼리문 -->
+		
+	<!-- 게시판 list 조회 -->
 	<select id="usedBoardList" resultMap="usedResultSet">
 		select
 			    used_no
@@ -101,7 +104,8 @@
 	</select>
 	
 	
-	<!-- 게시글 조회수 증가 -->
+	
+	<!-- 조회수 증가 -->
 	<update id="increaseUsedCount" parameterType="_int">
 		update
 		       used_board
@@ -114,7 +118,8 @@
 	</update>
 	
 	
-	<!-- 게시글 내용을 db에서 select해서 목록 띄우기  -->
+	
+	<!-- 게시글 상세 조회 => DB에서 정보 가져 오기  -->
 	<select id="selectUsedBoard" resultMap="usedResultSet">
 		select
 			    used_no
@@ -142,6 +147,7 @@
 	</select>
 	
 	
+	
 	<!-- 게시글 삭제 -->
 	<update id="deleteUsedBoard" parameterType="_int">
 		update
@@ -153,7 +159,8 @@
 	</update>
 
 
-	<!-- 게시글 수정버튼 클릭 시 => db에서 select해서 수정폼에 뿌려주기  -->
+
+	<!-- 게시글 수정버튼 클릭 시 => 게시판 번호를 식별자로 DB에서 게시글 정보 select해서 가져오기  -->
 	<select id="selectUpdateUsedBoard" parameterType="used" resultMap="usedResultSet">
 		select
 		        used_no
@@ -178,7 +185,8 @@
 	</select>
 
 	
-	<!-- 게시글 수정 쿼리문(첨부파일) => 안배웠음 안된다구~~!! -->
+	
+	<!-- 글수정 -->
 	<update id="usedUpdate" parameterType="used">
 		update
 		       used_Board
@@ -196,7 +204,8 @@
 	</update>
 	
 	
-	<!-- topN분석 쿼리문 -->
+	
+	<!-- Top-N분석 -->
 	<select id="selectTopUsed" resultMap="usedResultSet">
 		select
 		     *
@@ -223,6 +232,8 @@
 	</select>
 	
 	
+	
+	<!-- 검색 기능 : 검색 결과에 맞는 게시글의 총 개수-->
 	<select id="selectSearchCount" parameterType="hashmap" resultType="_int">
 		select 
 		       count(*)
@@ -245,6 +256,8 @@
 	</select>
 	
 	
+	
+	<!-- 검색 기능 : 검색 결과에 맞는 게시글 데이터 -->
 	<select id="selectSearchList" parameterType="hashmap" resultMap="usedResultSet">
 		select
 		        stock_status
@@ -275,7 +288,6 @@
 		 order
 		    by
 		       used_no desc
-		     
 	</select>
 	
 	

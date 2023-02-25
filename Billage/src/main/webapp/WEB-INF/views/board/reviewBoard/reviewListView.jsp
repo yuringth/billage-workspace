@@ -15,21 +15,11 @@
 
     }
  
-/*     
-    .reviewOption{
-        border:1px solid red;
-    	width:1200px;
-    	height:30px;
-    }
-    
- */ 
- 
     #reviewOption2{
         /* border:1px solid red; */
     	width:1200px;
     	height:70px;
     }
-    
     
     .list-outer{
    		width:1200px;
@@ -39,59 +29,50 @@
     }
     
     .one-content{
-   		border:1px solid forestgreen;
+   		border:1px solid black; 
+   		border-radius:1rem;
     	width:500px;
-    	height:400px;
+    	height:430px;
     	margin:25px;
+    	padding:2px;
     }
-    
-    
 
     .one-content-detail1{
-        border:1px solid blue;
+       /*  border:1px solid blue; */
 		width:500px;
 		height:50px;
         display:flex;
     }
 
-
   	.one-content-detail2{
-  		border:1px solid red;
+  		/* border:1px solid red; */
   		width:500px;
 		height:250px;
   		display:flex;
   		margin:auto;
   	}
   	
- 
-  	
 	.book-detail1{
-		border:1px solid pink;
+		/* border:1px solid pink; */
 		width:200px; 
 		height:220px;
 		margin-top:10px;
 		margin-left:10px;
 	}
 
-  	
 	.book-detail2{
-		border:1px solid pink;
+		/* border:1px solid pink; */
 		width:300px;
 		height:220px;
 		margin-top:10px;
 		margin-left:10px;
 	}
-	
-	
 
-	
-	/* 이거 뭔데 div안에 안들어가냐??! 찜갯수 ㅠ */
 	.one-content-detail3{
-		border:1px solid black;
+	/* 	border:1px solid black; */
 		width:500px;
 		height:100px;
 	}
-
 
 	* {
 	  margin: 0;
@@ -104,17 +85,28 @@
 		justify-content: center;
 	}
 	
+	.ContentRow{
+		height:170px;
+		width:270px;
+		overflow:hidden;
+		text-overflow:ellipsis;
+		/* white-space:nowrap; */
+		display:block;
+		
+		white-space: normal;
+        line-height: 1.2;
+	}
+	
 </style>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 <!-- modal bootstrap -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   
 <!-- 옵션 부트스트랩 -->  
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -127,29 +119,12 @@
 
 	<!-- 메뉴바 -->
 	<jsp:include page="../../common/header.jsp" />
-    
-    
 
-
-
-	<h1>리뷰게시판</h1>
 	
     <!-- 전체를 감싸는 div -->
     <div class="reviewList-area">
 
-        <!-- 옵션div -->
-		
-		<!--       
-        <div>
-            <div class="reviewOption">
-                <select name="" id="">
-                    <option value="book" selected>책 제목순</option>
-                    <option value="date">날짜 정렬 순</option>
-                </select>
-            </div>
-        </div>
-         -->
-         
+        <!-- 정렬 div -->
 		<div class="align-side margin-bottom">
 			<div class="dropdown" id="reviewOption2">
 				<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
@@ -162,26 +137,26 @@
 			</div>
 		</div>	
 
-
+		
 		<div class="list-outer">
   			<c:forEach items="${ list }" var="b">
    	
         		<!-- 리뷰 하나를 감싸는 div -->
 		        <div class="one-content">
-		        <!-- <div class="one-content" onclick="reviewDetail()"> -->
-		        
-		        	<!-- 작성자/별 -->
+
+		        	<!-- 작성자/별점 div -->
 		            <div class="one-content-detail1">
 		            	<input type="hidden" value="${ b.bookAuthor }">
-		            	<input type="hidden"  class ="fuserNo" value="${b.userNo }">
-		            <%-- 	<input class="bno" type="hidden" value="${ b.reviewNo }"> --%>
-		                <div>유저 닉네임: ${ b.nickname }</div>                                              
+		            	<input type="hidden"  class ="fuserNo" value="${ b.userNo }">
+
+		                <div>작성자: ${ b.nickname }</div>                                              
+
 		                <div class="card-footer">
 		                 	   별점 : ${ b.reviewStar }
 		                </div>
 		            </div>
 					
-					<!-- 책관련 디테일 div 책사진/제목/내용  -->
+					<!-- 책관련 디테일 div (책사진, 제목, 내용) -->
 					<div class="one-content-detail2">
 						<input class="bno" type="hidden" value="${ b.reviewNo }">
 						<div class="book-detail1">
@@ -192,27 +167,28 @@
 						
 						<div class="book-detail2">	            
 				            <div>
-				            	<div style="height:80px; font-weight:bold;" >${ b.bookTitle }</div>
+				            	<div style="height:50px; font-weight:bold;" >${ b.bookTitle }</div>
 				            </div>
 			    	        <div>
-			  	  	       		<div style="height:140px;">${ b.reviewContent }</div>
+			  	  	       		<div class="ContentRow">${ b.reviewContent }</div>
 			    	        </div>
 						</div>
 						<br>
 					</div>
 		
+					<!-- 조회수, 작성일 div -->					
 		            <div class="one-content-detail3">
 		            	<input class="bno" type="hidden" id="reviewlikeNo" value="${ b.reviewNo }">
-		            	<button id="reviewLikeBtn" onclick="reviewLikeIncrease();">♡ </button>
-		            	<span>좋아요수</span>
-	            		<div> 댓글(3) 리뷰등록수(3) 조회수${ b.count }</div>
+
+		            	<br><br>
+
+	            		<div> 조회수${ b.count }</div>
 		            	<div>${ b.createDate }</div>
 		            </div>
 		        </div>
 		        
 			</c:forEach>
 		</div>
-
 
 
                     
@@ -248,11 +224,9 @@
 	<!-- 로그인 한 유저만 버튼 보임 -->
 	<c:if test="${ not empty loginUser }">
 		<div class="pagingArea">
-			<button class="btn btn-secondary" onclick="location.href='insert.re'">글작성</button>
+			<button class="btn btn-outline-primary" onclick="location.href='insert.re'">글작성</button>
 		</div>
 	</c:if>
-	<!-- 페이지 처리 끝  -->
-	
 	
 	
 	
@@ -291,80 +265,21 @@
 	
 	<!-- follow modal창 끝 -->
 
-
-
-	<!-- 게시글 상세보기 :되지만 나중에 페이징처리로 이동하기(기존) -->
-<!-- 	
-	<script>
-		$(function(){
-			$('.one-content').click(function(){
-				location.href = 'detail.re?reviewNo=' + $(this).find('.bno').val();
-				console.log($(this).find('.bno').val()); // http://localhost:8787/billage/detail.re?reviewNo=16
-			})
-			
-		})
-	</script>
- -->
  	
- 	
- 	
- 	
- 	<!-- 종아요부분  -->
- 	<script>
- /* 	
- 		$(function(){
-			
- 			$(document).on('click', '#reviewLikeBtn', function(){
- 				//console.log($('#reviewlikeNo').val());
- 				$.ajax({
- 	 				url:'reviewLike.re',
- 	 				data:{
- 	 					reviewNo : $('#reviewlikeNo').val()
- 	 				},
- 	 				success:function(){
- 	 					
- 	 				},
- 	 				error:function(){
- 	 					
- 	 				}
- 				})
- 			
- 			})
- 		})
- 		 */
-  		 function reviewLikeIncrease(){
-  			//console.log($('#reviewlikeNo').val());
-  			console.log('${loginUser.userNo}');
-  			
- 			$.ajax({
- 				url:'insertReviewLike.re',
- 				data:{
- 					reviewNo : $('#reviewlikeNo').val(),
- 					userNo : '${loginUser.userNo}'
- 				},
- 				success:function(result){
- 					console.log(result)
- 				},
- 				error:function(){
- 					
- 				}
- 			})
- 		} 
- 	</script>
- 		
-  
 	
 	<script>
-		/* (유림)게시글 상세보기 :되지만 나중에 페이징처리로 이동하기 (변경) */
-		$(function(){
+		// 유림시작
+		
+		// 리뷰게시글 상세보기 
+ 		$(function(){
 			$('.one-content-detail2').click(function(){
 				location.href = 'detail.re?reviewNo=' + $(this).find('.bno').val();
-				console.log($(this).find('.bno').val()); // http://localhost:8787/billage/detail.re?reviewNo=16
-		})
+				console.log($(this).find('.bno').val());
+		});
 
 		
 		
-		// 휘수시작 =======================================================================================================	
+		// 휘수시작
 			
 		//유저 닉네임 클릭시 모달창 생성
 			if(${ !empty loginUser && loginUser.userNo != b.userNo}){
@@ -439,6 +354,71 @@
 		})
 		
 	</script>
+
+
+	
+
+	<!-- 게시글 상세보기 (기존) -->
+	<!-- 	
+	<script>
+		$(function(){
+			$('.one-content').click(function(){
+				location.href = 'detail.re?reviewNo=' + $(this).find('.bno').val();
+				console.log($(this).find('.bno').val()); // http://localhost:8787/billage/detail.re?reviewNo=16
+			})
+			
+		})
+	</script>
+ 	-->
+ 	
+
+ 	
+ 	<!-- 종아요부분  -->
+ 	<script>
+ /* 	
+ 		$(function(){
+			
+ 			$(document).on('click', '#reviewLikeBtn', function(){
+ 				//console.log($('#reviewlikeNo').val());
+ 				$.ajax({
+ 	 				url:'reviewLike.re',
+ 	 				data:{
+ 	 					reviewNo : $('#reviewlikeNo').val()
+ 	 				},
+ 	 				success:function(){
+ 	 					
+ 	 				},
+ 	 				error:function(){
+ 	 					
+ 	 				}
+ 				})
+ 			
+ 			})
+ 		})
+ 		 */
+ 		 
+ 		 
+  		 function reviewLikeIncrease(){
+  			//console.log($('#reviewlikeNo').val());
+  			console.log('${loginUser.userNo}');
+  			
+ 			$.ajax({
+ 				url:'insertReviewLike.re',
+ 				data:{
+ 					reviewNo : $('#reviewlikeNo').val(),
+ 					userNo : '${loginUser.userNo}'
+ 				},
+ 				success:function(result){
+ 					console.log(result)
+ 				},
+ 				error:function(){
+ 					
+ 				}
+ 			})
+ 		} 
+ 	</script>
+ 		
+  
 
   </div>
   
